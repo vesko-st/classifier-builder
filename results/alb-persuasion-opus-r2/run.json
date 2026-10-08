@@ -1,0 +1,93 @@
+{
+  "run_id": "alb-persuasion-opus-r2",
+  "task": "persuasion_strategy",
+  "budget": 0,
+  "strategy": "boundary",
+  "mode": "all_labels",
+  "created": "2026-10-04T17:11:11",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 684,
+    "num_turns": 54,
+    "total_cost_usd": 2.7912693999999996
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.55,
+      "note": "v1 draft: flat choice, 18 options with structured definitions",
+      "test": {
+        "jev": {
+          "accuracy": 0.6368,
+          "macro_f1": 0.6096,
+          "est_cost_usd": 0.100263,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.59,
+      "note": "v2: other split into 7 concrete sub-options (map), acknowledgement narrowed to short affirmations",
+      "test": {
+        "jev": {
+          "accuracy": 0.6513,
+          "macro_f1": 0.614,
+          "est_cost_usd": 0.129023,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 0,
+      "estimate": 0.585,
+      "note": "v3: did-you-know questions -> inquiries; payment-method answers -> donation-information",
+      "test": {
+        "jev": {
+          "accuracy": 0.648,
+          "macro_f1": 0.6138,
+          "est_cost_usd": 0.133258,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 0,
+      "estimate": 0.59,
+      "note": "e4: 3-member wording-variant ensemble (A=v4 wording, B rephrased, D=A text + other instructions); emotion covers persuader's own heartbreak/guilt",
+      "test": {
+        "jev": {
+          "accuracy": 0.6407,
+          "macro_f1": 0.606,
+          "est_cost_usd": 0.382202,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 0,
+      "estimate": 0.59,
+      "note": "e5: ensemble + rule that descriptions of Save the Children's work/results are credibility, not logical",
+      "test": {
+        "jev": {
+          "accuracy": 0.644,
+          "macro_f1": 0.609,
+          "est_cost_usd": 0.386943,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

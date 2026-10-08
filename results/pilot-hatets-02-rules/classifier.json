@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v12",
+  "model": "jev-latest",
+  "type": "two_level",
+  "state_template": "Tweet:\n{{input}}",
+  "router": {
+    "instructions": "What is this tweet mainly about?",
+    "criteria": {
+      "immigration": "Immigrants, refugees, migrants, illegal aliens, borders, deportation, the wall, DACA or ICE.",
+      "slurs_women": "Uses words like bitch, hoe, whore, slut or cunt, or talks about women or girls.",
+      "other": "Anything else."
+    }
+  },
+  "groups": {
+    "immigration": {
+      "instructions": "Under a hate-speech policy that protects immigrants and refugees, which fits this tweet best?",
+      "criteria": {
+        "contempt": "Hatred, contempt or dehumanisation aimed at immigrants, refugees or migrants themselves: calls them invaders, criminals, rapists, animals, parasites, 'rapefugees' or a burden, or incites hostility or harm against them.",
+        "expel": "Demands that immigrants, refugees or migrants themselves be deported, sent back, sent home or kept out, in words or in hashtags that reject the people (e.g. 'Send them all back!', 'Arrest them and deport them all', 'Go home', #DeportThemAll, #SendThemBack, #NoIllegals, #NoImmigrants, #NoRefugees, #NoMoreRefugees), even without insults.",
+        "policy": "Argues about or supports immigration policy (the wall, DACA, amnesty, chain migration, E-Verify, visas, ICE, sanctuary cities, voting, census), including policy hashtags like #NoDACA, #EndDACA or #NoAmnesty, without demanding that immigrants themselves be deported or kept out and without derogatory statements about them.",
+        "other_target": "Mentions immigrants or illegal aliens (often only in a hashtag), but the hostility or mockery is aimed at someone else, such as Democrats, liberals, politicians, the media ('the MSM keeps lying'), Twitter or another user, or it argues that 'illegal alien' is the correct term. Says nothing derogatory about immigrants themselves.",
+        "sympathetic": "Defends immigrants or criticises anti-immigrant views.",
+        "news_or_wall": "Shares an immigration news story, crime report, statistic or 'invasion'/demographic conspiracy link, or supports the wall, ICE or border enforcement, without demanding that immigrants be deported or kept out and without insulting them in its own words."
+      },
+      "map": {
+        "contempt": "hate",
+        "expel": "hate",
+        "policy": "not_hate",
+        "other_target": "not_hate",
+        "sympathetic": "not_hate",
+        "news_or_wall": "not_hate"
+      }
+    },
+    "slurs_women": {
+      "instructions": "Under a hate-speech policy that protects women, which fits this tweet best?",
+      "criteria": {
+        "women_group": "Explicit hatred or contempt of women as a group, or degrading sexist generalisations about what women or 'bitches/hoes' are like.",
+        "woman_abuse": "Insults, harasses, sexually degrades or threatens a specific woman or girl, using gendered slurs to demean her.",
+        "aimed_at_man": "The slur or insult is aimed at a man or men, or at a racist or other aggressor in an argument that is not about gender (e.g. 'bitch ass nigga', 'he a hoe', 'bitch made').",
+        "casual": {
+          "meaning": "Casual slang with no woman being demeaned: talking about oneself, exclamations, affectionate, admiring or joking use between friends (birthday wishes, compliments), quoted banter, or one's own sex life or desires.",
+          "examples": [
+            "Happy birthday, bitch! love you",
+            "YASS Queen, keep blessing us! Shoe game on psychotic bitch",
+            "bitch i'm omw",
+            "i need a bad bitch tonight"
+          ]
+        },
+        "neutral": {
+          "meaning": "Talks about women without demeaning them, or criticises sexism, rape culture or someone else for calling a woman a slur.",
+          "examples": [
+            "You called your mom a hoe AND a bitch? Karma is going to get you",
+            "welcome to thailand bitch- we find rape culture very humorous smh"
+          ]
+        },
+        "no_person": "The slur is not aimed at any person: 'bitch' used as a verb meaning to complain ('why should I bitch', 'don't bitch now'), used about a thing, situation, song or life ('life's a bitch', 'karma a bitch'), as an exclamation ('Bitch wtf is that noise'), or quoted lyrics."
+      },
+      "map": {
+        "women_group": "hate",
+        "woman_abuse": "hate",
+        "aimed_at_man": "not_hate",
+        "casual": "not_hate",
+        "neutral": "not_hate",
+        "no_person": "not_hate"
+      }
+    },
+    "other": {
+      "class": "not_hate"
+    }
+  }
+}

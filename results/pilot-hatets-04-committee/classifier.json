@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "name": "hate_committee",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "flat_fine",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Which description best fits this tweet? We label hate speech against immigrants/refugees/migrants and against women.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_dehumanising": "Demeans immigrants, refugees, migrants or Muslim newcomers as a group: animals, invaders, parasites, disease carriers, 'bottom feeders', inferior, or generalises that they as a group are criminals or rapists. Includes framing immigration as an invasion or immigrants as bringing diseases.",
+        "immigrant_exclusion_call": "Calls for immigrants/illegal aliens/refugees as a group to be deported, sent back, expelled or kept out (#DeportThemAll, #SendThemBack, 'send them home'), or frames them as a group of criminals, rapists or invaders. Deport/crime framing counts even without slurs. Includes slogans like 'Refugees go home!' or #SendThemBack aimed at Muslims or foreigners, even when voiced inside a story.",
+        "immigrant_policy_neutral": "Political talk only: cheering for Trump, the wall, MAGA, NoDACA, voting, Congress, ICE funding or border policy, often just hashtags, without saying anything hostile about immigrants as people; neutral news; enforcement or legal process. Also discussing or comparing one particular crime case without generalising to immigrants as a group. Includes a one-line news headline about a single arrest, complaints about ICE budget or enforcement resources, or a bare hashtag correction like 'You mean #IllegalAliens?'. Also general complaints about multiculturalism or diversity ideology that do not describe immigrants themselves.",
+        "women_group_misogyny": "Contempt for women as a class or talking about women as 'bitches', 'hoes' or 'whores' in a sexual way (what they are like, who they sleep with), even when the point is criticising men; saying women deserve abuse.",
+        "casual_slur_use": "Other casual slang: affectionate or self-referential use, lyrics, excitement.",
+        "criticises_hate": "Quotes, reports or criticises sexism or racism rather than endorsing it.",
+        "unrelated": "Anything else, unrelated to immigrants or women.",
+        "sexual_violence_women": "Describes a woman or 'bitch' being raped or sexually abused as the victim ('I catch ya bitch and I rape her'), including quoting such a line. General remarks that rape can happen to anyone do not count.",
+        "calls_someone_hoe_whore": "Calls a woman or girl (addressed or described) a hoe, whore, slut or cunt as an insult or put-down ('you whore', 'bum ass hoe'), including hitting back.",
+        "bitch_as_attack": "The word bitch is itself the attack on a woman: 'you dirty bitch', 'shut up bitch', threats aimed at her.",
+        "bitch_filler_or_at_man": "Bitch only as a filler, tag, command or exclamation ('drink a glass of water right now bitch', 'I can tell you thoe bitch', 'Are those not grapes bitch?'); any insult aimed at a man, even cunt/bitch ('he a whole bitch bro', 'Ronnie is a cunt', 'Trump's little bitch'); talk about a guy being a hoe; or quoting slurs the author objects to.",
+        "affectionate_friend": "Loving or celebratory address to a friend ('I love you, you crazy hoe', 'happy birthday bitch', 'my bff bitch')."
+      },
+      "map": {
+        "immigrant_dehumanising": "hate",
+        "immigrant_exclusion_call": "hate",
+        "immigrant_policy_neutral": "not_hate",
+        "women_group_misogyny": "hate",
+        "casual_slur_use": "not_hate",
+        "criticises_hate": "not_hate",
+        "unrelated": "not_hate",
+        "sexual_violence_women": "hate",
+        "calls_someone_hoe_whore": "hate",
+        "bitch_as_attack": "hate",
+        "bitch_filler_or_at_man": "not_hate",
+        "affectionate_friend": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "topic_then_stance",
+      "model": "jev-latest",
+      "type": "two_level",
+      "state_template": "Tweet:\n{{input}}",
+      "router": {
+        "instructions": "What is this tweet mainly about?",
+        "criteria": {
+          "immigration": "Immigrants, refugees, migrants, Muslims or foreigners told to leave, illegal aliens, borders, deportation, the wall, ICE, DACA.",
+          "women": "Women, a woman, or a person the author insults or threatens as a bitch/hoe/whore/cunt (addressing them with the slur as an attack).",
+          "slang": "Bitch/hoe etc. used as an exclamation, about oneself, affectionately with friends, in lyrics, or aimed at a man; no one is being attacked as a woman.",
+          "other": "None of these."
+        }
+      },
+      "groups": {
+        "immigration": {
+          "instructions": "Which best describes how this tweet treats immigrants?",
+          "criteria": {
+            "slur_or_dehumanising": "Uses slurs or dehumanising framing for immigrants/refugees: rapefugee, invaders, an 'invasion', animals, parasites, bringers of disease.",
+            "crime_generalisation": "Implies immigrants, illegals or DACA recipients as a group are criminals, rapists or smugglers.",
+            "expel_them": "Calls for them all to be sent back, deported or kept out (#SendThemBack, #DeportThemAll, 'go home'). Also saying the country is being given away to them or cannot sustain them, or opposing letting them in (e.g. against catch-and-release, H1B) until Americans are employed.",
+            "single_case_news": "Reports or discusses one specific arrest or crime, or compares individual cases, without generalising about immigrants.",
+            "partisan_hashtags": "Cheers for Trump/the wall/MAGA/NoDACA or jabs at politicians or liberals, without attacking immigrants themselves. Includes bare endorsements like 'THIS. #IllegalAliens'. Also urging people to use or trend the term #IllegalAliens, or mocking jokes that do not describe immigrants as a group.",
+            "enforcement_or_policy": "Discusses ICE budget, laws, courts, terminology or policy mechanics. Also complaints about multiculturalism or diversity ideology that do not describe immigrants themselves.",
+            "supportive": "Supports immigrants or criticises anti-immigrant views."
+          },
+          "map": {
+            "slur_or_dehumanising": "hate",
+            "crime_generalisation": "hate",
+            "expel_them": "hate",
+            "single_case_news": "not_hate",
+            "partisan_hashtags": "not_hate",
+            "enforcement_or_policy": "not_hate",
+            "supportive": "not_hate"
+          }
+        },
+        "women": {
+          "instructions": "Which best describes how this tweet treats women?",
+          "criteria": {
+            "attacks_a_woman": "Calls the person addressed or described a hoe/whore/cunt, or insults her as a bitch, even playfully or when hitting back after being insulted.",
+            "degrades_women_as_class": "Generalises about or talks about women as 'hoes', 'bitches' or 'whores' sexually, even while criticising men.",
+            "insult_at_man": "Insults a man without calling him a hoe/whore, e.g. mocking a male athlete as having 'no hoes'.",
+            "self_defence": "The author only objects to being called a bitch/whore, without slurring anyone back.",
+            "political_or_public_criticism": "Criticises a public woman's politics or conduct without sexual degradation.",
+            "crude_but_untargeted": "A lone 'bitch' as filler, tag or exclamation in an otherwise harmless line ('Are those not grapes bitch?', 'I can tell you thoe bitch'), general talk about rape, or crude jokes that insult nobody.",
+            "sexual_violence": "Describes a woman or 'bitch' as the victim of rape or sexual abuse, including quoting such a line (not general remarks that rape can happen to anyone)."
+          },
+          "map": {
+            "attacks_a_woman": "hate",
+            "degrades_women_as_class": "hate",
+            "insult_at_man": "not_hate",
+            "self_defence": "not_hate",
+            "political_or_public_criticism": "not_hate",
+            "crude_but_untargeted": "not_hate",
+            "sexual_violence": "hate"
+          }
+        },
+        "other": {
+          "class": "not_hate"
+        },
+        "slang": {
+          "class": "not_hate"
+        }
+      }
+    },
+    {
+      "version": 1,
+      "name": "policy_tests",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm_target": {
+          "instructions": "Is the tweet about immigrants, refugees, migrants, illegal aliens, or Muslims/foreigners being told to go back?"
+        },
+        "imm_hostile": {
+          "instructions": "Does the tweet itself express hostility toward immigrants/refugees/DACA recipients/Muslim newcomers as a group: slurs (e.g. 'rapefugee'), demeaning them, insinuating or generalising that they are criminals, smugglers or invaders, or voicing calls to send them back or keep them out (e.g. 'Refugees go home!', #SendThemBack)? A neutral or approving remark plus hashtags like #illegalaliens or #NoDACA, or a jab at a politician, is 'no'. Framing immigration as an 'invasion' or immigrants as bringing disease is 'yes'."
+        },
+        "women_target": {
+          "instructions": "Does the tweet insult or address someone with bitch/hoe/whore/slut/cunt, or talk about women (as 'bitches', 'hoes', etc.)?"
+        },
+        "women_hostile": {
+          "instructions": "Is the gendered slur used to degrade: calling someone a hoe/whore/slut/cunt (even playfully or in a reciprocal fight), insulting someone as a bitch ('you dirty bitch'), talking about women sexually as 'bitches/whores', or describing a woman being raped? 'No' for: a lone 'bitch' as filler, tag or exclamation that insults nobody; mocking a man for having 'no hoes'; general remarks that rape can happen to anyone; objecting to being called a bitch without slurring back."
+        },
+        "counter": {
+          "instructions": "Is the author clearly condemning or arguing against bigotry (not using slurs, narrating a scene, or mocking in-group) ?"
+        },
+        "filler": {
+          "instructions": "Is every use of bitch/hoe in this tweet only a filler word, tag or exclamation (e.g. 'I can tell you thoe bitch', 'rape could happen to anyone bitch'), or a jab at a man for having 'no hoes', or a quote of an insult the author objects to - with no one actually being called a hoe/whore or attacked as a bitch?"
+        },
+        "male_or_friendly": {
+          "instructions": "Is the person being called bitch/hoe/cunt a man (he, bro, a male name, a male politician), or is the slur used lovingly toward a friend (birthday wishes, 'I love you, you crazy hoe')?"
+        }
+      },
+      "rule": [
+        [
+          "imm_target",
+          "imm_hostile",
+          "!counter"
+        ],
+        [
+          "women_target",
+          "women_hostile",
+          "!counter",
+          "!filler",
+          "!male_or_friendly"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ]
+}

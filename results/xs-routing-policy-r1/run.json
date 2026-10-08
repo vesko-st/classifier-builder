@@ -1,0 +1,92 @@
+{
+  "run_id": "xs-routing-policy-r1",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T11:21:52",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 442,
+    "num_turns": 37,
+    "total_cost_usd": 1.4789826000000001
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 25,
+      "estimate": 0.8,
+      "note": "v1 draft: 47 intent options mapped to 6 teams, with the 5 policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.8851,
+          "macro_f1": 0.8846,
+          "est_cost_usd": 0.000801,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 37,
+      "estimate": 0.82,
+      "note": "v2: supported cards/currencies -> pricing, found card -> cards, card abroad -> cards (from minimal pairs)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8886,
+          "macro_f1": 0.8886,
+          "est_cost_usd": 0.256907,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 73,
+      "estimate": 0.86,
+      "note": "v5: unknown charge->fraud, fee when buying->pricing, cancel own transaction->payments, cancel order->disputes, reverted->disputes; 18/18 bought labels (10 random 10/10)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8945,
+          "macro_f1": 0.8968,
+          "est_cost_usd": 0.284322,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 89,
+      "estimate": 0.88,
+      "note": "v6: direct debit disputes->fraud, small extra amount on statement->disputes, balance after ATM->cards, credit card for transfer->payments; 26/26 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8984,
+          "macro_f1": 0.901,
+          "est_cost_usd": 0.298676,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.89,
+      "note": "v9: 3-variant wording ensemble of v8 (cash amount->disputes, card demand->cards, declined purchase->cards, beneficiary->payments); 29/31 bought labels, 10/10 random",
+      "test": {
+        "jev": {
+          "accuracy": 0.8997,
+          "macro_f1": 0.9021,
+          "est_cost_usd": 0.932109,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

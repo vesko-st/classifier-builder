@@ -1,0 +1,47 @@
+{
+  "run_id": "xm-hatets-haiku-high-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:21:57",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 396,
+    "num_turns": 69,
+    "total_cost_usd": 0.4871318500000001
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 67,
+      "estimate": 0.9,
+      "note": "v3: refined questions to exclude keywords without meaning. 90% on check set (9/10). 1 FP: #DeportThemAll political post. Ready for uncertainty sampling.",
+      "test": {
+        "jev": {
+          "accuracy": 0.7361,
+          "macro_f1": 0.7361,
+          "est_cost_usd": 0.039965,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 95,
+      "estimate": 0.9,
+      "note": "FINAL: v3 with refined questions. 90% macro-F1 on 10-label check set (9/10 correct). Handles: women hostility (personal vs group), immigrant hostility (policy vs threat framing). 1 edge case: pure hashtags without policy content.",
+      "test": {
+        "jev": {
+          "accuracy": 0.7361,
+          "macro_f1": 0.7361,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,129 @@
+{
+  "run_id": "al-intents-opus-r1",
+  "task": "banking77_intents_fullpool",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T14:32:14",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 2580,
+    "num_turns": 63,
+    "total_cost_usd": 3.1637956
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.842,
+      "note": "v1 flat 77-option choice from description + class samples; dev 0.842 (n=1963)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8679,
+          "macro_f1": 0.8644,
+          "est_cost_usd": 0.398769,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.879,
+      "note": "v2 structured descriptions (meaning/also_includes/not_this) encoding label conventions; dev 0.879 (n=1963)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8984,
+          "macro_f1": 0.8985,
+          "est_cost_usd": 0.572701,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 0,
+      "estimate": 0.884,
+      "note": "v5 refined conventions (fees, transfer cluster, top-up pending/failed, card arrival); build 0.895, dev 0.884 (n=1963)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9117,
+          "macro_f1": 0.9122,
+          "est_cost_usd": 0.623653,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 0,
+      "estimate": 0.89,
+      "note": "v6 conventions for cash-withdrawal exchange rate, unrecognised cash, declined transfer, transfer not received, card top-up; build 0.903, dev 0.890 (n=1963)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9172,
+          "macro_f1": 0.9178,
+          "est_cost_usd": 0.655594,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 0,
+      "estimate": 0.895,
+      "note": "v8 ensemble of two wordings (structured descriptions + flat reworded strings); build 0.905, dev 0.899 (n=1963); estimate discounted slightly for version selection on dev",
+      "test": {
+        "jev": {
+          "accuracy": 0.9182,
+          "macro_f1": 0.9182,
+          "est_cost_usd": 1.329632,
+          "total": 3080,
+          "answered": 3031
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 0,
+      "estimate": 0.897,
+      "note": "FINAL: v10 two-wording ensemble (77 structured options + reworded flat variant); build 0.909, dev 0.900 (n=1963, 90% 0.89-0.91)",
+      "test": {
+        "claude": {
+          "accuracy": 0.9097,
+          "macro_f1": 0.9097,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        },
+        "luna": {
+          "accuracy": 0.9149,
+          "macro_f1": 0.9148,
+          "est_cost_usd": 2.998658,
+          "total": 3080,
+          "answered": 3080
+        },
+        "pplx": {
+          "accuracy": 0.911,
+          "macro_f1": 0.911,
+          "est_cost_usd": 0.001799,
+          "total": 3080,
+          "answered": 3080
+        },
+        "jev": {
+          "accuracy": 0.9195,
+          "macro_f1": 0.9196,
+          "est_cost_usd": 1.390331,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

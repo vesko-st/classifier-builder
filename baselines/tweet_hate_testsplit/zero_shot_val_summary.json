@@ -1,0 +1,65 @@
+{
+  "classifier": "tweet_hate_zero_shot",
+  "type": "choice",
+  "total": 200,
+  "answered": 200,
+  "errors": {},
+  "cached": 200,
+  "input_tokens_billed": 0,
+  "est_cost_usd": 0.0,
+  "prediction_counts": {
+    "hate": 114,
+    "not_hate": 86
+  },
+  "labeled": 200,
+  "accuracy": 0.73,
+  "macro_f1": 0.73,
+  "per_class": {
+    "hate": {
+      "n": 84,
+      "precision": 0.6316,
+      "recall": 0.8571,
+      "f1": 0.7273
+    },
+    "not_hate": {
+      "n": 116,
+      "precision": 0.8605,
+      "recall": 0.6379,
+      "f1": 0.7327
+    }
+  },
+  "top_confusions": [
+    {
+      "gold": "not_hate",
+      "predicted": "hate",
+      "n": 42
+    },
+    {
+      "gold": "hate",
+      "predicted": "not_hate",
+      "n": 12
+    }
+  ],
+  "accuracy_by_confidence": [
+    {
+      "confidence": "[0.0, 0.5)",
+      "n": 62,
+      "accuracy": 0.6452
+    },
+    {
+      "confidence": "[0.5, 0.7)",
+      "n": 25,
+      "accuracy": 0.76
+    },
+    {
+      "confidence": "[0.7, 0.9)",
+      "n": 46,
+      "accuracy": 0.7174
+    },
+    {
+      "confidence": "[0.9, 1.0]",
+      "n": 67,
+      "accuracy": 0.806
+    }
+  ]
+}

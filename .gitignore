@@ -1,0 +1,27 @@
+.env
+.DS_Store
+__pycache__/
+*.pyc
+
+# dataset copies, rebuilt by tools/prepare_tasks.py
+data/
+# run directories: bought labels, transcripts, per-record predictions
+runs/
+# per-record baseline predictions and model checkpoints
+baselines/*/*_results.jsonl
+baselines/*/*/
+
+# working notes and drafts
+PLAN.md
+scratch/
+paper/STYLE.md
+
+# LaTeX build output
+paper/acl/*.aux
+paper/acl/*.bbl
+paper/acl/*.blg
+paper/acl/*.fdb_latexmk
+paper/acl/*.fls
+paper/acl/*.log
+paper/acl/*.out
+paper/acl/*.pdf

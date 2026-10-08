@@ -1,0 +1,72 @@
+{
+  "run_id": "pilot-intents-03",
+  "task": "banking77_intents",
+  "budget": 100,
+  "created": "2026-09-25T23:03:19",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1: 77 options with meaning+examples from description and Banking77 priors",
+      "test": {
+        "jev": {
+          "accuracy": 0.8513,
+          "macro_f1": 0.846,
+          "est_cost_usd": 0.636584,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 40,
+      "estimate": 0.84,
+      "note": "v2: rules from 20 random labels (ATM exchange rate, virtual card declined, unknown charge, transfer not received, found card->linking)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8594,
+          "macro_f1": 0.8541,
+          "est_cost_usd": 0.666845,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 66,
+      "estimate": 0.86,
+      "note": "v4: +13 targeted labels (UK transfer not showing->balance_not_updated, card top-up/transfer via credit card, top-up not credited->reverted, spare card, card failing at shop->declined)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8636,
+          "macro_f1": 0.8599,
+          "est_cost_usd": 0.704476,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.85,
+      "note": "v6 final: +17 targeted labels (pending vs timing vs not-received transfers, top-up reverted, Amex->supported cards, freeze->lost card, transfer fees abroad, card failing at multiple places->card_not_working, 'not possible' message->declined_transfer)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8669,
+          "macro_f1": 0.8621,
+          "est_cost_usd": 0.769782,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

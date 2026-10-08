@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "name": "ens3",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v5",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "How does this Craigslist price negotiation end? Look at the last concrete price (a dollar amount) proposed in the chat and whether anyone refuses it afterwards.",
+      "state_template": "Craigslist negotiation (listing, then chat):\n{{input}}",
+      "criteria": {
+        "accepted": "The other side accepts the last price proposed, even briefly or lukewarmly ('ok', 'yes', 'deal', 'sure', 'that works', 'sounds fair', 'I'll take it', 'I can do that', 'good offer'), or the side that was holding out gives in to the other's number. Small slips in the wording of the accepted price still count. May be followed by pickup, delivery, payment, viewing or thanks.",
+        "agreed_will_submit": "Both sides settle on a price and then say they will make, send, submit or accept the offer.",
+        "open_offer": "The chat ends with a concrete dollar counteroffer on the table that nobody refuses afterwards (the other side never replies to it, or only replies with non-price talk). A seller's counter such as 'no, but I can go down to $X, that's my lowest' or '$X and you pick it up' is an open offer even though it turns down the previous number. Also a chat that is just one message naming a price, and bare number exchanges.",
+        "rejected": "The last word on price is a refusal that nobody later accepts or softens: one side says the last offer is too low/high, that they cannot go that low/high, that they are too far apart, or walks away, and no new counter price or acceptance follows. Also: the seller has firmly stated a floor ('lowest I can go is $X', 'can't go below $X') and the buyer ends by pushing for less than that floor. A seller adding a condition ('for that price I can't include X') that the buyer then okays is 'accepted', not rejected.",
+        "backed_out": "They had agreed on a price but later one side backs out, or explicitly says the submitted offer was rejected or cannot be accepted.",
+        "no_price": "Nobody ever proposes a counter price and the buyer never accepts the asking price: the chat is only greetings or questions about the item, the seller only restates the listing price, the buyer only hesitates or asks whether the price is negotiable without naming their own number, it is about the wrong item, it complains about the site glitching, or it stops before anyone names a counter price."
+      },
+      "map": {
+        "accepted": "deal",
+        "agreed_will_submit": "deal",
+        "open_offer": "deal",
+        "rejected": "no_deal",
+        "backed_out": "no_deal",
+        "no_price": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v6",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "How does this Craigslist price negotiation end? Look at the last concrete price (a dollar amount) proposed in the chat and whether anyone refuses it afterwards.",
+      "state_template": "Craigslist negotiation (listing, then chat):\n{{input}}",
+      "criteria": {
+        "accepted": "The other side accepts the last price proposed, even briefly or lukewarmly ('ok', 'yes', 'deal', 'sure', 'that works', 'sounds fair', 'I'll take it', 'I can do that', 'good offer'), or the side that was holding out gives in to the other's number. Accepting without restating a number ('looks like we have a deal', 'I will take it') counts. Small slips in the wording of the accepted price still count. May be followed by pickup, delivery, payment, viewing or thanks.",
+        "agreed_will_submit": "Both sides settle on a price and then say they will make, send, submit or accept the offer.",
+        "open_offer": "The chat ends with a concrete dollar counteroffer on the table that nobody refuses afterwards (the other side never replies to it, or only replies with non-price talk). A seller's counter such as 'no, but I can go down to $X, that's my lowest' or '$X and you pick it up' is an open offer even though it turns down the previous number. Also a chat that is just one message naming a price, and bare number exchanges.",
+        "rejected": "The last word on price is a refusal that nobody later accepts or softens: one side says the last offer is too low/high, that they cannot go that low/high, that they are too far apart, or walks away, and no new counter price or acceptance follows. Also: the seller has firmly stated a floor ('lowest I can go is $X', 'can't go below $X') and the buyer ends by pushing for less than that floor. Also: after the seller's counter or floor, the buyer replies without accepting it (asks for extra perks, delivery, or a lower price) and the chat ends without the seller agreeing. A seller adding a condition ('for that price I can't include X') that the buyer then okays is 'accepted', not rejected.",
+        "backed_out": "They had agreed on a price but later one side backs out, or explicitly says the submitted offer was rejected or cannot be accepted.",
+        "no_price": "Nobody ever proposes a counter price and the buyer never accepts the asking price: the chat is only greetings or questions about the item, the seller only restates the listing price, the buyer only hesitates or asks whether the price is negotiable without naming their own number, it is about the wrong item, it complains about the site glitching, or it stops before anyone names a counter price."
+      },
+      "map": {
+        "accepted": "deal",
+        "agreed_will_submit": "deal",
+        "open_offer": "deal",
+        "rejected": "no_deal",
+        "backed_out": "no_deal",
+        "no_price": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v5b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Read the chat between a Craigslist buyer and seller. Which description best fits where the price talk stands when the chat stops? Pay most attention to the final dollar figure mentioned and to whether the other party turned it down.",
+      "state_template": "Listing and negotiation chat:\n{{input}}",
+      "criteria": {
+        "accepted": "The other side accepts the last price proposed, even briefly or lukewarmly ('ok', 'yes', 'deal', 'sure', 'that works', 'sounds fair', 'I'll take it', 'I can do that', 'good offer'), or the side that was holding out gives in to the other's number. Small slips in the wording of the accepted price still count. May be followed by pickup, delivery, payment, viewing or thanks.",
+        "agreed_will_submit": "Both sides settle on a price and then say they will make, send, submit or accept the offer.",
+        "open_offer": "The chat ends with a concrete dollar counteroffer on the table that nobody refuses afterwards (the other side never replies to it, or only replies with non-price talk). A seller's counter such as 'no, but I can go down to $X, that's my lowest' or '$X and you pick it up' is an open offer even though it turns down the previous number. Also a chat that is just one message naming a price, and bare number exchanges.",
+        "rejected": "The last word on price is a refusal that nobody later accepts or softens: one side says the last offer is too low/high, that they cannot go that low/high, that they are too far apart, or walks away, and no new counter price or acceptance follows. Also: the seller has firmly stated a floor ('lowest I can go is $X', 'can't go below $X') and the buyer ends by pushing for less than that floor. A seller adding a condition ('for that price I can't include X') that the buyer then okays is 'accepted', not rejected.",
+        "backed_out": "They had agreed on a price but later one side backs out, or explicitly says the submitted offer was rejected or cannot be accepted.",
+        "no_price": "Nobody ever proposes a counter price and the buyer never accepts the asking price: the chat is only greetings or questions about the item, the seller only restates the listing price, the buyer only hesitates or asks whether the price is negotiable without naming their own number, it is about the wrong item, it complains about the site glitching, or it stops before anyone names a counter price."
+      },
+      "map": {
+        "accepted": "deal",
+        "agreed_will_submit": "deal",
+        "open_offer": "deal",
+        "rejected": "no_deal",
+        "backed_out": "no_deal",
+        "no_price": "no_deal"
+      }
+    }
+  ]
+}

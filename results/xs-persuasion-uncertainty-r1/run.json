@@ -1,0 +1,107 @@
+{
+  "run_id": "xs-persuasion-uncertainty-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-30T10:05:35",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 455,
+    "num_turns": 45,
+    "total_cost_usd": 1.5750577999999997
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.5,
+      "note": "v1 draft from description: 18-option choice with descriptions; no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.592,
+          "macro_f1": 0.5805,
+          "est_cost_usd": 0.097861,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.52,
+      "note": "v2: broadened 'other' (persuader answering/talking about self, confirming donation choice), labelled examples in option criteria; 10/10 on bought labels (examples included)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6144,
+          "macro_f1": 0.5919,
+          "est_cost_usd": 0.120111,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.5,
+      "note": "v3: batch-2 rules (fragments tagged by their turn's strategy, praise must be the point, rhetorical program questions = credibility, other donation channels = donation-info); 20/20 on bought labels (examples in criteria)",
+      "test": {
+        "jev": {
+          "accuracy": 0.615,
+          "macro_f1": 0.5893,
+          "est_cost_usd": 0.145458,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.5,
+      "note": "v4: batch-3 rules (child vulnerability=emotion, reasons to choose StC / helping everyone matters=logical, reflective concessions=other); 30/30 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6144,
+          "macro_f1": 0.5914,
+          "est_cost_usd": 0.164421,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.5,
+      "note": "v5: batch-4 rules (invitations to elaborate/ask = task-inquiry, 'up to you'/what the chat is about = donation-info, specific-sum asks = ask-amount, persuader's own work/answers = other); 40/40 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.617,
+          "macro_f1": 0.5934,
+          "est_cost_usd": 0.187492,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.55,
+      "note": "v8 final: 3-member wording-variant ensemble of the v7 scheme (batch-5 rules + self-modeling clarification); 50/50 on bought labels (fit, labels are in examples); estimate is a judgment, no unbiased labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6124,
+          "macro_f1": 0.5845,
+          "est_cost_usd": 0.614878,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "name": "deal_v3",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "A buyer and a seller negotiated over chat about a Craigslist item. Read the whole chat, paying most attention to how it ends, and decide how the negotiation ended. Pick the option that best describes the outcome.",
+  "state_template": "Listing and negotiation chat:\n{{input}}",
+  "criteria": {
+    "agreed_price": "Both sides explicitly agreed on a price: one side proposed a price and the other accepted it (says deal, ok, yes, that works, or confirms the deal while restating the terms), possibly followed by thanks or arrangements for pickup, delivery or payment.",
+    "agreed_then_formal_offer": "The two sides agreed on terms and one of them says they will now submit, send or enter the official offer.",
+    "agreed_then_side_question": "A price was accepted by both sides, and the chat ends on a minor follow-up such as accessories, timing or pickup that does not reopen the price.",
+    "pending_close_offer": "The chat ends with an offer or counter-offer the other side never answers, but it is close to what the other side last asked or offered: a small step from their price, splitting a small remaining gap, meeting their price, or a 'this price and we have a deal' that is near their last number. The other side would very likely accept it.",
+    "pending_far_offer": "The chat ends with an offer or counter-offer the other side never answers, and a large gap remains: it is far from the other side's last price or well beyond a limit they stated firmly, or it is an opening offer before any real negotiation.",
+    "rejected": "One side refused the last offer, said they cannot go that low/high, or walked away, and no agreement followed.",
+    "agreement_reversed": "The two sides seemed to agree on a price, but later in the same chat one of them backed out, changed the terms or reopened the price, and no new agreement was confirmed by the end.",
+    "abandoned": "The chat stops early: only greetings or questions about the item, with no price agreement.",
+    "broken": "The chat is confused or broken: the participants talk about different items, mix up roles, or discuss problems with the website or task instead of negotiating, with no agreement."
+  },
+  "map": {
+    "agreed_price": "deal",
+    "agreed_then_formal_offer": "deal",
+    "agreed_then_side_question": "deal",
+    "pending_close_offer": "deal",
+    "pending_far_offer": "no_deal",
+    "rejected": "no_deal",
+    "agreement_reversed": "no_deal",
+    "abandoned": "no_deal",
+    "broken": "no_deal"
+  }
+}

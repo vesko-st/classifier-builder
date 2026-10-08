@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "name": "donation_ens3",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "m3_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a chat in which a persuader tries to get the persuadee to donate part of their task payment (about $2) to Save the Children; after the chat the persuadee chooses an amount from $0 to their whole payment. Some chats are in broken English or the speakers mix up their roles; read them for what the persuadee means. Based on what the persuadee says, especially by the end, did the persuadee end up donating from this task payment?",
+      "state_template": "Charity-donation chat:\n{{input}}",
+      "criteria": {
+        "committed_amount": "The persuadee firmly states a specific amount they will give from this task payment (from a few cents up to the whole payment, $2 included), e.g. 'I will donate $0.15', 'I can donate 2 dollars', or confirms a donation. Also counts: the persuadee has said they will donate some of their earnings and then asks whether a small amount (up to $2) is enough.",
+        "agreed_unspecified": "The persuadee clearly agrees to give but gives no amount: e.g. says yes they will donate, endorses giving through this task and accepts the persuader's thanks for agreeing without objecting. In broken-English chats a plain 'yes I donate' counts.",
+        "tentative_amount": "The persuadee only floats an amount tentatively and never settles on it: 'maybe I'll donate $X', 'I might give X', 'I could do a dollar or two', or an amount asked as a question ('what about 20 cents?', 'is a dollar too small?') without ever saying they will give from their earnings.",
+        "unrealistic_amount": "The amount the persuadee says they will give, or accepts when the persuader proposes it, is more than the whole task payment (about $2): e.g. $5, $10, $20, $50, $100, or a monthly/recurring pledge. They are talking hypothetically rather than choosing an amount from this payment.",
+        "consider_only": "The persuadee only says they will consider it, look into the charity or its website, or answers a generic hope with a bare 'sure', without clearly agreeing to give.",
+        "undecided": "The persuadee stays undecided or gives an unclear answer about giving.",
+        "later_only": "The persuadee says they may donate later or elsewhere, but not now from this payment.",
+        "refused": "The persuadee declines to donate, or says they want to keep their payment."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_unspecified": "donated",
+        "tentative_amount": "not_donated",
+        "unrealistic_amount": "not_donated",
+        "consider_only": "not_donated",
+        "undecided": "not_donated",
+        "later_only": "not_donated",
+        "refused": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "m3_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A persuader asks the persuadee to give some of their roughly $2 task earnings to the charity Save the Children; once the chat is over the persuadee picks a donation between $0 and their full earnings. Chats may be in poor English or have the two speakers swap roles, so focus on what the persuadee actually intends. Judging mainly from the persuadee's final position, which best describes the outcome?",
+      "state_template": "Charity-donation chat:\n{{input}}",
+      "criteria": {
+        "committed_amount": "The persuadee settles on a concrete amount from their task earnings (a few cents up to the full earnings of $2), e.g. 'I'll give 15 cents', 'I can donate 2 dollars', or says they have donated. It also counts when they have said they will donate some of their earnings and then ask if a small sum like $1 is enough.",
+        "agreed_unspecified": "The persuadee clearly says yes to giving without naming an amount, e.g. 'yes I will donate', or happily accepts the persuader thanking them for agreeing to chip in. In poor-English chats a simple 'yes i donate' qualifies.",
+        "tentative_amount": "The persuadee mentions an amount only as a possibility and never commits: 'maybe $0.50', 'I might give a little', 'I could do a dollar or two', or an amount posed as a question like 'how about 20 cents?' or 'is a dollar too small?' when they never said they will give from their earnings.",
+        "unrealistic_amount": "The sum the persuadee offers, or agrees to when the persuader suggests it, exceeds their whole task earnings of about $2 (such as $5, $10, $20, $50, $100), or is a monthly or ongoing pledge; this shows they are speaking hypothetically rather than picking an amount from these earnings.",
+        "consider_only": "The persuadee only promises to think about it or to look the charity up online, or replies 'sure' to a general wish, with no clear yes to giving.",
+        "undecided": "The persuadee never makes their mind up, or their answer about giving is unclear.",
+        "later_only": "The persuadee would give some other time or through some other channel, but not from these earnings now.",
+        "refused": "The persuadee says no, or wants to keep their earnings."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_unspecified": "donated",
+        "tentative_amount": "not_donated",
+        "unrealistic_amount": "not_donated",
+        "consider_only": "not_donated",
+        "undecided": "not_donated",
+        "later_only": "not_donated",
+        "refused": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "m3_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "{\"context\": \"Chat between a persuader and a persuadee. The persuader wants the persuadee to donate part of their task payment (about $2) to Save the Children. After the chat, the persuadee enters a donation amount from $0 up to the full payment.\", \"note\": \"Some chats have broken English or confused roles; interpret the persuadee's meaning.\", \"question\": \"From what the persuadee says, above all at the end of the chat, what did they decide about donating from this payment?\"}",
+      "state_template": "Charity-donation chat:\n{{input}}",
+      "criteria": {
+        "committed_amount": "{\"definition\": \"Persuadee firmly names an amount to give from this payment, or confirms a donation.\", \"range\": \"a few cents up to the whole payment ($2 included)\", \"examples\": [\"I will donate $0.15\", \"I can donate 2 dollars\", \"I would be able to donate some of my earnings. Would $1 help at all?\"]}",
+        "agreed_unspecified": "{\"definition\": \"Persuadee clearly agrees to donate but names no amount.\", \"includes\": [\"yes, I will donate\", \"accepting the persuader's thanks for agreeing to pitch in without objecting\", \"plain 'yes i donate' in broken-English chats\"]}",
+        "tentative_amount": "{\"definition\": \"Persuadee floats an amount but never settles on it, including an amount asked as a question when they never said they will give from their earnings.\", \"examples\": [\"maybe I'll donate $.50\", \"I could do a dollar or two\", \"what about 20 cents?\", \"I can help out with a small amount. Is a dollar too small?\"]}",
+        "unrealistic_amount": "{\"definition\": \"The amount the persuadee offers or accepts is more than the whole task payment (about $2), or is a monthly/recurring pledge, so they are speaking hypothetically.\", \"examples\": [\"I will donate $5 a month\", \"is 20 dollars okay? ... yes i am\", \"accepting the persuader's 'your $10 donation'\", \"I can donate $100\"]}",
+        "consider_only": "{\"definition\": \"Persuadee only says they will consider it or check the charity/website, or gives a bare 'sure' to a generic hope; no clear agreement.\"}",
+        "undecided": "{\"definition\": \"Persuadee stays undecided or unclear about giving.\"}",
+        "later_only": "{\"definition\": \"Persuadee may give later or elsewhere, not now from this payment.\"}",
+        "refused": "{\"definition\": \"Persuadee declines or wants to keep their payment.\"}"
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_unspecified": "donated",
+        "tentative_amount": "not_donated",
+        "unrealistic_amount": "not_donated",
+        "consider_only": "not_donated",
+        "undecided": "not_donated",
+        "later_only": "not_donated",
+        "refused": "not_donated"
+      }
+    }
+  ]
+}

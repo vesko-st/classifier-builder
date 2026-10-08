@@ -1,0 +1,48 @@
+{
+  "run_id": "alb-donation-opus-r2",
+  "task": "persuasion_donation",
+  "budget": 0,
+  "strategy": "boundary",
+  "mode": "all_labels",
+  "created": "2026-10-04T17:11:11",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 286,
+    "num_turns": 33,
+    "total_cost_usd": 1.2234668
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.637,
+      "note": "v1 draft: 5-option choice mapped to 2 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.7362,
+          "macro_f1": 0.7128,
+          "est_cost_usd": 0.018846,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.69,
+      "note": "3-wording ensemble of v4 options (firm/willing->donated; hedged/engaged/outside/other/refused->not_donated), donated threshold 0.7 fitted on build",
+      "test": {
+        "jev": {
+          "accuracy": 0.7242,
+          "macro_f1": 0.7188,
+          "est_cost_usd": 0.064771,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

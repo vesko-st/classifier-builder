@@ -1,0 +1,77 @@
+{
+  "run_id": "xs-persuasion-labelsfirst-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "created": "2026-09-30T10:05:35",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 657,
+    "num_turns": 49,
+    "total_cost_usd": 1.8143176
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 29,
+      "estimate": 0.45,
+      "note": "draft v1: choice with 21 options mapped to 18 classes, from 3 policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.592,
+          "macro_f1": 0.5665,
+          "est_cost_usd": 0.105825,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 49,
+      "estimate": 0.45,
+      "note": "v3: broader 'other' (conversational replies/reactions), narrower praise/emotion; check acc 0.6 (n=10, rules derived from these)",
+      "test": {
+        "jev": {
+          "accuracy": 0.588,
+          "macro_f1": 0.5483,
+          "est_cost_usd": 0.122133,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 85,
+      "estimate": 0.5,
+      "note": "e6: 3-member wording ensemble of v5 (FITD small-framing, thank-on-behalf, continuation fragments, charity-fact answers->credibility, echo->ack). all-label acc 0.536 n=28 (mostly hard picks)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5847,
+          "macro_f1": 0.5466,
+          "est_cost_usd": 0.40047,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 99,
+      "estimate": 0.5,
+      "note": "e9: e6 + narrow rule 'stating a principle/duty to give = logical-appeal'. vs e6 fixes 4 labels, breaks 3 (2 jitter). all-label acc 0.543 n=35 (25 hard picks); check acc 0.8 but check set informed rules",
+      "test": {
+        "jev": {
+          "accuracy": 0.586,
+          "macro_f1": 0.5486,
+          "est_cost_usd": 0.413365,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

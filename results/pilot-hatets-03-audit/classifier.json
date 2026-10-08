@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v5",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "Hate-speech annotation of a tweet under a policy covering hate against immigrants/refugees and against women. Which description best fits this tweet?",
+    "key_rules": [
+      "Supporting restrictive immigration policy (the wall, ICE, ending DACA, deportation) is NOT hate by itself. Hashtags such as #BuildThatWall, #DeportThemAll or #SendThemBack attached to political commentary, news or a hashtag stack do not make a tweet hateful.",
+      "An immigration tweet is hate when its own words generalise immigrants as criminals, rapists, thieves, invaders or a plague, or when its own words demand that immigrants/illegal aliens be removed, sent home or gotten rid of.",
+      "Tweets using 'bitch' (or cunt) as slang, an exclamation, self-reference, lyrics or an ordinary insult in a personal beef are NOT hate.",
+      "A tweet about women is hate when it sexually degrades or threatens a woman because she is a woman (rape threats or jokes, sexual humiliation, wishing sexual violence or death on her) or demeans women as a group.",
+      "Calling a woman or women hoes/whores/sluts (labelling women by sexual promiscuity) is hate, whether aimed at one woman or at women generally (e.g. 'chasing hoes')."
+    ]
+  },
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "immigrants_criminalised": "The tweet's own words portray immigrants, refugees or illegal aliens as a group as criminals, rapists, child molesters, thieves stealing jobs/benefits, disease carriers, invaders, vermin or an invasion. Also: sharing crime news or statistics to imply illegal aliens are typically predators or killers, and claims that an immigrant ethnicity (e.g. Mestizos) turns a country into a third-world shithole.",
+    "immigrants_expel_demand": "The tweet's own text (not just a hashtag) demands immigrants/illegal aliens be deported, sent home, gotten rid of or kept out, as its main message.",
+    "immigration_commentary": "Immigration politics without demeaning immigrants as people: support for the wall, ICE, ending DACA, legal-vs-illegal distinctions, jabs at Democrats or Trump, news links, rally posts, hashtag stacks, or defending the term 'illegal alien'. Complaints about how politicians spend money or treat citizens, ending in a #SendThemHome-style hashtag, belong here unless the tweet also portrays immigrants as criminals or a hazard.",
+    "woman_sexually_degraded": "Sexually degrades, humiliates or threatens a woman as a woman: rape threats or jokes, graphic sexual insults about her body or sexual acts, wishing violence or death on her.",
+    "women_generalised": "Demeaning generalisations about women as a group (women are whores, only good for sex, deserve rape).",
+    "woman_called_hoe": "Calls a woman or women hoe(s), whore(s) or slut(s), degrading them for their sexuality, e.g. 'you a hoe', 'chasing hoes', 'drag a hoe'.",
+    "bitch_insult": "Uses 'bitch' or 'cunt' as an ordinary insult or form of address in an argument or complaint, without calling anyone a hoe/whore/slut and without sexual degradation or threats.",
+    "casual_slur": "'Bitch' as filler, exclamation, self-description, affection between friends, or song lyrics.",
+    "other_insult_or_report": "Insults a man, politician or thing; reports or criticises someone else's sexism or racism; or anything unrelated to women or immigrants."
+  },
+  "map": {
+    "immigrants_criminalised": "hate",
+    "immigrants_expel_demand": "hate",
+    "immigration_commentary": "not_hate",
+    "woman_sexually_degraded": "hate",
+    "women_generalised": "hate",
+    "woman_called_hoe": "hate",
+    "bitch_insult": "not_hate",
+    "casual_slur": "not_hate",
+    "other_insult_or_report": "not_hate"
+  }
+}

@@ -1,0 +1,76 @@
+{
+  "run_id": "xs-deal-free-r1",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "free",
+  "created": "2026-09-30T11:09:25",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 293,
+    "num_turns": 33,
+    "total_cost_usd": 1.105842
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft: 5 ending types, unanswered final offer -> deal (guess)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8883,
+          "macro_f1": 0.8209,
+          "est_cost_usd": 0.018099,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 65,
+      "estimate": 0.84,
+      "note": "v3: unanswered offers split by ~10% gap (small->deal, large->no_deal); 27/30 on bought labels, 15/16 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.921,
+          "macro_f1": 0.8908,
+          "est_cost_usd": 0.024724,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.85,
+      "note": "final: ensemble of v3/v4/v5 wording variants; 15/16 random check; unanswered-offer group ~60-65% (label noise)",
+      "test": {
+        "luna": {
+          "accuracy": 0.9296,
+          "macro_f1": 0.9019,
+          "est_cost_usd": 0.155578,
+          "total": 582,
+          "answered": 582
+        },
+        "pplx": {
+          "accuracy": 0.9175,
+          "macro_f1": 0.883,
+          "est_cost_usd": 0.000174,
+          "total": 582,
+          "answered": 582
+        },
+        "jev": {
+          "accuracy": 0.9261,
+          "macro_f1": 0.8966,
+          "est_cost_usd": 0.06894,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

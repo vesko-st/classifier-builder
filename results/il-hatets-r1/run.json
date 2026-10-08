@@ -1,0 +1,81 @@
+{
+  "run_id": "il-hatets-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 533,
+    "num_turns": 39,
+    "total_cost_usd": 1.5988170000000002
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description; 12 options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7871,
+          "macro_f1": 0.7868,
+          "est_cost_usd": 0.059101,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 63,
+      "estimate": 0.8,
+      "note": "ens1: 3 wording variants of v4 (H1 politics-vs-immigrants rule, narrower slur rules); 20/24 on mostly boundary labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7911,
+          "macro_f1": 0.7908,
+          "est_cost_usd": 0.197775,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 85,
+      "estimate": 0.82,
+      "note": "ens2: + term-debate rule (H3) and female-public-figure/political-opponent rule (H4); 30/35 on boundary-heavy labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7973,
+          "macro_f1": 0.7969,
+          "est_cost_usd": 0.213871,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 99,
+      "estimate": 0.8,
+      "note": "FINAL: ens2 re-snapshotted after last batch; 33/42 on bought labels (32 boundary-picked), threshold 0.6 tested and rejected",
+      "test": {
+        "jev": {
+          "accuracy": 0.7973,
+          "macro_f1": 0.7969,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

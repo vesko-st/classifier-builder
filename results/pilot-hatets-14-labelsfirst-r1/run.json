@@ -1,0 +1,103 @@
+{
+  "run_id": "pilot-hatets-14-labelsfirst-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "created": "2026-09-28T22:27:34",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 20,
+      "estimate": 0.68,
+      "note": "v1 criteria draft from policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.7922,
+          "macro_f1": 0.7865,
+          "est_cost_usd": 0.056505,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 40,
+      "estimate": 0.72,
+      "note": "v1 + hate threshold 0.40 (fit on 10 random check labels)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7877,
+          "macro_f1": 0.7859,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 50,
+      "estimate": 0.74,
+      "note": "ensemble v1+v3 (own-words expulsion / burden framing rule), thr 0.40",
+      "test": {
+        "jev": {
+          "accuracy": 0.8012,
+          "macro_f1": 0.8,
+          "est_cost_usd": 0.120576,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 66,
+      "estimate": 0.76,
+      "note": "ens3: woman rule adds sexual/relationship-status shaming; thr 0.50",
+      "test": {
+        "jev": {
+          "accuracy": 0.8046,
+          "macro_f1": 0.8021,
+          "est_cost_usd": 0.127326,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 82,
+      "estimate": 0.77,
+      "note": "ens4: not_hate carve-outs for 'illegal aliens' term use, swear strings, friendly banter; thr 0.50",
+      "test": {
+        "jev": {
+          "accuracy": 0.8126,
+          "macro_f1": 0.81,
+          "est_cost_usd": 0.135074,
+          "total": 1766,
+          "answered": 1750
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.8,
+      "note": "final: ens4 with thr 0.55 (fit on 19 random check labels; pool hate rate 43% matches random base rate 42%)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8063,
+          "macro_f1": 0.8011,
+          "est_cost_usd": 0.001227,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

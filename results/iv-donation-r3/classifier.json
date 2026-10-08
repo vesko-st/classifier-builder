@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "name": "donation_v8",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "In this chat a persuader urges the persuadee to give a portion of their earnings from the task (from nothing up to two dollars) to Save the Children, a children's charity. After the chat, the persuadee privately chooses how much of their pay to give, and that choice may differ from what they said. Judge from the persuadee's words and attitude how they ended the chat. Which description best fits the persuadee?",
+  "state_template": "{{input}}",
+  "criteria": {
+    "firm_willing": "The persuadee readily and sincerely commits to give a specific positive amount, a fraction such as half, or all of their pay from this task, as their answer to how much to give here (a number a few dollars over the pay still counts), shows genuine interest in the cause, and does not take it back.",
+    "reluctant_small": "The persuadee commits to a small amount only reluctantly: after pushing, haggling or repeated asking, or while stressing they cannot really afford it.",
+    "doubtful_commit": "The persuadee names an amount, but still distrusts the charity at the end of the chat: they keep doubting that the money really reaches children or that the charity's claims are true, call the gift a gamble, or treat the donation as hypothetical or pretend. Suspicion about whether the persuader is a real person, or confusion about how the task works, does not count as this.",
+    "confused_amount": "The persuadee talks about giving their own money outside this task rather than a share of the task pay: they pledge tens of dollars or more, or describe paying by check, card or on the website, giving monthly or next year, or giving what they normally give to charity.",
+    "agrees_no_amount": "The persuadee says yes to giving to this charity, or says they will probably or definitely give to it, but no amount is settled; also a persuadee who mixes up the roles and themselves praises this charity and says they give to it. Sympathy, questions, or talk of other charities without such a yes does not count.",
+    "hedged": "The persuadee stays noncommittal or reluctant: says only that they might or will think about it while voicing reservations, money worries or lack of interest, or makes a vague offer after earlier saying no.",
+    "deferred": "The persuadee says they will give later, elsewhere, online, or after research, rather than from this task pay now.",
+    "refuses": "The persuadee declines to give, chooses zero, or says they want to keep their pay, including after earlier agreeing.",
+    "unsettled": "The persuadee never says whether they will give to this charity: the chat stays off topic, or they only ask questions, express sympathy, or talk about other charities they support, without any yes or no."
+  },
+  "map": {
+    "firm_willing": "donated",
+    "reluctant_small": "donated",
+    "doubtful_commit": "not_donated",
+    "confused_amount": "not_donated",
+    "agrees_no_amount": "donated",
+    "hedged": "not_donated",
+    "deferred": "not_donated",
+    "refuses": "not_donated",
+    "unsettled": "not_donated"
+  }
+}

@@ -1,0 +1,81 @@
+{
+  "run_id": "iv-deal-r2",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "interview",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T11:16:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 410,
+    "num_turns": 46,
+    "total_cost_usd": 1.6276890000000006
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft from description: 7 outcome options mapped; pending offers -> no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.8969,
+          "macro_f1": 0.8722,
+          "est_cost_usd": 0.019908,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 15,
+      "estimate": 0.82,
+      "note": "v2: owner confirmed rules; added agreement_reversed -> no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.8969,
+          "macro_f1": 0.8722,
+          "est_cost_usd": 0.021253,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 63,
+      "estimate": 0.86,
+      "note": "v3: split unanswered final offers into close (deal) / far (no_deal); acceptance restating terms = agreement",
+      "test": {
+        "jev": {
+          "accuracy": 0.9141,
+          "macro_f1": 0.8824,
+          "est_cost_usd": 0.02399,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 99,
+      "estimate": 0.88,
+      "note": "final: v3 re-snapshotted with updated estimate; check set 8/8 for v1-v3, v3 best on non-check (29/34)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9141,
+          "macro_f1": 0.8824,
+          "est_cost_usd": 0.0,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

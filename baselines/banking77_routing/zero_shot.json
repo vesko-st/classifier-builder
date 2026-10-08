@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "name": "banking77_routing_zero_shot",
+  "description": "0-point baseline from the public task definition.",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Route customer messages sent to a digital bank's support chat to the team that should handle them. Each message goes to exactly one team. Which class does this input belong to?",
+  "criteria": {
+    "fraud_and_security": "Fraud and security team",
+    "disputes_and_refunds": "Disputes and refunds team",
+    "cards": "Cards team",
+    "payments_and_transfers": "Payments and transfers team",
+    "pricing_and_fx": "Pricing and FX team",
+    "account_and_compliance": "Account and compliance team"
+  },
+  "state_template": "A single customer message (usually one sentence).\n\n{{input}}"
+}

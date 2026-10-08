@@ -1,0 +1,72 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v5",
+  "model": "jev-latest",
+  "type": "two_level",
+  "state_template": "Tweet:\n{{input}}",
+  "router": {
+    "instructions": "Which of these does this tweet touch on? If it mentions or tags immigration at all, choose immigration.",
+    "criteria": {
+      "immigration": "Mentions immigrants, migrants, refugees, asylum, borders or immigration policy, or contains any immigration hashtag such as #BuildThatWall, #SendThemBack, #Immigration, even among many other hashtags",
+      "women": "Women or girls, a particular woman, gender relations, or uses words like bitch, hoe, whore, slut, skank, cunt about or at someone",
+      "other": "Anything else"
+    }
+  },
+  "groups": {
+    "immigration": {
+      "instructions": {
+        "task": "Under a hate-speech policy that protects immigrants, migrants and refugees, which best describes this tweet?",
+        "note": "Attacks on politicians, parties, religions or countries are outside the policy."
+      },
+      "criteria": {
+        "dehumanise_or_stereotype": "Hostile to immigrants as people: calls them invaders, criminals, rapists, frauds, freeloaders, parasites, animals, or says they cheat the system",
+        "threat_or_burden": "Portrays immigration or migrants as a crisis, threat or burden the country cannot cope with, or demands extra screening, stopping or deporting them",
+        "slogan": "Uses or endorses an anti-immigrant slogan or hashtag such as #BuildThatWall, 'build the wall', #SendThemBack, #StopTheInvasion, even if the rest is about something else",
+        "policy_analysis": "Dispassionate argument or analysis of immigration levels, economics or policy that does not portray migrants as a threat",
+        "news": "Neutral news report or headline about migrants or refugees, even about incidents or crimes",
+        "refugee_status": "Discusses whether particular people are genuinely refugees, or says refugees should return home once it is safe, without hostility",
+        "supportive": "Supports or defends immigrants or refugees",
+        "other_target": "Mainly attacks a politician, party, the media, a religion or a country rather than immigrants"
+      },
+      "map": {
+        "dehumanise_or_stereotype": "hate",
+        "threat_or_burden": "hate",
+        "slogan": "hate",
+        "policy_analysis": "not_hate",
+        "news": "not_hate",
+        "refugee_status": "not_hate",
+        "supportive": "not_hate",
+        "other_target": "not_hate"
+      }
+    },
+    "women": {
+      "instructions": {
+        "task": "Under a hate-speech policy that protects women, which best describes this tweet?",
+        "note": "Abuse aimed at men, and personal insults at an identifiable person (an @user reply or a named public figure), are outside the policy."
+      },
+      "criteria": {
+        "generic_misogyny": "Generalises about women as a group: calls women (in general, 'these bitches', 'hoes') bitches/hoes/whores, treats women as sex objects, jokes about rape, or opposes women's rights, even in a joking or 'loving' tone",
+        "unnamed_woman_degradation": "Slur-laden or sexual degradation of an unnamed woman or girl ('this bitch', 'dumb bitch', 'she need some dick'), not addressed to a specific account",
+        "abuse_identifiable_person": "Insults or slurs (bitch, cunt, skank, whore, 'stay in the kitchen') aimed at a specific identifiable person: a reply to an @user or a named public figure",
+        "insult_man": "Insults or slurs aimed at a man, a company or a thing",
+        "banter": "Affectionate or joking banter with a friend using words like bitch, hoe, girl",
+        "reporting": "Recounts or quotes being called a slur or suffering sexism or abuse, or supports women",
+        "gender_discussion": "Discusses sexism, 'not all men' or gender relations without demeaning women or opposing their rights",
+        "casual_profanity": "Profanity about oneself, song lyrics or jokes that do not demean women"
+      },
+      "map": {
+        "generic_misogyny": "hate",
+        "unnamed_woman_degradation": "hate",
+        "abuse_identifiable_person": "not_hate",
+        "insult_man": "not_hate",
+        "banter": "not_hate",
+        "reporting": "not_hate",
+        "gender_discussion": "not_hate",
+        "casual_profanity": "not_hate"
+      }
+    },
+    "other": {
+      "class": "not_hate"
+    }
+  }
+}

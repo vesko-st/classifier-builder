@@ -1,0 +1,246 @@
+{
+  "classifier": "persuasion_strategy_zero_shot",
+  "type": "choice",
+  "backend": "pplx",
+  "total": 1517,
+  "answered": 1517,
+  "errors": {},
+  "cached": 9,
+  "input_tokens_billed": 666225,
+  "output_tokens_billed": 1508,
+  "est_cost_usd": 0.026649,
+  "latency_ms_p50": 193.4,
+  "latency_ms_p95": 219.0,
+  "prediction_counts": {
+    "donation-information": 303,
+    "acknowledgement": 199,
+    "proposition-of-donation": 127,
+    "emotion-appeal": 108,
+    "other": 88,
+    "logical-appeal": 83,
+    "task-related-inquiry": 81,
+    "greeting": 77,
+    "thank": 74,
+    "off-task": 72,
+    "credibility-appeal": 66,
+    "self-modeling": 57,
+    "ask-donation-amount": 55,
+    "praise-user": 43,
+    "personal-related-inquiry": 42,
+    "personal-story": 22,
+    "source-related-inquiry": 11,
+    "foot-in-the-door": 9
+  },
+  "labeled": 1517,
+  "accuracy": 0.4469,
+  "macro_f1": 0.4618,
+  "per_class": {
+    "acknowledgement": {
+      "n": 71,
+      "precision": 0.3216,
+      "recall": 0.9014,
+      "f1": 0.4741
+    },
+    "ask-donation-amount": {
+      "n": 26,
+      "precision": 0.4545,
+      "recall": 0.9615,
+      "f1": 0.6173
+    },
+    "credibility-appeal": {
+      "n": 247,
+      "precision": 0.7121,
+      "recall": 0.1903,
+      "f1": 0.3003
+    },
+    "donation-information": {
+      "n": 124,
+      "precision": 0.3036,
+      "recall": 0.7419,
+      "f1": 0.4309
+    },
+    "emotion-appeal": {
+      "n": 95,
+      "precision": 0.5463,
+      "recall": 0.6211,
+      "f1": 0.5813
+    },
+    "foot-in-the-door": {
+      "n": 51,
+      "precision": 0.8889,
+      "recall": 0.1569,
+      "f1": 0.2667
+    },
+    "greeting": {
+      "n": 79,
+      "precision": 0.7532,
+      "recall": 0.7342,
+      "f1": 0.7436
+    },
+    "logical-appeal": {
+      "n": 109,
+      "precision": 0.3253,
+      "recall": 0.2477,
+      "f1": 0.2812
+    },
+    "off-task": {
+      "n": 36,
+      "precision": 0.2361,
+      "recall": 0.4722,
+      "f1": 0.3148
+    },
+    "other": {
+      "n": 256,
+      "precision": 0.3636,
+      "recall": 0.125,
+      "f1": 0.186
+    },
+    "personal-related-inquiry": {
+      "n": 40,
+      "precision": 0.5238,
+      "recall": 0.55,
+      "f1": 0.5366
+    },
+    "personal-story": {
+      "n": 35,
+      "precision": 0.5455,
+      "recall": 0.3429,
+      "f1": 0.4211
+    },
+    "praise-user": {
+      "n": 44,
+      "precision": 0.4419,
+      "recall": 0.4318,
+      "f1": 0.4368
+    },
+    "proposition-of-donation": {
+      "n": 81,
+      "precision": 0.5354,
+      "recall": 0.8395,
+      "f1": 0.6538
+    },
+    "self-modeling": {
+      "n": 49,
+      "precision": 0.5965,
+      "recall": 0.6939,
+      "f1": 0.6415
+    },
+    "source-related-inquiry": {
+      "n": 43,
+      "precision": 0.5455,
+      "recall": 0.1395,
+      "f1": 0.2222
+    },
+    "task-related-inquiry": {
+      "n": 50,
+      "precision": 0.358,
+      "recall": 0.58,
+      "f1": 0.4427
+    },
+    "thank": {
+      "n": 81,
+      "precision": 0.7973,
+      "recall": 0.7284,
+      "f1": 0.7613
+    }
+  },
+  "top_confusions": [
+    {
+      "gold": "credibility-appeal",
+      "predicted": "donation-information",
+      "n": 139
+    },
+    {
+      "gold": "other",
+      "predicted": "acknowledgement",
+      "n": 62
+    },
+    {
+      "gold": "other",
+      "predicted": "off-task",
+      "n": 44
+    },
+    {
+      "gold": "other",
+      "predicted": "donation-information",
+      "n": 37
+    },
+    {
+      "gold": "source-related-inquiry",
+      "predicted": "task-related-inquiry",
+      "n": 28
+    },
+    {
+      "gold": "praise-user",
+      "predicted": "acknowledgement",
+      "n": 21
+    },
+    {
+      "gold": "logical-appeal",
+      "predicted": "emotion-appeal",
+      "n": 19
+    },
+    {
+      "gold": "emotion-appeal",
+      "predicted": "logical-appeal",
+      "n": 18
+    },
+    {
+      "gold": "foot-in-the-door",
+      "predicted": "logical-appeal",
+      "n": 16
+    },
+    {
+      "gold": "other",
+      "predicted": "greeting",
+      "n": 14
+    },
+    {
+      "gold": "logical-appeal",
+      "predicted": "other",
+      "n": 14
+    },
+    {
+      "gold": "credibility-appeal",
+      "predicted": "other",
+      "n": 13
+    },
+    {
+      "gold": "personal-related-inquiry",
+      "predicted": "task-related-inquiry",
+      "n": 13
+    },
+    {
+      "gold": "logical-appeal",
+      "predicted": "acknowledgement",
+      "n": 12
+    },
+    {
+      "gold": "credibility-appeal",
+      "predicted": "logical-appeal",
+      "n": 12
+    }
+  ],
+  "accuracy_by_confidence": [
+    {
+      "confidence": "[0.0, 0.5)",
+      "n": 670,
+      "accuracy": 0.3164
+    },
+    {
+      "confidence": "[0.5, 0.7)",
+      "n": 340,
+      "accuracy": 0.3971
+    },
+    {
+      "confidence": "[0.7, 0.9)",
+      "n": 334,
+      "accuracy": 0.5808
+    },
+    {
+      "confidence": "[0.9, 1.0]",
+      "n": 173,
+      "accuracy": 0.7919
+    }
+  ]
+}

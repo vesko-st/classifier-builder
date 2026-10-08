@@ -1,0 +1,103 @@
+{
+  "run_id": "pilot-hatefull-01-uncertainty",
+  "task": "tweet_hate_fullpool",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-27T22:13:49",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v1 description-only draft, 7 options mapped",
+      "test": {
+        "jev": {
+          "accuracy": 0.6195,
+          "macro_f1": 0.6047,
+          "est_cost_usd": 0.105324,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.72,
+      "note": "v2: low bar for anti-immigration hostility, slang bitch not hate; 10/10 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6202,
+          "macro_f1": 0.6202,
+          "est_cost_usd": 0.141824,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.74,
+      "note": "v3: gendered slurs at women = hate even in slang; 19/20 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6118,
+          "macro_f1": 0.5949,
+          "est_cost_usd": 0.175957,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.75,
+      "note": "v4: news-incident option, sexist jokes/anti-feminism hate, slurs at unclear gender not; 29/30 bought",
+      "test": {
+        "jev": {
+          "accuracy": 0.6273,
+          "macro_f1": 0.6164,
+          "est_cost_usd": 0.226159,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.75,
+      "note": "v5: refugee-perk resentment hate, relationship banter not; 38/40 bought",
+      "test": {
+        "jev": {
+          "accuracy": 0.6202,
+          "macro_f1": 0.607,
+          "est_cost_usd": 0.258174,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.72,
+      "note": "v8 final: batch-5 fixes (unstated-target slurs/hysterical = hate, party-stance criticism not, #MaleDominance hate), 'hysterical'=hilarious not hate; 47/50 bought",
+      "test": {
+        "jev": {
+          "accuracy": 0.6111,
+          "macro_f1": 0.5951,
+          "est_cost_usd": 0.29131,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    }
+  ]
+}

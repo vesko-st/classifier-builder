@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "name": "deal_v6",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Craigslist listing and buyer-seller negotiation chat:\n{{input}}",
+  "questions": {
+    "agreed": {
+      "instructions": "By the end of the chat, had one side accepted a price the other side proposed, so that both settled on the same price? (Restating the other side's price as acceptance, e.g. 'OK, I can pay the $30' or '1800 it will be', counts.)",
+      "criteria": {
+        "true": "A price offer is answered with acceptance by the other side: 'deal', 'sounds like a deal', 'ok', 'okay', 'sure', 'yes', 'sounds good/fair/great', 'that works', 'I can do that', 'I accept', '$X it is', 'I'll take it', 'I'll make/submit the offer'. Accepting an offer that has conditions (pickup today, cash) by agreeing to those conditions also counts. After the acceptance there may be thanks or pickup plans, or nothing (acceptance can be the last line).",
+        "false": "The last price offer or counter-offer gets no reply or no acceptance: the chat ends on it, the other side counters, refuses or walks away, or replies about something else (item details, questions) without accepting the price. Also false when no price was discussed."
+      }
+    },
+    "undone": {
+      "instructions": "Is the chat's final state that no price is agreed, because an accepted price was later taken back or replaced by a new offer or condition that was left unaccepted?",
+      "criteria": {
+        "true": "After an acceptance someone retracts or hesitates ('let me think about it', 'actually no'), or makes a new counter-offer or adds a new condition, and the chat ends without the other side accepting that new offer/condition.",
+        "false": "The last price agreement still stands at the end: after it come only thanks, logistics, pickup plans, 'I'll submit the offer', or site/button problems; or a new offer after it was itself accepted; or no price was accepted at all."
+      }
+    },
+    "broken": {
+      "instructions": "Did the chat fail to become a real negotiation about this listed item?",
+      "criteria": {
+        "true": "Only greetings or one or two lines; both people act as seller or buyer; they talk about a different item; or the chat is mostly complaints about the site or task, with no price agreed.",
+        "false": "The buyer and seller actually discussed this item and its price."
+      }
+    },
+    "close_offer": {
+      "instructions": "Does the chat end with one side making a new compromise price offer that moves close to the other side's last offer (or that they say they will submit as the final offer), which the other side has not yet answered?",
+      "criteria": {
+        "true": "The last price message is a genuine concession toward the other side, e.g. buyer offered 2900, seller replies 'if you can go 2950 it would save me the trouble'; or 'my final offer is $525, I will submit the final offer'. The two sides are close and no one refuses afterwards.",
+        "false": "The chat ends with a price already accepted, with a refusal or someone holding firm ('80 or nothing', 'I can't go lower', 'look elsewhere'), with the sides still far apart, with talk about item details, or with no price discussed."
+      }
+    }
+  },
+  "rule": [
+    [
+      "agreed",
+      "!undone",
+      "!broken"
+    ],
+    [
+      "close_offer",
+      "!agreed",
+      "!broken"
+    ]
+  ],
+  "positive": "deal",
+  "negative": "no_deal",
+  "decision": {
+    "class": "deal",
+    "threshold": 0.45
+  }
+}

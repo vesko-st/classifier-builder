@@ -1,0 +1,92 @@
+{
+  "run_id": "xs-routing-labelsfirst-r1",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "created": "2026-09-30T11:23:10",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 348,
+    "num_turns": 36,
+    "total_cost_usd": 1.1837368000000001
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 25,
+      "estimate": 0.8,
+      "note": "v1 draft: 52 fine intent options mapped to 6 teams per owner policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.8799,
+          "macro_f1": 0.8747,
+          "est_cost_usd": 0.000582,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 59,
+      "estimate": 0.87,
+      "note": "v2: verify_top_up->account, supported cards/currencies->pricing, extra charge on statement->disputes; 17/17 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9081,
+          "macro_f1": 0.9083,
+          "est_cost_usd": 0.226905,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 75,
+      "estimate": 0.88,
+      "note": "v3: direct debit any issue->fraud, card payment fee vs unexplained extra charge split, card types for top-up->pricing; 24/25 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9123,
+          "macro_f1": 0.9132,
+          "est_cost_usd": 0.233888,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 99,
+      "estimate": 0.885,
+      "note": "v4: unrecognised incoming money->fraud, rate-differs-from-expected->disputes, other cards for top-up->pricing; 33/37 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9166,
+          "macro_f1": 0.9189,
+          "est_cost_usd": 0.237638,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.89,
+      "note": "v5 final: v4 + narrow buy-crypto->account option; 34/37 bought labels (3 suspected noise), 10/10 check labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9185,
+          "macro_f1": 0.9213,
+          "est_cost_usd": 0.241259,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

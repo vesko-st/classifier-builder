@@ -1,0 +1,62 @@
+{
+  "run_id": "xm-persuasion-sonnet-high-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:38:50",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 215,
+    "num_turns": 29,
+    "total_cost_usd": 0.6297739000000001
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 41,
+      "estimate": 0.45,
+      "note": "draft v1 choice 18 classes from owner policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.5702,
+          "macro_f1": 0.5768,
+          "est_cost_usd": 0.104561,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 81,
+      "estimate": 0.5,
+      "note": "v2: narrower acknowledgement, emotion/logical/other tweaks (fit to 20 labels, so optimistic on them)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5735,
+          "macro_f1": 0.5806,
+          "est_cost_usd": 0.11695,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.55,
+      "note": "v3: narrow foot-in-the-door/off-task/ask-amount, proposition absorbs suggested amounts; fit to 29 labels (24/29), unbiased estimate uncertain",
+      "test": {
+        "jev": {
+          "accuracy": 0.5775,
+          "macro_f1": 0.5709,
+          "est_cost_usd": 0.13212,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "run_id": "pilot-intents-14-uncertainty-ens2",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-28T22:00:32",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "description-only flat 77-option choice",
+      "test": {
+        "jev": {
+          "accuracy": 0.8367,
+          "macro_f1": 0.832,
+          "est_cost_usd": 0.332946,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.81,
+      "note": "batch1 examples+notes",
+      "test": {
+        "jev": {
+          "accuracy": 0.8399,
+          "macro_f1": 0.8351,
+          "est_cost_usd": 0.372905,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.82,
+      "note": "batch2 examples+notes",
+      "test": {
+        "jev": {
+          "accuracy": 0.839,
+          "macro_f1": 0.8341,
+          "est_cost_usd": 0.419977,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.83,
+      "note": "batch3 examples+notes",
+      "test": {
+        "jev": {
+          "accuracy": 0.8477,
+          "macro_f1": 0.8439,
+          "est_cost_usd": 0.469247,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.84,
+      "note": "batch4 rules; 2-member wording-variant ensemble",
+      "test": {
+        "jev": {
+          "accuracy": 0.8591,
+          "macro_f1": 0.854,
+          "est_cost_usd": 1.095098,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.85,
+      "note": "batch5 rules; final 2-member wording-variant ensemble",
+      "test": {
+        "jev": {
+          "accuracy": 0.8679,
+          "macro_f1": 0.8636,
+          "est_cost_usd": 1.158076,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

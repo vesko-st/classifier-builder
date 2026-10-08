@@ -1,0 +1,111 @@
+{
+  "run_id": "ro-deal-uncertainty-r1",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-04T17:49:08",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 702,
+    "num_turns": 49,
+    "total_cost_usd": 2.1331838000000007
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft from description: 5 ending-type options mapped to deal/no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9055,
+          "macro_f1": 0.8817,
+          "est_cost_usd": 0.018075,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.82,
+      "note": "v5: ensemble of 2 wording variants; rules H1 close final offer=deal, H2 side-condition yes/ cannot-pay = no_deal, H4 lone message never deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9124,
+          "macro_f1": 0.8809,
+          "est_cost_usd": 0.049985,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.83,
+      "note": "v7: + H5 unanswered offer after price exchange = deal unless it breaks a firm repeated limit; H6 conditional yes confirmed = deal; H7 chat ending before any price response = no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9055,
+          "macro_f1": 0.867,
+          "est_cost_usd": 0.058051,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.85,
+      "note": "v9t: gap rule (within ~1/5 = deal, >1/4 = no_deal), repeated-limit override, asking-price acceptance, bundled-offer yes, one-party chats never deal, figure typos; deal threshold 0.45",
+      "test": {
+        "jev": {
+          "accuracy": 0.9278,
+          "macro_f1": 0.8987,
+          "est_cost_usd": 0.064407,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.85,
+      "note": "v11: 3-member wording ensemble (+ step-wise variant c); + logistics-question acceptance, grudging assent, formal-offer-rejected, interest != acceptance; threshold back to 0.5",
+      "test": {
+        "jev": {
+          "accuracy": 0.9278,
+          "macro_f1": 0.8998,
+          "est_cost_usd": 0.100277,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.87,
+      "note": "v13 final: 3-member ensemble; + who-made-the-last-offer rule (buyer's unanswered first offer = no_deal; seller's discount/conditional acceptance = deal unless gap > ~1/4). 46/50 on uncertainty-picked labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9313,
+          "macro_f1": 0.9045,
+          "est_cost_usd": 0.110543,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "run_id": "pilot-hatefull-02-rules",
+  "task": "tweet_hate_fullpool",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "created": "2026-09-27T22:13:49",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.62,
+      "note": "v1 description-only draft, 8 fine options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7404,
+          "macro_f1": 0.74,
+          "est_cost_usd": 0.083026,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 29,
+      "estimate": 0.72,
+      "note": "round 1: target scope women+immigrants, slogans, misogynistic generalisations, banter, opinion narrowed",
+      "test": {
+        "jev": {
+          "accuracy": 0.6088,
+          "macro_f1": 0.5931,
+          "est_cost_usd": 0.120896,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 63,
+      "estimate": 0.74,
+      "note": "round 2: two-level router (immigration/women/other); H6 threat-or-burden, H8 identifiable-person abuse not hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.5919,
+          "macro_f1": 0.5895,
+          "est_cost_usd": 0.154406,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    }
+  ]
+}

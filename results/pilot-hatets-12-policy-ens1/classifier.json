@@ -1,0 +1,130 @@
+{
+  "version": 1,
+  "name": "hate_ens_v6",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "m_a",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm_about": {
+          "instructions": "Is this tweet about immigrants, migrants, refugees, asylum seekers or illegal aliens as people (not only about a wall, a politician, or an unrelated topic that merely carries an immigration hashtag)?"
+        },
+        "imm_hostile": {
+          "instructions": "Does the tweet show hostility toward immigrants, migrants, refugees or illegal aliens?",
+          "criteria": {
+            "true": "Yes: portrays them as criminals, rapists, killers, invaders, disease carriers, welfare burdens, job thieves or subhuman (including news of a crime by an illegal alien used to blame them); uses slurs like rapefugee or bottom feeders; or approvingly calls to deport, expel, send them back (e.g. #DeportThemAll, #SendThemBack used against them) or harm them.",
+            "false": "No: neutral news, general claims about open borders or crime without blaming immigrants themselves, policy talk about the wall, voting, laws, terminology or politicians, defending immigrants, or criticising anti-immigrant views."
+          }
+        },
+        "woman_target": {
+          "instructions": "Is the tweet aimed at one particular person who is a woman or is insulted as one (an addressed @user, or a named or described individual called bitch, hoe, whore, slut or cunt), rather than clearly at a man, at women in general, or at nobody? A man or boy (named male, 'he/him', 'this dude', a male athlete or politician) never counts, even when called bitch, whore or cunt."
+        },
+        "sexual_violent": {
+          "instructions": "Is it a hostile attack on that person: contemptuous name-calling with gendered or sexual slurs ('fuck you hoe', 'you're a whore', 'bitch ass hoe'), sexually degrading remarks, or threats to hit, rape or kill her?",
+          "criteria": {
+            "true": "Yes: the slurs or sexual/violent content are used with real hostility to insult, degrade or threaten her.",
+            "false": "No: playful or affectionate use between friends, excited exclamations ('bitch I'm so happy'), merely mentioning or describing someone ('this bitch at work asked me'), self-reference, song lyrics, jokes, or no slur at all. Also No: 'bitch' used as a filler word or form of address in a casual remark or command ('bitch eat', 'smoke weed bitch', 'karma's a bitch') with no real insult."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_about",
+          "imm_hostile"
+        ],
+        [
+          "woman_target",
+          "sexual_violent"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "m_b",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet text:\n{{input}}",
+      "questions": {
+        "imm_about": {
+          "instructions": "Does this tweet talk about immigrants, migrants, refugees, asylum seekers or illegal aliens themselves (the people), rather than only about the border wall, politicians, or another subject with an immigration hashtag attached?"
+        },
+        "imm_hostile": {
+          "instructions": "Is the tweet hostile to immigrants, migrants, refugees or illegal aliens?",
+          "criteria": {
+            "true": "Yes: it paints them as criminals, rapists, murderers, invaders, carriers of disease, drains on welfare, people who steal jobs, or less than human (a crime story about an illegal alien used to blame them counts); it uses slurs such as rapefugee or bottom feeders; or it cheers deporting, expelling or sending them back (#DeportThemAll, #SendThemBack aimed at them) or harming them.",
+            "false": "No: neutral reporting, broad remarks about open borders or crime that do not blame immigrants themselves, talk about wall funding, elections, laws, word choice or politicians, defending immigrants, or criticising anti-immigrant views."
+          }
+        },
+        "woman_target": {
+          "instructions": "Is a single specific person the target here, a woman or someone insulted with female slurs such as bitch, hoe, whore, slut or cunt (an @user being addressed, or a named or described individual), and not plainly a man, women as a group, or no one? Men and boys (a male name, he/him, 'this dude', a male public figure) never count, even if called bitch, whore or cunt."
+        },
+        "sexual_violent": {
+          "instructions": "Does the tweet attack that person with hostility: scornful gendered or sexual slurs ('fuck you hoe', 'you are a whore', 'bitch ass hoe'), sexual degradation, or threats of beating, rape or death?",
+          "criteria": {
+            "true": "Yes: the slurs or sexual or violent content are meant with genuine hostility, to insult, degrade or threaten.",
+            "false": "No: friendly or loving banter, happy exclamations ('bitch I'm so happy'), just referring to someone ('this bitch at work asked me'), talking about oneself, lyrics, joking, or no slur. Also No: 'bitch' as a filler or casual way of addressing someone in an ordinary remark or request ('bitch eat', 'smoke weed bitch', 'karma's a bitch'), without a real insult."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_about",
+          "imm_hostile"
+        ],
+        [
+          "woman_target",
+          "sexual_violent"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "m_c",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "A tweet:\n{{input}}",
+      "questions": {
+        "imm_about": {
+          "instructions": "Is the subject of this tweet immigrants, refugees, migrants, asylum seekers or illegal aliens as a group of people (and not merely a wall, a politician, or some unrelated topic carrying an immigration hashtag)?"
+        },
+        "imm_hostile": {
+          "instructions": "Does the author express hostility toward immigrants, refugees, migrants or illegal aliens?",
+          "criteria": {
+            "true": "Yes: presents them as criminals, rapists, killers, invaders, disease carriers, welfare burdens, job thieves or subhuman (including using a crime committed by an illegal alien to blame them); uses slurs like rapefugee or bottom feeders; or approvingly calls to deport, expel or send them back (e.g. #DeportThemAll, #SendThemBack directed at them) or to harm them.",
+            "false": "No: neutral news, generic remarks on open borders or crime that do not blame immigrants, discussion of wall funding, voting, laws, terminology or politicians, support for immigrants, or criticism of anti-immigrant views."
+          }
+        },
+        "woman_target": {
+          "instructions": "Does the tweet target an individual woman, or an individual addressed with female slurs (bitch, hoe, whore, slut, cunt), such as an @user or a named or described person, as opposed to an obvious man, women collectively, or no one in particular? An obvious male target (male name, he/him, 'this dude', male celebrity or politician) does not count, even with slurs like bitch, whore or cunt."
+        },
+        "sexual_violent": {
+          "instructions": "Is this a hostile attack on her, using gendered or sexual slurs with contempt ('fuck you hoe', 'you're a whore', 'bitch ass hoe'), degrading her sexually, or threatening to hurt, rape or kill her?",
+          "criteria": {
+            "true": "Yes: hostile insult, sexual degradation or threat aimed at her.",
+            "false": "No: affectionate or playful use among friends, exclamations ('bitch I'm so happy'), neutral mention or description of someone ('this bitch at work asked me'), self-reference, lyrics, joking, or no slur. Also No: casual filler or address use of 'bitch' in a plain remark or command ('bitch eat', 'smoke weed bitch', 'karma's a bitch') that insults no one."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_about",
+          "imm_hostile"
+        ],
+        [
+          "woman_target",
+          "sexual_violent"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ]
+}

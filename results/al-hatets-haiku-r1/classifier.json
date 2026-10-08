@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "name": "tweet_hate",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "You are classifying tweets to identify hate speech. Hate speech includes dehumanizing language, slurs, calls for violence or discrimination, or explicitly hateful statements targeting groups or individuals based on identity characteristics. Consider context and intent carefully.",
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "hate": "Contains hate speech, slurs, dehumanizing language, or calls for violence/discrimination against a group or individual",
+    "not_hate": "Does not contain hate speech; includes legitimate criticism, political views, or strong language that is not hateful in context"
+  }
+}

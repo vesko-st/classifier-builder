@@ -1,0 +1,124 @@
+{
+  "run_id": "xs-intents-labelsfirst-r1",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-05T16:50:03",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 672,
+    "num_turns": 47,
+    "total_cost_usd": 2.1597625999999996
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.78,
+      "note": "v1 draft: flat 77-option choice from description only, 0 points spent",
+      "test": {
+        "jev": {
+          "accuracy": 0.8451,
+          "macro_f1": 0.8402,
+          "est_cost_usd": 0.345731,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 24,
+      "estimate": 0.8,
+      "note": "v2: descriptions rewritten to match owner's transfer, charge and top-up rules (Q1-Q3)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8412,
+          "macro_f1": 0.8381,
+          "est_cost_usd": 0.366827,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 44,
+      "estimate": 0.81,
+      "note": "v3: ~1 pound charges -> extra_charge_on_statement even if unrecognised (label 0395); salary -> receiving_money (label 0044). check 10/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.8451,
+          "macro_f1": 0.8417,
+          "est_cost_usd": 0.371473,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.82,
+      "note": "v4: rules from 8 hard labels: card top-up money gone->topping_up_by_card, domestic transfer not arrived->recipient, mortgage payment error->failed_transfer, cash on app not taken->cash_withdrawal_not_recognised, physical card->order, PIN->get_physical_card, unknown charge->not_recognised. 18/18 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8531,
+          "macro_f1": 0.8457,
+          "est_cost_usd": 0.387972,
+          "total": 3080,
+          "answered": 3030
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 60,
+      "estimate": 0.82,
+      "note": "v5: ensemble of 3 wording variants of v4 rules (renamed option keys; area-prefixed descriptions). 18/18 labels, each member 18/18",
+      "test": {
+        "jev": {
+          "accuracy": 0.8516,
+          "macro_f1": 0.8482,
+          "est_cost_usd": 1.237959,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 86,
+      "estimate": 0.83,
+      "note": "v7: ensemble; rules from round 2 (wrong rate complaints, country card availability, transfer not possible->beneficiary_not_allowed, fraud vs unrecognised, etc.). 31/31 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8562,
+          "macro_f1": 0.8539,
+          "est_cost_usd": 1.299664,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 100,
+      "estimate": 0.84,
+      "note": "v8 final: ensemble of 3 wordings; rules from last 7 labels (cash-withdrawal rates, money security->source_of_funds, in-country transfer not through->recipient, want a Visa->visa_or_mastercard, physical card stolen->lost_or_stolen). 38/38 labels, budget spent",
+      "test": {
+        "jev": {
+          "accuracy": 0.8588,
+          "macro_f1": 0.8557,
+          "est_cost_usd": 1.342694,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

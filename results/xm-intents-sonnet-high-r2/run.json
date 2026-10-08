@@ -1,0 +1,107 @@
+{
+  "run_id": "xm-intents-sonnet-high-r2",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-30T10:16:36",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 254,
+    "num_turns": 28,
+    "total_cost_usd": 0.6967971999999999
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "draft v1 from descriptions, 77-option flat choice",
+      "test": {
+        "jev": {
+          "accuracy": 0.8195,
+          "macro_f1": 0.8125,
+          "est_cost_usd": 0.306823,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.72,
+      "note": "v2: examples from batch 1 added to descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.8192,
+          "macro_f1": 0.8105,
+          "est_cost_usd": 0.342515,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.73,
+      "note": "v3: batch 2 examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.8237,
+          "macro_f1": 0.8147,
+          "est_cost_usd": 0.371353,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.74,
+      "note": "v4: batch 3 cues",
+      "test": {
+        "jev": {
+          "accuracy": 0.8263,
+          "macro_f1": 0.8176,
+          "est_cost_usd": 0.384673,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.76,
+      "note": "v7: batch 4 cues, broad currency classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.8328,
+          "macro_f1": 0.8249,
+          "est_cost_usd": 0.404071,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.76,
+      "note": "final: v7 (v8 rejected)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8328,
+          "macro_f1": 0.8249,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

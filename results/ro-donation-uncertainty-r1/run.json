@@ -1,0 +1,126 @@
+{
+  "run_id": "ro-donation-uncertainty-r1",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-04T17:49:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 463,
+    "num_turns": 48,
+    "total_cost_usd": 1.8671962
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description: 7 outcome options mapped to 2 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.741,
+          "macro_f1": 0.718,
+          "est_cost_usd": 0.02065,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.7,
+      "note": "v2: role-confusion rule, sympathy-only and deferral split out; 8/10 on batch-1 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7338,
+          "macro_f1": 0.7106,
+          "est_cost_usd": 0.025467,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 44,
+      "estimate": 0.75,
+      "note": "v4: softened yes counts; self-directed later/website plan = not donated; named amount wins over 'later'. 20/22 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7386,
+          "macro_f1": 0.7175,
+          "est_cost_usd": 0.027936,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 64,
+      "estimate": 0.75,
+      "note": "v5: evades_amount option (asked how much, never settles) -> not donated; 27/32 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7386,
+          "macro_f1": 0.7175,
+          "est_cost_usd": 0.029548,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 84,
+      "estimate": 0.75,
+      "note": "v6: evades_amount narrowed to direct amount questions dodged; 35/42 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7482,
+          "macro_f1": 0.7294,
+          "est_cost_usd": 0.031492,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 84,
+      "estimate": 0.75,
+      "note": "v7: 3-member wording-variant ensemble of v6; 34/42 bought labels, steadier near-ties",
+      "test": {
+        "jev": {
+          "accuracy": 0.7506,
+          "macro_f1": 0.7316,
+          "est_cost_usd": 0.088047,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 100,
+      "estimate": 0.72,
+      "note": "v8 FINAL: ensemble + hardship/tentative and prefers-other-help rules; 41/50 on (uncertainty-picked, biased) bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7506,
+          "macro_f1": 0.7308,
+          "est_cost_usd": 0.096156,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "run_id": "il-deal-r3",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 562,
+    "num_turns": 46,
+    "total_cost_usd": 1.8632387999999995
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft from description; unanswered offers -> no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9021,
+          "macro_f1": 0.8779,
+          "est_cost_usd": 0.020275,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 80,
+      "estimate": 0.85,
+      "note": "3-member wording ensemble; unanswered offers deal unless far below a declared firm limit (gap rule); 31/35 on mostly-boundary labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8986,
+          "macro_f1": 0.8456,
+          "est_cost_usd": 0.084315,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.83,
+      "note": "final: same ens2 as v02; 34/43 on boundary-heavy labels, 2/2 random checks",
+      "test": {
+        "jev": {
+          "accuracy": 0.8986,
+          "macro_f1": 0.8456,
+          "est_cost_usd": 0.0,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

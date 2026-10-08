@@ -1,0 +1,91 @@
+{
+  "run_id": "xs-routing-free-r2",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "free",
+  "created": "2026-09-30T14:19:57",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 297,
+    "num_turns": 19,
+    "total_cost_usd": 0.9821251999999999
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "draft: 77 banking intents mapped to teams by guess",
+      "test": {
+        "jev": {
+          "accuracy": 0.8399,
+          "macro_f1": 0.8083,
+          "est_cost_usd": 0.270485,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 72,
+      "estimate": 0.85,
+      "note": "mapping corrected from 36 intent labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9,
+          "macro_f1": 0.8961,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.88,
+      "note": "fix exchange_charge->pricing (v2 had it wrong), split disputed exchange fee, sharpened fee/unrecognised/refund/limit descriptions; 48/50 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9133,
+          "macro_f1": 0.9164,
+          "est_cost_usd": 0.286521,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.9,
+      "note": "v4 + PIN-not-yet-received -> get_physical_card, sign-up by country -> country_support; 49/50 labels",
+      "test": {
+        "luna": {
+          "accuracy": 0.9221,
+          "macro_f1": 0.9253,
+          "est_cost_usd": 0.624867,
+          "total": 3080,
+          "answered": 3080
+        },
+        "pplx": {
+          "accuracy": 0.9224,
+          "macro_f1": 0.9233,
+          "est_cost_usd": 0.184443,
+          "total": 3080,
+          "answered": 3080
+        },
+        "jev": {
+          "accuracy": 0.9205,
+          "macro_f1": 0.923,
+          "est_cost_usd": 0.289495,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

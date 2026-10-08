@@ -1,0 +1,58 @@
+{
+  "run_id": "pilot-hatets-07-policyrules",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_rules",
+  "created": "2026-09-28T16:15:40",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 25,
+      "estimate": 0.65,
+      "note": "v1 criteria from owner policy answers (imm target+hostile OR woman target+degraded)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8137,
+          "macro_f1": 0.8062,
+          "est_cost_usd": 0.064813,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 63,
+      "estimate": 0.72,
+      "note": "v3: imm hostility must be in author's own words (expel/no place/derogatory generalisation/crime-as-reason); hashtags-only and terminology args not hostile",
+      "test": {
+        "jev": {
+          "accuracy": 0.8092,
+          "macro_f1": 0.7981,
+          "est_cost_usd": 0.066518,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 87,
+      "estimate": 0.74,
+      "note": "v5: v3 + H4 (male target not hate) + H6 (they/hashtag-subject generalisations about immigrants count)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8126,
+          "macro_f1": 0.8017,
+          "est_cost_usd": 0.074974,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

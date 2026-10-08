@@ -1,0 +1,111 @@
+{
+  "run_id": "il-persuasion-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 700,
+    "num_turns": 51,
+    "total_cost_usd": 2.224854
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description and reading; 20 options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.5709,
+          "macro_f1": 0.5613,
+          "est_cost_usd": 0.090086,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 25,
+      "estimate": 0.5,
+      "note": "v2: owner rules for farewells, self-answers, confirmations -> other",
+      "test": {
+        "jev": {
+          "accuracy": 0.5959,
+          "macro_f1": 0.5813,
+          "est_cost_usd": 0.098998,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 53,
+      "estimate": 0.55,
+      "note": "v3b: opening how-are-you replies=greeting, answers about self=other, narrower proposition, emotion for reminders of persuadee's family; 10/14 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6111,
+          "macro_f1": 0.5828,
+          "est_cost_usd": 0.105699,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 87,
+      "estimate": 0.62,
+      "note": "e3: 3-member wording ensemble; adds amount-is-your-choice -> donation-information, own fortunate upbringing -> emotion, affordability -> logical; 26/31 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6091,
+          "macro_f1": 0.5876,
+          "est_cost_usd": 0.304454,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 89,
+      "estimate": 0.63,
+      "note": "e4: general principle statements -> logical; 28/32 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6012,
+          "macro_f1": 0.58,
+          "est_cost_usd": 0.306729,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.63,
+      "note": "e5 final: consistency-with-stated-value and argument-ending-in-urge -> logical; 30/37 labels (mostly boundary picks)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6038,
+          "macro_f1": 0.5847,
+          "est_cost_usd": 0.315389,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

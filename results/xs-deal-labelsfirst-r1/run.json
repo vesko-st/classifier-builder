@@ -1,0 +1,92 @@
+{
+  "run_id": "xs-deal-labelsfirst-r1",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "created": "2026-09-30T11:15:55",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 381,
+    "num_turns": 38,
+    "total_cost_usd": 1.1849504000000002
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 20,
+      "estimate": 0.85,
+      "note": "v1 criteria draft from policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.8711,
+          "macro_f1": 0.8445,
+          "est_cost_usd": 0.019248,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 40,
+      "estimate": 0.87,
+      "note": "v2 choice-with-map over chat endings; check 9/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.8849,
+          "macro_f1": 0.8586,
+          "est_cost_usd": 0.019493,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 70,
+      "estimate": 0.84,
+      "note": "v4: open offers mapped to deal (labels), refined no_price/rejected; 22/25 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.878,
+          "macro_f1": 0.8031,
+          "est_cost_usd": 0.022744,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 82,
+      "estimate": 0.86,
+      "note": "v5: seller counter=open offer(deal), buyer below firm floor=rejected, restated ask=no_price; 28/31 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8849,
+          "macro_f1": 0.8167,
+          "est_cost_usd": 0.024919,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 94,
+      "estimate": 0.86,
+      "note": "ens3: v5 + v6 + v5 reworded; 34/37 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.89,
+          "macro_f1": 0.8266,
+          "est_cost_usd": 0.076469,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

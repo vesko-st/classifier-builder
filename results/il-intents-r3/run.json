@@ -1,0 +1,96 @@
+{
+  "run_id": "il-intents-r3",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 709,
+    "num_turns": 47,
+    "total_cost_usd": 2.4786147999999995
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.82,
+      "note": "v1 flat 77-option choice from description + domain reading; no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8588,
+          "macro_f1": 0.8541,
+          "est_cost_usd": 0.40459,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 39,
+      "estimate": 0.84,
+      "note": "3-variant wording ensemble; owner rules (card-use fee, cancel=transfer), £1 extra charge, transfer-into-own-account not showing -> balance_not_updated, recipient rule, card-brand top-up -> supported_cards",
+      "test": {
+        "jev": {
+          "accuracy": 0.8646,
+          "macro_f1": 0.8599,
+          "est_cost_usd": 1.549846,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 57,
+      "estimate": 0.85,
+      "note": "batch-2 rules (ATM failure->declined_cash_withdrawal, whether-must-verify->why_verify, non-card payment error->failed_transfer, card delivery method, unspecified deposit->cheque_or_cash, UK-account transfer->balance_not_updated); copy-check clean",
+      "test": {
+        "jev": {
+          "accuracy": 0.8672,
+          "macro_f1": 0.8627,
+          "est_cost_usd": 1.614656,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 73,
+      "estimate": 0.86,
+      "note": "batch-3 rules: wrong rate on a particular own transaction (not cash)->card_payment_wrong_exchange_rate; named-currency exchange allowed->fiat_currency_support; new PIN replacing current->change_pin",
+      "test": {
+        "jev": {
+          "accuracy": 0.8672,
+          "macro_f1": 0.8627,
+          "est_cost_usd": 1.663942,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.88,
+      "note": "final: reactivating a previously used/lost card -> card_linking; ordering another card beyond the current one -> getting_spare_card; 36/37 bought labels, 12/13 random check before fix",
+      "test": {
+        "jev": {
+          "accuracy": 0.8695,
+          "macro_f1": 0.8648,
+          "est_cost_usd": 1.682958,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

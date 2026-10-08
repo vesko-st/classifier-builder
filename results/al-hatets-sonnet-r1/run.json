@@ -1,0 +1,33 @@
+{
+  "run_id": "al-hatets-sonnet-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T14:43:18",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 173,
+    "num_turns": 29,
+    "total_cost_usd": 0.5217951
+  },
+  "final_version": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.82,
+      "note": "ensemble v2+v3, 6 options mapped, hate threshold 0.85 (tuned on build); dev macro-F1 0.821 n=399",
+      "test": {
+        "jev": {
+          "accuracy": 0.8092,
+          "macro_f1": 0.8031,
+          "est_cost_usd": 0.131553,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

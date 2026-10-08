@@ -1,0 +1,107 @@
+{
+  "run_id": "xs-deal-uncertainty-r1",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-30T11:13:08",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 395,
+    "num_turns": 35,
+    "total_cost_usd": 1.2914396
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft from description, 5 options mapped to deal/no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9175,
+          "macro_f1": 0.8953,
+          "est_cost_usd": 0.017806,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.78,
+      "note": "v2: convergence-based rules, near_agreement + offer_mismatch options, batch1 examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.8866,
+          "macro_f1": 0.8599,
+          "est_cost_usd": 0.033572,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.8,
+      "note": "v3: cooperative open endings count as deal; no_price_bargaining option",
+      "test": {
+        "jev": {
+          "accuracy": 0.9021,
+          "macro_f1": 0.8569,
+          "est_cost_usd": 0.042617,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.82,
+      "note": "v4: one/two-message chats and unagreed rent -> no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9124,
+          "macro_f1": 0.8741,
+          "est_cost_usd": 0.051465,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.83,
+      "note": "v5b: first_offer_unanswered, seller_holds_firm options; stricter 2-message rule",
+      "test": {
+        "jev": {
+          "accuracy": 0.9141,
+          "macro_f1": 0.8824,
+          "est_cost_usd": 0.063223,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.85,
+      "note": "v7 final: 3-variant wording ensemble of v6b (firm-limits no_deal, conditional rent = deal); 48/50 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.921,
+          "macro_f1": 0.8897,
+          "est_cost_usd": 0.207244,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

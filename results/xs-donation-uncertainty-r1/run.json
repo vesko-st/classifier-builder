@@ -1,0 +1,107 @@
+{
+  "run_id": "xs-donation-uncertainty-r1",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-30T11:09:25",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 321,
+    "num_turns": 31,
+    "total_cost_usd": 1.1627454000000002
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v1 draft: 6 fine options mapped to donated/not_donated, from description only",
+      "test": {
+        "jev": {
+          "accuracy": 0.7434,
+          "macro_f1": 0.7194,
+          "est_cost_usd": 0.020966,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.72,
+      "note": "v2: added hedged_or_conditional option + examples from batch 1; 8/10 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7458,
+          "macro_f1": 0.7272,
+          "est_cost_usd": 0.025187,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.73,
+      "note": "v3b: leaning_yes->not_donated, tentative wording note, plain-yes/HIT-donor note; 17/20 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7506,
+          "macro_f1": 0.7387,
+          "est_cost_usd": 0.029758,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.74,
+      "note": "v4: 3-variant wording ensemble of v3b + batch-3 examples; 23/30 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7506,
+          "macro_f1": 0.7381,
+          "est_cost_usd": 0.08211,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.75,
+      "note": "v5: ensemble + batch-4 examples ('probably will' = yes, plain yes + visit site = yes, maybe/could = no, $5/month = hedged); 34/40 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7482,
+          "macro_f1": 0.7341,
+          "est_cost_usd": 0.089974,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.76,
+      "note": "v6 final: v5 ensemble + batch-5 examples; 42/50 on bought (hard, fitted) labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7482,
+          "macro_f1": 0.7341,
+          "est_cost_usd": 0.093949,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

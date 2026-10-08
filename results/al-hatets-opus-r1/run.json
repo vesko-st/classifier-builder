@@ -1,0 +1,84 @@
+{
+  "run_id": "al-hatets-opus-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T14:32:14",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 329,
+    "num_turns": 31,
+    "total_cost_usd": 1.2584670000000002
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.77,
+      "note": "v2: 10-option choice+map (women/immigrant targets, slur-usage and hashtag-vs-text rules); dev macro-F1 0.773 on 400",
+      "test": {
+        "jev": {
+          "accuracy": 0.7877,
+          "macro_f1": 0.7839,
+          "est_cost_usd": 0.076383,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v4: immigrant side split (degrade/crime story/expel), women side adds unknown-gender, reported-speech, pushing-back rules; dev macro-F1 0.805 on 400 (v3 0.795)",
+      "test": {
+        "jev": {
+          "accuracy": 0.825,
+          "macro_f1": 0.8227,
+          "est_cost_usd": 0.094852,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 0,
+      "estimate": 0.81,
+      "note": "ens1: 3 wording variants of v4 (same options/rules); dev macro-F1 0.811 on 400, build 0.847",
+      "test": {
+        "claude": {
+          "accuracy": 0.8228,
+          "macro_f1": 0.8214,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        },
+        "luna": {
+          "accuracy": 0.8301,
+          "macro_f1": 0.8259,
+          "est_cost_usd": 0.375067,
+          "total": 1766,
+          "answered": 1766
+        },
+        "pplx": {
+          "accuracy": 0.8097,
+          "macro_f1": 0.7999,
+          "est_cost_usd": 9.4e-05,
+          "total": 1766,
+          "answered": 1766
+        },
+        "jev": {
+          "accuracy": 0.8245,
+          "macro_f1": 0.8228,
+          "est_cost_usd": 0.249992,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

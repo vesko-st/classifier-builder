@@ -1,0 +1,121 @@
+{
+  "run_id": "xm-intents-opus-high-r2",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-30T10:15:42",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 356,
+    "num_turns": 32,
+    "total_cost_usd": 1.0865204000000002
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.78,
+      "note": "v1: flat 77-option choice with hand-written descriptions, no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8506,
+          "macro_f1": 0.8462,
+          "est_cost_usd": 0.353766,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.8,
+      "note": "v2: labels as examples + 10 rule clarifications from batch 1",
+      "test": {
+        "jev": {
+          "accuracy": 0.8562,
+          "macro_f1": 0.8516,
+          "est_cost_usd": 0.420235,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.81,
+      "note": "v3: batch-2 labels as examples + 4 rules (beneficiary, 1-pound extra charge, source of funds, unreceived cash)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8565,
+          "macro_f1": 0.8524,
+          "est_cost_usd": 0.47442,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.81,
+      "note": "v4: batch-3 labels as examples + rules (transfer not received vs pending, card not working, reverted payment)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8623,
+          "macro_f1": 0.8585,
+          "est_cost_usd": 0.526017,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.81,
+      "note": "v5: batch-4 labels as examples + rules (virtual card not received, exchange discounts, how card delivered)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8659,
+          "macro_f1": 0.8611,
+          "est_cost_usd": 0.560157,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.82,
+      "note": "v6 (final): batch-5 labels as examples + rules (want physical card = order, reactivating found card = linking, transfer 'not possible' = beneficiary, fee complaints)",
+      "test": {
+        "luna": {
+          "accuracy": 0.8789,
+          "macro_f1": 0.8754,
+          "est_cost_usd": 1.269987,
+          "total": 3080,
+          "answered": 3080
+        },
+        "pplx": {
+          "accuracy": 0.8627,
+          "macro_f1": 0.8578,
+          "est_cost_usd": 0.000147,
+          "total": 3080,
+          "answered": 3080
+        },
+        "jev": {
+          "accuracy": 0.8731,
+          "macro_f1": 0.8695,
+          "est_cost_usd": 0.602056,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

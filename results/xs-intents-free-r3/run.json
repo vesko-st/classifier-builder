@@ -1,0 +1,79 @@
+{
+  "run_id": "xs-intents-free-r3",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-05T16:50:03",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 744,
+    "num_turns": 37,
+    "total_cost_usd": 2.2263542000000003
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 flat 77-option choice from description + domain knowledge",
+      "test": {
+        "jev": {
+          "accuracy": 0.8468,
+          "macro_f1": 0.8413,
+          "est_cost_usd": 0.381046,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 48,
+      "estimate": 0.87,
+      "note": "2-wording ensemble; rules from 24 hard labels (recipient vs balance transfer, £1 extra charge, order card, freeze=lost, deposit, cash withdrawal not recognised)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8565,
+          "macro_f1": 0.8518,
+          "est_cost_usd": 0.715937,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 88,
+      "estimate": 0.88,
+      "note": "3-member wording ensemble; round-2 rules: transfer status split, rate complaints->card_payment_wrong_exchange_rate, cash rate->cash withdrawal class, physical card->order, failed mortgage payment",
+      "test": {
+        "jev": {
+          "accuracy": 0.8591,
+          "macro_f1": 0.8546,
+          "est_cost_usd": 1.176643,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.88,
+      "note": "final: 3-member wording ensemble + rules from 50 labels (pending card payment, virtual card rejected, beneficiary trouble, 'not here yet'->recipient, currency allowed->fiat)",
+      "test": {
+        "jev": {
+          "accuracy": 0.863,
+          "macro_f1": 0.8587,
+          "est_cost_usd": 1.203677,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

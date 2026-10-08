@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens1",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v6",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify the tweet under a hate-speech annotation policy whose protected targets are women and immigrants (including refugees, asylum seekers, migrants, undocumented people). Pick the option that best describes what the tweet does.",
+        "notes": [
+          "Hate toward women: the tweet demeans women as a group, or uses gendered slurs (bitch, hoe, whore, cunt, slut) to characterise an identifiable woman or girl (someone addressed or described) with contempt: calling her a hoe or whore, insulting her looks or worth, telling her to shut up, threatening her, degrading her sexually. A personal fight is NOT an exemption.",
+          "Not hate: insults aimed at an unidentified person (whoever did something), at men, or at people the author defends someone against; tweets where the slur is an interjection or form of address while the tweet is really about a situation, event or joke; friendly banter, self-description, lyrics, consensual sexual talk, bragging.",
+          "Hate toward immigrants: dehumanising language about immigrants or refugees, calls to deport, send back, keep out or expel them as a group, or portraying them as a group as criminals, rapists, welfare cheats or disease carriers. This counts even without slurs.",
+          "Political tweets supporting the wall or immigration enforcement, or attacking politicians, with no hostile claim about immigrants as people, are NOT hate, even with hashtags such as building the wall or ending DACA.",
+          "Casual, affectionate, self-describing, lyric or bragging uses of gendered slurs, and slurs aimed at men, are NOT hate. Quoting or criticising hateful language is not hate."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogyny_group": "Demeans or generalises about women or girls as a group (women as sluts, gold diggers, inferior, objects), or endorses violence or rape against women.",
+        "hostile_abuse_of_woman": "Uses gendered slurs to characterise an identifiable woman or girl (addressed or described) with contempt or aggression: calling her a hoe or whore, insulting her, telling her off, threatening her, sexual degradation, or a stream of gendered slurs.",
+        "mild_slur_address": "The slur appears in a tweet whose point is something else (a complaint about a situation, a joke, a request, gossip, excitement) and the tone toward the person addressed is annoyed, teasing or neutral rather than contemptuous.",
+        "slur_at_man_or_unknown": "Uses a gendered slur as an insult toward a man, a male public figure, an unidentified person (whoever did something), or people the author is defending someone against, without attacking women.",
+        "casual_slur": "Uses a gendered slur casually: as an exclamation, intensifier, self-description, affectionate address to a friend, song lyric or bragging, with no hostility toward women.",
+        "anti_misogyny": "Criticises sexism or reports being called slurs; counter-speech.",
+        "immigrant_dehumanising": "Describes immigrants or refugees with dehumanising or slur language (invaders, animals, parasites, vermin, rapists by nature, ethnic slurs), or calls for violence against them.",
+        "immigrant_exclusion": "Calls for immigrants as a group to be deported, sent back, kept out or expelled, or portrays immigrants as a group as criminals, disease carriers, welfare cheats or a threat, without slurs.",
+        "immigration_policy": "Supports border or immigration policy (the wall, ending DACA, enforcement, voting) or attacks politicians, without demeaning immigrants as people; includes tweets whose only immigration content is hashtags.",
+        "immigration_neutral": "News, discussion of terminology, counter-speech defending immigrants, or off-topic tweets that merely carry an immigration hashtag.",
+        "other": "Anything else with no attack on women or immigrants."
+      },
+      "map": {
+        "misogyny_group": "hate",
+        "hostile_abuse_of_woman": "hate",
+        "mild_slur_address": "not_hate",
+        "slur_at_man_or_unknown": "not_hate",
+        "casual_slur": "not_hate",
+        "anti_misogyny": "not_hate",
+        "immigrant_dehumanising": "hate",
+        "immigrant_exclusion": "hate",
+        "immigration_policy": "not_hate",
+        "immigration_neutral": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_varA",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "An annotation policy defines hate speech as attacks on two protected groups: women, and immigrants (refugees, migrants, asylum seekers, people without legal status). Decide which description fits this tweet best.",
+        "rules": [
+          "Against women, it is hate when the author belittles women in general, or when a gendered slur such as bitch, hoe, whore, cunt or slut is used to put down a particular woman or girl the tweet speaks to or about, out of contempt: labelling her a whore, mocking her looks or value, ordering her to be quiet, threatening her, humiliating her sexually. That the tweet is part of a private quarrel does not make it acceptable.",
+          "It is not hate when the target cannot be identified (an anonymous wrongdoer), when the target is male, when the insults are thrown at people who are bothering someone the author supports, or when the slur is only a filler word, greeting or exclamation in a tweet that is really about some event, situation or joke. Friendly teasing, describing oneself, lyrics, bragging and consensual sex talk are also not hate.",
+          "Against immigrants, it is hate when they are dehumanised, when the author wants them as a group deported, returned, barred or removed, or when they are painted collectively as criminals, rapists, benefit cheats or carriers of disease, whether or not slurs are used.",
+          "Backing the border wall or immigration enforcement, or criticising politicians, is not hate if nothing hostile is said about immigrants as people, even when hashtags about the wall or DACA appear.",
+          "Reporting, quoting or condemning hateful language is not hate."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogyny_group": "Puts down women or girls in general (as promiscuous, greedy, inferior or as objects), or approves of violence or rape against women.",
+        "hostile_abuse_of_woman": "Puts down a particular woman or girl the tweet speaks to or about using gendered slurs, with contempt or aggression: labelling her a whore, insulting or scolding her, threatening her, humiliating her sexually, or piling slur on slur.",
+        "mild_slur_address": "A slur is present but the tweet is mainly about something else (a situation, a joke, a request, gossip, excitement) and the attitude toward the person is irritated, playful or neutral, not contemptuous.",
+        "slur_at_man_or_unknown": "A gendered slur insults a man, a male public figure, an anonymous wrongdoer, or people bothering someone the author supports, with no attack on women.",
+        "casual_slur": "A gendered slur used loosely: exclamation, intensifier, describing oneself, affectionate address to a friend, lyrics or bragging, with no hostility toward women.",
+        "anti_misogyny": "Objects to sexism or reports having been called slurs; counter-speech.",
+        "immigrant_dehumanising": "Calls immigrants or refugees invaders, animals, parasites, vermin, inherent rapists or uses ethnic slurs, or urges violence against them.",
+        "immigrant_exclusion": "Wants immigrants as a group deported, returned, barred or removed, or paints immigrants collectively as criminals, disease carriers, benefit cheats or a danger, without slurs.",
+        "immigration_policy": "Backs border or immigration measures (the wall, ending DACA, enforcement, voting) or criticises politicians without putting down immigrants as people; includes tweets whose only immigration content is hashtags.",
+        "immigration_neutral": "News, debate about terminology, defence of immigrants, or unrelated tweets that just carry an immigration hashtag.",
+        "other": "Anything else, with no attack on women or immigrants."
+      },
+      "map": {
+        "misogyny_group": "hate",
+        "hostile_abuse_of_woman": "hate",
+        "mild_slur_address": "not_hate",
+        "slur_at_man_or_unknown": "not_hate",
+        "casual_slur": "not_hate",
+        "anti_misogyny": "not_hate",
+        "immigrant_dehumanising": "hate",
+        "immigrant_exclusion": "hate",
+        "immigration_policy": "not_hate",
+        "immigration_neutral": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_varB",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Which option describes this tweet? The policy protects women and immigrants; a tweet is hateful only when it attacks one of these groups or a member of them.",
+        "women": {
+          "hate": "General contempt for women; or a specific, identifiable woman or girl (addressed or talked about) being degraded with gendered slurs out of contempt: called a whore or hoe, insulted, told to shut up, threatened, sexually humiliated. Arguments between individuals still count.",
+          "not_hate": "Slurs aimed at men, at an unknown person who did something, or at people harassing someone the author defends; slurs that serve only as an interjection or way of addressing someone while the tweet is about a situation, event or joke; banter, self-description, lyrics, bragging, consensual sex talk."
+        },
+        "immigrants": {
+          "hate": "Dehumanising them; calling for them as a group to be deported, sent home, kept out or removed; casting them as a group as criminals, rapists, welfare cheats or disease carriers, even without slurs.",
+          "not_hate": "Support for the wall or enforcement and attacks on politicians that say nothing hostile about immigrants as people, even with wall or DACA hashtags; news; terminology debates."
+        },
+        "always_not_hate": "Quoting or condemning hateful language."
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogyny_group": "Puts down women or girls in general (as promiscuous, greedy, inferior or as objects), or approves of violence or rape against women.",
+        "hostile_abuse_of_woman": "Puts down a particular woman or girl the tweet speaks to or about using gendered slurs, with contempt or aggression: labelling her a whore, insulting or scolding her, threatening her, humiliating her sexually, or piling slur on slur.",
+        "mild_slur_address": "A slur is present but the tweet is mainly about something else (a situation, a joke, a request, gossip, excitement) and the attitude toward the person is irritated, playful or neutral, not contemptuous.",
+        "slur_at_man_or_unknown": "A gendered slur insults a man, a male public figure, an anonymous wrongdoer, or people bothering someone the author supports, with no attack on women.",
+        "casual_slur": "A gendered slur used loosely: exclamation, intensifier, describing oneself, affectionate address to a friend, lyrics or bragging, with no hostility toward women.",
+        "anti_misogyny": "Objects to sexism or reports having been called slurs; counter-speech.",
+        "immigrant_dehumanising": "Calls immigrants or refugees invaders, animals, parasites, vermin, inherent rapists or uses ethnic slurs, or urges violence against them.",
+        "immigrant_exclusion": "Wants immigrants as a group deported, returned, barred or removed, or paints immigrants collectively as criminals, disease carriers, benefit cheats or a danger, without slurs.",
+        "immigration_policy": "Backs border or immigration measures (the wall, ending DACA, enforcement, voting) or criticises politicians without putting down immigrants as people; includes tweets whose only immigration content is hashtags.",
+        "immigration_neutral": "News, debate about terminology, defence of immigrants, or unrelated tweets that just carry an immigration hashtag.",
+        "other": "Anything else, with no attack on women or immigrants."
+      },
+      "map": {
+        "misogyny_group": "hate",
+        "hostile_abuse_of_woman": "hate",
+        "mild_slur_address": "not_hate",
+        "slur_at_man_or_unknown": "not_hate",
+        "casual_slur": "not_hate",
+        "anti_misogyny": "not_hate",
+        "immigrant_dehumanising": "hate",
+        "immigrant_exclusion": "hate",
+        "immigration_policy": "not_hate",
+        "immigration_neutral": "not_hate",
+        "other": "not_hate"
+      }
+    }
+  ]
+}

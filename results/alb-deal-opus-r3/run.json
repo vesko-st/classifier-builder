@@ -1,0 +1,48 @@
+{
+  "run_id": "alb-deal-opus-r3",
+  "task": "craigslist_deal_fullpool",
+  "budget": 0,
+  "strategy": "boundary",
+  "mode": "all_labels",
+  "created": "2026-10-04T17:11:11",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 483,
+    "num_turns": 37,
+    "total_cost_usd": 1.4109289999999999
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.89,
+      "note": "v3: gap_closed/gap_open split of pending offers; dev macro-F1 0.890 (n=1000)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9175,
+          "macro_f1": 0.8913,
+          "est_cost_usd": 0.019566,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.899,
+      "note": "ensemble of 3 wording variants of v4 (gap_closed incl. logistics-as-acceptance), deal threshold 0.30 fitted on building set; dev macro-F1 0.899 (n=1000)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9278,
+          "macro_f1": 0.9017,
+          "est_cost_usd": 0.05948,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,90 @@
+{
+  "version": 1,
+  "name": "donation_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v3",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "This is a chat from a research study. The persuader asks the persuadee to donate part of their task payment (typically $2, sometimes less) to Save the Children. After the chat, the persuadee privately chooses an actual donation amount from $0 up to their payment. Pick the option that best describes how the persuadee left things about donating part of their task payment.",
+        "rules": [
+          "Focus on the persuadee's own words, especially their last statements about donating; later statements override earlier ones.",
+          "Donations to other charities, past donations, or volunteering time do not count as donating part of the task payment.",
+          "A persuader thanking the persuadee for a donation counts only if the persuadee went along with it."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "eager_commit": "The persuadee readily and willingly commits a specific, realistic amount or share of the task payment (some cents, $1, half, all of it), without much resistance.",
+        "reluctant_commit": "The persuadee commits a specific, realistic amount only after hesitation, objections, money worries, or repeated pushing, often a small token amount.",
+        "negotiated_deal": "The amount is settled as a mutual deal with the persuader (both donate the same, matching, 'let's each give'), rather than as the persuadee's own decision.",
+        "agrees_no_amount": "The persuadee clearly agrees to donate from the task payment but never states an amount.",
+        "offsite_intent": "The persuadee mainly talks about donating later or on their own through the website, by card, check or sponsorship, rather than from the task payment.",
+        "unrealistic_amount": "The persuadee names an amount that cannot come from the task payment (much larger than the payment, tens or thousands of dollars).",
+        "unserious_or_garbled": "The persuadee's replies are low-effort, garbled, repetitive or mechanical agreement ('ok', 'yes i donate') with little real engagement.",
+        "hesitant_maybe": "The persuadee stays undecided, says maybe, or wants to research first.",
+        "refuses": "The persuadee declines to donate, says $0, can't afford it, or prefers other charities or volunteering.",
+        "never_discussed": "The persuadee never really addresses whether they will donate."
+      },
+      "map": {
+        "eager_commit": "donated",
+        "reluctant_commit": "not_donated",
+        "negotiated_deal": "donated",
+        "agrees_no_amount": "donated",
+        "offsite_intent": "not_donated",
+        "unrealistic_amount": "not_donated",
+        "unserious_or_garbled": "not_donated",
+        "hesitant_maybe": "not_donated",
+        "refuses": "not_donated",
+        "never_discussed": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v3b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "context": "Research-study chat: a persuader tries to get the persuadee to give some of the money they earn for this task (usually $2) to the charity Save the Children. The real donation is entered by the persuadee privately after the chat.",
+        "question": "Which description fits how the persuadee ended the conversation regarding giving part of their task earnings?",
+        "guidance": [
+          "Weigh the persuadee's statements, not the persuader's; the persuadee's final position counts most.",
+          "Giving to other organisations, earlier gifts, or offering time instead of money is not giving from the task earnings.",
+          "If the persuader thanks the persuadee for a gift, count it only when the persuadee accepted that."
+        ]
+      },
+      "state_template": "Chat transcript:\n{{input}}",
+      "criteria": {
+        "eager_commit": "Willingly names a concrete, plausible amount or portion of the task earnings (cents, a dollar, half, everything) with little or no pushback.",
+        "reluctant_commit": "Names a concrete, plausible amount, but only after doubts, objections, talk of needing the money, or the persuader pressing; frequently a minimal token sum.",
+        "negotiated_deal": "Settles the amount together with the persuader as a matched or shared pledge ('we both give $1') instead of deciding alone.",
+        "agrees_no_amount": "Plainly says yes to giving from the task earnings without ever naming a sum.",
+        "offsite_intent": "Talks mostly about giving afterwards or separately, via the charity website, a card, a check or a sponsorship, rather than from these task earnings.",
+        "unrealistic_amount": "Names a sum the task earnings could not cover, such as tens, hundreds or thousands of dollars.",
+        "unserious_or_garbled": "Replies are minimal, broken, repetitive or rote yes-saying with little genuine engagement.",
+        "hesitant_maybe": "Remains unsure, says perhaps, or wants to look into the charity first.",
+        "refuses": "Says no, picks $0, cannot afford it, or would rather support other causes or volunteer.",
+        "never_discussed": "Never actually responds to whether they will give."
+      },
+      "map": {
+        "eager_commit": "donated",
+        "reluctant_commit": "not_donated",
+        "negotiated_deal": "donated",
+        "agrees_no_amount": "donated",
+        "offsite_intent": "not_donated",
+        "unrealistic_amount": "not_donated",
+        "unserious_or_garbled": "donated",
+        "hesitant_maybe": "not_donated",
+        "refuses": "not_donated",
+        "never_discussed": "not_donated"
+      }
+    }
+  ],
+  "decision": {
+    "class": "donated",
+    "threshold": 0.45
+  }
+}

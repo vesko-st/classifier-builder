@@ -1,0 +1,33 @@
+{
+  "run_id": "alb-donation-opus-r1",
+  "task": "persuasion_donation",
+  "budget": 0,
+  "strategy": "boundary",
+  "mode": "all_labels",
+  "created": "2026-10-03T17:20:04",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 20942,
+    "num_turns": 44,
+    "total_cost_usd": 10.714530199999999
+  },
+  "final_version": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.63,
+      "note": "v1 draft: 6 stance options mapped to 2 classes; dev macro-F1 0.628 (n=200)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7314,
+          "macro_f1": 0.7049,
+          "est_cost_usd": 0.019162,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

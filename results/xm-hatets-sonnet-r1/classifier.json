@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "name": "hate_criteria_v3",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "imm_target": {
+      "instructions": "Is the tweet about immigrants, refugees, migrants or 'illegals/illegal aliens' as a group (including Muslim or other migrants targeted as immigrants)? Merely a hashtag like #BuildThatWall on an unrelated or supportive tweet does not count."
+    },
+    "imm_hostile": {
+      "instructions": "Does the tweet demean, dehumanise or criminalise immigrants/refugees as a group: calling them scum, invaders, vermin, cancer, or a threat; generalising that they are criminals, rapists, thieves or inherently dangerous; using a crime by one immigrant to condemn them as a group; or demanding their mass expulsion with contempt or violence? Neutral policy opinions, legal arguments, or calls to enforce the law without contempt are NO."
+    },
+    "woman_target": {
+      "instructions": "Is the tweet aimed at a woman or at women as a group, on account of being a woman?"
+    },
+    "woman_degrade": {
+      "instructions": "Does the tweet clearly attack, insult or demean a woman or women with a misogynistic term (bitch, cunt, whore, hoe, slut, thot), or threaten or wish harm on women, or say women are inferior or only good for sex? It must be a hostile, contemptuous or angry attack. NO if the slur is just a casual address, a greeting, hype or praise ('slay bitch', 'Britney, bitch'), a neutral question, a joke between friends, a song lyric, or someone criticising sexism. Insults aimed at a man or a politician are NO."
+    }
+  },
+  "rule": [
+    [
+      "imm_target",
+      "imm_hostile"
+    ],
+    [
+      "woman_target",
+      "woman_degrade"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate"
+}

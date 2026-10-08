@@ -1,0 +1,33 @@
+{
+  "run_id": "al-intents-haiku-r1",
+  "task": "banking77_intents_fullpool",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T14:51:48",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 1401,
+    "num_turns": 50,
+    "total_cost_usd": 0.6845718500000001
+  },
+  "final_version": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.794,
+      "note": "Ensemble of 3 wording variants: +0.6% over v1 baseline",
+      "test": {
+        "jev": {
+          "accuracy": 0.7938,
+          "macro_f1": 0.789,
+          "est_cost_usd": 0.905211,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "run_id": "xs-donation-policy-r1",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T11:09:25",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 341,
+    "num_turns": 29,
+    "total_cost_usd": 1.1945302
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v0 draft from description: choice of 6 outcome options mapped to donated/not_donated; no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7506,
+          "macro_f1": 0.733,
+          "est_cost_usd": 0.018671,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 30,
+      "estimate": 0.68,
+      "note": "v1 criteria: commit AND NOT not_now, mirroring owner policy (actual donation; later/elsewhere = not)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7458,
+          "macro_f1": 0.7363,
+          "est_cost_usd": 0.018987,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.66,
+      "note": "v2: v1 + !inflated (pledge far above task payment -> not_donated); 30 random labels macro-F1 0.70, rule tested 3/5 on moved records",
+      "test": {
+        "jev": {
+          "accuracy": 0.7338,
+          "macro_f1": 0.7302,
+          "est_cost_usd": 0.021439,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.66,
+      "note": "v3 final: 3-member wording-variant ensemble of v2 (commit AND !not_now AND !inflated); same label score as v2, steadier near ties",
+      "test": {
+        "jev": {
+          "accuracy": 0.7362,
+          "macro_f1": 0.7334,
+          "est_cost_usd": 0.063125,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

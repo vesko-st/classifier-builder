@@ -1,0 +1,108 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens2",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v5",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate speech policy that only protects two groups: WOMEN and IMMIGRANTS/REFUGEES. Pick the option that best describes the tweet.",
+        "policy": [
+          "Hate against women: real hostility or contempt toward a woman or women expressed with gendered slurs or degradation. This INCLUDES angry, aggressive or contemptuous insults aimed at a particular woman or girl (addressed or talked about) such as 'bitch stop it, bum ass hoe you lame', 'fuck you hoe', 'this bitch is so annoying, attention whore', 'I called her a cunt', 'bitch or cunt is more appropriate'. Also generalisations about women/hoes/females, rape jokes, sexual degradation.",
+          "NOT hate: 'bitch' used as a filler or term of address in casual talk, banter or commands without real contempt ('smoke weed bitch', 'bitch eat', 'bitch do it look like we play'), friendly or playful teasing between friends ('okay bitch tf... whore 😜'), jokes or neutral descriptions of what a woman or a fictional character did ('that bitch fell in love with an animal'), exclamations ('bitch I'm tired'), self-reference ('I'm a bad bitch'), song lyrics, general rants not aimed at a woman, and insults clearly aimed at men or things.",
+          "Hate against immigrants: portraying immigrants/refugees/illegal aliens as a group as criminals, rapists, killers, invaders, parasites or a burden that victimises or robs citizens; sharing stories of crimes by migrants/asylum seekers to stir anger against them; mocking or gloating at their suffering ('you cross illegally, you suffer - the cages are stainless'); dehumanising words (scum, rapefugees, animals); calling their arrival an invasion; hostile demands to send them back or insisting they are illegals not real refugees; calls for violence or expulsion in demeaning terms.",
+          "NOT hate: supporting anti-immigration policy (build the wall, deport illegals, #NoDACA, secure borders) or political hashtags without negative claims about immigrants as people; discussing the term 'illegal aliens'; plain news about enforcement; opinions about Democrats, Trump or the media.",
+          "Hostility toward any other group (Muslims, Jews, Black people, trans people, liberals) is out of scope and NOT hate."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "women_group_contempt": "Contempt or negative generalisations about women/females/hoes as a group, or says women should be subordinate",
+        "hostile_insult_at_woman": "Real anger, aggression or contempt aimed at a particular woman or girl, putting her down with bitch, hoe, whore, cunt, slut or similar (e.g. fuck you hoe, you lame bum ass hoe, I called her a cunt)",
+        "woman_sexual_degradation": "Rape jokes, trivialising sexual violence, sexually degrading a woman, treating her as disposable or an object",
+        "filler_or_banter": "'bitch'/'hoe'/'whore' used as a filler word, term of address, playful teasing between friends, or in a joke or neutral description of what a woman or character did, without real contempt for a woman (e.g. smoke weed bitch, bitch eat, okay bitch tf 😜)",
+        "casual_slang": "Friendly, affectionate or self-referential use of bitch/hoe etc., exclamations, or song lyrics",
+        "insult_at_man_or_thing": "Insult or hostility clearly aimed at a man, boy, or a thing, not at a woman",
+        "immigrant_dehumanising": "Portrays immigrants/refugees/illegal aliens as criminals, rapists, killers, invaders or an invasion, parasites or a burden victimising citizens, shares migrant crime stories to stir anger against them, insists they are illegals to be sent back, mocks or gloats at their suffering, or uses dehumanising terms or threats",
+        "immigration_policy": "Supports or discusses immigration policy (wall, deportation, DACA, borders, sanctuary cities), the term 'illegal aliens', or political hashtags, without negative claims about immigrants as people",
+        "other_group_or_topic": "About another group (Muslims, Jews, Black people, liberals, politicians) or another topic entirely"
+      },
+      "map": {
+        "women_group_contempt": "hate",
+        "hostile_insult_at_woman": "hate",
+        "woman_sexual_degradation": "hate",
+        "filler_or_banter": "not_hate",
+        "casual_slang": "not_hate",
+        "insult_at_man_or_thing": "not_hate",
+        "immigrant_dehumanising": "hate",
+        "immigration_policy": "not_hate",
+        "other_group_or_topic": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v5b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Under our hate speech policy, which description fits this tweet best? Only two groups are protected: women and immigrants/refugees.",
+        "women": {
+          "hateful": [
+            "insulting or attacking a specific woman or girl with contempt using slurs like bitch, hoe, whore, cunt (e.g. 'fuck you hoe', 'bum ass hoe you lame', 'I called her a cunt', 'this bitch is so annoying, attention whore')",
+            "negative generalisations about women or hoes as a group",
+            "rape jokes or sexual degradation of women"
+          ],
+          "not_hateful": [
+            "slurs used as filler, address terms or exclamations with no real contempt ('bitch eat', 'smoke weed bitch', 'bitch I'm tired')",
+            "playful teasing among friends ('okay bitch tf 😜')",
+            "jokes or neutral storytelling about a woman or fictional character",
+            "self-description ('bad bitch'), song lyrics",
+            "rants not directed at a woman, and insults aimed at men or objects"
+          ]
+        },
+        "immigrants": {
+          "hateful": [
+            "depicting immigrants, refugees or illegal aliens collectively as criminals, rapists, killers, invaders, parasites or a drain that harms citizens",
+            "posting migrant crime stories to fuel anger against immigrants",
+            "mocking or gloating over their suffering",
+            "dehumanising language or threats",
+            "calling immigration an invasion, or hostile demands to send them back ('they are not asylum seekers, they are illegals #sendthemback')"
+          ],
+          "not_hateful": [
+            "backing anti-immigration policy such as the wall, deportation, #NoDACA, border security, or political hashtags, without negative claims about immigrants as people",
+            "talking about the term 'illegal aliens'",
+            "plain enforcement news",
+            "opinions on parties, Trump or the media"
+          ]
+        },
+        "out_of_scope": "Hostility toward other groups (Muslims, Jews, Black people, trans people, liberals) is not hate under this policy."
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "women_group_contempt": "Disparages women, females or hoes in general, or says women are inferior",
+        "hostile_insult_at_woman": "Attacks or puts down a particular woman or girl with real contempt or anger using a gendered slur",
+        "woman_sexual_degradation": "Jokes about rape, makes light of sexual violence, or sexually degrades a woman as an object",
+        "filler_or_banter": "Gendered slur used loosely: as a filler, address term, playful teasing among friends, or in a joke or neutral story, with no real contempt",
+        "casual_slang": "Friendly or self-referential slang, exclamations or song lyrics",
+        "insult_at_man_or_thing": "Insult aimed at a man, boy or an object rather than a woman",
+        "immigrant_dehumanising": "Paints immigrants, refugees or illegal aliens as criminals, invaders or an invasion, parasites or a danger or drain on citizens, spreads migrant crime stories to stir anger, demands they be sent back as illegals, gloats at their suffering, or dehumanises or threatens them",
+        "immigration_policy": "Backs or debates immigration policy (wall, deportation, DACA, borders), the term 'illegal aliens', or uses political hashtags, without negative claims about immigrants as people",
+        "other_group_or_topic": "Concerns some other group or an unrelated topic"
+      },
+      "map": {
+        "women_group_contempt": "hate",
+        "hostile_insult_at_woman": "hate",
+        "woman_sexual_degradation": "hate",
+        "filler_or_banter": "not_hate",
+        "casual_slang": "not_hate",
+        "insult_at_man_or_thing": "not_hate",
+        "immigrant_dehumanising": "hate",
+        "immigration_policy": "not_hate",
+        "other_group_or_topic": "not_hate"
+      }
+    }
+  ]
+}

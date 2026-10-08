@@ -1,0 +1,111 @@
+{
+  "run_id": "il-routing-r3",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 669,
+    "num_turns": 38,
+    "total_cost_usd": 1.753477
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.72,
+      "note": "v1: 80 intent options mapped to 6 teams by guess; no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.8052,
+          "macro_f1": 0.7886,
+          "est_cost_usd": 0.286872,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.8,
+      "note": "v2: mapping updated from owner's answers to 4 routing rules",
+      "test": {
+        "jev": {
+          "accuracy": 0.8769,
+          "macro_f1": 0.875,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 56,
+      "estimate": 0.85,
+      "note": "v4: PIN set vs change, Visa/MC brand -> cards, found lost card -> cards, unexplained incoming money -> fraud; 16/18 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.914,
+          "macro_f1": 0.9126,
+          "est_cost_usd": 0.295573,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 72,
+      "estimate": 0.86,
+      "note": "v5: forgotten PIN -> fraud, bank-issued card kinds -> cards, daily limits -> top-up limits; 24/26 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9136,
+          "macro_f1": 0.9126,
+          "est_cost_usd": 0.301263,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 88,
+      "estimate": 0.88,
+      "note": "e7: 3-variant wording ensemble; app-shown unreceived cash -> fraud, fee questions -> pricing, PIN unknown -> cards; 31/34 bought (mostly boundary) labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9195,
+          "macro_f1": 0.919,
+          "est_cost_usd": 0.941161,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.88,
+      "note": "e10: small specific charge said to be an error -> disputes (fees on known transactions stay pricing); choosing which card -> cards; 34/40 bought labels (boundary-heavy); budget spent",
+      "test": {
+        "jev": {
+          "accuracy": 0.9208,
+          "macro_f1": 0.9207,
+          "est_cost_usd": 0.962111,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

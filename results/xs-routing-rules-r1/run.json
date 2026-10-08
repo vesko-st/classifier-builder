@@ -1,0 +1,122 @@
+{
+  "run_id": "xs-routing-rules-r1",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "created": "2026-09-30T13:43:47",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 858,
+    "num_turns": 47,
+    "total_cost_usd": 2.1606374000000006
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: 72 fine-grained intent options mapped to 6 teams from description only",
+      "test": {
+        "jev": {
+          "accuracy": 0.7711,
+          "macro_f1": 0.755,
+          "est_cost_usd": 0.246303,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 26,
+      "estimate": 0.8,
+      "note": "v2: H1 applepay->cards, H2a card fees->cards, H3 narrowed, H4 receipt option, H5 declined ATM->cards",
+      "test": {
+        "jev": {
+          "accuracy": 0.7974,
+          "macro_f1": 0.7716,
+          "est_cost_usd": 0.2582,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 32,
+      "estimate": 0.82,
+      "note": "v3: + declined card payments->cards, visa/mastercard example, transfer fee fix, Apple/Google Pay broadened",
+      "test": {
+        "jev": {
+          "accuracy": 0.8114,
+          "macro_f1": 0.7805,
+          "est_cost_usd": 0.267252,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 52,
+      "estimate": 0.85,
+      "note": "v4: 3-variant ensemble; + reverted payments->disputes, cancel card txn->fraud, cancel order->disputes, card brand/top-up card fixes",
+      "test": {
+        "jev": {
+          "accuracy": 0.8182,
+          "macro_f1": 0.7945,
+          "est_cost_usd": 0.925643,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 70,
+      "estimate": 0.87,
+      "note": "v5: + pending ATM withdrawals->cards, ATM swallowed card->fraud, transfer/cancel examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.8474,
+          "macro_f1": 0.821,
+          "est_cost_usd": 0.947756,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 88,
+      "estimate": 0.86,
+      "note": "v6: + wrong exchange rate->disputes, extra statement charges->disputes, compromised PIN/unknown incoming money->fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.8792,
+          "macro_f1": 0.8714,
+          "est_cost_usd": 1.003622,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 100,
+      "estimate": 0.85,
+      "note": "v7 final: 3-variant ensemble; general 'cancel a transaction'->payments, US-card top-up->pricing, source-of-funds example, declined-card wording; 50/50 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8799,
+          "macro_f1": 0.8723,
+          "est_cost_usd": 1.021856,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

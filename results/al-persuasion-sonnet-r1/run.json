@@ -1,0 +1,48 @@
+{
+  "run_id": "al-persuasion-sonnet-r1",
+  "task": "persuasion_strategy",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T14:47:02",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 236,
+    "num_turns": 36,
+    "total_cost_usd": 0.6897789999999999
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.63,
+      "note": "c2 flat 18-option choice, dev macro-F1 0.647 (n=350)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6355,
+          "macro_f1": 0.6403,
+          "est_cost_usd": 0.103676,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.64,
+      "note": "c5: flat choice, 'other' split into 5 concrete sub-options mapped to other; dev macro-F1 0.653 n=350",
+      "test": {
+        "jev": {
+          "accuracy": 0.6388,
+          "macro_f1": 0.6288,
+          "est_cost_usd": 0.120553,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

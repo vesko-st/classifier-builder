@@ -1,0 +1,14 @@
+{
+  "model": "roberta-base",
+  "n_train": 4947,
+  "epochs": 4,
+  "best_epoch": 4,
+  "lr": 2e-05,
+  "max_length": 512,
+  "seed": 0,
+  "val": 0.8904,
+  "accuracy": 0.9192439862542955,
+  "macro_f1": 0.8887,
+  "total": 582,
+  "train_seconds": 12486
+}

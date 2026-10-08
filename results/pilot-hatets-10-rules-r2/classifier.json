@@ -1,0 +1,215 @@
+{
+  "version": 1,
+  "name": "tweet_hate_e13",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v4a_r6",
+      "model": "jev-latest",
+      "type": "two_level",
+      "state_template": "Tweet:\n{{input}}",
+      "router": {
+        "instructions": "Hate-speech annotation policy covers hatred against WOMEN and against IMMIGRANTS/REFUGEES. Which area does this tweet belong to?",
+        "criteria": {
+          "women": "Uses gendered slurs (bitch, hoe, whore, slut, cunt) or talks about women, girls or a particular woman",
+          "immigration": "About immigrants, refugees, migrants, illegal aliens, borders, the wall, DACA, deportation or immigration policy",
+          "other": "Neither of these"
+        }
+      },
+      "groups": {
+        "women": {
+          "instructions": "Hate-speech policy: hateful if it attacks women or a woman — insults, degrades, sexually objectifies, dehumanises, or threatens violence against her/them because she is a woman or using gendered slurs as an attack. Which fits best?",
+          "criteria": {
+            "attack_on_woman": "Insults, degrades, taunts or threatens a woman: the slur comes with a negative remark about her ('I can't stand you hoe', 'bitch stop it, bum ass hoe you lame', 'you one of them ... basic bitch hoein', 'you ugly bitch', 'shut up whore'), even if joking, or with talk of violence ('just bitch slap them'), or is hurled back at someone in an argument",
+            "attack_on_women": "Generalises about or mocks women as a group with slurs ('bitches think...', 'these hoes...', 'you hoes can't do that'), degrades, sexually objectifies or stereotypes women in general, or endorses rape or violence against women",
+            "casual_or_friendly": "Slur used as an interjection or filler ('Bitch this is RAPE', 'BITCH I'M TRYING TO SEARCH YOUR ACCOUNT', 'Lil' bitch! You can't fuck with me, these is Walmart shoes'), lyrics or self-description ('Bitch I like to smoke', 'bitch whole pussy out wit some pro-keds on'), as a neutral way to refer to a woman or character while telling a story ('that bitch fell in love w a whole animal'), or in a warm or neutral request/remark to a friend ('turn your snapchat map on bitch i just wanna talk', 'smoke weed bitch', 'happy birthday bitch, hope you have a great one'), with no insult of a woman",
+            "reported_or_defensive": "The author reports, quotes or pushes back against slurs aimed at herself (e.g. 'the next person to call me a fat bitch...') without herself calling anyone a slur",
+            "not_at_women": "The slur is aimed at a man or a political opponent ('you bitch ass nigga', 'hoe ass nigga', 'fuck marty that cunt', 'hey asshole ... you dirtbag bitch', 'stop looking at us asshole ... I know you're a bitch', 'Trump's a bitch'), or criticises men ('you dudes be so worried about ya bitch being hoes but y'all the problem'), a thing, or a situation ('karma's a bitch', 'life's a bitch')"
+          },
+          "map": {
+            "attack_on_woman": "hate",
+            "attack_on_women": "hate",
+            "casual_or_friendly": "not_hate",
+            "reported_or_defensive": "not_hate",
+            "not_at_women": "not_hate"
+          }
+        },
+        "immigration": {
+          "instructions": "Hate-speech policy: hateful if, in the author's own voice, it demeans, dehumanises or stereotypes immigrants/refugees as a group, or calls for them to be stopped, expelled, deported or kept out. Which fits best?",
+          "criteria": {
+            "dehumanise_or_stereotype": "Calls immigrants/refugees/dreamers criminals, rapists, invaders, animals, parasites, disease or a threat as a group, including sarcasm that mocks them (e.g. 'another wonderful dreamer youngster' said about a crime)",
+            "exclusion_call": "Explicitly calls for or endorses immigrants/refugees/dreamers themselves being deported, sent back, expelled or stopped from coming (e.g. #DeportThemAll, #SendThemBack, StopImmigration, stop the invasion, 'dreamers could apply once deported')",
+            "politics_or_news": "Supports the border wall, ending DACA, no amnesty, Trump/MAGA or other immigration policy (hashtags like #BuildThatWall, #NoDACA alone are policy), attacks or wants to jail/stop politicians, liberals or other non-immigrants, or shares or reports a news story, headline or fact ('Migrant Crisis EXPOSED! via @user #immigration'), without itself attacking, mocking or sarcastically praising immigrants/dreamers as people or calling for their removal",
+            "defends_immigrants": "Criticises anti-immigrant hate or defends immigrants, or discusses whether terms are hate speech"
+          },
+          "map": {
+            "dehumanise_or_stereotype": "hate",
+            "exclusion_call": "hate",
+            "politics_or_news": "not_hate",
+            "defends_immigrants": "not_hate"
+          }
+        },
+        "other": {
+          "class": "not_hate"
+        }
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v4b_r6",
+      "model": "jev-latest",
+      "type": "two_level",
+      "state_template": "Tweet:\n{{input}}",
+      "router": {
+        "instructions": "Hate-speech annotation policy covers hatred against WOMEN and against IMMIGRANTS/REFUGEES. Which area does this tweet belong to?",
+        "criteria": {
+          "women": "Uses gendered slurs (bitch, hoe, whore, slut, cunt) or talks about women, girls or a particular woman",
+          "immigration": "About immigrants, refugees, migrants, illegal aliens, borders, the wall, DACA, deportation or immigration policy",
+          "other": "Neither of these"
+        }
+      },
+      "groups": {
+        "women": {
+          "instructions": "Hate-speech policy: hateful if it attacks women or a woman — insults, degrades, sexually objectifies, dehumanises, or threatens violence against her/them because she is a woman or using gendered slurs as an attack. Which fits best?",
+          "criteria": {
+            "attack_on_woman": "Insults, degrades, taunts or threatens a woman: the slur comes with a negative remark about her ('I can't stand you hoe', 'bitch stop it, bum ass hoe you lame', 'you one of them ... basic bitch hoein', 'you ugly bitch', 'shut up whore'), even if joking, or with talk of violence ('just bitch slap them'), or is hurled back at someone in an argument",
+            "attack_on_women": "Generalises about or mocks women as a group with slurs ('bitches think...', 'these hoes...', 'you hoes can't do that'), degrades, sexually objectifies or stereotypes women in general, or endorses rape or violence against women",
+            "casual_or_friendly": "Slur used as an interjection or filler ('Bitch this is RAPE', 'BITCH I'M TRYING TO SEARCH YOUR ACCOUNT', 'Lil' bitch! You can't fuck with me, these is Walmart shoes'), lyrics or self-description ('Bitch I like to smoke', 'bitch whole pussy out wit some pro-keds on'), as a neutral way to refer to a woman or character while telling a story ('that bitch fell in love w a whole animal'), or in a warm or neutral request/remark to a friend ('turn your snapchat map on bitch i just wanna talk', 'smoke weed bitch', 'happy birthday bitch, hope you have a great one'), with no insult of a woman",
+            "reported_or_defensive": "The author reports, quotes or pushes back against slurs aimed at herself (e.g. 'the next person to call me a fat bitch...') without herself calling anyone a slur",
+            "not_at_women": "The slur is aimed at a man or a political opponent ('you bitch ass nigga', 'hoe ass nigga', 'fuck marty that cunt', 'hey asshole ... you dirtbag bitch', 'stop looking at us asshole ... I know you're a bitch', 'Trump's a bitch'), or criticises men ('you dudes be so worried about ya bitch being hoes but y'all the problem'), a thing, or a situation ('karma's a bitch', 'life's a bitch')"
+          },
+          "map": {
+            "attack_on_woman": "hate",
+            "attack_on_women": "hate",
+            "casual_or_friendly": "not_hate",
+            "reported_or_defensive": "not_hate",
+            "not_at_women": "not_hate"
+          }
+        },
+        "immigration": {
+          "instructions": "Hate-speech policy: hateful if, in the author's own voice, it demeans, dehumanises or stereotypes immigrants/refugees as a group, or calls for them to be stopped, expelled, deported or kept out. Which fits best?",
+          "criteria": {
+            "dehumanise_or_stereotype": "Portrays immigrants/refugees/dreamers as criminals, rapists, invaders, animals, parasites, carriers of disease ('drug-resistant diseases coming across our open border') or a threat as a group, including sarcasm that mocks them (e.g. 'another wonderful dreamer youngster' said about a crime)",
+            "exclusion_call": "Explicitly calls for or endorses immigrants/refugees/dreamers themselves being deported, sent back, expelled or stopped from coming (e.g. #DeportThemAll, #SendThemBack, StopImmigration, stop the invasion, 'dreamers could apply once deported')",
+            "politics_or_news": "Supports the border wall, ending DACA, no amnesty, Trump/MAGA or other immigration policy (hashtags like #BuildThatWall, #NoDACA alone are policy), attacks or wants to jail/stop politicians, liberals or other non-immigrants, or shares or reports a news story, headline or fact ('Migrant Crisis EXPOSED! via @user #immigration'), without itself attacking, mocking or sarcastically praising immigrants/dreamers as people or calling for their removal",
+            "defends_immigrants": "Criticises anti-immigrant hate or defends immigrants, or discusses whether terms are hate speech"
+          },
+          "map": {
+            "dehumanise_or_stereotype": "hate",
+            "exclusion_call": "hate",
+            "politics_or_news": "not_hate",
+            "defends_immigrants": "not_hate"
+          }
+        },
+        "other": {
+          "class": "not_hate"
+        }
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v4a_r6b",
+      "model": "jev-latest",
+      "type": "two_level",
+      "state_template": "Tweet:\n{{input}}",
+      "router": {
+        "instructions": "Hate-speech annotation policy covers hatred against WOMEN and against IMMIGRANTS/REFUGEES. Which area does this tweet belong to?",
+        "criteria": {
+          "women": "Uses gendered slurs (bitch, hoe, whore, slut, cunt) or talks about women, girls or a particular woman",
+          "immigration": "About immigrants, refugees, migrants, illegal aliens, borders, the wall, DACA, deportation or immigration policy",
+          "other": "Neither of these"
+        }
+      },
+      "groups": {
+        "women": {
+          "instructions": "Hate-speech policy: hateful if it attacks women or a woman — insults, degrades, sexually objectifies, dehumanises, or threatens violence against her/them because she is a woman or using gendered slurs as an attack. Which fits best?",
+          "criteria": {
+            "attack_on_woman": "Insults, degrades, taunts or threatens a woman: the slur comes with a negative remark about her ('I can't stand you hoe', 'bitch stop it, bum ass hoe you lame', 'you one of them ... basic bitch hoein', 'you ugly bitch', 'shut up whore'), even if joking, or with talk of violence ('just bitch slap them'), or is hurled back at someone in an argument",
+            "attack_on_women": "Generalises about or mocks women as a group with slurs ('bitches think...', 'these hoes...', 'you hoes can't do that'), degrades, sexually objectifies or stereotypes women in general, or endorses rape or violence against women",
+            "casual_or_friendly": "Slur used as an interjection or filler ('Bitch this is RAPE', 'BITCH I'M TRYING TO SEARCH YOUR ACCOUNT', 'Lil' bitch! You can't fuck with me, these is Walmart shoes'), lyrics or self-description ('Bitch I like to smoke', 'bitch whole pussy out wit some pro-keds on'), as a neutral way to refer to a woman or character while telling a story ('that bitch fell in love w a whole animal'), or in a warm or neutral request/remark to a friend ('turn your snapchat map on bitch i just wanna talk', 'smoke weed bitch', 'happy birthday bitch, hope you have a great one'), with no insult of a woman",
+            "reported_or_defensive": "The author reports, quotes or pushes back against slurs aimed at herself (e.g. 'the next person to call me a fat bitch...') without herself calling anyone a slur",
+            "not_at_women": "The slur is aimed at a man or a political opponent ('you bitch ass nigga', 'hoe ass nigga', 'fuck marty that cunt', 'hey asshole ... you dirtbag bitch', 'stop looking at us asshole ... I know you're a bitch', 'Trump's a bitch'), or criticises men ('you dudes be so worried about ya bitch being hoes but y'all the problem'), a thing, or a situation ('karma's a bitch', 'life's a bitch')"
+          },
+          "map": {
+            "attack_on_woman": "hate",
+            "attack_on_women": "hate",
+            "casual_or_friendly": "not_hate",
+            "reported_or_defensive": "not_hate",
+            "not_at_women": "not_hate"
+          }
+        },
+        "immigration": {
+          "instructions": "Hate-speech policy: hateful if, in the author's own voice, it demeans, dehumanises or stereotypes immigrants/refugees as a group, or calls for them to be stopped, expelled, deported or kept out. Which fits best?",
+          "criteria": {
+            "dehumanise_or_stereotype": "Calls immigrants/refugees/dreamers criminals, rapists, invaders, animals, parasites, disease or a threat as a group, including sarcasm that mocks them (e.g. 'another wonderful dreamer youngster' said about a crime)",
+            "exclusion_call": "Explicitly calls for or endorses immigrants/refugees/dreamers themselves being deported, sent back, expelled or stopped from coming (e.g. #DeportThemAll, #SendThemBack, StopImmigration, stop the invasion, 'dreamers could apply once deported')",
+            "politics_or_news": "Supports the border wall, ending DACA, no amnesty, Trump/MAGA or other immigration policy (hashtags like #BuildThatWall, #NoDACA alone are policy), attacks or wants to jail/stop politicians, liberals or other non-immigrants ('someone stop this evil person #BuildTheWall #EndDACA #LockThemAllUp'), or shares or reports a news story, headline or fact ('Migrant Crisis EXPOSED! via @user #immigration'), without itself attacking, mocking or sarcastically praising immigrants/dreamers as people or calling for their removal",
+            "defends_immigrants": "Criticises anti-immigrant hate or defends immigrants, or discusses whether terms are hate speech"
+          },
+          "map": {
+            "dehumanise_or_stereotype": "hate",
+            "exclusion_call": "hate",
+            "politics_or_news": "not_hate",
+            "defends_immigrants": "not_hate"
+          }
+        },
+        "other": {
+          "class": "not_hate"
+        }
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v4b_r6b",
+      "model": "jev-latest",
+      "type": "two_level",
+      "state_template": "Tweet:\n{{input}}",
+      "router": {
+        "instructions": "Hate-speech annotation policy covers hatred against WOMEN and against IMMIGRANTS/REFUGEES. Which area does this tweet belong to?",
+        "criteria": {
+          "women": "Uses gendered slurs (bitch, hoe, whore, slut, cunt) or talks about women, girls or a particular woman",
+          "immigration": "About immigrants, refugees, migrants, illegal aliens, borders, the wall, DACA, deportation or immigration policy",
+          "other": "Neither of these"
+        }
+      },
+      "groups": {
+        "women": {
+          "instructions": "Hate-speech policy: hateful if it attacks women or a woman — insults, degrades, sexually objectifies, dehumanises, or threatens violence against her/them because she is a woman or using gendered slurs as an attack. Which fits best?",
+          "criteria": {
+            "attack_on_woman": "Insults, degrades, taunts or threatens a woman: the slur comes with a negative remark about her ('I can't stand you hoe', 'bitch stop it, bum ass hoe you lame', 'you one of them ... basic bitch hoein', 'you ugly bitch', 'shut up whore'), even if joking, or with talk of violence ('just bitch slap them'), or is hurled back at someone in an argument",
+            "attack_on_women": "Generalises about or mocks women as a group with slurs ('bitches think...', 'these hoes...', 'you hoes can't do that'), degrades, sexually objectifies or stereotypes women in general, or endorses rape or violence against women",
+            "casual_or_friendly": "Slur used as an interjection or filler ('Bitch this is RAPE', 'BITCH I'M TRYING TO SEARCH YOUR ACCOUNT', 'Lil' bitch! You can't fuck with me, these is Walmart shoes'), lyrics or self-description ('Bitch I like to smoke', 'bitch whole pussy out wit some pro-keds on'), as a neutral way to refer to a woman or character while telling a story ('that bitch fell in love w a whole animal'), or in a warm or neutral request/remark to a friend ('turn your snapchat map on bitch i just wanna talk', 'smoke weed bitch', 'happy birthday bitch, hope you have a great one'), with no insult of a woman",
+            "reported_or_defensive": "The author reports, quotes or pushes back against slurs aimed at herself (e.g. 'the next person to call me a fat bitch...') without herself calling anyone a slur",
+            "not_at_women": "The slur is aimed at a man or a political opponent ('you bitch ass nigga', 'hoe ass nigga', 'fuck marty that cunt', 'hey asshole ... you dirtbag bitch', 'stop looking at us asshole ... I know you're a bitch', 'Trump's a bitch'), or criticises men ('you dudes be so worried about ya bitch being hoes but y'all the problem'), a thing, or a situation ('karma's a bitch', 'life's a bitch')"
+          },
+          "map": {
+            "attack_on_woman": "hate",
+            "attack_on_women": "hate",
+            "casual_or_friendly": "not_hate",
+            "reported_or_defensive": "not_hate",
+            "not_at_women": "not_hate"
+          }
+        },
+        "immigration": {
+          "instructions": "Hate-speech policy: hateful if, in the author's own voice, it demeans, dehumanises or stereotypes immigrants/refugees as a group, or calls for them to be stopped, expelled, deported or kept out. Which fits best?",
+          "criteria": {
+            "dehumanise_or_stereotype": "Portrays immigrants/refugees/dreamers as criminals, rapists, invaders, animals, parasites, carriers of disease ('drug-resistant diseases coming across our open border') or a threat as a group, including sarcasm that mocks them (e.g. 'another wonderful dreamer youngster' said about a crime)",
+            "exclusion_call": "Explicitly calls for or endorses immigrants/refugees/dreamers themselves being deported, sent back, expelled or stopped from coming (e.g. #DeportThemAll, #SendThemBack, StopImmigration, stop the invasion, 'dreamers could apply once deported')",
+            "politics_or_news": "Supports the border wall, ending DACA, no amnesty, Trump/MAGA or other immigration policy (hashtags like #BuildThatWall, #NoDACA alone are policy), attacks or wants to jail/stop politicians, liberals or other non-immigrants ('someone stop this evil person #BuildTheWall #EndDACA #LockThemAllUp'), or shares or reports a news story, headline or fact ('Migrant Crisis EXPOSED! via @user #immigration'), without itself attacking, mocking or sarcastically praising immigrants/dreamers as people or calling for their removal",
+            "defends_immigrants": "Criticises anti-immigrant hate or defends immigrants, or discusses whether terms are hate speech"
+          },
+          "map": {
+            "dehumanise_or_stereotype": "hate",
+            "exclusion_call": "hate",
+            "politics_or_news": "not_hate",
+            "defends_immigrants": "not_hate"
+          }
+        },
+        "other": {
+          "class": "not_hate"
+        }
+      }
+    }
+  ]
+}

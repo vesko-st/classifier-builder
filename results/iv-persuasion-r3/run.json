@@ -1,0 +1,96 @@
+{
+  "run_id": "iv-persuasion-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "interview",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T11:16:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 512,
+    "num_turns": 45,
+    "total_cost_usd": 1.8692536000000002
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description: 21 fine options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.6005,
+          "macro_f1": 0.5831,
+          "est_cost_usd": 0.090781,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 30,
+      "estimate": 0.5,
+      "note": "v2: rules from 6 owner policy answers (narrow praise/FITD/off-task, habit vs anecdote, closings->other)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5926,
+          "macro_f1": 0.5659,
+          "est_cost_usd": 0.101527,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 70,
+      "estimate": 0.55,
+      "note": "v3c: coverage-label rules H2'(hardship->story, privilege contrast->emotion), H3 (org arrangements->credibility), H4 (amount up to you->donation-info)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5979,
+          "macro_f1": 0.5694,
+          "est_cost_usd": 0.106457,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 86,
+      "estimate": 0.6,
+      "note": "v4: FITD 'even smallest' rule, chat-logistics->other, confirm/check decision->other, chat purpose->donation-info, partner's own child->emotion",
+      "test": {
+        "jev": {
+          "accuracy": 0.6045,
+          "macro_f1": 0.5656,
+          "est_cost_usd": 0.112083,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.6,
+      "note": "e1: 3-variant wording ensemble of v5d rules (small-talk/other for persuader's own life, role at charity->credibility, added-together->logical, trivial-amount->FITD). Check 6/8, build 23/27.",
+      "test": {
+        "jev": {
+          "accuracy": 0.6117,
+          "macro_f1": 0.5721,
+          "est_cost_usd": 0.36286,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

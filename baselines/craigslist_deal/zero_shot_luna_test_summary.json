@@ -1,0 +1,62 @@
+{
+  "classifier": "craigslist_deal_zero_shot",
+  "type": "choice",
+  "backend": "luna",
+  "total": 582,
+  "answered": 582,
+  "errors": {},
+  "cached": 580,
+  "input_tokens_billed": 744,
+  "est_cost_usd": 9.1e-05,
+  "latency_ms_p50": 1354.1,
+  "latency_ms_p95": 1354.1,
+  "prediction_counts": {
+    "deal": 406,
+    "no_deal": 176
+  },
+  "labeled": 582,
+  "accuracy": 0.921,
+  "macro_f1": 0.8993,
+  "per_class": {
+    "deal": {
+      "n": 446,
+      "precision": 0.9926,
+      "recall": 0.9036,
+      "f1": 0.946
+    },
+    "no_deal": {
+      "n": 136,
+      "precision": 0.7557,
+      "recall": 0.9779,
+      "f1": 0.8526
+    }
+  },
+  "top_confusions": [
+    {
+      "gold": "deal",
+      "predicted": "no_deal",
+      "n": 43
+    },
+    {
+      "gold": "no_deal",
+      "predicted": "deal",
+      "n": 3
+    }
+  ],
+  "accuracy_by_confidence": [
+    {
+      "confidence": "[0.7, 0.9)",
+      "n": 13,
+      "accuracy": 0.8462
+    },
+    {
+      "confidence": "[0.9, 1.0]",
+      "n": 569,
+      "accuracy": 0.9227
+    }
+  ],
+  "luna": {
+    "model": "gpt-6-luna",
+    "reasoning": "low"
+  }
+}

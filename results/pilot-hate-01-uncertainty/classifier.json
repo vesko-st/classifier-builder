@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v5",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "Classify this tweet under a hate-speech annotation policy whose targets are WOMEN and IMMIGRANTS (migrants, refugees, asylum seekers, illegal aliens). Pick the option that best describes the tweet.",
+    "notes": [
+      "Hate means the tweet expresses or endorses hostility against women or immigrants: contempt, dehumanisation, threats, resentment, stigmatising them, or calls to exclude, deport or round them up, either toward the group or toward an individual woman/immigrant because of that identity.",
+      "Endorsing anti-immigrant action counts even when phrased as a policy opinion, a bare slogan (#BuildTheWall, send them home, round them up, enforce immigration laws and take away subsidies) or a news-style item promoting the wall or penalties over illegal immigration. Angry resentment that migrants get jobs, benefits or treatment that natives do not, casting illegal immigrants as cheats, accounts of refugees attacking people, and outrage headlines about 'illegal aliens' as rapists/criminals also count. Plain factual reports of an arrest, and stories where immigrants are the victims, do not.",
+      "A woman insulted with a gendered slur (calling her a bitch, whore, cunt, skank) or belittled as a woman (e.g. accused of 'playing the rape card'), women referred to generically as bitches/hoes, or slut-shaming a woman, counts as hate, as does a generic slur-bait like 'RT if you're a cunt' or a bare string of gendered slurs. The same slurs or taunts ('pussy', 'cunt', 'hysterical girlie rants') aimed at a man (a referee, a guy, 'bro', a male politician) do not. A slur used as a general insult with no identifiable woman as its target (at the government, at 'everyone'), quoted to criticise it, or used about oneself consensually, is not hate.",
+      "Not hate: neutral news, pro-refugee messages, defending border law enforcement without attacking migrants, jokes or insults whose target is not women/immigrants, and slurs that are quoted, reported, objected to, or used as casual slang between friends.",
+      "Tweets not in English, or satire mocking anti-immigrant people (e.g. Brexiters), are not hate."
+    ]
+  },
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "immigrant_hate": {
+      "meaning": "Hostile toward immigrants/refugees/migrants or endorsing action against them: calls them invaders, criminals, a burden or a threat; supports the wall, deportation, rounding up, or keeping them out; resents them getting jobs or benefits over natives; shares crime stories framing immigrants as rapists/criminals; cheers on confrontation with migrants.",
+      "examples": [
+        "@user The wall would HELP! #BuildThatWall",
+        "WHY DONT YOU GO AND ROUND ALL THEM UP ?",
+        "Muslim migrant challenges welfare worker... EXACTLY WHAT WE MUST DO !!!",
+        "make up your mind your going to take their benefits away so r u going to do the same to the young migrants punish ur own and let off others",
+        "Illegal alien in Utah who was deported raped 7-year-old girl 'thousands of times,' police say",
+        "Immigration gone crazy 100 trainee doctors from abroad what about Nurse Practitioners",
+        "Rep. Biggs pitches plan to fund border wall by penalizing countries of illegal immigrants",
+        "IS-puppets tried to roll me over three times! ... Some of the first refugees in 1993 also attacked me without reason",
+        "Paris dont like tentrefugees. Now they bring them to the parque ... The rich have made big walls around their property.",
+        "You want less violenceLegalize drugs, gambling and prostitution.Enforce immigration laws.Take away subsidized...",
+        "increasing intolerance towards who? People smugglers? Drug cartel members? People who cheat the system essentially flip the bird to legal immigrants waiting in"
+      ]
+    },
+    "misogyny_group": {
+      "meaning": "Contempt for women as a group or for a group of women: generalisations that women are stupid, hysterical, inferior, whores, pigs, should be silenced or controlled; #WomenSuck style jokes degrading women.",
+      "examples": [
+        "Lipstick on a PIG. The Democrat Women ... it would be hysterical.",
+        "No one gives less fucks than the guy that comments 'check your DM, ma' on bitches posts"
+      ]
+    },
+    "misogyny_individual": {
+      "meaning": "Insults, belittles, sexually degrades or threatens a specific woman or girl: calls her a bitch, whore, slut, skank, cunt or hoe, or dismisses her as a woman (e.g. accuses her of playing the rape/victim card).",
+      "examples": [
+        "This bitch crazy he saying its cool to rape?",
+        "Anita is equating gamergate to cosby and weinstein so she can equate herself to actual rape victims so she can keep playing the card",
+        "Dear Akkorou, Bitch ass nigga cunt on a stick fuck shit bitch ... Love, Dj Rits",
+        "RT @user RT if you're a cunt",
+        "stop skin out your hole and then you will see a man treat you like a women u want to be treated .",
+        "〝 Bitch fuck shit cunt who─ 〞 Okayyy..",
+        "@user Dutch woman looking at him like you cunt"
+      ]
+    },
+    "neutral_immigration": {
+      "meaning": "About immigration or refugees without hostility toward immigrants: news, neutral policy discussion, defending border enforcement or mocking media labels without attacking migrants, supportive or sympathetic messages, criticism of anti-immigrant people, or hostility aimed at someone else (a city, a politician) rather than migrants.",
+      "examples": [
+        "Made your bed, now lie in the flea pit you created 'Tourists go home, refugees welcome': why Barcelona chose migrants over visitors",
+        "anti immigrant hardliner as @user just described Kris Kobach -- I guess that's liberal news media spin for supporting the enforcement of border laws",
+        "Here's our Spanish version of ... story of worker accused of molesting 8 (!!) immigrant kids at Arizona shelter. Please share",
+        "There is a hidden fact in the migrants story we have our own waiting lists and no one including the churches held out the hands for them.",
+        "@user Pepper spray needs to free to women in Europe and supplied by the government. #migrants",
+        "Wow, @user is disgusting. Watch the way she laughs off ... the importance of black lives and immigrant children",
+        "Looks like UK population will be increased by 300 million if US immigrants forced to go home! #Stopbrexit #FBPE",
+        "And thanks to these Quislings, net migration to Britain totalled 2.2million between 1997 and 2010",
+        "PHOTO OF SHOOTER IN TENN CHURCH ATTACK | Sudanese Immigrant Arrested... Emanuel Sampson, 25, From Sudan"
+      ]
+    },
+    "neutral_gender": {
+      "meaning": "About women, men, feminism, #MeToo or sexual violence without contempt for women; criticises sexism; reports or objects to a slur someone else used.",
+      "examples": [
+        "I remember ... being called a cunt for 20 years. Sacred, I think not",
+        "Hell do you think you are to call my friend a fucking skank?!",
+        "lets get rid of womens sports and make men and women play side by side! #equality",
+        "Hartley - Brewer, Vine, Oakeshott, Moir, women of the right who seem to think #TorySleaze36 is an hysterical witch hunt, say it to victims.",
+        "Last night I saw a PEI bar brawl between 2 women fighting over a man. One socked the other and called her a whore.",
+        "if you're really gonna sit and bitch about women hating on men for raping and harassing them, please exit my life",
+        "@user Where's the punchline to 'Fuck you cunt go die in a ditch whore'? That's not even in the form of a fo…"
+      ]
+    },
+    "other_profanity": {
+      "meaning": "Crude, sexual or offensive language not aimed at degrading women or immigrants: slang among friends, fan fiction, song-like exclamations, gendered slurs aimed at a man or male politician.",
+      "examples": [
+        "man we're Bros from another crack hoe",
+        "What would you do if namjoon ... yells 'HERE COMES MONSTER DICK BITCH!!'",
+        "@user Motlante you power hungry kunt you wanna be relevant shut up we know that",
+        "@user Sooo you trying to pimp em out. Bet.",
+        "@user No, Keith, you should be next. Your hysterical girlie rants are pretty hilarious",
+        "@user @user @user hoe you dont even know??Tragique....add me back",
+        "FUCK OFF REF. Martial was held back. U stupid cunt. What the fuck is wrong with you?",
+        "Tell us why u rape people too pussy",
+        "Remind me what I pay NI for. And what the fuck have you done with our money cunt?",
+        "God fucking forbid someone offend any fucking one ... everyone is too much of a fucking cunt bitch to speak their minds",
+        "@user Please call me slut or whore sex mistress~"
+      ]
+    },
+    "unrelated": {
+      "meaning": "Anything else: jokes, memes, personal chatter, political satire not attacking women or immigrants. Tweets not in English.",
+      "examples": [
+        "Shakespeare plays for tRumpers: ... Much Ado About Hillary The Grabbing of the Pussy",
+        "MaÅ¾ou informace o migrantech! udeÅ™il Viktor OrbÃ¡n. A pÅ™itvrdil akce proti Sorosovi"
+      ]
+    }
+  },
+  "map": {
+    "immigrant_hate": "hate",
+    "misogyny_group": "hate",
+    "misogyny_individual": "hate",
+    "neutral_immigration": "not_hate",
+    "neutral_gender": "not_hate",
+    "other_profanity": "not_hate",
+    "unrelated": "not_hate"
+  }
+}

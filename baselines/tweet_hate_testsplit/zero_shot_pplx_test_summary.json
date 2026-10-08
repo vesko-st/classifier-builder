@@ -1,0 +1,69 @@
+{
+  "classifier": "tweet_hate_zero_shot",
+  "type": "choice",
+  "backend": "pplx",
+  "total": 1766,
+  "answered": 1766,
+  "errors": {},
+  "cached": 1765,
+  "input_tokens_billed": 142,
+  "output_tokens_billed": 1,
+  "est_cost_usd": 6e-06,
+  "latency_ms_p50": 204.8,
+  "latency_ms_p95": 204.8,
+  "prediction_counts": {
+    "not_hate": 908,
+    "hate": 858
+  },
+  "labeled": 1766,
+  "accuracy": 0.7112,
+  "macro_f1": 0.7088,
+  "per_class": {
+    "hate": {
+      "n": 746,
+      "precision": 0.6375,
+      "recall": 0.7332,
+      "f1": 0.682
+    },
+    "not_hate": {
+      "n": 1020,
+      "precision": 0.7808,
+      "recall": 0.6951,
+      "f1": 0.7355
+    }
+  },
+  "top_confusions": [
+    {
+      "gold": "not_hate",
+      "predicted": "hate",
+      "n": 311
+    },
+    {
+      "gold": "hate",
+      "predicted": "not_hate",
+      "n": 199
+    }
+  ],
+  "accuracy_by_confidence": [
+    {
+      "confidence": "[0.0, 0.5)",
+      "n": 1262,
+      "accuracy": 0.6426
+    },
+    {
+      "confidence": "[0.5, 0.7)",
+      "n": 245,
+      "accuracy": 0.8531
+    },
+    {
+      "confidence": "[0.7, 0.9)",
+      "n": 158,
+      "accuracy": 0.8608
+    },
+    {
+      "confidence": "[0.9, 1.0]",
+      "n": 101,
+      "accuracy": 0.9901
+    }
+  ]
+}

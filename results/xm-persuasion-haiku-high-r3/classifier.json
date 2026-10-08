@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "name": "persuasion_strategy",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Classify this persuader message from a charity-donation chat using one of these persuasion strategies or dialogue acts:\n\nSTRATEGIC ACTS (persuasion tactics):\n- credibility-appeal: establishing the charity's trustworthiness, ratings, location, programs, efficiency (e.g., \"We're highly rated\", \"86% goes to programs\", \"Save the Children excels in health care\")\n- emotion-appeal: evoking sympathy with statistics or stories about child suffering (e.g., \"5 million children die yearly\", \"Did you know 16,000 children under 5 die each day?\")\n- foot-in-the-door: framing donation as small/easy to reduce resistance (e.g., \"Even $1 helps\", \"You won't miss $2\") - NOT asking for amount\n- logical-appeal: reasoning, arguments, consequences (e.g., \"Small donations add up\", \"When there's a crisis, children are most vulnerable\")\n- personal-story: persuader sharing their own experience/giving habits (e.g., \"I saw a starving child\", \"I already gave $5\")\n- praise-user: complimenting persuadee's character/generosity WITHOUT gratitude (e.g., \"You're so kind\", \"That's generous of you\")\n- self-modeling: persuader showing/stating their own donation as example (e.g., \"I will donate $1\", \"If you donate 30%, I will donate 50%\")\n\nDONATION-RELATED ACTS:\n- ask-donation-amount: soliciting a specific dollar figure from persuadee (e.g., \"How much would you donate?\", \"What amount?\") - a question seeking a number\n- proposition-of-donation: directly asking the persuadee themselves to donate (e.g., \"Would you donate?\", \"Please donate something\", \"Could you donate?\") - NOT asking them to get others to donate\n- donation-information: mechanics of THIS TASK's donation (e.g., \"Deducted from your payment\", \"Range is $0-$2\", \"We'll send it next week\", asking where this task's donations go) - NOT general charity info\n\nINQUIRIES (questions):\n- personal-related-inquiry: questions about persuadee's life, family, circumstances, giving history (e.g., \"Do you have children?\", \"Where are you from?\", \"Have you donated before?\")\n- source-related-inquiry: questions about Save the Children organization (e.g., \"Have you heard of Save the Children?\", \"What programs do they run?\")\n- task-related-inquiry: questions about the task/donation at hand (e.g., \"Are you willing to donate?\", \"How many turns left?\")\n\nDIALOGUE ACTS:\n- acknowledgement: ONLY short reactions that merely register/agree with what persuadee said, with NO added content (e.g., \"Absolutely\", \"Yes, that's true\", \"That's true\", \"I agree\", \"Exactly\") - NOT reactions that add information, answer questions, state facts, or comment on the persuadee\n- greeting: social openings/closings, \"hi\", \"hello\", combined \"how are you\" openers (e.g., \"Hi!\", \"Hello, how are you today?\", \"Have a great night!\")\n- thank: expressing gratitude for something (e.g., \"Thank you for your kindness\", \"Thanks for donating\") - if both thanks and praise present, thank wins\n- other: all other dialogue - responses that add content, simple reactions, answers to questions, confirmations, brief responses, requests outside direct donation (e.g., \"Great!\", \"I do\", \"Sounds good\", \"Yes, I was really surprised too\", \"If you could ask your friends to help?\")\n- off-task: irrelevant to the donation conversation",
+  "state_template": "Persuader message to classify:\n{{input}}",
+  "description": "Classify persuader messages by persuasion strategy/dialogue act",
+  "criteria": {
+    "acknowledgement": "short agreement with no added content",
+    "ask-donation-amount": "asking for a specific dollar figure",
+    "credibility-appeal": "charity trustworthiness, ratings, location, program efficiency",
+    "donation-information": "mechanics of this task's donation process",
+    "emotion-appeal": "statistics or stories evoking sympathy about child suffering",
+    "foot-in-the-door": "framing donation as small/easy to overcome resistance",
+    "greeting": "social opening/closing exchanges",
+    "logical-appeal": "reasoning, arguments, consequences",
+    "off-task": "irrelevant to the donation conversation",
+    "other": "responses with added content, reactions, answers, confirmations, requests outside direct donation",
+    "personal-related-inquiry": "questions about persuadee's life/circumstances",
+    "personal-story": "persuader sharing their own experience",
+    "praise-user": "complimenting persuadee's character or generosity",
+    "proposition-of-donation": "directly asking persuadee themselves to donate",
+    "self-modeling": "persuader showing/stating their own donation",
+    "source-related-inquiry": "questions about Save the Children",
+    "task-related-inquiry": "questions about the donation task itself",
+    "thank": "expressing gratitude"
+  }
+}

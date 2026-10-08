@@ -1,0 +1,77 @@
+{
+  "run_id": "xs-routing-policy-r2",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T14:19:57",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 453,
+    "num_turns": 40,
+    "total_cost_usd": 1.3723644000000004
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "draft: 77 fine intent options mapped to teams by guess",
+      "test": {
+        "jev": {
+          "accuracy": 0.8201,
+          "macro_f1": 0.7937,
+          "est_cost_usd": 0.258976,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 57,
+      "estimate": 0.8,
+      "note": "policy-mirrored map: PIN/passcode->fraud, verify_top_up->account, fee complaints->pricing, exchange overcharge/wrong rate/extra charge->disputes",
+      "test": {
+        "jev": {
+          "accuracy": 0.8977,
+          "macro_f1": 0.8985,
+          "est_cost_usd": 0.270097,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 89,
+      "estimate": 0.86,
+      "note": "apple/google pay->cards; reverted/cancelled payment, extra charge, wrong rate complaint->disputes wording",
+      "test": {
+        "jev": {
+          "accuracy": 0.912,
+          "macro_f1": 0.9084,
+          "est_cost_usd": 0.277339,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 99,
+      "estimate": 0.88,
+      "note": "3 wording-variant ensemble of v6 (cancelled payment->disputes, unspecified pending payment->cards, recipient got less->transfer fee, unknown charge->fraud) + source-of-funds wording",
+      "test": {
+        "jev": {
+          "accuracy": 0.9146,
+          "macro_f1": 0.9118,
+          "est_cost_usd": 0.849992,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

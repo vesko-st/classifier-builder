@@ -1,0 +1,92 @@
+{
+  "run_id": "xs-deal-rules-r1",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "created": "2026-09-30T11:14:55",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 594,
+    "num_turns": 53,
+    "total_cost_usd": 2.0850906
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.85,
+      "note": "v1 draft from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.8986,
+          "macro_f1": 0.8745,
+          "est_cost_usd": 0.015093,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 24,
+      "estimate": 0.82,
+      "note": "v4: lenient acceptance (H1 narrowed), unanswered closing offer = deal (H3); agrees with 12/12 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9038,
+          "macro_f1": 0.8798,
+          "est_cost_usd": 0.024675,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 54,
+      "estimate": 0.82,
+      "note": "v7: 7 fine-grained options mapped; H1-H4; 24/27 labels (0520 suspected noise, 0973 pending-offer noise, 0594 near-tie)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9296,
+          "macro_f1": 0.9085,
+          "est_cost_usd": 0.027364,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 80,
+      "estimate": 0.8,
+      "note": "ens2: 3 wording variants x 7 options + 9 shared examples; 34/40 labels incl. 6 random from the noisy still_apart group",
+      "test": {
+        "jev": {
+          "accuracy": 0.9244,
+          "macro_f1": 0.9025,
+          "est_cost_usd": 0.116679,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.83,
+      "note": "final: 2-variant ensemble (members 0,2 of ens2; weakest member dropped), deal threshold 0.45; 40/50 labels; remaining errors mostly unanswered-final-offer chats whose outcome is not in the text",
+      "test": {
+        "jev": {
+          "accuracy": 0.9296,
+          "macro_f1": 0.9085,
+          "est_cost_usd": 0.0,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

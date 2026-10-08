@@ -1,0 +1,12 @@
+{
+  "name": "craigslist_deal",
+  "description": "Buyers and sellers negotiate the price of a Craigslist item over chat. Tell us whether each negotiation closed with a deal.",
+  "input": "The item listing, then the negotiation chat.",
+  "label_type": "single",
+  "classes": {
+    "deal": "They closed a deal",
+    "no_deal": "They did not close a deal"
+  },
+  "metric": "macro_f1",
+  "source": "CraigslistBargain (He et al. 2018), raw parsed.json; label = outcome.reward == 1; offer/accept/reject/quit events stripped from the transcript"
+}

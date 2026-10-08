@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "name": "ens_v5_t70",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "hate_v3",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "women_group": {
+          "instructions": "Does this tweet make a degrading generalisation about women as a group (e.g. 'these hoes will whore around', 'bitches ain't loyal', 'you hoes need to die', women are sluts/worthless)? Answer no for insults at one specific person, casual or affectionate use of 'bitch'/'hoe', self-reference ('I'm that bitch'), or 'bitch' about a situation or a man.",
+          "criteria": {
+            "true": "demeans women in general / women as a class",
+            "false": "no generalisation about women as a group"
+          }
+        },
+        "woman_sexual_threat": {
+          "instructions": "Does this tweet sexually degrade, threaten, or wish violence on a woman or women (rape references, sexual humiliation such as calling her a whore in a sexual way, threats to beat or kill her, wishing her dead)? Answer no for a plain angry insult with a slur ('shut up you dumb hoe', 'bitch please') that has no sexual degradation, threat or violence. Quoting or retelling someone else's rape joke or threat still counts as yes. Answer no when 'whore' or 'hoe' is merely mentioned in passing without degrading anyone sexually ('I'm not gonna call you that, that's for whores').",
+          "criteria": {
+            "true": "sexualised degradation, rape reference, or threat/violence towards women",
+            "false": "no sexual degradation or threat towards women"
+          }
+        },
+        "immigrant_hate": {
+          "instructions": "Does this tweet demean or dehumanise immigrants, refugees, migrants or illegal aliens as a group: calling them criminals, rapists, invaders, parasites, disease carriers or 'bottom feeders'; calling for them to be expelled or harmed as a group with hostile framing; or presenting an individual immigrant's crime as typical of the whole group ('yet another victim of an illegal alien')? Also answer yes for insinuations that immigrants, DACA recipients or people crossing the border are criminals, smugglers, drug dealers or dangerous — including rhetorical questions ('How many DACA have been arrested for smuggling?', 'These are the people we caught, how many are we not catching?') and attacks on people who defend them. Answer no for plain policy support (build the wall, end DACA), Trump/MAGA cheerleading, news, or criticism of politicians that just carries these hashtags.",
+          "criteria": {
+            "true": "hostile generalisation or dehumanisation of immigrants",
+            "false": "policy talk, politics, or news without demeaning immigrants as a group"
+          }
+        },
+        "counter": {
+          "instructions": "Is the author criticising, reporting or opposing hateful speech (e.g. calling out someone else's sexism or racism) rather than expressing it themselves?"
+        },
+        "slur_at_person": {
+          "instructions": "Does the author call a specific person (a woman, or someone whose gender isn't stated) a bitch, hoe, whore, slut, cunt or thot as a contemptuous put-down (e.g. 'you a obsessed hoe', 'those are my hooves you bitch', 'fat hoe', 'she's a hoe')? Answer no when: the insult targets a man ('Trump's a bitch'); 'bitch' is just an exclamation or filler word addressed to no one in particular ('BITCH HOLD UP', 'bitch where?', 'WELLL bitch'); it is friendly or affectionate ('yasss bitch', 'you just my bitch ;)'); it is a self-description; or it describes a situation ('life's a bitch'). Also answer no when the target is male or men ('Nick', 'Tucker, a Trump bitch', 'so called men are bitch made hoes'), and for friendly banter or laughing along with a joke ('You got me with the bitch ass hoe comment 😂').",
+          "criteria": {
+            "true": "contemptuous slur put-down naming a woman or unspecified person",
+            "false": "no such put-down"
+          }
+        }
+      },
+      "rule": [
+        [
+          "women_group"
+        ],
+        [
+          "woman_sexual_threat"
+        ],
+        [
+          "slur_at_person",
+          "!counter"
+        ],
+        [
+          "immigrant_hate",
+          "!counter"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "hate_v4",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "women_group": {
+          "instructions": "Does this tweet make a degrading generalisation about women as a group (e.g. 'these hoes will whore around', 'bitches ain't loyal', 'you hoes need to die', women are sluts/worthless)? Answer no for insults at one specific person, casual or affectionate use of 'bitch'/'hoe', self-reference ('I'm that bitch'), or 'bitch' about a situation or a man.",
+          "criteria": {
+            "true": "demeans women in general / women as a class",
+            "false": "no generalisation about women as a group"
+          }
+        },
+        "woman_sexual_threat": {
+          "instructions": "Does this tweet sexually degrade, threaten, or wish violence on a woman or women (rape references, sexual humiliation such as calling her a whore in a sexual way, threats to beat or kill her, wishing her dead)? Answer no for a plain angry insult with a slur ('shut up you dumb hoe', 'bitch please') that has no sexual degradation, threat or violence. Quoting or retelling someone else's rape joke or threat still counts as yes. Answer no when 'whore' or 'hoe' is merely mentioned in passing without degrading anyone sexually ('I'm not gonna call you that, that's for whores').",
+          "criteria": {
+            "true": "sexualised degradation, rape reference, or threat/violence towards women",
+            "false": "no sexual degradation or threat towards women"
+          }
+        },
+        "immigrant_hate": {
+          "instructions": "Does this tweet demean or dehumanise immigrants, refugees, migrants or illegal aliens as a group: calling them criminals, rapists, invaders, parasites, disease carriers or 'bottom feeders'; calling for them to be expelled or harmed as a group with hostile framing; or presenting an individual immigrant's crime as typical of the whole group ('yet another victim of an illegal alien')? Also answer yes for insinuations that immigrants, DACA recipients or people crossing the border are criminals, smugglers, drug dealers or dangerous — including rhetorical questions ('How many DACA have been arrested for smuggling?', 'These are the people we caught, how many are we not catching?') and attacks on people who defend them. Answer no for plain policy support (build the wall, end DACA), Trump/MAGA cheerleading, news, or criticism of politicians that just carries these hashtags.",
+          "criteria": {
+            "true": "hostile generalisation or dehumanisation of immigrants",
+            "false": "policy talk, politics, or news without demeaning immigrants as a group"
+          }
+        },
+        "counter": {
+          "instructions": "Is the author criticising, reporting or opposing hateful speech (e.g. calling out someone else's sexism or racism) rather than expressing it themselves?"
+        },
+        "slur_at_person": {
+          "instructions": "Is the tweet an angry or contemptuous attack on a specific person (a woman, or someone whose gender isn't stated) in which the author calls them a bitch, hoe, whore, slut, cunt or thot as part of the attack (e.g. 'Bitch stop it, bum ass hoe you lame', 'you a obsessed hoe', 'BITCH HOW DARE YOU SUPPORT HER HOE ASS', 'she's a hoe, she's ugly')? Answer no when: the insult targets a man ('Trump's a bitch'); 'bitch' is filler, an exclamation, or a vocative tacked onto an otherwise non-hostile sentence ('Are those not grapes bitch?', 'BITCH HOLD UP', 'be whoever I want to be, bitch'); it is friendly, joking or affectionate ('yasss bitch', 'you just my bitch ;)'); it is a self-description or aimed at oneself; or it describes a situation ('life's a bitch'). Also answer no when the target is male or men ('Nick', 'Tucker, a Trump bitch', 'so called men are bitch made hoes'), and for friendly banter or laughing along with a joke ('You got me with the bitch ass hoe comment 😂').",
+          "criteria": {
+            "true": "contemptuous slur put-down naming a woman or unspecified person",
+            "false": "no such put-down"
+          }
+        }
+      },
+      "rule": [
+        [
+          "women_group"
+        ],
+        [
+          "woman_sexual_threat"
+        ],
+        [
+          "slur_at_person",
+          "!counter"
+        ],
+        [
+          "immigrant_hate",
+          "!counter"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.7
+  }
+}

@@ -1,0 +1,134 @@
+{
+  "version": 1,
+  "name": "hate_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "hate_v2",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm_about": {
+          "instructions": "Is the tweet about immigrants, refugees, migrants or 'illegal aliens' as people (not merely about a wall, a party, a city, a politician or a country)?",
+          "criteria": {
+            "true": "the tweet is about immigrants/refugees/illegals as a group of people, or expresses a stance against their presence or entry",
+            "false": "not about immigrants as people"
+          }
+        },
+        "imm_hostile": {
+          "instructions": "Does this tweet express hostility toward immigrants, refugees, migrants or 'illegals' as a group: insulting or dehumanising them (scum, parasites, invaders, vermin, rapefugees), portraying them generally as criminals, rapists, diseased or dangerous, calling their presence an invasion or 'white genocide', or demanding they be stopped, sent back or expelled with hostility or alarm? Answer NO for neutral news, a neutral statement of support for a wall, border security or legal immigration, cheering Trump, insults aimed at politicians or parties, and hostility aimed at other groups (Muslims in general, Jews, Black people).",
+          "criteria": {
+            "true": "hostile, dehumanising, fearmongering or demeaning toward immigrants/refugees as a group",
+            "false": "neutral, policy-only, or not about immigrants"
+          }
+        },
+        "woman_abuse": {
+          "instructions": "Is this tweet hostile toward a woman or women, using a gendered insult (bitch, whore, hoe, cunt, slut, etc.) or sexual abuse, rape threats or sexist stereotypes to degrade them? Answer NO when the word is only slang, an exclamation, a way to address a friend, self-description, affectionate or joking, when it is quoted lyrics, or when the tweet has no hostility toward women (for example a plain statement like 'bitch I ain't got that money'). Answer NO for insults at men or for general anger without gendered degradation.",
+          "criteria": {
+            "true": "hostile, degrading or abusive toward women using gendered abuse",
+            "false": "casual or friendly slang, self-reference, or not about women"
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_about",
+          "imm_hostile"
+        ],
+        [
+          "woman_abuse"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "hate_v2b",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm_about": {
+          "instructions": "Does this tweet concern immigrants, refugees, migrants or so-called illegal aliens as people, including arguing against letting them in or for removing them? Tweets only about a border wall slogan, a politician, a party, a city or a foreign country do not count.",
+          "criteria": {
+            "true": "the tweet is about immigrants/refugees/illegals as a group of people, or expresses a stance against their presence or entry",
+            "false": "not about immigrants as people"
+          }
+        },
+        "imm_hostile": {
+          "instructions": "Is the tweet hostile or derogatory toward immigrants/refugees/illegals as a group? Examples of YES: calling them scum, vermin, invaders, parasites, rapefugees; saying they are typically criminals, rapists, disease carriers or a danger; describing an invasion or replacement; demanding they be thrown out or kept out in a hateful or alarmist tone. NO: neutral news, calm policy or legal argument, slogans of support for a wall, cheering for politicians, attacks on Democrats or media, hostility aimed at Muslims, Jews or Black people generally.",
+          "criteria": {
+            "true": "hostile, dehumanising, fearmongering or demeaning toward immigrants/refugees as a group",
+            "false": "neutral, policy-only, or not about immigrants"
+          }
+        },
+        "woman_abuse": {
+          "instructions": "Does the tweet attack or demean a woman or women as women: with a misogynistic insult (bitch, whore, hoe, cunt, slut), sexual abuse, a rape threat or a sexist generalisation? NO if the slang is casual, friendly, an exclamation, self-directed, joking, part of lyrics, or there is no hostility (e.g. 'bitch I ain't got that money'), and NO for insults at men or plain anger with no gendered degradation.",
+          "criteria": {
+            "true": "hostile, degrading or abusive toward women using gendered abuse",
+            "false": "casual or friendly slang, self-reference, or not about women"
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_about",
+          "imm_hostile"
+        ],
+        [
+          "woman_abuse"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "hate_v2c",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm_about": {
+          "instructions": "Is this tweet talking about immigrants, refugees or illegal aliens as a group of people, or about keeping them out or deporting them?",
+          "criteria": {
+            "true": "the tweet is about immigrants/refugees/illegals as a group of people, or expresses a stance against their presence or entry",
+            "false": "not about immigrants as people"
+          }
+        },
+        "imm_hostile": {
+          "instructions": "Does the author show hatred, contempt, fear or blame toward immigrants/refugees/illegal aliens as a group (dehumanising words, blanket claims that they commit crime, rape, spread disease or steal, invasion language, go back/send them back said with hostility)? A dry news item, a policy opinion, a pro-wall slogan or an attack on politicians is NOT enough.",
+          "criteria": {
+            "true": "hostile, dehumanising, fearmongering or demeaning toward immigrants/refugees as a group",
+            "false": "neutral, policy-only, or not about immigrants"
+          }
+        },
+        "woman_abuse": {
+          "instructions": "Is the author being abusive toward a woman or women because of her/their gender, e.g. calling her a bitch, whore, slut, hoe or cunt to degrade her, sexual insults, rape wishes, or sexist put-downs? Friendly or casual use of these words, jokes, self-reference, lyrics and plain non-hostile remarks do not count.",
+          "criteria": {
+            "true": "hostile, degrading or abusive toward women using gendered abuse",
+            "false": "casual or friendly slang, self-reference, or not about women"
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_about",
+          "imm_hostile"
+        ],
+        [
+          "woman_abuse"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.55
+  }
+}

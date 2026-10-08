@@ -1,0 +1,88 @@
+{
+  "run_id": "pilot-hatets-08-policy-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-28T16:15:40",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 34,
+      "estimate": 0.62,
+      "note": "v1 criteria (misogyny OR anti_immigrant) from Q1-Q2 + minimal pairs; overpredicts immigrant hate on dev",
+      "test": {
+        "jev": {
+          "accuracy": 0.8075,
+          "macro_f1": 0.8049,
+          "est_cost_usd": 0.063107,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 34,
+      "estimate": 0.72,
+      "note": "v2: anti_immigrant judged on wording ignoring hashtags; dev 12/13",
+      "test": {
+        "jev": {
+          "accuracy": 0.8058,
+          "macro_f1": 0.7989,
+          "est_cost_usd": 0.065109,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 70,
+      "estimate": 0.74,
+      "note": "ensemble v1+v2, hate threshold 0.55; 0.846 on 26 labels (threshold fit on them)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8114,
+          "macro_f1": 0.8048,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 86,
+      "estimate": 0.78,
+      "note": "v4: + exclusion_comment question, threshold 0.70; check 12/12, all 34 labels 0.85",
+      "test": {
+        "jev": {
+          "accuracy": 0.7995,
+          "macro_f1": 0.7934,
+          "est_cost_usd": 0.083059,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.76,
+      "note": "v5: broad misogyny (gendered insult/taunt at a woman or 'hoes'), + v4 immigration clauses, threshold 0.70; 35/41 labels, check 11/12",
+      "test": {
+        "jev": {
+          "accuracy": 0.8052,
+          "macro_f1": 0.8049,
+          "est_cost_usd": 0.086248,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

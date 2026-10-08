@@ -1,0 +1,62 @@
+{
+  "run_id": "xm-hatets-opus-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-29T15:37:39",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": null,
+    "wall_seconds": 229,
+    "num_turns": 24,
+    "total_cost_usd": 0.8902771999999998
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 37,
+      "estimate": 0.72,
+      "note": "v1 criteria from policy answers + minimal pairs",
+      "test": {
+        "jev": {
+          "accuracy": 0.778,
+          "macro_f1": 0.7772,
+          "est_cost_usd": 0.049162,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 57,
+      "estimate": 0.78,
+      "note": "v1 confirmed 10/10 on random check labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.778,
+          "macro_f1": 0.7772,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.8,
+      "note": "final: v1 re-snapshotted; 13/13 random check, revisions v2-v5 rejected",
+      "test": {
+        "jev": {
+          "accuracy": 0.778,
+          "macro_f1": 0.7772,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

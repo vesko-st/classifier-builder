@@ -1,0 +1,62 @@
+{
+  "run_id": "xm-hatets-sonnet-high-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-29T17:10:15",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 528,
+    "num_turns": 22,
+    "total_cost_usd": 0.46992010000000006
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 43,
+      "estimate": 0.7,
+      "note": "v1 criteria draft from policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.7486,
+          "macro_f1": 0.7184,
+          "est_cost_usd": 0.050646,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 87,
+      "estimate": 0.72,
+      "note": "v3: whore/cunt clause, deport clause tightened; 285 hate in pool",
+      "test": {
+        "jev": {
+          "accuracy": 0.7633,
+          "macro_f1": 0.7395,
+          "est_cost_usd": 0.054354,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.7,
+      "note": "v4 = v3 + decision threshold hate>=0.45; 320 hate in pool",
+      "test": {
+        "jev": {
+          "accuracy": 0.7701,
+          "macro_f1": 0.7508,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

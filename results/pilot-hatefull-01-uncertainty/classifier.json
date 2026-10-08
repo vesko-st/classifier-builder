@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v8",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "Classify this tweet under a hate-speech annotation policy. The policy covers two target groups only: immigrants/refugees/migrants, and women. A tweet is hateful when it expresses hostility, contempt or incitement against one of these groups (or against a woman because she is a woman). Pick the option that best describes the tweet.",
+    "notes": [
+      "For immigration, the bar is low: tweets that oppose immigration and frame migrants as a threat, burden or bad news, demand closed borders or fewer migrants, or call migration an invasion count as hateful even when phrased as political opinion.",
+      "For women: calling a woman or girl a bitch, hoe, whore, slut, cunt or skank, or describing women as hoes or sexual objects, IS hateful even in slang or casual tone. The same words aimed at a man, used as a pure exclamation, or used about oneself are NOT hateful. Sarcasm or criticism of people who mock women, and neutral opinions about gender policy, are not hateful.",
+      "Neutral news, blame directed at governments or elites rather than migrants, and support for refugees or women are not hateful.",
+      "A gendered slur (cunt, bitch, whore, skank) or 'hysterical' used to insult someone is hateful unless the target is clearly a man or boy, the person is being compared to 'a hysterical woman', the word is used about oneself, or it is quoted or friendly banter. 'Hysterical' meaning very funny or hilarious is never hateful.",
+      "A gendered slur is hateful only when aimed at a woman or girl or at women; if the target is a man, or the target's gender is unclear, it is not hateful.",
+      "Mocking a political party's immigration stance is not hateful by itself; it is hateful when the tweet also wants migrants taken back, kept out or reduced, or frames them as a burden."
+    ]
+  },
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "hate_immigrants": {
+      "meaning": "The tweet itself takes a hostile stance toward immigrants, refugees or migrants: opposes their arrival or migrant plans, wants borders closed, caps or them sent back, frames them as invaders, criminals, a burden, or bad news for natives, or dehumanises them. Includes resentment that refugees get money or perks natives do not, sarcastic hashtags like #DiversityIsOurStrength on migrant-crime stories, and cheering the end of pro-immigration politics.",
+      "examples": [
+        "@user ur were voted in to protect our borders not let migrants or the EU dictate how many you let in.",
+        "The answer is NOT to support mass migration into European nations.",
+        "plans to repatriate failed asylum seekers put on hold, its always bad news for Brits where migrants are concerned",
+        "Nicola sturgeon wont put a cap on immigration really what about ur own people",
+        "EU's hailed migrant plan 'a road to Hell' Czech Republic refuses involvement",
+        "Refugee contractor gives #Refugees free tourism trips. What about poor Americans and military vets?",
+        "Police officers attacked by migrant family ... #DiversityIsOurStrength",
+        "how many of the \"refugees\" (code for country shoppers) have been deported?"
+      ]
+    },
+    "hate_women_generic": {
+      "meaning": "Sexist or misogynistic content about women or girls in general: demeaning generalisations (women are stupid, hoes, liars, bad drivers, should be silent), sexist jokes, anti-feminist claims that women are privileged, sexual objectification, #WomenSuck contempt, endorsing violence against women.",
+      "examples": [
+        "If I was a woman I would probably be a hoe lol they have so much fun and niggas pay them",
+        "Next time I hear that a girl cheated, I'll assume that women are systemically pr…",
+        "You ain't a real bitch unless you suckin dick",
+        "Only places my wife can drive are to restaurants and grocery stores",
+        "#Women have all the privileges. #Men have all the responsibilities. End feminism today!",
+        "I knew he respected women when he said 'if you aint a hoe get up out my traphouse!' Legendary",
+        "#MaleDominance let's get it trending!",
+        "When your girls telling you about her day and you really want a bj after"
+      ]
+    },
+    "abuse_woman_individual": {
+      "meaning": "Insults or degrades a specific woman or girl: gendered slurs (bitch, hoe, whore, slut, cunt, skank), belittling her as hysterical or stupid because she is a woman, unsolicited crude sexual remarks, or threats of violence or rape, even in a casual register.",
+      "examples": [
+        "Bitch you a hoe, tf.",
+        "All women deserve an opinion, you on the other hand my dear are a cunt",
+        "let's blame the women for being in the military eh you fucking cunt smear",
+        "To the woman in a car, honking at me: you looked hysterical and idiotic",
+        "@user I'd love to lick your pussy ... HMU if you need a cuckold",
+        "This cunt with a dick @user is a perpetual race whore who wouldn't know an historical fact if her pathetic life depended on it",
+        "What a stupid cunt",
+        "@user You seem hysterical."
+      ]
+    },
+    "immigration_neutral": {
+      "meaning": "News or facts about immigration or refugees without taking a stance against migrants; blames governments, poverty or elites for migrants' hardship; mocks anti-immigrant attitudes; supportive or humanitarian content. Includes concern that sending refugees back is premature or unsafe. Includes mocking a party's immigration stance without asking for fewer migrants.",
+      "examples": [
+        "universal credit is more to do because of the impending numbers of migrants poor people are the victims",
+        "Say it ain't so ....noooo not an immigrant",
+        "Dutch Red Cross raising funds for the repatriation of Syrian refugees. Which seems both premature and irresponsible.",
+        "Dem Party has gone insane. Their new position is that it's immoral to restrict any kind of immigration"
+      ]
+    },
+    "women_neutral_or_supportive": {
+      "meaning": "Talks about women, sexism, gender equality, harassment or #MeToo neutrally or supportively, gives a non-hostile opinion on gender policy, praises women, reports being harassed, or sarcastically criticises people who mock women. Also condemning rape or sexual violence.",
+      "examples": [
+        "Thank god for anti-hysterical women like @user that have the guts to stand up for reason",
+        "Let's laugh at the hurting women in the church. So funny!! Make fun of the hurting!!",
+        "lets get rid of womens sports and make men and women play side by side! #equality",
+        "Don't tell me how u got a bitch drunk an then took her to the crib... sounds like rape to me"
+      ]
+    },
+    "casual_profanity": {
+      "meaning": "Slurs or profanity aimed at a clearly male target, used by the speaker about herself or himself (including explicit sexual talk about the speaker's own body), as an exclamation, in lyrics, quoting insults others said, or comparing a man to a woman; 'hysterical' meaning hilarious. No woman is being degraded. Seeking or describing women as sluts or sex objects is NOT this option.",
+      "examples": [
+        "Bitch boi still doesn't know his girl still barking up my tree",
+        "First of all, I don't have tastebuds bitch",
+        "Jordan's so butthead ... pussy ass bitch keep trying me",
+        "Cunt your 16 dont act like you arnt lol go to bed before i knock your block off",
+        "@user is like a hysterical woman trying to out scream @user",
+        "Please rape my slut cunt and fill it up",
+        "Two months ago you were 'fat & a whore' now y'all talk... boys"
+      ]
+    },
+    "other": {
+      "meaning": "Anything else: unrelated topics, general complaints, politics or insults not about women or immigrants, light-hearted dating or relationship banter and advice that does not demean women.",
+      "examples": [
+        "Next time your girl's pissing you off, go buy some hair ties and leave one on the floor of your car",
+        "When will the kenyan woman learn to say 'My man' ... not all men are de same"
+      ]
+    },
+    "immigration_news_incident": {
+      "meaning": "A factual news headline or report of an incident involving migrants (a crime, arrest, border clash, rescue) that does not add the author's own hostile opinion.",
+      "examples": [
+        "Man charged in deadly Fairhope hit and run is illegal immigrant who was deported twice",
+        "400 migrants storm border and #Attack security forces to get into Spain's North African enclave"
+      ]
+    }
+  },
+  "map": {
+    "hate_immigrants": "hate",
+    "hate_women_generic": "hate",
+    "abuse_woman_individual": "hate",
+    "immigration_neutral": "not_hate",
+    "women_neutral_or_supportive": "not_hate",
+    "casual_profanity": "not_hate",
+    "other": "not_hate",
+    "immigration_news_incident": "not_hate"
+  }
+}

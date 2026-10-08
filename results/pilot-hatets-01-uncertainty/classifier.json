@@ -1,0 +1,96 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v6",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "This tweet comes from a hate-speech annotation project whose targets are immigrants/refugees and women. Which description best fits the tweet?",
+    "rules": [
+      "Immigrants: hateful when the tweet portrays immigrants/illegal aliens/refugees/Mestizos/DACA recipients negatively as people: as criminals, rapists, killers, smugglers, invaders, inferior, a cause of decline; relishes their suffering; or demands that immigration stop entirely or that they be removed without rights. Sharing a crime story about an illegal alien to argue against immigration counts. Headlines or news links reporting arrests or gang busts without the tweeter adding contempt, factual news of a single non-violent case (e.g. document fraud caught at the border), plain policy support (the wall, funding deportation, ending DACA), news links, rally posts, definitions, or hashtags alone are not hateful.",
+      "Only immigrants and women are protected targets here. Attacks on Islam, Muslims, Democrats, liberals, judges or other groups, without attacking immigrants or women, are not hateful under this policy.",
+      "Women: hateful when slurs like bitch, hoe, whore, cunt, thot are hurled as an insult at someone (usually 'you', a named person, or 'you hoes/bitches'), with contempt or mockery, or when women are threatened or degraded. Not hateful when the word is a friendly or affectionate address between friends (happy birthday bitch, love you hoe), an exclamation or intensifier, self-description, reported speech (someone called me a bitch), a third-person narrative or song lyric about sex or relationships, a neutral mention, or a tweet that criticises someone else for calling women bitches."
+    ]
+  },
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "hate_immigrants": {
+      "meaning": "Negative portrayal of immigrants as people: criminals, rapists, smugglers, dehumanising terms, blaming them for decline, or relishing their suffering.",
+      "examples": [
+        "HOW MANY DACA HAVE BEEN ARRESTED FOR SMUGGLING PEOPLE OVER THE BORDER?#NoDACA #NoAmnesty",
+        "ICYMI: #IllegalAlien Accused of Raping, Trafficking Girl in Louisiana #NoDACA #NoAmnesty",
+        "Manhunt for Illegal Alien who Almost Killed African American Teacher That an Open Borders Judge Released ... @TheDemocrats put #IllegalAliens before Americans.",
+        "AWWW TOO BAD!! U CROSS OVER ILLEGALLY YOU SUFFER THE CONSEQUENCES !! THE CAGES ARE AT LEAST STAINLESS! #DEPORTTHEMALL",
+        "Argentina imported tons of Mestizos and they went from a first world country to another third world Latin American shithole.",
+        "Mestizos are Indians... the Europeans built a far more advanced civilization than the Indians ever could dream of. #BuildTheWall #DeportThemAll",
+        "Trump wants to deport illegal aliens with 'no judges or court cases' I am solidly behind this action ... #DeportThemAll",
+        "It's getting worse every single day! #StopImmigration #CloseTheBorders #NoMoreImmigrantsHere",
+        "#SendThemBack fight the #CulturalReplacement and #IslamicCaliphate masquerading as #EconoMigration.",
+        "@user Send them all back! #NoMoreRefugees",
+        "Not after government alots so many spaces for illegals, not fair for my off spring!!!#AMERICAFIRST #NODACA #Gohomewhereyoubelong",
+        "#stopimmigration#banislam#Merkelmussweg #FuckEUNot far right but Damn right !"
+      ]
+    },
+    "immigration_politics": {
+      "meaning": "Immigration, borders, the wall, DACA, deportation or ICE as politics or news, including strong support for deportation or the wall, hashtags, rally posts, complaints about media or Democrats, without portraying immigrants themselves negatively.",
+      "examples": [
+        "@user @user #BuildThatWall already",
+        "Only $10 million to catch & deport 20 million #IllegalAliens ?? I think @user needs a lot more $$s to do their job",
+        "The latest Immigration-News! Thanks to @user #immigration #illegalaliens",
+        "The more they lie, the more it plays into our hands because less and less people are listening to MSM #StopTheInvasion #FightBack",
+        "You stand with @user because you don't pay taxes, especially not in Maryland. #NoDACA",
+        "#IllegalAliens are in the USA illegally and they are alien to our soil. Hence the term #IllegalAlien",
+        "#Sudanese get home loans with deal done with #BendigoBank putting Sudanese before Australians #AussiesBeforeRefugees #SENDTHEMBACK",
+        "a CBP officer determined that the traveler was not a match to the passport ... she was a Ghanaian citizen and an impostor.#BuildTheWall #DeportThemAll",
+        "If #IllegalAliens don't like being called illegal, they shouldn't break the law. They can follow the established protocols for residency and citizenship or stay home.",
+        "There is NO #WhiteGenocide in South Africa. You may want to investigate the #CheapLabour and #IllegalImmigration angle for farm murders.",
+        "Border Patrol Agents Bust MS-13, 18th Street Gang Members in South Texas via @user #StopTheInvasion",
+        "Which is why @user will walk across broken glass to keep our borders wide open. #IllegalAliens are literally determining the balance of power in our nation.",
+        "Spanish town's mayor pleads for help after surge in migration #SWRM #SendThemBack",
+        "so is working #IllegalAliens for pennies on the dollar, knowing they can't come forward about it because they are here illegally ... unfair to illegals, unfair to #Citizens",
+        "Poland: Why don't Qatar and Saudi Arabia take Muslim refugees? This isn't a European problem! - Polish MP #StopTheInvasion"
+      ]
+    },
+    "hate_women": {
+      "meaning": "Slurs (bitch, hoe, whore, cunt, thot) used with contempt to insult or put down a person or 'bitches/hoes' as a group, or threats/degradation of women.",
+      "examples": [
+        "Like um bitch I'm mentally ill u cunts??????",
+        "Bitches kill me with that bitch wanna be me hoe you don't wanna be yourself",
+        "bitch you & y'all weak ass body oil selection can suck my clit backwards, hoe.",
+        "This bitch so pressed lmfao, like Dana still sleeps good at night move on you lame ass hoe",
+        "Dirty Shoe Shawty Bitch You Need To Check Your Shoe Strings"
+      ]
+    },
+    "casual_slang": {
+      "meaning": "Bitch/hoe used as friendly address, exclamation, intensifier, self-description, sexual talk, jokes, lyrics, or a neutral mention without contempt for anyone.",
+      "examples": [
+        "i need a bad bitch to rape me today.",
+        "@user bitch do it look like WE play ?!",
+        "welcome to thailand bitch- we find rape culture very humorous and we make jokes out of it smh",
+        "You called your mom a hoe AND a bitch? Imma pray for you cause karma is going to do a number on your life",
+        "If you have a bitch, don't text me. Don't try to flirt with me. Respect your hoe.",
+        "So I got called a slut, whore and bitch for sticking up for @user but j really don't care",
+        "If a guy gets out of a relationship and he fuckin a new bitch the next day then yall saying he a hoe??? Smfh",
+        "But don't let 'em hear you fucking these hoes though He gon' kill you 'bout that bitch",
+        "@user happy birthday bitch! Hope you have a fab day you hoe n get on lifts soon",
+        "IF UR LAME AND DONT WANNA SEE A DRUNK CUNT TWEET ABOUT HER LATE NIGHT THOUGHTS THEN SMASH THAT UNFOLLOW BUTTON BITCH",
+        "whoever called my phone private bitch don't do it, you don't want it",
+        "@user Bitch he'll be getting more than just shoes",
+        "And what am i gonna do if they lock me up he asks ? Bitch I'll eat pizza tomorrow cause its Friday hoe"
+      ]
+    },
+    "other": {
+      "meaning": "Anything else, including attacks on Islam, Muslims, political parties or other groups that are not immigrants or women, and insults unrelated to gender. Also tweets that criticise misogyny or harassment.",
+      "examples": [
+        "The only enemy here is Islam!! #BanMuslims #BanIslam #BanTheHijab #CloseTheBorders #SendThemBack",
+        ">Harasses women and calls them bitch and crabby  >They block him  >Plays the victim"
+      ]
+    }
+  },
+  "map": {
+    "hate_immigrants": "hate",
+    "immigration_politics": "not_hate",
+    "hate_women": "hate",
+    "casual_slang": "not_hate",
+    "other": "not_hate"
+  }
+}

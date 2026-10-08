@@ -1,0 +1,107 @@
+{
+  "run_id": "xs-persuasion-rules-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "created": "2026-09-30T10:05:35",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 663,
+    "num_turns": 56,
+    "total_cost_usd": 2.2436749999999996
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description + P4G-style scheme knowledge, fine options mapped",
+      "test": {
+        "jev": {
+          "accuracy": 0.5867,
+          "macro_f1": 0.5726,
+          "est_cost_usd": 0.10671,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 34,
+      "estimate": 0.5,
+      "note": "round1: amount statements, FITD narrowed, ack vs answering-question rule, thanks in sign-off, org facts in answers stay credibility",
+      "test": {
+        "jev": {
+          "accuracy": 0.5979,
+          "macro_f1": 0.5882,
+          "est_cost_usd": 0.120869,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 48,
+      "estimate": 0.52,
+      "note": "round2: org programs -> credibility, reminding of persuadee's belief -> logical, how-are-you replies -> greeting",
+      "test": {
+        "jev": {
+          "accuracy": 0.6012,
+          "macro_f1": 0.5877,
+          "est_cost_usd": 0.127632,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 73,
+      "estimate": 0.55,
+      "note": "2-member wording ensemble; round3 rules: confirm-donation->other, reactions to donation->thank, ack vs praise per owner policy, meaningful donation->logical, charity comparisons->credibility",
+      "test": {
+        "jev": {
+          "accuracy": 0.6045,
+          "macro_f1": 0.5804,
+          "est_cost_usd": 0.309815,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 91,
+      "estimate": 0.56,
+      "note": "round4: own-donating answers -> self-modeling (narrowed with fine other options), small talk -> other, children saved from hunger -> emotion, choose-your-amount -> donation-information",
+      "test": {
+        "jev": {
+          "accuracy": 0.6078,
+          "macro_f1": 0.57,
+          "est_cost_usd": 0.359814,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.55,
+      "note": "final: same as v05 (ens15); last 4 labels 3/4 agree, 0545 suspected noise, not encoded",
+      "test": {
+        "jev": {
+          "accuracy": 0.6078,
+          "macro_f1": 0.57,
+          "est_cost_usd": 0.0,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "name": "donation_ens_t70",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "context": "A chat, possibly cut off before the end, in which a persuader asks the persuadee to donate part of their payment for this task ($0 up to the full payment) to Save the Children. The donation counts only if it comes from this task's payment, decided now.",
+        "question": "Judging from the persuadee's own messages, which option best describes where the persuadee stands on giving part of this task's payment?",
+        "notes": [
+          "Look at the persuadee's latest statements; later statements override earlier ones.",
+          "Plans to give through the charity's website, in the future, monthly, or from personal money are not a donation from this task's payment."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "firm_amount": "The persuadee firmly agrees to give a specific amount above $0 from this task's payment, or plainly agrees to an amount the persuader proposed.",
+        "willing_no_amount": "The persuadee says they will donate, want to give, or would like to help with a donation from this task's payment, but no amount is settled.",
+        "hedged_amount": "The persuadee only floats an amount tentatively ('maybe', 'I could', 'I might') or makes it conditional, and never firms it up.",
+        "engaged_no_decision": "The persuadee is polite and engaged (asks about the charity, agrees children need help) but never says they will give anything; the chat ends without a decision.",
+        "outside_task": "The persuadee talks about donating later, via the website, monthly, or from their own money, rather than from this task's payment.",
+        "other_help_only": "The persuadee prefers to help in non-monetary ways (volunteering, giving goods, spreading the word) instead of donating.",
+        "refused": "The persuadee declines, says they cannot afford it, chooses $0, is hostile or sceptical to the end, or wants to keep their earnings."
+      },
+      "map": {
+        "firm_amount": "donated",
+        "willing_no_amount": "donated",
+        "hedged_amount": "not_donated",
+        "engaged_no_decision": "not_donated",
+        "outside_task": "not_donated",
+        "other_help_only": "not_donated",
+        "refused": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v4b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "In this conversation a persuader tries to convince the persuadee to give some of the money they earn for this task (anything from nothing to the full payment) to the children's charity Save the Children. The chat may stop before it is finished. Only money from this task's payment, decided during the chat, counts; promises to give elsewhere, later, online or from one's own pocket do not. Based on what the persuadee last says, how would you describe their decision?",
+      "state_template": "Conversation:\n{{input}}",
+      "criteria": {
+        "firm_amount": "Settles on a definite sum greater than zero to give out of this task's payment, or clearly accepts a sum the persuader suggested.",
+        "willing_no_amount": "Says yes to giving part of this task's payment or says they want to contribute, but no sum is fixed.",
+        "hedged_amount": "Mentions a sum only tentatively or on a condition (perhaps, could, might, if you do too) and never confirms it.",
+        "engaged_no_decision": "Friendly and curious about the charity, but never says they will give; the chat stops without a decision.",
+        "outside_task": "Intends to give later, through the charity's website, on a monthly basis or from personal funds, not from this task's payment.",
+        "other_help_only": "Would rather help without money: volunteering, donating items, or telling others.",
+        "refused": "Says no, cannot afford it, picks /bin/zsh, keeps the earnings, or stays distrustful or hostile to the end."
+      },
+      "map": {
+        "firm_amount": "donated",
+        "willing_no_amount": "donated",
+        "hedged_amount": "not_donated",
+        "engaged_no_decision": "not_donated",
+        "outside_task": "not_donated",
+        "other_help_only": "not_donated",
+        "refused": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v4c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Decide what the persuadee decided about donating part of their task payment to Save the Children.",
+        "rules": [
+          "Only a donation out of this task's payment counts (between /bin/zsh and the whole payment).",
+          "If the persuadee changes their mind, use their final position.",
+          "Talking about giving via the website, in future, monthly, or out of personal savings does not count as donating from the payment.",
+          "The chat may be cut off; judge from what is there."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "firm_amount": {
+          "definition": "The persuadee commits to a concrete amount above zero from the task payment.",
+          "includes": [
+            "agreeing to an amount the persuader proposed",
+            "stating 'I will donate '"
+          ]
+        },
+        "willing_no_amount": {
+          "definition": "The persuadee agrees to donate from the task payment or says they want to help with money, without a settled amount."
+        },
+        "hedged_amount": {
+          "definition": "The persuadee only suggests an amount tentatively or conditionally and never firms it up.",
+          "includes": [
+            "'maybe I could do 50 cents'",
+            "'I'll give if you give'"
+          ]
+        },
+        "engaged_no_decision": {
+          "definition": "The persuadee is interested and polite but never says they will donate; no decision by the end."
+        },
+        "outside_task": {
+          "definition": "The persuadee plans to donate some other way: later, online, monthly, or with their own money."
+        },
+        "other_help_only": {
+          "definition": "The persuadee prefers non-monetary help such as volunteering, giving goods or spreading the word."
+        },
+        "refused": {
+          "definition": "The persuadee declines, cannot afford it, chooses /bin/zsh, wants to keep the money, or remains sceptical or hostile."
+        }
+      },
+      "map": {
+        "firm_amount": "donated",
+        "willing_no_amount": "donated",
+        "hedged_amount": "not_donated",
+        "engaged_no_decision": "not_donated",
+        "outside_task": "not_donated",
+        "other_help_only": "not_donated",
+        "refused": "not_donated"
+      }
+    }
+  ],
+  "decision": {
+    "class": "donated",
+    "threshold": 0.7
+  }
+}

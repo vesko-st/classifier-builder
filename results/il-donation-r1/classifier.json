@@ -1,0 +1,32 @@
+{
+  "version": 1,
+  "name": "donation_v2",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "In this chat a persuader asks the persuadee to donate some of the persuadee's earnings for this job to Save the Children, a children's charity. Once the job is over, the persuadee chooses an amount to donate from their payment (any amount, even one cent, counts as donating). Judge the persuadee's final position at the end of the chat: did the persuadee end up donating part of their task payment?",
+    "guidance": [
+      "Only the persuadee's own decision matters, not the persuader's.",
+      "The persuadee's last stated position decides; a later change of mind overrides an earlier one.",
+      "A promise to give somewhere else or at some later time (on the website, from a future paycheck, after more research) is not a donation from this task.",
+      "The payment for this job is small, about two dollars at most. A pledge of an amount well above that (five, twenty, a hundred dollars or more) cannot come out of the payment and does not count as donating from it."
+    ]
+  },
+  "state_template": "Charity-donation chat:\n{{input}}",
+  "criteria": {
+    "committed_amount": "The persuadee agrees to donate a specific positive amount from their payment that fits within it (a few cents up to about two dollars, a share such as half, or all of it).",
+    "pledge_exceeds_payment": "The persuadee's pledge is an amount far larger than the job pays (five dollars or more), so it cannot be taken from the payment.",
+    "committed_unspecified": "The persuadee clearly says they will donate from this task's payment but never names an amount.",
+    "refused": "The persuadee declines, says they will donate nothing or zero, or says they will not donate today.",
+    "deferred_elsewhere": "The persuadee only promises to give later or by another route (website, own money, another time, after research), not from this task's payment.",
+    "undecided": "The chat ends without the persuadee deciding: they only ask questions, express interest or sympathy, or say maybe."
+  },
+  "map": {
+    "committed_amount": "donated",
+    "pledge_exceeds_payment": "not_donated",
+    "committed_unspecified": "donated",
+    "refused": "not_donated",
+    "deferred_elsewhere": "not_donated",
+    "undecided": "not_donated"
+  }
+}

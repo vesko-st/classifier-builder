@@ -1,0 +1,81 @@
+{
+  "run_id": "il-deal-r2",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 416,
+    "num_turns": 40,
+    "total_cost_usd": 1.4684757999999998
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft from description: 6 ending-type options mapped to deal/no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9021,
+          "macro_f1": 0.8774,
+          "est_cost_usd": 0.019077,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 50,
+      "estimate": 0.8,
+      "note": "v4: 3-variant ensemble; unfinished chats split by gap size, offer handoff, no-price -> no_deal, conditional refusal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9141,
+          "macro_f1": 0.8862,
+          "est_cost_usd": 0.076102,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 86,
+      "estimate": 0.86,
+      "note": "v5: ensemble + seller-concession converging (H5), offer-mismatch broken (H6)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9141,
+          "macro_f1": 0.8857,
+          "est_cost_usd": 0.078791,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.86,
+      "note": "FINAL = v5 ensemble (v6, v7 reverted). 45 labels acc 0.844 (35 boundary-biased); random check 10/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.9141,
+          "macro_f1": 0.8857,
+          "est_cost_usd": 0.0,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

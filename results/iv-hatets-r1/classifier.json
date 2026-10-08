@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v4",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "Classify the tweet under a hate-speech policy that protects two groups: women and immigrants (including refugees, asylum seekers, migrants and undocumented/illegal immigrants). Pick the option that best describes what the author is doing in the tweet.",
+    "notes": [
+      "Judge the author's own stance and intent, not just the presence of slurs or hashtags.",
+      "Words like bitch and hoe are very often generic profanity in this data. They are not hate when used as an exclamation, a form of address, an intensifier, self-description, banter, or an insult at a man or at someone whose gender is unknown. They are hate when the author uses them to demean a woman: attacking a specific woman's sexuality, morals, money motives, looks or worth, hurling sexual slurs such as whore, slut or cunt at her, threatening or wishing violence on her, or making degrading claims about women or hoes as a type of person. Slurs aimed at nobody (a string of swear words, talk about the words themselves) are not hate.",
+      "For immigration tweets, hate needs hostility toward immigrants as a group: a demand to expel or exclude them backed by a negative generalisation, or dehumanising language. Supporting the wall or enforcement as policy, or reporting a single crime without generalising, is not hate."
+    ]
+  },
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "woman_sexual_degradation_or_violence": "The author demeans a specific woman or girl as a woman: mocks or condemns her sexuality, morals, money motives, looks or worth with gendered slurs, calls her a whore, slut or cunt as an insult, threatens rape or violence, or wishes she were hurt or killed.",
+    "personal_fight_profanity": "The author argues with or mocks someone using bitch or hoe as everyday profanity or a form of address, where the target is a man, is of unknown gender, or the words are not used to demean her as a woman (no attack on her sexuality, morals or worth, no sexual slurs, no violent threats).",
+    "women_group_contempt": "The author makes a generalising, degrading claim about women, girls, hoes or bitches as a type of person (what they all do, what they are worth, how they should be treated), or sexually objectifies women, or endorses rape or violence against women.",
+    "slur_casual_or_friendly": "A gendered slur is used casually, as an exclamation, about the author herself, affectionately to a friend, as filler, or as a list of swear words aimed at nobody, with no hostility toward women.",
+    "slur_at_man_or_unknown": "A slur is aimed at a man, a male politician, or an unidentified wrongdoer, as a general insult rather than contempt for women.",
+    "lyrics_meta_or_countering": "The tweet quotes lyrics, discusses the word itself, reports someone else's abuse, or criticises misogyny.",
+    "immigrant_dehumanising": "The author dehumanises or slurs immigrants or refugees as a group (calls them invaders, animals, parasites, rapists, criminals by nature, vermin), or wishes violence on them.",
+    "immigrant_expulsion_hostile": "The author demands that immigrants be deported, sent back or kept out, together with a hostile generalisation about immigrants as a group (crime, disease, welfare abuse, stealing jobs, invasion, the incident being typical of them).",
+    "immigration_policy_neutral": "The author discusses immigration policy, the border wall, DACA, or the term 'illegal alien' without hostile claims about immigrants as people.",
+    "political_hashtag_only": "A political tweet (Trump, elections, Congress, Kavanaugh, liberals) where immigration hashtags are just tacked on and immigrants are not the subject.",
+    "counter_speech": "The author criticises racism or hostility against immigrants.",
+    "other_group_or_unrelated": "Hostility toward another group (religion, race, nationality not framed as immigrants), or a tweet unrelated to women or immigrants.",
+    "immigrant_single_crime_report": "The author reports a crime or incident involving one specific immigrant (possibly with deportation hashtags) without generalising it to immigrants as a group."
+  },
+  "map": {
+    "woman_sexual_degradation_or_violence": "hate",
+    "personal_fight_profanity": "not_hate",
+    "women_group_contempt": "hate",
+    "slur_casual_or_friendly": "not_hate",
+    "slur_at_man_or_unknown": "not_hate",
+    "lyrics_meta_or_countering": "not_hate",
+    "immigrant_dehumanising": "hate",
+    "immigrant_expulsion_hostile": "hate",
+    "immigration_policy_neutral": "not_hate",
+    "political_hashtag_only": "not_hate",
+    "counter_speech": "not_hate",
+    "other_group_or_unrelated": "not_hate",
+    "immigrant_single_crime_report": "not_hate"
+  }
+}

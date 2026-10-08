@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v7_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v6a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This tweet comes from a hate-speech dataset whose policy covers only hate against WOMEN and against IMMIGRANTS/REFUGEES. Hostile use of gendered slurs (bitch, hoe, whore, slut, cunt) against a woman, an addressee who is not clearly male, or women in general counts as misogynist hate; the same words used playfully, about oneself, as an exclamation, or against a man do not. Supporting the wall or ending DACA is NOT hate on its own, but calling for immigrants to be deported or sent home IS; anti-immigrant hate needs demeaning immigrants, or framing them as criminals, rapists, invaders, welfare abusers or job thieves, or hostility such as mocking their suffering, telling them to go home, calling them a burden we can't afford, or 'white genocide'/replacement talk. Which description fits the tweet best?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogynist_attack": "Hostile insult, threat, put-down or degradation aimed at a woman, at someone addressed as bitch/hoe/whore/cunt who is not clearly male, or at women in general ('these hoes', 'bitches be...'); includes rape jokes, sexual degradation and violence against women.",
+        "insult_at_man": "Hostile slur or insult clearly aimed at a man (he/him, 'nigga', 'bro', a male name or male politician, 'bitch ass nigga').",
+        "slang_not_hostile": "Uses 'bitch'/'hoe' playfully or without hostility: casual exclamation, self-description ('I'm a whole new bitch'), affection, birthday wishes or joking between friends, song lyrics, excitement, 'karma is a bitch'. Also: reporting that someone else called you a slur, or venting profanity with no target ('god damn cunt ass bitch', 'Bitch no, rape is rape').",
+        "immigrant_dehumanizing": "Demeans or taunts immigrants, refugees or migrants: invaders, animals, parasites, rapefugees, savages, breeding like rats; mocks their suffering (cages, separated families), hostile 'go home', or wishes harm on them.",
+        "immigrant_crime_burden": "Frames immigrants or illegal aliens as criminals, rapists, gang members, welfare abusers, job/ID thieves, a burden 'we can't afford', or a threat replacing or taking over the country (white genocide, invasion); or blames crimes on them (including crime reports pushing #DeportThemAll/#BuildTheWall).",
+        "immigrant_expulsion": "Calls for immigrants or illegal aliens themselves to be deported, sent home, sent back or removed (send them home, #SendThemBack, #DeportThemAll, deport them without courts), even without insults. Not when the tweet is unrelated to immigrants (e.g. #sendthemhome on a family photo).",
+        "immigration_politics": "Calm talk about immigration policy without targeting immigrants as people and without demanding their removal: wall funding, DACA votes, ICE, census, illegals and elections, defending the term 'illegal alien', legal-process arguments, campaign slogans, news, attacking Democrats or Congress. Saying immigrants should come legally or follow the established process is politics, not an expulsion demand.",
+        "other": "Anything else: other topics, criticism of racism or sexism (calling out someone who insults women), hostility toward groups that are not women or immigrants."
+      },
+      "map": {
+        "misogynist_attack": "hate",
+        "insult_at_man": "not_hate",
+        "slang_not_hostile": "not_hate",
+        "immigrant_dehumanizing": "hate",
+        "immigrant_crime_burden": "hate",
+        "immigrant_expulsion": "hate",
+        "immigration_politics": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v6b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Annotation policy: a tweet is hateful only if it targets WOMEN or IMMIGRANTS. Women: a hostile slur (bitch, hoe, whore, slut, cunt) thrown at a woman, at a person not clearly male, or at women collectively is hateful, as is sexual degradation or violence against women; friendly, self-referential or exclamatory use, and slurs at men, are not. Immigrants: hostility toward immigrants themselves is hateful (dehumanizing them, taunting them, calling them criminals, invaders, a burden, telling them to go home); so is demanding that they be deported or sent home; plain support for the wall or ending DACA is not. Pick the category that best describes the tweet.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogynist_attack": "A woman, a non-male addressee, or women in general are insulted, threatened, put down or sexually degraded, usually with bitch/hoe/whore/slut/cunt said with hostility; includes rape jokes and generalizations like 'bitches be...' or 'these hoes'.",
+        "insult_at_man": "The hostile slur or insult targets a man: a male name, he/him, 'nigga', 'bro', a male politician, 'bitch ass nigga'.",
+        "slang_not_hostile": "No hostility: bitch/hoe as an exclamation, about oneself, between friends, in congratulations or jokes, quoting lyrics, 'life's a bitch'. Also: reporting that someone else called you a slur, or venting profanity with no target ('god damn cunt ass bitch', 'Bitch no, rape is rape').",
+        "immigrant_dehumanizing": "Immigrants, refugees or migrants are dehumanized or taunted: called animals, invaders, parasites, rapefugees, savages; their suffering mocked; told to go home with contempt; harm wished on them.",
+        "immigrant_crime_burden": "Immigrants or illegal aliens are portrayed as criminals, rapists, gang members, thieves of jobs or IDs, welfare cheats, an unaffordable burden, or a population replacing natives; crimes by them are used to argue for deportation or the wall.",
+        "immigrant_expulsion": "Demands that immigrants be expelled: deport them, send them home or back, get them out (#SendThemBack, #SendThemHome, #DeportThemAll), with or without insults. A hashtag like #sendthemhome on a tweet that is not about immigrants (family photo, kids) does not count.",
+        "immigration_politics": "Political discussion of immigration law, wall funding, DACA, ICE, elections, voting or the term 'illegal alien', or about Trump and Democrats, that neither attacks immigrants as people nor demands that they be deported or sent back. Arguing immigrants should apply legally or follow the proper process belongs here.",
+        "other": "Unrelated topics, people condemning racism or sexism, or hostility aimed at groups other than women and immigrants."
+      },
+      "map": {
+        "misogynist_attack": "hate",
+        "insult_at_man": "not_hate",
+        "slang_not_hostile": "not_hate",
+        "immigrant_dehumanizing": "hate",
+        "immigrant_crime_burden": "hate",
+        "immigrant_expulsion": "hate",
+        "immigration_politics": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v6c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Decide which kind of tweet this is. Context: the labelling policy counts as hate speech only (1) misogyny: hostile slurs or degradation directed at women, at an addressee not identifiable as male, or at women as a group, and (2) xenophobia: contempt, taunting, dehumanization, criminal/burden stereotyping of immigrants and refugees, or demands to deport them or send them back. Profanity among friends, slurs at men, and ordinary pro-wall or anti-DACA politics without a call to expel people are not hate.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogynist_attack": "Misogyny: attacks or degrades a woman or women (or an addressee not marked as male) with hostile gendered slurs, sexual humiliation, rape or violence threats, or sweeping put-downs of women.",
+        "insult_at_man": "Insult or slur clearly directed at a male person (he, a guy, nigga, bro, a male politician).",
+        "slang_not_hostile": "Friendly, celebratory, self-describing or exclamatory use of bitch/hoe; lyrics; idioms; no one is being put down. Also: reporting that someone else called you a slur, or venting profanity with no target ('god damn cunt ass bitch', 'Bitch no, rape is rape').",
+        "immigrant_dehumanizing": "Xenophobic dehumanization or taunting: immigrants as vermin, animals, invaders, rapefugees, savages; gloating over their suffering; contemptuous 'go home'; wishing them harm.",
+        "immigrant_crime_burden": "Xenophobic stereotyping: immigrants as criminals, rapists, gangs, thieves, welfare abusers, a costly burden, or demographic replacement; crime stories used to call for deportation.",
+        "immigrant_expulsion": "Expulsion demand: the tweet wants immigrants/illegals removed from the country (deport them all, send them back/home, no court cases, get them out), even politely. Ignore such hashtags when the tweet itself is not about immigrants (e.g. a photo of kids).",
+        "immigration_politics": "Ordinary immigration politics: wall funding, DACA, ICE, voting and seat counts, terminology like 'illegal alien', Trump and Democrats, with no attack on immigrants as people and no demand to deport or send them back. Advice that immigrants should enter legally or follow procedures belongs here.",
+        "other": "Anything else, including tweets criticizing racism or misogyny and hostility to groups other than women or immigrants."
+      },
+      "map": {
+        "misogynist_attack": "hate",
+        "insult_at_man": "not_hate",
+        "slang_not_hostile": "not_hate",
+        "immigrant_dehumanizing": "hate",
+        "immigrant_crime_burden": "hate",
+        "immigrant_expulsion": "hate",
+        "immigration_politics": "not_hate",
+        "other": "not_hate"
+      }
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.6
+  }
+}

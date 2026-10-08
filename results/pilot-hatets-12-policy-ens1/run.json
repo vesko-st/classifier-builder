@@ -1,0 +1,73 @@
+{
+  "run_id": "pilot-hatets-12-policy-ens1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-28T22:00:31",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.6,
+      "note": "description-only draft",
+      "test": {
+        "jev": {
+          "accuracy": 0.7186,
+          "macro_f1": 0.707,
+          "est_cost_usd": 0.032622,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 34,
+      "estimate": 0.72,
+      "note": "policy-mirroring criteria: immigrant hostility OR sexual/violent abuse of a specific woman",
+      "test": {
+        "jev": {
+          "accuracy": 0.7022,
+          "macro_f1": 0.6773,
+          "est_cost_usd": 0.051684,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.8,
+      "note": "3-variant ensemble; women clause = hostile slur attack/threat on a specific person",
+      "test": {
+        "jev": {
+          "accuracy": 0.778,
+          "macro_f1": 0.7748,
+          "est_cost_usd": 0.163285,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.78,
+      "note": "3-variant ensemble; women clause excludes male targets and casual filler 'bitch'; 31/33 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7848,
+          "macro_f1": 0.78,
+          "est_cost_usd": 0.181012,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

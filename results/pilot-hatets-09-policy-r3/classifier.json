@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v5",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v3",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Hate speech policy: only two targets are protected, immigrants/refugees/migrants and women. A tweet is hateful when it expresses hostility, contempt or aggression toward immigrants or toward women (a group or an individual woman), e.g. dehumanising or derogatory generalisations, insults, slurs used to attack or degrade, threats, or calls for violence or exclusion driven by hostility. Hostility toward any other group (Muslims as a religion, races, liberals, politicians, men) is not hateful under this policy. Which best describes the tweet?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_hostility": "Hostile or derogatory toward immigrants/refugees/illegal aliens as people: calls them criminals, rapists, invaders, rapefugees, leeches, scum, dummies, animals; blames them as a group for crime, disease or stealing jobs and welfare; hostile calls to send them back, keep them out or harm them",
+        "women_abuse": "Attacks, degrades or threatens a woman or women with misogynistic insults or slurs (bitch, cunt, whore, hoe used to abuse her), sexual violence or rape, sexual humiliation, or contempt for women as a group",
+        "immigration_policy": "About immigration or the border as politics, policy or news without hostility to immigrants as people: wall funding, DACA, voting, elections, Trump, criticism of politicians, the term 'illegal alien'",
+        "casual_profanity": "Uses bitch/hoe etc. casually, as an exclamation, about oneself, affectionately to friends, in lyrics, or aimed at a man; or banter with no real hostility toward women",
+        "other_target": "Hostility aimed at another group or at people for reasons unrelated to being an immigrant or a woman (religion, race, politics, men), or counter-speech criticising hate",
+        "other": "Anything else"
+      },
+      "map": {
+        "immigrant_hostility": "hate",
+        "women_abuse": "hate",
+        "immigration_policy": "not_hate",
+        "casual_profanity": "not_hate",
+        "other_target": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Hate speech policy: only two targets are protected, immigrants/refugees/migrants and women. A tweet is hateful when it expresses hostility, contempt or aggression toward immigrants or toward women (a group or an individual woman or girl), e.g. dehumanising or derogatory generalisations, insults, slurs used to attack or degrade, threats, or calls for violence, deportation or exclusion driven by hostility. Hostility toward any other group (Muslims as a religion, races, liberals, politicians, men) is not hateful under this policy. Which best describes the tweet?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_hostility": "Hostile or derogatory toward immigrants/refugees/illegal aliens as people: calls them criminals, rapists, invaders, rapefugees, leeches, scum, dummies, animals; blames them for crime, disease or stealing jobs and welfare; hostile demands to arrest, deport, send them back, keep them out or harm them (e.g. 'Arrest them and DEPORT THEM ALL!!!!', 'illegals deserve deportation not representation', 'we can't take all the refugees #SendThemHome')",
+        "women_abuse": "Attacks, insults, degrades or threatens a woman, girl or women with misogynistic slurs used against her (bitch, cunt, whore, slut, hoe as an insult, even in a personal argument, e.g. 'Fuck you then bitch, cheap ass hoe', 'Dont bring your whore self in this'), sexual violence or rape, sexual humiliation, or contempt for women as a group",
+        "immigration_policy": "About immigration, ICE, the census, the border or the wall as politics, policy, procedure or news, with no hostility toward immigrants themselves; praise for Trump or ICE; criticism of Democrats, liberals or politicians; discussion of the term 'illegal alien'; tweets whose hostility is aimed at politicians or parties rather than immigrants",
+        "casual_profanity": "Uses bitch/hoe etc. with no hostility toward a woman: as an exclamation or interjection, a greeting or address to a friend or celebrity ('Britney, bitch'), about oneself, affectionately, in lyrics, or aimed at a man",
+        "other_target": "Hostility aimed at another group or at people for reasons unrelated to being an immigrant or a woman (religion, race, politics, men), or counter-speech criticising hate",
+        "other": "Anything else"
+      },
+      "map": {
+        "immigrant_hostility": "hate",
+        "women_abuse": "hate",
+        "immigration_policy": "not_hate",
+        "casual_profanity": "not_hate",
+        "other_target": "not_hate",
+        "other": "not_hate"
+      }
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.8
+  }
+}

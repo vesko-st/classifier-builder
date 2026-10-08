@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "name": "hate_ens_v23_t85",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v2",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Does this tweet count as hate speech under a policy that protects WOMEN and IMMIGRANTS (incl. refugees, illegal aliens, Muslims as migrants)? Hate requires that the tweet's own words express hostility, contempt, dehumanisation or a call for exclusion/harm towards women or immigrants as a group, or towards an individual woman in a degrading gendered way. Mere mention, a slogan or a slur without real hostility is not enough. Pick the single best option.",
+        "notes": [
+          "Hateful: hostile or degrading address of a woman/girl with gendered slurs (bitch, whore, hoe, slut, cunt), threats or sexual degradation of women, sexist generalisations about women.",
+          "Not hateful: bitch/hoe/slut used as a casual exclamation, friendly greeting, joke, self-description or about objects and non-gendered situations; slurs aimed at men; insults aimed at politicians with no sexist/anti-immigrant content.",
+          "Hateful: the text demands deportation, expulsion, shooting, banning or exclusion of immigrants/illegals/Muslims, or describes them as criminals, invaders, rapists, parasites or a threat as a group.",
+          "Not hateful: tweets whose only immigration content is a hashtag slogan (#BuildThatWall, #DeportThemAll, #MAGA, #IllegalAliens) while the text is about something else or empty; neutral news, questions, complaints about policy, or praise of a politician or wall.",
+          "When the tweet is ambiguous or only faintly hostile, prefer not hateful."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "sexist_attack": "Hostile, insulting or degrading words aimed at a woman or women (gendered slurs bitch/whore/hoe/slut/cunt used as an insult, sexual degradation, threats, sexist stereotypes)",
+        "anti_immigrant_attack": "The text itself demeans, blames, dehumanises or threatens immigrants/refugees/illegals/Muslims as a group, or demands they be deported, sent back, expelled, banned or harmed",
+        "friendly_or_casual_slang": "Bitch/hoe/slut etc. used playfully, affectionately, as a casual address, exclamation or self-description, with no real hostility toward women",
+        "political_commentary": "Neutral, factual or political talk about immigration, border wall, DACA, Islam, feminism; policy opinions or praise without attacking the people; or a tweet whose only relevant content is hashtag slogans",
+        "other_insult": "Offensive or angry but aimed at men, politicians, institutions or others, without sexism or anti-immigrant content",
+        "unrelated": "Not about women, immigrants or insulting anyone; everyday chat, news, ads, spam"
+      },
+      "map": {
+        "sexist_attack": "hate",
+        "anti_immigrant_attack": "hate",
+        "friendly_or_casual_slang": "not_hate",
+        "political_commentary": "not_hate",
+        "other_insult": "not_hate",
+        "unrelated": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v3",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "A moderation team applies a hate speech policy that covers two target groups: women, and immigrants/refugees/Muslims. Decide which situation best describes this tweet.",
+        "rules": [
+          "Toward women: it is hateful when a woman or women are addressed or described with contempt, using misogynistic slurs (bitch, whore, hoe, slut, cunt), sexual degradation, threats or sexist stereotypes.",
+          "Toward women: it is NOT hateful when those words are just slang between friends, a greeting, a joke, self-reference, or part of an unrelated everyday remark, or when the target is a man or an organisation.",
+          "Toward immigrants: it is hateful when the wording itself wants immigrants/illegals/refugees/Muslims gone (deport, send back, ban, shoot), or portrays them as criminals, invaders, rapists or a danger.",
+          "Toward immigrants: it is NOT hateful when it is news, a neutral or policy opinion, a question, or when immigration only shows up as trailing hashtag slogans.",
+          "If it is borderline, choose the non-hateful option."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "sexist_attack": "Contemptuous, degrading or threatening language toward a woman/women: misogynistic slurs used as insults, sexual degradation, sexist stereotypes",
+        "anti_immigrant_attack": "Wording that wants immigrants/refugees/illegals/Muslims removed, banned or harmed, or that portrays them as criminals, invaders or a danger as a group",
+        "friendly_or_casual_slang": "Bitch/hoe/slut etc. as casual slang, greeting, joke or self-reference without real hostility toward women",
+        "political_commentary": "Neutral or factual statements, news, questions or policy opinions on immigration, borders, DACA, Islam or feminism, or only hashtag slogans with nothing hostile in the text",
+        "other_insult": "Rude or angry content aimed at men, politicians or institutions, not sexist or anti-immigrant",
+        "unrelated": "Ordinary content with no insult and no relevance to women or immigrants"
+      },
+      "map": {
+        "sexist_attack": "hate",
+        "anti_immigrant_attack": "hate",
+        "friendly_or_casual_slang": "not_hate",
+        "political_commentary": "not_hate",
+        "other_insult": "not_hate",
+        "unrelated": "not_hate"
+      }
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.85
+  }
+}

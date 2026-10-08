@@ -1,0 +1,57 @@
+{
+  "run_id": "pilot-intents-02",
+  "task": "banking77_intents",
+  "budget": 100,
+  "created": "2026-09-25T22:44:10",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1: description-only draft, 77 options with hand-written descriptions from class names + banking domain knowledge",
+      "test": {
+        "jev": {
+          "accuracy": 0.838,
+          "macro_f1": 0.8331,
+          "est_cost_usd": 0.363594,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 18,
+      "estimate": 0.84,
+      "note": "v2: descriptions revised from 9 targeted labels (UK-account transfer -> balance_not_updated, mortgage payment -> failed_transfer, card top-up money gone -> topping_up_by_card, Apple/Google Pay top-up -> apple_pay, physical card -> order_physical_card, PIN -> get_physical_card, ATM in-progress -> pending_cash_withdrawal)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8529,
+          "macro_f1": 0.8488,
+          "est_cost_usd": 0.387777,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 34,
+      "estimate": 0.87,
+      "note": "v4: transfer cluster split (pending_transfer=outgoing still processing, transfer_not_received=in-country sent not arriving, transfer_timing=generic how long), pending vs failed for card payments/top-ups, structured options with bought-label examples. 17/17 on bought labels (in-sample). 34 pts spent.",
+      "test": {
+        "jev": {
+          "accuracy": 0.8552,
+          "macro_f1": 0.8506,
+          "est_cost_usd": 0.477911,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

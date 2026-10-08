@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "name": "donation_v1",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "This is a chat in which a persuader tries to get the persuadee to give part of their earnings from this study to a children's aid charity. Judge, from the persuadee's own statements, how the chat ends regarding the persuadee's donation. The persuadee's final stated decision counts over earlier statements.",
+  "state_template": "{{input}}",
+  "criteria": {
+    "commits_amount": "The persuadee commits to donating a specific positive amount or share of their payment (cents, dollars, half, all).",
+    "commits_vague": "The persuadee says they will donate or agrees to donate now, but without naming an amount.",
+    "defers_outside": "The persuadee says they may or will donate later or elsewhere (website, after research, when they have money), but not from this task now.",
+    "refuses": "The persuadee declines to donate or settles on zero.",
+    "no_decision": "The chat never reaches any statement from the persuadee about whether they will donate."
+  },
+  "map": {
+    "commits_amount": "donated",
+    "commits_vague": "donated",
+    "defers_outside": "not_donated",
+    "refuses": "not_donated",
+    "no_decision": "not_donated"
+  }
+}

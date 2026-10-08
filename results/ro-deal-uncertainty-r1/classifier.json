@@ -1,0 +1,136 @@
+{
+  "version": 1,
+  "name": "deal_v13_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v13a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Read the item listing and the buyer-seller negotiation chat. Decide how the negotiation ended: did they close a deal?",
+        "background": "After the chat the parties formally submit and accept an offer, so a chat often stops just short of an explicit yes. Most negotiations that get close on price do close. Judge whether they were on track to settle.",
+        "rules": [
+          "First check that both parties actually took part: if only one party writes anything, it is never a deal, whatever words it contains.",
+          "Read obvious typos in figures as the intended amount (a counteroffer missing a zero next to figures ten times larger means the larger figure).",
+          "A short assent to a stated price (ok, fair enough, sounds good, thanks plus pickup plans, even with a typo) is a full agreement, whoever proposed the price.",
+          "When one side answers a price offer by asking only about logistics (can you pick it up, when, cash) and the offerer agrees, the price has been accepted: deal. A reluctant acceptance (agreeing to settle although it is more than they wanted) is also agreement.",
+          "A buyer who says they will take the item at the asking price, without haggling, has closed a deal.",
+          "A yes to an offer that bundles a price with conditions (polish it, deliver it, pick up, cash) accepts the price as well. A yes that adds a condition the other side then confirms is also full agreement. Once the price is explicitly accepted, confusion about extras or trade-ins does not undo the deal.",
+          "Unless the exception below applies, if the chat ends without an explicit yes, compare the last price each side named. If the two figures are within roughly a fifth of the price, and the last offer does not break a limit the other side had already refused more than once, count it as a deal. This holds when the last word is one side's 'lowest' or 'final' price, or an ultimatum offer, or when the other side had praised the offer.",
+          "If the two last figures differ by more than roughly a quarter of the price, it is not a deal, even if both were still talking.",
+          "Exception that overrides closeness: if the last offer is one the other side had already firmly refused more than once (it is still beyond a limit they stated repeatedly, e.g. a seller who said twice they will not go below a figure), it is not a deal, however small the gap.",
+          "A yes that answers only a side question is not agreement on price: for example when a buyer offers a lower price only on condition of picking up, and the seller instead agrees to deliver without accepting that price.",
+          "It is not a deal when the last word is a refusal not followed by any accepted figure, a party walks away, or only one side has named a price and the other never responded to it. A lone message or a one-sided chat is never a deal, whatever words it contains.",
+          "If the chat itself says the formal offer was rejected or could not be accepted, it is not a deal.",
+          "A chat that ends on an opening price offer the other side never answered, or on questions about the item with no price exchanged, is not a deal.",
+          "Saying one wants to buy, or is interested, is not accepting a price. Accepting the asking price means the price was stated and the buyer then explicitly agreed to pay it.",
+          "Who made the last unanswered offer matters. The listing price is not the seller's answer to a buyer's offer. If the chat ends on the buyer's first offer and the seller never replied to it, it is not a deal, even if the offer is close to the listing price. If the chat ends with the seller volunteering a lower price, or accepting the buyer's price on a condition such as pickup, and the buyer has not refused, it is a deal unless the seller's figure is still far (more than roughly a quarter) above the buyer's last figure: buyers take discounts offered to them."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed": "Both sides accepted the same price or terms: a short or reluctant assent, taking the item at the asking price, a yes to a bundled offer, or a logistics question about an offer that the offerer then confirms, or the seller offering a discount or conditional acceptance that the buyer did not refuse.",
+        "close_figures_no_yes": "No explicit yes, but the two sides' last figures are within roughly a fifth of the price and the last offer does not break a limit already refused more than once.",
+        "far_figures": "No explicit yes and the two sides' last figures differ by more than roughly a quarter of the price.",
+        "breaks_repeated_limit": "The last offer is still beyond a limit the other side had stated and refused more than once.",
+        "side_question_yes_only": "The only yes covered a side question while the price offer was never accepted.",
+        "refused_or_walked_away": "The last word is a refusal, a party walked away, or the chat says the formal offer was rejected.",
+        "no_negotiation": "Only one party writes anything, the chat ends on the buyer's first offer that the seller never answered, or on item questions with no price exchanged, or is off-topic or nonsensical, even if it contains a word of agreement."
+      },
+      "map": {
+        "agreed": "deal",
+        "close_figures_no_yes": "deal",
+        "far_figures": "no_deal",
+        "breaks_repeated_limit": "no_deal",
+        "side_question_yes_only": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "no_negotiation": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v13b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Did this Craigslist buyer and seller end their negotiation with a closed sale?",
+        "context": "The chat is followed by a formal offer step that is not shown, so many successful negotiations end without a final explicit yes. Most chats where the prices got close end in a sale. Decide whether the two were on course to settle on one price.",
+        "guidance": [
+          "Start by checking that both people actually wrote something; a chat with messages from only one party is never a sale, whatever it says.",
+          "Treat an obvious slip in a figure as the amount meant (for instance a counter missing a zero when the other figures are ten times larger).",
+          "Count it as agreed when one side states a price and the other assents briefly (ok, fair enough, sounds good, thanks plus pickup plans), whoever proposed the price; misspellings do not matter.",
+          "If someone responds to a price offer only with a practical question (pickup, timing, payment) and the person who offered says yes, that price is accepted: sale. Grudging agreement (settling for more than one hoped) also counts as agreement.",
+          "A buyer who simply agrees to buy at the listed or asked price has made a sale.",
+          "Saying yes to an offer that packages a price with requests (cleaning, delivery, pickup, cash) accepts that price too. An acceptance with a condition the other party confirms is agreement. When the price has been explicitly accepted, a mix-up about extras or a trade-in does not cancel the sale.",
+          "Apart from the override below, without an explicit yes, look at the latest figure from each side. When they are within about 20 percent of the price, and the final offer does not go past a limit the other side had already refused more than once, treat it as a sale; it does not matter if the last message is someone's 'final' or 'lowest' price, an ultimatum, or if the other side had called the offer good.",
+          "When the latest figures are more than about 25 percent of the price apart, there is no sale, even if the chat was still going.",
+          "Override regardless of how small the gap is: when the final offer is still past a limit the other party had named and refused more than once (say, a seller who twice said they would not go under a figure), there is no sale.",
+          "Saying yes to a side matter (such as delivery) is not agreeing on the price; if the buyer's lower price depended on a condition the seller did not take up, and the seller never accepted that price, the price is open.",
+          "No sale when the conversation ends on a refusal with no accepted figure after it, when someone leaves, or when only one side ever named a price and the other never answered it. A chat where only one party speaks, or a single message, is never a sale even if it contains a word of agreement.",
+          "When the conversation mentions that the formal offer was turned down or could not be accepted, there is no sale.",
+          "A conversation that stops on a first price offer nobody replied to, or on questions about the item without any exchange of prices, is no sale.",
+          "Interest in buying (wanting the item, asking about it) is not agreement on a price. Buying at the asked price requires the price to be stated and the buyer to say clearly they will pay it.",
+          "Pay attention to who made the final unanswered offer. A listed price is not the seller replying to the buyer. When the conversation ends on the buyer's first offer with no reply from the seller, there is no sale, even if that offer is near the listed price. When it ends with the seller proposing a reduced price unprompted, or agreeing to the buyer's figure on a condition such as collection, and the buyer has not said no, it is a sale, unless the seller's figure is still more than about 25 percent above the buyer's latest figure: buyers take the discounts they are offered."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "settled": "The parties settled on a price: a brief or grudging assent, buying at the asked price, a yes to a packaged offer, or a practical question about an offer that the offerer then confirms, or the seller proposing a reduced price or conditional acceptance the buyer did not refuse.",
+        "near_figures_open": "No explicit yes, but the latest figures from each side are within about 20 percent of the price, and the final offer does not pass a limit refused more than once.",
+        "distant_figures": "No explicit yes and the latest figures are more than about 25 percent of the price apart.",
+        "past_repeated_limit": "The final offer still passes a limit the other party named and refused more than once.",
+        "side_matter_only": "The yes concerned only a side matter and the price offer was never accepted.",
+        "declined_or_left": "Ends on a refusal, someone left, or the chat says the formal offer was turned down.",
+        "not_a_negotiation": "Messages from only one party, ends on the buyer's first offer that the seller never answered, or on item questions without any price exchange, off-topic or nonsensical, even if it contains a word of agreement."
+      },
+      "map": {
+        "settled": "deal",
+        "near_figures_open": "deal",
+        "distant_figures": "no_deal",
+        "past_repeated_limit": "no_deal",
+        "side_matter_only": "no_deal",
+        "declined_or_left": "no_deal",
+        "not_a_negotiation": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v13c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "goal": "Classify how this used-item negotiation between a buyer and a seller ended.",
+        "note": "A formal offer is submitted after the chat and is not shown. So judge from the chat whether the two had effectively converged on one price.",
+        "decision_steps": [
+          "1. Did both parties write messages and exchange price figures (or did the buyer clearly agree to pay a stated asking price)? If not — a single message, only interest or item questions, or an opening offer the other side never answered — there is no deal.",
+          "1b. The listing price is not a reply to the buyer. If the chat ends on the buyer's first offer that the seller never answered, there is no deal even when it is near the listing price. If it ends with the seller offering a lower price, or accepting the buyer's figure on a condition like pickup, and the buyer has not refused, it is a deal, unless that figure is still more than roughly a quarter above the buyer's last figure.",
+          "2. Does the chat say the formal offer was rejected or could not be accepted, or end on a plain refusal that nobody moved past? Then there is no deal.",
+          "3. Did one side accept the other's price, in any form: brief assent, grudging assent, accepting a counter bundled with extras or conditions, or answering an offer with a logistics question (pickup, timing, cash) that the offerer confirms? Then it is a deal. Once a price is explicitly accepted, later mix-ups about extras or an odd closing remark do not undo it. A yes that only answers a side question while a conditional lower price was never accepted is not acceptance.",
+          "4. Without explicit acceptance, compare the last figure each side named (reading obvious typos, such as a missing zero, as intended). If the final offer is still beyond a limit the other side refused more than once, there is no deal however small the gap. Otherwise, within roughly a fifth of the price is a deal; more than roughly a quarter apart is no deal. Calling an offer final, lowest or an ultimatum does not change this.",
+          "5. A party restating, after an apparent yes, that they cannot pay that price means no deal."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "accepted": "A price was accepted (step 3): brief, grudging, bundled, or via a confirmed logistics question; or the buyer explicitly agreed to the asking price; or the seller offered a lower price or a conditional acceptance that the buyer did not refuse.",
+        "converged_without_yes": "No explicit acceptance, but the last figures are within roughly a fifth of the price and no repeatedly refused limit is broken.",
+        "still_apart": "No explicit acceptance and the last figures are more than roughly a quarter apart.",
+        "broke_firm_limit": "The final offer is still beyond a limit the other side refused more than once.",
+        "refused_or_rejected": "Ends on an unresolved refusal, someone leaves, the chat says the formal offer was rejected, or a party says after a yes they cannot pay.",
+        "conditional_price_not_accepted": "The only yes answered a side question while a conditional lower price was never accepted.",
+        "no_price_exchange": "Single message or one party only, only interest or item questions, or the buyer's first offer that the seller never answered."
+      },
+      "map": {
+        "accepted": "deal",
+        "converged_without_yes": "deal",
+        "still_apart": "no_deal",
+        "broke_firm_limit": "no_deal",
+        "refused_or_rejected": "no_deal",
+        "conditional_price_not_accepted": "no_deal",
+        "no_price_exchange": "no_deal"
+      }
+    }
+  ]
+}

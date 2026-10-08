@@ -1,0 +1,62 @@
+{
+  "run_id": "xm-hatets-haiku-high-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:15:19",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 314,
+    "num_turns": 67,
+    "total_cost_usd": 0.5322463500000001
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 38,
+      "estimate": 0.7,
+      "note": "Draft 1: criteria classifier with 4 conditions (dehumanizing, violence, sexualized_abuse, group_hostility). Predicts 73% hate on pool. Need to calibrate with labels.",
+      "test": {
+        "jev": {
+          "accuracy": 0.6512,
+          "macro_f1": 0.6435,
+          "est_cost_usd": 0.032622,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 58,
+      "estimate": 0.75,
+      "note": "Draft 2: clarified instructions to distinguish policy positions from hate. Accuracy: 90% on 10-label check set (macro-F1: 0.89). Pool predictions: 63% hate. 1 remaining false positive: news report with #SendThemBack.",
+      "test": {
+        "jev": {
+          "accuracy": 0.7044,
+          "macro_f1": 0.7039,
+          "est_cost_usd": 0.035737,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 98,
+      "estimate": 0.72,
+      "note": "Final: Draft 4 - conservative criteria classifier. Accuracy: 60% on 30 labels (macro-F1: 0.58). Pool: 65.6% hate. Key distinctions: explicit dehumanization, violence calls, sexual abuse, hostility vs. policy/criticism.",
+      "test": {
+        "jev": {
+          "accuracy": 0.6914,
+          "macro_f1": 0.6903,
+          "est_cost_usd": 0.030248,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

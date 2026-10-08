@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "name": "hate_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "hate_v2",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm_hostile": {
+          "instructions": "Does this tweet express hostility toward immigrants, refugees, migrants or 'illegal aliens' as people or a group? Count: blaming them for crime or harm ('another crime by an illegal alien'), framing them as dangerous, criminal, parasites or animals, insulting or demeaning them, wanting them expelled ('send them back', 'deport them all'), or saying they should not be allowed in. Do NOT count: neutral news, or calm policy debate about border security/immigration law with no hostility toward the people. Do NOT count tweets that only use immigration hashtags but say nothing about immigrants (e.g. praising a politician, unrelated topics).",
+          "criteria": {
+            "true": "The tweet is hostile toward immigrants/refugees/illegal aliens",
+            "false": "No hostility toward immigrants (neutral, policy only, or not about immigrants)"
+          }
+        },
+        "woman_abuse": {
+          "instructions": "Is this tweet a sincere, hostile attack on a specific woman or on women in general, using gendered or sexualised abuse (bitch, hoe, slut, whore, cunt, etc.)? Count it only if the author is really angry at or contemptuous of a woman/women and is degrading them as women: e.g. threats or intimidation alongside misogynistic slurs, calling a woman a whore/slut/hoe to shame her, sexist contempt for women as a group. Do NOT count: joking or playful use, banter between friends, self-reference ('I'm such a bitch'), song lyrics, mild venting or complaining where 'bitch'/'hoe' is just a filler word or exclamation ('bitch where were you', 'bitch I'm tired', 'whoever took my shoes is a bitch lol'), slurs with no clear woman being attacked, or insults of men or of public figures that are not about gender or sexuality.",
+          "criteria": {
+            "true": "Sincere hostile gendered/sexualised attack on a woman or women",
+            "false": "Not such an attack (banter, filler word, venting, lyrics, self-reference, or not about a woman)"
+          }
+        },
+        "condemning": {
+          "instructions": "Is the author quoting, reporting, or condemning someone else's hateful language, or criticising someone for being racist or sexist, rather than expressing hostility themselves?",
+          "criteria": {
+            "true": "Author is quoting or condemning hate speech",
+            "false": "Author is speaking for themselves"
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_hostile",
+          "!condemning"
+        ],
+        [
+          "woman_abuse",
+          "!condemning"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "hate_v3",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm_hostile": {
+          "instructions": "Does this tweet express hostility toward immigrants, refugees, migrants or 'illegal aliens' as people or a group? Count: blaming them for crime or harm ('another crime by an illegal alien'), framing them as dangerous, criminal, parasites or animals, insulting or demeaning them, wanting them expelled ('send them back', 'deport them all'), or saying they should not be allowed in. Do NOT count: neutral news, or calm policy debate about border security/immigration law with no hostility toward the people. Do NOT count tweets that only use immigration hashtags but say nothing about immigrants (e.g. praising a politician, unrelated topics).",
+          "criteria": {
+            "true": "The tweet is hostile toward immigrants/refugees/illegal aliens",
+            "false": "No hostility toward immigrants (neutral, policy only, or not about immigrants)"
+          }
+        },
+        "woman_abuse": {
+          "instructions": "Is this tweet a sincere, hostile attack on a specific woman or on women in general, using gendered or sexualised abuse (bitch, hoe, slut, whore, cunt, etc.)? Count it only if the author is really angry at or contemptuous of a woman/women and is degrading them as women: e.g. threats or intimidation alongside misogynistic slurs, calling a woman a whore/slut/hoe to shame her, sexist contempt for women as a group, or mocking/encouraging rape or violence against women. Do NOT count: joking or playful use, banter between friends, self-reference ('I'm such a bitch'), song lyrics, mild venting or complaining where 'bitch'/'hoe' is just a filler word or exclamation ('bitch where were you', 'bitch I'm tired', 'whoever took my shoes is a bitch lol'), slurs with no clear woman being attacked, or insults of men or of public figures that are not about gender or sexuality.",
+          "criteria": {
+            "true": "Sincere hostile gendered/sexualised attack on a woman or women",
+            "false": "Not such an attack (banter, filler word, venting, lyrics, self-reference, or not about a woman)"
+          }
+        },
+        "condemning": {
+          "instructions": "Is the author quoting, reporting, or condemning someone else's hateful language, or criticising someone for being racist or sexist, rather than expressing hostility themselves?",
+          "criteria": {
+            "true": "Author is quoting or condemning hate speech",
+            "false": "Author is speaking for themselves"
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_hostile",
+          "!condemning"
+        ],
+        [
+          "woman_abuse",
+          "!condemning"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ]
+}

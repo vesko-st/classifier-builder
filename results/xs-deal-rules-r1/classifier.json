@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "name": "deal_final",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v8",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Read the Craigslist listing and the buyer-seller negotiation chat. How does the negotiation end? Pick the option that best describes the end of the chat.",
+        "notes": [
+          "Focus on the last price offered and how the other side responded to it.",
+          "Acceptance is often terse or implicit: 'ok', 'fine', 'yes', 'fair enough', 'sounds good', 'done', 'deal', 'I'm on my way', or going straight to arranging pickup, delivery, a meeting, a test drive, payment or paperwork for that price.",
+          "A garbled or odd final line (typos, a joke) does not undo an acceptance that already happened."
+        ],
+        "examples": [
+          {
+            "chat_end": "Seller: I can give you $75 last price. Buyer: I can do 70. Seller: Okay then you still will have to come pick it up yourself. Buyer: ok",
+            "answer": "implicit_accept"
+          },
+          {
+            "chat_end": "Buyer: meet halfway, bring it down $15? Seller: Yeah I do that put in your offer.",
+            "answer": "implicit_accept"
+          },
+          {
+            "chat_end": "Seller: I think 1300 will work since I need to get it sold. Buyer: Oh, sorry for being rude",
+            "answer": "explicit_accept"
+          },
+          {
+            "chat_end": "Buyer: Ok, that sounds fair. Seller: great, when do you want to come check it out in person? Buyer: Yes I will have cash in hand",
+            "answer": "implicit_accept"
+          },
+          {
+            "chat_end": "Buyer: $10000 and you bring it to me. Seller: 10000 and you will come get it yourself",
+            "answer": "closing_offer_pending"
+          },
+          {
+            "chat_end": "Buyer: ok how about 2900. Seller: Well if you can go 2950 it would save me the trouble of holding the open house.",
+            "answer": "closing_offer_pending"
+          },
+          {
+            "chat_end": "Buyer: can it be delivered? if not, the most im willing to pay is $70 if i have to go pick it up. Seller: Yes we will gladly deliver it for you, no problem!",
+            "answer": "price_never_settled"
+          },
+          {
+            "chat_end": "Seller: Yeah I am selling it for 75$ are you interested? Buyer: Yes. It looks great. Did you alter the device or trust the person who did?",
+            "answer": "price_never_settled"
+          },
+          {
+            "whole_chat": "Buyer: I seen you are asking $55. Would you go lower if I come pick it up tonight? Seller: Yes, I'll go 5 lower",
+            "answer": "no_negotiation"
+          }
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_accept": "A specific price stated in the chat was explicitly accepted by the other side ('deal', 'ok $110', 'that works', 'sounds good').",
+        "implicit_accept": "A specific price stated in the chat was accepted implicitly or tersely: the other side said 'fair enough'/'ok'/'yes', agreed to a condition attached to it (pickup, delivery, extras), or moved on to arranging pickup, a meeting, a test drive, payment or paperwork. Small open details (utilities to be worked out later) are fine.",
+        "closing_offer_pending": "After a real back-and-forth, the chat ends on one side's final offer (e.g. 'make that $6,600 and you have a deal', 'I'll send the offer at $1900', 'can I give you $6 for both?') that was not rejected, with the two sides close together or one side already giving in.",
+        "still_apart": "The chat ends with the two sides still disagreeing on price, or a counteroffer with new terms (e.g. an added deposit) that the other side never answered.",
+        "rejected_or_walked_away": "One side rejected the final offer, said they were too far apart, or walked away.",
+        "price_never_settled": "One side said 'ok'/'sounds good'/'fine' but not to a settled stated price: the price was never named in the chat ('see final offer directly'), only a side question (delivery, pets) was answered, or after an apparent agreement a side disputes the price again ('the offer says $2695 but I can only afford $2200') and the chat ends there.",
+        "no_negotiation": "Hardly any conversation: the chat is empty or has only one or two messages with no back-and-forth, even if one message states a price or says 'Agree'/'Cool' (e.g. only the seller's opening line 'I will let it go for $260', or 'I would like to buy your house' / 'Cool'). No real exchange of offers took place."
+      },
+      "map": {
+        "explicit_accept": "deal",
+        "implicit_accept": "deal",
+        "closing_offer_pending": "deal",
+        "still_apart": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "price_never_settled": "no_deal",
+        "no_negotiation": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v8c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Decide how this Craigslist bargaining chat ended.",
+        "guidance": {
+          "key_question": "What was the last price put forward, and did the other side go along with it?",
+          "acceptance_signals": "Short or implied acceptance counts: 'ok', 'fine', 'yes', 'fair enough', 'sounds good', 'deal', 'I'm on my way', or arranging pickup, delivery, a meeting, test drive, payment or paperwork at that price.",
+          "noise": "A typo-ridden, joking or odd last line does not reverse an acceptance given earlier."
+        },
+        "examples": [
+          {
+            "chat_end": "Seller: I can give you $75 last price. Buyer: I can do 70. Seller: Okay then you still will have to come pick it up yourself. Buyer: ok",
+            "answer": "implicit_accept"
+          },
+          {
+            "chat_end": "Buyer: meet halfway, bring it down $15? Seller: Yeah I do that put in your offer.",
+            "answer": "implicit_accept"
+          },
+          {
+            "chat_end": "Seller: I think 1300 will work since I need to get it sold. Buyer: Oh, sorry for being rude",
+            "answer": "explicit_accept"
+          },
+          {
+            "chat_end": "Buyer: Ok, that sounds fair. Seller: great, when do you want to come check it out in person? Buyer: Yes I will have cash in hand",
+            "answer": "implicit_accept"
+          },
+          {
+            "chat_end": "Buyer: $10000 and you bring it to me. Seller: 10000 and you will come get it yourself",
+            "answer": "closing_offer_pending"
+          },
+          {
+            "chat_end": "Buyer: ok how about 2900. Seller: Well if you can go 2950 it would save me the trouble of holding the open house.",
+            "answer": "closing_offer_pending"
+          },
+          {
+            "chat_end": "Buyer: can it be delivered? if not, the most im willing to pay is $70 if i have to go pick it up. Seller: Yes we will gladly deliver it for you, no problem!",
+            "answer": "price_never_settled"
+          },
+          {
+            "chat_end": "Seller: Yeah I am selling it for 75$ are you interested? Buyer: Yes. It looks great. Did you alter the device or trust the person who did?",
+            "answer": "price_never_settled"
+          },
+          {
+            "whole_chat": "Buyer: I seen you are asking $55. Would you go lower if I come pick it up tonight? Seller: Yes, I'll go 5 lower",
+            "answer": "no_negotiation"
+          }
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_accept": "A specific price stated in the chat was explicitly accepted by the other side ('deal', 'ok $110', 'that works', 'sounds good').",
+        "implicit_accept": "A specific price stated in the chat was accepted implicitly or tersely: the other side said 'fair enough'/'ok'/'yes', agreed to a condition attached to it (pickup, delivery, extras), or moved on to arranging pickup, a meeting, a test drive, payment or paperwork. Small open details (utilities to be worked out later) are fine.",
+        "closing_offer_pending": "After a real back-and-forth, the chat ends on one side's final offer (e.g. 'make that $6,600 and you have a deal', 'I'll send the offer at $1900', 'can I give you $6 for both?') that was not rejected, with the two sides close together or one side already giving in.",
+        "still_apart": "The chat ends with the two sides still disagreeing on price, or a counteroffer with new terms (e.g. an added deposit) that the other side never answered.",
+        "rejected_or_walked_away": "One side rejected the final offer, said they were too far apart, or walked away.",
+        "price_never_settled": "One side said 'ok'/'sounds good'/'fine' but not to a settled stated price: the price was never named in the chat ('see final offer directly'), only a side question (delivery, pets) was answered, or after an apparent agreement a side disputes the price again ('the offer says $2695 but I can only afford $2200') and the chat ends there.",
+        "no_negotiation": "Hardly any conversation: the chat is empty or has only one or two messages with no back-and-forth, even if one message states a price or says 'Agree'/'Cool' (e.g. only the seller's opening line 'I will let it go for $260', or 'I would like to buy your house' / 'Cool'). No real exchange of offers took place."
+      },
+      "map": {
+        "explicit_accept": "deal",
+        "implicit_accept": "deal",
+        "closing_offer_pending": "deal",
+        "still_apart": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "price_never_settled": "no_deal",
+        "no_negotiation": "no_deal"
+      }
+    }
+  ],
+  "decision": {
+    "class": "deal",
+    "threshold": 0.45
+  }
+}

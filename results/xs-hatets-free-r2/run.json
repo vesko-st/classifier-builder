@@ -1,0 +1,64 @@
+{
+  "run_id": "xs-hatets-free-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-05T16:50:03",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 334,
+    "num_turns": 33,
+    "total_cost_usd": 1.1105612000000002
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 12,
+      "estimate": 0.7,
+      "note": "draft v1: choice with 7 options mapped, from owner policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.7503,
+          "macro_f1": 0.7363,
+          "est_cost_usd": 0.072304,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 72,
+      "estimate": 0.8,
+      "note": "v3: hostile insults at women -> hate, filler/banter bitch -> not_hate, migrant crime framing -> hate; 27/30 labels (in-sample), 12/12 check for v1",
+      "test": {
+        "jev": {
+          "accuracy": 0.7695,
+          "macro_f1": 0.7659,
+          "est_cost_usd": 0.089586,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.82,
+      "note": "final: 2-member wording-variant ensemble (v5, v5b); broader immigrant rule (invasion / send-back-as-illegals -> hate). 35/44 on all labels (mostly hard picks), 12/12 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.7844,
+          "macro_f1": 0.7825,
+          "est_cost_usd": 0.177448,
+          "total": 1766,
+          "answered": 1721
+        }
+      }
+    }
+  ]
+}

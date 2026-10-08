@@ -1,0 +1,133 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens_v34",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v3",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "imm_hostile": {
+          "instructions": "Does this tweet attack immigrants, refugees, migrants or 'illegal aliens' AS A GROUP?",
+          "criteria": {
+            "true": "Yes: it dehumanises them (invaders, invasion, rapefugees, bottom feeders, savages, animals), portrays them in general as criminals, rapists, disease carriers, job thieves or welfare parasites, reports a crime by an illegal alien/migrant to blame them and justify keeping them out or deporting them, or endorses expelling them as a group ('send them back', 'send them all home', #DeportThemAll / #SendThemBack aimed at immigrants, 'no more refugees'). Also yes when it frames immigration as white genocide, replacement or invasion, or when the text discusses immigrants/immigration and ends with #SendThemBack / #DeportThemAll aimed at them.",
+            "false": "No: it is not about immigrants, or it only supports a policy or politician (build the wall, fund the wall, end DACA, vote Republican, support ICE) without hostile framing of immigrants themselves, or argues about terminology or the law ('illegal is illegal', why the term 'illegal alien' is accurate), or the deport/send-back hashtags are just tacked onto an unrelated point, or it defends immigrants or criticises anti-immigrant people."
+          }
+        },
+        "offtopic": {
+          "instructions": "Is the tweet's actual message about something other than immigrants themselves, with immigration hashtags (#BuildTheWall, #DeportThemAll, #SendThemBack, #MAGA) merely tacked on as slogans?",
+          "criteria": {
+            "true": "Yes: the text itself is about a politician, a party, a country, taxes, elections, sports, loyalty to Trump, etc., and immigrants are mentioned only through hashtags, or the deport/send-back call is aimed at a specific named person or non-immigrant group.",
+            "false": "No: the text itself talks about immigrants, refugees, migrants, illegals or 'them' (the migrants), or reports something they did, or the whole tweet is a call to expel them."
+          }
+        },
+        "women_group": {
+          "instructions": "Does this tweet express contempt for women in general, or endorse rape or violence against women?",
+          "criteria": {
+            "true": "Yes: hostile generalisation about women or 'bitches/hoes' as a group, saying women are worthless, deserve abuse, or treating rape or beating women approvingly or as a joke.",
+            "false": "No: no generalised contempt for women and no endorsement of violence against them; or it criticises sexism."
+          }
+        },
+        "slur_attack": {
+          "instructions": "Does the author use a gendered slur (bitch, hoe, whore, slut, cunt) as a hostile put-down of some person or people — insulting, mocking, blaming, shaming or threatening them?",
+          "criteria": {
+            "true": "Yes: the slur is aimed at someone the author is angry at, mocking or looking down on (the @user addressee, 'you', 'that bitch', 'y'all hoes', an ex, a stranger), even in a short snappy insult.",
+            "false": "No: the slur is not aimed at anyone in a hostile way — it is an exclamation, self-description, part of a neutral story, a general musing, or there is no gendered slur."
+          }
+        },
+        "friendly": {
+          "instructions": "Is the gendered slang in this tweet used affectionately, playfully among friends, self-referentially, or as a mere exclamation, rather than as an insult?",
+          "criteria": {
+            "true": "Yes: friendly or joking tone toward a friend, the author calling themself a bitch, 'bitch I'm on my way' style exclamations, hype or praise.",
+            "false": "No: the slang is used to insult or demean someone, or there is no such slang."
+          }
+        },
+        "male_target": {
+          "instructions": "Is the insult clearly aimed at a man or boy (e.g. 'bitch boy', 'son of a bitch', a named man, 'he')?"
+        }
+      },
+      "rule": [
+        [
+          "imm_hostile",
+          "!offtopic"
+        ],
+        [
+          "women_group"
+        ],
+        [
+          "slur_attack",
+          "!friendly",
+          "!male_target"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v4",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "imm_hostile": {
+          "instructions": "Does this tweet attack immigrants, refugees, migrants or 'illegal aliens' AS A GROUP?",
+          "criteria": {
+            "true": "Yes: it dehumanises them (invaders, invasion, rapefugees, bottom feeders, savages, animals), portrays them in general as criminals, rapists, disease carriers, job thieves or welfare parasites, reports a crime by an illegal alien/migrant to blame them and justify keeping them out or deporting them, or endorses expelling them as a group ('send them back', 'send them all home', #DeportThemAll / #SendThemBack aimed at immigrants, 'no more refugees'). Also yes when it frames immigration as white genocide, replacement or invasion, or when the text discusses immigrants/immigration and ends with #SendThemBack / #DeportThemAll aimed at them.",
+            "false": "No: it is not about immigrants, or it only supports a policy or politician (build the wall, fund the wall, end DACA, vote Republican, support ICE) without hostile framing of immigrants themselves, or argues about terminology or the law ('illegal is illegal', why the term 'illegal alien' is accurate), or the deport/send-back hashtags are just tacked onto an unrelated point, or it defends immigrants or criticises anti-immigrant people."
+          }
+        },
+        "offtopic": {
+          "instructions": "Is the tweet's actual message about something other than immigrants themselves, with immigration hashtags (#BuildTheWall, #DeportThemAll, #SendThemBack, #MAGA) merely tacked on as slogans?",
+          "criteria": {
+            "true": "Yes: the text itself is about a politician, a party, a country, taxes, elections, sports, loyalty to Trump, etc., and immigrants are mentioned only through hashtags, or the deport/send-back call is aimed at a specific named person or non-immigrant group.",
+            "false": "No: the text itself talks about immigrants, refugees, migrants, illegals or 'them' (the migrants), or reports something they did, or the whole tweet is a call to expel them."
+          }
+        },
+        "women_group": {
+          "instructions": "Does this tweet express contempt for women in general, or endorse rape or violence against women?",
+          "criteria": {
+            "true": "Yes: hostile generalisation about women or 'bitches/hoes' as a group, saying women are worthless, deserve abuse, or treating rape or beating women approvingly or as a joke.",
+            "false": "No: no generalised contempt for women and no endorsement of violence against them; or it criticises sexism."
+          }
+        },
+        "slur_attack": {
+          "instructions": "Is a gendered slur (bitch, hoe, whore, slut, cunt) used here as an INSULT against someone — to degrade, mock, scold, blame or threaten a person or people the author is hostile to?",
+          "criteria": {
+            "true": "Yes: the author is hostile to the target ('you', the @user addressee, 'that bitch', 'y'all hoes', an ex, a stranger) and uses the slur to put them down, even in a short snappy insult.",
+            "false": "No: the slur is merely a word for a woman or girlfriend ('a new bitch', 'respect your hoe'), a general saying, an exclamation, playful teasing between friends, self-description, part of a neutral story, or there is no gendered slur."
+          }
+        },
+        "friendly": {
+          "instructions": "Is the gendered slang in this tweet friendly rather than hostile — affectionate or teasing banter with a friend, making plans, joking ('lmao'), self-reference, hype or an exclamation?",
+          "criteria": {
+            "true": "Yes: the tone toward the person is friendly, joking or neutral; the author is not actually angry at or contemptuous of them.",
+            "false": "No: the author is genuinely angry at, contemptuous of or threatening someone, or there is no such slang."
+          }
+        },
+        "male_target": {
+          "instructions": "Is the insult clearly aimed at a man or boy (e.g. 'bitch boy', 'son of a bitch', a named man, 'he')?"
+        }
+      },
+      "rule": [
+        [
+          "imm_hostile",
+          "!offtopic"
+        ],
+        [
+          "women_group"
+        ],
+        [
+          "slur_attack",
+          "!friendly",
+          "!male_target"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ]
+}

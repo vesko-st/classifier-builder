@@ -1,0 +1,756 @@
+{
+  "version": 1,
+  "name": "routing_ensemble",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "routing_A",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A customer sent this message to a digital bank's support chat. Which specific issue is the customer asking about? Pick the closest match.",
+      "state_template": "Customer message:\n{{input}}",
+      "criteria": {
+        "unrecognised_card_payment": "A charge, purchase or deduction appears on the account that the customer did not authorise or does not recognise, or money is missing from the account without explanation. This applies even when the customer only asks why it is there or how to challenge it, and does not use the word fraud. Not a small added amount or fee on the statement that the customer thinks was charged in error.",
+        "unrecognised_cash_withdrawal": "A cash or ATM withdrawal is listed in the app that the customer says they did not make, do not recognise, or never received.",
+        "unrecognised_direct_debit": "A direct debit or standing payment the customer did not set up or does not recognise.",
+        "card_compromised": "The customer suspects their card, card details or PIN have become known to, copied by or used by someone else.",
+        "lost_or_stolen_card": "The customer no longer has their card because it went missing or a thief took it, and wants to report or block it, or asks what happens (including fees or charges) in that situation. Not when the card has been found again.",
+        "lost_or_stolen_phone": "The customer does not have the phone with the banking app on it (lost, stolen, or left somewhere) and asks about access to or safety of the account.",
+        "passcode_forgotten": "The customer cannot log in to the app because they forgot or are entering a wrong passcode.",
+        "pin_blocked": "The card PIN is rejected, not accepted, blocked or locked, or the customer cannot get past the PIN to use their card.",
+        "request_refund": "The customer wants a refund from a merchant or asks how to get money back for a purchase.",
+        "refund_not_received": "A refund that was promised by a merchant has not appeared on the account.",
+        "charged_twice": "The same payment was charged twice or more.",
+        "statement_extra_charge": "A small unexplained amount (typically a round amount of about one unit of currency) or an unexplained fee appears on the statement or in the app, and the customer asks what it is or says it was charged in error. Applies even if it is still pending and even if the customer says they bought nothing for that amount. Not tied to a specific service such as a card payment, transfer, withdrawal or exchange, not fees from using the account abroad or in another currency, and not a whole purchase or withdrawal of ordinary size that they never made.",
+        "fee_policy_complaint": "The customer argues with the bank's fee rules: says that a fee the bank applies should not apply to them at all, or complains about the bank's fees in general (new fees introduced on their account, being charged for using the bank's services, how much the bank charges). Not a question asking what an unexplained extra amount or charge on the statement or app is.",
+        "card_payment_reverted": "The customer reports that a card payment they made has been cancelled, reversed or returned to the account afterwards and asks what happened. Reported after the fact, not a refusal at the moment of paying.",
+        "wrong_cash_amount": "An ATM gave less cash than requested, the wrong amount, or none of the cash the customer asked for, while the account was debited.",
+        "dispute_transaction": "The customer asks about the general process for disputing a transaction they did make, such as a purchase that went wrong; not a charge they never authorised.",
+        "activate_card": "Activating a newly received card.",
+        "apple_google_pay": "Using Apple Pay, Google Pay or other phone wallets with the bank, including whether they can be used to top up or add money.",
+        "atm_support": "Which ATMs can be used, ATM locations or ATM functions.",
+        "card_expiring": "The card is about to expire or has expired and needs renewing.",
+        "card_acceptance": "Where the card is accepted (shops, countries, merchants).",
+        "card_not_arrived": "A card that was ordered has not arrived yet; tracking card delivery.",
+        "card_delivery_time": "How long card delivery takes or when or where it can be delivered.",
+        "link_card_in_app": "Adding, linking or showing an existing card in the app, including re-enabling a card the customer had misplaced and has now found again.",
+        "card_not_working": "The card is not working at all or is broken or damaged.",
+        "card_swallowed": "An ATM kept or swallowed the card.",
+        "contactless_not_working": "Contactless payment with the card does not work.",
+        "card_payment_declined": "The card was refused or rejected at the moment of paying in a shop or online. Not a payment the customer says was cancelled afterwards.",
+        "cash_withdrawal_declined": "The card was declined when trying to withdraw cash from an ATM.",
+        "change_pin": "Changing or setting the card PIN, or where and how a PIN can be changed. Not a PIN that is being rejected or is blocked.",
+        "disposable_card_limits": "Limits on how often or how many disposable virtual cards can be used.",
+        "get_disposable_card": "Getting or creating a disposable (single-use) virtual card.",
+        "get_virtual_card": "Getting or accessing a virtual card.",
+        "virtual_card_not_working": "A virtual card is not working or was rejected.",
+        "order_physical_card": "Ordering a physical plastic card, a replacement card or getting a PIN for it.",
+        "spare_card": "Getting an additional, second or spare card.",
+        "visa_or_mastercard": "Questions about the Visa or Mastercard networks: whether the bank offers, accepts or lets the customer use one or the other, or both. Treat these as questions about which network the bank's own card is on. Also choosing which kind of card the customer will get.",
+        "transfer_not_arrived_in_balance": "An incoming bank transfer has not shown up in the balance.",
+        "deposit_not_in_balance": "A cash or cheque deposit has not shown up in the balance.",
+        "beneficiary_not_allowed": "A transfer to a payee or beneficiary is not allowed or fails because of the beneficiary.",
+        "cancel_transfer": "Cancelling or reversing a bank transfer or payment the customer sent, including one sent to the wrong account.",
+        "cancel_purchase_order": "Cancelling an order or purchase made with a merchant, so that the money comes back.",
+        "transfer_declined_or_failed": "An outgoing transfer was declined, failed or did not go through.",
+        "pending_card_payment": "A card payment (in a shop, at a petrol station, online) is still pending, stuck or taking a long time to complete.",
+        "pending_cash_withdrawal": "A cash withdrawal from an ATM is still showing as pending, or the withdrawn cash is not yet reflected in the balance.",
+        "pending_transfer": "A transfer is still pending or taking a long time.",
+        "transfer_not_received_by_recipient": "The person the customer sent money to says they have not received it.",
+        "transfer_timing": "How long transfers take to arrive.",
+        "receiving_money": "How to receive money, salary or payments from other people into the account, including which currencies incoming payments or salary can arrive in. Not questions about fees or deductions on incoming money.",
+        "transfer_into_account": "How to move money into the account from another bank account; types of transfers supported.",
+        "top_up_how": "The steps or methods for adding money (topping up) to the account by card, cash, cheque or other means, or how to pay for a transfer the customer wants to send, including whether a card can be used to send money. Not which other cards, card brands or currencies are accepted for topping up.",
+        "auto_top_up": "Automatic top-ups when the balance is low.",
+        "top_up_limits": "Limits on how much or how often the account can be topped up.",
+        "top_up_failed": "A top-up failed, was declined or did not work.",
+        "top_up_pending": "A top-up is still pending or the topped-up money has not appeared.",
+        "top_up_reverted": "A top-up was cancelled, reverted or returned.",
+        "top_up_verification": "Verifying a top-up with a code or why a top-up needs verification.",
+        "card_payment_fee": "A fee was charged on a card payment.",
+        "cash_withdrawal_fee": "A fee was charged for withdrawing cash.",
+        "transfer_fee": "A fee was charged for a transfer, what transfers cost, or a transfer arrived with less money than was sent because something was deducted on the way.",
+        "other_fee_question": "Whether the bank charges anything, or deducts anything, for an activity not covered by the other fee options, such as receiving money, or whether the full amount of incoming money will arrive without deductions.",
+        "top_up_fee": "A fee for topping up by card or bank transfer.",
+        "exchange_rate": "What exchange rates the bank uses, or how they are set.",
+        "wrong_exchange_rate": "The exchange rate applied to a payment or cash withdrawal abroad was wrong or worse than expected.",
+        "exchange_fee": "Fees or charges for exchanging currency.",
+        "exchange_in_app": "How to exchange or convert currencies in the app.",
+        "supported_currencies": "Which currencies can be held in the account or exchanged in the app (not about receiving incoming payments).",
+        "age_limit": "Minimum age to open or use an account.",
+        "country_support": "Whether the bank's account or cards are available to people living in a particular country or region, including signing up or getting a card while living abroad.",
+        "edit_personal_details": "Changing personal details such as name, address or phone.",
+        "close_account": "Closing or deleting the account.",
+        "verify_identity": "How to verify identity or what documents are needed.",
+        "identity_verification_failed": "Identity verification is failing or the app cannot verify the customer.",
+        "why_verify_identity": "Why identity verification is required.",
+        "source_of_funds": "Proving or verifying the source of the customer's funds.",
+        "supported_cards_and_currencies": "Whether other cards (a credit card, a card from another provider, a brand other than the two main networks) or a given currency can be used or are accepted to add money (top up) to the account, or what the bank supports for top-ups. Not about the Visa/Mastercard network of the bank's own card, and not about how to send a transfer.",
+        "transaction_record": "The customer wants confirmation, proof, a receipt or details for a payment or transfer they made.",
+        "foreign_use_fee": "The customer noticed fees they did not expect after using the account or card abroad, while travelling or in another currency, and asks why."
+      },
+      "map": {
+        "unrecognised_card_payment": "fraud_and_security",
+        "unrecognised_cash_withdrawal": "fraud_and_security",
+        "unrecognised_direct_debit": "fraud_and_security",
+        "card_compromised": "fraud_and_security",
+        "lost_or_stolen_card": "fraud_and_security",
+        "lost_or_stolen_phone": "fraud_and_security",
+        "passcode_forgotten": "fraud_and_security",
+        "pin_blocked": "fraud_and_security",
+        "request_refund": "disputes_and_refunds",
+        "refund_not_received": "disputes_and_refunds",
+        "charged_twice": "disputes_and_refunds",
+        "statement_extra_charge": "disputes_and_refunds",
+        "fee_policy_complaint": "pricing_and_fx",
+        "card_payment_reverted": "disputes_and_refunds",
+        "wrong_cash_amount": "disputes_and_refunds",
+        "dispute_transaction": "disputes_and_refunds",
+        "activate_card": "cards",
+        "apple_google_pay": "cards",
+        "atm_support": "cards",
+        "card_expiring": "cards",
+        "card_acceptance": "cards",
+        "card_not_arrived": "cards",
+        "card_delivery_time": "cards",
+        "link_card_in_app": "cards",
+        "card_not_working": "cards",
+        "card_swallowed": "cards",
+        "contactless_not_working": "cards",
+        "card_payment_declined": "cards",
+        "cash_withdrawal_declined": "cards",
+        "change_pin": "cards",
+        "disposable_card_limits": "cards",
+        "get_disposable_card": "cards",
+        "get_virtual_card": "cards",
+        "virtual_card_not_working": "cards",
+        "order_physical_card": "cards",
+        "spare_card": "cards",
+        "visa_or_mastercard": "cards",
+        "transfer_not_arrived_in_balance": "payments_and_transfers",
+        "deposit_not_in_balance": "payments_and_transfers",
+        "beneficiary_not_allowed": "payments_and_transfers",
+        "cancel_transfer": "payments_and_transfers",
+        "cancel_purchase_order": "disputes_and_refunds",
+        "transfer_declined_or_failed": "payments_and_transfers",
+        "pending_card_payment": "payments_and_transfers",
+        "pending_cash_withdrawal": "cards",
+        "pending_transfer": "payments_and_transfers",
+        "transfer_not_received_by_recipient": "payments_and_transfers",
+        "transfer_timing": "payments_and_transfers",
+        "receiving_money": "payments_and_transfers",
+        "transfer_into_account": "payments_and_transfers",
+        "top_up_how": "payments_and_transfers",
+        "auto_top_up": "payments_and_transfers",
+        "top_up_limits": "payments_and_transfers",
+        "top_up_failed": "payments_and_transfers",
+        "top_up_pending": "payments_and_transfers",
+        "top_up_reverted": "payments_and_transfers",
+        "top_up_verification": "payments_and_transfers",
+        "card_payment_fee": "pricing_and_fx",
+        "cash_withdrawal_fee": "pricing_and_fx",
+        "transfer_fee": "pricing_and_fx",
+        "other_fee_question": "pricing_and_fx",
+        "top_up_fee": "pricing_and_fx",
+        "exchange_rate": "pricing_and_fx",
+        "wrong_exchange_rate": "pricing_and_fx",
+        "exchange_fee": "pricing_and_fx",
+        "exchange_in_app": "pricing_and_fx",
+        "supported_currencies": "pricing_and_fx",
+        "age_limit": "account_and_compliance",
+        "country_support": "account_and_compliance",
+        "edit_personal_details": "account_and_compliance",
+        "close_account": "account_and_compliance",
+        "verify_identity": "account_and_compliance",
+        "identity_verification_failed": "account_and_compliance",
+        "why_verify_identity": "account_and_compliance",
+        "source_of_funds": "account_and_compliance",
+        "supported_cards_and_currencies": "pricing_and_fx",
+        "transaction_record": "payments_and_transfers",
+        "foreign_use_fee": "pricing_and_fx"
+      }
+    },
+    {
+      "version": 1,
+      "name": "routing_B",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "You route chats for a digital bank's support desk. Read the customer's message and decide which of these request types best describes what they need help with. Each request type names the team that owns it.",
+      "state_template": {
+        "channel": "bank support chat",
+        "customer_message": "{{input}}"
+      },
+      "criteria": {
+        "foreign_use_fee": "Pricing and FX team: The customer noticed fees they did not expect after using the account or card abroad, while travelling or in another currency, and asks why.",
+        "transaction_record": "Payments and transfers team: The customer wants confirmation, proof, a receipt or details for a payment or transfer they made.",
+        "supported_cards_and_currencies": "Pricing and FX team: Whether other cards (a credit card, a card from another provider, a brand other than the two main networks) or a given currency can be used or are accepted to add money (top up) to the account, or what the bank supports for top-ups. Not about the Visa/Mastercard network of the bank's own card, and not about how to send a transfer.",
+        "source_of_funds": "Account and compliance team: Proving or verifying the source of the customer's funds.",
+        "why_verify_identity": "Account and compliance team: Why identity verification is required.",
+        "identity_verification_failed": "Account and compliance team: Identity verification is failing or the app cannot verify the customer.",
+        "verify_identity": "Account and compliance team: How to verify identity or what documents are needed.",
+        "close_account": "Account and compliance team: Closing or deleting the account.",
+        "edit_personal_details": "Account and compliance team: Changing personal details such as name, address or phone.",
+        "country_support": "Account and compliance team: Whether the bank's account or cards are available to people living in a particular country or region, including signing up or getting a card while living abroad.",
+        "age_limit": "Account and compliance team: Minimum age to open or use an account.",
+        "supported_currencies": "Pricing and FX team: Which currencies can be held in the account or exchanged in the app (not about receiving incoming payments).",
+        "exchange_in_app": "Pricing and FX team: How to exchange or convert currencies in the app.",
+        "exchange_fee": "Pricing and FX team: Fees or charges for exchanging currency.",
+        "wrong_exchange_rate": "Pricing and FX team: The exchange rate applied to a payment or cash withdrawal abroad was wrong or worse than expected.",
+        "exchange_rate": "Pricing and FX team: What exchange rates the bank uses, or how they are set.",
+        "top_up_fee": "Pricing and FX team: A fee for topping up by card or bank transfer.",
+        "other_fee_question": "Pricing and FX team: Whether the bank charges anything, or deducts anything, for an activity not covered by the other fee options, such as receiving money, or whether the full amount of incoming money will arrive without deductions.",
+        "transfer_fee": "Pricing and FX team: A fee was charged for a transfer, what transfers cost, or a transfer arrived with less money than was sent because something was deducted on the way.",
+        "cash_withdrawal_fee": "Pricing and FX team: A fee was charged for withdrawing cash.",
+        "card_payment_fee": "Pricing and FX team: A fee was charged on a card payment.",
+        "top_up_verification": "Payments and transfers team: Verifying a top-up with a code or why a top-up needs verification.",
+        "top_up_reverted": "Payments and transfers team: A top-up was cancelled, reverted or returned.",
+        "top_up_pending": "Payments and transfers team: A top-up is still pending or the topped-up money has not appeared.",
+        "top_up_failed": "Payments and transfers team: A top-up failed, was declined or did not work.",
+        "top_up_limits": "Payments and transfers team: Limits on how much or how often the account can be topped up.",
+        "auto_top_up": "Payments and transfers team: Automatic top-ups when the balance is low.",
+        "top_up_how": "Payments and transfers team: The steps or methods for adding money (topping up) to the account by card, cash, cheque or other means, or how to pay for a transfer the customer wants to send, including whether a card can be used to send money. Not which other cards, card brands or currencies are accepted for topping up.",
+        "transfer_into_account": "Payments and transfers team: How to move money into the account from another bank account; types of transfers supported.",
+        "receiving_money": "Payments and transfers team: How to receive money, salary or payments from other people into the account, including which currencies incoming payments or salary can arrive in. Not questions about fees or deductions on incoming money.",
+        "transfer_timing": "Payments and transfers team: How long transfers take to arrive.",
+        "transfer_not_received_by_recipient": "Payments and transfers team: The person the customer sent money to says they have not received it.",
+        "pending_transfer": "Payments and transfers team: A transfer is still pending or taking a long time.",
+        "pending_cash_withdrawal": "Cards team: A cash withdrawal from an ATM is still showing as pending, or the withdrawn cash is not yet reflected in the balance.",
+        "pending_card_payment": "Payments and transfers team: A card payment (in a shop, at a petrol station, online) is still pending, stuck or taking a long time to complete.",
+        "transfer_declined_or_failed": "Payments and transfers team: An outgoing transfer was declined, failed or did not go through.",
+        "cancel_purchase_order": "Disputes and refunds team: Cancelling an order or purchase made with a merchant, so that the money comes back.",
+        "cancel_transfer": "Payments and transfers team: Cancelling or reversing a bank transfer or payment the customer sent, including one sent to the wrong account.",
+        "beneficiary_not_allowed": "Payments and transfers team: A transfer to a payee or beneficiary is not allowed or fails because of the beneficiary.",
+        "deposit_not_in_balance": "Payments and transfers team: A cash or cheque deposit has not shown up in the balance.",
+        "transfer_not_arrived_in_balance": "Payments and transfers team: An incoming bank transfer has not shown up in the balance.",
+        "visa_or_mastercard": "Cards team: Questions about the Visa or Mastercard networks: whether the bank offers, accepts or lets the customer use one or the other, or both. Treat these as questions about which network the bank's own card is on. Also choosing which kind of card the customer will get.",
+        "spare_card": "Cards team: Getting an additional, second or spare card.",
+        "order_physical_card": "Cards team: Ordering a physical plastic card, a replacement card or getting a PIN for it.",
+        "virtual_card_not_working": "Cards team: A virtual card is not working or was rejected.",
+        "get_virtual_card": "Cards team: Getting or accessing a virtual card.",
+        "get_disposable_card": "Cards team: Getting or creating a disposable (single-use) virtual card.",
+        "disposable_card_limits": "Cards team: Limits on how often or how many disposable virtual cards can be used.",
+        "change_pin": "Cards team: Changing or setting the card PIN, or where and how a PIN can be changed. Not a PIN that is being rejected or is blocked.",
+        "cash_withdrawal_declined": "Cards team: The card was declined when trying to withdraw cash from an ATM.",
+        "card_payment_declined": "Cards team: The card was refused or rejected at the moment of paying in a shop or online. Not a payment the customer says was cancelled afterwards.",
+        "contactless_not_working": "Cards team: Contactless payment with the card does not work.",
+        "card_swallowed": "Cards team: An ATM kept or swallowed the card.",
+        "card_not_working": "Cards team: The card is not working at all or is broken or damaged.",
+        "link_card_in_app": "Cards team: Adding, linking or showing an existing card in the app, including re-enabling a card the customer had misplaced and has now found again.",
+        "card_delivery_time": "Cards team: How long card delivery takes or when or where it can be delivered.",
+        "card_not_arrived": "Cards team: A card that was ordered has not arrived yet; tracking card delivery.",
+        "card_acceptance": "Cards team: Where the card is accepted (shops, countries, merchants).",
+        "card_expiring": "Cards team: The card is about to expire or has expired and needs renewing.",
+        "atm_support": "Cards team: Which ATMs can be used, ATM locations or ATM functions.",
+        "apple_google_pay": "Cards team: Using Apple Pay, Google Pay or other phone wallets with the bank, including whether they can be used to top up or add money.",
+        "activate_card": "Cards team: Activating a newly received card.",
+        "dispute_transaction": "Disputes and refunds team: The customer asks about the general process for disputing a transaction they did make, such as a purchase that went wrong; not a charge they never authorised.",
+        "wrong_cash_amount": "Disputes and refunds team: An ATM gave less cash than requested, the wrong amount, or none of the cash the customer asked for, while the account was debited.",
+        "card_payment_reverted": "Disputes and refunds team: The customer reports that a card payment they made has been cancelled, reversed or returned to the account afterwards and asks what happened. Reported after the fact, not a refusal at the moment of paying.",
+        "fee_policy_complaint": "Pricing and FX team: The customer argues with the bank's fee rules: says that a fee the bank applies should not apply to them at all, or complains about the bank's fees in general (new fees introduced on their account, being charged for using the bank's services, how much the bank charges). Not a question asking what an unexplained extra amount or charge on the statement or app is.",
+        "statement_extra_charge": "Disputes and refunds team: A small unexplained amount (typically a round amount of about one unit of currency) or an unexplained fee appears on the statement or in the app, and the customer asks what it is or says it was charged in error. Applies even if it is still pending and even if the customer says they bought nothing for that amount. Not tied to a specific service such as a card payment, transfer, withdrawal or exchange, not fees from using the account abroad or in another currency, and not a whole purchase or withdrawal of ordinary size that they never made.",
+        "charged_twice": "Disputes and refunds team: The same payment was charged twice or more.",
+        "refund_not_received": "Disputes and refunds team: A refund that was promised by a merchant has not appeared on the account.",
+        "request_refund": "Disputes and refunds team: The customer wants a refund from a merchant or asks how to get money back for a purchase.",
+        "pin_blocked": "Fraud and security team: The card PIN is rejected, not accepted, blocked or locked, or the customer cannot get past the PIN to use their card.",
+        "passcode_forgotten": "Fraud and security team: The customer cannot log in to the app because they forgot or are entering a wrong passcode.",
+        "lost_or_stolen_phone": "Fraud and security team: The customer does not have the phone with the banking app on it (lost, stolen, or left somewhere) and asks about access to or safety of the account.",
+        "lost_or_stolen_card": "Fraud and security team: The customer no longer has their card because it went missing or a thief took it, and wants to report or block it, or asks what happens (including fees or charges) in that situation. Not when the card has been found again.",
+        "card_compromised": "Fraud and security team: The customer suspects their card, card details or PIN have become known to, copied by or used by someone else.",
+        "unrecognised_direct_debit": "Fraud and security team: A direct debit or standing payment the customer did not set up or does not recognise.",
+        "unrecognised_cash_withdrawal": "Fraud and security team: A cash or ATM withdrawal is listed in the app that the customer says they did not make, do not recognise, or never received.",
+        "unrecognised_card_payment": "Fraud and security team: A charge, purchase or deduction appears on the account that the customer did not authorise or does not recognise, or money is missing from the account without explanation. This applies even when the customer only asks why it is there or how to challenge it, and does not use the word fraud. Not a small added amount or fee on the statement that the customer thinks was charged in error."
+      },
+      "map": {
+        "foreign_use_fee": "pricing_and_fx",
+        "transaction_record": "payments_and_transfers",
+        "supported_cards_and_currencies": "pricing_and_fx",
+        "source_of_funds": "account_and_compliance",
+        "why_verify_identity": "account_and_compliance",
+        "identity_verification_failed": "account_and_compliance",
+        "verify_identity": "account_and_compliance",
+        "close_account": "account_and_compliance",
+        "edit_personal_details": "account_and_compliance",
+        "country_support": "account_and_compliance",
+        "age_limit": "account_and_compliance",
+        "supported_currencies": "pricing_and_fx",
+        "exchange_in_app": "pricing_and_fx",
+        "exchange_fee": "pricing_and_fx",
+        "wrong_exchange_rate": "pricing_and_fx",
+        "exchange_rate": "pricing_and_fx",
+        "top_up_fee": "pricing_and_fx",
+        "other_fee_question": "pricing_and_fx",
+        "transfer_fee": "pricing_and_fx",
+        "cash_withdrawal_fee": "pricing_and_fx",
+        "card_payment_fee": "pricing_and_fx",
+        "top_up_verification": "payments_and_transfers",
+        "top_up_reverted": "payments_and_transfers",
+        "top_up_pending": "payments_and_transfers",
+        "top_up_failed": "payments_and_transfers",
+        "top_up_limits": "payments_and_transfers",
+        "auto_top_up": "payments_and_transfers",
+        "top_up_how": "payments_and_transfers",
+        "transfer_into_account": "payments_and_transfers",
+        "receiving_money": "payments_and_transfers",
+        "transfer_timing": "payments_and_transfers",
+        "transfer_not_received_by_recipient": "payments_and_transfers",
+        "pending_transfer": "payments_and_transfers",
+        "pending_cash_withdrawal": "cards",
+        "pending_card_payment": "payments_and_transfers",
+        "transfer_declined_or_failed": "payments_and_transfers",
+        "cancel_purchase_order": "disputes_and_refunds",
+        "cancel_transfer": "payments_and_transfers",
+        "beneficiary_not_allowed": "payments_and_transfers",
+        "deposit_not_in_balance": "payments_and_transfers",
+        "transfer_not_arrived_in_balance": "payments_and_transfers",
+        "visa_or_mastercard": "cards",
+        "spare_card": "cards",
+        "order_physical_card": "cards",
+        "virtual_card_not_working": "cards",
+        "get_virtual_card": "cards",
+        "get_disposable_card": "cards",
+        "disposable_card_limits": "cards",
+        "change_pin": "cards",
+        "cash_withdrawal_declined": "cards",
+        "card_payment_declined": "cards",
+        "contactless_not_working": "cards",
+        "card_swallowed": "cards",
+        "card_not_working": "cards",
+        "link_card_in_app": "cards",
+        "card_delivery_time": "cards",
+        "card_not_arrived": "cards",
+        "card_acceptance": "cards",
+        "card_expiring": "cards",
+        "atm_support": "cards",
+        "apple_google_pay": "cards",
+        "activate_card": "cards",
+        "dispute_transaction": "disputes_and_refunds",
+        "wrong_cash_amount": "disputes_and_refunds",
+        "card_payment_reverted": "disputes_and_refunds",
+        "fee_policy_complaint": "pricing_and_fx",
+        "statement_extra_charge": "disputes_and_refunds",
+        "charged_twice": "disputes_and_refunds",
+        "refund_not_received": "disputes_and_refunds",
+        "request_refund": "disputes_and_refunds",
+        "pin_blocked": "fraud_and_security",
+        "passcode_forgotten": "fraud_and_security",
+        "lost_or_stolen_phone": "fraud_and_security",
+        "lost_or_stolen_card": "fraud_and_security",
+        "card_compromised": "fraud_and_security",
+        "unrecognised_direct_debit": "fraud_and_security",
+        "unrecognised_cash_withdrawal": "fraud_and_security",
+        "unrecognised_card_payment": "fraud_and_security"
+      }
+    },
+    {
+      "version": 1,
+      "name": "routing_C",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify the support request in `message` by the underlying problem or question the customer has.",
+        "guidance": [
+          "Focus on what the customer wants resolved, not on incidental words.",
+          "Each option describes one kind of request; choose the single best fit."
+        ]
+      },
+      "state_template": {
+        "message": "{{input}}"
+      },
+      "criteria": {
+        "activate_card": {
+          "request": "Activating a newly received card.",
+          "handled_by": "Cards team"
+        },
+        "age_limit": {
+          "request": "Minimum age to open or use an account.",
+          "handled_by": "Account and compliance team"
+        },
+        "apple_google_pay": {
+          "request": "Using Apple Pay, Google Pay or other phone wallets with the bank, including whether they can be used to top up or add money.",
+          "handled_by": "Cards team"
+        },
+        "atm_support": {
+          "request": "Which ATMs can be used, ATM locations or ATM functions.",
+          "handled_by": "Cards team"
+        },
+        "auto_top_up": {
+          "request": "Automatic top-ups when the balance is low.",
+          "handled_by": "Payments and transfers team"
+        },
+        "beneficiary_not_allowed": {
+          "request": "A transfer to a payee or beneficiary is not allowed or fails because of the beneficiary.",
+          "handled_by": "Payments and transfers team"
+        },
+        "cancel_purchase_order": {
+          "request": "Cancelling an order or purchase made with a merchant, so that the money comes back.",
+          "handled_by": "Disputes and refunds team"
+        },
+        "cancel_transfer": {
+          "request": "Cancelling or reversing a bank transfer or payment the customer sent, including one sent to the wrong account.",
+          "handled_by": "Payments and transfers team"
+        },
+        "card_acceptance": {
+          "request": "Where the card is accepted (shops, countries, merchants).",
+          "handled_by": "Cards team"
+        },
+        "card_compromised": {
+          "request": "The customer suspects their card, card details or PIN have become known to, copied by or used by someone else.",
+          "handled_by": "Fraud and security team"
+        },
+        "card_delivery_time": {
+          "request": "How long card delivery takes or when or where it can be delivered.",
+          "handled_by": "Cards team"
+        },
+        "card_expiring": {
+          "request": "The card is about to expire or has expired and needs renewing.",
+          "handled_by": "Cards team"
+        },
+        "card_not_arrived": {
+          "request": "A card that was ordered has not arrived yet; tracking card delivery.",
+          "handled_by": "Cards team"
+        },
+        "card_not_working": {
+          "request": "The card is not working at all or is broken or damaged.",
+          "handled_by": "Cards team"
+        },
+        "card_payment_declined": {
+          "request": "The card was refused or rejected at the moment of paying in a shop or online. Not a payment the customer says was cancelled afterwards.",
+          "handled_by": "Cards team"
+        },
+        "card_payment_fee": {
+          "request": "A fee was charged on a card payment.",
+          "handled_by": "Pricing and FX team"
+        },
+        "card_payment_reverted": {
+          "request": "The customer reports that a card payment they made has been cancelled, reversed or returned to the account afterwards and asks what happened. Reported after the fact, not a refusal at the moment of paying.",
+          "handled_by": "Disputes and refunds team"
+        },
+        "card_swallowed": {
+          "request": "An ATM kept or swallowed the card.",
+          "handled_by": "Cards team"
+        },
+        "cash_withdrawal_declined": {
+          "request": "The card was declined when trying to withdraw cash from an ATM.",
+          "handled_by": "Cards team"
+        },
+        "cash_withdrawal_fee": {
+          "request": "A fee was charged for withdrawing cash.",
+          "handled_by": "Pricing and FX team"
+        },
+        "change_pin": {
+          "request": "Changing or setting the card PIN, or where and how a PIN can be changed. Not a PIN that is being rejected or is blocked.",
+          "handled_by": "Cards team"
+        },
+        "charged_twice": {
+          "request": "The same payment was charged twice or more.",
+          "handled_by": "Disputes and refunds team"
+        },
+        "close_account": {
+          "request": "Closing or deleting the account.",
+          "handled_by": "Account and compliance team"
+        },
+        "contactless_not_working": {
+          "request": "Contactless payment with the card does not work.",
+          "handled_by": "Cards team"
+        },
+        "country_support": {
+          "request": "Whether the bank's account or cards are available to people living in a particular country or region, including signing up or getting a card while living abroad.",
+          "handled_by": "Account and compliance team"
+        },
+        "deposit_not_in_balance": {
+          "request": "A cash or cheque deposit has not shown up in the balance.",
+          "handled_by": "Payments and transfers team"
+        },
+        "disposable_card_limits": {
+          "request": "Limits on how often or how many disposable virtual cards can be used.",
+          "handled_by": "Cards team"
+        },
+        "dispute_transaction": {
+          "request": "The customer asks about the general process for disputing a transaction they did make, such as a purchase that went wrong; not a charge they never authorised.",
+          "handled_by": "Disputes and refunds team"
+        },
+        "edit_personal_details": {
+          "request": "Changing personal details such as name, address or phone.",
+          "handled_by": "Account and compliance team"
+        },
+        "exchange_fee": {
+          "request": "Fees or charges for exchanging currency.",
+          "handled_by": "Pricing and FX team"
+        },
+        "exchange_in_app": {
+          "request": "How to exchange or convert currencies in the app.",
+          "handled_by": "Pricing and FX team"
+        },
+        "exchange_rate": {
+          "request": "What exchange rates the bank uses, or how they are set.",
+          "handled_by": "Pricing and FX team"
+        },
+        "fee_policy_complaint": {
+          "request": "The customer argues with the bank's fee rules: says that a fee the bank applies should not apply to them at all, or complains about the bank's fees in general (new fees introduced on their account, being charged for using the bank's services, how much the bank charges). Not a question asking what an unexplained extra amount or charge on the statement or app is.",
+          "handled_by": "Pricing and FX team"
+        },
+        "foreign_use_fee": {
+          "request": "The customer noticed fees they did not expect after using the account or card abroad, while travelling or in another currency, and asks why.",
+          "handled_by": "Pricing and FX team"
+        },
+        "get_disposable_card": {
+          "request": "Getting or creating a disposable (single-use) virtual card.",
+          "handled_by": "Cards team"
+        },
+        "get_virtual_card": {
+          "request": "Getting or accessing a virtual card.",
+          "handled_by": "Cards team"
+        },
+        "identity_verification_failed": {
+          "request": "Identity verification is failing or the app cannot verify the customer.",
+          "handled_by": "Account and compliance team"
+        },
+        "link_card_in_app": {
+          "request": "Adding, linking or showing an existing card in the app, including re-enabling a card the customer had misplaced and has now found again.",
+          "handled_by": "Cards team"
+        },
+        "lost_or_stolen_card": {
+          "request": "The customer no longer has their card because it went missing or a thief took it, and wants to report or block it, or asks what happens (including fees or charges) in that situation. Not when the card has been found again.",
+          "handled_by": "Fraud and security team"
+        },
+        "lost_or_stolen_phone": {
+          "request": "The customer does not have the phone with the banking app on it (lost, stolen, or left somewhere) and asks about access to or safety of the account.",
+          "handled_by": "Fraud and security team"
+        },
+        "order_physical_card": {
+          "request": "Ordering a physical plastic card, a replacement card or getting a PIN for it.",
+          "handled_by": "Cards team"
+        },
+        "other_fee_question": {
+          "request": "Whether the bank charges anything, or deducts anything, for an activity not covered by the other fee options, such as receiving money, or whether the full amount of incoming money will arrive without deductions.",
+          "handled_by": "Pricing and FX team"
+        },
+        "passcode_forgotten": {
+          "request": "The customer cannot log in to the app because they forgot or are entering a wrong passcode.",
+          "handled_by": "Fraud and security team"
+        },
+        "pending_card_payment": {
+          "request": "A card payment (in a shop, at a petrol station, online) is still pending, stuck or taking a long time to complete.",
+          "handled_by": "Payments and transfers team"
+        },
+        "pending_cash_withdrawal": {
+          "request": "A cash withdrawal from an ATM is still showing as pending, or the withdrawn cash is not yet reflected in the balance.",
+          "handled_by": "Cards team"
+        },
+        "pending_transfer": {
+          "request": "A transfer is still pending or taking a long time.",
+          "handled_by": "Payments and transfers team"
+        },
+        "pin_blocked": {
+          "request": "The card PIN is rejected, not accepted, blocked or locked, or the customer cannot get past the PIN to use their card.",
+          "handled_by": "Fraud and security team"
+        },
+        "receiving_money": {
+          "request": "How to receive money, salary or payments from other people into the account, including which currencies incoming payments or salary can arrive in. Not questions about fees or deductions on incoming money.",
+          "handled_by": "Payments and transfers team"
+        },
+        "refund_not_received": {
+          "request": "A refund that was promised by a merchant has not appeared on the account.",
+          "handled_by": "Disputes and refunds team"
+        },
+        "request_refund": {
+          "request": "The customer wants a refund from a merchant or asks how to get money back for a purchase.",
+          "handled_by": "Disputes and refunds team"
+        },
+        "source_of_funds": {
+          "request": "Proving or verifying the source of the customer's funds.",
+          "handled_by": "Account and compliance team"
+        },
+        "spare_card": {
+          "request": "Getting an additional, second or spare card.",
+          "handled_by": "Cards team"
+        },
+        "statement_extra_charge": {
+          "request": "A small unexplained amount (typically a round amount of about one unit of currency) or an unexplained fee appears on the statement or in the app, and the customer asks what it is or says it was charged in error. Applies even if it is still pending and even if the customer says they bought nothing for that amount. Not tied to a specific service such as a card payment, transfer, withdrawal or exchange, not fees from using the account abroad or in another currency, and not a whole purchase or withdrawal of ordinary size that they never made.",
+          "handled_by": "Disputes and refunds team"
+        },
+        "supported_cards_and_currencies": {
+          "request": "Whether other cards (a credit card, a card from another provider, a brand other than the two main networks) or a given currency can be used or are accepted to add money (top up) to the account, or what the bank supports for top-ups. Not about the Visa/Mastercard network of the bank's own card, and not about how to send a transfer.",
+          "handled_by": "Pricing and FX team"
+        },
+        "supported_currencies": {
+          "request": "Which currencies can be held in the account or exchanged in the app (not about receiving incoming payments).",
+          "handled_by": "Pricing and FX team"
+        },
+        "top_up_failed": {
+          "request": "A top-up failed, was declined or did not work.",
+          "handled_by": "Payments and transfers team"
+        },
+        "top_up_fee": {
+          "request": "A fee for topping up by card or bank transfer.",
+          "handled_by": "Pricing and FX team"
+        },
+        "top_up_how": {
+          "request": "The steps or methods for adding money (topping up) to the account by card, cash, cheque or other means, or how to pay for a transfer the customer wants to send, including whether a card can be used to send money. Not which other cards, card brands or currencies are accepted for topping up.",
+          "handled_by": "Payments and transfers team"
+        },
+        "top_up_limits": {
+          "request": "Limits on how much or how often the account can be topped up.",
+          "handled_by": "Payments and transfers team"
+        },
+        "top_up_pending": {
+          "request": "A top-up is still pending or the topped-up money has not appeared.",
+          "handled_by": "Payments and transfers team"
+        },
+        "top_up_reverted": {
+          "request": "A top-up was cancelled, reverted or returned.",
+          "handled_by": "Payments and transfers team"
+        },
+        "top_up_verification": {
+          "request": "Verifying a top-up with a code or why a top-up needs verification.",
+          "handled_by": "Payments and transfers team"
+        },
+        "transaction_record": {
+          "request": "The customer wants confirmation, proof, a receipt or details for a payment or transfer they made.",
+          "handled_by": "Payments and transfers team"
+        },
+        "transfer_declined_or_failed": {
+          "request": "An outgoing transfer was declined, failed or did not go through.",
+          "handled_by": "Payments and transfers team"
+        },
+        "transfer_fee": {
+          "request": "A fee was charged for a transfer, what transfers cost, or a transfer arrived with less money than was sent because something was deducted on the way.",
+          "handled_by": "Pricing and FX team"
+        },
+        "transfer_into_account": {
+          "request": "How to move money into the account from another bank account; types of transfers supported.",
+          "handled_by": "Payments and transfers team"
+        },
+        "transfer_not_arrived_in_balance": {
+          "request": "An incoming bank transfer has not shown up in the balance.",
+          "handled_by": "Payments and transfers team"
+        },
+        "transfer_not_received_by_recipient": {
+          "request": "The person the customer sent money to says they have not received it.",
+          "handled_by": "Payments and transfers team"
+        },
+        "transfer_timing": {
+          "request": "How long transfers take to arrive.",
+          "handled_by": "Payments and transfers team"
+        },
+        "unrecognised_card_payment": {
+          "request": "A charge, purchase or deduction appears on the account that the customer did not authorise or does not recognise, or money is missing from the account without explanation. This applies even when the customer only asks why it is there or how to challenge it, and does not use the word fraud. Not a small added amount or fee on the statement that the customer thinks was charged in error.",
+          "handled_by": "Fraud and security team"
+        },
+        "unrecognised_cash_withdrawal": {
+          "request": "A cash or ATM withdrawal is listed in the app that the customer says they did not make, do not recognise, or never received.",
+          "handled_by": "Fraud and security team"
+        },
+        "unrecognised_direct_debit": {
+          "request": "A direct debit or standing payment the customer did not set up or does not recognise.",
+          "handled_by": "Fraud and security team"
+        },
+        "verify_identity": {
+          "request": "How to verify identity or what documents are needed.",
+          "handled_by": "Account and compliance team"
+        },
+        "virtual_card_not_working": {
+          "request": "A virtual card is not working or was rejected.",
+          "handled_by": "Cards team"
+        },
+        "visa_or_mastercard": {
+          "request": "Questions about the Visa or Mastercard networks: whether the bank offers, accepts or lets the customer use one or the other, or both. Treat these as questions about which network the bank's own card is on. Also choosing which kind of card the customer will get.",
+          "handled_by": "Cards team"
+        },
+        "why_verify_identity": {
+          "request": "Why identity verification is required.",
+          "handled_by": "Account and compliance team"
+        },
+        "wrong_cash_amount": {
+          "request": "An ATM gave less cash than requested, the wrong amount, or none of the cash the customer asked for, while the account was debited.",
+          "handled_by": "Disputes and refunds team"
+        },
+        "wrong_exchange_rate": {
+          "request": "The exchange rate applied to a payment or cash withdrawal abroad was wrong or worse than expected.",
+          "handled_by": "Pricing and FX team"
+        }
+      },
+      "map": {
+        "activate_card": "cards",
+        "age_limit": "account_and_compliance",
+        "apple_google_pay": "cards",
+        "atm_support": "cards",
+        "auto_top_up": "payments_and_transfers",
+        "beneficiary_not_allowed": "payments_and_transfers",
+        "cancel_purchase_order": "disputes_and_refunds",
+        "cancel_transfer": "payments_and_transfers",
+        "card_acceptance": "cards",
+        "card_compromised": "fraud_and_security",
+        "card_delivery_time": "cards",
+        "card_expiring": "cards",
+        "card_not_arrived": "cards",
+        "card_not_working": "cards",
+        "card_payment_declined": "cards",
+        "card_payment_fee": "pricing_and_fx",
+        "card_payment_reverted": "disputes_and_refunds",
+        "card_swallowed": "cards",
+        "cash_withdrawal_declined": "cards",
+        "cash_withdrawal_fee": "pricing_and_fx",
+        "change_pin": "cards",
+        "charged_twice": "disputes_and_refunds",
+        "close_account": "account_and_compliance",
+        "contactless_not_working": "cards",
+        "country_support": "account_and_compliance",
+        "deposit_not_in_balance": "payments_and_transfers",
+        "disposable_card_limits": "cards",
+        "dispute_transaction": "disputes_and_refunds",
+        "edit_personal_details": "account_and_compliance",
+        "exchange_fee": "pricing_and_fx",
+        "exchange_in_app": "pricing_and_fx",
+        "exchange_rate": "pricing_and_fx",
+        "fee_policy_complaint": "pricing_and_fx",
+        "foreign_use_fee": "pricing_and_fx",
+        "get_disposable_card": "cards",
+        "get_virtual_card": "cards",
+        "identity_verification_failed": "account_and_compliance",
+        "link_card_in_app": "cards",
+        "lost_or_stolen_card": "fraud_and_security",
+        "lost_or_stolen_phone": "fraud_and_security",
+        "order_physical_card": "cards",
+        "other_fee_question": "pricing_and_fx",
+        "passcode_forgotten": "fraud_and_security",
+        "pending_card_payment": "payments_and_transfers",
+        "pending_cash_withdrawal": "cards",
+        "pending_transfer": "payments_and_transfers",
+        "pin_blocked": "fraud_and_security",
+        "receiving_money": "payments_and_transfers",
+        "refund_not_received": "disputes_and_refunds",
+        "request_refund": "disputes_and_refunds",
+        "source_of_funds": "account_and_compliance",
+        "spare_card": "cards",
+        "statement_extra_charge": "disputes_and_refunds",
+        "supported_cards_and_currencies": "pricing_and_fx",
+        "supported_currencies": "pricing_and_fx",
+        "top_up_failed": "payments_and_transfers",
+        "top_up_fee": "pricing_and_fx",
+        "top_up_how": "payments_and_transfers",
+        "top_up_limits": "payments_and_transfers",
+        "top_up_pending": "payments_and_transfers",
+        "top_up_reverted": "payments_and_transfers",
+        "top_up_verification": "payments_and_transfers",
+        "transaction_record": "payments_and_transfers",
+        "transfer_declined_or_failed": "payments_and_transfers",
+        "transfer_fee": "pricing_and_fx",
+        "transfer_into_account": "payments_and_transfers",
+        "transfer_not_arrived_in_balance": "payments_and_transfers",
+        "transfer_not_received_by_recipient": "payments_and_transfers",
+        "transfer_timing": "payments_and_transfers",
+        "unrecognised_card_payment": "fraud_and_security",
+        "unrecognised_cash_withdrawal": "fraud_and_security",
+        "unrecognised_direct_debit": "fraud_and_security",
+        "verify_identity": "account_and_compliance",
+        "virtual_card_not_working": "cards",
+        "visa_or_mastercard": "cards",
+        "why_verify_identity": "account_and_compliance",
+        "wrong_cash_amount": "disputes_and_refunds",
+        "wrong_exchange_rate": "pricing_and_fx"
+      }
+    }
+  ]
+}

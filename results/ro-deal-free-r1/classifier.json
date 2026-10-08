@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "deal_v4",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "A buyer and a seller negotiate the price of a Craigslist item over chat. After chatting, one side submits a formal final offer outside the chat and the other side accepts or rejects it, so the chat often stops right before that step. Decide how the conversation ended, judging whether the negotiation reached (or was about to be sealed with) an agreed price.",
+  "state_template": "{{input}}",
+  "criteria": {
+    "agreed": "Both sides accepted the same price/terms in the chat: one side made an offer and the other agreed, or the other answered the offer by setting a condition (such as timing, pickup or payment method) instead of refusing and the offerer met that condition; nothing later retracted it.",
+    "agreed_then_logistics": "A price was accepted by both sides and the rest of the chat is only about pickup, payment, meeting or thanks.",
+    "final_offer_submitted": "The chat ends with one side saying they are sending, submitting or pointing to the formal final offer, or asking the other to send it, without either side having refused it.",
+    "converging_compromise": "Both sides had already moved on price, and the chat stops on an unanswered offer that essentially closes the gap: it accepts or nearly matches the other side's last number, splits a small remaining difference, or says that price would be a deal.",
+    "opening_offer_only": "The chat stops right after the first price proposal from one side (often a lowball), before the other side has countered or engaged with it.",
+    "gap_still_open": "The chat stops on an unanswered offer or counteroffer while the two sides are still clearly apart: e.g. a counter the speaker calls their floor that is well above what the buyer offered, or a buyer offer far below what the seller said they would take.",
+    "rejected_or_walked_away": "One side refused the last offer, said the gap is too big or the price is final and the other cannot pay it, or left without agreeing.",
+    "no_negotiation": "The chat is only greetings or questions about the item; no specific price was ever proposed."
+  },
+  "map": {
+    "agreed": "deal",
+    "agreed_then_logistics": "deal",
+    "final_offer_submitted": "deal",
+    "converging_compromise": "deal",
+    "opening_offer_only": "no_deal",
+    "gap_still_open": "no_deal",
+    "rejected_or_walked_away": "no_deal",
+    "no_negotiation": "no_deal"
+  }
+}

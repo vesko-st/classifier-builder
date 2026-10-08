@@ -1,0 +1,63 @@
+{
+  "run_id": "alb-hatets-opus-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 0,
+  "strategy": "boundary",
+  "mode": "all_labels",
+  "created": "2026-10-03T17:20:04",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 18358,
+    "num_turns": 38,
+    "total_cost_usd": 9.054731000000002
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.717,
+      "note": "v1 draft: 6 options mapped to hate/not_hate; over-predicts hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.6942,
+          "macro_f1": 0.6893,
+          "est_cost_usd": 0.051165,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.817,
+      "note": "v2: strict policy, 7 options (hashtags_only, slang_banter, insult_at_man_or_unknown split out)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8012,
+          "macro_f1": 0.7985,
+          "est_cost_usd": 0.062958,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 0,
+      "estimate": 0.826,
+      "note": "v3: immigrant exclusion slogans and crime framing count as hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8154,
+          "macro_f1": 0.8144,
+          "est_cost_usd": 0.068373,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

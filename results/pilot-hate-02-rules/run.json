@@ -1,0 +1,88 @@
+{
+  "run_id": "pilot-hate-02-rules",
+  "task": "tweet_hate",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "created": "2026-09-26T15:16:48",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "description-only draft, 7 options mapped to 2 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.7182,
+          "macro_f1": 0.7161,
+          "est_cost_usd": 0.08614,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 45,
+      "estimate": 0.74,
+      "note": "round1: H1-H4 (women insult/sexual-object, only women+immigrants in scope, immigrant burden/crime, explicit exclusion calls)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6061,
+          "macro_f1": 0.5904,
+          "est_cost_usd": 0.133228,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 63,
+      "estimate": 0.76,
+      "note": "round2: H5 narrowed (neutral border news not hate), H7 policy criticism not hate, examples for playful slang",
+      "test": {
+        "jev": {
+          "accuracy": 0.6037,
+          "macro_f1": 0.5838,
+          "est_cost_usd": 0.201992,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 79,
+      "estimate": 0.77,
+      "note": "round3: counter-speech not hate, generic slang not hate, women-generalisation and refugees-unwanted examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.6377,
+          "macro_f1": 0.6271,
+          "est_cost_usd": 0.240734,
+          "total": 2970,
+          "answered": 2970
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.75,
+      "note": "round4: primary-target rule narrowed (immigrants framed as threat still hate), neutral single-crime headlines not hate, graphic vs mild sexual content; fits 39/40 labels (0424 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6462,
+          "macro_f1": 0.6368,
+          "est_cost_usd": 0.297732,
+          "total": 2970,
+          "answered": 2962
+        }
+      }
+    }
+  ]
+}

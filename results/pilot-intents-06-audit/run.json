@@ -1,0 +1,73 @@
+{
+  "run_id": "pilot-intents-06-audit",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "audit_check",
+  "created": "2026-09-27T23:16:11",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 description-only flat 77-option choice",
+      "test": {
+        "jev": {
+          "accuracy": 0.8377,
+          "macro_f1": 0.8322,
+          "est_cost_usd": 0.345877,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 68,
+      "estimate": 0.8,
+      "note": "v2: feature-specific intent beats generic action intent (0639,0288)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8442,
+          "macro_f1": 0.8387,
+          "est_cost_usd": 0.355576,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 78,
+      "estimate": 0.8,
+      "note": "v3b: v2 + owner-defined transfer family (pending/timing/balance/recipient)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8403,
+          "macro_f1": 0.8352,
+          "est_cost_usd": 0.358163,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 94,
+      "estimate": 0.82,
+      "note": "v4: v2 + label-derived transfer family rules (recipient/timing/balance)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8416,
+          "macro_f1": 0.836,
+          "est_cost_usd": 0.368249,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

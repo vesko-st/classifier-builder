@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "classifier",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Classify the persuader message by its primary persuasion strategy. Look at whether the message is advancing the donation goal, asking a direct question, or engaging in dialogue. Each message gets exactly one label based on its most prominent strategy.",
+  "state_template": "Classify the following persuader message:\n\n{{input}}",
+  "criteria": {
+    "acknowledgement": "Simply agreeing with what the persuadee said, without complimenting them. E.g., 'You're right', 'I agree', 'Me too', 'I think you're correct'.",
+    "ask-donation-amount": "The persuader directly asking the persuadee how much they want to donate RIGHT NOW (as a direct question). E.g., 'How much would you like to donate?', 'What amount works for you?'. (Note: quoting or restating a previous question is not this; it's donation-information.)",
+    "credibility-appeal": "Building trust by describing the organization's trustworthiness, history, reach, proven track record, fund usage, scope of work, or defending its existence/validity. E.g., 'We've been around 70 years', 'Save the Children helps children worldwide', '86% of funds go directly to programs', 'Just because you don't see it doesn't mean it doesn't exist'.",
+    "donation-information": "Providing practical information about donating: payment methods, donation options, amounts available, or explaining/clarifying a donation process. E.g., 'You can donate via credit card or PayPal', 'Options are $1, $5, or $10', 'Did they tell you how much?'.",
+    "emotion-appeal": "Making emotional appeals about children's suffering or hardship, where the emotional impact dominates. E.g., '16,000 children die daily' (framed emotionally), 'Children are separated from families', 'It's so sad what they endure', 'One child was killed in the war'.",
+    "foot-in-the-door": "Proposing a small initial donation/step as a starting point, with the implication of escalation. E.g., 'Could you start with just 50 cents?', 'Even a dollar helps, and you could give more later', 'Let's start small'.",
+    "greeting": "Simple greetings and opening social pleasantries, including reciprocal responses to 'how are you' type questions. E.g., 'Hi', 'Hello', 'How are you?', 'I'm doing well', 'Good morning', 'I'm pretty good'.",
+    "logical-appeal": "Providing statistics, facts, or logical arguments for why donating is effective or needed, showing evidence of impact/need. E.g., 'Our programs have 95% success rate', 'A dollar feeds a child for a day', '$5 provides medicine'.",
+    "off-task": "Completely unrelated to the charity/donation task. E.g., 'The weather is nice', personal comments about unrelated weekend plans, discussions not tied to the task or charity.",
+    "other": "On-topic but doesn't fit any specific strategy. E.g., answering a question that doesn't fit other categories, confirming amounts, closing remarks, general commentary. E.g., 'Bucket lists are all well and good, but sometimes we help now'.",
+    "personal-related-inquiry": "Asking the persuadee about their personal life, experiences, or circumstances. E.g., 'Have you ever experienced hardship?', 'What's your situation?', 'Do you have family?'.",
+    "personal-story": "Narrating a personal story or anecdote (a statement, not a question). E.g., 'I have a friend who lost a child to hunger', 'My sister donated last year and felt great', 'The founder heard about a family in need'.",
+    "praise-user": "Complimenting or praising the persuadee personally (about their character, generosity, etc.). E.g., 'That's very generous', 'Good for you', 'You have a kind heart'.",
+    "proposition-of-donation": "Suggesting or proposing that the persuadee donate, usually as a yes/no ask. E.g., 'Would you donate?', 'Consider donating to Save the Children', 'You could help by donating'.",
+    "self-modeling": "Showing that the persuader is also donating, willing to help, or taking action themselves. E.g., 'I'm going to donate', 'I would donate if I could', 'I already gave', 'We should donate'.",
+    "source-related-inquiry": "Asking whether the persuadee knows or has heard of Save the Children. E.g., 'Have you heard of Save the Children?', 'Are you familiar with this charity?'.",
+    "task-related-inquiry": "Asking about the task, HIT, or research itself (meta-questions). E.g., 'Do we need 10 chats to complete this?', 'Will the money be deducted?'.",
+    "thank": "Thanking the persuadee or expressing gratitude. E.g., 'Thank you', 'Thanks so much', 'I appreciate your willingness'."
+  }
+}

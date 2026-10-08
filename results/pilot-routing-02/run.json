@@ -1,0 +1,72 @@
+{
+  "run_id": "pilot-routing-02",
+  "task": "banking77_routing",
+  "budget": 100,
+  "created": "2026-09-25T22:44:10",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.78,
+      "note": "v1: 77 banking77 intents mapped to 6 teams by guess; no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8315,
+          "macro_f1": 0.7999,
+          "est_cost_usd": 0.261388,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 72,
+      "estimate": 0.88,
+      "note": "v2: map fitted to 36 labels (8 overrides)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9175,
+          "macro_f1": 0.9124,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 80,
+      "estimate": 0.88,
+      "note": "v3: sharper descriptions for cross-team confusable intent pairs",
+      "test": {
+        "jev": {
+          "accuracy": 0.9182,
+          "macro_f1": 0.916,
+          "est_cost_usd": 0.282512,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 80,
+      "estimate": 0.89,
+      "note": "v5: change_pin->fraud (label), new pin_not_received option->cards (label)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9341,
+          "macro_f1": 0.9315,
+          "est_cost_usd": 0.288848,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

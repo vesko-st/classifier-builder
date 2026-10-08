@@ -1,0 +1,62 @@
+{
+  "run_id": "xm-hatets-sonnet-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-29T15:37:39",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": null,
+    "wall_seconds": 111,
+    "num_turns": 19,
+    "total_cost_usd": 0.35599470000000005
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 29,
+      "estimate": 0.7,
+      "note": "policy criteria draft",
+      "test": {
+        "jev": {
+          "accuracy": 0.7237,
+          "macro_f1": 0.6908,
+          "est_cost_usd": 0.042561,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 77,
+      "estimate": 0.72,
+      "note": "v3: broader woman slur test w/ playful exclusion",
+      "test": {
+        "jev": {
+          "accuracy": 0.816,
+          "macro_f1": 0.8115,
+          "est_cost_usd": 0.046566,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.78,
+      "note": "v3 final; 10/11 on fresh random labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.816,
+          "macro_f1": 0.8115,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

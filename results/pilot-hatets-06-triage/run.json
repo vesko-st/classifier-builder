@@ -1,0 +1,88 @@
+{
+  "run_id": "pilot-hatets-06-triage",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "triage",
+  "created": "2026-09-28T16:15:40",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v0 description-only draft, 7 options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7123,
+          "macro_f1": 0.696,
+          "est_cost_usd": 0.046492,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 35,
+      "estimate": 0.78,
+      "note": "v1 criteria: (imm_target & imm_hostile) OR (women_target & women_degrade), mirrors owner answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.7191,
+          "macro_f1": 0.6758,
+          "est_cost_usd": 0.052352,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 51,
+      "estimate": 0.8,
+      "note": "v2 criteria loosened per round-1 labels + decision threshold hate>=0.7",
+      "test": {
+        "jev": {
+          "accuracy": 0.8086,
+          "macro_f1": 0.804,
+          "est_cost_usd": 0.05962,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 67,
+      "estimate": 0.8,
+      "note": "v3: author-voice immigration hostility + single hostile-gendered-slur question, threshold 0.7",
+      "test": {
+        "jev": {
+          "accuracy": 0.7826,
+          "macro_f1": 0.7821,
+          "est_cost_usd": 0.059027,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 83,
+      "estimate": 0.8,
+      "note": "v3 criteria with threshold 0.75 (29/34 labels, check 9/10)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7894,
+          "macro_f1": 0.788,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

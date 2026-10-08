@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v3",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "women_dehumanization": {
+      "instructions": "Does this tweet make a blanket dehumanizing generalization about women's character, worth, or role? (e.g., 'women are gold-digging whores', 'women deserve abuse'). Exclude personal insults or slang about a specific person."
+    },
+    "women_sexual_degradation": {
+      "instructions": "Does this tweet sexually threaten, degrade, or objectify women? Look for rape threats, sexual slurs used to demean, or explicit sexual violence. Exclude crude slang or joking self-deprecation in non-sexual contexts."
+    },
+    "immigrant_exclusion": {
+      "instructions": "Does this tweet actively advocate excluding, deporting, or removing immigrants as a group? Look for statements like 'get them out', 'send them back', 'build the wall to keep them out'. Exclude political slogans or hashtags if they're not the main point of the tweet."
+    },
+    "immigrant_demean": {
+      "instructions": "Does this tweet demean immigrants as a group using dehumanizing stereotypes or generalizations (e.g., 'they are rapists/criminals/lazy/worthless')? Exclude factual claims about specific incidents or policy discussions."
+    }
+  },
+  "rule": [
+    [
+      "women_dehumanization"
+    ],
+    [
+      "women_sexual_degradation"
+    ],
+    [
+      "immigrant_exclusion"
+    ],
+    [
+      "immigrant_demean"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate"
+}

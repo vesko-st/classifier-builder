@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v6_ens3",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v3",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "imm_hostile": {
+          "instructions": {
+            "question": "Does this tweet express hostility toward immigrants, migrants, refugees or asylum seekers as a group (not merely support a restrictive immigration policy)?",
+            "counts_as_hostility": [
+              "dehumanising terms: invaders, animals, parasites, vermin, rapefugees, savages, breeding like rats, wetbacks",
+              "portraying immigrants/illegal aliens as a class as criminals, rapists, murderers, child molesters, gang members, terrorists or disease carriers, including sharing a crime story about an illegal alien to argue against immigrants",
+              "portraying them as welfare drains, job thieves, identity thieves, or a burden stealing from citizens",
+              "a hostile standalone demand to throw them out ('Send them all back!', 'get these people out') aimed at the people rather than arguing policy"
+            ],
+            "does_not_count": [
+              "bare slogans or hashtags (#BuildTheWall, #DeportThemAll, #SendThemBack, #MAGA) without hostile content about immigrants",
+              "neutral policy talk: funding the wall, ending DACA, enforcing law, border security, voting",
+              "attacks on politicians, Democrats, liberals or the media",
+              "discussing whether the term 'illegal alien' is acceptable",
+              "criticising or condemning anti-immigrant racism"
+            ]
+          }
+        },
+        "women_group_hate": {
+          "instructions": "Does the tweet make an explicit misogynistic claim about women as a whole — that women are inferior, deserve violence or rape, should be subordinate, or are worthless because they are women? Generic street slang about 'hoes' or 'bitches' (e.g. 'these hoes ain't loyal') does not count."
+        },
+        "misogynist_attack": {
+          "instructions": {
+            "question": "Does the author use a gendered or sexual slur (bitch, hoe, whore, slut, cunt, skank) or sexual degradation as a genuine hostile attack on a person who is, or could be, a woman — insulting, shaming, degrading or threatening them?",
+            "yes_examples": [
+              "'@user shut up you dumb ass hoe'",
+              "'you a whore anyways so don't complain bitch'",
+              "'i hope this bitch gets raped'",
+              "'she's a hoe, she's a bitch, she's ugly'"
+            ],
+            "no_when": [
+              "the target is clearly a man (he/him, a male name, 'bitch ass nigga')",
+              "affectionate or friendly teasing between friends ('I love you bitch', 'bitch you were supposed to be home')",
+              "the author describes herself",
+              "exclamations or filler ('BITCH this song', 'bitch I'm broke')",
+              "an unknown stranger over a minor annoyance ('whoever stole my shoes is a bitch')",
+              "song lyrics or quotes with no one targeted",
+              "no slur is used"
+            ]
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_hostile"
+        ],
+        [
+          "misogynist_attack"
+        ],
+        [
+          "women_group_hate"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v4",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "imm_hostile": {
+          "instructions": {
+            "question": "Does this tweet express hostility toward immigrants, migrants, refugees or asylum seekers as a group (not merely support a restrictive immigration policy)?",
+            "counts_as_hostility": [
+              "dehumanising terms: invaders, animals, parasites, vermin, rapefugees, savages, breeding like rats, wetbacks",
+              "portraying immigrants/illegal aliens as a class as criminals, rapists, murderers, child molesters, gang members, terrorists or disease carriers, including sharing a crime story about an illegal alien to argue against immigrants",
+              "portraying them as welfare drains, job thieves, identity thieves, or a burden stealing from citizens",
+              "a hostile standalone demand to throw them out ('Send them all back!', 'get these people out') aimed at the people rather than arguing policy"
+            ],
+            "does_not_count": [
+              "bare slogans or hashtags (#BuildTheWall, #DeportThemAll, #SendThemBack, #MAGA) without hostile content about immigrants",
+              "neutral policy talk: funding the wall, ending DACA, enforcing law, border security, voting",
+              "attacks on politicians, Democrats, liberals or the media",
+              "discussing whether the term 'illegal alien' is acceptable",
+              "criticising or condemning anti-immigrant racism"
+            ]
+          }
+        },
+        "misogynistic_abuse": {
+          "instructions": "Is the author angry at or contemptuous of someone and using a gendered or sexual slur (bitch, whore, hoe, slut, cunt, skank) or sexual degradation to insult, shame or threaten them?",
+          "criteria": {
+            "true": "a genuine hostile attack: '@user shut up you dumb ass hoe', 'you a whore anyways so don't complain bitch', 'i hope this bitch gets raped', 'groupie ass hoe'",
+            "false": "affectionate or playful use with friends ('I love you bitch', 'bitch you were supposed to be home', 'drink some water bitch'), self-description, exclamations or filler ('BITCH HOLD UP', 'bitch I'm broke'), a stranger over a minor annoyance ('whoever took my shoes is a bitch'), song lyrics with no one targeted, or no slur at all"
+          }
+        },
+        "women_group_hate": {
+          "instructions": "Does the tweet make an explicit misogynistic claim about women as a whole — that women are inferior, deserve violence or rape, should be subordinate, or are worthless because they are women? Generic street slang about 'hoes' or 'bitches' (e.g. 'these hoes ain't loyal') does not count."
+        },
+        "target_not_female": {
+          "instructions": "Is the person being insulted in this tweet clearly NOT a woman — clearly a man (he/him, a male name, 'bitch ass nigga', 'boy'), the author talking about herself, or no actual person being insulted at all? Answer no if the target is a woman or girl, or an @user / 'you' whose gender is not stated."
+        }
+      },
+      "rule": [
+        [
+          "imm_hostile"
+        ],
+        [
+          "misogynistic_abuse",
+          "!target_not_female"
+        ],
+        [
+          "women_group_hate"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v3b",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "imm_hostile": {
+          "instructions": {
+            "question": "Is this tweet hostile to immigrants, refugees, migrants or 'illegal aliens' as people, beyond simply backing a tougher immigration policy?",
+            "yes_if": [
+              "it calls them invaders, animals, parasites, savages, rapefugees or similar dehumanising names",
+              "it paints them as a group as criminals, rapists, killers, molesters, gangsters, terrorists or diseased — e.g. spreading a crime story about an illegal alien as a reason to deport them",
+              "it paints them as leeches on welfare or thieves of jobs, identities and taxpayer money",
+              "it angrily demands they all be thrown out, as contempt for the people rather than a policy argument"
+            ],
+            "no_if": [
+              "it only uses slogans or hashtags such as #BuildTheWall, #DeportThemAll, #SendThemBack or #MAGA",
+              "it discusses policy: wall funding, DACA, law enforcement, borders, elections",
+              "its anger is aimed at politicians, Democrats, liberals or the press",
+              "it debates the phrase 'illegal alien'",
+              "it condemns racism against immigrants"
+            ]
+          }
+        },
+        "women_group_hate": {
+          "instructions": "Does the tweet state an explicit misogynistic view of women in general — that women are inferior, should be subordinate, deserve violence or rape, or are worthless for being women? Everyday slang about 'hoes' or 'bitches' ('these hoes ain't loyal') does not count."
+        },
+        "misogynist_attack": {
+          "instructions": {
+            "question": "Is the author really going after someone — a woman, or a person who might be a woman — by calling them bitch, hoe, whore, slut, cunt or skank, or by degrading them sexually, in order to insult, shame or threaten them?",
+            "yes_examples": [
+              "'@user bitch don't @ me you dumb ass hoe'",
+              "'You are a whore anyways, so don't complain bitch'",
+              "'@user i hope this bitch gets raped'",
+              "'she's a hoe, she's a bitch, she's ugly'"
+            ],
+            "no_when": [
+              "the person insulted is plainly male",
+              "it is warm or playful talk between friends ('love you bitch', 'bitch you were supposed to be home')",
+              "the author is talking about herself",
+              "the word is an exclamation or filler ('BITCH this song', 'bitch I'm broke')",
+              "it's a shrug at an unknown stranger over something small ('whoever took my shoes is a bitch')",
+              "it is lyrics or a quote with no target",
+              "no such slur appears"
+            ]
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_hostile"
+        ],
+        [
+          "misogynist_attack"
+        ],
+        [
+          "women_group_hate"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ]
+}

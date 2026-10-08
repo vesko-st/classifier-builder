@@ -1,0 +1,34 @@
+{
+  "version": 1,
+  "name": "donation_v4",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "In this chat a persuader asks the persuadee to hand over part of their earnings from the study to a charity helping kids. After the chat, the persuadee privately chose how much to actually give, and what people say in the chat does not always match what they later do. Read the persuadee's messages closely and pick the option that best describes how firmly and sincerely they committed.",
+  "state_template": "Charity chat:\n{{input}}",
+  "criteria": {
+    "eager_commitment": "The persuadee shows real interest in the cause, readily offers or accepts a specific amount within the study payment, and sounds sincere and engaged (asks questions, explains their reasons, or offers to give more).",
+    "agreed_after_resistance": "The persuadee first declined, said not now, or pushed back, and only named an amount after the persuader kept pressing.",
+    "passive_agreement": "The persuadee names or accepts an amount, but mostly goes along with the persuader: short, flat replies, little interest in the charity, seems to want the chat to end.",
+    "confused_commitment": "The persuadee commits but seems confused about how the donation works, for example thinks they will pay later on a website, or names an amount larger than what the study pays.",
+    "agreed_no_amount": "The persuadee says they will give something from the payment but never states an amount.",
+    "leaning_yes": "The persuadee is positive about the charity and sounds likely to give, but never clearly commits.",
+    "undecided": "The persuadee stays undecided, says they will think about it, or the chat ends before they decide.",
+    "later_or_elsewhere": "The persuadee says they will give only at another time, on their own, or through another channel, but not from this payment.",
+    "refused": "The persuadee declines to give from this payment, or takes back an earlier agreement."
+  },
+  "map": {
+    "eager_commitment": "donated",
+    "agreed_after_resistance": "not_donated",
+    "passive_agreement": "donated",
+    "confused_commitment": "donated",
+    "agreed_no_amount": "donated",
+    "leaning_yes": "donated",
+    "undecided": "not_donated",
+    "later_or_elsewhere": "not_donated",
+    "refused": "not_donated"
+  },
+  "decision": {
+    "class": "not_donated",
+    "threshold": 0.3
+  }
+}

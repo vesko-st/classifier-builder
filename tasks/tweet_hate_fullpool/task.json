@@ -1,0 +1,12 @@
+{
+  "name": "tweet_hate",
+  "description": "Label tweets as hateful or not, following our annotation policy for hate speech.",
+  "input": "A tweet. User mentions are anonymised as @user.",
+  "label_type": "single",
+  "classes": {
+    "hate": "Hateful under the policy",
+    "not_hate": "Not hateful under the policy"
+  },
+  "metric": "macro_f1",
+  "source": "tweet_eval / SemEval-2019 Task 5 HatEval (English)"
+}

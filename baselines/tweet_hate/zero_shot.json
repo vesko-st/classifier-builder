@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "name": "tweet_hate_zero_shot",
+  "description": "0-point baseline from the public task definition.",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Label tweets as hateful or not, following our annotation policy for hate speech. Which class does this input belong to?",
+  "criteria": {
+    "hate": "Hateful under the policy",
+    "not_hate": "Not hateful under the policy"
+  },
+  "state_template": "A tweet. User mentions are anonymised as @user.\n\n{{input}}"
+}

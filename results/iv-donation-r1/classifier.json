@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "name": "donation_v9",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "This is a chat in a study. The persuader asks the persuadee to donate part of the persuadee's task payment (up to about $2) to a children's charity (Save the Children); the donation is taken from the payment after the chat. Judge where the persuadee ended up by the end of the chat: what did they finally commit to about donating from this task payment?",
+    "notes": [
+      "Only the persuadee's decision counts, not the persuader's.",
+      "If the persuadee changes their mind, their final stance counts.",
+      "What matters most is whether the persuadee names how much they will give: a stated figure or share, however small, implausibly large, or promised for a later time, signals a donation; agreeing in principle without ever saying how much does not. The exception is a persuadee who says they will give through another channel instead (going to the charity's own website, donating there or in person on their own): that does not count, even with a figure.",
+      "Saying yes to a specific figure that the persuader proposed for the persuadee's own donation counts the same as the persuadee naming that figure. Saying yes to a general question such as whether they would like to donate does not settle an amount.",
+      "A figure offered only as a possibility (with may, might, maybe, perhaps, or I could possibly) and never firmed up is tentative, not a commitment.",
+      "Talk about the persuadee's past or usual giving to other causes is not a decision about this donation."
+    ]
+  },
+  "state_template": "{{input}}",
+  "criteria": {
+    "firm_amount": "The persuadee commits to donating a specific amount or share (a number of cents or dollars, half, all of it) and does not take it back or move it to another channel.",
+    "accepts_proposed_amount": "The persuader proposes a specific figure (a number of cents or dollars, or a share such as half) for the persuadee's own donation, and the persuadee accepts that figure (says yes, agrees, that works) without naming a different one or backing out.",
+    "vague_quantity": "The persuadee commits to giving and describes the size only loosely, such as a small amount, a little, or some of the payment.",
+    "large_amount": "The persuadee names a figure larger than the task payment could cover (such as tens, hundreds or more dollars) as their donation, showing willingness but a misunderstanding of the setup.",
+    "later_with_amount": "The persuadee names a figure they will give at a later time (next week, when paid), without saying it will go through the charity's website or some other channel.",
+    "agrees_no_amount": "The persuadee says yes to donating or that they will donate, but no amount is ever settled: they never say how much, even loosely (all, half, a little), and never accept a specific figure proposed for them; this includes saying yes only to a general request to donate.",
+    "tentative": "The persuadee only says they might, may, or will consider donating, including floating a figure as a mere possibility (maybe a few cents, I may do a quarter) without ever firming it up.",
+    "other_channel": "The persuadee says they will give through the charity's website or on their own outside this chat task, instead of through the task, whether or not they name a figure.",
+    "later_no_amount": "The persuadee says they will donate at some later time or after doing research, without naming any figure.",
+    "other_help_only": "The persuadee offers only other help, such as volunteering, spreading the word, or getting others to donate, but no money of their own.",
+    "refuses": "The persuadee declines to donate, chooses zero, or decides to keep the whole payment, including retracting an earlier offer.",
+    "never_decided": "The donation is never settled by the persuadee: the chat drifts to other topics or to their giving to other causes, the persuadee only asks questions, or the text is too garbled to show any decision."
+  },
+  "map": {
+    "firm_amount": "donated",
+    "accepts_proposed_amount": "donated",
+    "vague_quantity": "donated",
+    "large_amount": "donated",
+    "later_with_amount": "donated",
+    "agrees_no_amount": "not_donated",
+    "tentative": "not_donated",
+    "other_channel": "not_donated",
+    "later_no_amount": "not_donated",
+    "other_help_only": "not_donated",
+    "refuses": "not_donated",
+    "never_decided": "not_donated"
+  }
+}

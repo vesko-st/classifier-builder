@@ -1,0 +1,107 @@
+{
+  "run_id": "xs-routing-uncertainty-r1",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-30T11:20:08",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 413,
+    "num_turns": 37,
+    "total_cost_usd": 1.4134026
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: 70 fine-grained intent options mapped to 6 teams, mapping guessed from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.801,
+          "macro_f1": 0.7801,
+          "est_cost_usd": 0.262209,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.8,
+      "note": "v2: PIN/passcode -> fraud, declined ATM -> cards, batch-1 examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.839,
+          "macro_f1": 0.8216,
+          "est_cost_usd": 0.299064,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.82,
+      "note": "v3: cancel card transaction -> fraud, reverted/cancelled -> disputes, batch-2 examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.839,
+          "macro_f1": 0.8214,
+          "est_cost_usd": 0.331135,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.84,
+      "note": "v4: pending ATM -> cards, extra statement charge -> disputes, batch-3 examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.8625,
+          "macro_f1": 0.8493,
+          "est_cost_usd": 0.354689,
+          "total": 3080,
+          "answered": 3069
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.85,
+      "note": "v5: source of funds -> account, fee-shouldn't-apply -> pricing, batch-4 examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.8698,
+          "macro_f1": 0.8591,
+          "est_cost_usd": 0.373034,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.82,
+      "note": "v6 final: declined card payment -> payments, ATM FX -> disputes, supported cards -> pricing, batch-5 examples; 50/50 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8792,
+          "macro_f1": 0.8727,
+          "est_cost_usd": 0.419459,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

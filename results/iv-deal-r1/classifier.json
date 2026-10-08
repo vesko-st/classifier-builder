@@ -1,0 +1,131 @@
+{
+  "version": 1,
+  "name": "deal_ens4t",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_vA",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "A buyer and a seller negotiated over chat about a Craigslist listing. Decide whether they ended up agreeing on a deal. Read the whole chat and pick the description that best fits how the negotiation stands at the end.",
+        "rules": [
+          "A deal exists when one side named a price (or a full set of terms) and the other side accepted it, in any wording, casual or formal, and the agreement was not withdrawn.",
+          "If the final message accepts the price the other side just proposed, that is agreement, not an open proposal.",
+          "If a clear mutual agreement was reached earlier, a later throwaway remark, pleasantry, joke or small logistics question does not undo it.",
+          "If after agreeing, one side raises a new substantive condition, extra item or different price that the other side never accepts, the agreement is not settled.",
+          "Talk about submitting, sending or entering an offer, or about the offer system misbehaving, is only background: the outcome depends on whether the chat itself shows both sides agreeing on a specific price. A claim that an offer was accepted on the website, with no agreed price visible in the chat, is not a deal.",
+          "Saying you want to buy, or welcoming that interest, is not a deal unless a specific price was proposed and accepted (accepting the listing price counts).",
+          "After a price is accepted, a follow-up request for a minor extra such as delivery, shipping or a pickup time that the other side answers positively, even tentatively, leaves the deal in place.",
+          "A reply that accepts the other side's last number (ok, will do, fine) counts as acceptance even if it repeats the number wrongly or leaves it out, or moves straight on to exchanging contact details.",
+          "Once one side has explicitly accepted the other's last number, a final reply that is unclear, garbled or a figure of speech, rather than a clear refusal or a new number, leaves the deal in place.",
+          "Accepting the other side's price together with an extra the other side had already offered or agreed to is acceptance, not a new unresolved condition.",
+          "If, after discussing the item, the buyer says the asking price is acceptable and commits to buy or to submit an offer at it, and the seller responds by moving forward, that is a deal at the listing price even without a number being repeated. A bare opening wish to buy, before any discussion of terms, is still not a deal.",
+          "If the final message comes from the side that received the latest price proposal and it accepts a price, it is a deal even when the acceptance is imperfect: it offers more than was asked, misstates the unit (each versus the pair), tells the other side to go ahead and make the offer, or mentions an extra the other side had already offered.",
+          "If one side announces that it will now submit or send its offer and the other side welcomes that, treat it as a deal even when the exact number was not settled in the chat, unless the chat shows that offer being rejected.",
+          "If both sides have named the same price and differ only on a minor logistics point such as who picks up or delivers, it is a deal."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "One side proposed a price or terms and the other clearly accepted, and nothing afterwards reopened it.",
+        "final_acceptance": "The last message (or one of the last) is a short acceptance of the price the other side had just proposed: yes, ok, sure, fine, deal, that works, I can do that.",
+        "agreed_then_logistics": "After settling on a price, the chat moves on to arranging pickup, delivery, payment, a visit, lease signing or paperwork, without the price agreement falling apart.",
+        "explicit_breakdown": "One or both sides refused the other's last price and walked away, said they were too far apart, declined to go any further, or said there would be no deal.",
+        "unanswered_proposal": "The last price offer or counteroffer was never accepted by the other side: the chat stops while one side is still waiting for an answer to a number, or the other side replied with a different number or a refusal.",
+        "new_condition_unresolved": "They were close to or at agreement, but then one side added a new substantive condition, extra item or different price that the other side refused or never answered.",
+        "no_price_talk": "The chat stopped before any price was proposed and accepted: only greetings, statements of interest, questions or answers about the item, or a single opening message.",
+        "broken_chat": "The chat is confused or off-task: both act as sellers or buyers, they talk about different items, or they discuss the website or task instead of negotiating, with no clear agreement on a price."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "final_acceptance": "deal",
+        "agreed_then_logistics": "deal",
+        "explicit_breakdown": "no_deal",
+        "unanswered_proposal": "no_deal",
+        "new_condition_unresolved": "no_deal",
+        "no_price_talk": "no_deal",
+        "broken_chat": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_vB",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "This is a chat between someone selling an item listed on Craigslist and someone who wants to buy it. Did the two of them settle on a deal by the end? Choose the option that describes where the conversation ended up.",
+        "rules": [
+          "They have a deal when a specific price or package of terms put forward by one person was agreed to by the other, however casually, and neither took it back.",
+          "When the closing message agrees to the figure the other person just offered, the negotiation is settled, not still open.",
+          "Once both sides have clearly agreed, later small talk, thanks, jokes or minor arrangement questions do not cancel the agreement.",
+          "If, after agreeing, someone introduces a significant new demand, an extra item or a changed price that the other person rejects or never responds to, the agreement is not settled.",
+          "Expressing interest in buying, or a friendly response to such interest, is not a deal unless a specific price was offered and agreed to (agreeing to the asking price counts).",
+          "If after agreement one side asks for a small extra such as delivery, shipping or a pickup time, and the other answers positively or tentatively positively, the deal still holds.",
+          "Agreeing to the other person's latest figure counts even if the figure is mistyped or not repeated, or the reply goes straight to swapping contact details.",
+          "Mentions of making, submitting or entering an offer, or of the website's offer feature failing, are background only: what matters is whether the conversation itself shows agreement on a specific price. Saying an offer was accepted on the site, without an agreed price appearing in the conversation, is not a deal.",
+          "When someone has plainly agreed to the other person's latest figure, a closing response that is ambiguous, garbled or idiomatic, as opposed to an outright rejection or a fresh figure, does not undo the deal.",
+          "Agreeing to the other person's figure while asking for something the other person had already volunteered or agreed to give is agreement, not a fresh unresolved demand.",
+          "When the buyer, having talked the item over, says the asking price is fine and commits to buying or to putting in an offer at that price, and the seller answers by proceeding, they have a deal at the asking price even if no figure is restated. Simply saying at the start that you would like to buy, before any terms are discussed, is still not a deal.",
+          "When the closing message is from the person who received the latest figure and it agrees to a price, the deal is done even if the agreement is clumsy: offering more than requested, getting the unit wrong (per item versus for the set), telling the other person to go ahead and make the offer, or mentioning an extra the other person already offered.",
+          "When one person says they are now going to submit or send their offer and the other responds approvingly, count it as a deal even if the exact figure was not fixed in the conversation, unless the conversation shows that offer being turned down.",
+          "When both people have stated the same figure and disagree only about a small logistics detail such as collection versus delivery, it is a deal."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed_price": "One person put forward a price or terms and the other plainly agreed, and nothing later reopened it.",
+        "closing_yes": "Among the final messages is a brief yes to the figure the other person just proposed, such as ok, sure, fine, deal, works for me.",
+        "arranging_handover": "With the price settled, they turn to arranging collection, delivery, payment, a viewing, signing a lease or paperwork, and the price agreement stays intact.",
+        "walked_away": "One or both people rejected the other's last figure and ended things, said the gap was too big, refused to move further, or said there was no deal.",
+        "open_offer": "The latest figure was never agreed to: the conversation stops with one person still waiting on a reply to a number, or the reply was a different number or a refusal.",
+        "late_new_demand": "They were nearly or fully agreed, then one person added a significant new condition, extra item or different figure that the other refused or ignored.",
+        "never_negotiated": "No price was ever offered and agreed: just greetings, expressions of interest, questions and answers about the item, or one opening line.",
+        "derailed": "The conversation is muddled or off topic: both behave as sellers or as buyers, they discuss different items, or they talk about the website or task rather than negotiating, with no clear agreement on a price."
+      },
+      "map": {
+        "agreed_price": "deal",
+        "closing_yes": "deal",
+        "arranging_handover": "deal",
+        "walked_away": "no_deal",
+        "open_offer": "no_deal",
+        "late_new_demand": "no_deal",
+        "never_negotiated": "no_deal",
+        "derailed": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_vC",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a Craigslist listing and the negotiation chat between its seller and a prospective buyer. Work out whether the negotiation closed with both parties committed to a price. Decision rules: (a) a deal means one side's specific price or terms were accepted by the other in any wording and not withdrawn; accepting the listed price counts. (b) A last message accepting the number the other side just named closes the deal. (c) After a clear agreement, pleasantries, jokes or small logistics questions change nothing. (d) A significant new condition, added item or changed price raised after agreement and refused or left unanswered means it is not settled. (e) A minor extra such as delivery, shipping or pickup time that is answered positively, even tentatively, keeps the deal. (f) Saying you want to buy, or welcoming that, is not a deal without an agreed price. (g) Accepting the other side's last number counts even if the number is mistyped or omitted, or the reply moves on to contact details. (h) Talk about submitting offers or the offer system misbehaving is background; a claim of acceptance on the website without an agreed price in the chat is not a deal. (i) After one side explicitly accepts the other's last number, a final reply that is unclear, garbled or a figure of speech, not a clear refusal or new number, keeps the deal. (j) Accepting the other side's price plus an extra the other side had already offered or agreed to is acceptance, not a new condition. (k) If after discussing the item the buyer says the asking price is acceptable and commits to buy or submit an offer at it, and the seller proceeds, it is a deal at the listing price even with no number repeated; a bare opening wish to buy before any terms are discussed is still not a deal. (l) A final message from the side that received the latest price proposal that accepts a price is a deal even if imperfect: offering more than asked, misstating the unit (each versus pair), telling the other side to make the offer, or mentioning an extra already offered. (m) If one side says it will now submit or send its offer and the other welcomes it, it is a deal even if the number was not settled in the chat, unless the offer is shown being rejected. (n) If both sides named the same price and differ only on minor logistics such as pickup versus delivery, it is a deal. Which option describes the end state?",
+      "state_template": "{{input}}",
+      "criteria": {
+        "accepted_offer": "A price or set of terms from one side was clearly accepted by the other and stayed accepted.",
+        "short_yes_at_end": "Near the end, one side gives a short yes to the price the other just put forward.",
+        "settled_and_planning": "The price is settled and they move on to pickup, delivery, payment, viewing, lease or paperwork without it unravelling.",
+        "refused_and_ended": "The last price was refused and someone gave up, said they were too far apart, would go no further, or said no deal.",
+        "pending_counter": "A price offer or counteroffer was left without acceptance: the chat stops awaiting an answer, or the answer was another number or a no.",
+        "reopened_after_agreement": "Agreement was near or reached, then a significant new condition, item or price was added and refused or left unanswered.",
+        "no_price_agreed_yet": "The chat ended before any price was proposed and accepted: greetings, interest, questions about the item, or a single opening line.",
+        "confused_chat": "The chat is confused or off task: both act as the same role, they discuss different items, or they talk about the website or task instead of negotiating, without a clear agreed price."
+      },
+      "map": {
+        "accepted_offer": "deal",
+        "short_yes_at_end": "deal",
+        "settled_and_planning": "deal",
+        "refused_and_ended": "no_deal",
+        "pending_counter": "no_deal",
+        "reopened_after_agreement": "no_deal",
+        "no_price_agreed_yet": "no_deal",
+        "confused_chat": "no_deal"
+      }
+    }
+  ],
+  "decision": {
+    "class": "deal",
+    "threshold": 0.45
+  }
+}

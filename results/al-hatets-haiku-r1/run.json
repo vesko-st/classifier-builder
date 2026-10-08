@@ -1,0 +1,48 @@
+{
+  "run_id": "al-hatets-haiku-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T15:04:59",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 310,
+    "num_turns": 54,
+    "total_cost_usd": 0.3437769500000001
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.745,
+      "note": "Baseline: simple choice between hate and not_hate with clear instructions",
+      "test": {
+        "jev": {
+          "accuracy": 0.7367,
+          "macro_f1": 0.7289,
+          "est_cost_usd": 0.032399,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.745,
+      "note": "Final: Simple choice classifier. Best among 9 iterations. Tested ensemble, two-level, and criteria approaches but simpler instruction performed best.",
+      "test": {
+        "jev": {
+          "accuracy": 0.7367,
+          "macro_f1": 0.7289,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v1",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "w_target": {
+      "instructions": "Does the tweet insult, attack or demean a woman, girl, or women (a specific person addressed or mentioned, or women in general)? Answer no if the slur is only an exclamation, self-reference, affectionate banter between friends, song lyrics, or if the target is a man, a politician who is a man, or an object/situation."
+    },
+    "w_sexual": {
+      "instructions": "Does the tweet use sexually degrading or sexually abusive language (e.g. whore/slut/cunt used to degrade, references to her sex life or sexual acts, 'suck dick'), or threaten or endorse violence or rape against a woman?"
+    },
+    "imm_dehuman": {
+      "instructions": "Does the tweet generalise negatively about immigrants, refugees, migrants or 'illegal aliens' as a group, or dehumanise them? Yes for: calling them criminals, rapists, invaders, animals, parasites, bottom feeders, 'rapefugees', 'fakefugees', disease carriers, job stealers, welfare drains, or a threat to our children/culture. No for tweets that only support a policy (the wall, ICE, ending DACA, voter ID), discuss politics or politicians, or mention immigration neutrally."
+    },
+    "imm_expel": {
+      "instructions": "Does the tweet call for immigrants, refugees or migrants to be deported, expelled, sent back or kept out (e.g. #DeportThemAll, #SendThemBack, 'send them home', 'keep them out')?"
+    },
+    "imm_negative": {
+      "instructions": "Does the tweet portray immigrants, refugees or 'illegal aliens' negatively, for example by reporting a crime committed by one, or describing them as a burden, danger or problem?"
+    }
+  },
+  "rule": [
+    [
+      "w_target",
+      "w_sexual"
+    ],
+    [
+      "imm_dehuman"
+    ],
+    [
+      "imm_expel",
+      "imm_negative"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate"
+}

@@ -1,0 +1,81 @@
+{
+  "run_id": "il-donation-r2",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 448,
+    "num_turns": 50,
+    "total_cost_usd": 1.8380406
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description: 6 options mapped to 2 classes; no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.7194,
+          "macro_f1": 0.686,
+          "est_cost_usd": 0.021876,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 58,
+      "estimate": 0.72,
+      "note": "v3: genuine vs doubtful pledge split (narrowed), undecided->not_donated; 22 labels: fixes 6 breaks 1 vs v1",
+      "test": {
+        "jev": {
+          "accuracy": 0.7362,
+          "macro_f1": 0.7269,
+          "est_cost_usd": 0.023733,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 80,
+      "estimate": 0.75,
+      "note": "v4: + oversized_pledge (amount above whole study payment) -> not_donated; 33 labels: v3->v4 fixes 7 breaks 2",
+      "test": {
+        "jev": {
+          "accuracy": 0.7194,
+          "macro_f1": 0.7157,
+          "est_cost_usd": 0.025957,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.76,
+      "note": "v5 = v4 + decision threshold donated>=0.62 (fit on 43 labels; pool 59.6% donated, owner said 55-60%)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7242,
+          "macro_f1": 0.7219,
+          "est_cost_usd": 0.0,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,93 @@
+{
+  "run_id": "al-intents-sonnet-r1",
+  "task": "banking77_intents_fullpool",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T14:39:41",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 1158,
+    "num_turns": 30,
+    "total_cost_usd": 0.9188034999999999
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.853,
+      "note": "v1 flat 77-option choice with per-class descriptions; dev n=1466 acc 0.853",
+      "test": {
+        "jev": {
+          "accuracy": 0.8815,
+          "macro_f1": 0.8792,
+          "est_cost_usd": 0.409761,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.867,
+      "note": "v2: descriptions encode label conventions from confusion pairs; dev 0.867",
+      "test": {
+        "jev": {
+          "accuracy": 0.8909,
+          "macro_f1": 0.8906,
+          "est_cost_usd": 0.501447,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 0,
+      "estimate": 0.875,
+      "note": "v3: more convention rules (beneficiary/not possible, arrival vs estimate, amex, country residents); dev 0.875",
+      "test": {
+        "jev": {
+          "accuracy": 0.9078,
+          "macro_f1": 0.9078,
+          "est_cost_usd": 0.548131,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 0,
+      "estimate": 0.881,
+      "note": "v4: cue-word rules from per-pair n-gram contrasts on building set; dev 0.881",
+      "test": {
+        "jev": {
+          "accuracy": 0.9088,
+          "macro_f1": 0.9088,
+          "est_cost_usd": 0.567658,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 0,
+      "estimate": 0.88,
+      "note": "v5: identity, phone/mugged, deposit cues; dev 0.884 (n=1466), estimate shaded for repeated dev use",
+      "test": {
+        "jev": {
+          "accuracy": 0.913,
+          "macro_f1": 0.9129,
+          "est_cost_usd": 0.587702,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "run_id": "pilot-hatets-13-policy-ens2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-28T22:00:31",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.6,
+      "note": "v0 description-only single choice",
+      "test": {
+        "jev": {
+          "accuracy": 0.7446,
+          "macro_f1": 0.7396,
+          "est_cost_usd": 0.032325,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 40,
+      "estimate": 0.65,
+      "note": "v1 criteria mirroring policy answers (4 OR clauses)",
+      "test": {
+        "jev": {
+          "accuracy": 0.607,
+          "macro_f1": 0.6062,
+          "est_cost_usd": 0.059695,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 60,
+      "estimate": 0.78,
+      "note": "v2 criteria, narrowed immigration questions; 10/10 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.7429,
+          "macro_f1": 0.7296,
+          "est_cost_usd": 0.064367,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 78,
+      "estimate": 0.8,
+      "note": "v4 criteria + women_individual clause (hostile gendered abuse of a woman), confirmed 8/9 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7956,
+          "macro_f1": 0.7952,
+          "est_cost_usd": 0.082169,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 92,
+      "estimate": 0.78,
+      "note": "v6: 3-member wording-variant ensemble of v4 criteria, hate threshold 0.60",
+      "test": {
+        "jev": {
+          "accuracy": 0.8075,
+          "macro_f1": 0.806,
+          "est_cost_usd": 0.227963,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 92,
+      "estimate": 0.79,
+      "note": "v7: + deportation enforcement/funding talk is not an exclusion demand (fixes 0213, 0249)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8035,
+          "macro_f1": 0.802,
+          "est_cost_usd": 0.246655,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 100,
+      "estimate": 0.78,
+      "note": "v8 final: + barring/keeping immigrants out counts as exclusion demand; 35/39 labels, 10/10 random",
+      "test": {
+        "jev": {
+          "accuracy": 0.8029,
+          "macro_f1": 0.8018,
+          "est_cost_usd": 0.265123,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "run_id": "xs-routing-rules-r2",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "created": "2026-09-30T14:19:57",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 739,
+    "num_turns": 41,
+    "total_cost_usd": 1.9389062000000004
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: 62 fine intents mapped to 6 teams from description alone",
+      "test": {
+        "jev": {
+          "accuracy": 0.8,
+          "macro_f1": 0.785,
+          "est_cost_usd": 0.242682,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 26,
+      "estimate": 0.8,
+      "note": "v3: round 1 rules (ATM declined/pending->cards, source of funds, supported cards/currencies->pricing, cancel transaction->payments)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8334,
+          "macro_f1": 0.8098,
+          "est_cost_usd": 0.252769,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 44,
+      "estimate": 0.85,
+      "note": "v11: 3-variant wording ensemble + round 2 rules (limits->payments, general security->account, reverted card payment->disputes, supported cards for top-up->pricing, Visa/MC choice->cards)",
+      "test": {
+        "jev": {
+          "accuracy": 0.837,
+          "macro_f1": 0.814,
+          "est_cost_usd": 0.811067,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 62,
+      "estimate": 0.86,
+      "note": "v13: round 3 rules (cancelled card payment->disputes confirmed, ATM less cash->disputes, SWIFT/top-up cards->pricing, recipient got less->transfer fee)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8419,
+          "macro_f1": 0.819,
+          "est_cost_usd": 0.832793,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.87,
+      "note": "v16 final: mapping fixes (pending card payment->cards, extra statement charge->disputes, passcode & PIN change/blocked->fraud), fee wording fixes; agrees with all 50 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8974,
+          "macro_f1": 0.886,
+          "est_cost_usd": 0.878959,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

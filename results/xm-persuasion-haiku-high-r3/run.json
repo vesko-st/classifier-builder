@@ -1,0 +1,47 @@
+{
+  "run_id": "xm-persuasion-haiku-high-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:43:52",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 303,
+    "num_turns": 45,
+    "total_cost_usd": 0.3061588
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 94,
+      "estimate": 0.76,
+      "note": "Draft classifier from policy_first strategy. 80% accuracy on 10-record check set. Main strategy: clear instructions distinguishing acknowledgement (pure agreement) from other (any added content). Next: look at remaining errors and refine edge cases.",
+      "test": {
+        "jev": {
+          "accuracy": 0.5392,
+          "macro_f1": 0.5671,
+          "est_cost_usd": 0.104561,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 99,
+      "estimate": 0.78,
+      "note": "Final classifier after policy_first strategy. 90% accuracy on 10-record check set (macro-F1: 0.782). Key refinement: clarified proposition-of-donation is asking them themselves to donate, not asking them to persuade others. Ready for submission.",
+      "test": {
+        "jev": {
+          "accuracy": 0.5353,
+          "macro_f1": 0.562,
+          "est_cost_usd": 0.106773,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

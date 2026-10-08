@@ -1,0 +1,44 @@
+{
+  "run_id": "alb-deal-opus-r2",
+  "task": "craigslist_deal_fullpool",
+  "budget": 0,
+  "strategy": "boundary",
+  "mode": "all_labels",
+  "created": "2026-10-03T20:24:02",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.86,
+      "note": "v1 draft from description: 6 options mapped to deal/no_deal. Estimate = macro-F1 0.864 on 1200 unread building records (dev untouched).",
+      "test": {
+        "jev": {
+          "accuracy": 0.9107,
+          "macro_f1": 0.8875,
+          "est_cost_usd": 0.019908,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.88,
+      "note": "v2: split open_offer into converging_offer_pending (deal) vs far_apart (no_deal); build_sub 0.887, compare vs v1 ABOVE NOISE (+71/-37). Dev not yet scored.",
+      "test": {
+        "jev": {
+          "accuracy": 0.9141,
+          "macro_f1": 0.8775,
+          "est_cost_usd": 0.022719,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

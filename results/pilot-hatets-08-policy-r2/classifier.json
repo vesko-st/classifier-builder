@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "name": "hate_v5",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "misogyny": {
+      "instructions": {
+        "question": "Does this tweet use bitch, hoe, whore, slut, cunt or similar to insult, taunt, threaten or put down a woman, girl, or women/'hoes' in general?",
+        "yes_when": [
+          "insulting or taunting a (presumably female) person: 'bitch stop it, bum ass hoe', 'you a side bitch', 'y'all hoes love making shit up', 'you hoes can't do that'",
+          "contempt for a woman: 'let that worthless cunt cry', 'fucking cunt ass bitches', 'crack whore'",
+          "sexual degradation, or threats of violence against a woman",
+          "generalisations that women or 'hoes' are whores, liars, worthless"
+        ],
+        "no_when": [
+          "the word is an exclamation, filler or self-reference ('bitch I'm omw', 'a bitch like me is broke', 'I'm a whole new bitch')",
+          "affectionate or friendly use between friends ('I love you bitch', 'let's romeo and juliet this bitch')",
+          "the target is clearly a man, a politician or a thing ('bitch ass nigga', 'Trump's a bitch')",
+          "the tweet criticises misogyny or someone else's slurs",
+          "fantasy or joke about oneself ('i need a bad bitch to...')"
+        ]
+      }
+    },
+    "anti_immigrant": {
+      "instructions": {
+        "question": "Ignoring the hashtags, does the tweet's own wording attack immigrants, refugees, migrants or illegal aliens as people?",
+        "yes_when": [
+          "it calls them animals, invaders, parasites, bottom feeders, rapefugees, savages, or similar",
+          "it generalises that they are criminals, rapists, thieves, child molesters, disease carriers or welfare leeches",
+          "it tells a crime story as proof of what 'they' or illegal aliens are like ('yet another victim of an illegal alien', 'they steal')",
+          "it says they are not wanted and must be kept out or sent home ('we don't want them here', 'illegal is illegal, go home')"
+        ],
+        "no_when": [
+          "it argues about immigration policy, the wall, DACA, ICE, amnesty, legality or voting, without insulting the people",
+          "it only reports a news story or crime, even one by an illegal alien, without a generalisation",
+          "its anger is at Democrats, liberals, politicians, Congress, the media or Twitter",
+          "the only hostile element is a hashtag such as #DeportThemAll, #SendThemBack, #BuildThatWall",
+          "it criticises anti-immigrant racism, or is about Muslims or an ethnic group not framed as migrants"
+        ],
+        "default": "If in doubt, answer no."
+      }
+    },
+    "exclusion_comment": {
+      "instructions": {
+        "question": "Is this tweet the author's own jab or rallying cry that immigrants, refugees or illegals should be removed or kept out, stated in words or through hashtags such as #SendThemBack, #DeportThemAll, #NoRefugees, #NoIllegals, #StopImmigration, #Repatriation?",
+        "yes_when": [
+          "a short comment or slogan aimed at immigrants plus exclusion hashtags ('There goes the neighborhood! #SendThemBack', 'this is infiltration #DeportThemAll')",
+          "a list of demands to deport, ban or keep out migrants",
+          "cheering deportations or removal of migrants"
+        ],
+        "no_when": [
+          "a news headline, report or link about immigration or crime, even with such hashtags",
+          "a definition or discussion of terms like 'illegal alien'",
+          "a reasoned policy argument about law, procedures, costs or politicians",
+          "the tweet is about politicians, Democrats, elections, Kavanaugh, Nike, sports or other topics with immigration hashtags tacked on"
+        ]
+      }
+    }
+  },
+  "rule": [
+    [
+      "misogyny"
+    ],
+    [
+      "anti_immigrant"
+    ],
+    [
+      "exclusion_comment"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate",
+  "decision": {
+    "class": "hate",
+    "threshold": 0.7
+  }
+}

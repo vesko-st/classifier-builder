@@ -1,0 +1,103 @@
+{
+  "run_id": "pilot-intents-09-triage",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "triage",
+  "created": "2026-09-28T16:15:40",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 description-only flat choice, 77 options",
+      "test": {
+        "jev": {
+          "accuracy": 0.8419,
+          "macro_f1": 0.8366,
+          "est_cost_usd": 0.322083,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 36,
+      "estimate": 0.82,
+      "note": "v2: round-1 rules (reactivate->linking, refund process, delivery, country)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8461,
+          "macro_f1": 0.8396,
+          "est_cost_usd": 0.33592,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 52,
+      "estimate": 0.83,
+      "note": "v3b: round-2 rules (spare card total, transfer not received, fee wording)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8477,
+          "macro_f1": 0.8411,
+          "est_cost_usd": 0.346136,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 68,
+      "estimate": 0.83,
+      "note": "v4b: round-3 rules (deposit, balance update, virtual card receipt)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8506,
+          "macro_f1": 0.8444,
+          "est_cost_usd": 0.354283,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 84,
+      "estimate": 0.84,
+      "note": "v5: round-4 rules (beneficiary, cash not recognised, currency support, recipient)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8529,
+          "macro_f1": 0.8474,
+          "est_cost_usd": 0.359327,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.85,
+      "note": "v6b: round-5 rules (currency exchange support, lost vs swallowed, card shipping); final",
+      "test": {
+        "jev": {
+          "accuracy": 0.8584,
+          "macro_f1": 0.854,
+          "est_cost_usd": 0.364241,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

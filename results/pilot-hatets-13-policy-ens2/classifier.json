@@ -1,0 +1,200 @@
+{
+  "version": 1,
+  "name": "hate_v8_ens_t060",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "hate_v4_criteria",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm_exclusion": {
+          "instructions": "Does this tweet approvingly demand that immigrants, refugees, migrants or illegal aliens themselves be deported, expelled, sent back, removed, cut off, or attacked? Demands like 'get rid of them', 'send them home', 'get them out', #DeportThemAll, #SendThemBack or #Deport attached to a story about them count. Supporting the wall, border security, ICE, ending DACA or no amnesty, by itself, does not count. Also not a demand: discussing how deportation is enforced or funded (ICE operations, budgets, census, numbers to deport) rather than demanding the people be thrown out. Demanding that they be barred or kept out also counts: 'no people from these countries should be allowed in', #NoRefugees, #NoMigrants, #RefugeesNotWelcome.",
+          "criteria": {
+            "true": "The author endorses removing or harming immigrants/refugees as people (e.g. 'Get rid of #IllegalAliens build the wall!!!!', '#LockHimUp and #Deport him #DeportThemAll'). Also demands to bar them from entering (e.g. 'we do not want them here, no people from these countries should be allowed', '#NoRefugees #NoMigrants').",
+            "false": "No demand to remove or harm the people themselves: border-wall, ICE, DACA, amnesty or election talk; news; legal or definitional points; criticism of politicians; or not about immigrants. Also operational or funding talk about deportation enforcement (e.g. 'ICE should start deportation, DACA has to end', 'only $10 million to deport 20 million illegals? they need more money')."
+          }
+        },
+        "imm_demean": {
+          "instructions": "In its own words (not just a hashtag), does this tweet demean immigrants, refugees, migrants or illegal aliens as a group: dehumanising them (invaders, animals, parasites, rapefugees, breeding like rats), or generalising them as criminals, rapists, disease carriers, welfare cheats or job thieves?",
+          "criteria": {
+            "true": "The text portrays immigrants as a group as subhuman, dangerous, criminal or parasitic.",
+            "false": "No demeaning generalisation in the text: a single news report, a policy or political claim (e.g. about votes or seats), a slogan hashtag alone, or not about immigrants."
+          }
+        },
+        "women_group": {
+          "instructions": "Does this tweet demean, degrade or express contempt for women as a group, e.g. generalising that women or 'bitches'/'hoes' in general are whores, liars, worthless or only good for sex?",
+          "criteria": {
+            "true": "A demeaning generalisation about women in general.",
+            "false": "No generalisation about women: an insult at one specific person, casual or affectionate slang (bitch, hoe as filler or banter), self-reference, or not about women."
+          }
+        },
+        "women_sexual_violence": {
+          "instructions": "Does this tweet endorse, joke approvingly about, or threaten rape or sexual violence against women?",
+          "criteria": {
+            "true": "Endorses or threatens sexual violence toward women (e.g. 'u scared to rape a bitch?').",
+            "false": "No endorsement or threat of sexual violence against women (including tweets that condemn rape)."
+          }
+        },
+        "women_individual": {
+          "instructions": "Is this tweet an angry, contemptuous attack on a particular woman or girl that degrades her with sexualised or gendered slurs (whore, slut, hoe, cunt, bitch), for example calling her a whore, worthless or disgusting, or threatening her? Ignore 'bitch' or 'hoe' used as an interjection, a form of address in casual talk ('nah bitch', 'bitch I...'), filler, lyrics, or about the author herself.",
+          "criteria": {
+            "true": "A real woman is the target and the slurs are used to degrade her with evident contempt (e.g. 'Bitch stop lying and accept it, you're a whore, move out', 'Bitch you just want attention. Dont bring your whore self in this', 'Ask this old whore to suicide').",
+            "false": "Casual or joking slang, banter or affection, exclamations, self-description, lyrics or quotes, mild annoyance, insults aimed at a man or a male politician, reporting names someone else used, or no gendered slur."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_exclusion"
+        ],
+        [
+          "imm_demean"
+        ],
+        [
+          "women_group"
+        ],
+        [
+          "women_sexual_violence"
+        ],
+        [
+          "women_individual"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "hate_v5_varB",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet to assess:\n{{input}}",
+      "questions": {
+        "imm_exclusion": {
+          "instructions": "Is the author endorsing the removal of immigrants, refugees, migrants or illegal aliens as people, i.e. demanding that they be deported, sent home, thrown out, cut off or harmed? Hashtags such as #DeportThemAll, #SendThemBack or #Deport count when attached as a demand about them. Merely backing the border wall, ICE, border security, the end of DACA, or opposing amnesty does not count on its own. Also not a demand: discussing how deportation is enforced or funded (ICE operations, budgets, census, numbers to deport) rather than demanding the people be thrown out. Demanding that they be barred or kept out also counts: 'no people from these countries should be allowed in', #NoRefugees, #NoMigrants, #RefugeesNotWelcome.",
+          "criteria": {
+            "true": "Endorses getting immigrants/refugees out or hurting them (e.g. 'We need to cut them off and get them out of here', '#Deport him #DeportThemAll'). Also demands to bar them from entering (e.g. 'we do not want them here, no people from these countries should be allowed', '#NoRefugees #NoMigrants').",
+            "false": "No demand aimed at the people themselves: wall, ICE, DACA, amnesty or voting talk, news, definitions of terms, attacks on politicians, or unrelated to immigrants. Also operational or funding talk about deportation enforcement (e.g. 'ICE should start deportation, DACA has to end', 'only $10 million to deport 20 million illegals? they need more money')."
+          }
+        },
+        "imm_demean": {
+          "instructions": "Setting hashtags aside, does the text itself degrade immigrants, refugees or migrants collectively, by calling them subhuman (invaders, animals, parasites, rapefugees, vermin) or by painting them as a group of criminals, rapists, disease spreaders, welfare leeches or job stealers?",
+          "criteria": {
+            "true": "The text paints immigrants collectively as subhuman, criminal, dangerous or parasitic.",
+            "false": "No collective degradation in the text itself: one news item, a policy or electoral claim, a slogan hashtag alone, or unrelated to immigrants."
+          }
+        },
+        "women_group": {
+          "instructions": "Does this tweet express contempt for women in general, for example claiming that women, or 'bitches' and 'hoes' as a category, are whores, liars, worthless or good only for sex?",
+          "criteria": {
+            "true": "Contemptuous generalisation about women as a whole.",
+            "false": "No claim about women in general: an insult at one person, casual or friendly slang, self-reference, or not about women."
+          }
+        },
+        "women_sexual_violence": {
+          "instructions": "Does this tweet threaten, endorse or make light of raping or sexually assaulting women?",
+          "criteria": {
+            "true": "Threatens or endorses sexual violence toward women (e.g. 'u scared to rape a bitch?').",
+            "false": "No threat or endorsement of sexual violence toward women, including tweets condemning rape."
+          }
+        },
+        "women_individual": {
+          "instructions": "Is the author hostile toward a specific woman or girl and using slurs such as whore, slut, hoe, cunt or bitch to degrade or threaten her with real contempt? Do not count 'bitch' or 'hoe' as a casual interjection, a friendly way of addressing someone, filler, song lyrics, or the author talking about herself.",
+          "criteria": {
+            "true": "A woman is attacked and degraded with gendered slurs out of real contempt (e.g. 'Bitch stop lying and accept it, you're a whore', 'Dont bring your whore self in this', 'Ask this old whore to suicide').",
+            "false": "Friendly or joking slang, affection, exclamations, self-description, lyrics or quotes, mild irritation, insults at a man or male politician, reporting what others called you, or no gendered slur."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_exclusion"
+        ],
+        [
+          "imm_demean"
+        ],
+        [
+          "women_group"
+        ],
+        [
+          "women_sexual_violence"
+        ],
+        [
+          "women_individual"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "hate_v5_varC",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Here is a tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "imm_exclusion": {
+          "instructions": "Does the author want immigrants, refugees, migrants or illegal aliens gone or hurt: calling for them to be deported, expelled, sent back, removed or attacked (including demand hashtags like #DeportThemAll, #SendThemBack, #Deport about them)? Support for a wall, ICE, border security, ending DACA or no amnesty is not enough by itself. Also not a demand: discussing how deportation is enforced or funded (ICE operations, budgets, census, numbers to deport) rather than demanding the people be thrown out. Demanding that they be barred or kept out also counts: 'no people from these countries should be allowed in', #NoRefugees, #NoMigrants, #RefugeesNotWelcome.",
+          "criteria": {
+            "true": "Wants the people removed or harmed (e.g. 'Get rid of #IllegalAliens build the wall!!!!'). Also demands to bar them from entering (e.g. 'we do not want them here, no people from these countries should be allowed', '#NoRefugees #NoMigrants').",
+            "false": "Talks about wall funding, ICE, DACA, amnesty, elections, news or definitions without demanding the people be removed; or is not about immigrants. Also operational or funding talk about deportation enforcement (e.g. 'ICE should start deportation, DACA has to end', 'only $10 million to deport 20 million illegals? they need more money')."
+          }
+        },
+        "imm_demean": {
+          "instructions": "Apart from any hashtags, does the wording of the tweet belittle immigrants, refugees or migrants as a whole, either dehumanising them (invaders, animals, parasites, rapefugees) or stereotyping them as criminals, rapists, carriers of disease, welfare cheats or people who steal jobs?",
+          "criteria": {
+            "true": "Immigrants as a whole are belittled as subhuman or stereotyped as criminal or parasitic.",
+            "false": "No such stereotype in the wording: a single reported case, a political or policy point, only a slogan hashtag, or not about immigrants."
+          }
+        },
+        "women_group": {
+          "instructions": "Does the tweet make a degrading sweeping statement about women (or 'bitches'/'hoes' in general), such as that they are all whores, liars, worthless or only there for sex?",
+          "criteria": {
+            "true": "A degrading sweeping statement about women.",
+            "false": "No sweeping statement about women: a remark about one person, casual slang or banter, self-reference, or not about women."
+          }
+        },
+        "women_sexual_violence": {
+          "instructions": "Does the tweet approve of, joke favourably about, or threaten rape or sexual assault against women?",
+          "criteria": {
+            "true": "Approves of or threatens sexual violence toward women.",
+            "false": "Does not approve of or threaten sexual violence toward women (condemning rape counts as no)."
+          }
+        },
+        "women_individual": {
+          "instructions": "Does the tweet angrily attack a particular woman or girl, degrading her with gendered slurs (whore, slut, hoe, cunt, bitch) or threatening her? 'Bitch' or 'hoe' used as a casual exclamation, as friendly address, as filler, in lyrics, or about the author does not count.",
+          "criteria": {
+            "true": "An angry, degrading slur-laden attack on a woman (e.g. 'Bitch you just want fucking attention. Dont bring your whore self in this').",
+            "false": "Casual, joking or affectionate use, an exclamation, self-description, lyrics, mild annoyance, a man as the target, reporting others' insults, or no gendered slur."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_exclusion"
+        ],
+        [
+          "imm_demean"
+        ],
+        [
+          "women_group"
+        ],
+        [
+          "women_sexual_violence"
+        ],
+        [
+          "women_individual"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.6
+  }
+}

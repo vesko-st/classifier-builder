@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "name": "deal_ens_v5",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A buyer and a seller negotiated over chat about a Craigslist listing. Read the whole conversation, paying most attention to how it ends. Read prices with an obvious typo (a missing or extra digit) as the amount clearly meant from context. Which description best fits how the negotiation ended?",
+      "state_template": "{{input}}",
+      "criteria": {
+        "mutual_agreement": "Both sides accepted the same price or terms: one side proposed and the other clearly said yes (agreement words, accepting the number, or moving on to pickup, delivery, payment or thanks as a settled sale). An acceptance still stands if what follows is only small talk, thanks, an apology or logistics rather than a new demand.",
+        "agreed_will_submit": "The chat ends with one side saying they will now enter, send or submit the formal offer (or telling the other to look at the offer they submitted), either after a price was agreed or after the other side invited them to name their price, and nobody objects.",
+        "open_offer_converging": "The very last message puts a concrete price or terms on the table (an offer, counter-offer, final offer, or acceptance with a condition) that the other side does not answer in the chat, and the remaining gap is small: the last proposal meets, nearly meets or splits the difference with what the other side last asked for, or invites the other side to make their formal offer. Mild irritation does not matter if the numbers are close.",
+        "open_offer_far_apart": "The very last message puts a price on the table that the other side does not answer in the chat, but the sides are still far apart: the side that would have to accept has barely moved from its asking price, has called the other's numbers far too low or too high, or holds a firm floor that the last proposal is still well short of; or the exchange is hostile, sarcastic or confused.",
+        "rejected": "One side refused the other's last offer or walked away, and the conversation ended without agreement.",
+        "stalled": "The negotiation was still under way when the chat stopped and the last message does not put a new price on the table: it asks a question about the item, asks whether the price is negotiable, or answers such a question, with no agreement reached, even if a number was mentioned earlier.",
+        "never_started": "The chat barely began: only greetings, one or two messages, or no real negotiation about price.",
+        "broken_session": "The chat went off the rails: the participants talk about different items, confuse their roles, or complain that the site or task is not working."
+      },
+      "map": {
+        "mutual_agreement": "deal",
+        "agreed_will_submit": "deal",
+        "open_offer_converging": "deal",
+        "open_offer_far_apart": "no_deal",
+        "rejected": "no_deal",
+        "stalled": "no_deal",
+        "never_started": "no_deal",
+        "broken_session": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v4_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a Craigslist listing followed by the chat in which a buyer and a seller bargained over it. Decide how the bargaining finished, judging mainly from the final few messages. If a price contains an evident typo, such as a dropped or added digit, take it as the amount the context makes clear. Pick the ending that fits best.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "mutual_agreement": "The two sides settled on one price or set of terms: someone made a proposal and the other plainly accepted it, whether by saying yes, repeating the number, or going on to arrange pickup, delivery or payment or to thank each other as for a done sale. Later chit-chat, apologies, thanks or logistics do not undo the acceptance unless they add a new demand.",
+        "agreed_will_submit": "At the end someone says they are about to put in, send or submit the official offer, or points the other to the offer they already submitted, either once a price was agreed or once the other asked them to name a price, and no objection follows.",
+        "open_offer_converging": "The final message offers a concrete price or terms (a bid, counter, final offer or a yes with a condition) and gets no reply in the chat, while the gap left is small: the proposal reaches, almost reaches or meets halfway what the other side last wanted, or asks the other to send their formal offer. A bit of annoyance does not change this when the numbers are close.",
+        "open_offer_far_apart": "The final message offers a price that gets no reply in the chat, yet the two remain well apart: the side who would need to accept has hardly come down from the asking price, has dismissed the other's numbers as much too low or high, or sticks to a firm limit the proposal still falls well short of; or the tone is hostile, mocking or muddled.",
+        "rejected": "Someone turned down the other's latest offer or gave up and left, so the chat ended with no agreement.",
+        "stalled": "The chat stopped while bargaining was still going on, and its last message brings no new price: it asks or answers a question about the item or about whether the price can move, with nothing agreed, even if numbers came up earlier.",
+        "never_started": "Hardly anything happened: just greetings, one or two messages, or no real talk about the price.",
+        "broken_session": "The conversation fell apart: the two discuss different items, mix up who is buying and who is selling, or say the website or task is malfunctioning."
+      },
+      "map": {
+        "mutual_agreement": "deal",
+        "agreed_will_submit": "deal",
+        "open_offer_converging": "deal",
+        "open_offer_far_apart": "no_deal",
+        "rejected": "no_deal",
+        "stalled": "no_deal",
+        "never_started": "no_deal",
+        "broken_session": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v4_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "You will see an item listing and a negotiation chat between a buyer and a seller. Classify the outcome visible at the end of the chat. Treat a clearly mistyped price (an extra or missing digit) as the intended amount. Choose the single best-fitting ending.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "mutual_agreement": "Agreement reached: a price or terms put forward by one party were clearly accepted by the other (explicit yes, restating the figure, or moving to logistics, payment or thanks as for a completed sale). Anything said after the acceptance that is only small talk, thanks, apology or logistics leaves the agreement in place.",
+        "agreed_will_submit": "Ends with a party announcing they will enter or send the formal offer, or referring the other to an offer already submitted, after a price was agreed or after being invited to make an offer, with no pushback.",
+        "open_offer_converging": "Ends on an unanswered concrete proposal (price, counter, final offer, or acceptance with a condition) where the sides are close: it meets, nearly meets, or splits the difference with the other side's last position, or invites the formal offer. Some irritation is irrelevant when the figures are near each other.",
+        "open_offer_far_apart": "Ends on an unanswered price proposal while the sides remain far apart: the party who must accept has barely moved from its asking price, called the other's figures far too low or high, or holds a firm limit well above or below the proposal; or the conversation is hostile, sarcastic or confused.",
+        "rejected": "Ends without agreement because one party declined the latest offer or walked away.",
+        "stalled": "Still mid-negotiation when it stops, with a final message that adds no new price: a question or answer about the item or about flexibility on price, nothing agreed, even if figures appeared earlier.",
+        "never_started": "Barely begun: greetings only, one or two messages, or no actual price discussion.",
+        "broken_session": "Derailed: the parties refer to different items, confuse their roles, or report that the site or task is not working."
+      },
+      "map": {
+        "mutual_agreement": "deal",
+        "agreed_will_submit": "deal",
+        "open_offer_converging": "deal",
+        "open_offer_far_apart": "no_deal",
+        "rejected": "no_deal",
+        "stalled": "no_deal",
+        "never_started": "no_deal",
+        "broken_session": "no_deal"
+      }
+    }
+  ]
+}

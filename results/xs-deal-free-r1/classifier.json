@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "name": "deal_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v3",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A buyer and a seller negotiated over chat about a Craigslist item. After the chat, one side may have submitted a final price that the other accepted or rejected. Judge from how the chat ENDS whether they closed a deal. If the chat ends on a price proposal nobody answered, compare that last proposed price with the other side's last stated price (or with the listing price if the other side never named one) and decide whether the gap is small (about 10% or less) or large (more than about 10%). Pick the option that best describes the end of the chat.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "One side made a price offer and the other side clearly accepted it (e.g. 'deal', 'ok', 'sounds good', 'I'll take it', 'that works'), or both confirmed the same final price. The chat may continue afterwards with pickup, payment or scheduling details.",
+        "unanswered_offer_small_gap": "The chat ends on a price proposal with no reply, and it is within about 10% of the other side's last stated price, or it meets the other side's terms (e.g. $45 vs $40, $15 vs $16, $5500 vs $5750, $1850 vs $1900, $4000 vs $3700).",
+        "unanswered_offer_large_gap": "The chat ends on a price proposal with no reply, and it is more than about 10% away from the other side's last stated price or the listing price (e.g. $1600 vs $1300, $2000 offered on a $2292 listing, $250 vs $350, $25 on a $75 item, $11500 vs $9200).",
+        "rejected_or_walked_away": "The sides could not agree: one side refused the last offer, said they were too far apart, or left without agreeing.",
+        "no_price_negotiation": "The chat ends before any real price negotiation: only greetings or questions about the item, with no price proposed by the buyer.",
+        "off_topic_or_broken": "The chat is nonsensical, off-topic, or the sides talk past each other (e.g. about a different item), so no deal is made."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "unanswered_offer_small_gap": "deal",
+        "unanswered_offer_large_gap": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "no_price_negotiation": "no_deal",
+        "off_topic_or_broken": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A buyer and a seller negotiated over chat about a Craigslist item. After the chat, the side that spoke last may have submitted its final price, which the other side then accepted or rejected. Judge from how the chat ENDS whether they closed a deal. If the chat ends on an unanswered price proposal, predict whether the other side would accept it: they usually accept when it is only a small step from their own last number (roughly 10% or less), and reject when the sides are still far apart. Pick the option that best describes the end of the chat.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "One side made a price offer and the other side clearly accepted it (e.g. 'deal', 'ok', 'sounds good', 'I'll take it', 'that works'), or both confirmed the same final price. The chat may continue afterwards with pickup, payment or scheduling details.",
+        "unanswered_offer_small_gap": "The chat ends on an unanswered price proposal that the other side would most likely accept: it is only a small step from their own last number or meets their terms (e.g. seller $45 after buyer $40, buyer $5500 after seller $5750, seller $8750 after buyer $8500).",
+        "unanswered_offer_large_gap": "The chat ends on an unanswered price proposal that the other side would most likely reject: the two numbers are still well apart (e.g. seller $8600 after buyer $7500, seller $450 after buyer $359, buyer $250 after seller $350, $25 offered on a $75 item).",
+        "rejected_or_walked_away": "The sides could not agree: one side refused the last offer, said they were too far apart, or left without agreeing.",
+        "no_price_negotiation": "The chat ends before any real price negotiation: only greetings or questions about the item, with no price proposed by the buyer.",
+        "off_topic_or_broken": "The chat is nonsensical, off-topic, or the sides talk past each other (e.g. about a different item), so no deal is made."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "unanswered_offer_small_gap": "deal",
+        "unanswered_offer_large_gap": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "no_price_negotiation": "no_deal",
+        "off_topic_or_broken": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v5",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Here is a Craigslist listing and the buyer-seller chat about its price. Once the chat stopped, the last speaker could formally submit their price and the other party chose to accept or reject it. Decide whether this negotiation ended in a deal. When the final message is a price proposal that got no reply, ask yourself whether the other party would take it: a proposal within roughly 10% of that party's own most recent number is normally taken; one that leaves a wide gap is normally refused. Choose the option that fits the ending.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "The two parties agreed on a price in the chat: one proposed it and the other said yes to it ('deal', 'ok', 'works for me', 'I'll take it'), possibly followed by talk about pickup, payment or timing.",
+        "unanswered_offer_small_gap": "The last message is a price proposal with no reply, and the other party would probably take it because it is close to their own latest number or gives them what they asked for.",
+        "unanswered_offer_large_gap": "The last message is a price proposal with no reply, and the other party would probably refuse it because the two prices are still well apart.",
+        "rejected_or_walked_away": "No agreement: one party turned down the latest offer, said the gap was too big, or left.",
+        "no_price_negotiation": "The chat stops before any price is really negotiated: greetings or item questions only.",
+        "off_topic_or_broken": "The chat makes no sense, is off topic, or the parties discuss different items, so nothing is agreed."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "unanswered_offer_small_gap": "deal",
+        "unanswered_offer_large_gap": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "no_price_negotiation": "no_deal",
+        "off_topic_or_broken": "no_deal"
+      }
+    }
+  ]
+}

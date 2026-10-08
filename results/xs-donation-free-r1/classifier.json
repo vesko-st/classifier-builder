@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "name": "donation_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v2",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "In this chat a persuader tries to get the persuadee to donate part of their task payment (up to $2) to Save the Children. After the chat, the persuadee privately chose how much to actually donate. People often say they will donate in the chat and then give $0, especially when their agreement was pressured, hesitant, vague or confused. Which description best fits the persuadee's behaviour?",
+      "state_template": "Charity-donation chat:\n{{input}}",
+      "criteria": {
+        "firm_eager": "Persuadee is genuinely enthusiastic about the charity early on and, on their own initiative, firmly and consistently commits to a specific amount from their task payment.",
+        "firm_specific": "Persuadee clearly and firmly states a specific amount they will donate from their payment (e.g. 'I will donate $0.50'), with no hedging, and does not back away.",
+        "hedged_amount": "Persuadee names an amount but hedges ('I could do', 'maybe', 'I think', 'possibly', a range) or just goes along with the persuader's suggestion.",
+        "reluctant_token": "Persuadee first refused or said they need the money, and only after pressure agreed to a tiny token amount (a few cents).",
+        "confused": "Persuadee seems confused about the task: talks about donating more than the payment (e.g. $5, $50), donating via a website or later, asks the persuader to donate, or mixes up roles.",
+        "vague_yes": "Persuadee agrees in general that they will donate but never gives a clear amount.",
+        "undecided": "Persuadee never clearly decides, or says they will think about it.",
+        "later_elsewhere": "Persuadee declines to donate from this payment, but says they may donate later, elsewhere, or help in other ways.",
+        "refused": "Persuadee clearly refuses to donate anything."
+      },
+      "map": {
+        "firm_eager": "donated",
+        "firm_specific": "donated",
+        "hedged_amount": "donated",
+        "reluctant_token": "not_donated",
+        "confused": "not_donated",
+        "vague_yes": "donated",
+        "undecided": "not_donated",
+        "later_elsewhere": "not_donated",
+        "refused": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v2b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Chat from a study: a persuader asks the persuadee to give some of their task earnings (at most $2) to the charity Save the Children. Once the chat ended, the persuadee made a private donation choice that the persuader never saw, and many who agreed during the chat actually gave nothing. Judge how the persuadee committed during the chat. Pick the best description.",
+      "state_template": "Charity-donation chat:\n{{input}}",
+      "criteria": {
+        "firm_eager": "Warm, sincere interest in the charity from early on, and they volunteer a definite amount from their earnings and stick with it.",
+        "firm_specific": "Says plainly and without hedging exactly how much they will give from their earnings, and never retracts it.",
+        "hedged_amount": "Mentions an amount only tentatively (maybe, possibly, I could, I guess, a range) or simply accepts whatever the persuader proposes.",
+        "reluctant_token": "Initially declined or said they need the money, then under pressure agreed to only a symbolic few cents.",
+        "confused": "Misunderstands the setup: promises more than the earnings (e.g. $5 or $50), plans to give via a website or at some later time, asks the persuader to give, or swaps roles.",
+        "vague_yes": "Says yes to donating in general but never names a clear amount.",
+        "undecided": "Never reaches a clear decision, or says they need to think it over.",
+        "later_elsewhere": "Won't give from these earnings, though they might give some other time, to another cause, or help another way.",
+        "refused": "Turns down donating anything."
+      },
+      "map": {
+        "firm_eager": "donated",
+        "firm_specific": "donated",
+        "hedged_amount": "donated",
+        "reluctant_token": "not_donated",
+        "confused": "not_donated",
+        "vague_yes": "donated",
+        "undecided": "not_donated",
+        "later_elsewhere": "not_donated",
+        "refused": "not_donated"
+      }
+    }
+  ],
+  "decision": {
+    "class": "donated",
+    "threshold": 0.75
+  }
+}

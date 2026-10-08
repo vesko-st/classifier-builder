@@ -1,0 +1,37 @@
+{
+  "version": 1,
+  "name": "tweet_hate",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "dehumanizing": {
+      "instructions": "Does the tweet explicitly compare people to animals, vermin, diseases, or describe them as subhuman?"
+    },
+    "violence": {
+      "instructions": "Does the tweet call for or wish for violence or physical harm against anyone?"
+    },
+    "sexualized_abuse": {
+      "instructions": "Does the tweet contain explicit sexualized abuse, rape wishes, or explicit sexual degradation?"
+    },
+    "explicit_hostility": {
+      "instructions": "Does the tweet explicitly express hatred, contempt, or hostility toward a group (with no ambiguity that it's just policy or criticism)?"
+    }
+  },
+  "rule": [
+    [
+      "dehumanizing"
+    ],
+    [
+      "violence"
+    ],
+    [
+      "sexualized_abuse"
+    ],
+    [
+      "explicit_hostility"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate"
+}

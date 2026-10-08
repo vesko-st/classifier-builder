@@ -1,0 +1,111 @@
+{
+  "run_id": "il-intents-r2",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1251,
+    "num_turns": 55,
+    "total_cost_usd": 2.5669422
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: two-level, 8 groups, 77 class descriptions from task description",
+      "test": {
+        "jev": {
+          "accuracy": 0.789,
+          "macro_f1": 0.7779,
+          "est_cost_usd": 0.422563,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.78,
+      "note": "v2: wrong-rate, wallet top-up, cards/currencies for top-up, ATM-location options placed in second groups",
+      "test": {
+        "jev": {
+          "accuracy": 0.8192,
+          "macro_f1": 0.8132,
+          "est_cost_usd": 0.46291,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.79,
+      "note": "v3: H1 PIN->get_physical_card, H2 wrong rate abroad->cash, H3 country eligibility->country_support, H4 card fails at shop->declined_card_payment",
+      "test": {
+        "jev": {
+          "accuracy": 0.8377,
+          "macro_f1": 0.8331,
+          "est_cost_usd": 0.492425,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 40,
+      "estimate": 0.8,
+      "note": "v5b: ensemble of 2 wording variants of two-level; H2/H3 narrowed, H8 own transfer not showing->balance_not_updated, H10 revert own transaction->cancel_transfer",
+      "test": {
+        "jev": {
+          "accuracy": 0.8396,
+          "macro_f1": 0.8346,
+          "est_cost_usd": 1.033801,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 68,
+      "estimate": 0.82,
+      "note": "v7c: 3 two-level wording variants; H11 Visa/MC brand, H12 unrecognised cash in app, H13 general own-money questions->source_of_funds, H14 stolen details->compromised, SWIFT->top_up_by_bank_transfer_charge, wrong-amount incl full amount shown",
+      "test": {
+        "jev": {
+          "accuracy": 0.8464,
+          "macro_f1": 0.8417,
+          "est_cost_usd": 1.745001,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.84,
+      "note": "v9: 3-variant two-level ensemble; refined transfer rules (H8 narrowed, transfer_timing, transfer_not_received), reverted incl. apparently cancelled card payment",
+      "test": {
+        "jev": {
+          "accuracy": 0.8497,
+          "macro_f1": 0.8453,
+          "est_cost_usd": 1.768077,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

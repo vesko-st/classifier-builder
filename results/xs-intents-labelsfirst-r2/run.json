@@ -1,0 +1,109 @@
+{
+  "run_id": "xs-intents-labelsfirst-r2",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-05T16:50:03",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 677,
+    "num_turns": 53,
+    "total_cost_usd": 2.0117557999999995
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 22,
+      "estimate": 0.8,
+      "note": "v1 draft: flat 77-option choice with descriptions encoding phase-1 policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.8526,
+          "macro_f1": 0.848,
+          "est_cost_usd": 0.365005,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 42,
+      "estimate": 0.82,
+      "note": "v2: beneficiary_not_allowed covers 'transfer not allowed'; small ~1-unit unrecognised charges -> extra_charge_on_statement. 10/10 on check (was 8/10)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8549,
+          "macro_f1": 0.8509,
+          "est_cost_usd": 0.372767,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 56,
+      "estimate": 0.82,
+      "note": "v4: v2 + card top-up money gone -> topping_up_by_card, flat/mortgage payment error -> failed_transfer, bare 'why was I charged' -> transfer_fee_charged. 15/17 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8562,
+          "macro_f1": 0.8535,
+          "est_cost_usd": 0.392689,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 74,
+      "estimate": 0.85,
+      "note": "e6: 3-member wording ensemble of v6 rules (outgoing transfer not arrived -> transfer_not_received_by_recipient, found card -> card_linking, shop decline vs card_not_working, card delivery how/when -> estimate, cash fee -> cash_withdrawal_charge). 25/26 bought labels (mostly hard picks), check 10/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.862,
+          "macro_f1": 0.8584,
+          "est_cost_usd": 1.286211,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 90,
+      "estimate": 0.85,
+      "note": "e7: e6 + Amex/card brand top-up -> supported_cards_and_currencies, 'doesn't show up/appear/update balance' transfer -> balance_not_updated, incoming transfer wait -> transfer_timing. 30/34 bought labels (hard picks)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8653,
+          "macro_f1": 0.8617,
+          "est_cost_usd": 1.315705,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.86,
+      "note": "e9 FINAL: e7 + cash showing in app -> cash_withdrawal_not_recognised, repeated never-goes-through -> card_not_working, wanting a Visa -> visa_or_mastercard, identity-check how-to -> verify_my_identity, 'told transfer not possible' -> beneficiary_not_allowed. 35/39 bought labels (mostly hard picks); random check 10/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.8672,
+          "macro_f1": 0.8643,
+          "est_cost_usd": 1.338167,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

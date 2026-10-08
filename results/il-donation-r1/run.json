@@ -1,0 +1,66 @@
+{
+  "run_id": "il-donation-r1",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 341,
+    "num_turns": 44,
+    "total_cost_usd": 1.6672591999999997
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v1 draft from description: 5 options mapped to 2 classes; no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.7386,
+          "macro_f1": 0.7258,
+          "est_cost_usd": 0.020703,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 27,
+      "estimate": 0.72,
+      "note": "v2: H1 pledges far above the payment -> not_donated; fixes 3/4 oracle-cited + 5/6 verify labels, breaks 1",
+      "test": {
+        "jev": {
+          "accuracy": 0.7434,
+          "macro_f1": 0.738,
+          "est_cost_usd": 0.022612,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.74,
+      "note": "final: v2 (H1 exceeds-payment rule); 42 labels macro-F1 0.738, random check 0.76; v3/v4/ensemble reverted",
+      "test": {
+        "jev": {
+          "accuracy": 0.7434,
+          "macro_f1": 0.738,
+          "est_cost_usd": 0.0,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

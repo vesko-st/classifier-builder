@@ -1,0 +1,103 @@
+{
+  "run_id": "pilot-intents-04-uncertainty",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-26T09:31:58",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.78,
+      "note": "description-only draft, 77 options with one-line meanings",
+      "test": {
+        "jev": {
+          "accuracy": 0.8412,
+          "macro_f1": 0.8361,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.8,
+      "note": "batch1 revision: PIN->get_physical_card, country availability, $1 charges->extra_charge, apple pay catch-all, typos",
+      "test": {
+        "jev": {
+          "accuracy": 0.8614,
+          "macro_f1": 0.8553,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.81,
+      "note": "batch2 revision: freeze->lost card, delivery estimate vs arrival, pending transfer waits, fee/beneficiary examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.862,
+          "macro_f1": 0.8573,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.82,
+      "note": "batch3 revision: UK transfer not showing->balance_not_updated_after_bank_transfer, SWIFT->top_up_by_bank_transfer_charge, set PIN->get_physical_card, Amex->supported cards",
+      "test": {
+        "jev": {
+          "accuracy": 0.8724,
+          "macro_f1": 0.8693,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.82,
+      "note": "batch4 revision: SEPA/SWIFT charge, card count->spare card, verification code->verify_top_up, transfer not here->not received",
+      "test": {
+        "jev": {
+          "accuracy": 0.8763,
+          "macro_f1": 0.8737,
+          "est_cost_usd": 0.042457,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.82,
+      "note": "batch5 revision (final): SWIFT/SEPA catch-all, cash exchange rate, revert->cancel_transfer, salary->receiving_money, retrieve card->lost, Visa->visa_or_mastercard",
+      "test": {
+        "jev": {
+          "accuracy": 0.8799,
+          "macro_f1": 0.8782,
+          "est_cost_usd": 0.559563,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

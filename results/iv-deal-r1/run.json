@@ -1,0 +1,126 @@
+{
+  "run_id": "iv-deal-r1",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "interview",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T11:16:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 609,
+    "num_turns": 55,
+    "total_cost_usd": 1.9632239999999999
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft from description + phenomena; 8 options mapped",
+      "test": {
+        "jev": {
+          "accuracy": 0.8935,
+          "macro_f1": 0.8684,
+          "est_cost_usd": 0.020959,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.8,
+      "note": "v2: rules from owner answers (earlier agreement beats throwaway, final acceptance, new condition)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9072,
+          "macro_f1": 0.8836,
+          "est_cost_usd": 0.026215,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 68,
+      "estimate": 0.88,
+      "note": "v3b: H1-H3 + offer-system rule narrowed; 16/16 build labels, 8/8 check",
+      "test": {
+        "jev": {
+          "accuracy": 0.9107,
+          "macro_f1": 0.8875,
+          "est_cost_usd": 0.030248,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 68,
+      "estimate": 0.88,
+      "note": "ens1: v3b + 2 wording variants; 16/16 build, 8/8 check",
+      "test": {
+        "jev": {
+          "accuracy": 0.9072,
+          "macro_f1": 0.8836,
+          "est_cost_usd": 0.084535,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.88,
+      "note": "ens2: + H4 (ambiguous closing reply after explicit acceptance keeps deal); 22/22 build, 8/8 check",
+      "test": {
+        "jev": {
+          "accuracy": 0.9089,
+          "macro_f1": 0.8856,
+          "est_cost_usd": 0.087811,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 92,
+      "estimate": 0.88,
+      "note": "ens3: + H5/H6; 27/28 build, 8/8 check",
+      "test": {
+        "jev": {
+          "accuracy": 0.9089,
+          "macro_f1": 0.8856,
+          "est_cost_usd": 0.095486,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 100,
+      "estimate": 0.89,
+      "note": "ens4t: + H7-H9 (imperfect final acceptance, announced offer welcomed, same price differing on logistics) + deal threshold 0.45; build 29/32, check 8/8",
+      "test": {
+        "jev": {
+          "accuracy": 0.9124,
+          "macro_f1": 0.8895,
+          "est_cost_usd": 0.106217,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

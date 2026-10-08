@@ -1,0 +1,76 @@
+{
+  "run_id": "xm-hatets-opus-high-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-29T17:10:15",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 766,
+    "num_turns": 38,
+    "total_cost_usd": 1.2898399999999999
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 47,
+      "estimate": 0.72,
+      "note": "v2 criteria: imm_hostile&!offtopic OR misogyny; from owner policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.8313,
+          "macro_f1": 0.8278,
+          "est_cost_usd": 0.068076,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 83,
+      "estimate": 0.62,
+      "note": "ensemble v3+v4: imm_hostile&!offtopic OR women_group OR slur_attack&!friendly&!male_target",
+      "test": {
+        "jev": {
+          "accuracy": 0.7922,
+          "macro_f1": 0.792,
+          "est_cost_usd": 0.179246,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.64,
+      "note": "final: ensemble v3+v4, no threshold; 27 labels macro-F1 0.645, check set 0.67",
+      "test": {
+        "luna": {
+          "accuracy": 0.8182,
+          "macro_f1": 0.8167,
+          "est_cost_usd": 0.736153,
+          "total": 1766,
+          "answered": 1766
+        },
+        "pplx": {
+          "accuracy": 0.8137,
+          "macro_f1": 0.8119,
+          "est_cost_usd": 0.000482,
+          "total": 1766,
+          "answered": 1766
+        },
+        "jev": {
+          "accuracy": 0.7922,
+          "macro_f1": 0.792,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

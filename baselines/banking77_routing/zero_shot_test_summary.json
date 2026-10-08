@@ -1,0 +1,160 @@
+{
+  "classifier": "banking77_routing_zero_shot",
+  "type": "choice",
+  "total": 3080,
+  "answered": 3080,
+  "errors": {},
+  "cached": 401,
+  "input_tokens_billed": 1185668,
+  "est_cost_usd": 0.049798,
+  "latency_ms_p50": 106.1,
+  "latency_ms_p95": 165.9,
+  "prediction_counts": {
+    "payments_and_transfers": 1004,
+    "cards": 893,
+    "pricing_and_fx": 394,
+    "fraud_and_security": 303,
+    "account_and_compliance": 288,
+    "disputes_and_refunds": 198
+  },
+  "labeled": 3080,
+  "accuracy": 0.7367,
+  "macro_f1": 0.7202,
+  "per_class": {
+    "account_and_compliance": {
+      "n": 400,
+      "precision": 0.8854,
+      "recall": 0.6375,
+      "f1": 0.7413
+    },
+    "cards": {
+      "n": 880,
+      "precision": 0.7794,
+      "recall": 0.7909,
+      "f1": 0.7851
+    },
+    "disputes_and_refunds": {
+      "n": 320,
+      "precision": 0.8232,
+      "recall": 0.5094,
+      "f1": 0.6293
+    },
+    "fraud_and_security": {
+      "n": 400,
+      "precision": 0.8251,
+      "recall": 0.625,
+      "f1": 0.7112
+    },
+    "payments_and_transfers": {
+      "n": 680,
+      "precision": 0.6175,
+      "recall": 0.9118,
+      "f1": 0.7363
+    },
+    "pricing_and_fx": {
+      "n": 400,
+      "precision": 0.7234,
+      "recall": 0.7125,
+      "f1": 0.7179
+    }
+  },
+  "top_confusions": [
+    {
+      "gold": "cards",
+      "predicted": "payments_and_transfers",
+      "n": 167
+    },
+    {
+      "gold": "fraud_and_security",
+      "predicted": "cards",
+      "n": 104
+    },
+    {
+      "gold": "disputes_and_refunds",
+      "predicted": "pricing_and_fx",
+      "n": 92
+    },
+    {
+      "gold": "pricing_and_fx",
+      "predicted": "payments_and_transfers",
+      "n": 81
+    },
+    {
+      "gold": "account_and_compliance",
+      "predicted": "payments_and_transfers",
+      "n": 74
+    },
+    {
+      "gold": "disputes_and_refunds",
+      "predicted": "payments_and_transfers",
+      "n": 52
+    },
+    {
+      "gold": "account_and_compliance",
+      "predicted": "fraud_and_security",
+      "n": 38
+    },
+    {
+      "gold": "account_and_compliance",
+      "predicted": "cards",
+      "n": 33
+    },
+    {
+      "gold": "payments_and_transfers",
+      "predicted": "cards",
+      "n": 28
+    },
+    {
+      "gold": "pricing_and_fx",
+      "predicted": "cards",
+      "n": 24
+    },
+    {
+      "gold": "fraud_and_security",
+      "predicted": "account_and_compliance",
+      "n": 22
+    },
+    {
+      "gold": "fraud_and_security",
+      "predicted": "disputes_and_refunds",
+      "n": 14
+    },
+    {
+      "gold": "payments_and_transfers",
+      "predicted": "pricing_and_fx",
+      "n": 13
+    },
+    {
+      "gold": "fraud_and_security",
+      "predicted": "payments_and_transfers",
+      "n": 10
+    },
+    {
+      "gold": "payments_and_transfers",
+      "predicted": "disputes_and_refunds",
+      "n": 9
+    }
+  ],
+  "accuracy_by_confidence": [
+    {
+      "confidence": "[0.0, 0.5)",
+      "n": 259,
+      "accuracy": 0.4672
+    },
+    {
+      "confidence": "[0.5, 0.7)",
+      "n": 370,
+      "accuracy": 0.5054
+    },
+    {
+      "confidence": "[0.7, 0.9)",
+      "n": 535,
+      "accuracy": 0.6467
+    },
+    {
+      "confidence": "[0.9, 1.0]",
+      "n": 1916,
+      "accuracy": 0.8429
+    }
+  ]
+}

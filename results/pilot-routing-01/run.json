@@ -1,0 +1,49 @@
+{
+  "run_id": "pilot-routing-01",
+  "task": "banking77_routing",
+  "budget": 100,
+  "created": "2026-09-25T22:24:44",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1: 77 Banking77 intents mapped to teams by my guessed policy (description only)",
+      "test": {
+        "jev": {
+          "accuracy": 0.835,
+          "macro_f1": 0.8273,
+          "est_cost_usd": 0.035094,
+          "total": 400,
+          "answered": 400
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 26,
+      "estimate": 0.91,
+      "note": "v4: owner-confirmed intent->team map (3 policy questions) + sharper descriptions for charge/fee/exchange-rate/pending/refund intents",
+      "test": {}
+    },
+    {
+      "version": 3,
+      "points_spent": 30,
+      "estimate": 0.91,
+      "note": "v5: v4 + 'don't know where charge came from' -> card_payment_not_recognised (fraud); extra_charge_on_statement narrowed to small specific-amount charges. 5/5 on bought labels.",
+      "test": {
+        "jev": {
+          "accuracy": 0.91,
+          "macro_f1": 0.9035,
+          "est_cost_usd": 0.03701,
+          "total": 400,
+          "answered": 400
+        }
+      }
+    }
+  ]
+}

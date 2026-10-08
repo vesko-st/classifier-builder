@@ -1,0 +1,107 @@
+{
+  "run_id": "xm-intents-opus-r1",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-29T15:37:39",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": null,
+    "wall_seconds": 301,
+    "num_turns": 29,
+    "total_cost_usd": 1.0887486000000002
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.78,
+      "note": "v1 zero-shot flat 77-option choice",
+      "test": {
+        "jev": {
+          "accuracy": 0.8429,
+          "macro_f1": 0.8379,
+          "est_cost_usd": 0.321178,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.8,
+      "note": "v2: rules+examples from batch 1",
+      "test": {
+        "jev": {
+          "accuracy": 0.8494,
+          "macro_f1": 0.8445,
+          "est_cost_usd": 0.358421,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.81,
+      "note": "v3: rules+examples from batches 1-2",
+      "test": {
+        "jev": {
+          "accuracy": 0.8516,
+          "macro_f1": 0.8473,
+          "est_cost_usd": 0.396182,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.81,
+      "note": "v4: rules+examples from batches 1-3",
+      "test": {
+        "jev": {
+          "accuracy": 0.8545,
+          "macro_f1": 0.8507,
+          "est_cost_usd": 0.425537,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.81,
+      "note": "v5: rules+examples from batches 1-4",
+      "test": {
+        "jev": {
+          "accuracy": 0.8601,
+          "macro_f1": 0.8562,
+          "est_cost_usd": 0.216727,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.82,
+      "note": "v6 final: rules+examples from all 50 uncertainty-sampled labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8627,
+          "macro_f1": 0.8607,
+          "est_cost_usd": 0.469764,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

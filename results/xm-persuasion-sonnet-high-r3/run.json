@@ -1,0 +1,62 @@
+{
+  "run_id": "xm-persuasion-sonnet-high-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:38:50",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 266,
+    "num_turns": 31,
+    "total_cost_usd": 0.6952475999999999
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 53,
+      "estimate": 0.5,
+      "note": "v1 policy-mirroring 18-way choice, no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.563,
+          "macro_f1": 0.5789,
+          "est_cost_usd": 0.11714,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 81,
+      "estimate": 0.6,
+      "note": "v3: foot-in-the-door = small/any amount statements (from labels), proposition incl declarative requests; fits 14 labels (biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5768,
+          "macro_f1": 0.6043,
+          "est_cost_usd": 0.127253,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.55,
+      "note": "v4: broadened credibility (what the charity does/introductions) and emotion (persuader feelings), narrowed personal-story/self-modeling; 23/23 bought labels right (fitted)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6058,
+          "macro_f1": 0.6069,
+          "est_cost_usd": 0.13901,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

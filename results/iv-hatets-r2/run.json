@@ -1,0 +1,111 @@
+{
+  "run_id": "iv-hatets-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "interview",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T11:16:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 715,
+    "num_turns": 55,
+    "total_cost_usd": 2.2602573999999995
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description: fine options for women/immigrant phenomena, expel+crime mapped to hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7933,
+          "macro_f1": 0.7928,
+          "est_cost_usd": 0.06726,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 27,
+      "estimate": 0.68,
+      "note": "v2: owner rules - quarrel insults/lyrics not_hate, only sexual/gender degradation of women is hate; hostile expel calls hate, wall support not",
+      "test": {
+        "jev": {
+          "accuracy": 0.7305,
+          "macro_f1": 0.7114,
+          "est_cost_usd": 0.087806,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 67,
+      "estimate": 0.72,
+      "note": "v3: hostile slur attack on an addressed/named person = hate (labels 0851,0420; verified 0473); rants about others not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7486,
+          "macro_f1": 0.7465,
+          "est_cost_usd": 0.088696,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 71,
+      "estimate": 0.74,
+      "note": "e1: ensemble of v4/v5/v6 rule variants (casual-vocative filler not_hate; slur attacks on specific women or women as a group hate)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7684,
+          "macro_f1": 0.7673,
+          "est_cost_usd": 0.285817,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 87,
+      "estimate": 0.75,
+      "note": "e3: 3 wording variants of v8 rules: slur attacks on women (one or group) hate, not at men/self/filler; term-only immigrant tweets not_hate; crime-by-one-immigrant to argue for wall = hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7956,
+          "macro_f1": 0.794,
+          "est_cost_usd": 0.303025,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.75,
+      "note": "e4: e3 + slurs at people not identified as women not_hate; dismissing women's views in general = group degradation (hate). Final.",
+      "test": {
+        "jev": {
+          "accuracy": 0.799,
+          "macro_f1": 0.7974,
+          "est_cost_usd": 0.309107,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

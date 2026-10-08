@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "name": "ens678e",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v6",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Classify this tweet under a hate-speech annotation policy about hate against women and against immigrants/refugees. Which option best describes the tweet?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogynist_group": "Demeans, dehumanises or stereotypes women in general (e.g. women as whores, property, inferior), or endorses sexual violence against women.",
+        "misogynist_attack_on_woman": "Hostile toward a specific woman or girl (or someone addressed as a hoe/bitch who is not clearly male): insults, harasses, degrades or threatens her with contempt or violence (e.g. 'you can get dragged bitch'), using gendered slurs (bitch, whore, hoe, cunt, slut). The tone must be genuinely hostile, not friendly, not an idiom, and not a crude but non-hostile remark.",
+        "immigrants_as_threat": "Frames immigrants, refugees, migrants or illegal aliens themselves as dangerous, subhuman or collectively guilty: criminals, rapists, human traffickers, invaders, disease carriers, thieves, animals or vermin, or as replacing or endangering the native population. Includes sharing a crime story or mugshots of illegal aliens, migrants or gangs like MS-13 to argue for deportation or the wall ('these are the people we caught'), hashtags that brand them as an invasion or criminals (#StopTheInvasion, #Rapefugees, #WhiteGenocide), insults such as 'pig fuckers', and wishing them violent or degrading removal (e.g. catapulting them out). Merely using or defending the term 'illegal aliens' is not enough.",
+        "immigrants_rejected": "Expresses personal contempt or hostility toward immigrants as people, beyond a policy slogan: e.g. 'no sympathy, you're not welcome', 'get these people out', 'arrest them and DEPORT THEM ALL!!!!', '#IllegalAliens deserve deportation not representation', treating them as unwanted lawbreakers who deserve nothing.",
+        "immigration_policy": "Immigration or border politics without framing immigrants as dangerous or subhuman and without contempt for them as people: policy arguments (wall, DACA, voting, census, legal process), defending or promoting the term #IllegalAliens, campaign slogans and hashtags such as #BuildThatWall, #DeportThemAll or #SendThemBack used as political cheering, links between a party's policy and crime or open borders, or attacks on politicians, media or liberals.",
+        "casual_slur_not_at_woman": "Uses bitch, hoe etc. without hostility toward a woman: affectionately or jokingly to a friend (e.g. 'happy birthday bitch'), boastfully or about oneself (e.g. 'I'm still the same bitch that tazes hoes'), idioms ('karma is a bitch'), as an exclamation or filler ('bitch, I ain't got money', 'lace that bitch up'), crude but non-hostile descriptions (e.g. 'bitch whole pussy out wit some pro-keds on'), in lyrics, or aimed at a man or male public figure (e.g. 'a Trump bitch' about a male pundit, 'senatorial whore... he'll dance to your tune' about a male politician), even violently threatening him.",
+        "political_insult_at_woman": "Harsh insults at a politician, official, public figure or political opponent over their politics or conduct (traitor, liar, asshole, dirtbag bitch, 'should be in prison', even 'cunt'), e.g. 'I would never call a woman a cunt. But this one is an unpatriotic asshole.', 'we want the wall and you answer us dirtbag bitch'. The insult is about their politics, not about women.",
+        "reporting_or_countering": "Reports, quotes, criticises or opposes hateful content.",
+        "other_not_hate": "Anything else that is not hateful."
+      },
+      "map": {
+        "misogynist_group": "hate",
+        "misogynist_attack_on_woman": "hate",
+        "immigrants_as_threat": "hate",
+        "immigrants_rejected": "hate",
+        "immigration_policy": "not_hate",
+        "casual_slur_not_at_woman": "not_hate",
+        "political_insult_at_woman": "not_hate",
+        "reporting_or_countering": "not_hate",
+        "other_not_hate": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v7",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Classify this tweet under a hate-speech annotation policy about hate against women and against immigrants/refugees. Which option best describes the tweet?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogynist_group": "Demeans, dehumanises or stereotypes women in general (e.g. women as whores, property, inferior), or endorses sexual violence against women.",
+        "misogynist_attack_on_woman": "Hostile toward a specific woman or girl (or someone addressed as a hoe/bitch who is not clearly male): insults, harasses, degrades or threatens her with contempt or violence (e.g. 'you can get dragged bitch'), using gendered slurs (bitch, whore, hoe, cunt, slut). The tone must be genuinely hostile, not friendly, not an idiom, and not a crude but non-hostile remark.",
+        "immigrants_as_threat": "Frames immigrants, refugees, migrants or illegal aliens themselves as dangerous, subhuman or collectively guilty: criminals, rapists, human traffickers, invaders, disease carriers, freeloaders or a burden ripping off taxpayers (welfare, entitlements, 'anchor babies'), thieves, animals or vermin, or as replacing or endangering the native population. Includes sharing a crime story or mugshots of illegal aliens, migrants or gangs like MS-13 to argue for deportation or the wall ('these are the people we caught'), hashtags that brand them as an invasion or criminals (#StopTheInvasion, #Rapefugees, #WhiteGenocide), insults such as 'pig fuckers', and wishing them violent or degrading removal (e.g. catapulting them out). Merely using or defending the term 'illegal aliens' is not enough. Also hostility to Muslims or Islam as a group (#BanIslam, #StopIslam) alongside immigration.",
+        "immigrants_rejected": "The migrants themselves are the subject and the tweet delegitimises them and wants them gone: e.g. 'they are not asylum seekers, they are illegal immigrants #sendthemback', 'no sympathy, you're not welcome #DeportThemAll', 'illegal aliens have no place in our country', 'get these people out', 'arrest them and DEPORT THEM ALL!!!!', '#IllegalAliens deserve deportation not representation'. Contrast: a #SendThemBack/#DeportThemAll tag attached to talk about politicians, policy or campaigns is immigration_policy.",
+        "immigration_policy": "Immigration or border politics without framing immigrants as dangerous or subhuman and without contempt for them as people: policy arguments (wall, DACA, voting, census, legal process), defending or promoting the term #IllegalAliens, campaign slogans and hashtags such as #BuildThatWall, #DeportThemAll or #SendThemBack used as political cheering, links between a party's policy and crime or open borders, or attacks on politicians, media or liberals.",
+        "casual_slur_not_at_woman": "Uses bitch, hoe, whore etc. without hostility toward a woman: affectionately or jokingly to friends (e.g. 'happy birthday bitch', 'hoe you down bad 😂'), boastfully or about oneself, reporting that someone called you a slur, aphorisms and idioms ('life's a bitch', 'karma is a bitch'), as an exclamation or filler ('bitch, I ain't got money', 'lace that bitch up'), crude but non-hostile descriptions (e.g. 'bitch whole pussy out wit some pro-keds on'), in lyrics, or aimed at a man or male public figure (e.g. 'a Trump bitch' about a male pundit, 'senatorial whore... he'll dance to your tune' about a male politician), even violently threatening him.",
+        "political_insult_at_woman": "Harsh insults at a politician, official, public figure or political opponent over their politics or conduct (traitor, liar, asshole, dirtbag bitch, 'should be in prison', even 'cunt'), e.g. 'I would never call a woman a cunt. But this one is an unpatriotic asshole.', 'we want the wall and you answer us dirtbag bitch'. The insult is about their politics, not about women.",
+        "reporting_or_countering": "Reports, quotes, criticises or opposes hateful content.",
+        "other_not_hate": "Anything else that is not hateful."
+      },
+      "map": {
+        "misogynist_group": "hate",
+        "misogynist_attack_on_woman": "hate",
+        "immigrants_as_threat": "hate",
+        "immigrants_rejected": "hate",
+        "immigration_policy": "not_hate",
+        "casual_slur_not_at_woman": "not_hate",
+        "political_insult_at_woman": "not_hate",
+        "reporting_or_countering": "not_hate",
+        "other_not_hate": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v8",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Classify this tweet under a hate-speech annotation policy about hate against women and against immigrants/refugees. Which option best describes the tweet?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogynist_group": "Demeans, dehumanises or stereotypes women in general (e.g. women as whores, property, inferior), or endorses sexual violence against women.",
+        "misogynist_attack_on_woman": "Hostile toward a specific woman or girl (or someone addressed as a hoe/bitch who is not clearly male): insults, harasses, degrades or threatens her with contempt or violence (e.g. 'you can get dragged bitch'), using gendered slurs (bitch, whore, hoe, cunt, slut). The tone must be genuinely hostile, not friendly, not an idiom, and not a crude but non-hostile remark.",
+        "immigrants_as_threat": "Frames immigrants, refugees, migrants or illegal aliens themselves as dangerous, subhuman or collectively guilty: criminals, rapists, human traffickers, invaders, disease carriers, freeloaders or a burden ripping off taxpayers (welfare, entitlements, 'anchor babies'), thieves, animals or vermin, or as replacing or endangering the native population. Includes sharing a crime story or mugshots of illegal aliens, migrants or gangs like MS-13 to argue for deportation or the wall ('these are the people we caught'), hashtags that brand them as an invasion or criminals (#StopTheInvasion, #Rapefugees, #WhiteGenocide), insults such as 'pig fuckers', and wishing them violent or degrading removal (e.g. catapulting them out). Merely using or defending the term 'illegal aliens' is not enough. Also calls to ban Islam together with stopping immigration (e.g. '#stopimmigration #banislam'). A jab at one Muslim individual is not enough.",
+        "immigrants_rejected": "The tweet's own words (not just a hashtag) are about the migrants themselves, delegitimise them and demand they leave: e.g. 'they are not asylum seekers, they are illegal immigrants #sendthemback', 'no sympathy, you're not welcome #DeportThemAll', 'illegal aliens have no place in our country', 'get these people out', 'arrest them and DEPORT THEM ALL!!!!', '#IllegalAliens deserve deportation not representation'. Contrast: a #SendThemBack/#DeportThemAll tag tacked onto a reply about politicians, policy, campaigns or a different topic is immigration_policy.",
+        "immigration_policy": "Immigration or border politics without framing immigrants as dangerous or subhuman and without contempt for them as people: policy arguments (wall, DACA, voting, census, legal process), defending or promoting the term #IllegalAliens, campaign slogans and hashtags such as #BuildThatWall, #DeportThemAll or #SendThemBack used as political cheering, links between a party's policy and crime or open borders, or attacks on politicians, media or liberals.",
+        "casual_slur_not_at_woman": "Uses bitch, hoe, whore etc. without hostility toward a woman: affectionately or jokingly to friends (e.g. 'happy birthday bitch', 'hoe you down bad 😂'), boastfully or about oneself, reporting that someone called you a slur, aphorisms and idioms ('life's a bitch', 'karma is a bitch'), as an exclamation or filler ('bitch, I ain't got money', 'lace that bitch up'), crude but non-hostile descriptions (e.g. 'bitch whole pussy out wit some pro-keds on'), in lyrics, or aimed at a man or male public figure (e.g. 'a Trump bitch' about a male pundit, 'senatorial whore... he'll dance to your tune' about a male politician), even violently threatening him.",
+        "political_insult_at_woman": "Harsh insults at a politician, official, public figure or political opponent over their politics or conduct (traitor, liar, asshole, dirtbag bitch, 'should be in prison', even 'cunt'), e.g. 'I would never call a woman a cunt. But this one is an unpatriotic asshole.', 'we want the wall and you answer us dirtbag bitch'. The insult is about their politics, not about women.",
+        "reporting_or_countering": "Reports, quotes, criticises or opposes hateful content.",
+        "other_not_hate": "Anything else that is not hateful."
+      },
+      "map": {
+        "misogynist_group": "hate",
+        "misogynist_attack_on_woman": "hate",
+        "immigrants_as_threat": "hate",
+        "immigrants_rejected": "hate",
+        "immigration_policy": "not_hate",
+        "casual_slur_not_at_woman": "not_hate",
+        "political_insult_at_woman": "not_hate",
+        "reporting_or_countering": "not_hate",
+        "other_not_hate": "not_hate"
+      }
+    }
+  ]
+}

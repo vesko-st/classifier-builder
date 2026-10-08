@@ -1,0 +1,111 @@
+{
+  "run_id": "il-intents-r1",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1073,
+    "num_turns": 48,
+    "total_cost_usd": 2.681179599999999
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "draft two-level from description + my reading of the pool",
+      "test": {
+        "jev": {
+          "accuracy": 0.8097,
+          "macro_f1": 0.7997,
+          "est_cost_usd": 0.448556,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 26,
+      "estimate": 0.8,
+      "note": "ensemble 2-level+flat; wallet group, mapped extra options; rules H1,H2,H3,H5,H6,H7",
+      "test": {
+        "jev": {
+          "accuracy": 0.8549,
+          "macro_f1": 0.8486,
+          "est_cost_usd": 0.932933,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 46,
+      "estimate": 0.81,
+      "note": "3-member ensemble; rules H8-H11,H13-H15 (SWIFT->top_up_by_bank_transfer_charge, why_verify scope, cash rate, recipient)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8649,
+          "macro_f1": 0.8612,
+          "est_cost_usd": 1.41376,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 66,
+      "estimate": 0.82,
+      "note": "rules H16-H23 (ATM card->declined withdrawal, cash rates, not-possible transfer->beneficiary, delivery how, supported card brands)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8653,
+          "macro_f1": 0.8623,
+          "est_cost_usd": 1.468261,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 84,
+      "estimate": 0.83,
+      "note": "rules H24,H26-H28 (beneficiary scope, add-money methods, top-up verification why, source of funds)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8643,
+          "macro_f1": 0.8618,
+          "est_cost_usd": 1.499298,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.83,
+      "note": "final: revert H26; H29 currency coverage->fiat, H30 want physical card->order, H31 unfair rate->card wrong rate; card_not_working clarified",
+      "test": {
+        "jev": {
+          "accuracy": 0.8736,
+          "macro_f1": 0.872,
+          "est_cost_usd": 1.517317,
+          "total": 3080,
+          "answered": 3078
+        }
+      }
+    }
+  ]
+}

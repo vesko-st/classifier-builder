@@ -1,0 +1,84 @@
+{
+  "run_id": "al-donation-opus-r1",
+  "task": "persuasion_donation",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T21:55:20",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 238,
+    "num_turns": 28,
+    "total_cost_usd": 1.1501472
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.657,
+      "note": "v1 draft: 6 stance options mapped to 2 classes; dev n=199",
+      "test": {
+        "jev": {
+          "accuracy": 0.7386,
+          "macro_f1": 0.7291,
+          "est_cost_usd": 0.021176,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.69,
+      "note": "v3: 10 fine stance options; reluctant token commitments mapped to not_donated; dev n=199 macro-F1 0.693",
+      "test": {
+        "jev": {
+          "accuracy": 0.6882,
+          "macro_f1": 0.6875,
+          "est_cost_usd": 0.024013,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "ensemble of v3 + reworded v3b (same 10 options/map), threshold donated>=0.45; dev n=199 macro-F1 0.703",
+      "test": {
+        "claude": {
+          "accuracy": 0.7122,
+          "macro_f1": 0.7114,
+          "est_cost_usd": 0.0,
+          "total": 417,
+          "answered": 417
+        },
+        "luna": {
+          "accuracy": 0.6811,
+          "macro_f1": 0.681,
+          "est_cost_usd": 0.120772,
+          "total": 417,
+          "answered": 417
+        },
+        "pplx": {
+          "accuracy": 0.7122,
+          "macro_f1": 0.7075,
+          "est_cost_usd": 0.035271,
+          "total": 417,
+          "answered": 417
+        },
+        "jev": {
+          "accuracy": 0.6811,
+          "macro_f1": 0.6805,
+          "est_cost_usd": 0.047448,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,88 @@
+{
+  "run_id": "pilot-intents-08-policy",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-27T23:16:11",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "flat 77-option choice from description + domain reading",
+      "test": {
+        "jev": {
+          "accuracy": 0.8409,
+          "macro_f1": 0.8353,
+          "est_cost_usd": 0.322212,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 51,
+      "estimate": 0.82,
+      "note": "policy rules from Q1-Q5 + minimal pairs in option descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.8477,
+          "macro_f1": 0.8423,
+          "est_cost_usd": 0.350921,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 87,
+      "estimate": 0.83,
+      "note": "v2 + country/amex/deposit/pending descriptions; 9/10 random labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8477,
+          "macro_f1": 0.8423,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 87,
+      "estimate": 0.84,
+      "note": "labels-driven fixes: $1 charge=extra_charge, unknown charge=not_recognised, how-much-longer=transfer_timing, reverted top-up/card payment, cash-withdrawal fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.8451,
+          "macro_f1": 0.8396,
+          "est_cost_usd": 0.363594,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.85,
+      "note": "sent-to-someone transfers = not_received_by_recipient; fiat vs exchange_via_app split; 21/24 bought labels, 10/10 random",
+      "test": {
+        "jev": {
+          "accuracy": 0.8513,
+          "macro_f1": 0.8458,
+          "est_cost_usd": 0.372,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "run_id": "iv-intents-r3",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "interview",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T11:16:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 743,
+    "num_turns": 51,
+    "total_cost_usd": 2.421048799999999
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: flat 77-option choice, descriptions from task + pool reading",
+      "test": {
+        "jev": {
+          "accuracy": 0.8545,
+          "macro_f1": 0.8495,
+          "est_cost_usd": 0.358667,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 30,
+      "estimate": 0.78,
+      "note": "v2: rules from owner answers (transfer delay split, top-up split, PIN->get_physical_card, fee rules, adding-money rules)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8545,
+          "macro_f1": 0.8494,
+          "est_cost_usd": 0.380399,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 66,
+      "estimate": 0.8,
+      "note": "v3: coverage-label rules (cancel purchase->request_refund, banking-abroad fees->transfer_fee_charged)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8571,
+          "macro_f1": 0.8519,
+          "est_cost_usd": 0.390104,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 82,
+      "estimate": 0.82,
+      "note": "v4: 3-member wording/order ensemble; SWIFT/SEPA->top_up_by_bank_transfer_charge; unexplained cash in app->cash_withdrawal_not_recognised; card brand for top-up->supported_cards",
+      "test": {
+        "jev": {
+          "accuracy": 0.863,
+          "macro_f1": 0.8596,
+          "est_cost_usd": 1.223212,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 94,
+      "estimate": 0.82,
+      "note": "v5: questions naming Visa/Mastercard -> visa_or_mastercard",
+      "test": {
+        "jev": {
+          "accuracy": 0.8633,
+          "macro_f1": 0.8598,
+          "est_cost_usd": 1.236407,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

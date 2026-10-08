@@ -1,0 +1,12 @@
+{
+  "name": "persuasion_donation",
+  "description": "In our charity-donation chats, a persuader tries to get the other person to donate part of their task payment to Save the Children. From the chat, tell us whether the person ended up donating.",
+  "input": "A whole chat between the persuader and the persuadee.",
+  "label_type": "single",
+  "classes": {
+    "donated": "The persuadee donated",
+    "not_donated": "The persuadee did not donate"
+  },
+  "metric": "macro_f1",
+  "source": "Persuasion for Good (Wang et al. 2019), full corpus; label = persuadee's actual donation (B6) > 0"
+}

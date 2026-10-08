@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "name": "persuasion_strategy_v6_refined",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "You are analyzing persuader messages in charity-donation conversations where a persuader tries to get someone to donate to Save the Children. For each message, identify the primary persuasion strategy or dialogue act being used. The persuader message to tag appears after the dialogue history. Consider the context of the conversation but focus on the strategy of the specific message being tagged.\n\nKey distinctions:\n- Credibility-appeal is about SAVE THE CHILDREN (the organization itself: reputable, trustworthy, well-known, effective, track record, presence)\n- Logical-appeal is about THE CAUSE (child suffering, impact of donations, statistics about children, needs, facts about why donation helps)\n- Emotion-appeal focuses on FEELINGS (sadness, horror, compassion, pity, outrage, sympathy) - usually about children's suffering presented to evoke an emotional reaction\n\nWhat persuasion strategy or dialogue act does the persuader use in this message?",
+  "state_template": "{{input}}",
+  "description": "Refined to better distinguish emotion, logical, and credibility appeals",
+  "criteria": {
+    "greeting": "Opening or casual greeting (hello, hi, etc.)",
+    "acknowledgement": "Acknowledging or responding to what the persuadee said",
+    "thank": "Expressing gratitude",
+    "praise-user": "Complimenting or flattering the persuadee",
+    "personal-related-inquiry": "Asking about the persuadee personally (not about the task/charity)",
+    "personal-story": "Sharing a personal story or experience",
+    "self-modeling": "Demonstrating or being an example of donating or caring",
+    "source-related-inquiry": "Asking about the charity/organization or its work",
+    "task-related-inquiry": "Asking about the donation task itself",
+    "credibility-appeal": "Claim about SAVE THE CHILDREN ITSELF (trustworthy, reputable, well-known, effective organization, has good track record, present in many countries)",
+    "logical-appeal": "Facts or reasoning about THE CAUSE (children suffer from X disease, millions of children affected, donations help by doing Y, statistics about child welfare)",
+    "emotion-appeal": "Appeal to FEELINGS (words like horrifies, breaks my heart, tragic, sadness about children, evoking compassion or pity - focuses on emotional impact)",
+    "donation-information": "Providing information about how or where to donate",
+    "ask-donation-amount": "Directly asking how much the persuadee wants to donate",
+    "proposition-of-donation": "Proposing or suggesting a donation",
+    "foot-in-the-door": "Getting agreement on something small to build toward a larger ask",
+    "off-task": "Not related to the donation task or persuasion",
+    "other": "Doesn't clearly fit the above categories"
+  }
+}

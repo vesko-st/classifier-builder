@@ -1,0 +1,88 @@
+{
+  "run_id": "pilot-hatets-02-rules",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "created": "2026-09-27T22:29:49",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.62,
+      "note": "description-only draft, 6 options mapped",
+      "test": {
+        "jev": {
+          "accuracy": 0.761,
+          "macro_f1": 0.761,
+          "est_cost_usd": 0.047753,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 28,
+      "estimate": 0.72,
+      "note": "two-level router; deport calls=hate, targeted woman abuse=hate, other-target imm=not_hate, slur at men=not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7712,
+          "macro_f1": 0.7712,
+          "est_cost_usd": 0.073936,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 52,
+      "estimate": 0.74,
+      "note": "v4 + H7 (slur at no person) + H6n (news/wall without deport demand = not_hate)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7758,
+          "macro_f1": 0.7758,
+          "est_cost_usd": 0.084097,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 78,
+      "estimate": 0.75,
+      "note": "v6 + people-rejecting hashtags=expel, policy hashtags=policy (H5c), criticism of slurs=not_hate (H8n), affectionate casual examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.7882,
+          "macro_f1": 0.7881,
+          "est_cost_usd": 0.095371,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.68,
+      "note": "final: v9 + verb 'bitch', compliments, retorts to aggressor = not_hate; media-lies = other_target",
+      "test": {
+        "jev": {
+          "accuracy": 0.7882,
+          "macro_f1": 0.788,
+          "est_cost_usd": 0.09997,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

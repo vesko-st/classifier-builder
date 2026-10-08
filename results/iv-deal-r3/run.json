@@ -1,0 +1,81 @@
+{
+  "run_id": "iv-deal-r3",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "interview",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T11:16:08",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 448,
+    "num_turns": 48,
+    "total_cost_usd": 1.7911278000000002
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft from description and phenomena; pending offers -> no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.8849,
+          "macro_f1": 0.8591,
+          "est_cost_usd": 0.020079,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 72,
+      "estimate": 0.82,
+      "note": "v2: implicit/reluctant acceptance counts as agreement (H1)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9003,
+          "macro_f1": 0.876,
+          "est_cost_usd": 0.02157,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.78,
+      "note": "v3: unanswered counteroffer group remapped to deal (labels override owner answer 1); check 5/8",
+      "test": {
+        "jev": {
+          "accuracy": 0.8711,
+          "macro_f1": 0.8013,
+          "est_cost_usd": 0.0,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.78,
+      "note": "v5: split unanswered offers: after real bargaining -> deal, lone opening offer -> no_deal; check 5/8; final",
+      "test": {
+        "jev": {
+          "accuracy": 0.8883,
+          "macro_f1": 0.8386,
+          "est_cost_usd": 0.024112,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

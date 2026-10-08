@@ -1,0 +1,109 @@
+{
+  "run_id": "xs-intents-labelsfirst-r3",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-05T16:50:03",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 11519,
+    "num_turns": 40,
+    "total_cost_usd": 2.8673552
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 20,
+      "estimate": 0.8,
+      "note": "v1 draft: flat 77-option choice with descriptions from policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.8377,
+          "macro_f1": 0.8305,
+          "est_cost_usd": 0.357244,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 60,
+      "estimate": 0.83,
+      "note": "v3: rules from 10 cluster labels (PIN->get_physical_card, UK-account transfer not showing->balance_not_updated, flat/mortgage error->failed_transfer, cash in app->cash_withdrawal_not_recognised, outgoing transfer slow->not_received_by_recipient)",
+      "test": {
+        "jev": {
+          "accuracy": 0.851,
+          "macro_f1": 0.8462,
+          "est_cost_usd": 0.375096,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 80,
+      "estimate": 0.84,
+      "note": "e5: 2-member wording ensemble of flat choice; card_not_working vs declined, pending_card_payment, incoming vs outgoing transfer rules",
+      "test": {
+        "jev": {
+          "accuracy": 0.8536,
+          "macro_f1": 0.8487,
+          "est_cost_usd": 0.759893,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 80,
+      "estimate": 0.85,
+      "note": "e6: transfer_timing = 'how much longer' without 'pending' (label 0314)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8545,
+          "macro_f1": 0.8496,
+          "est_cost_usd": 0.771027,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.85,
+      "note": "e7: rules from final 10 labels (virtual card declined, how will I get my card, wrong rate default to card payment, wanting a Visa, transfer taking forever -> pending)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8542,
+          "macro_f1": 0.8493,
+          "est_cost_usd": 0.785765,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.85,
+      "note": "e9 (final): e7 + order_physical_card covers shipping cards, country_support covers which countries can get a card",
+      "test": {
+        "jev": {
+          "accuracy": 0.8588,
+          "macro_f1": 0.8532,
+          "est_cost_usd": 0.791974,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

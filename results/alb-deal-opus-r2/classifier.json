@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "name": "deal_v2",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "A buyer and a seller negotiated over chat about a Craigslist item. After the chat each side could submit a final price offer outside the chat, and the other could accept it; a deal counts as closed when they settle on a price. Read the whole conversation, paying most attention to where the two sides' latest prices ended up. Pick the option that best describes how the chat ended.",
+  "state_template": "{{input}}",
+  "criteria": {
+    "explicit_agreement": "Both sides clearly agree on a price or terms: one makes an offer and the other accepts it (e.g. 'deal', 'ok', 'sounds good', 'I can do that', 'works for me'), possibly followed by thanks or pickup arrangements.",
+    "implicit_acceptance": "The last messages signal going along with the other side's offer without a formal 'deal' (e.g. 'I think I can manage that', 'that's better', 'sounds like a good deal'), and nobody objects afterwards.",
+    "converging_offer_pending": "No explicit acceptance yet, but the chat ends on a concrete offer that meets, splits the difference with, or comes within a small amount of what the other side last proposed or asked for (e.g. the seller concedes most of the way, or a counter-offer just a little off the other's price), in a cooperative tone. The two sides are close enough that the last offer would likely be accepted.",
+    "far_apart": "The chat ends with the two sides' latest prices still far apart: a lowball offer, a counter-offer the other side has called too low/too high, both repeating their positions, or a firm 'final price' the other clearly can't meet.",
+    "rejected": "One side explicitly refuses the other's offer or walks away, and no agreement follows.",
+    "no_negotiation": "The chat is only greetings, questions about the item, or a single opening message; the sides never exchange concrete prices.",
+    "off_task": "The participants talk about the chat task itself or say nonsense, without settling on a price."
+  },
+  "map": {
+    "explicit_agreement": "deal",
+    "implicit_acceptance": "deal",
+    "converging_offer_pending": "deal",
+    "far_apart": "no_deal",
+    "rejected": "no_deal",
+    "no_negotiation": "no_deal",
+    "off_task": "no_deal"
+  }
+}

@@ -1,0 +1,154 @@
+{
+  "version": 1,
+  "name": "tweet_hate_e4",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v9a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate-speech policy that protects only two groups: women (as women) and immigrants (including refugees, migrants, asylum seekers and people in the country illegally). Pick the option that best describes what the tweet does.",
+        "notes": [
+          "Judge the author's own stance: reporting, quoting to criticise, or arguing against hate is not hate.",
+          "A gendered slur (bitch, hoe, whore, slut, cunt) is hate only when it is the weapon in a contemptuous insult or put-down of a woman or of women: one particular woman (addressed, named or spoken about) or women as a group.",
+          "It is not hate when the slur targets a man or the speaker, is affectionate, joking, an exclamation or a casual form of address, or sits in a sentence whose real message is something else (advice, a general remark, karma, bragging).",
+          "Supporting a wall, border enforcement, immigration law or a politician is not by itself hate, and a tweet whose only point is which word to use for them (such as defending the term illegal alien) is not hate. Hostility toward immigrants as people is hate: wanting them gone or thrown out, saying they must go home or are unwelcome, pointing to a crime by one of them to argue for the wall or deportation, or painting them as criminals, invaders or vermin.",
+          "Other groups (religions, races, LGBT people, politicians) are outside the policy."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_dehumanising": "Describes immigrants or refugees as subhuman or a plague: animals, vermin, parasites, invaders, rapists by nature, or uses ethnic slurs or insulting coined words for them.",
+        "immigrant_expel_hostile": "Hostile call for immigrants or refugees as people to be deported, removed, got rid of, sent back, told to go home, kept out, or declared unwelcome, including when said through hashtags.",
+        "immigrant_crime_burden": "Portrays immigrants as criminals, disease carriers, welfare cheats or job thieves, including pointing to a crime by one immigrant to argue for the wall, deportation or tougher policy.",
+        "immigrant_policy_neutral": "Supports or discusses a wall, border security, immigration law, DACA, ICE or politicians without attacking immigrants as people; political hashtag lists; a tweet whose only point is which word to use for them, with no claim about what they do or what should be done to them.",
+        "immigrant_defended": "Defends immigrants, criticises anti-immigrant speech, or reports on immigration neutrally.",
+        "person_attacked_with_slur": "A contemptuous insult, threat or put-down of a woman or of women using bitch, hoe, whore, slut or cunt, attacking her or their character, looks, intelligence, sexuality or behaviour. The target is one particular woman (addressed, named or spoken about) or women as a group; never a man and never the speaker.",
+        "slur_as_address_filler": "bitch or hoe used only as a form of address or interjection in a sentence whose real message is advice, a request, excitement, news, a general remark or banter, with no actual insult of a woman.",
+        "women_degraded_group": "Degrades women or girls in general: claims that women as a whole are whores, objects or worthless, dismisses what women think or feel as worthless, or endorses rape or violence against women.",
+        "rant_about_others": "Talks about relationships, cheating, drama or bragging involving women called bitches or hoes, without insulting or showing contempt for them.",
+        "slur_friendly_or_self": "Uses a word like bitch or hoe affectionately, jokingly, about oneself, or as an exclamation, without contempt for a woman.",
+        "slur_at_man_or_thing": "Gendered insult aimed at a man (he, him, bro, dude, a man's name), at people who are not identified as women (a crowd, a profession, polluters, politicians), at an organisation, or at a situation.",
+        "lyrics_vulgar_talk": "Song lyrics, rap-style bragging or vulgar talk about sex or about hoes/bitches that is crude but not clearly meant to demean women.",
+        "misogyny_criticised": "Talks about or criticises sexist language or misogyny, or quotes it to object to it.",
+        "other": "Anything else: off-topic, other groups, spam with no target."
+      },
+      "map": {
+        "immigrant_dehumanising": "hate",
+        "immigrant_expel_hostile": "hate",
+        "immigrant_crime_burden": "hate",
+        "immigrant_policy_neutral": "not_hate",
+        "immigrant_defended": "not_hate",
+        "person_attacked_with_slur": "hate",
+        "slur_as_address_filler": "not_hate",
+        "women_degraded_group": "hate",
+        "rant_about_others": "not_hate",
+        "slur_friendly_or_self": "not_hate",
+        "slur_at_man_or_thing": "not_hate",
+        "lyrics_vulgar_talk": "not_hate",
+        "misogyny_criticised": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v9b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Decide which option fits this tweet. The policy counts as hate only speech against women because they are women, or against immigrants (migrants, refugees, asylum seekers, undocumented people). Everything else is outside the policy.",
+        "notes": [
+          "What matters is the author's own attitude; reports, criticism of hateful speech, and quotations made to object are not hate.",
+          "Swear words like bitch, hoe, whore, slut or cunt count as hate against women only if the author uses them to degrade or show contempt for a woman — a specific one, whether spoken to, named or talked about — or for women generally.",
+          "Not hate: such words aimed at men or at oneself, used warmly or for fun, shouted as an exclamation, used to address someone casually, or dropped into a sentence that is really about something else.",
+          "Not hate: backing border security, the wall, ICE, deportation law or a politician; a tweet whose only point is the label for them (such as arguing for the term illegal alien). Hate: hostility to immigrants as human beings — demanding they leave, be removed or go home, calling them unwelcome, citing a crime by one of them as a reason for the wall or deportation, or casting them as criminals, invaders, animals or parasites.",
+          "Religions, races, LGBT people and politicians are not protected by this policy."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_dehumanising": "Describes immigrants or refugees as subhuman or a plague: animals, vermin, parasites, invaders, rapists by nature, or uses ethnic slurs or insulting coined words for them.",
+        "immigrant_expel_hostile": "Demands, with hostility, that immigrants or refugees be deported, removed, got rid of, sent back, sent home or kept out, or says they are unwelcome, including through hashtags.",
+        "immigrant_crime_burden": "Casts immigrants as criminals, carriers of disease, welfare cheats or job thieves, including citing a crime by one immigrant as a reason for the wall, deportation or harsher policy.",
+        "immigrant_policy_neutral": "Discusses or backs the wall, border security, immigration law, DACA, ICE or politicians without attacking immigrants as people; strings of political hashtags; a tweet only about the label for them, saying nothing about what they do or what should happen to them.",
+        "immigrant_defended": "Defends immigrants, criticises anti-immigrant speech, or reports on immigration neutrally.",
+        "person_attacked_with_slur": "The author degrades or shows contempt for a woman or for women with bitch, hoe, whore, slut or cunt — an insult, threat or put-down about her character, appearance, intelligence, sex life or behaviour, aimed at a specific woman (spoken to, named or talked about) or at women generally. Not for men, not for the speaker.",
+        "slur_as_address_filler": "The word bitch or hoe is just a way of addressing someone or an interjection; the sentence itself gives advice, asks for something, shares excitement or news, makes a general point, or jokes, and insults no woman.",
+        "women_degraded_group": "Belittles women in general: says women as a whole are whores, objects or worthless, waves away women's thoughts or feelings as not mattering, or approves of rape or violence against women.",
+        "rant_about_others": "Relationship, cheating or gossip talk, or bragging, in which women are called bitches or hoes but are not insulted or looked down on.",
+        "slur_friendly_or_self": "Warm, joking or self-directed use of bitch or hoe, or use as an exclamation, with no contempt for any woman.",
+        "slur_at_man_or_thing": "The gendered insult is aimed at a man (he, him, bro, dude, a man's name), at people not identified as women (a crowd, a profession, polluters, politicians), an organisation, or a situation.",
+        "lyrics_vulgar_talk": "Song lyrics, rap-style bragging or vulgar talk about sex or about hoes/bitches that is crude but not clearly meant to demean women.",
+        "misogyny_criticised": "Talks about or criticises sexist language or misogyny, or quotes it to object to it.",
+        "other": "Anything else: off-topic, other groups, spam with no target."
+      },
+      "map": {
+        "immigrant_dehumanising": "hate",
+        "immigrant_expel_hostile": "hate",
+        "immigrant_crime_burden": "hate",
+        "immigrant_policy_neutral": "not_hate",
+        "immigrant_defended": "not_hate",
+        "person_attacked_with_slur": "hate",
+        "slur_as_address_filler": "not_hate",
+        "women_degraded_group": "hate",
+        "rant_about_others": "not_hate",
+        "slur_friendly_or_self": "not_hate",
+        "slur_at_man_or_thing": "not_hate",
+        "lyrics_vulgar_talk": "not_hate",
+        "misogyny_criticised": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v9c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Pick the option that describes this tweet. Our hate-speech policy protects two groups only: women, attacked for being women, and immigrants of any kind (migrants, refugees, asylum seekers, people without legal status).",
+        "notes": [
+          "Hate must come from the author; someone reporting it, quoting it to condemn it, or arguing against it is not hateful.",
+          "Treat bitch, hoe, whore, slut and cunt as hate only when the author is insulting or belittling a woman or women with them — one woman the tweet speaks to, names or describes, or women as a whole.",
+          "These words are not hate when the target is a man or the author, when the tone is fond or playful, when they are an exclamation or a casual way to address someone, or when the sentence's point lies elsewhere.",
+          "Backing a wall, enforcement, immigration law or a politician is not hate; nor is a tweet whose sole point is the name for them (such as defending the label illegal alien). Treating immigrants as people with hostility is hate: calls to get rid of them, expel them or send them home, saying they are unwelcome, holding up a crime by one of them as a reason for the wall or deportation, or portraying them as criminals, invaders or vermin.",
+          "Hostility to other groups — faiths, races, LGBT people, politicians — falls outside this policy."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_dehumanising": "Describes immigrants or refugees as subhuman or a plague: animals, vermin, parasites, invaders, rapists by nature, or uses ethnic slurs or insulting coined words for them.",
+        "immigrant_expel_hostile": "A hostile call to deport, remove, get rid of, send back or send home immigrants or refugees, keep them out, or declare them unwelcome, hashtags included.",
+        "immigrant_crime_burden": "Depicts immigrants as criminals, disease carriers, welfare cheats or job takers, including holding up a crime by one immigrant as a reason for the wall, deportation or stricter policy.",
+        "immigrant_policy_neutral": "Talks about or supports a wall, border security, immigration law, DACA, ICE or politicians without attacking immigrants as people; lists of political hashtags; a tweet only about the name for them, with nothing about their conduct or what should be done with them.",
+        "immigrant_defended": "Defends immigrants, criticises anti-immigrant speech, or reports on immigration neutrally.",
+        "person_attacked_with_slur": "Insulting or belittling a woman or women with bitch, hoe, whore, slut or cunt: an attack, threat or put-down of her or their character, looks, intelligence, sexuality or conduct, aimed at a particular woman (spoken to, named or described) or at women as a whole. The target is never a man or the author.",
+        "slur_as_address_filler": "bitch or hoe serves only as a way to address someone or as an interjection; the point of the sentence is advice, a request, excitement, news, a general comment or a joke, and no woman is insulted.",
+        "women_degraded_group": "Disparages women as a whole: calls women in general whores, objects or worthless, treats women's opinions or feelings as worthless, or endorses rape or violence against women.",
+        "rant_about_others": "Bragging, gossip or talk about relationships and cheating that calls women bitches or hoes without insulting or belittling them.",
+        "slur_friendly_or_self": "bitch or hoe used fondly, playfully, about the author, or as an exclamation, with no contempt for a woman.",
+        "slur_at_man_or_thing": "The gendered insult targets a man (he, him, bro, dude, a man's name), people not identified as women (a crowd, a profession, polluters, politicians), an organisation, or a situation.",
+        "lyrics_vulgar_talk": "Song lyrics, rap-style bragging or vulgar talk about sex or about hoes/bitches that is crude but not clearly meant to demean women.",
+        "misogyny_criticised": "Talks about or criticises sexist language or misogyny, or quotes it to object to it.",
+        "other": "Anything else: off-topic, other groups, spam with no target."
+      },
+      "map": {
+        "immigrant_dehumanising": "hate",
+        "immigrant_expel_hostile": "hate",
+        "immigrant_crime_burden": "hate",
+        "immigrant_policy_neutral": "not_hate",
+        "immigrant_defended": "not_hate",
+        "person_attacked_with_slur": "hate",
+        "slur_as_address_filler": "not_hate",
+        "women_degraded_group": "hate",
+        "rant_about_others": "not_hate",
+        "slur_friendly_or_self": "not_hate",
+        "slur_at_man_or_thing": "not_hate",
+        "lyrics_vulgar_talk": "not_hate",
+        "misogyny_criticised": "not_hate",
+        "other": "not_hate"
+      }
+    }
+  ]
+}

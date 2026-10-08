@@ -1,0 +1,109 @@
+{
+  "run_id": "xs-hatets-free-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-05T16:50:03",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 496,
+    "num_turns": 32,
+    "total_cost_usd": 1.3021494
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "draft from description; 63% hate predicted",
+      "test": {
+        "jev": {
+          "accuracy": 0.7452,
+          "macro_f1": 0.7448,
+          "est_cost_usd": 0.056357,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 25,
+      "estimate": 0.68,
+      "note": "v2: owner policy applied; 23% hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.6959,
+          "macro_f1": 0.6536,
+          "est_cost_usd": 0.065332,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 69,
+      "estimate": 0.74,
+      "note": "v3: hostile slurs at women/non-male addressee = hate (labels override owner); immigration politics not hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7407,
+          "macro_f1": 0.7401,
+          "est_cost_usd": 0.064813,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 83,
+      "estimate": 0.76,
+      "note": "v4: 3 wording-variant ensemble; immigrant hostility (go home, taunting, burden) = hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.761,
+          "macro_f1": 0.7607,
+          "est_cost_usd": 0.193918,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.73,
+      "note": "v6: + expulsion demands (deport/send home) = hate; legal-process advice = politics",
+      "test": {
+        "jev": {
+          "accuracy": 0.7656,
+          "macro_f1": 0.7656,
+          "est_cost_usd": 0.227296,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.74,
+      "note": "v7 final: v6 ensemble + hate threshold 0.6",
+      "test": {
+        "jev": {
+          "accuracy": 0.7843,
+          "macro_f1": 0.7841,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "name": "deal_ens_t30",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A buyer and a seller chatted about a Craigslist listing. After the chat the buyer could submit a final price through a form and the seller accepted or rejected it; that step is not shown, so the chat may stop before anyone says 'deal'. Look at the last prices each side named and how the chat ends. Which describes the end of this negotiation?",
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed": "They explicitly agreed on a price: one side accepted the other's offer ('deal', 'ok', 'sounds good', 'I can do that'), or both named the same price, possibly followed by pickup, delivery or payment details.",
+        "gap_closed": "No explicit 'deal', but the gap is closed or nearly closed: the last price named meets or nearly meets what the other side offered or said they could pay, one side gives in to the other's number, someone says they will send or accept the offer, or the other side answers a price by moving on to pickup, delivery, payment, meeting time or lease details without objecting to it.",
+        "gap_open": "The chat stops with the two sides' latest prices still clearly apart: an offer or counter-offer that the other side has not come close to or has objected to, a refusal ('too low', 'too much', 'can't do that'), or a 'final offer' the other side has not met.",
+        "no_price_talk": "The chat never got to price negotiation: only greetings, questions about the item, or small talk, and it stops there.",
+        "broken": "The chat is confused or off-topic (a different item, unclear roles), or the participants say they are quitting without a deal."
+      },
+      "map": {
+        "agreed": "deal",
+        "gap_closed": "deal",
+        "gap_open": "no_deal",
+        "no_price_talk": "no_deal",
+        "broken": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v4a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a Craigslist sale chat between a buyer and a seller. The deal is finalised outside the chat: the buyer enters a price in an offer form and the seller accepts or declines it, so the chat itself often ends before anyone writes 'deal'. Based on the last prices the two sides mentioned and the way the chat finishes, how did this negotiation end?",
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed": "A price was clearly agreed: one person accepted the other's number (for example 'deal', 'ok', 'that works', 'I can do that'), or both stated the same price; there may be follow-up about pickup, delivery or payment.",
+        "gap_closed": "Nobody says 'deal' outright, but the two sides have met or almost met: the latest price matches or is very near what the other person offered or could pay, one person concedes to the other's figure, someone says they will send or accept the offer, or the reply to a price simply moves on to pickup, delivery, payment, timing or lease details with no objection.",
+        "gap_open": "When the chat ends the two sides are still clearly apart on price: a pending offer or counter-offer the other person has objected to or not come near, a rejection such as 'too low' or 'can't do that', or a 'final offer' that has not been met.",
+        "no_price_talk": "Price was never really negotiated: the chat is just greetings, questions about the item or small talk, and ends there.",
+        "broken": "The conversation is confused or off-topic (about another item, the roles are mixed up), or the people say they are giving up without a deal."
+      },
+      "map": {
+        "agreed": "deal",
+        "gap_closed": "deal",
+        "gap_open": "no_deal",
+        "no_price_talk": "no_deal",
+        "broken": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v4b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a Craigslist listing and the buyer-seller negotiation about it. The sale is closed afterwards by the buyer submitting an offer that the seller accepts or rejects, which is not part of the transcript. Decide what state the negotiation was in when the chat ended.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed": "Explicit agreement on a price: an offer was accepted in words, or both parties said the same figure, possibly followed by arrangements.",
+        "gap_closed": "Effectively agreed without saying so: the final figures are equal or nearly equal, one party gave in to the other's price, a party says they will submit or accept the offer, or a price was answered by arranging pickup, delivery, payment, a meeting or lease terms rather than by objecting.",
+        "gap_open": "Still apart at the end: the last offer or counter-offer was objected to or is clearly far from the other party's number, an offer was refused, or a stated final offer was not met.",
+        "no_price_talk": "No real price negotiation took place: only hellos, item questions or chit-chat before the chat ends.",
+        "broken": "A broken conversation: off-topic, about a different item, roles confused, or the parties say they are quitting."
+      },
+      "map": {
+        "agreed": "deal",
+        "gap_closed": "deal",
+        "gap_open": "no_deal",
+        "no_price_talk": "no_deal",
+        "broken": "no_deal"
+      }
+    }
+  ],
+  "decision": {
+    "class": "deal",
+    "threshold": 0.3
+  }
+}

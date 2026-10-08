@@ -1,0 +1,81 @@
+{
+  "run_id": "ro-persuasion-free-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-04T17:49:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 484,
+    "num_turns": 49,
+    "total_cost_usd": 1.6536894000000002
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description + known scheme, 21 options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.5682,
+          "macro_f1": 0.5573,
+          "est_cost_usd": 0.099062,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 34,
+      "estimate": 0.5,
+      "note": "v2: owner policy on other / emotion stats / credibility descriptions / foot-in-the-door small amounts",
+      "test": {
+        "jev": {
+          "accuracy": 0.5913,
+          "macro_f1": 0.5787,
+          "est_cost_usd": 0.106015,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 80,
+      "estimate": 0.58,
+      "note": "v3: rules H1-H6 (bare acknowledgement only, opinion vs personal-history inquiries, beneficiary narratives = emotion, greeting replies)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5933,
+          "macro_f1": 0.5987,
+          "est_cost_usd": 0.113473,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.55,
+      "note": "ens6: 3 wording variants of v3 rules + org facts in replies = credibility (H7); 'answer-to-question' option renamed practical-reply",
+      "test": {
+        "jev": {
+          "accuracy": 0.6018,
+          "macro_f1": 0.6072,
+          "est_cost_usd": 0.332329,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

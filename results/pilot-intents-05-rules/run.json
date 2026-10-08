@@ -1,0 +1,133 @@
+{
+  "run_id": "pilot-intents-05-rules",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "created": "2026-09-26T14:42:07",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 8,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.78,
+      "note": "v1: description-only draft, one-line definition per intent",
+      "test": {
+        "jev": {
+          "accuracy": 0.8481,
+          "macro_f1": 0.8441,
+          "est_cost_usd": 0.333075,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.79,
+      "note": "round 1: H1-H4 (debit->direct_debit, ATM->declined_cash_withdrawal, narrowed pending_card_payment, overdue transfer->not_received), 0574 transfer-fee framing",
+      "test": {
+        "jev": {
+          "accuracy": 0.8516,
+          "macro_f1": 0.8476,
+          "est_cost_usd": 0.356223,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 20,
+      "estimate": 0.79,
+      "note": "round 1 final: + freeze->lost_or_stolen",
+      "test": {
+        "jev": {
+          "accuracy": 0.849,
+          "macro_f1": 0.8454,
+          "est_cost_usd": 0.359184,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 44,
+      "estimate": 0.8,
+      "note": "round 2: H5-H12, narrowed top-up and delivery rules; 0719 suspected noise",
+      "test": {
+        "jev": {
+          "accuracy": 0.8607,
+          "macro_f1": 0.8571,
+          "est_cost_usd": 0.395924,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 62,
+      "estimate": 0.81,
+      "note": "round 3: H13 verify_source_of_funds broadened, pending_transfer/timing split, country shipping",
+      "test": {
+        "jev": {
+          "accuracy": 0.8653,
+          "macro_f1": 0.8614,
+          "est_cost_usd": 0.41364,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 78,
+      "estimate": 0.81,
+      "note": "round 4: top-up pending/failed split, Apple Pay top-ups, Amex support, own-account transfer not showing",
+      "test": {
+        "jev": {
+          "accuracy": 0.8714,
+          "macro_f1": 0.8674,
+          "est_cost_usd": 0.429546,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 94,
+      "estimate": 0.82,
+      "note": "round 5: auto top-up limits, delivery method, banking-abroad fee, transfer-to-others wins over timing, H17 confirmed",
+      "test": {
+        "jev": {
+          "accuracy": 0.8718,
+          "macro_f1": 0.868,
+          "est_cost_usd": 0.442866,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 100,
+      "estimate": 0.82,
+      "note": "final: budget spent; agrees with 47/50 labels (3 suspected noise); pins for 0463/0573/0377/0285/0315",
+      "test": {
+        "jev": {
+          "accuracy": 0.8744,
+          "macro_f1": 0.8706,
+          "est_cost_usd": 0.462005,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

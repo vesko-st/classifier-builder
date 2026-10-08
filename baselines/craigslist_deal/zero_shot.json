@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "name": "craigslist_deal_zero_shot",
+  "description": "0-point baseline from the public task definition.",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Buyers and sellers negotiate the price of a Craigslist item over chat. Tell us whether each negotiation closed with a deal. Which class does this input belong to?",
+  "criteria": {
+    "deal": "They closed a deal",
+    "no_deal": "They did not close a deal"
+  },
+  "state_template": "The item listing, then the negotiation chat.\n\n{{input}}"
+}

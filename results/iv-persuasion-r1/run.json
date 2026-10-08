@@ -1,0 +1,96 @@
+{
+  "run_id": "iv-persuasion-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "interview",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T11:16:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 637,
+    "num_turns": 53,
+    "total_cost_usd": 2.1553736000000003
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description + phenomena, no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.5966,
+          "macro_f1": 0.5809,
+          "est_cost_usd": 0.100136,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 30,
+      "estimate": 0.5,
+      "note": "v2: policy answers (ack vs evaluative reaction->other, self-modeling incl habits, FITD vs logical, closings other)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6018,
+          "macro_f1": 0.587,
+          "est_cost_usd": 0.108859,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 72,
+      "estimate": 0.5,
+      "note": "v3: own_reasoning option (persuader reflections -> other); H1 forwarding->credibility reverted",
+      "test": {
+        "jev": {
+          "accuracy": 0.5966,
+          "macro_f1": 0.5815,
+          "est_cost_usd": 0.112715,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 86,
+      "estimate": 0.5,
+      "note": "e3: 3-variant wording ensemble of v3 rules (damps near-tie jitter); H4/H5 not kept",
+      "test": {
+        "jev": {
+          "accuracy": 0.5933,
+          "macro_f1": 0.5755,
+          "est_cost_usd": 0.355844,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.5,
+      "note": "e7: ensemble + H7 refined (small amount from persuadee=FITD, pooled money effect=logical), H8 guilt->emotion, H9 any how-much=ask-amount, H10 reply to how-are-you=greeting, amount range=donation-info. check 4/8",
+      "test": {
+        "jev": {
+          "accuracy": 0.6005,
+          "macro_f1": 0.5821,
+          "est_cost_usd": 0.369118,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

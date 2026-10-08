@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "name": "donation_v1",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "This is a chat in which a persuader asks the persuadee to donate part of their task payment to the charity Save the Children. The chat may be cut off before the end. Judging from everything the persuadee says, which best describes the persuadee's final position on donating part of their task payment?",
+  "state_template": "Charity-donation chat:\n{{input}}",
+  "criteria": {
+    "pledged_amount": "The persuadee commits to donating a specific positive amount or share of their task payment (e.g. a number of cents or dollars, half, all of it).",
+    "agreed_no_amount": "The persuadee clearly agrees to donate or says they will donate, but does not name an amount.",
+    "leaning_yes": "The persuadee is sympathetic and seems inclined to give, but has not clearly committed.",
+    "outside_only": "The persuadee only talks about donating later, elsewhere (e.g. on the website), or helping in another way, not from the task payment.",
+    "undecided": "The persuadee stays undecided, asks for time, or the chat ends before they give any answer about donating.",
+    "declined": "The persuadee refuses, says they cannot afford it, or chooses to donate $0."
+  },
+  "map": {
+    "pledged_amount": "donated",
+    "agreed_no_amount": "donated",
+    "leaning_yes": "donated",
+    "outside_only": "not_donated",
+    "undecided": "not_donated",
+    "declined": "not_donated"
+  }
+}

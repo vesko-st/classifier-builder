@@ -1,0 +1,62 @@
+{
+  "run_id": "xs-persuasion-free-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "free",
+  "created": "2026-09-30T10:05:35",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 506,
+    "num_turns": 32,
+    "total_cost_usd": 1.6089692
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from P4G-style definitions, 22 options mapped to 18 classes, no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.5972,
+          "macro_f1": 0.6,
+          "est_cost_usd": 0.106457,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 100,
+      "estimate": 0.5,
+      "note": "v5: owner rules Q1-3 + lessons from 30 targeted labels; 27 options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.6262,
+          "macro_f1": 0.6069,
+          "est_cost_usd": 0.143182,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.5,
+      "note": "final: ensemble of 3 wording variants of v5 (same options/rules)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6262,
+          "macro_f1": 0.6041,
+          "est_cost_usd": 0.440482,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "run_id": "xs-routing-uncertainty-r3",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "mode": "budget",
+  "created": "2026-09-30T14:31:38",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 461,
+    "num_turns": 34,
+    "total_cost_usd": 1.3470188000000003
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: 76 issue options mapped to teams; 2-member ensemble with alternative team mapping for 23 ambiguous issues (encodes mapping uncertainty)",
+      "test": {
+        "jev": {
+          "accuracy": 0.775,
+          "macro_f1": 0.7441,
+          "est_cost_usd": 0.515624,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.8,
+      "note": "v2: batch 1 settled 10 issue->team mappings (pending cash withdrawal->cards, lost card/phone/passcode->fraud, wrong cash amount->disputes); inferred pending card payment->cards; bought texts added as examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.8357,
+          "macro_f1": 0.8175,
+          "est_cost_usd": 0.583645,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.83,
+      "note": "v3: batch 2 settled 10 more mappings (top-up verification->account, supported cards/currencies->pricing, PIN blocked->fraud, reverted payment & extra charge->disputes, fees->pricing); inferred direct debit->fraud, top-up card fee->pricing",
+      "test": {
+        "jev": {
+          "accuracy": 0.8782,
+          "macro_f1": 0.8668,
+          "est_cost_usd": 0.65477,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.84,
+      "note": "v4: batch 3 examples; Apple Pay->cards; account-security option; sharper supported-cards vs top-up-by-card; re-opened ATM support & withdrawal fee as cards/pricing vs disputes after label 0650",
+      "test": {
+        "jev": {
+          "accuracy": 0.8831,
+          "macro_f1": 0.8638,
+          "est_cost_usd": 0.723826,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.85,
+      "note": "v5: batch 4; all mappings settled (withdrawal fee->pricing, ATM support->cards), so single choice+map; new unrecognised-money option->fraud; cancelling an order->disputes; 39/40 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8935,
+          "macro_f1": 0.8787,
+          "est_cost_usd": 0.396182,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.87,
+      "note": "v6 final: batch 5 examples; PIN compromised->fraud, phone left somewhere->fraud, small unexplained statement charge->disputes, using it worldwide->account, general top-up methods option->payments; 49/50 labels (0650 outlier)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8977,
+          "macro_f1": 0.8829,
+          "est_cost_usd": 0.436542,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

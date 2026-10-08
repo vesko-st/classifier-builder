@@ -1,0 +1,106 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v10",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "Classify this tweet under a hate-speech annotation policy that protects two target groups only: WOMEN and IMMIGRANTS (immigrants, refugees, migrants, asylum seekers, 'illegals'). The policy is broad for these two groups: hostile, contemptuous or sexually degrading remarks about a woman, and content that paints immigrants as a threat or burden or calls to exclude or expel them, count as hate even without strong language, including headlines shared from anti-immigration outlets.",
+    "out_of_scope": "Abuse aimed at men, male individuals (e.g. a referee), politicians, 'leftists', or other groups is NOT hate, however abusive. Criticising governments, cities or politicians for pro-immigration policies, or agreeing with a politician on immigration, is not hate unless the immigrants themselves are painted as a threat/burden or exclusion is demanded. Hostility toward Muslims counts only when framed around them as migrants/refugees. Affectionate or friendly banter and slang used playfully toward a friend, and slurs aimed at a person of unknown gender, are not hate. Profanity with no woman demeaned is not hate. Neutral news, advocacy and support are not hate. Counter-speech is not hate: tweets that quote, mock or complain about sexist tropes or anti-immigrant claims in order to reject them (e.g. women pushing back on being called 'hysterical').",
+    "primary_target": "Judge whether the author degrades women or immigrants themselves. If the tweet mainly attacks a government, party, politicians or liberals and immigrants are only the subject of the policy, it is not hate; but if it ALSO frames immigrants as dangerous, criminal, an invading influx of millions, or wants them deported, it is hate. Neutral factual reporting (e.g. a news headline about one immigrant's arrest) is not hate; hate needs hostile framing by the author or an anti-immigrant outlet."
+  },
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "hate_woman_insulted": {
+      "meaning": "Insults or shows contempt for a woman or girl: gendered slurs used hostilely (hoe, bitch, whore, slut, skank) at a woman, or calling a woman hysterical, crazy or stupid as a put-down.",
+      "examples": [
+        "What I ever do to you hoe? ... Hating ass hoe",
+        "The woman is hysterical, you did well Blaire.",
+        "you broken depression pussy ass bitch"
+      ]
+    },
+    "hate_woman_sexual_object": {
+      "meaning": "Graphically treats women or a woman as a sexual object or degrades her sexually (e.g. using her for sex then discarding her, crude talk reducing women to body parts). Mild flirting or innuendo is not enough.",
+      "examples": [
+        "after I fuck you I'm never gonna talk to you again",
+        "I'm on this new diet where I only eat pussy and ass from Friday to Sunday"
+      ]
+    },
+    "hate_women_group": {
+      "meaning": "Expresses contempt, stereotypes or hostility toward women as a group (e.g. women belong in the kitchen, #WomenSuck, generalising that women are hoes/promiscuous/liars).",
+      "examples": [
+        "I thought you had to fuck 20 different guys to be a hoe so that explains why women fine someone better"
+      ]
+    },
+    "hate_immigrants_attack": "Calls immigrants/refugees invaders, animals, criminals, freeloaders, or calls for violence against them.",
+    "hate_immigrants_exclusion": {
+      "meaning": "Calls for, cheers, or approvingly presents excluding immigrants: build the wall, deport them, close borders, end DACA, refuse refugees, praising a country for keeping migrants out, saying refugees are unwanted somewhere, or anti-immigration outlets (e.g. 'Free Speech Time') presenting fences/armies/deportations as a win.",
+      "examples": [
+        "Stricter immigration laws and build that wall!",
+        "Poland: our country is safe because we haven't taken in refugees.",
+        "Macedonia deployed the army to build a second fence to keep refugees out - Free Speech Time",
+        "Paris dont like tentrefugees. Now they bring them to the parque \"Bois de Bologne\". Close of this place life the most rich people of France",
+        "CONG is the main culprit for influx of illegal migrants both Bangladeshis & Rhongyias. If they deported few, millions came"
+      ],
+      "excludes": "A neutral mainstream news headline reporting a government's border or asylum decision, with no approval or hostility added, is not_news_or_support (e.g. 'Prague not to accept migrants from Italy, offers police, experts')."
+    },
+    "hate_immigrants_burden_or_crime": {
+      "meaning": "Author portrays immigrants or 'illegals' as a threat, crime wave, or burden getting welfare/benefits/resources at citizens' expense, including crime stories framed pejoratively (e.g. 'illegal alien', 'who was deported') or shared from anti-immigrant outlets.",
+      "examples": [
+        "we can not afford to give welfare to illegals while U.S Citizens are homeless",
+        "take their benefits away so r u going to do the same to the young migrants punish ur own and let off others",
+        "Illegal alien in Utah who was deported raped 7-year-old girl",
+        "How do refugees in this country get money? It is, initially, given to them and then they learn the system."
+      ],
+      "excludes": "Neutral headline about a single immigrant's crime or arrest with no pejorative framing (e.g. 'PHOTO OF SHOOTER IN TENN CHURCH ATTACK | Sudanese Immigrant Arrested') is not_news_or_support."
+    },
+    "not_other_target": "Insults, abuse or criticism aimed at a man, men in general, politicians, leftists, a city or government, or a person of unknown gender not targeted as a woman or immigrant; or hostility toward Muslims/religion with no migration angle.",
+    "not_friendly_or_profane": {
+      "meaning": "Friendly banter, playful slang, or generic slang like 'hoe'/'bitch' used about people in general or at a person of unknown gender, crude sexual jokes or profanity, with no specific woman or women as a group being demeaned or treated as an object.",
+      "examples": [
+        "@user MELISSA, YOU'RE HYSTERICAL. 😂 I AM GIVING YOU A HAPPY DANCE FOR TODAY",
+        "@user hoe you dont even know??Tragique....add me back",
+        "Cuffing is not DEAD If everybody stop being a hoe then you can cuff",
+        "Apparently asking a doctor if she wants to come to your room and play doctor, is not an appropriate question"
+      ]
+    },
+    "not_policy_criticism": {
+      "meaning": "Mainly criticises or mocks a government, party, politicians, liberals, or a pro-immigration policy or city (immigrants only mentioned in passing), or agrees with a politician on immigration, or shares a policy story, without the author painting immigrants as a threat/burden or demanding exclusion.",
+      "examples": [
+        "Made your bed, now lie in the flea pit you created 'Tourists go home, refugees welcome': why Barcelona chose migrants over visitors",
+        "Legal Immigrant Explains His Story and Why President Trump is Right About Illegal Immigration",
+        "The German government is giving refugees three weeks paid vacations INCLUDING airfare BACK to the very countries they fled from because it was unsafe.",
+        "Liberals on odd days: Modi's India is saffron terror ... Liberals on even days: Illegal Muslim Bangladeshi migrants feel home in India. Why should they go?",
+        "take more migrants in you can find money for non Uk people ... there is no dignity for our NHS staff no pay rises ... The torys have lost the trust"
+      ],
+      "excludes": "If the author also frames immigrants as dangerous, criminal, an invading influx, or wants them deported, choose a hate option (e.g. 'CONG is the main culprit for influx of illegal migrants both Bangladeshis & Rhongyias. If they deported few, millions came' is hate)."
+    },
+    "not_counter_speech": {
+      "meaning": "Counter-speech: a woman or ally complaining about sexism, or quoting/mocking a sexist trope or anti-immigrant claim in order to reject it.",
+      "examples": [
+        "We wouldn't appear hysterical if you'd STFU the FIRST time we try to talk.",
+        "\"Hysterical Women\" is right out of the Con play book"
+      ]
+    },
+    "not_news_or_support": {
+      "meaning": "Neutral news, including headlines about governments' border/asylum decisions without approval or hostility added; advocacy or support for refugees, immigrants or women; counter-speech against hate.",
+      "examples": [
+        "Prague not to accept migrants from Italy, offers police, experts"
+      ]
+    },
+    "not_other": "Anything else unrelated or harmless."
+  },
+  "map": {
+    "hate_woman_insulted": "hate",
+    "hate_woman_sexual_object": "hate",
+    "hate_women_group": "hate",
+    "hate_immigrants_attack": "hate",
+    "hate_immigrants_exclusion": "hate",
+    "hate_immigrants_burden_or_crime": "hate",
+    "not_other_target": "not_hate",
+    "not_friendly_or_profane": "not_hate",
+    "not_policy_criticism": "not_hate",
+    "not_counter_speech": "not_hate",
+    "not_news_or_support": "not_hate",
+    "not_other": "not_hate"
+  }
+}

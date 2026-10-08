@@ -1,0 +1,88 @@
+{
+  "run_id": "pilot-intents-10-policyrules",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "policy_rules",
+  "created": "2026-09-28T16:15:40",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.78,
+      "note": "v1: description-only flat choice, 77 options",
+      "test": {
+        "jev": {
+          "accuracy": 0.837,
+          "macro_f1": 0.832,
+          "est_cost_usd": 0.348076,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.79,
+      "note": "v2: policy answers (PIN->get_physical_card, charges, pending vs timing)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8416,
+          "macro_f1": 0.8374,
+          "est_cost_usd": 0.369284,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 64,
+      "estimate": 0.78,
+      "note": "v3b: H2 reverted_card_payment rule (paid then cancelled/disappeared)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8471,
+          "macro_f1": 0.8429,
+          "est_cost_usd": 0.374198,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 78,
+      "estimate": 0.78,
+      "note": "v4b: H7 single failed shop payment -> declined; repeated/multiple places -> card_not_working",
+      "test": {
+        "jev": {
+          "accuracy": 0.8458,
+          "macro_f1": 0.8417,
+          "est_cost_usd": 0.377302,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 90,
+      "estimate": 0.78,
+      "note": "ens_a: average of v4b, v5, v5b (H10 cash_withdrawal_not_recognised; damps near-tie flips)",
+      "test": {
+        "jev": {
+          "accuracy": 0.849,
+          "macro_f1": 0.845,
+          "est_cost_usd": 1.148199,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

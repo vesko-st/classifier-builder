@@ -1,0 +1,47 @@
+{
+  "run_id": "xm-persuasion-haiku-high-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:43:40",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 1301,
+    "num_turns": 40,
+    "total_cost_usd": 0.42666490000000007
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 65,
+      "estimate": 0.55,
+      "note": "Draft 1: Policy-based choice classifier with 18 persuasion strategies. Based on policy questions, not yet calibrated against labels.",
+      "test": {
+        "jev": {
+          "accuracy": 0.5946,
+          "macro_f1": 0.5983,
+          "est_cost_usd": 0.080351,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 95,
+      "estimate": 0.82,
+      "note": "Draft 2: Improved descriptions for emotion-appeal and acknowledgement. Random sample: 90% accuracy (9/10), macro-F1 0.857. Better recognition of sympathy/emotional content and short agreements.",
+      "test": {
+        "jev": {
+          "accuracy": 0.586,
+          "macro_f1": 0.5882,
+          "est_cost_usd": 0.083765,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

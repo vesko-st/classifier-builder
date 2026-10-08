@@ -1,0 +1,88 @@
+{
+  "run_id": "pilot-hatets-15-labelsfirst-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "created": "2026-09-28T22:27:34",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 24,
+      "estimate": 0.7,
+      "note": "v1 criteria draft from 3 policy answers; 39.5% hate on pool",
+      "test": {
+        "jev": {
+          "accuracy": 0.7729,
+          "macro_f1": 0.7639,
+          "est_cost_usd": 0.056357,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 60,
+      "estimate": 0.66,
+      "note": "v3: + hostile slur-at-woman/unspecified clause (labels showed plain directed insults are hate), counter dropped for women clauses; 0.667 mF1 on 18 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7644,
+          "macro_f1": 0.7644,
+          "est_cost_usd": 0.072601,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 60,
+      "estimate": 0.68,
+      "note": "ensemble of v3+v4 wording variants (slur clause AND !counter); 0.721 mF1 on 18 labels (8 biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7752,
+          "macro_f1": 0.7752,
+          "est_cost_usd": 0.148613,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 80,
+      "estimate": 0.72,
+      "note": "ens v5 (men-target/banter exclusions, immigrant insinuation inclusion) + hate threshold 0.65; 0.844 mF1 in-sample on 28",
+      "test": {
+        "jev": {
+          "accuracy": 0.7928,
+          "macro_f1": 0.7918,
+          "est_cost_usd": 0.172793,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.68,
+      "note": "FINAL: ens v5 + hate threshold 0.70; 0.770 mF1 on 38 labels (28 hard-picked, threshold fit in-sample), 0.58 on 10 random check; pool 47.6% hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7911,
+          "macro_f1": 0.7888,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

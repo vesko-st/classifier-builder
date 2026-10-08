@@ -1,0 +1,76 @@
+{
+  "run_id": "xm-hatets-opus-high-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:19:30",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 413,
+    "num_turns": 36,
+    "total_cost_usd": 1.3428049999999996
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 32,
+      "estimate": 0.7,
+      "note": "v1 criteria draft from Q1,Q2 and 5 minimal pairs; 378/1000 hate; 12/13 owner-cited examples right",
+      "test": {
+        "jev": {
+          "accuracy": 0.7967,
+          "macro_f1": 0.787,
+          "est_cost_usd": 0.065258,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 84,
+      "estimate": 0.74,
+      "note": "v3: single hostile-slur question (any target not clearly male/friendly) + imm_hostile + women_group_hate; 540/1000 hate; 9/10 random check, 20/24 all labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7922,
+          "macro_f1": 0.7914,
+          "est_cost_usd": 0.06956,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.73,
+      "note": "v6: 3-member wording ensemble (v3, v4, v3b) of the looser slur rule + imm_hostile; 531 hate; 25/32 labels (macro-F1 0.78), 8/10 random check, 12/13 owner-cited",
+      "test": {
+        "luna": {
+          "accuracy": 0.8092,
+          "macro_f1": 0.807,
+          "est_cost_usd": 0.20799,
+          "total": 1766,
+          "answered": 1766
+        },
+        "pplx": {
+          "accuracy": 0.7911,
+          "macro_f1": 0.7864,
+          "est_cost_usd": 0.000805,
+          "total": 1766,
+          "answered": 1766
+        },
+        "jev": {
+          "accuracy": 0.799,
+          "macro_f1": 0.7981,
+          "est_cost_usd": 0.206453,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

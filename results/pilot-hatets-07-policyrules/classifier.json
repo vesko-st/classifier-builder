@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v5",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "imm_target": {
+      "instructions": "Is this tweet about immigrants, migrants, refugees, asylum seekers or 'illegal aliens' as people (not only about border policy, politicians or elections)?",
+      "criteria": {
+        "true": "The tweet talks about immigrants/migrants/refugees/illegals themselves, as a group or as an individual immigrant. This includes a claim whose subject is 'they/them' or a hashtag such as #IllegalAliens or #Illegals when that refers to immigrants.",
+        "false": "The tweet is only about politics, Trump, the wall as policy, taxes, elections, or something unrelated, with no statement about immigrants themselves."
+      }
+    },
+    "imm_hostile": {
+      "instructions": "Does the author express hostility toward immigrants/refugees as people in their own words: saying they should be sent home, deported or kept out, that they have no place or are not welcome here; dehumanising or derogatory terms (invaders, rapefugees, bottom feeders, animals); claims that they as a group are criminals, rapists, job thieves, disease carriers or welfare abusers; or presenting a crime by an immigrant as a reason to deport them or protect citizens from them?",
+      "criteria": {
+        "true": "The tweet's own words (not only its hashtags) reject, expel, demean or generalise negatively about immigrants/refugees; the subject of the claim may be 'they' or a hashtag naming them (e.g. '#IllegalAliens are destroying the World', 'they steal and wreck cars... #SendThemBack').",
+        "false": "The only hostility is in hashtags (#StopTheInvasion, #IllegalAliens, #SendThemBack) added to a neutral, political or news text; only arguing that 'illegal alien' is the correct term; political support for the wall or Trump; or criticism of politicians."
+      }
+    },
+    "woman_target": {
+      "instructions": "Is the tweet aimed at a woman or at women (a specific female person being addressed or talked about, or women/'hoes'/'bitches' as a group)? If the insulted person is male (he, him, dude, man, boy), answer no.",
+      "criteria": {
+        "true": "The target of the words is female or women in general.",
+        "false": "The words are aimed at a man (e.g. 'this dude... little bitch', 'he going to be a whore'), at the author herself, at no one (exclamation, filler, lyrics), or at an object or situation."
+      }
+    },
+    "woman_degraded": {
+      "instructions": "Does the tweet degrade women with real hostility: sexual degradation (calling her a whore/slut to demean her sexually, sexual humiliation), threats or wishes of violence or rape against a woman, or a demeaning generalisation about women as a class (e.g. 'these hoes ain't loyal', 'bitches will whore around')?",
+      "criteria": {
+        "true": "Sexualised degradation, threats/violence, or demeaning generalisation about women.",
+        "false": "Casual, affectionate, joking or self-referential use of bitch/hoe; filler exclamations ('bitch I'm so proud'); or a plain angry insult in a quarrel without sexual degradation, threat or generalisation about women."
+      }
+    }
+  },
+  "rule": [
+    [
+      "imm_target",
+      "imm_hostile"
+    ],
+    [
+      "woman_target",
+      "woman_degraded"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate"
+}

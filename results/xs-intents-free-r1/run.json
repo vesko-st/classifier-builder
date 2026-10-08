@@ -1,0 +1,79 @@
+{
+  "run_id": "xs-intents-free-r1",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-05T16:50:03",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 621,
+    "num_turns": 37,
+    "total_cost_usd": 2.0099920000000004
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 flat 77-option choice, descriptions from task names only",
+      "test": {
+        "jev": {
+          "accuracy": 0.8344,
+          "macro_f1": 0.8291,
+          "est_cost_usd": 0.364876,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 32,
+      "estimate": 0.84,
+      "note": "v3: descriptions revised from 16 targeted labels (transfers, pending, card PIN/physical, unrecognised charges)",
+      "test": {
+        "jev": {
+          "accuracy": 0.849,
+          "macro_f1": 0.8449,
+          "est_cost_usd": 0.408988,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 64,
+      "estimate": 0.86,
+      "note": "v6: 3 flat wording-variant ensemble; rules from 32 labels (fees, transfers, ATM, refunds, source of funds)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8562,
+          "macro_f1": 0.8522,
+          "est_cost_usd": 1.344957,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.86,
+      "note": "v9: 3 flat wording-variant ensemble, rules from all 50 labels; 50/50 bought labels (biased, labels shaped rules)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8591,
+          "macro_f1": 0.8552,
+          "est_cost_usd": 1.431167,
+          "total": 3080,
+          "answered": 3030
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "run_id": "xm-persuasion-haiku-high-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:38:50",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 285,
+    "num_turns": 67,
+    "total_cost_usd": 0.4924800999999999
+  },
+  "final_version": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 98,
+      "estimate": 0.75,
+      "note": "Final classifier with refined descriptions. 90.9% accuracy on 11 labeled records. Distribution: credibility-appeal dominant (17.1%), followed by other (11%), acknowledgement (9.4%). Only remaining error is subtle quoting vs direct asking distinction.",
+      "test": {
+        "jev": {
+          "accuracy": 0.5742,
+          "macro_f1": 0.5604,
+          "est_cost_usd": 0.104814,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

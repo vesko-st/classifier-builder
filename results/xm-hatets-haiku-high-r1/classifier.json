@@ -1,0 +1,47 @@
+{
+  "version": 1,
+  "name": "tweet_hate_refined",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "targets_immigrants": {
+      "instructions": "Does the tweet specifically discuss or target immigrants, refugees, migrants, or undocumented people as a group? Ignore hashtags alone; look for actual content targeting this group."
+    },
+    "targets_women": {
+      "instructions": "Does the tweet demean women as a group, or make a sexualized/misogynistic attack on a woman because of her gender? (Not personal insults using crude language, but specifically gender-based attacks.)"
+    },
+    "dehumanize_generalize_immigrants": {
+      "instructions": "Does the tweet use dehumanizing language or make hostile negative generalizations about immigrants: calling them invaders, infestations, rapists, criminals, diseased, welfare fraudsters, or inherently dangerous?"
+    },
+    "call_for_exclusion_or_violence": {
+      "instructions": "Does the tweet call for deportation, violence, or exclusion of immigrants WITH hostile framing or intent (not just as neutral policy, but with dehumanizing or aggressive language stacked with it)?"
+    },
+    "sexualized_attack_women": {
+      "instructions": "Does the tweet make a sexualized or gender-based degrading insult at a woman because she is a woman? (Not crude personal insults in general, but specifically misogynistic sexual attacks.)"
+    },
+    "generalize_negative_women": {
+      "instructions": "Does the tweet claim all women or a group of women inherently possess negative qualities (catty, inferior, etc.), or make sexist generalizations about gender?"
+    }
+  },
+  "rule": [
+    [
+      "targets_immigrants",
+      "dehumanize_generalize_immigrants"
+    ],
+    [
+      "targets_immigrants",
+      "call_for_exclusion_or_violence"
+    ],
+    [
+      "targets_women",
+      "sexualized_attack_women"
+    ],
+    [
+      "targets_women",
+      "generalize_negative_women"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate"
+}

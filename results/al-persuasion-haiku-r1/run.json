@@ -1,0 +1,33 @@
+{
+  "run_id": "al-persuasion-haiku-r1",
+  "task": "persuasion_strategy",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T15:10:35",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 389,
+    "num_turns": 71,
+    "total_cost_usd": 0.6221962500000002
+  },
+  "final_version": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.505,
+      "note": "v6: refined emotion/logical/credibility distinctions, dev F1 0.505",
+      "test": {
+        "jev": {
+          "accuracy": 0.4693,
+          "macro_f1": 0.4863,
+          "est_cost_usd": 0.073272,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

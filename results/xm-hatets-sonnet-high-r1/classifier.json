@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "name": "hate_v4",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "imm_target": {
+      "instructions": "Is this tweet about immigrants, migrants, refugees, asylum seekers or 'illegal aliens' as a group of people (including Muslim migrants), as opposed to only about border policy, politics or an unrelated topic?"
+    },
+    "imm_hostile": {
+      "instructions": "Does the tweet express hostility toward immigrants/refugees as a group by (a) dehumanising or demeaning them (scum, animals, invaders, parasites, cancer, rapefugee), (b) generalising them as criminals, rapists, thieves, freeloaders or a threat because of who they are, or (c) the text itself (not just a hashtag) demanding that they all be deported, expelled, sent home or kept out? Neutral discussion of immigration law or legal process, arguing that illegal immigration is unfair to legal immigrants, news about a crime, praise for a politician, a bare hashtag, criticising politicians on borders, or a call to build a wall with no demand against the people themselves is NO."
+    },
+    "women_target": {
+      "instructions": "Is the tweet hostile abuse directed at or about a woman or women (or a female person), rather than about a man, a politician's policies, or something unrelated?"
+    },
+    "women_degrade": {
+      "instructions": "Does the tweet insult a woman or women with sexualised degrading words such as whore, slut, cunt, thot, skank or prostitute, or contain rape or sexual-violence talk, or say women are inferior? The words 'bitch' and 'hoe' on their own, aggression, threats to fight, body insults without such words, and friendly or everyday uses are NO."
+    },
+    "casual": {
+      "instructions": "Is the gendered word (bitch, hoe, whore) used in a friendly, affectionate, complimentary or self-referential way, as a casual exclamation, or as banter among friends, rather than to attack someone?"
+    },
+    "quoted": {
+      "instructions": "Is the tweet only reporting news, quoting someone, or criticising hateful content rather than endorsing it?"
+    }
+  },
+  "rule": [
+    [
+      "imm_target",
+      "imm_hostile",
+      "!quoted"
+    ],
+    [
+      "women_target",
+      "women_degrade",
+      "!casual",
+      "!quoted"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate",
+  "decision": {
+    "class": "hate",
+    "threshold": 0.45
+  }
+}

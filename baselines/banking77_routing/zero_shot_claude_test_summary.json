@@ -1,0 +1,164 @@
+{
+  "classifier": "banking77_routing_zero_shot",
+  "type": "choice",
+  "backend": "claude",
+  "total": 3080,
+  "answered": 3080,
+  "errors": {},
+  "cached": 3080,
+  "input_tokens_billed": 0,
+  "output_tokens_billed": 0,
+  "est_cost_usd": 0.0,
+  "prediction_counts": {
+    "cards": 956,
+    "payments_and_transfers": 858,
+    "pricing_and_fx": 479,
+    "account_and_compliance": 371,
+    "disputes_and_refunds": 229,
+    "fraud_and_security": 187
+  },
+  "labeled": 3080,
+  "accuracy": 0.7649,
+  "macro_f1": 0.7344,
+  "per_class": {
+    "account_and_compliance": {
+      "n": 400,
+      "precision": 0.7925,
+      "recall": 0.735,
+      "f1": 0.7626
+    },
+    "cards": {
+      "n": 880,
+      "precision": 0.7772,
+      "recall": 0.8443,
+      "f1": 0.8094
+    },
+    "disputes_and_refunds": {
+      "n": 320,
+      "precision": 0.7467,
+      "recall": 0.5344,
+      "f1": 0.623
+    },
+    "fraud_and_security": {
+      "n": 400,
+      "precision": 0.9412,
+      "recall": 0.44,
+      "f1": 0.5997
+    },
+    "payments_and_transfers": {
+      "n": 680,
+      "precision": 0.7168,
+      "recall": 0.9044,
+      "f1": 0.7997
+    },
+    "pricing_and_fx": {
+      "n": 400,
+      "precision": 0.7453,
+      "recall": 0.8925,
+      "f1": 0.8123
+    }
+  },
+  "top_confusions": [
+    {
+      "gold": "fraud_and_security",
+      "predicted": "cards",
+      "n": 135
+    },
+    {
+      "gold": "cards",
+      "predicted": "payments_and_transfers",
+      "n": 118
+    },
+    {
+      "gold": "disputes_and_refunds",
+      "predicted": "pricing_and_fx",
+      "n": 102
+    },
+    {
+      "gold": "account_and_compliance",
+      "predicted": "payments_and_transfers",
+      "n": 69
+    },
+    {
+      "gold": "fraud_and_security",
+      "predicted": "account_and_compliance",
+      "n": 51
+    },
+    {
+      "gold": "fraud_and_security",
+      "predicted": "disputes_and_refunds",
+      "n": 34
+    },
+    {
+      "gold": "account_and_compliance",
+      "predicted": "cards",
+      "n": 30
+    },
+    {
+      "gold": "disputes_and_refunds",
+      "predicted": "payments_and_transfers",
+      "n": 27
+    },
+    {
+      "gold": "pricing_and_fx",
+      "predicted": "payments_and_transfers",
+      "n": 25
+    },
+    {
+      "gold": "payments_and_transfers",
+      "predicted": "account_and_compliance",
+      "n": 23
+    },
+    {
+      "gold": "payments_and_transfers",
+      "predicted": "cards",
+      "n": 20
+    },
+    {
+      "gold": "disputes_and_refunds",
+      "predicted": "cards",
+      "n": 18
+    },
+    {
+      "gold": "payments_and_transfers",
+      "predicted": "pricing_and_fx",
+      "n": 14
+    },
+    {
+      "gold": "cards",
+      "predicted": "disputes_and_refunds",
+      "n": 11
+    },
+    {
+      "gold": "pricing_and_fx",
+      "predicted": "cards",
+      "n": 10
+    }
+  ],
+  "accuracy_by_confidence": [
+    {
+      "confidence": "[0.0, 0.5)",
+      "n": 10,
+      "accuracy": 0.6
+    },
+    {
+      "confidence": "[0.5, 0.7)",
+      "n": 547,
+      "accuracy": 0.5868
+    },
+    {
+      "confidence": "[0.7, 0.9)",
+      "n": 1261,
+      "accuracy": 0.751
+    },
+    {
+      "confidence": "[0.9, 1.0]",
+      "n": 1262,
+      "accuracy": 0.8574
+    }
+  ],
+  "claude": {
+    "model": "claude-sonnet-5",
+    "thinking": "disabled"
+  }
+}

@@ -1,0 +1,88 @@
+{
+  "run_id": "pilot-hatets-03-audit",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "audit_check",
+  "created": "2026-09-27T23:16:11",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "description-only draft, 8 options mapped",
+      "test": {
+        "jev": {
+          "accuracy": 0.7174,
+          "macro_f1": 0.7156,
+          "est_cost_usd": 0.055689,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 46,
+      "estimate": 0.68,
+      "note": "owner rules: slurs at women only hate with sexual degradation/threat; immigration hate only with criminalising/expel-demand in text",
+      "test": {
+        "jev": {
+          "accuracy": 0.7067,
+          "macro_f1": 0.652,
+          "est_cost_usd": 0.072007,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 62,
+      "estimate": 0.7,
+      "note": "hoe/whore/slut aimed at women -> hate; bitch insult -> not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7678,
+          "macro_f1": 0.761,
+          "est_cost_usd": 0.080166,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 78,
+      "estimate": 0.7,
+      "note": "hashtag-only expel after spending/politician complaint -> commentary",
+      "test": {
+        "jev": {
+          "accuracy": 0.7684,
+          "macro_f1": 0.7616,
+          "est_cost_usd": 0.082762,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.7,
+      "note": "final: criminalising crime-news and ethnic-degradation examples added to immigrants_criminalised",
+      "test": {
+        "jev": {
+          "accuracy": 0.7724,
+          "macro_f1": 0.7661,
+          "est_cost_usd": 0.085803,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

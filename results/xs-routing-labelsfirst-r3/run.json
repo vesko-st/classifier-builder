@@ -1,0 +1,93 @@
+{
+  "run_id": "xs-routing-labelsfirst-r3",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "mode": "budget",
+  "created": "2026-09-30T14:38:40",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 481,
+    "num_turns": 32,
+    "total_cost_usd": 1.3307072
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 29,
+      "estimate": 0.8,
+      "note": "v1 draft: 40 intent-like options mapped to 6 teams per owner policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.9075,
+          "macro_f1": 0.907,
+          "est_cost_usd": 0.199102,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 49,
+      "estimate": 0.82,
+      "note": "v2: fee-for-purchase->pricing, supported top-up cards->payments, getting PIN for new card->cards (fixes 3 check errors, 32 pool preds moved)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9026,
+          "macro_f1": 0.904,
+          "est_cost_usd": 0.207119,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 67,
+      "estimate": 0.84,
+      "note": "v3: Apple/Google Pay (incl. top-up) -> cards; 8 pool preds moved, fixes 0126",
+      "test": {
+        "jev": {
+          "accuracy": 0.9136,
+          "macro_f1": 0.9109,
+          "est_cost_usd": 0.210999,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 79,
+      "estimate": 0.85,
+      "note": "v4: finding/receiving PIN -> cards; money appearing / cancel debit txn -> fraud; 14 preds moved, fixes 3 labels, breaks 0",
+      "test": {
+        "jev": {
+          "accuracy": 0.9214,
+          "macro_f1": 0.9188,
+          "est_cost_usd": 0.218241,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.88,
+      "note": "ens6: 3 wording variants of v5 (beneficiary/not-allowed transfers->account, receiving in other currency->payments, app-cancelled payment->disputes, wrong exchange charges on specific exchange->disputes). 32/35 bought labels.",
+      "test": {
+        "jev": {
+          "accuracy": 0.9279,
+          "macro_f1": 0.9258,
+          "est_cost_usd": 0.75184,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

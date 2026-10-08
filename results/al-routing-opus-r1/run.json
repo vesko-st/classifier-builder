@@ -1,0 +1,84 @@
+{
+  "run_id": "al-routing-opus-r1",
+  "task": "banking77_routing_fullpool",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T21:55:20",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 2919,
+    "num_turns": 47,
+    "total_cost_usd": 2.5510708
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.922,
+      "note": "v1: 77 banking intents, majority map to 6 teams learned from 2000 build records; dev 0.922 (n=1959)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9351,
+          "macro_f1": 0.9299,
+          "est_cost_usd": 0.285227,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.959,
+      "note": "v2: 93 options (77 intents + boundary sub-intents), map learned on full build set (7833); dev 0.959 (n=1959)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9672,
+          "macro_f1": 0.9648,
+          "est_cost_usd": 0.363465,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 0,
+      "estimate": 0.965,
+      "note": "ensemble of v2/v4/v5 fine-intent classifiers with learned team maps; dev 0.967 (n=1959, slightly optimistic: v4 rules partly written after reading v3 dev errors); build in-sample 0.970",
+      "test": {
+        "claude": {
+          "accuracy": 0.9672,
+          "macro_f1": 0.967,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        },
+        "luna": {
+          "accuracy": 0.9649,
+          "macro_f1": 0.9634,
+          "est_cost_usd": 2.548468,
+          "total": 3080,
+          "answered": 3080
+        },
+        "pplx": {
+          "accuracy": 0.9662,
+          "macro_f1": 0.9642,
+          "est_cost_usd": 0.002337,
+          "total": 3080,
+          "answered": 3080
+        },
+        "jev": {
+          "accuracy": 0.9747,
+          "macro_f1": 0.9727,
+          "est_cost_usd": 1.178848,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

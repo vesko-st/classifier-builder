@@ -1,0 +1,133 @@
+{
+  "run_id": "pilot-hatets-04-committee",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "committee",
+  "created": "2026-09-27T23:16:11",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 8,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.62,
+      "note": "initial 3-member committee from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.7022,
+          "macro_f1": 0.6992,
+          "est_cost_usd": 0.135322,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.66,
+      "note": "members revised with owner's policy answer",
+      "test": {
+        "jev": {
+          "accuracy": 0.7775,
+          "macro_f1": 0.7775,
+          "est_cost_usd": 0.149712,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.68,
+      "note": "round 1 fixes: slang group in two_level, stricter women/immigrant tests",
+      "test": {
+        "jev": {
+          "accuracy": 0.8046,
+          "macro_f1": 0.8014,
+          "est_cost_usd": 0.16284,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.72,
+      "note": "round 2 fixes: slang attack/banter split in two_level, hoes-as-class in flat, looser imm_hostile in criteria",
+      "test": {
+        "jev": {
+          "accuracy": 0.8041,
+          "macro_f1": 0.8036,
+          "est_cost_usd": 0.181606,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 60,
+      "estimate": 0.72,
+      "note": "round 2 fixes: two_level rebuilt with fine stance options; insults at a woman = hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8041,
+          "macro_f1": 0.8036,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 60,
+      "estimate": 0.72,
+      "note": "my round-2 ensemble (two_level with fine stance options), restored after duplicate overwrote work/ens_v4.json",
+      "test": {
+        "jev": {
+          "accuracy": 0.8012,
+          "macro_f1": 0.8007,
+          "est_cost_usd": 0.187095,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 80,
+      "estimate": 0.74,
+      "note": "round 3 fixes: hoe/whore-at-person and bitch-as-attack vs filler split; invasion/disease framing",
+      "test": {
+        "jev": {
+          "accuracy": 0.7616,
+          "macro_f1": 0.7615,
+          "est_cost_usd": 0.221362,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 100,
+      "estimate": 0.75,
+      "note": "round 4 fixes: insults at men and affectionate hoe/bitch are not_hate; country-given-away framing is hate. Final.",
+      "test": {
+        "jev": {
+          "accuracy": 0.7916,
+          "macro_f1": 0.7916,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

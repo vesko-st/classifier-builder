@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v1",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm_about": {
+          "instructions": "Is this tweet about immigrants, migrants, refugees, asylum seekers or illegal aliens (as people), or about immigration and border policy?"
+        },
+        "imm_attack": {
+          "instructions": "Does the tweet express hostility toward immigrants, migrants or refugees as a group?",
+          "criteria": {
+            "true": "Yes: it dehumanises them (invaders, animals, bottom feeders, rapefugees, invasion), generalises them as criminals, rapists, disease carriers, welfare leeches or job thieves, calls for all of them to be expelled/deported/sent back (e.g. 'deport them all, no exceptions'), or reports a crime by an illegal alien/migrant framed so that the whole group is blamed or should be removed (e.g. crime story plus #DeportThemAll/#BuildTheWall).",
+            "false": "No: it only argues policy (fund the wall, end DACA, no amnesty, vote red, support ICE), attacks politicians or Democrats, reports news without blaming the group, merely uses hashtags like #BuildThatWall or #SendThemBack on otherwise neutral or unrelated text, or criticises anti-immigrant racism."
+          }
+        },
+        "woman_abuse": {
+          "instructions": "Does the tweet direct severe degrading, sexualised or violent abuse at a woman or girl because she is a woman?",
+          "criteria": {
+            "true": "Yes: sexual humiliation or degradation of a woman ('nasty used up whore', 'your pussy belongs to me'), rape references or rape threats against women, wishing death or violence on a woman combined with gendered slurs (cunt, whore, slut), or explicitly degrading contempt for a woman's body or sexuality.",
+            "false": "No: casual, friendly, self-referential or exclamatory uses of bitch/hoe ('I'm a whole new bitch', 'happy birthday hoe'); mild or generic insults ('you a bitch', 'shut up bitch you annoying'); crude general remarks about 'hoes' or 'bitches'; threats or insults at someone whose gender is unknown or who is a man; song lyrics; criticism of sexism."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_about",
+          "imm_attack"
+        ],
+        [
+          "woman_abuse"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v3",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm_about": {
+          "instructions": "Is this tweet about immigrants, migrants, refugees, asylum seekers or illegal aliens (as people), or about immigration and border policy?"
+        },
+        "imm_attack": {
+          "instructions": "Does the text of the tweet itself explicitly attack immigrants, migrants or refugees as a group?",
+          "criteria": {
+            "true": "Yes, the words explicitly: dehumanise them (invaders, animals, bottom feeders, rapefugees, 'invasion'), portray them as a group as criminals, rapists, disease carriers, welfare leeches or job thieves, demand that all of them be expelled ('deport them all, no exceptions', 'keep them out'), or use a crime by an illegal alien/migrant to blame the whole group.",
+            "false": "No: policy arguments (fund the wall, end DACA, no amnesty, deportation as law enforcement, support ICE), attacks on Obama, Democrats or politicians, news headlines or links without explicit group blame, tweets that are mostly hashtags such as #BuildThatWall #SendThemBack #DeportThemAll, debate about the term 'illegal alien', or criticism of anti-immigrant racism. When in doubt, answer no."
+          }
+        },
+        "woman_attack": {
+          "instructions": "Is the tweet hostile toward a woman or toward women, using gendered slurs (bitch, hoe, whore, slut, cunt, skank) or sexist language to insult, demean, degrade or threaten her or them?",
+          "criteria": {
+            "true": "Yes: cursing at or insulting a woman or an addressed user with gendered slurs ('@user bitch fuck you hoe', 'shut up you dumb whore', 'lame ass hoe'), threats or violence with slurs, rape or sexual degradation, calling a woman a whore or slut, demeaning generalisations about women ('bitches be...', 'these hoes ain't loyal', 'dese bitches will whore around').",
+            "false": "No: the insult is aimed at a man or a clearly male target ('Trump's a bitch', 'little brother is a cry baby bitch', 'he a hoe'); friendly or affectionate use between friends ('happy birthday hoe love u'); self-referential or boasting ('I'm a whole new bitch', 'bad bitch like me', 'I came to slay, bitch'); exclamations or filler ('BITCH this song!', 'bitch I'm omw', 'Hahahaha bitch'); idioms about things ('life's a bitch', 'karma a bitch', 'sing the bitch'); song lyrics; criticising sexism or slurs."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm_about",
+          "imm_attack"
+        ],
+        [
+          "woman_attack"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ]
+}

@@ -1,0 +1,208 @@
+{
+  "version": 1,
+  "name": "v6",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "v6_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "This is a chat in which a Persuader tries to get the Persuadee to donate part of their task payment to the charity Save the Children. Judge from the whole chat whether the Persuadee ended up donating. Focus on what the Persuadee (not the Persuader) says, especially their final stance at the end of the chat.",
+        "notes": [
+          "Any positive amount counts as donating, even a few cents.",
+          "A promise to donate only at some later time or outside this task, or a statement that they cannot afford it, is not donating now.",
+          "If the Persuadee changes their mind or backs off after agreeing, use their final position.",
+          "Enthusiastic words alone ('I will definitely donate') are weaker evidence than a plain agreement to give a concrete amount from the task payment.",
+          "Tentative or hopeful wording ('maybe I'll donate 50 cents', 'I may donate a few cents', 'I want to help, how do I donate?') is not a commitment and usually means they did not donate.",
+          "A Persuadee who says plainly that they will donate, or who mentions they already give part of their HIT/MTurk rewards to charity, counts as committed even if they also mention reading more later.",
+          "\"I will probably do that\" counts as a yes; \"maybe I can\" or \"I could\" does not.",
+          "Saying they will also visit the website does not cancel a plain yes to donating now."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "committed_amount": {
+          "description": "The Persuadee firmly (not tentatively) agrees to donate a specific, realistic positive amount from this task payment and does not back off.",
+          "examples": [
+            "I'll do 20 cents",
+            "I will donate $0.15",
+            "I can do $0.10 today",
+            "i can donate 2 dollars (even if the rest of the chat is off-topic joking)"
+          ]
+        },
+        "committed_no_amount": {
+          "description": "The Persuadee firmly agrees to donate now, without naming an amount, and does not back off.",
+          "examples": [
+            "Maybe 5 dollars? ... Ok, I will",
+            "yes, I will do it ... I want to donate everything",
+            "Sure I will be able to donate. I've been able to donate through MTurk.",
+            "I will probably do that for sure. Every little bit helps",
+            "yes i donate",
+            "Ok, I'll donate. Can you send me the link again? ... I'll visit the site",
+            "I probably will do that. If everyone did something, it helps",
+            "I would love to - should I tell you the amount? ... Sounds good, I definitely will! (then chats about other things)"
+          ]
+        },
+        "leaning_yes": {
+          "description": "The Persuadee sounds positive, interested or tentative about donating (maybe, may, might, I want to help, how do I donate?) but never firmly commits.",
+          "examples": [
+            "that's awesome, so maybe I'll donate $.50",
+            "I may donate a few cents ... Maybe I can do some more",
+            "yes, I want to help with a donation ... how much is normal ... how do I donate?",
+            "asks many interested questions about the charity but never says they will give",
+            "I don't think I can help ... I think maybe I can do that. $0.01 sounds nice.",
+            "I may could .25 I know thats not much.",
+            "I'm just not too sure right now ... Okay, maybe I can donate .10 cents to this one"
+          ]
+        },
+        "hedged_or_conditional": {
+          "description": "The Persuadee's agreement is conditional, backed off, or evasive: it depends on the persuader giving too, they balk at the amount suggested, they refuse to say how much, or they promise an implausibly large sum without concrete follow-through.",
+          "examples": [
+            "if you give 1 dollar i will also give 1 dollar",
+            "ok, i will definitely donate then ... I don't think I can do 5$",
+            "I'm going to keep the amount I'm going to donate to myself",
+            "I would like to make a 50 dollar donation but first, is there a website?",
+            "I think I will donate $5 a month ... we will both donate!",
+            "I think I could donate a little but not that much ... I can donate $100."
+          ]
+        },
+        "undecided": {
+          "description": "The Persuadee says they need to think about it, will decide later, or the chat ends without a clear decision.",
+          "examples": [
+            "I will certainly consider it ... i sure will (said to something else)"
+          ]
+        },
+        "later_or_elsewhere": {
+          "description": "The Persuadee says they may donate in the future, directly on the charity's website, or to another charity, but not from this task payment now."
+        },
+        "refused": {
+          "description": "The Persuadee declines to donate, says they cannot afford it, or wants to keep their earnings."
+        }
+      },
+      "map": {
+        "committed_amount": "donated",
+        "committed_no_amount": "donated",
+        "leaning_yes": "not_donated",
+        "hedged_or_conditional": "not_donated",
+        "undecided": "not_donated",
+        "later_or_elsewhere": "not_donated",
+        "refused": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "v6_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Save the Children persuasion chat: a Persuader asks the Persuadee to give some of their task earnings to the charity. What was the Persuadee's final decision about giving from this task's payment?",
+        "guidance": [
+          "Judge the Persuadee's own words, above all near the end.",
+          "Even a few cents counts as giving.",
+          "Hopeful, tentative or curious remarks (maybe, might, could, how do I donate?) are not a decision to give.",
+          "A plain yes ('I will donate', 'yes I donate', 'sure'), or saying they already give part of their HIT/MTurk rewards, is a decision to give.",
+          "Giving only later, on the website, to another charity, or on a condition, is not giving now.",
+          "\"I will probably do that\" counts as a yes; \"maybe I can\" or \"I could\" does not.",
+          "Saying they will also visit the website does not cancel a plain yes to donating now."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "committed_amount": {
+          "description": "Firmly decides to give a concrete, realistic amount from this payment and sticks with it.",
+          "examples": [
+            "I'll do 20 cents",
+            "I will donate $0.15",
+            "I can do $0.10 today",
+            "i can donate 2 dollars (even if the rest of the chat is off-topic joking)"
+          ]
+        },
+        "committed_no_amount": {
+          "description": "Plainly says yes to giving now, with no amount named, and does not retract.",
+          "examples": [
+            "Maybe 5 dollars? ... Ok, I will",
+            "yes, I will do it ... I want to donate everything",
+            "Sure I will be able to donate. I've been able to donate through MTurk.",
+            "I will probably do that for sure. Every little bit helps",
+            "yes i donate",
+            "Ok, I'll donate. Can you send me the link again? ... I'll visit the site",
+            "I probably will do that. If everyone did something, it helps",
+            "I would love to - should I tell you the amount? ... Sounds good, I definitely will! (then chats about other things)"
+          ]
+        },
+        "leaning_yes": {
+          "description": "Interested, warm or tentative about giving, but no firm decision.",
+          "examples": [
+            "that's awesome, so maybe I'll donate $.50",
+            "I may donate a few cents ... Maybe I can do some more",
+            "yes, I want to help with a donation ... how much is normal ... how do I donate?",
+            "asks many interested questions about the charity but never says they will give",
+            "I don't think I can help ... I think maybe I can do that. $0.01 sounds nice.",
+            "I may could .25 I know thats not much.",
+            "I'm just not too sure right now ... Okay, maybe I can donate .10 cents to this one"
+          ]
+        },
+        "hedged_or_conditional": {
+          "description": "Agreement that is conditional, retracted, evasive about the amount, or an implausibly large promise with no follow-through.",
+          "examples": [
+            "if you give 1 dollar i will also give 1 dollar",
+            "ok, i will definitely donate then ... I don't think I can do 5$",
+            "I'm going to keep the amount I'm going to donate to myself",
+            "I would like to make a 50 dollar donation but first, is there a website?",
+            "I think I will donate $5 a month ... we will both donate!",
+            "I think I could donate a little but not that much ... I can donate $100."
+          ]
+        },
+        "undecided": {
+          "description": "Will think about it or decide later; no decision by the end.",
+          "examples": [
+            "I will certainly consider it ... i sure will (said to something else)"
+          ]
+        },
+        "later_or_elsewhere": {
+          "description": "Would give in the future, on the charity's website, or to a different charity, not from this payment now."
+        },
+        "refused": {
+          "description": "Says no, cannot afford it, or keeps the earnings."
+        }
+      },
+      "map": {
+        "committed_amount": "donated",
+        "committed_no_amount": "donated",
+        "leaning_yes": "not_donated",
+        "hedged_or_conditional": "not_donated",
+        "undecided": "not_donated",
+        "later_or_elsewhere": "not_donated",
+        "refused": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "v6_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Read this chat about donating to Save the Children. The Persuadee could give any part of their task payment (even cents) to the charity at the end of the task. Based on what the Persuadee says, especially at the end, which description best fits whether they went through with a donation from this payment? Treat tentative interest (maybe, might, could, asking how to donate) as not a decision; treat a plain yes, or mention that they already give from their HIT rewards, as a decision to give. Donating only later, elsewhere, or on a condition does not count. \"I will probably do that\" counts as a yes; \"maybe I can\" or \"I could\" does not. Saying they will also visit the website does not cancel a plain yes to donating now.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "committed_amount": "Clearly settled on giving a specific, realistic amount of this payment (e.g. I'll do 20 cents; I will donate $0.15; I can do $0.10 today; i can donate 2 dollars (even if the rest of the chat is off-topic joking)).",
+        "committed_no_amount": "Gave a plain, unretracted yes to donating now without an amount (e.g. Maybe 5 dollars? ... Ok, I will; yes, I will do it ... I want to donate everything; Sure I will be able to donate. I've been able to donate through MTurk.; I will probably do that for sure. Every little bit helps; yes i donate; Ok, I'll donate. Can you send me the link again? ... I'll visit the site; I probably will do that. If everyone did something, it helps; I would love to - should I tell you the amount? ... Sounds good, I definitely will! (then chats about other things)).",
+        "leaning_yes": "Positive or curious about donating but only tentative (e.g. that's awesome, so maybe I'll donate $.50; I may donate a few cents ... Maybe I can do some more; yes, I want to help with a donation ... how much is normal ... how do I donate?; asks many interested questions about the charity but never says they will give; I don't think I can help ... I think maybe I can do that. $0.01 sounds nice.; I may could .25 I know thats not much.; I'm just not too sure right now ... Okay, maybe I can donate .10 cents to this one).",
+        "hedged_or_conditional": "Yes with strings attached, backed off, would not say an amount, or an unrealistic big or recurring promise (e.g. if you give 1 dollar i will also give 1 dollar; ok, i will definitely donate then ... I don't think I can do 5$; I'm going to keep the amount I'm going to donate to myself; I would like to make a 50 dollar donation but first, is there a website?; I think I will donate $5 a month ... we will both donate!; I think I could donate a little but not that much ... I can donate $100.).",
+        "undecided": "Said they would think about it; ended without a decision (e.g. I will certainly consider it ... i sure will (said to something else)).",
+        "later_or_elsewhere": "Only willing to give later, via the website, or to another charity.",
+        "refused": "Declined, said they cannot afford it, or chose to keep their earnings."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "committed_no_amount": "donated",
+        "leaning_yes": "not_donated",
+        "hedged_or_conditional": "not_donated",
+        "undecided": "not_donated",
+        "later_or_elsewhere": "not_donated",
+        "refused": "not_donated"
+      }
+    }
+  ]
+}

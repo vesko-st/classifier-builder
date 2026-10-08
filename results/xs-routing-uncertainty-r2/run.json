@@ -1,0 +1,107 @@
+{
+  "run_id": "xs-routing-uncertainty-r2",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-30T14:19:57",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 484,
+    "num_turns": 41,
+    "total_cost_usd": 1.5432161999999998
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: 55 intents mapped to teams from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.8123,
+          "macro_f1": 0.8095,
+          "est_cost_usd": 0.20311,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.78,
+      "note": "v2: batch1 fixes (country use abroad, salary currency->payments, missing money, cancel card txn->fraud, card arrival)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8159,
+          "macro_f1": 0.8129,
+          "est_cost_usd": 0.225224,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.8,
+      "note": "v3: batch2 fixes; ATM pending/declined cash withdrawals -> cards; unknown charges -> fraud; cancel purchase -> refunds; transfer received less -> pricing",
+      "test": {
+        "jev": {
+          "accuracy": 0.8461,
+          "macro_f1": 0.8361,
+          "est_cost_usd": 0.262985,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.82,
+      "note": "v4: batch3 fixes (cancel transaction->payments, cancelled payments/cash not received->disputes, card in other country->account, fee on statement)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8471,
+          "macro_f1": 0.8376,
+          "est_cost_usd": 0.278244,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.84,
+      "note": "v5: batch4 fixes; declined card purchases -> payments; found lost card -> cards; card sent abroad -> cards; source of funds/security -> account",
+      "test": {
+        "jev": {
+          "accuracy": 0.8338,
+          "macro_f1": 0.8281,
+          "est_cost_usd": 0.304237,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.85,
+      "note": "v6: batch5 fixes (Apple/Google Pay top-ups->cards, crypto purchase->account, direct debit refund->fraud, SEPA full amount->pricing, card daily limit->payments)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8458,
+          "macro_f1": 0.8371,
+          "est_cost_usd": 0.323764,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "fraud_and_security": [
+    "compromised_card", "lost_or_stolen_card", "lost_or_stolen_phone", "card_swallowed",
+    "card_payment_not_recognised", "cash_withdrawal_not_recognised",
+    "direct_debit_payment_not_recognised", "pin_blocked", "passcode_forgotten", "change_pin"
+  ],
+  "disputes_and_refunds": [
+    "request_refund", "Refund_not_showing_up", "transaction_charged_twice",
+    "extra_charge_on_statement", "wrong_amount_of_cash_received", "reverted_card_payment?",
+    "card_payment_wrong_exchange_rate", "wrong_exchange_rate_for_cash_withdrawal"
+  ],
+  "cards": [
+    "activate_my_card", "card_arrival", "card_delivery_estimate", "card_about_to_expire",
+    "card_acceptance", "card_linking", "card_not_working", "contactless_not_working",
+    "virtual_card_not_working", "get_physical_card", "order_physical_card", "getting_spare_card",
+    "getting_virtual_card", "get_disposable_virtual_card", "disposable_card_limits",
+    "apple_pay_or_google_pay", "visa_or_mastercard", "declined_card_payment",
+    "pending_card_payment", "atm_support", "declined_cash_withdrawal", "pending_cash_withdrawal"
+  ],
+  "payments_and_transfers": [
+    "automatic_top_up", "pending_top_up", "top_up_failed", "top_up_limits", "top_up_reverted",
+    "topping_up_by_card", "top_up_by_cash_or_cheque", "cancel_transfer", "declined_transfer",
+    "failed_transfer", "pending_transfer", "transfer_into_account",
+    "transfer_not_received_by_recipient", "transfer_timing", "receiving_money",
+    "balance_not_updated_after_bank_transfer", "balance_not_updated_after_cheque_or_cash_deposit"
+  ],
+  "pricing_and_fx": [
+    "card_payment_fee_charged", "cash_withdrawal_charge", "exchange_charge", "exchange_rate",
+    "exchange_via_app", "top_up_by_bank_transfer_charge", "top_up_by_card_charge",
+    "transfer_fee_charged", "supported_cards_and_currencies", "fiat_currency_support"
+  ],
+  "account_and_compliance": [
+    "verify_my_identity", "unable_to_verify_identity", "why_verify_identity",
+    "verify_source_of_funds", "age_limit", "edit_personal_details", "terminate_account",
+    "beneficiary_not_allowed", "verify_top_up", "country_support"
+  ]
+}

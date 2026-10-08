@@ -1,0 +1,69 @@
+{
+  "run_id": "al-deal-opus-r1",
+  "task": "craigslist_deal_fullpool",
+  "budget": 0,
+  "strategy": "free",
+  "mode": "all_labels",
+  "created": "2026-09-30T21:55:20",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 421,
+    "num_turns": 26,
+    "total_cost_usd": 1.2642652
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.872,
+      "note": "v2: 8 ending-type options mapped to deal/no_deal; dev n=1200 macro-F1 0.872, build 0.893",
+      "test": {
+        "jev": {
+          "accuracy": 0.9192,
+          "macro_f1": 0.8881,
+          "est_cost_usd": 0.021081,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.886,
+      "note": "Ensemble of 3 wording variants of a 5-level deal-likelihood choice (v4,v4b,v4c), threshold 0.5. Dev n=1200 macro-F1 0.886 acc 0.912; build 0.899",
+      "test": {
+        "claude": {
+          "accuracy": 0.9261,
+          "macro_f1": 0.8961,
+          "est_cost_usd": 0.0,
+          "total": 582,
+          "answered": 582
+        },
+        "luna": {
+          "accuracy": 0.9347,
+          "macro_f1": 0.9119,
+          "est_cost_usd": 0.057193,
+          "total": 582,
+          "answered": 582
+        },
+        "pplx": {
+          "accuracy": 0.9313,
+          "macro_f1": 0.9059,
+          "est_cost_usd": 5.7e-05,
+          "total": 582,
+          "answered": 582
+        },
+        "jev": {
+          "accuracy": 0.9227,
+          "macro_f1": 0.8964,
+          "est_cost_usd": 0.054078,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

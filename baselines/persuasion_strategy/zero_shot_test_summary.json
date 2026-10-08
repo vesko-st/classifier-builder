@@ -1,0 +1,244 @@
+{
+  "classifier": "persuasion_strategy_zero_shot",
+  "type": "choice",
+  "total": 1517,
+  "answered": 1517,
+  "errors": {},
+  "cached": 9,
+  "input_tokens_billed": 1041785,
+  "est_cost_usd": 0.043755,
+  "latency_ms_p50": 93.0,
+  "latency_ms_p95": 171.2,
+  "prediction_counts": {
+    "donation-information": 276,
+    "acknowledgement": 191,
+    "emotion-appeal": 172,
+    "proposition-of-donation": 135,
+    "logical-appeal": 84,
+    "thank": 74,
+    "personal-related-inquiry": 69,
+    "greeting": 66,
+    "credibility-appeal": 62,
+    "self-modeling": 59,
+    "ask-donation-amount": 56,
+    "source-related-inquiry": 55,
+    "off-task": 51,
+    "praise-user": 47,
+    "other": 41,
+    "task-related-inquiry": 40,
+    "personal-story": 32,
+    "foot-in-the-door": 7
+  },
+  "labeled": 1517,
+  "accuracy": 0.4357,
+  "macro_f1": 0.4546,
+  "per_class": {
+    "acknowledgement": {
+      "n": 71,
+      "precision": 0.3194,
+      "recall": 0.8592,
+      "f1": 0.4656
+    },
+    "ask-donation-amount": {
+      "n": 26,
+      "precision": 0.4286,
+      "recall": 0.9231,
+      "f1": 0.5854
+    },
+    "credibility-appeal": {
+      "n": 247,
+      "precision": 0.6613,
+      "recall": 0.166,
+      "f1": 0.2654
+    },
+    "donation-information": {
+      "n": 124,
+      "precision": 0.2971,
+      "recall": 0.6613,
+      "f1": 0.41
+    },
+    "emotion-appeal": {
+      "n": 95,
+      "precision": 0.3953,
+      "recall": 0.7158,
+      "f1": 0.5094
+    },
+    "foot-in-the-door": {
+      "n": 51,
+      "precision": 1.0,
+      "recall": 0.1373,
+      "f1": 0.2414
+    },
+    "greeting": {
+      "n": 79,
+      "precision": 0.7879,
+      "recall": 0.6582,
+      "f1": 0.7172
+    },
+    "logical-appeal": {
+      "n": 109,
+      "precision": 0.2976,
+      "recall": 0.2294,
+      "f1": 0.2591
+    },
+    "off-task": {
+      "n": 36,
+      "precision": 0.2157,
+      "recall": 0.3056,
+      "f1": 0.2529
+    },
+    "other": {
+      "n": 256,
+      "precision": 0.5854,
+      "recall": 0.0938,
+      "f1": 0.1616
+    },
+    "personal-related-inquiry": {
+      "n": 40,
+      "precision": 0.4348,
+      "recall": 0.75,
+      "f1": 0.5505
+    },
+    "personal-story": {
+      "n": 35,
+      "precision": 0.3438,
+      "recall": 0.3143,
+      "f1": 0.3284
+    },
+    "praise-user": {
+      "n": 44,
+      "precision": 0.4043,
+      "recall": 0.4318,
+      "f1": 0.4176
+    },
+    "proposition-of-donation": {
+      "n": 81,
+      "precision": 0.4815,
+      "recall": 0.8025,
+      "f1": 0.6019
+    },
+    "self-modeling": {
+      "n": 49,
+      "precision": 0.5254,
+      "recall": 0.6327,
+      "f1": 0.5741
+    },
+    "source-related-inquiry": {
+      "n": 43,
+      "precision": 0.6182,
+      "recall": 0.7907,
+      "f1": 0.6939
+    },
+    "task-related-inquiry": {
+      "n": 50,
+      "precision": 0.45,
+      "recall": 0.36,
+      "f1": 0.4
+    },
+    "thank": {
+      "n": 81,
+      "precision": 0.7838,
+      "recall": 0.716,
+      "f1": 0.7484
+    }
+  },
+  "top_confusions": [
+    {
+      "gold": "credibility-appeal",
+      "predicted": "donation-information",
+      "n": 136
+    },
+    {
+      "gold": "other",
+      "predicted": "acknowledgement",
+      "n": 57
+    },
+    {
+      "gold": "other",
+      "predicted": "donation-information",
+      "n": 37
+    },
+    {
+      "gold": "logical-appeal",
+      "predicted": "emotion-appeal",
+      "n": 35
+    },
+    {
+      "gold": "other",
+      "predicted": "off-task",
+      "n": 30
+    },
+    {
+      "gold": "other",
+      "predicted": "emotion-appeal",
+      "n": 19
+    },
+    {
+      "gold": "credibility-appeal",
+      "predicted": "logical-appeal",
+      "n": 18
+    },
+    {
+      "gold": "praise-user",
+      "predicted": "acknowledgement",
+      "n": 18
+    },
+    {
+      "gold": "credibility-appeal",
+      "predicted": "emotion-appeal",
+      "n": 16
+    },
+    {
+      "gold": "donation-information",
+      "predicted": "proposition-of-donation",
+      "n": 15
+    },
+    {
+      "gold": "foot-in-the-door",
+      "predicted": "logical-appeal",
+      "n": 15
+    },
+    {
+      "gold": "greeting",
+      "predicted": "personal-related-inquiry",
+      "n": 14
+    },
+    {
+      "gold": "emotion-appeal",
+      "predicted": "logical-appeal",
+      "n": 13
+    },
+    {
+      "gold": "other",
+      "predicted": "greeting",
+      "n": 12
+    },
+    {
+      "gold": "task-related-inquiry",
+      "predicted": "source-related-inquiry",
+      "n": 12
+    }
+  ],
+  "accuracy_by_confidence": [
+    {
+      "confidence": "[0.0, 0.5)",
+      "n": 362,
+      "accuracy": 0.279
+    },
+    {
+      "confidence": "[0.5, 0.7)",
+      "n": 335,
+      "accuracy": 0.3134
+    },
+    {
+      "confidence": "[0.7, 0.9)",
+      "n": 386,
+      "accuracy": 0.4249
+    },
+    {
+      "confidence": "[0.9, 1.0]",
+      "n": 434,
+      "accuracy": 0.6705
+    }
+  ]
+}

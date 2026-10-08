@@ -1,0 +1,118 @@
+{
+  "run_id": "pilot-hatets-11-rules-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "created": "2026-09-28T16:15:41",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.6,
+      "note": "v0 description-only draft",
+      "test": {
+        "jev": {
+          "accuracy": 0.7644,
+          "macro_f1": 0.7644,
+          "est_cost_usd": 0.052055,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.7,
+      "note": "v3: round1 rules H1 (slurs at men/friendly not hate), H2 narrowed, H3 narrowed (hostile rejection of immigrants = hate)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7803,
+          "macro_f1": 0.7801,
+          "est_cost_usd": 0.064664,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 45,
+      "estimate": 0.72,
+      "note": "v6: round2 rules H4 narrowed (threats at women hate, idioms/crude not), H5/H6 crime stories + invasion hashtags hate, H7 term IllegalAliens alone not hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7701,
+          "macro_f1": 0.7673,
+          "est_cost_usd": 0.078683,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 65,
+      "estimate": 0.73,
+      "note": "ensemble of v6/v7/v8 (round3 rules H8 burden framing, H10 narrowed rejection, H9 narrowed Islam); fits all 33 known labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.795,
+          "macro_f1": 0.7934,
+          "est_cost_usd": 0.253849,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 79,
+      "estimate": 0.74,
+      "note": "ens678c: round4 examples (male politician whore, arrest+deport them all, crude non-hostile); 38/40 known labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7973,
+          "macro_f1": 0.7956,
+          "est_cost_usd": 0.263863,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 93,
+      "estimate": 0.74,
+      "note": "ens678e: round5 H11 political insults (incl. at female politicians) not hate; fits 47/47 known labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7973,
+          "macro_f1": 0.7955,
+          "est_cost_usd": 0.290787,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 99,
+      "estimate": 0.75,
+      "note": "FINAL: ens678e re-snapshotted (49/50 known labels; ens678f example-patch broke 2 so rejected)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7973,
+          "macro_f1": 0.7955,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

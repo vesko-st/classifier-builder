@@ -1,0 +1,66 @@
+{
+  "classifier": "persuasion_donation_zero_shot",
+  "type": "choice",
+  "backend": "claude",
+  "total": 417,
+  "answered": 417,
+  "errors": {},
+  "cached": 417,
+  "input_tokens_billed": 0,
+  "output_tokens_billed": 0,
+  "est_cost_usd": 0.0,
+  "prediction_counts": {
+    "donated": 323,
+    "not_donated": 94
+  },
+  "labeled": 417,
+  "accuracy": 0.7314,
+  "macro_f1": 0.703,
+  "per_class": {
+    "donated": {
+      "n": 223,
+      "precision": 0.6718,
+      "recall": 0.9731,
+      "f1": 0.7949
+    },
+    "not_donated": {
+      "n": 194,
+      "precision": 0.9362,
+      "recall": 0.4536,
+      "f1": 0.6111
+    }
+  },
+  "top_confusions": [
+    {
+      "gold": "not_donated",
+      "predicted": "donated",
+      "n": 106
+    },
+    {
+      "gold": "donated",
+      "predicted": "not_donated",
+      "n": 6
+    }
+  ],
+  "accuracy_by_confidence": [
+    {
+      "confidence": "[0.5, 0.7)",
+      "n": 45,
+      "accuracy": 0.6
+    },
+    {
+      "confidence": "[0.7, 0.9)",
+      "n": 103,
+      "accuracy": 0.6893
+    },
+    {
+      "confidence": "[0.9, 1.0]",
+      "n": 269,
+      "accuracy": 0.7695
+    }
+  ],
+  "claude": {
+    "model": "claude-sonnet-5",
+    "thinking": "disabled"
+  }
+}

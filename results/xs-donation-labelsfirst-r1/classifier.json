@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "name": "donation_ens_v6",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_stance_v6a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "The persuadee could donate part of their task payment ($0 to $2) to Save the Children after this chat. Which best describes the persuadee's final stance about donating from this task's payment?",
+      "state_template": "Charity-donation chat:\n{{input}}",
+      "criteria": {
+        "eager_pledge": "Willingly commits to donating a positive amount from this task's payment and sounds genuinely motivated, with no stress on needing the money.",
+        "reluctant_pledge": "Commits to a positive amount, but only reluctantly: after hesitation or being pushed, while stressing they are broke or need the money, or giving a token amount grudgingly.",
+        "vague_positive": "Sounds positive or open about donating but never clearly commits to an amount or a clear yes (e.g. 'I might', 'I'd like to help', 'sounds good').",
+        "deferred": "Says they will donate later, some other way (for example on the charity's website, by card, or directly to the charity), or after researching, instead of from this task's payment. This applies even if they say they will do it today.",
+        "refusal": "Declines, says $0 or nothing, or takes back an earlier pledge.",
+        "no_discussion": "Donating from this task's payment is barely discussed or never settled; the chat is mostly small talk or about other things (including other charities the persuadee supports)."
+      },
+      "map": {
+        "eager_pledge": "donated",
+        "reluctant_pledge": "not_donated",
+        "vague_positive": "not_donated",
+        "deferred": "not_donated",
+        "refusal": "not_donated",
+        "no_discussion": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_stance_v6b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "After this chat the persuadee chose how much of their task payment (between $0 and $2) to give to Save the Children. Judging from how the persuadee talks about giving, which category fits them best at the end of the chat?",
+      "state_template": "Persuasion chat about donating to Save the Children:\n{{input}}",
+      "criteria": {
+        "happy_giver": "Agrees to give a positive amount from this task's pay without real resistance. A brief pause ('let me think'), a small amount, or a question about how it works still counts here.",
+        "grudging_giver": "Names or accepts a positive amount only reluctantly: resists at first and is talked into it or pushed to give more, or keeps stressing that money is tight, they are broke, or they need the money.",
+        "noncommittal": "Friendly or interested but never actually commits to an amount or a clear yes ('maybe', 'I would like to', 'I'll think about it').",
+        "later_or_elsewhere": "Plans to give outside this task: on the charity's website, with a card, directly to the charity, at a later time, or after doing research, rather than having it taken from this task's pay (even if they say they'll do it today).",
+        "declines": "Says no, chooses $0 or nothing, or withdraws an earlier offer.",
+        "off_topic": "Donating from this task's pay is hardly discussed or never settled; the conversation is mostly about other things (including other charities the persuadee supports)."
+      },
+      "map": {
+        "happy_giver": "donated",
+        "grudging_giver": "not_donated",
+        "noncommittal": "not_donated",
+        "later_or_elsewhere": "not_donated",
+        "declines": "not_donated",
+        "off_topic": "not_donated"
+      }
+    }
+  ]
+}

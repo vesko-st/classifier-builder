@@ -1,0 +1,67 @@
+{
+  "classifier": "persuasion_donation_zero_shot",
+  "type": "choice",
+  "total": 417,
+  "answered": 417,
+  "errors": {},
+  "cached": 0,
+  "input_tokens_billed": 374916,
+  "est_cost_usd": 0.015746,
+  "latency_ms_p50": 99.4,
+  "latency_ms_p95": 199.7,
+  "prediction_counts": {
+    "donated": 278,
+    "not_donated": 139
+  },
+  "labeled": 417,
+  "accuracy": 0.7434,
+  "macro_f1": 0.7326,
+  "per_class": {
+    "donated": {
+      "n": 223,
+      "precision": 0.7086,
+      "recall": 0.8834,
+      "f1": 0.7864
+    },
+    "not_donated": {
+      "n": 194,
+      "precision": 0.8129,
+      "recall": 0.5825,
+      "f1": 0.6787
+    }
+  },
+  "top_confusions": [
+    {
+      "gold": "not_donated",
+      "predicted": "donated",
+      "n": 81
+    },
+    {
+      "gold": "donated",
+      "predicted": "not_donated",
+      "n": 26
+    }
+  ],
+  "accuracy_by_confidence": [
+    {
+      "confidence": "[0.0, 0.5)",
+      "n": 45,
+      "accuracy": 0.6
+    },
+    {
+      "confidence": "[0.5, 0.7)",
+      "n": 29,
+      "accuracy": 0.6207
+    },
+    {
+      "confidence": "[0.7, 0.9)",
+      "n": 47,
+      "accuracy": 0.6809
+    },
+    {
+      "confidence": "[0.9, 1.0]",
+      "n": 296,
+      "accuracy": 0.7872
+    }
+  ]
+}

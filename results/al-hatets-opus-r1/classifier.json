@@ -1,0 +1,151 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens1",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate-speech policy that covers only two target groups: women, and immigrants/refugees/migrants. Pick the option that best describes what the tweet actually does.",
+        "rules": [
+          "Hate against women: the author is genuinely hostile toward a woman or women and uses misogynistic slurs or sexual degradation to attack, belittle, shame or threaten them. This includes angry personal insults at a specific woman or girl (the addressee or someone described).",
+          "Not hate: 'bitch', 'hoe' etc. used as an interjection or filler ('bitch please', 'bitch I'm tired'), to express excitement or surprise, as joking banter with a friend, about oneself, about a thing or situation ('karma is a bitch'), in lyrics, aimed at a man or at someone whose gender is not indicated ('whoever did this'); also when the author reports what someone else said or pushes back at being called a slur.",
+          "Hate against immigrants: the tweet's main message is hostility toward immigrants, refugees or migrants themselves: its words portray them as criminals, rapists, invaders, diseased, parasites or a burden; it spreads stories of crimes by immigrants to show they are dangerous; or its point is that they should be expelled, sent back, got rid of or kept out.",
+          "Not hate: tweets whose main target is politicians, parties, liberals, judges, voting, media or the wording 'illegal alien', or that argue about immigration law, process, costs or elections, even when they carry hashtags like #BuildThatWall, #DeportThemAll, #StopTheInvasion or #IllegalAliens. Hashtags alone do not make a tweet hateful; look at what the words say."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "attack_woman": "Angry, contemptuous attack on a specific woman or girl using slurs (bitch, hoe, whore, cunt, slut): calling her worthless, dirty, stupid, telling her to shut up, shaming her sexually",
+        "threat_women": "Threatens or wishes violence, rape or death on a woman or women, or jokes approvingly about it",
+        "degrade_women_group": "Degrading generalisation about women or 'hoes/bitches' as a group",
+        "slur_interjection": "Slur used as an interjection, filler or exclamation, to express surprise, excitement or emphasis, not as a real attack on a woman",
+        "slur_friendly_or_self": "Slur used affectionately to a friend, jokingly, about oneself, in lyrics or quotes",
+        "slur_not_woman": "Insult aimed at a man, a male figure, a thing or situation, someone whose gender is not indicated (whoever, anyone, people), or generic swearing at nobody in particular",
+        "slur_reported_or_defending": "The author quotes or reports someone else's words, or pushes back at being called a slur themself, rather than attacking a woman",
+        "immigrants_degraded": "The tweet's words portray immigrants, refugees or migrants as criminals, rapists, invaders, disease carriers, parasites, animals, scum or a drain on the country",
+        "immigrant_crime_story": "Reports or links a crime committed by an immigrant, illegal alien or refugee to argue that immigrants are dangerous and must be removed",
+        "expel_immigrants": "The point of the tweet is that immigrants should be deported, sent back, got rid of or kept out, or it cheers their removal (not an argument about laws, costs or politicians)",
+        "immigration_policy": "Argues about immigration law, process, costs, border funding, DACA, amnesty or voting, without the words degrading immigrants as people",
+        "politics_other": "Main target is Democrats, liberals, politicians, judges, the media or tech companies, or the tweet discusses the term 'illegal alien' or other political topics; also a tweet that is only hashtags, links or mentions",
+        "other": "Anything else"
+      },
+      "map": {
+        "attack_woman": "hate",
+        "threat_women": "hate",
+        "degrade_women_group": "hate",
+        "slur_interjection": "not_hate",
+        "slur_friendly_or_self": "not_hate",
+        "slur_not_woman": "not_hate",
+        "slur_reported_or_defending": "not_hate",
+        "immigrants_degraded": "hate",
+        "immigrant_crime_story": "hate",
+        "expel_immigrants": "hate",
+        "immigration_policy": "not_hate",
+        "politics_other": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v4b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This tweet is being reviewed under a hate speech policy that protects exactly two groups: women and immigrants (including refugees and migrants). Decide what the tweet is doing. For women, it is hateful only when the writer truly means to demean, insult, sexually shame or threaten a woman or girl, or women in general; the words bitch, hoe, whore or cunt on their own are not enough, because people often use them as exclamations, as filler, jokingly with friends, about themselves, about things, in song lyrics, or toward men or people whose gender is unclear, and quoting someone or answering an insult is not an attack. For immigrants, it is hateful when the thrust of the tweet is hostility toward immigrants themselves: describing them as criminals, rapists, invaders, diseased or parasites, spreading stories of their crimes to show they are a danger, or insisting that they be deported, sent home or kept out. Tweets mainly aimed at politicians, Democrats, liberals, judges, media or at debating immigration law, costs, the term 'illegal alien' or voting are not hateful, whatever hashtags they carry.",
+      "state_template": "Tweet to review:\n{{input}}",
+      "criteria": {
+        "insults_a_woman": "The writer angrily insults, belittles or sexually shames a particular woman or girl with slurs such as bitch, hoe, whore, slut or cunt",
+        "threatens_women": "The writer threatens, wishes for or approves of violence, rape or death against a woman or women",
+        "demeans_women_generally": "The writer makes a demeaning generalisation about women, or about 'bitches' or 'hoes' as a class",
+        "slur_as_exclamation": "The slur works as an exclamation, filler word or intensifier expressing surprise, excitement or emphasis, not as an attack on a woman",
+        "slur_in_fun": "The slur is used jokingly or affectionately with a friend, about the writer, or inside song lyrics or quotations",
+        "slur_at_non_woman": "The insult targets a man, a male figure, an object, a situation, someone of unstated gender (whoever, anyone), or nobody in particular",
+        "quoting_or_responding": "The writer relays what another person said, or responds to having been called a slur, rather than attacking a woman",
+        "immigrants_as_bad_people": "The text depicts immigrants, refugees or migrants as criminals, rapists, invaders, disease carriers, parasites, animals, scum or a drain",
+        "immigrant_crime_report": "The tweet reports or links a crime by an immigrant, illegal alien or refugee in order to show that immigrants are dangerous and should go",
+        "remove_immigrants": "The main point is that immigrants must be deported, sent back, removed or kept out, or it celebrates their removal (not a debate about laws, costs or politicians)",
+        "immigration_debate": "Debates immigration law, procedure, costs, border funding, DACA, amnesty or voting without depicting immigrants as bad people",
+        "political_target": "Mainly aimed at Democrats, liberals, politicians, judges, the media or tech firms, discusses the phrase 'illegal alien', covers other political topics, or is only hashtags, links or mentions",
+        "unrelated": "None of the above"
+      },
+      "map": {
+        "insults_a_woman": "hate",
+        "threatens_women": "hate",
+        "demeans_women_generally": "hate",
+        "slur_as_exclamation": "not_hate",
+        "slur_in_fun": "not_hate",
+        "slur_at_non_woman": "not_hate",
+        "quoting_or_responding": "not_hate",
+        "immigrants_as_bad_people": "hate",
+        "immigrant_crime_report": "hate",
+        "remove_immigrants": "hate",
+        "immigration_debate": "not_hate",
+        "political_target": "not_hate",
+        "unrelated": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v4c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Which description fits this tweet best? The policy only protects women and immigrants/refugees/migrants.",
+        "women": {
+          "hateful": "a real attack on a woman, girl or women: hostile slurs, sexual shaming, contempt or threats of violence",
+          "not_hateful": [
+            "slur as exclamation, filler or intensifier",
+            "joking or affectionate use with friends",
+            "self-description, lyrics, quotes",
+            "target is a man, a thing, a situation, or of unstated gender",
+            "the writer reports someone else's words or answers being insulted"
+          ]
+        },
+        "immigrants": {
+          "hateful": "hostility toward immigrants themselves: calling them criminals, invaders, diseased, parasites; using their crimes to show they are dangerous; demanding they be deported, sent back or kept out",
+          "not_hateful": [
+            "main target is politicians, Democrats, liberals, judges or media",
+            "debate about immigration law, process, cost, voting or the term 'illegal alien'",
+            "hashtags alone, without hostile words about immigrants"
+          ]
+        }
+      },
+      "state_template": {
+        "tweet": "{{input}}"
+      },
+      "criteria": {
+        "woman_attacked": "Hostile personal insult at a woman or girl using slurs or sexual shaming",
+        "women_threatened": "Threat, wish or approval of violence or rape against a woman or women",
+        "women_demeaned": "Contemptuous generalisation about women or 'hoes/bitches' as a group",
+        "exclamation": "Slur as exclamation, filler or intensifier; no woman is attacked",
+        "banter_self_lyrics": "Slur in friendly joking, about oneself, or in lyrics or quotes",
+        "non_woman_target": "Insult at a man, male figure, object, situation, unstated-gender person, or no one",
+        "reporting_or_rebuttal": "Relays someone else's words, or answers the writer being called a slur",
+        "immigrants_vilified": "Immigrants, refugees or migrants depicted as criminals, rapists, invaders, diseased, parasites, animals or a burden",
+        "immigrant_crime": "A crime by an immigrant or illegal alien presented as proof that immigrants are dangerous",
+        "deport_them": "Main message: immigrants should be deported, sent back, got rid of or kept out, or cheering their removal",
+        "policy_debate": "Immigration law, process, cost, border funding, DACA, amnesty or voting, without vilifying immigrants",
+        "politics": "Aimed at Democrats, liberals, politicians, judges, media; the term 'illegal alien'; other politics; hashtags/links/mentions only",
+        "none": "Anything else"
+      },
+      "map": {
+        "woman_attacked": "hate",
+        "women_threatened": "hate",
+        "women_demeaned": "hate",
+        "exclamation": "not_hate",
+        "banter_self_lyrics": "not_hate",
+        "non_woman_target": "not_hate",
+        "reporting_or_rebuttal": "not_hate",
+        "immigrants_vilified": "hate",
+        "immigrant_crime": "hate",
+        "deport_them": "hate",
+        "policy_debate": "not_hate",
+        "politics": "not_hate",
+        "none": "not_hate"
+      }
+    }
+  ]
+}

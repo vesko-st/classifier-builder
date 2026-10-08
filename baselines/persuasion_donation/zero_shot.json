@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "name": "persuasion_donation_zero_shot",
+  "description": "0-point baseline from the public task definition.",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "In our charity-donation chats, a persuader tries to get the other person to donate part of their task payment to Save the Children. From the chat, tell us whether the person ended up donating. Which class does this input belong to?",
+  "criteria": {
+    "donated": "The persuadee donated",
+    "not_donated": "The persuadee did not donate"
+  },
+  "state_template": "A whole chat between the persuader and the persuadee.\n\n{{input}}"
+}

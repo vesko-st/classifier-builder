@@ -1,0 +1,111 @@
+{
+  "run_id": "il-routing-r1",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 610,
+    "num_turns": 44,
+    "total_cost_usd": 1.8464264000000006
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.62,
+      "note": "v1 draft: 80 fine intent options mapped to teams by guess",
+      "test": {
+        "jev": {
+          "accuracy": 0.8107,
+          "macro_f1": 0.7818,
+          "est_cost_usd": 0.306435,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.62,
+      "note": "v1 draft (copy-check clean): fine intent options mapped to teams by guess",
+      "test": {
+        "jev": {
+          "accuracy": 0.8107,
+          "macro_f1": 0.782,
+          "est_cost_usd": 0.307341,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 35,
+      "estimate": 0.78,
+      "note": "v2: routing map corrected from owner answers (pending->cards, PIN/passcode->fraud, wrong FX & statement extra charge->disputes, Apple/Google Pay->cards)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9123,
+          "macro_f1": 0.9074,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 59,
+      "estimate": 0.82,
+      "note": "v3: H1-H5 (ATM-retained card->fraud, Google/Apple Pay currencies->cards, cash not received->disputes, unknown charge vs small extra charge, incoming-in-full->pricing)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9269,
+          "macro_f1": 0.9217,
+          "est_cost_usd": 0.321178,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 81,
+      "estimate": 0.84,
+      "note": "v4: H6-H10 (fee tied to transaction->pricing, paid in other currency->payments, Visa/Mastercard->cards, Apple/Google Pay failing top-up->cards, funding a transfer->payments)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9299,
+          "macro_f1": 0.9247,
+          "est_cost_usd": 0.349757,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.86,
+      "note": "v5d final: v4 + stolen-card fee objection->fraud, card-kind acceptance for top-up->pricing, general transaction timing->payments",
+      "test": {
+        "jev": {
+          "accuracy": 0.9305,
+          "macro_f1": 0.9248,
+          "est_cost_usd": 0.357128,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

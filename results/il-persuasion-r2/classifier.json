@@ -1,0 +1,241 @@
+{
+  "version": 1,
+  "name": "persuasion_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "persuasion_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A persuader is chatting with a partner to convince them to donate to the charity Save the Children. Classify ONLY the final 'Persuader message to tag' (not the earlier chat) by the persuasion strategy or dialogue act it performs. Use the earlier chat only as context to understand what the tagged message is doing (for example, what it replies to). Choose the single option that best describes the tagged message.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "greeting_open": "Opens the conversation: says hello / hi, or asks how the partner is doing as a pleasantry at the start of the chat. Only openings, never goodbyes.",
+        "closing_farewell": "Says goodbye or wishes the partner well as the chat ends (wishing them a nice day or night, take care), without thanking.",
+        "thank": "Thanks the partner: for their time, for chatting, for agreeing to donate, or for their donation.",
+        "acknowledge": "Explicitly agrees with, affirms or shows understanding of a statement or opinion the partner just made (agreeing, sharing the same view, saying it makes sense), without adding a new persuasive point, question or praise.",
+        "answer_reply": "A bare reply to a question the partner asked (a plain yes, no, or not sure that only answers it, with no persuasive content), or the persuader answering how they themself are doing, or answering a personal question the partner just asked about the persuader (how they manage, what they do, whether they volunteer); the reply is about themself only because they were asked. A reply that dwells on children's suffering or tries to stir feelings for them belongs to the emotion option instead.",
+        "praise": "Compliments or praises the partner themself or the partner's own choice: calls them kind, generous, a good person, or says their decision or intention to donate is great or wonderful. Praise aimed at the charity or its work is NOT this option.",
+        "propose": "Asks or urges the partner to donate (or to donate part of their task payment) without naming or asking about an amount: whether they would be willing to give, would consider donating, or a direct call to donate.",
+        "ask_amount": "Asks the partner how much they would like or be willing to donate.",
+        "confirm_amount": "Checks or confirms the specific amount the partner said they will donate.",
+        "logistics_check": "After the partner has agreed to give, asks which way of giving they prefer or whether a proposed arrangement is OK with them.",
+        "foot_in_door": "Starts with a small request to make giving easier: stresses that even a tiny amount helps or makes a difference, suggests starting with a small sum, or after a small pledge asks for a little more. Merely saying the amount is up to them is not this option.",
+        "donation_procedure": "Explains how donating or this task works: the amount comes out of the task payment or bonus, the research team collects and forwards donations, the range they can give, how and when to give, what the task / HIT requires, or that the amount is entirely up to the partner (whatever they are comfortable giving, they can decide).",
+        "org_credibility": "Gives facts about Save the Children itself to establish it is legitimate and effective: what it is and does, where it works, its history, founder, reputation, ratings, share of funds that reach programs, partnerships, points to its website, or speaks highly of the organization itself (calling it great, trustworthy, a blessing). A statement whose point is what the charity does or achieves belongs here even when it mentions children in hardship.",
+        "logical": "Uses reasoning to argue that donating is worthwhile: explains how a donation would help or what it achieves, cause-and-effect arguments, that the charity depends on donors, or that small sums add up. Appeals that work by making the partner picture or feel for the children belong to the emotion option instead.",
+        "emotion": "Tries to make the partner feel sadness, sympathy, guilt or compassion: describes children's suffering, danger, need or loss (including telling of a particular child's or family's hardship), asks them to imagine children's situation, invites them to picture the children they would help or how good helping would feel, or the persuader expresses their own sadness, distress or helplessness about the suffering of children or victims.",
+        "personal_story": "Tells a story with a hopeful point: the persuader's own experience of giving or helping, or how a particular child or family was helped and their life improved. A story whose point is a child's or family's suffering or loss belongs to the emotion option.",
+        "self_model": "The persuader states their own donation or intention to donate (to this charity or charity in general), or offers to give or match, to set an example.",
+        "source_inquiry": "Asks whether the partner knows, has heard of, or is familiar with Save the Children (or the charity).",
+        "task_inquiry": "Asks the partner's opinion, habits or experience about donating, charities, or the cause: whether they donate, have donated, what they think of the charity or issue, whether they care about it, whether they have a moment or are willing to hear about the charity, or if they want more information.",
+        "personal_inquiry": "Asks about the partner's personal life unrelated to donating: their family, children, where they live, job, day, interests.",
+        "off_task": "Chit-chat genuinely unrelated to the charity and donating: small talk about places, weather, hobbies, work or daily life, or other personal topics.",
+        "other": "Anything else: unclear, garbled or non-English text, fragments with no clear act, the persuader voicing their own feelings or mood about things other than the suffering of children or victims, remarks about the chat's own progress (how many turns are done or left), or remarks that fit none of the other options."
+      },
+      "map": {
+        "greeting_open": "greeting",
+        "closing_farewell": "other",
+        "thank": "thank",
+        "acknowledge": "acknowledgement",
+        "answer_reply": "other",
+        "praise": "praise-user",
+        "propose": "proposition-of-donation",
+        "ask_amount": "ask-donation-amount",
+        "confirm_amount": "other",
+        "logistics_check": "other",
+        "foot_in_door": "foot-in-the-door",
+        "donation_procedure": "donation-information",
+        "org_credibility": "credibility-appeal",
+        "logical": "logical-appeal",
+        "emotion": "emotion-appeal",
+        "personal_story": "personal-story",
+        "self_model": "self-modeling",
+        "source_inquiry": "source-related-inquiry",
+        "task_inquiry": "task-related-inquiry",
+        "personal_inquiry": "personal-related-inquiry",
+        "off_task": "off-task",
+        "other": "other"
+      }
+    },
+    {
+      "version": 1,
+      "name": "persuasion_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a donation-persuasion chat: the persuader wants the partner to give money to Save the Children. The text ends with one persuader message marked as the message to tag. Decide which strategy or dialogue act that single message carries out, reading the earlier turns only to understand what it responds to. Pick the one best-fitting option.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "greeting_open": {
+          "definition": "Opens the conversation: says hello / hi, or asks how the partner is doing as a pleasantry at the start of the chat. Only openings, never goodbyes.",
+          "output class": "greeting"
+        },
+        "closing_farewell": {
+          "definition": "Says goodbye or wishes the partner well as the chat ends (wishing them a nice day or night, take care), without thanking.",
+          "output class": "other"
+        },
+        "thank": {
+          "definition": "Thanks the partner: for their time, for chatting, for agreeing to donate, or for their donation.",
+          "output class": "thank"
+        },
+        "acknowledge": {
+          "definition": "Explicitly agrees with, affirms or shows understanding of a statement or opinion the partner just made (agreeing, sharing the same view, saying it makes sense), without adding a new persuasive point, question or praise.",
+          "output class": "acknowledgement"
+        },
+        "answer_reply": {
+          "definition": "A bare reply to a question the partner asked (a plain yes, no, or not sure that only answers it, with no persuasive content), or the persuader answering how they themself are doing, or answering a personal question the partner just asked about the persuader (how they manage, what they do, whether they volunteer); the reply is about themself only because they were asked. A reply that dwells on children's suffering or tries to stir feelings for them belongs to the emotion option instead.",
+          "output class": "other"
+        },
+        "praise": {
+          "definition": "Compliments or praises the partner themself or the partner's own choice: calls them kind, generous, a good person, or says their decision or intention to donate is great or wonderful. Praise aimed at the charity or its work is NOT this option.",
+          "output class": "praise-user"
+        },
+        "propose": {
+          "definition": "Asks or urges the partner to donate (or to donate part of their task payment) without naming or asking about an amount: whether they would be willing to give, would consider donating, or a direct call to donate.",
+          "output class": "proposition-of-donation"
+        },
+        "ask_amount": {
+          "definition": "Asks the partner how much they would like or be willing to donate.",
+          "output class": "ask-donation-amount"
+        },
+        "confirm_amount": {
+          "definition": "Checks or confirms the specific amount the partner said they will donate.",
+          "output class": "other"
+        },
+        "logistics_check": {
+          "definition": "After the partner has agreed to give, asks which way of giving they prefer or whether a proposed arrangement is OK with them.",
+          "output class": "other"
+        },
+        "foot_in_door": {
+          "definition": "Starts with a small request to make giving easier: stresses that even a tiny amount helps or makes a difference, suggests starting with a small sum, or after a small pledge asks for a little more. Merely saying the amount is up to them is not this option.",
+          "output class": "foot-in-the-door"
+        },
+        "donation_procedure": {
+          "definition": "Explains how donating or this task works: the amount comes out of the task payment or bonus, the research team collects and forwards donations, the range they can give, how and when to give, what the task / HIT requires, or that the amount is entirely up to the partner (whatever they are comfortable giving, they can decide).",
+          "output class": "donation-information"
+        },
+        "org_credibility": {
+          "definition": "Gives facts about Save the Children itself to establish it is legitimate and effective: what it is and does, where it works, its history, founder, reputation, ratings, share of funds that reach programs, partnerships, points to its website, or speaks highly of the organization itself (calling it great, trustworthy, a blessing). A statement whose point is what the charity does or achieves belongs here even when it mentions children in hardship.",
+          "output class": "credibility-appeal"
+        },
+        "logical": {
+          "definition": "Uses reasoning to argue that donating is worthwhile: explains how a donation would help or what it achieves, cause-and-effect arguments, that the charity depends on donors, or that small sums add up. Appeals that work by making the partner picture or feel for the children belong to the emotion option instead.",
+          "output class": "logical-appeal"
+        },
+        "emotion": {
+          "definition": "Tries to make the partner feel sadness, sympathy, guilt or compassion: describes children's suffering, danger, need or loss (including telling of a particular child's or family's hardship), asks them to imagine children's situation, invites them to picture the children they would help or how good helping would feel, or the persuader expresses their own sadness, distress or helplessness about the suffering of children or victims.",
+          "output class": "emotion-appeal"
+        },
+        "personal_story": {
+          "definition": "Tells a story with a hopeful point: the persuader's own experience of giving or helping, or how a particular child or family was helped and their life improved. A story whose point is a child's or family's suffering or loss belongs to the emotion option.",
+          "output class": "personal-story"
+        },
+        "self_model": {
+          "definition": "The persuader states their own donation or intention to donate (to this charity or charity in general), or offers to give or match, to set an example.",
+          "output class": "self-modeling"
+        },
+        "source_inquiry": {
+          "definition": "Asks whether the partner knows, has heard of, or is familiar with Save the Children (or the charity).",
+          "output class": "source-related-inquiry"
+        },
+        "task_inquiry": {
+          "definition": "Asks the partner's opinion, habits or experience about donating, charities, or the cause: whether they donate, have donated, what they think of the charity or issue, whether they care about it, whether they have a moment or are willing to hear about the charity, or if they want more information.",
+          "output class": "task-related-inquiry"
+        },
+        "personal_inquiry": {
+          "definition": "Asks about the partner's personal life unrelated to donating: their family, children, where they live, job, day, interests.",
+          "output class": "personal-related-inquiry"
+        },
+        "off_task": {
+          "definition": "Chit-chat genuinely unrelated to the charity and donating: small talk about places, weather, hobbies, work or daily life, or other personal topics.",
+          "output class": "off-task"
+        },
+        "other": {
+          "definition": "Anything else: unclear, garbled or non-English text, fragments with no clear act, the persuader voicing their own feelings or mood about things other than the suffering of children or victims, remarks about the chat's own progress (how many turns are done or left), or remarks that fit none of the other options.",
+          "output class": "other"
+        }
+      },
+      "map": {
+        "greeting_open": "greeting",
+        "closing_farewell": "other",
+        "thank": "thank",
+        "acknowledge": "acknowledgement",
+        "answer_reply": "other",
+        "praise": "praise-user",
+        "propose": "proposition-of-donation",
+        "ask_amount": "ask-donation-amount",
+        "confirm_amount": "other",
+        "logistics_check": "other",
+        "foot_in_door": "foot-in-the-door",
+        "donation_procedure": "donation-information",
+        "org_credibility": "credibility-appeal",
+        "logical": "logical-appeal",
+        "emotion": "emotion-appeal",
+        "personal_story": "personal-story",
+        "self_model": "self-modeling",
+        "source_inquiry": "source-related-inquiry",
+        "task_inquiry": "task-related-inquiry",
+        "personal_inquiry": "personal-related-inquiry",
+        "off_task": "off-task",
+        "other": "other"
+      }
+    },
+    {
+      "version": 1,
+      "name": "persuasion_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Annotate a persuader's chat message. Earlier turns are context; the label is for the last line, the 'Persuader message to tag'. The persuader's goal is a donation to the charity Save the Children. Which of these persuasion strategies or dialogue acts does that message perform?",
+      "state_template": "{{input}}",
+      "criteria": {
+        "propose": "Asks or urges the partner to donate (or to donate part of their task payment) without naming or asking about an amount: whether they would be willing to give, would consider donating, or a direct call to donate.",
+        "ask_amount": "Asks the partner how much they would like or be willing to donate.",
+        "foot_in_door": "Starts with a small request to make giving easier: stresses that even a tiny amount helps or makes a difference, suggests starting with a small sum, or after a small pledge asks for a little more. Merely saying the amount is up to them is not this option.",
+        "donation_procedure": "Explains how donating or this task works: the amount comes out of the task payment or bonus, the research team collects and forwards donations, the range they can give, how and when to give, what the task / HIT requires, or that the amount is entirely up to the partner (whatever they are comfortable giving, they can decide).",
+        "org_credibility": "Gives facts about Save the Children itself to establish it is legitimate and effective: what it is and does, where it works, its history, founder, reputation, ratings, share of funds that reach programs, partnerships, points to its website, or speaks highly of the organization itself (calling it great, trustworthy, a blessing). A statement whose point is what the charity does or achieves belongs here even when it mentions children in hardship.",
+        "logical": "Uses reasoning to argue that donating is worthwhile: explains how a donation would help or what it achieves, cause-and-effect arguments, that the charity depends on donors, or that small sums add up. Appeals that work by making the partner picture or feel for the children belong to the emotion option instead.",
+        "emotion": "Tries to make the partner feel sadness, sympathy, guilt or compassion: describes children's suffering, danger, need or loss (including telling of a particular child's or family's hardship), asks them to imagine children's situation, invites them to picture the children they would help or how good helping would feel, or the persuader expresses their own sadness, distress or helplessness about the suffering of children or victims.",
+        "personal_story": "Tells a story with a hopeful point: the persuader's own experience of giving or helping, or how a particular child or family was helped and their life improved. A story whose point is a child's or family's suffering or loss belongs to the emotion option.",
+        "self_model": "The persuader states their own donation or intention to donate (to this charity or charity in general), or offers to give or match, to set an example.",
+        "source_inquiry": "Asks whether the partner knows, has heard of, or is familiar with Save the Children (or the charity).",
+        "task_inquiry": "Asks the partner's opinion, habits or experience about donating, charities, or the cause: whether they donate, have donated, what they think of the charity or issue, whether they care about it, whether they have a moment or are willing to hear about the charity, or if they want more information.",
+        "personal_inquiry": "Asks about the partner's personal life unrelated to donating: their family, children, where they live, job, day, interests.",
+        "greeting_open": "Opens the conversation: says hello / hi, or asks how the partner is doing as a pleasantry at the start of the chat. Only openings, never goodbyes.",
+        "thank": "Thanks the partner: for their time, for chatting, for agreeing to donate, or for their donation.",
+        "praise": "Compliments or praises the partner themself or the partner's own choice: calls them kind, generous, a good person, or says their decision or intention to donate is great or wonderful. Praise aimed at the charity or its work is NOT this option.",
+        "acknowledge": "Explicitly agrees with, affirms or shows understanding of a statement or opinion the partner just made (agreeing, sharing the same view, saying it makes sense), without adding a new persuasive point, question or praise.",
+        "answer_reply": "A bare reply to a question the partner asked (a plain yes, no, or not sure that only answers it, with no persuasive content), or the persuader answering how they themself are doing, or answering a personal question the partner just asked about the persuader (how they manage, what they do, whether they volunteer); the reply is about themself only because they were asked. A reply that dwells on children's suffering or tries to stir feelings for them belongs to the emotion option instead.",
+        "confirm_amount": "Checks or confirms the specific amount the partner said they will donate.",
+        "logistics_check": "After the partner has agreed to give, asks which way of giving they prefer or whether a proposed arrangement is OK with them.",
+        "closing_farewell": "Says goodbye or wishes the partner well as the chat ends (wishing them a nice day or night, take care), without thanking.",
+        "off_task": "Chit-chat genuinely unrelated to the charity and donating: small talk about places, weather, hobbies, work or daily life, or other personal topics.",
+        "other": "Anything else: unclear, garbled or non-English text, fragments with no clear act, the persuader voicing their own feelings or mood about things other than the suffering of children or victims, remarks about the chat's own progress (how many turns are done or left), or remarks that fit none of the other options."
+      },
+      "map": {
+        "propose": "proposition-of-donation",
+        "ask_amount": "ask-donation-amount",
+        "foot_in_door": "foot-in-the-door",
+        "donation_procedure": "donation-information",
+        "org_credibility": "credibility-appeal",
+        "logical": "logical-appeal",
+        "emotion": "emotion-appeal",
+        "personal_story": "personal-story",
+        "self_model": "self-modeling",
+        "source_inquiry": "source-related-inquiry",
+        "task_inquiry": "task-related-inquiry",
+        "personal_inquiry": "personal-related-inquiry",
+        "greeting_open": "greeting",
+        "thank": "thank",
+        "praise": "praise-user",
+        "acknowledge": "acknowledgement",
+        "answer_reply": "other",
+        "confirm_amount": "other",
+        "logistics_check": "other",
+        "closing_farewell": "other",
+        "off_task": "off-task",
+        "other": "other"
+      }
+    }
+  ]
+}

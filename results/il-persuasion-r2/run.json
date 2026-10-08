@@ -1,0 +1,111 @@
+{
+  "run_id": "il-persuasion-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 654,
+    "num_turns": 50,
+    "total_cost_usd": 2.0404046000000005
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description: 20 options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.5603,
+          "macro_f1": 0.5489,
+          "est_cost_usd": 0.094005,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 25,
+      "estimate": 0.5,
+      "note": "v2: owner conventions (farewell/confirm/bare replies -> other; task mechanics -> donation-information)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5972,
+          "macro_f1": 0.5757,
+          "est_cost_usd": 0.098488,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 49,
+      "estimate": 0.5,
+      "note": "v3: H1 org praise->credibility, H2 logistics->other, H3 amount-up-to-you->donation-info, H4 chat progress->other",
+      "test": {
+        "jev": {
+          "accuracy": 0.5999,
+          "macro_f1": 0.5803,
+          "est_cost_usd": 0.106078,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 57,
+      "estimate": 0.52,
+      "note": "v6e: 3-variant wording ensemble + H6 (picture children->emotion), H7 (charity's work->credibility), persuader's sadness about victims->emotion",
+      "test": {
+        "jev": {
+          "accuracy": 0.619,
+          "macro_f1": 0.589,
+          "est_cost_usd": 0.353631,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 61,
+      "estimate": 0.53,
+      "note": "v7e: H8 have-a-moment->task-inquiry, H5 hardship stories->emotion, personal-story = hopeful/own-experience stories",
+      "test": {
+        "jev": {
+          "accuracy": 0.6216,
+          "macro_f1": 0.5935,
+          "est_cost_usd": 0.364061,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.5,
+      "note": "v10e: v7e + H9 narrowed (answers to personal questions about the persuader -> other, unless dwelling on children's suffering -> emotion). 26/37 on bought labels (mostly hard picks)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6229,
+          "macro_f1": 0.5879,
+          "est_cost_usd": 0.375628,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v6",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "Hate-speech annotation for tweets. Only hate against women and against immigrants/refugees is in scope. Pick the description that fits the tweet best.",
+    "rules": [
+      "Attacks on other groups (Muslims, politicians, Democrats, men, Trump) are out of scope.",
+      "Calling for immigrants or refugees to be deported, sent back, kept out or removed from the country is distinct from merely discussing border policy.",
+      "Slurs like bitch/hoe used casually, affectionately, self-referentially, about oneself or a thing, or as an exclamation are not attacks.",
+      "Judge what the tweet's own text is about. Hashtags like #DeportThemAll or #BuildThatWall appended to a tweet that is about something else (praising Trump, attacking Democrats, other news) do not make it about immigrants."
+    ]
+  },
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "woman_sexual_degradation_or_threat": "Sexually degrades, dehumanises or threatens violence/rape against a specific woman or women (e.g. sexual humiliation, 'your pussy belongs to me', 'I'll beat that cunt')",
+    "woman_plain_insult": "Insults a specific woman or girl with a slur or profanity (e.g. 'shut up you dumb hoe') but without sexual degradation or threats",
+    "women_negative_generalisation": "Makes a negative generalisation about women as bitches/hoes/whores (e.g. 'every bitch lie', 'bitches ain't loyal', women called whores for what they do), degrading or stereotyping women",
+    "women_neutral_slang": "Uses bitch/hoe as neutral slang for a girlfriend or women in general without degrading them, e.g. dating advice or relationship talk",
+    "slur_casual": "Uses bitch/hoe etc. casually, affectionately, self-referentially, in lyrics, about a thing, or as an exclamation",
+    "insult_man_or_unclear": "Insults a man, a group of men, or someone whose gender is unclear",
+    "immigrants_vilified": "Frames immigrants, refugees, migrants or illegal aliens as criminals, rapists, gang members (MS-13), drug or human traffickers, invaders, vermin, parasites, disease or scum, including sharing stories of crimes by illegal aliens/migrants to argue for the wall or deportation",
+    "immigrants_expel": "The tweet's own text is about immigrants/refugees/migrants and calls for them to be deported, sent back, kicked out or kept out (e.g. 'Sweden needs to clean house #sendthemback', 'get them out of our country')",
+    "border_policy_or_hashtags": "Supports the wall or discusses DACA, ICE, border or immigration policy without vilifying immigrants or calling for their removal, or is about another topic (Trump, Democrats, economy, elections) with immigration hashtags such as #DeportThemAll merely appended",
+    "other": "Other politics, attacks on politicians/other groups, news, unrelated content, or opposing hate"
+  },
+  "map": {
+    "woman_sexual_degradation_or_threat": "hate",
+    "woman_plain_insult": "hate",
+    "women_negative_generalisation": "hate",
+    "women_neutral_slang": "not_hate",
+    "slur_casual": "not_hate",
+    "insult_man_or_unclear": "not_hate",
+    "immigrants_vilified": "hate",
+    "immigrants_expel": "hate",
+    "border_policy_or_hashtags": "not_hate",
+    "other": "not_hate"
+  }
+}

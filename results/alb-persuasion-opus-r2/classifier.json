@@ -1,0 +1,250 @@
+{
+  "version": 1,
+  "name": "persuasion_ensemble",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "persuasion_strategy_v5",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "A persuader is chatting with a persuadee to get them to donate (part of their task payment) to the charity Save the Children. Tag the 'Persuader message to tag' with the one persuasion strategy or dialogue act it performs.",
+        "rules": [
+          "Judge only the final 'Persuader message to tag'; the earlier dialogue is context for what the message responds to.",
+          "When a message mixes acts, choose the act that carries its main purpose.",
+          "Statements about Save the Children itself (what it does, where, how well) are credibility; statements about the children's suffering meant to stir feelings are emotion; arguments for why donating makes sense are logical."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "greeting": {
+          "definition": "Opens the chat socially: hello, hi, good evening, how are you, or answering / returning a how-are-you ('I'm good', 'not bad', 'how about you?')."
+        },
+        "source-related-inquiry": {
+          "definition": "Asks whether the persuadee knows or has heard of Save the Children, or what they know or think of the organization (including 'did you know that Save the Children is ...?'); also introducing Save the Children as the topic of the chat."
+        },
+        "task-related-inquiry": {
+          "definition": "Asks the persuadee's opinion, knowledge or wishes about the cause, children in need, charities or how to help (e.g. what they think, whether they want more information, whether they have other questions). Also a question asking whether the persuadee knows or is aware of a fact about children in need or a crisis ('did you know ...?', 'are you aware ...?', 'have you seen ...?')."
+        },
+        "personal-related-inquiry": {
+          "definition": "Asks about the persuadee personally: their own past donating or charity habits, life, family, or whether they personally would be interested."
+        },
+        "credibility-appeal": {
+          "definition": "Gives information about Save the Children to establish it as real and trustworthy: its mission, programs, where it works, history, size, ratings, finances, leadership, or a link to its website; also vouching for the organization's quality or reputation."
+        },
+        "emotion-appeal": {
+          "definition": "Tries to stir emotions such as sadness, sympathy, guilt or warmth: describes children's suffering, hunger, war, disease or death, or how sad or heartbreaking their situation is; also the persuader voicing their own heartbreak, guilt or care about the children (it's heartbreaking, I can't imagine what their parents feel, I feel guilty for not doing more, they are our future)."
+        },
+        "logical-appeal": {
+          "definition": "Reasons for donating: argues that a donation will make an impact or help children, that helping is right or important, or compares what money means to us versus them. Describing what Save the Children does, its programs and what they achieve is credibility-appeal, not logical-appeal."
+        },
+        "foot-in-the-door": {
+          "definition": "Stresses that only a small amount is needed: every little bit helps, even a few cents makes a difference, start small."
+        },
+        "personal-story": {
+          "definition": "The persuader recounts an experience from their own life: something they saw, went through or felt about the cause in the past (e.g. what they have seen or heard over the years, their own hardships), not a plain statement about donating now."
+        },
+        "self-modeling": {
+          "definition": "The persuader sets an example with their own donation: says they will donate, are donating or will match the persuadee in this task, or that they give to Save the Children themselves."
+        },
+        "proposition-of-donation": {
+          "definition": "Directly asks or urges the persuadee to donate (would you donate? would you consider it? please help the children), without asking for an amount."
+        },
+        "ask-donation-amount": {
+          "definition": "Asks how much the persuadee will or would like to donate."
+        },
+        "donation-information": {
+          "definition": "Explains how the donation works in this task: it is deducted from the task payment, any amount from $0 to the full payment can be chosen, the research team forwards it, how or where to give; also answers to the persuadee's questions about how, when or how often the donation is paid."
+        },
+        "praise-user": {
+          "definition": "Compliments the persuadee or their choice or generosity: that's great, very generous, you're a nice person, people like you make the world better."
+        },
+        "thank": {
+          "definition": "Thanks the persuadee or expresses appreciation for their donation or time."
+        },
+        "acknowledgement": {
+          "definition": "A short reply accepting or affirming what was just said, adding nothing new: okay, sure, alright, yes, yeah, I know, absolutely, this is true, it really is, okay that's a start."
+        },
+        "off-task": {
+          "definition": "Talk unrelated to the charity or donation (e.g. history, politics, unrelated topics)."
+        },
+        "other: closing": {
+          "definition": "Ending the chat: goodbye, have a great day or night, nice talking to you. If the message mainly thanks the persuadee for their donation or time, it is thank."
+        },
+        "other: agree or empathize": {
+          "definition": "Shares or sympathizes with the persuadee's own feelings, situation or view, or adds the persuader's own take on it: me too, same here, I feel the same, I know what you mean, I can't imagine that either, sorry to hear that, yes that is so true and ... . Sadness about the children's plight is emotion-appeal instead."
+        },
+        "other: confirm donation": {
+          "definition": "The persuader checks back an amount or choice the persuadee has already stated or been offered (to confirm, you said 20 cents?; so I can count on you for that?; which option would you prefer?)."
+        },
+        "other: persuader's own life": {
+          "definition": "Small-talk facts about the persuader that are not a story and not about Save the Children: where they live, their job, their plans for the day, or a brief answer about how they themselves decided. A persuader describing their own role at Save the Children is credibility-appeal; a recounted experience is personal-story."
+        },
+        "other: chat logistics": {
+          "definition": "Talk about the conversation or HIT itself: number of turns, offering to explain or give info, glad you asked, I would love to (tell you), I'm going to look that up, typo corrections."
+        },
+        "other: other ways to help": {
+          "definition": "Suggests ways to help besides donating now: tell friends and family, volunteer, spread the word."
+        },
+        "other: remark or argument": {
+          "definition": "A comment, opinion, joke, disagreement or argument with the persuadee that does not itself give information, appeal or ask for a donation."
+        }
+      },
+      "map": {
+        "greeting": "greeting",
+        "source-related-inquiry": "source-related-inquiry",
+        "task-related-inquiry": "task-related-inquiry",
+        "personal-related-inquiry": "personal-related-inquiry",
+        "credibility-appeal": "credibility-appeal",
+        "emotion-appeal": "emotion-appeal",
+        "logical-appeal": "logical-appeal",
+        "foot-in-the-door": "foot-in-the-door",
+        "personal-story": "personal-story",
+        "self-modeling": "self-modeling",
+        "proposition-of-donation": "proposition-of-donation",
+        "ask-donation-amount": "ask-donation-amount",
+        "donation-information": "donation-information",
+        "praise-user": "praise-user",
+        "thank": "thank",
+        "acknowledgement": "acknowledgement",
+        "off-task": "off-task",
+        "other: closing": "other",
+        "other: agree or empathize": "other",
+        "other: confirm donation": "other",
+        "other: persuader's own life": "other",
+        "other: chat logistics": "other",
+        "other: other ways to help": "other",
+        "other: remark or argument": "other"
+      }
+    },
+    {
+      "version": 1,
+      "name": "variant_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a chat in which one worker (the persuader) tries to talk another worker (the persuadee) into giving some of their task earnings to Save the Children. Which strategy or dialogue act is the message after 'Persuader message to tag' carrying out? Use the earlier lines only to understand what it replies to. If several acts are mixed, pick the main one. Facts about the organization are credibility; describing the children's suffering to move the reader is emotion; giving reasons why a donation is worthwhile is logical.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "greeting": "Social opening: saying hello or hi, asking how the other person is, or replying to a how-are-you (I'm fine, pretty good, and you?).",
+        "source-related-inquiry": "A question about whether the persuadee has heard of or knows Save the Children, or what they think of it (also 'did you know Save the Children is ...?'), or announcing that the chat is about Save the Children.",
+        "task-related-inquiry": "A question about the persuadee's views, knowledge or wishes regarding the cause, needy children, charities or ways to help (what do you think, do you want more info, any other questions?), including asking if they know or are aware of some fact about children in need or a crisis (did you know ...? are you aware ...?).",
+        "personal-related-inquiry": "A question about the persuadee as a person: their own giving history or charity habits, their life or family, or whether they personally are interested.",
+        "credibility-appeal": "Information that makes Save the Children look legitimate and trustworthy: what it does, its programs, countries, history, size, ratings, how funds are spent, its leaders, its website link, or praise of the organization's reputation.",
+        "emotion-appeal": "Aims at the persuadee's feelings (sadness, pity, guilt, warmth) by describing children who suffer from hunger, war, illness or death, or saying how heartbreaking it is; this includes the persuader expressing their own sorrow, guilt or love for the children (so heartbreaking, I can't imagine how the parents feel, I feel guilty I haven't done more, children are our future).",
+        "logical-appeal": "Gives reasons to donate: the donation will have an impact or help children, helping is the right or important thing, or what a little money means for us compared with them. An account of Save the Children's work, programs and their results belongs to credibility-appeal instead.",
+        "foot-in-the-door": "Points out that just a small amount is enough: every bit helps, even pennies make a difference, you can start small.",
+        "personal-story": "The persuader narrates something from their own past: an experience, something they witnessed or lived through, or a hardship of their own; not simply saying they are donating.",
+        "self-modeling": "The persuader offers their own giving as an example: they are donating or will donate in this task, will match the persuadee, or give to Save the Children themselves.",
+        "proposition-of-donation": "Asks or urges the persuadee outright to make a donation (would you donate? will you consider it? please help), with no question about the amount.",
+        "ask-donation-amount": "Asks the persuadee what amount they will or want to give.",
+        "donation-information": "Explains the donation mechanics in this task: taken from the task payment, any sum from $0 to the full payment, forwarded by the research team, where or how to give; also replies to the persuadee's questions about how, when or how often it is paid.",
+        "praise-user": "Compliments the persuadee, their decision or their generosity (that's wonderful, so generous, you're a kind person, people like you make a difference).",
+        "thank": "Expresses thanks or appreciation to the persuadee for donating or for their time.",
+        "acknowledgement": "A brief reply that only accepts or confirms what was just said, with no new content: ok, sure, alright, yes, yeah, I know, absolutely, that's true, okay that's a start.",
+        "off-task": "Conversation that has nothing to do with the charity or donating, such as history, politics or unrelated topics.",
+        "other: closing": "Wrapping up the conversation: bye, have a nice day or evening, nice chatting. A message that mainly thanks the persuadee for their donation or time is thank instead.",
+        "other: agree or empathize": "Relating to the persuadee's own feelings, circumstances or opinion, or adding the persuader's own view on it: me too, same here, I feel that way too, I know what you mean, I can't imagine that either, sorry to hear it. Sadness about what the children go through is emotion-appeal instead.",
+        "other: confirm donation": "The persuader double-checks an amount or option the persuadee already gave or was offered (just to confirm, 20 cents?; can I count on you for that?; which would you prefer?).",
+        "other: persuader's own life": "Small talk about the persuader that is neither a story nor about Save the Children: where they live, their job, their plans today, or a short answer on how they themselves decided. The persuader's own role at Save the Children counts as credibility-appeal; a narrated experience counts as personal-story.",
+        "other: chat logistics": "Remarks about the chat or HIT itself: how many turns are left, offering to explain or share info, glad you asked, I'd love to, let me look that up, correcting a typo.",
+        "other: other ways to help": "Proposes helping in some way other than donating now: telling friends and family, volunteering, spreading the word.",
+        "other: remark or argument": "A comment, opinion, joke, disagreement or argument with the persuadee that by itself gives no information, makes no appeal and asks for no donation."
+      },
+      "map": {
+        "greeting": "greeting",
+        "source-related-inquiry": "source-related-inquiry",
+        "task-related-inquiry": "task-related-inquiry",
+        "personal-related-inquiry": "personal-related-inquiry",
+        "credibility-appeal": "credibility-appeal",
+        "emotion-appeal": "emotion-appeal",
+        "logical-appeal": "logical-appeal",
+        "foot-in-the-door": "foot-in-the-door",
+        "personal-story": "personal-story",
+        "self-modeling": "self-modeling",
+        "proposition-of-donation": "proposition-of-donation",
+        "ask-donation-amount": "ask-donation-amount",
+        "donation-information": "donation-information",
+        "praise-user": "praise-user",
+        "thank": "thank",
+        "acknowledgement": "acknowledgement",
+        "off-task": "off-task",
+        "other: closing": "other",
+        "other: agree or empathize": "other",
+        "other: confirm donation": "other",
+        "other: persuader's own life": "other",
+        "other: chat logistics": "other",
+        "other: other ways to help": "other",
+        "other: remark or argument": "other"
+      }
+    },
+    {
+      "version": 1,
+      "name": "variant_d",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Which persuasion strategy or dialogue act does the persuader's last message (after 'Persuader message to tag') use?",
+        "setting": "Crowd workers chat; the persuader wants the persuadee to donate part of their task payment to Save the Children.",
+        "how to decide": [
+          "Tag the final message only; earlier lines are context.",
+          "Pick the act that is the main purpose of the message.",
+          "Organization facts -> credibility-appeal; suffering of children to move feelings -> emotion-appeal; reasons a donation makes sense -> logical-appeal."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "greeting": "Opens the chat socially: hello, hi, good evening, how are you, or answering / returning a how-are-you ('I'm good', 'not bad', 'how about you?').",
+        "source-related-inquiry": "Asks whether the persuadee knows or has heard of Save the Children, or what they know or think of the organization (including 'did you know that Save the Children is ...?'); also introducing Save the Children as the topic of the chat.",
+        "task-related-inquiry": "Asks the persuadee's opinion, knowledge or wishes about the cause, children in need, charities or how to help (e.g. what they think, whether they want more information, whether they have other questions). Also a question asking whether the persuadee knows or is aware of a fact about children in need or a crisis ('did you know ...?', 'are you aware ...?', 'have you seen ...?').",
+        "personal-related-inquiry": "Asks about the persuadee personally: their own past donating or charity habits, life, family, or whether they personally would be interested.",
+        "credibility-appeal": "Gives information about Save the Children to establish it as real and trustworthy: its mission, programs, where it works, history, size, ratings, finances, leadership, or a link to its website; also vouching for the organization's quality or reputation.",
+        "emotion-appeal": "Tries to stir emotions such as sadness, sympathy, guilt or warmth: describes children's suffering, hunger, war, disease or death, or how sad or heartbreaking their situation is; also the persuader voicing their own heartbreak, guilt or care about the children (it's heartbreaking, I can't imagine what their parents feel, I feel guilty for not doing more, they are our future).",
+        "logical-appeal": "Reasons for donating: argues that a donation will make an impact or help children, that helping is right or important, or compares what money means to us versus them. Describing what Save the Children does, its programs and what they achieve is credibility-appeal, not logical-appeal.",
+        "foot-in-the-door": "Stresses that only a small amount is needed: every little bit helps, even a few cents makes a difference, start small.",
+        "personal-story": "The persuader recounts an experience from their own life: something they saw, went through or felt about the cause in the past (e.g. what they have seen or heard over the years, their own hardships), not a plain statement about donating now.",
+        "self-modeling": "The persuader sets an example with their own donation: says they will donate, are donating or will match the persuadee in this task, or that they give to Save the Children themselves.",
+        "proposition-of-donation": "Directly asks or urges the persuadee to donate (would you donate? would you consider it? please help the children), without asking for an amount.",
+        "ask-donation-amount": "Asks how much the persuadee will or would like to donate.",
+        "donation-information": "Explains how the donation works in this task: it is deducted from the task payment, any amount from $0 to the full payment can be chosen, the research team forwards it, how or where to give; also answers to the persuadee's questions about how, when or how often the donation is paid.",
+        "praise-user": "Compliments the persuadee or their choice or generosity: that's great, very generous, you're a nice person, people like you make the world better.",
+        "thank": "Thanks the persuadee or expresses appreciation for their donation or time.",
+        "acknowledgement": "A short reply accepting or affirming what was just said, adding nothing new: okay, sure, alright, yes, yeah, I know, absolutely, this is true, it really is, okay that's a start.",
+        "off-task": "Talk unrelated to the charity or donation (e.g. history, politics, unrelated topics).",
+        "other: closing": "Ending the chat: goodbye, have a great day or night, nice talking to you. If the message mainly thanks the persuadee for their donation or time, it is thank.",
+        "other: agree or empathize": "Shares or sympathizes with the persuadee's own feelings, situation or view, or adds the persuader's own take on it: me too, same here, I feel the same, I know what you mean, I can't imagine that either, sorry to hear that, yes that is so true and ... . Sadness about the children's plight is emotion-appeal instead.",
+        "other: confirm donation": "The persuader checks back an amount or choice the persuadee has already stated or been offered (to confirm, you said 20 cents?; so I can count on you for that?; which option would you prefer?).",
+        "other: persuader's own life": "Small-talk facts about the persuader that are not a story and not about Save the Children: where they live, their job, their plans for the day, or a brief answer about how they themselves decided. A persuader describing their own role at Save the Children is credibility-appeal; a recounted experience is personal-story.",
+        "other: chat logistics": "Talk about the conversation or HIT itself: number of turns, offering to explain or give info, glad you asked, I would love to (tell you), I'm going to look that up, typo corrections.",
+        "other: other ways to help": "Suggests ways to help besides donating now: tell friends and family, volunteer, spread the word.",
+        "other: remark or argument": "A comment, opinion, joke, disagreement or argument with the persuadee that does not itself give information, appeal or ask for a donation."
+      },
+      "map": {
+        "greeting": "greeting",
+        "source-related-inquiry": "source-related-inquiry",
+        "task-related-inquiry": "task-related-inquiry",
+        "personal-related-inquiry": "personal-related-inquiry",
+        "credibility-appeal": "credibility-appeal",
+        "emotion-appeal": "emotion-appeal",
+        "logical-appeal": "logical-appeal",
+        "foot-in-the-door": "foot-in-the-door",
+        "personal-story": "personal-story",
+        "self-modeling": "self-modeling",
+        "proposition-of-donation": "proposition-of-donation",
+        "ask-donation-amount": "ask-donation-amount",
+        "donation-information": "donation-information",
+        "praise-user": "praise-user",
+        "thank": "thank",
+        "acknowledgement": "acknowledgement",
+        "off-task": "off-task",
+        "other: closing": "other",
+        "other: agree or empathize": "other",
+        "other: confirm donation": "other",
+        "other: persuader's own life": "other",
+        "other: chat logistics": "other",
+        "other: other ways to help": "other",
+        "other: remark or argument": "other"
+      }
+    }
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "version": 1,
+  "name": "donation_ens8",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v6_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "This is a chat in which a persuader urges the persuadee to give some of their earnings from this job to a children's charity. After the chat the persuadee chose privately whether to donate. Judge from the persuadee's own words, especially their final stated decision, which outcome best describes them.",
+        "guidance": [
+          "Focus on what the persuadee (not the persuader) says about giving money from this task's payment.",
+          "If the persuadee changes their mind, their latest position counts.",
+          "Any positive amount, however small, counts as donating.",
+          "Speaker tags can be misleading: sometimes the participant tagged Persuadee ends up doing the persuading (asking the other whether or how much they will give, praising the cause). Still judge the tagged Persuadee; their arguing for giving to the children's charity shows they support it.",
+          "Low-quality or garbled chats still count: if the persuadee says yes to giving or names an amount anywhere and never refuses, that is a donation.",
+          "Agreeing that the cause is good is not the same as deciding to give; look for the persuadee's own decision about their payment.",
+          "When asked to give, a yes counts even if softened (they will probably give, might give, are willing): that is a donation unless they later refuse. Not donating means a refusal, a plan to give only at some later time or through another channel of their own choosing, doubts left unresolved, or no answer to the request.",
+          "Agreeing in principle is weaker evidence than a figure: if the persuader directly asks for an amount and the persuadee dodges the question, that points to not donating.",
+          "A persuadee who says money is tight and then agrees only tentatively, or who ends up preferring to help in a non-monetary way, has usually not donated; a definite figure they own outweighs this."
+        ]
+      },
+      "state_template": "Chat:\n{{input}}",
+      "criteria": {
+        "committed_amount": "The persuadee states they will give a specific positive amount (any size), and does not take it back. This holds even if they also mention giving more at another time.",
+        "agreed_no_amount": "Asked to give, the persuadee says yes without naming an amount, firmly or softened (probably, might, willing), and does not take it back. The yes must answer a request that they themselves give; merely agreeing with a general remark about giving does not count. A yes counts even if the persuader points them to the charity's website. If the persuader then directly asks for an amount and the persuadee dodges it, use the amount-evasion option instead.",
+        "leaning_yes": "The persuadee says they personally want to or will give to the children's charity (not just that it is a good cause), but never names an amount or a firm yes, and never refuses.",
+        "deferred_elsewhere": "Rather than agreeing to give from this job's payment, the persuadee says they will first look at the charity's website or research it and then send money on their own, possibly later; or they will give to a different cause instead. Any amount they mention is tied to that later, self-directed plan.",
+        "undecided": "The persuadee is still asking questions, voicing doubts, or has not answered the request when the chat ends, so no yes is ever given.",
+        "declined": "The persuadee refuses to donate, says they cannot afford it, or wants to keep their earnings.",
+        "no_decision_discussed": "The persuadee's own giving never comes up and they express no view in favour of giving to this charity.",
+        "persuadee_advocates": "The tagged Persuadee takes the persuading role themselves, urging the other to give to the children's charity or asking how much the other will give, and does not refuse to give.",
+        "sympathetic_only": "The persuadee praises the charity, is moved by its work, or hopes other people give, but never says they themselves will give from this payment.",
+        "evades_amount": "The persuader directly asks the tagged Persuadee how much they will give, and the persuadee dodges: they ask what is normal, say it depends, are still deciding, keep it private, offer only a hedged vague quantity, or only say they cannot give what was suggested, and they never settle on a figure. A share such as all, half or everything of their payment counts as a figure. Being told they will enter the amount later is not dodging.",
+        "prefers_other_help": "After any talk of giving money, the persuadee's latest position is that they would rather help in another way (volunteering, donating goods), or that money is too tight, and they never firm up a definite figure of their own.",
+        "tentative_while_broke": "The persuadee says money is tight for them and only agrees tentatively (I think I could, I'll do the same as you, maybe a little) without stating a definite figure they own."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "leaning_yes": "donated",
+        "deferred_elsewhere": "not_donated",
+        "undecided": "not_donated",
+        "declined": "not_donated",
+        "no_decision_discussed": "not_donated",
+        "persuadee_advocates": "donated",
+        "sympathetic_only": "not_donated",
+        "evades_amount": "not_donated",
+        "prefers_other_help": "not_donated",
+        "tentative_while_broke": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v6_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a conversation where one participant (the persuader) tries to get the other (the persuadee) to hand over part of their pay for this job to a children's charity. Once the chat was over, the persuadee privately decided whether to give. Considering mainly what the persuadee says, and their position at the end, pick the description that fits them best. Rules: only the persuadee's own decision about their pay matters, and their last position wins if they change their mind. Any amount above zero, however tiny, is a donation. Speaker tags can be confused: if the tagged Persuadee starts making the case for giving, still judge the tagged Persuadee, and treat their advocacy as support. Messy or broken-English chats count the same: a yes or an amount anywhere, with no refusal, is a donation. Liking the cause is not deciding to give. A softened yes to the request (probably, might, willing) still counts unless retracted. Not donating means refusing, planning to give only later or through some channel they pick themselves, unresolved doubts, or never answering. If the persuader asks point-blank for an amount and the persuadee sidesteps it, lean towards not donating. Someone who says money is tight and then only goes along tentatively, or who ends preferring non-money help, has usually not donated; a definite sum they commit to outweighs this.",
+      "state_template": "Conversation:\n{{input}}",
+      "criteria": {
+        "committed_amount": "Says they will give a definite positive sum of any size and never withdraws it, even if they also talk about giving more another time.",
+        "agreed_no_amount": "Replies yes to being asked to give, firmly or tentatively (probably, might, willing), with no sum named and no retraction. It has to be a yes to a request that they give, not just agreement with a general comment. Still counts if they are sent to the charity's website. If they are then asked point-blank for a sum and sidestep it, choose the sidestepping option.",
+        "leaning_yes": "Says they themselves would like to or intend to give to the children's charity, beyond calling it a good cause, but gives no sum or firm yes and never refuses.",
+        "deferred_elsewhere": "Instead of giving from this job's pay, says they will check the charity's website or research it first and send money themselves, maybe later, or will support some other cause. Any sum mentioned belongs to that later plan of their own.",
+        "undecided": "Still raising questions or doubts, or has not responded to the request by the end, so never says yes.",
+        "declined": "Says no, cannot afford it, or wants to keep their pay.",
+        "no_decision_discussed": "Their own giving is never raised and they show no support for giving to this charity.",
+        "persuadee_advocates": "The tagged Persuadee ends up doing the persuading, pressing the other to give to the children's charity or asking how much the other will give, and never refuses to give.",
+        "sympathetic_only": "Admires the charity, is touched by its work or hopes others will give, but never says they will give from this pay.",
+        "evades_amount": "Asked point-blank by the persuader how much they will give, the tagged Persuadee sidesteps: asks what is typical, says it depends, is still thinking, keeps it secret, offers only a hedged vague quantity, or only says they cannot match the suggestion, and never lands on a figure. All, half or everything of their pay counts as a figure. Being told they will type the amount in later is not sidestepping.",
+        "prefers_other_help": "Their final word is that they would sooner help without money (time, volunteering, used goods), or that they are too short of money, with no definite sum of their own settled.",
+        "tentative_while_broke": "Mentions being short of money and gives only a tentative go-along (could maybe, same as you, a little) with no definite sum they commit to."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "leaning_yes": "donated",
+        "deferred_elsewhere": "not_donated",
+        "undecided": "not_donated",
+        "declined": "not_donated",
+        "no_decision_discussed": "not_donated",
+        "persuadee_advocates": "donated",
+        "sympathetic_only": "not_donated",
+        "evades_amount": "not_donated",
+        "prefers_other_help": "not_donated",
+        "tentative_while_broke": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v6_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Did the persuadee in this chat end up giving part of their task earnings to the children's charity? Choose the outcome that matches the persuadee's final stance.",
+        "principles": {
+          "whose_decision": "Only the participant tagged Persuadee and only their pay. Their final position overrides earlier ones.",
+          "what_counts_as_giving": "Any non-zero amount. A plain or tentative yes to the request (probably, might, willing) counts unless taken back. A named figure, or a share like half or all of the pay, is the strongest sign.",
+          "what_counts_as_not_giving": "An explicit no; putting it off to a later time or a channel of their own choosing; doubts that are never resolved; no reply to the request; dodging a direct question about how much.",
+          "role_confusion": "If the tagged Persuadee starts arguing for the charity or asking the other how much they will give, that shows support; still judge the tagged Persuadee.",
+          "messy_chats": "Broken or off-script chats are judged the same way: a yes or a figure with no refusal is giving.",
+          "sympathy": "Saying the cause is worthy or sad is not a decision to give.",
+          "hardship": "Money being tight plus only a tentative go-along, or a final preference for non-money help, points to not giving; a definite committed figure outweighs this."
+        }
+      },
+      "state_template": "Chat transcript:\n{{input}}",
+      "criteria": {
+        "committed_amount": {
+          "meaning": "Names a definite positive sum or share of pay they will give and keeps to it.",
+          "note": "Talk of also giving more in future does not change this."
+        },
+        "agreed_no_amount": {
+          "meaning": "Says yes, firmly or tentatively, to a request that they give, without naming a sum, and never retracts.",
+          "excludes": "Agreeing with a general remark; or, after a yes, dodging a direct question about how much (use evades_amount)."
+        },
+        "leaning_yes": {
+          "meaning": "Expresses a personal wish or intention to give, more than praise, without a figure or firm yes, and no refusal."
+        },
+        "deferred_elsewhere": {
+          "meaning": "Instead of giving from this pay now, plans to research or visit the charity's website and give on their own later, or give to another cause."
+        },
+        "undecided": {
+          "meaning": "Still questioning or doubtful, or has not answered the request when the chat stops."
+        },
+        "declined": {
+          "meaning": "Refuses, cannot afford it, or wants to keep the money."
+        },
+        "no_decision_discussed": {
+          "meaning": "Their own giving never comes up and they show no support for giving."
+        },
+        "persuadee_advocates": {
+          "meaning": "The tagged Persuadee takes over the persuading role, urging the other to give or asking the other's amount, and does not refuse."
+        },
+        "sympathetic_only": {
+          "meaning": "Praises or is moved by the charity, or hopes others give, without saying they will give."
+        },
+        "evades_amount": {
+          "meaning": "Directly asked how much, never settles on a figure: asks what is normal, says it depends, still deciding, keeps it private, hedged vague quantity, or only says they cannot give the suggested sum.",
+          "excludes": "Naming all/half/everything of their pay; being told the amount is entered later."
+        },
+        "prefers_other_help": {
+          "meaning": "Ends up preferring to help without money (volunteering, goods) or stressing money is too tight, with no definite figure of their own."
+        },
+        "tentative_while_broke": {
+          "meaning": "Has said money is tight and only goes along tentatively (could maybe, same as you, a little), never committing to a definite figure."
+        }
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "leaning_yes": "donated",
+        "deferred_elsewhere": "not_donated",
+        "undecided": "not_donated",
+        "declined": "not_donated",
+        "no_decision_discussed": "not_donated",
+        "persuadee_advocates": "donated",
+        "sympathetic_only": "not_donated",
+        "evades_amount": "not_donated",
+        "prefers_other_help": "not_donated",
+        "tentative_while_broke": "not_donated"
+      }
+    }
+  ]
+}

@@ -1,0 +1,103 @@
+{
+  "run_id": "pilot-hatets-01-uncertainty",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-27T22:29:49",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.62,
+      "note": "description-only draft: 5 options (immigrant hate, immigration politics, women hate, casual slang, other) mapped to 2 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.7729,
+          "macro_f1": 0.7729,
+          "est_cost_usd": 0.048346,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.68,
+      "note": "round1: stricter rules; wall/deport/hashtags and slang bitch not hate by themselves; bought texts as examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.7763,
+          "macro_f1": 0.76,
+          "est_cost_usd": 0.073342,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.7,
+      "note": "round2: contemptuous slur insults = hate; immigrant crime stories / mocking suffering = hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7242,
+          "macro_f1": 0.7232,
+          "est_cost_usd": 0.098932,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.72,
+      "note": "round3: only immigrants/women protected (Islam-only attacks not hate); reported speech/3rd-person narrative slang not hate; stop-all-immigration/inferiority = hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7429,
+          "macro_f1": 0.7418,
+          "est_cost_usd": 0.127785,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.72,
+      "note": "round4: affectionate slang, criticism of misogyny, neutral fraud news not hate; send-them-all-back hate; stabilising examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.7565,
+          "macro_f1": 0.7557,
+          "est_cost_usd": 0.154116,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.7,
+      "note": "round5 (final): arrest/gang-bust news and power-balance politics not hate; exclamatory bitch not hate; stabilising examples; 50/50 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.752,
+          "macro_f1": 0.7514,
+          "est_cost_usd": 0.17518,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

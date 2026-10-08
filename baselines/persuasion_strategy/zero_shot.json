@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "name": "persuasion_strategy_zero_shot",
+  "description": "0-point baseline from the public task definition.",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "In our charity-donation chats, a persuader tries to get the other person to donate to Save the Children. Tag each persuader message with the persuasion strategy or dialogue act it uses, following our annotation scheme. Which class does this input belong to?",
+  "criteria": {
+    "acknowledgement": null,
+    "ask-donation-amount": null,
+    "credibility-appeal": null,
+    "donation-information": null,
+    "emotion-appeal": null,
+    "foot-in-the-door": null,
+    "greeting": null,
+    "logical-appeal": null,
+    "off-task": null,
+    "other": null,
+    "personal-related-inquiry": null,
+    "personal-story": null,
+    "praise-user": null,
+    "proposition-of-donation": null,
+    "self-modeling": null,
+    "source-related-inquiry": null,
+    "task-related-inquiry": null,
+    "thank": null
+  },
+  "state_template": "The chat so far, then the persuader message to tag.\n\n{{input}}"
+}

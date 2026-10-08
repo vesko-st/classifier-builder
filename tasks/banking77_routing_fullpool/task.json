@@ -1,0 +1,16 @@
+{
+  "name": "banking77_routing_fullpool",
+  "description": "Route customer messages sent to a digital bank's support chat to the team that should handle them. Each message goes to exactly one team.",
+  "input": "A single customer message (usually one sentence).",
+  "label_type": "single",
+  "classes": {
+    "fraud_and_security": "Fraud and security team",
+    "disputes_and_refunds": "Disputes and refunds team",
+    "cards": "Cards team",
+    "payments_and_transfers": "Payments and transfers team",
+    "pricing_and_fx": "Pricing and FX team",
+    "account_and_compliance": "Account and compliance team"
+  },
+  "metric": "accuracy",
+  "source": "Banking77 (PolyAI, CC-BY-4.0) intents mapped to teams by a private policy"
+}

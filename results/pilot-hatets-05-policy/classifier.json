@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens3",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v6t",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm": {
+          "instructions": "Is this tweet about immigrants, refugees, migrants, asylum seekers or 'illegal aliens' as people, including tweets demanding they be deported, sent back or kept out? Answer no when it is only about politicians, activists or parties, or about Muslims/Islam as a religion rather than about migrants."
+        },
+        "dehum": {
+          "instructions": "Ignoring hashtags, do the author's own sentences demean immigrants/refugees: calling them invaders, an invasion, animals, parasites, vermin, savages, rapefugees, wetbacks, a disease, or portraying them as criminals, rapists, killers or a danger (including reporting a crime by an illegal alien as a reason against immigrants)? Answer no for economic, legal, welfare, voting or border-security arguments without such framing, for tweets about politicians, activists or the media, and when the author criticises anti-immigrant people. A hashtag like #StopTheInvasion or #Rapefugees does not count on its own."
+        },
+        "expel": {
+          "instructions": "Does the author, in their own words, demand that illegal immigrants, migrants or refugees be deported, sent back, thrown out or kept out ('deport every illegal alien!', 'they keep coming, build the wall and deport', 'send them home', 'get them out'), or cheer hostile action against them? A hashtag alone (#SendThemBack, #BuildThatWall) attached to news or to an argument about politicians does not count."
+        },
+        "woman": {
+          "instructions": "Is the tweet aimed at a woman or girl, or does it characterise women or a type of woman in general (e.g. 'a hoe is a bitch who...', 'bitches be...')? An insult addressed to a person with feminine slurs (bitch, hoe, cunt, whore, slut) counts as aimed at a woman unless the target is clearly male. Answer no when 'bitch' or 'hoe' is generic slang, boasting, song lyrics or self-description."
+        },
+        "misogyny": {
+          "instructions": "Does the author degrade a woman or women with contempt, using the slur as a hostile insult?",
+          "criteria": {
+            "true": "Yes: hostilely insults a woman with a slur such as whore, hoe, slut or cunt, or with 'bitch' as part of a put-down (calling her stupid, ugly, a hoe, telling her off contemptuously); sexually degrades or threatens her; endorses rape or violence against women; or claims women or 'hoes' in general are worthless, sluts or inferior.",
+            "false": "No: 'bitch' used as a friendly or neutral interjection or form of address in an otherwise non-hostile message ('bitch stfu, whoever told you that can kick rocks', 'haha bitch I watched that video'), affectionate, joking or self-referential slang, song lyrics or sexual description not insulting anyone, slurs aimed at men, or criticising sexism."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm",
+          "dehum"
+        ],
+        [
+          "imm",
+          "expel"
+        ],
+        [
+          "woman",
+          "misogyny"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v7b",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm": {
+          "instructions": "Is this tweet about immigrants, refugees, migrants, asylum seekers or 'illegal aliens' as people, including tweets demanding they be deported, sent back or kept out? Answer no when it is only about politicians, activists or parties, or about Muslims/Islam as a religion rather than about migrants."
+        },
+        "dehum": {
+          "instructions": "Ignoring hashtags, do the author's own sentences demean immigrants/refugees: calling them invaders, an invasion, animals, parasites, vermin, savages, rapefugees, wetbacks, a disease, or portraying them as criminals, rapists, killers or a danger (including reporting or insinuating crimes by illegal aliens, DACA recipients or refugees, even as a rhetorical question, as a reason against them)? Answer no for economic, legal, welfare, voting or border-security arguments without such framing, for tweets about politicians, activists or the media, for insults about a foreign country or events there rather than about migrants coming here, and when the author criticises anti-immigrant people. A hashtag like #StopTheInvasion or #Rapefugees does not count on its own."
+        },
+        "expel": {
+          "instructions": "Does the author, in their own words, demand that illegal immigrants, migrants or refugees be deported, sent back, thrown out or kept out ('deport every illegal alien!', 'they keep coming, build the wall and deport', 'send them home', 'get them out'), or cheer hostile action against them? A hashtag alone (#SendThemBack, #BuildThatWall) attached to news or to an argument about politicians does not count."
+        },
+        "woman": {
+          "instructions": "Is the tweet aimed at a woman or girl, or does it characterise women or a type of woman in general (e.g. 'a hoe is a bitch who...', 'bitches be...')? An insult addressed to a person with feminine slurs (bitch, hoe, cunt, whore, slut) counts as aimed at a woman unless the target is clearly male. Answer no when 'bitch' or 'hoe' is generic slang, boasting, song lyrics or self-description."
+        },
+        "misogyny": {
+          "instructions": "Does the author degrade a woman or women with contempt, using the slur as a hostile insult?",
+          "criteria": {
+            "true": "Yes: hostilely insults a woman with a slur such as whore, hoe, slut or cunt, or with 'bitch' as part of a put-down (calling her stupid, ugly, a hoe, telling her off contemptuously); sexually degrades or threatens her; endorses rape or violence against women; or claims women or 'hoes' in general are worthless, sluts or inferior.",
+            "false": "No: 'bitch' used as a friendly or neutral interjection or form of address in an otherwise non-hostile message ('bitch stfu, whoever told you that can kick rocks', 'haha bitch I watched that video'), affectionate, joking or self-referential slang, song lyrics or sexual description not insulting anyone, slurs aimed at men, or criticising sexism."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm",
+          "dehum"
+        ],
+        [
+          "imm",
+          "expel"
+        ],
+        [
+          "woman",
+          "misogyny"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v7",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "imm": {
+          "instructions": "Is this tweet about immigrants, refugees, migrants, asylum seekers or 'illegal aliens' as people, including tweets demanding they be deported, sent back or kept out? Answer no when it is only about politicians, activists or parties, or about Muslims/Islam as a religion rather than about migrants."
+        },
+        "dehum": {
+          "instructions": "Ignoring hashtags, do the author's own sentences demean immigrants/refugees: calling them invaders, an invasion, animals, parasites, vermin, savages, rapefugees, wetbacks, a disease, or portraying them as criminals, rapists, killers or a danger (including reporting or insinuating crimes by illegal aliens, DACA recipients or refugees, even as a rhetorical question, as a reason against them)? Answer no for economic, legal, welfare, voting or border-security arguments without such framing, for tweets about politicians, activists or the media, for insults about a foreign country or events there rather than about migrants coming here, and when the author criticises anti-immigrant people. A hashtag like #StopTheInvasion or #Rapefugees does not count on its own."
+        },
+        "expel": {
+          "instructions": "Does the author, in their own words, demand that illegal immigrants, migrants or refugees be deported, sent back, thrown out or kept out ('deport every illegal alien!', 'they keep coming, build the wall and deport', 'send them home', 'get them out'), or cheer hostile action against them? A hashtag alone (#SendThemBack, #BuildThatWall) attached to news or to an argument about politicians does not count."
+        },
+        "woman": {
+          "instructions": "Is the tweet aimed at a woman or girl, or does it characterise women or a type of woman in general (e.g. 'a hoe is a bitch who...', 'bitches be...')? An insult addressed to a person with feminine slurs (bitch, hoe, cunt, whore, slut) counts as aimed at a woman unless the target is clearly male. Answer no when 'bitch' or 'hoe' is generic slang, boasting, song lyrics or self-description."
+        },
+        "misogyny": {
+          "instructions": "Does the author degrade a woman or women with contempt, using the slur as a hostile insult?",
+          "criteria": {
+            "true": "Yes: hostilely insults a woman with a slur such as whore, hoe, slut or cunt, or with 'bitch' as part of a put-down (calling her stupid, ugly, a hoe, telling her off contemptuously); sexually degrades or threatens her; endorses rape or violence against women; or claims women or 'hoes' in general are worthless, sluts or inferior.",
+            "false": "No: 'bitch' used as a friendly or neutral interjection or form of address in an otherwise non-hostile message ('bitch stfu, whoever told you that can kick rocks', 'haha bitch I watched that video'), affectionate, joking or self-referential slang, song lyrics or sexual description not insulting anyone, idioms like 'karma's a bitch' or 'life's a bitch' in a threat or taunt that does not degrade anyone as a woman, slurs aimed at men, or criticising sexism."
+          }
+        }
+      },
+      "rule": [
+        [
+          "imm",
+          "dehum"
+        ],
+        [
+          "imm",
+          "expel"
+        ],
+        [
+          "woman",
+          "misogyny"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.6
+  }
+}

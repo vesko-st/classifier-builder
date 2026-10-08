@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens2",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Annotation policy: hate speech is content that spreads hatred or incites harm against immigrants/refugees or against women, as groups or as individuals because they belong to the group. Which description best fits this tweet?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "imm_dehumanise": "Describes immigrants, refugees or migrants as subhuman, invaders, vermin, parasites, animals, disease carriers or breeding hordes, or uses ethnic slurs for them.",
+        "imm_generalise": "Makes negative sweeping claims about immigrants or illegal aliens as a group (criminals, rapists, welfare thieves, job stealers, a danger to citizens) or demands they be deported, sent back or kept out.",
+        "imm_policy": "Discusses border walls, immigration law, elections, Trump or politics, or attacks politicians, Democrats, officials, the media or the left over immigration, without itself making a negative claim about immigrants as people or demanding their removal. It also covers tweets arguing about whether the term 'illegal alien' may be used, or complaining that platforms censor that term, when they add no negative claim about immigrants themselves.",
+        "imm_defend": "Defends immigrants or criticises anti-immigrant views.",
+        "women_generalise": "Demeans women in general or women as a type: claims about what women, girls, 'hoes' or 'bitches' are like, or taunts and put-downs aimed at them collectively.",
+        "women_abuse": "The message attacks a specific woman or girl: it insults, puts down, mocks, sexually degrades or threatens her, using gendered slurs.",
+        "women_violence": "Threatens, wishes for, or jokes approvingly about rape or sexual violence against women (not discussion of rape as a topic or condemnation of it).",
+        "slur_casual": "Uses words like bitch or hoe where the message itself attacks no woman: as an interjection or form of address in ordinary chatter, complaints, jokes or news; as an idiom; about oneself or one's own self-praise; in song-style lines; or in friendly teasing or good wishes to a friend.",
+        "slur_at_man": "Uses a gendered insult against a man.",
+        "misogyny_critique": "Criticises sexism or the use of gendered slurs.",
+        "other_target": "Hostility toward some other group or person (religion, race, politicians, liberals) not about immigrants or women. This includes criticising a woman in public life for her politics, character or competence without misogynistic slurs or sexual degradation, and insulting an opponent in a political argument when the anger is about their views.",
+        "neutral": "Anything else, with no hostility toward immigrants or women."
+      },
+      "map": {
+        "imm_dehumanise": "hate",
+        "imm_generalise": "hate",
+        "imm_policy": "not_hate",
+        "imm_defend": "not_hate",
+        "women_generalise": "hate",
+        "women_abuse": "hate",
+        "women_violence": "hate",
+        "slur_casual": "not_hate",
+        "slur_at_man": "not_hate",
+        "misogyny_critique": "not_hate",
+        "other_target": "not_hate",
+        "neutral": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "v4b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "We label tweets for hate speech. Under our policy, a tweet is hateful when it expresses hatred, contempt or calls for harm or exclusion against immigrants and refugees, or against women (as a group, or a particular woman attacked with misogynistic language). Choose the option that describes the tweet.",
+      "state_template": "Tweet to label:\n{{input}}",
+      "criteria": {
+        "imm_dehumanise": "Portrays migrants, refugees or immigrants as less than human: an invasion, pests, parasites, beasts, carriers of disease, hordes that breed, or names them with ethnic slurs.",
+        "imm_generalise": "Paints immigrants or illegal aliens as a whole in a negative light (as criminals, sex offenders, welfare cheats, people who take jobs, a threat) or insists they be deported, removed or kept out.",
+        "imm_policy": "About immigration politics (the wall, laws, elections, Trump) or criticism of politicians, Democrats, officials, journalists or the left over immigration, with no negative claim about immigrants as people and no demand to remove them. This also includes arguing over whether the label 'illegal alien' is acceptable or grumbling that platforms suppress it, when no negative claim about immigrants is added.",
+        "imm_defend": "Takes the side of immigrants or pushes back against anti-immigrant attitudes.",
+        "women_generalise": "Belittles women as a whole or a kind of woman: statements about how women, girls, 'hoes' or 'bitches' behave, or mocking them collectively.",
+        "women_abuse": "Goes after one particular woman or girl: name-calling, belittling, mocking, sexual degradation or threats directed at her with misogynistic slurs.",
+        "women_violence": "Threatens, hopes for, or approvingly jokes about rape or sexual assault of women (talking about rape as an issue or condemning it does not count).",
+        "slur_casual": "The words bitch, hoe and the like appear but no woman is being attacked: an interjection or way of addressing someone in everyday talk, complaints, jokes or news; a set phrase; talking about oneself or bragging; lyric-like lines; or playful teasing and kind wishes between friends.",
+        "slur_at_man": "A gendered insult is directed at a man.",
+        "misogyny_critique": "Objects to sexism or to people using gendered slurs.",
+        "other_target": "Hostile toward someone or some group other than immigrants or women (a religion, race, politicians, liberals). Also covers attacks on a female politician or public figure over her politics, character or ability that use no misogynistic slurs or sexual degradation, and insults thrown at someone in a political dispute because of their opinions.",
+        "neutral": "None of the above; no hostility toward immigrants or women."
+      },
+      "map": {
+        "imm_dehumanise": "hate",
+        "imm_generalise": "hate",
+        "imm_policy": "not_hate",
+        "imm_defend": "not_hate",
+        "women_generalise": "hate",
+        "women_abuse": "hate",
+        "women_violence": "hate",
+        "slur_casual": "not_hate",
+        "slur_at_man": "not_hate",
+        "misogyny_critique": "not_hate",
+        "other_target": "not_hate",
+        "neutral": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "v4c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Decide which category this tweet falls into. Context: the annotation policy counts as hate speech only hostility aimed at immigrants/refugees or at women. Hostility toward anyone else, and casual use of vulgar words, is not hate under this policy.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "imm_dehumanise": "Immigrants/refugees/migrants are called subhuman things: invaders, vermin, animals, parasites, diseased, breeding masses, or ethnic slurs.",
+        "imm_generalise": "Negative generalisation about immigrants or illegal aliens as a group (crime, rape, welfare abuse, taking jobs, danger to citizens), or a demand to deport them, send them back or keep them out.",
+        "imm_policy": "Immigration or border politics, elections, Trump, or attacks on politicians, Democrats, officials, media or the left, where the tweet itself makes no negative claim about immigrants as people and does not demand their removal. Includes debates about using the term 'illegal alien' or complaints about its censorship, if nothing negative is said about immigrants themselves.",
+        "imm_defend": "Supports immigrants or criticises hostility toward them.",
+        "women_generalise": "Contempt for women generally or a type of woman: what women, girls, 'hoes' or 'bitches' supposedly are or do, or collective put-downs of them.",
+        "women_abuse": "Targets an individual woman or girl with gendered slurs in order to insult, demean, mock, sexually degrade or threaten her.",
+        "women_violence": "Rape or sexual violence against women is threatened, wished for or joked about approvingly (not merely discussed or condemned).",
+        "slur_casual": "Vulgar gendered words used without attacking any woman: interjections or terms of address in normal chat, complaints, jokes or news, fixed expressions, self-description or bragging, lyric-style lines, or friendly ribbing and good wishes.",
+        "slur_at_man": "Gendered insult aimed at a male person.",
+        "misogyny_critique": "Calls out sexism or the use of gendered slurs.",
+        "other_target": "Hostility toward other people or groups (religion, race, politicians, liberals) unrelated to immigrants or women. Includes criticism of women in public life for politics, character or competence without misogynistic slurs or sexual degradation, and name-calling of a political opponent over their views.",
+        "neutral": "Other content without hostility toward immigrants or women."
+      },
+      "map": {
+        "imm_dehumanise": "hate",
+        "imm_generalise": "hate",
+        "imm_policy": "not_hate",
+        "imm_defend": "not_hate",
+        "women_generalise": "hate",
+        "women_abuse": "hate",
+        "women_violence": "hate",
+        "slur_casual": "not_hate",
+        "slur_at_man": "not_hate",
+        "misogyny_critique": "not_hate",
+        "other_target": "not_hate",
+        "neutral": "not_hate"
+      }
+    }
+  ]
+}

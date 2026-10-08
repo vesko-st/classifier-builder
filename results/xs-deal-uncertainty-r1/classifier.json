@@ -1,0 +1,340 @@
+{
+  "version": 1,
+  "name": "deal_ens_v7",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v6b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Read the Craigslist item listing and the buyer-seller negotiation chat. Did the negotiation close with a deal?",
+        "background": "The chat is the talk before a formal offer is submitted and accepted outside the chat, so chats often stop right after the two sides converge, sometimes before the last counteroffer is answered in words. Most negotiations that reach a concrete price with a cooperative tone end in a deal.",
+        "rules": [
+          "A deal: a price was offered and the other side accepted it, even informally ('fair enough', 'ok', 'X will work', 'you've got a deal', 'done', 'put in your offer', 'that's a pretty good deal'), even with a side condition such as pickup, delivery or extras.",
+          "A deal: the seller goes along with the buyer's price (or names a price close to it) and the chat ends on logistics (pickup, meeting, delivery, 'on my way', 'today will work') or pleasantries, with no refusal.",
+          "A deal: the chat ends with a counteroffer that is close to the other side's last offer and nobody has refused; they are converging cooperatively.",
+          "No deal: the conversation has only one or two messages in total, even if one of them names a price, says 'I will take X' or 'I'll go 5 lower'.",
+          "No deal: for a rental, the monthly rent was never agreed, e.g. the landlord restates the rent without the tenant accepting, or agrees to the tenant's number only as a deposit. A landlord who accepts the tenant's rent on a condition (sign today, longer lease) has agreed: that is a deal.",
+          "No deal: the chat ends right after one side's first price offer, before the other side has replied to that offer.",
+          "No deal: the seller just repeats the same firm price they already stated, refusing to move, and the buyer has not accepted it.",
+          "No deal: the chat never gets to bargaining over a price (only questions about the item, or off-topic), or is empty, one or two lines, or nonsense.",
+          "No deal: one side clearly refuses the final price, says they are too far apart, or walks away; or one side says the submitted offer does not match what they can pay.",
+          "No deal: both sides have stated firm limits that do not meet (the buyer's stated maximum is well below the seller's stated rock-bottom or lowest price) and nobody gives in."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": {
+          "description": "Deal: one side made a price offer and the other side accepted it, even informally or with a side condition.",
+          "examples": [
+            "Buyer: I can do 70 / Seller: Okay then you still will have to come pick it up yourself / Buyer: ok",
+            "Buyer: Will you sell it to me for $150? / Seller: ...I am letting it go at $175... / Buyer: Fair enough. / Seller: Great doing business with you",
+            "Seller: you've got a deal. 28500 and your car for trade in.",
+            "Buyer: $40 is good, yea? / Seller: ok, 0 will do. what's your PHONE#?",
+            "Buyer: how about we meet halfway and you bring it down $15 / Seller: Yeah I do that put in your offer.",
+            "Seller: 2700 is too low... How about 3000? / Buyer: That's a pretty good deal I must say. But I was hoping it came with handcuffs",
+            "Buyer: is there any way you could reduce the rent to 1600 a month / Seller: If you can come today and sign your lease with me I will allow you the reduction in rent. [chat ends]"
+          ]
+        },
+        "agreed_then_logistics": {
+          "description": "Deal: the price was accepted or not disputed and the chat ends arranging pickup, meeting, delivery, payment, paperwork or the formal offer.",
+          "examples": [
+            "Buyer: I can give you $240 for it... could I swing by and pick it up? / Seller: [describes phone] ...we could meet at a starbucks. What day would be good for you? / Buyer: Today will work, thanks!",
+            "Seller: I have someone else interested at $40 but I'll go with you if you can get here in 30 minutes / Buyer: I am on my way! Thanks / Seller: Thank you.",
+            "Buyer: Would you be able to do $400 and deliver? / Seller: That sounds very reasonable... Ok submit your final offer, I will fix the ring and deliver",
+            "Buyer: Well, that doesn't sound like a bad deal. I think we will submit an offer for it. / Seller: Thanks for your interest, we'll submit the papers to you promptly. [a rental where the tenant accepts the listed rent]"
+          ]
+        },
+        "converging_open_end": {
+          "description": "Deal: the chat ends with a counteroffer or conditional reply close to the other side's price, no one refuses, and the tone is cooperative.",
+          "examples": [
+            "Buyer: I think you found a buyer... would $22 do? / Seller: 25 and you got yourself a deal [chat ends]",
+            "Buyer: $10000 and you bring it to me / Seller: 10000 and you will come get it yourself [chat ends]",
+            "Seller: I think 1300 will work since i need to get it sold / Buyer: Oh, sorry for being rude",
+            "Seller: What about $1350? / Buyer: Sounds reasonable, would you be able to deliver it at that price? / Seller: ...I should be able to include shipping.",
+            "Buyer: I'd like to offer $9200 for it. / Seller: I am sorry but this is a Lexus... I would of went off $500 but since you have 9200 [chat ends]",
+            "Buyer: Would you take $100? / Seller: I can't go quite that low, but I could probably give it to you for 175. [chat ends]",
+            "Buyer: $14800 and we have a deal. / Seller: $14900 is my final offer. [chat ends]",
+            "Seller: I'll give you 900$ for guts, but that's my best offer. / Buyer: It is a great bike. / Seller: I think it's worth it."
+          ]
+        },
+        "no_price_bargaining": {
+          "description": "No deal: the chat ends before the two sides bargain over a price, e.g. only the listing price is stated and the other side just asks questions about the item.",
+          "examples": [
+            "Seller: I am selling it for 75$ are you interested? / Buyer: Yes. It looks great. I would like to be sure I won't get in any trouble if I am caught with it though. Did you alter the device? [chat ends]"
+          ]
+        },
+        "offer_mismatch": {
+          "description": "No deal: one side says the formal offer shows a different price than they agreed or can afford, or refuses it.",
+          "examples": [
+            "Seller: Ok that is fine with me! / Buyer: The offer says 2695 but I can only afford 2200.00"
+          ]
+        },
+        "rejected_or_walked_away": {
+          "description": "No deal: one side refused the final price, said they are too far apart, gave up, or left; or both sides stated firm limits that do not meet (buyer's maximum well below seller's rock bottom).",
+          "examples": [
+            "Buyer: That's still too low partner, we're looking at maximum $9000. / Seller: I'm sad to hear that. My rock bottom price is $11,000. If you can see your way to make that great. [chat ends]"
+          ]
+        },
+        "broken_or_off_topic": "No deal: the conversation is empty or has only one or two messages in total (even 'I will take 70' or 'Yes, I'll go 5 lower'), nonsense, about a different item, or never negotiates.",
+        "rent_not_agreed": {
+          "description": "No deal: a rental where the monthly rent was never agreed by both sides; the landlord restates the rent, or agrees to the tenant's figure only as a deposit, and the tenant never accepts a rent.",
+          "examples": [
+            "Buyer: Would you be willing to take $100 less a month. / Seller: it a real nice appt with a 12 month lease 2200 month with 2200 depost also sound good [chat ends]",
+            "Buyer: How about $1600 a month? / Seller: $1600 is fine for a deposit, and we're happy to pick you up for a tour / Buyer: Alright, I think I can come in later today"
+          ]
+        },
+        "first_offer_unanswered": {
+          "description": "No deal: the chat ends with the first price offer (or first request for a discount) still unanswered; bargaining never got a reply. If the other side did reply with a counteroffer close to it, this is not the right option.",
+          "examples": [
+            "Buyer: ...the price is a little steep would you like to go down to $20K if I picked this up? [chat ends]",
+            "Buyer: my target price is $300. If I picked it up within the next two hours could you agree to that price? [chat ends]",
+            "Buyer: I hate to low ball you... but would you consider 60.00 cash? [chat ends]"
+          ]
+        },
+        "seller_holds_firm": {
+          "description": "No deal: the seller repeats the same price they already insisted on, without moving toward the buyer, and the buyer never accepts.",
+          "examples": [
+            "Seller: $100 is the least I'll take for both chairs / Buyer: can we do $80. I would have to rent a truck / Seller: 100 plus the rug and I'll deliver [chat ends]"
+          ]
+        }
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "agreed_then_logistics": "deal",
+        "converging_open_end": "deal",
+        "no_price_bargaining": "no_deal",
+        "offer_mismatch": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "broken_or_off_topic": "no_deal",
+        "rent_not_agreed": "no_deal",
+        "first_offer_unanswered": "no_deal",
+        "seller_holds_firm": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v6_B",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Below is a Craigslist listing followed by a chat between a buyer and a seller haggling over it. Decide whether the two of them ended up closing a deal.",
+        "background": "After this chat, the parties submit and accept a formal offer outside the conversation. So a chat frequently ends the moment the two sides meet, sometimes before the final counteroffer gets a verbal reply. When the haggling reaches a specific price and stays friendly, it usually ends in a deal.",
+        "rules": [
+          "Deal: someone proposed a price and the other person went along with it, however casually ('fair enough', 'ok', 'X will work', 'you've got a deal', 'done', 'put in your offer', 'that's a pretty good deal'), even with a side condition like pickup, delivery or extras.",
+          "Deal: the seller accepts the buyer's number (or offers something near it) and the conversation closes on arrangements (pickup, meeting, delivery, 'on my way', 'today will work') or friendly chit-chat, with nobody saying no.",
+          "Deal: the last message is a counteroffer near the other person's most recent offer, and nobody has turned it down; the two are moving together cooperatively.",
+          "No deal: there are just one or two messages in the whole conversation, even when one names a price, says 'I will take X' or 'I'll go 5 lower'.",
+          "No deal: for a rental, the two never agreed on the monthly rent, e.g. the landlord repeats the rent and the tenant never accepts, or the landlord takes the tenant's number only as a deposit. If the landlord grants the tenant's rent under a condition (sign today, longer lease), that counts as a deal.",
+          "No deal: the conversation stops right after the first price proposal, before the other person responds to it.",
+          "No deal: the seller simply repeats the firm price they already gave, won't budge, and the buyer hasn't accepted.",
+          "No deal: the two never actually haggle over a price (only item questions or off-topic talk), or the chat is empty, one or two lines, or gibberish.",
+          "No deal: someone plainly turns down the final price, says they're too far apart, or leaves; or someone says the submitted offer doesn't match what they can pay.",
+          "No deal: each side has named a hard limit and the limits don't meet (the buyer's stated top price is well under the seller's stated bottom price), and neither gives way."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": {
+          "description": "Deal: a price was proposed and the other party agreed to it, casually or with a side condition.",
+          "examples": [
+            "Buyer: I can do 70 / Seller: Okay then you still will have to come pick it up yourself / Buyer: ok",
+            "Buyer: Will you sell it to me for $150? / Seller: ...I am letting it go at $175... / Buyer: Fair enough. / Seller: Great doing business with you",
+            "Seller: you've got a deal. 28500 and your car for trade in.",
+            "Buyer: $40 is good, yea? / Seller: ok, 0 will do. what's your PHONE#?",
+            "Buyer: how about we meet halfway and you bring it down $15 / Seller: Yeah I do that put in your offer.",
+            "Seller: 2700 is too low... How about 3000? / Buyer: That's a pretty good deal I must say. But I was hoping it came with handcuffs",
+            "Buyer: is there any way you could reduce the rent to 1600 a month / Seller: If you can come today and sign your lease with me I will allow you the reduction in rent. [chat ends]"
+          ]
+        },
+        "agreed_then_logistics": {
+          "description": "Deal: the price was agreed or left unchallenged and the conversation ends on arranging pickup, a meeting, delivery, payment, paperwork or the formal offer.",
+          "examples": [
+            "Buyer: I can give you $240 for it... could I swing by and pick it up? / Seller: [describes phone] ...we could meet at a starbucks. What day would be good for you? / Buyer: Today will work, thanks!",
+            "Seller: I have someone else interested at $40 but I'll go with you if you can get here in 30 minutes / Buyer: I am on my way! Thanks / Seller: Thank you.",
+            "Buyer: Would you be able to do $400 and deliver? / Seller: That sounds very reasonable... Ok submit your final offer, I will fix the ring and deliver",
+            "Buyer: Well, that doesn't sound like a bad deal. I think we will submit an offer for it. / Seller: Thanks for your interest, we'll submit the papers to you promptly. [a rental where the tenant accepts the listed rent]"
+          ]
+        },
+        "converging_open_end": {
+          "description": "Deal: the last message is a counteroffer or conditional reply near the other party's price; nobody refuses and the mood is friendly.",
+          "examples": [
+            "Buyer: I think you found a buyer... would $22 do? / Seller: 25 and you got yourself a deal [chat ends]",
+            "Buyer: $10000 and you bring it to me / Seller: 10000 and you will come get it yourself [chat ends]",
+            "Seller: I think 1300 will work since i need to get it sold / Buyer: Oh, sorry for being rude",
+            "Seller: What about $1350? / Buyer: Sounds reasonable, would you be able to deliver it at that price? / Seller: ...I should be able to include shipping.",
+            "Buyer: I'd like to offer $9200 for it. / Seller: I am sorry but this is a Lexus... I would of went off $500 but since you have 9200 [chat ends]",
+            "Buyer: Would you take $100? / Seller: I can't go quite that low, but I could probably give it to you for 175. [chat ends]",
+            "Buyer: $14800 and we have a deal. / Seller: $14900 is my final offer. [chat ends]",
+            "Seller: I'll give you 900$ for guts, but that's my best offer. / Buyer: It is a great bike. / Seller: I think it's worth it."
+          ]
+        },
+        "no_price_bargaining": {
+          "description": "No deal: the conversation stops before any haggling over price, e.g. only the asking price is mentioned and the other party just asks about the item.",
+          "examples": [
+            "Seller: I am selling it for 75$ are you interested? / Buyer: Yes. It looks great. I would like to be sure I won't get in any trouble if I am caught with it though. Did you alter the device? [chat ends]"
+          ]
+        },
+        "offer_mismatch": {
+          "description": "No deal: someone says the formal offer shows a price different from what they agreed or can afford, or turns it down.",
+          "examples": [
+            "Seller: Ok that is fine with me! / Buyer: The offer says 2695 but I can only afford 2200.00"
+          ]
+        },
+        "rejected_or_walked_away": {
+          "description": "No deal: someone turned down the final price, said they're too far apart, gave up or left; or both named hard limits that don't meet (buyer's top price well under seller's bottom price).",
+          "examples": [
+            "Buyer: That's still too low partner, we're looking at maximum $9000. / Seller: I'm sad to hear that. My rock bottom price is $11,000. If you can see your way to make that great. [chat ends]"
+          ]
+        },
+        "broken_or_off_topic": "No deal: the conversation is empty or just one or two messages in total (even 'I will take 70' or 'Yes, I'll go 5 lower'), gibberish, about another item, or never haggles.",
+        "rent_not_agreed": {
+          "description": "No deal: a rental where both sides never settled the monthly rent; the landlord repeats the rent, or accepts the tenant's number only as a deposit, and the tenant never accepts a rent.",
+          "examples": [
+            "Buyer: Would you be willing to take $100 less a month. / Seller: it a real nice appt with a 12 month lease 2200 month with 2200 depost also sound good [chat ends]",
+            "Buyer: How about $1600 a month? / Seller: $1600 is fine for a deposit, and we're happy to pick you up for a tour / Buyer: Alright, I think I can come in later today"
+          ]
+        },
+        "first_offer_unanswered": {
+          "description": "No deal: the conversation ends with the very first price proposal (or first discount request) still without a reply. If the other party did answer with a nearby counteroffer, pick another option.",
+          "examples": [
+            "Buyer: ...the price is a little steep would you like to go down to $20K if I picked this up? [chat ends]",
+            "Buyer: my target price is $300. If I picked it up within the next two hours could you agree to that price? [chat ends]",
+            "Buyer: I hate to low ball you... but would you consider 60.00 cash? [chat ends]"
+          ]
+        },
+        "seller_holds_firm": {
+          "description": "No deal: the seller restates the price they already insisted on, doesn't move toward the buyer, and the buyer never accepts.",
+          "examples": [
+            "Seller: $100 is the least I'll take for both chairs / Buyer: can we do $80. I would have to rent a truck / Seller: 100 plus the rug and I'll deliver [chat ends]"
+          ]
+        }
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "agreed_then_logistics": "deal",
+        "converging_open_end": "deal",
+        "no_price_bargaining": "no_deal",
+        "offer_mismatch": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "broken_or_off_topic": "no_deal",
+        "rent_not_agreed": "no_deal",
+        "first_offer_unanswered": "no_deal",
+        "seller_holds_firm": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v6_C",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "You are given a Craigslist item listing and the negotiation chat between the buyer and the seller. Classify how the negotiation ended: with a deal or without one.",
+        "background": "These chats are only the negotiation; the formal offer is made and accepted separately, after the chat. Conversations therefore often stop as soon as the buyer and seller meet on price, and the last counteroffer may never be answered in writing. A negotiation that reaches a specific number in a cooperative mood usually closed.",
+        "rules": [
+          "It closed: a price was put forward and accepted by the other party in any informal way ('fair enough', 'ok', 'X will work', 'you've got a deal', 'done', 'put in your offer', 'that's a pretty good deal'), including acceptance with a side condition such as pickup, delivery or extras.",
+          "It closed: the seller agrees to the buyer's figure (or offers one close to it) and the talk ends on logistics (pickup, meetup, delivery, 'on my way', 'today will work') or courtesies, with no refusal.",
+          "It closed: the final message is a counteroffer close to the other party's latest offer and no one has refused it; both sides are converging in good faith.",
+          "It did not close: the whole conversation is only one or two messages, even if one mentions a price, 'I will take X' or 'I'll go 5 lower'.",
+          "It did not close: for a rental, the monthly rent was never settled, e.g. the landlord restates the rent and the tenant never accepts, or accepts the tenant's figure only as a deposit. A landlord who grants the tenant's rent on a condition (sign today, longer lease) has agreed, so it closed.",
+          "It did not close: the chat stops immediately after the first price offer, before the other party replies to it.",
+          "It did not close: the seller only repeats the firm price stated earlier, refusing to come down, and the buyer has not accepted.",
+          "It did not close: there is no bargaining over price at all (only item questions or off-topic talk), or the chat is empty, one or two lines, or nonsensical.",
+          "It did not close: one party clearly rejects the final price, says they are too far apart, or walks off; or one party says the submitted offer does not match what they can pay.",
+          "It did not close: both parties have declared hard limits that do not overlap (the buyer's maximum is well below the seller's minimum) and neither concedes."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": {
+          "description": "Closed: a price offer was accepted by the other party, informally or with a side condition.",
+          "examples": [
+            "Buyer: I can do 70 / Seller: Okay then you still will have to come pick it up yourself / Buyer: ok",
+            "Buyer: Will you sell it to me for $150? / Seller: ...I am letting it go at $175... / Buyer: Fair enough. / Seller: Great doing business with you",
+            "Seller: you've got a deal. 28500 and your car for trade in.",
+            "Buyer: $40 is good, yea? / Seller: ok, 0 will do. what's your PHONE#?",
+            "Buyer: how about we meet halfway and you bring it down $15 / Seller: Yeah I do that put in your offer.",
+            "Seller: 2700 is too low... How about 3000? / Buyer: That's a pretty good deal I must say. But I was hoping it came with handcuffs",
+            "Buyer: is there any way you could reduce the rent to 1600 a month / Seller: If you can come today and sign your lease with me I will allow you the reduction in rent. [chat ends]"
+          ]
+        },
+        "agreed_then_logistics": {
+          "description": "Closed: the price was accepted or not contested and the chat ends on arranging pickup, meetup, delivery, payment, paperwork or the formal offer.",
+          "examples": [
+            "Buyer: I can give you $240 for it... could I swing by and pick it up? / Seller: [describes phone] ...we could meet at a starbucks. What day would be good for you? / Buyer: Today will work, thanks!",
+            "Seller: I have someone else interested at $40 but I'll go with you if you can get here in 30 minutes / Buyer: I am on my way! Thanks / Seller: Thank you.",
+            "Buyer: Would you be able to do $400 and deliver? / Seller: That sounds very reasonable... Ok submit your final offer, I will fix the ring and deliver",
+            "Buyer: Well, that doesn't sound like a bad deal. I think we will submit an offer for it. / Seller: Thanks for your interest, we'll submit the papers to you promptly. [a rental where the tenant accepts the listed rent]"
+          ]
+        },
+        "converging_open_end": {
+          "description": "Closed: the chat ends on a counteroffer or conditional reply close to the other party's price, with no refusal and a cooperative mood.",
+          "examples": [
+            "Buyer: I think you found a buyer... would $22 do? / Seller: 25 and you got yourself a deal [chat ends]",
+            "Buyer: $10000 and you bring it to me / Seller: 10000 and you will come get it yourself [chat ends]",
+            "Seller: I think 1300 will work since i need to get it sold / Buyer: Oh, sorry for being rude",
+            "Seller: What about $1350? / Buyer: Sounds reasonable, would you be able to deliver it at that price? / Seller: ...I should be able to include shipping.",
+            "Buyer: I'd like to offer $9200 for it. / Seller: I am sorry but this is a Lexus... I would of went off $500 but since you have 9200 [chat ends]",
+            "Buyer: Would you take $100? / Seller: I can't go quite that low, but I could probably give it to you for 175. [chat ends]",
+            "Buyer: $14800 and we have a deal. / Seller: $14900 is my final offer. [chat ends]",
+            "Seller: I'll give you 900$ for guts, but that's my best offer. / Buyer: It is a great bike. / Seller: I think it's worth it."
+          ]
+        },
+        "no_price_bargaining": {
+          "description": "Not closed: the chat stops before any bargaining over price, e.g. only the asking price is stated and the other party only asks about the item.",
+          "examples": [
+            "Seller: I am selling it for 75$ are you interested? / Buyer: Yes. It looks great. I would like to be sure I won't get in any trouble if I am caught with it though. Did you alter the device? [chat ends]"
+          ]
+        },
+        "offer_mismatch": {
+          "description": "Not closed: one party says the formal offer shows a different price than agreed or affordable, or rejects it.",
+          "examples": [
+            "Seller: Ok that is fine with me! / Buyer: The offer says 2695 but I can only afford 2200.00"
+          ]
+        },
+        "rejected_or_walked_away": {
+          "description": "Not closed: one party rejected the final price, said they are too far apart, gave up or walked off; or both declared hard limits that do not overlap (buyer's maximum well below seller's minimum).",
+          "examples": [
+            "Buyer: That's still too low partner, we're looking at maximum $9000. / Seller: I'm sad to hear that. My rock bottom price is $11,000. If you can see your way to make that great. [chat ends]"
+          ]
+        },
+        "broken_or_off_topic": "Not closed: the chat is empty or only one or two messages in total (even 'I will take 70' or 'Yes, I'll go 5 lower'), nonsensical, about a different item, or never bargains.",
+        "rent_not_agreed": {
+          "description": "Not closed: a rental where the monthly rent was never settled by both; the landlord restates the rent, or accepts the tenant's figure only as a deposit, and the tenant never accepts a rent.",
+          "examples": [
+            "Buyer: Would you be willing to take $100 less a month. / Seller: it a real nice appt with a 12 month lease 2200 month with 2200 depost also sound good [chat ends]",
+            "Buyer: How about $1600 a month? / Seller: $1600 is fine for a deposit, and we're happy to pick you up for a tour / Buyer: Alright, I think I can come in later today"
+          ]
+        },
+        "first_offer_unanswered": {
+          "description": "Not closed: the chat ends with the first price offer (or first discount request) still unanswered. If the other party replied with a close counteroffer, choose a different option.",
+          "examples": [
+            "Buyer: ...the price is a little steep would you like to go down to $20K if I picked this up? [chat ends]",
+            "Buyer: my target price is $300. If I picked it up within the next two hours could you agree to that price? [chat ends]",
+            "Buyer: I hate to low ball you... but would you consider 60.00 cash? [chat ends]"
+          ]
+        },
+        "seller_holds_firm": {
+          "description": "Not closed: the seller restates the price they already insisted on, without coming down, and the buyer never accepts.",
+          "examples": [
+            "Seller: $100 is the least I'll take for both chairs / Buyer: can we do $80. I would have to rent a truck / Seller: 100 plus the rug and I'll deliver [chat ends]"
+          ]
+        }
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "agreed_then_logistics": "deal",
+        "converging_open_end": "deal",
+        "no_price_bargaining": "no_deal",
+        "offer_mismatch": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "broken_or_off_topic": "no_deal",
+        "rent_not_agreed": "no_deal",
+        "first_offer_unanswered": "no_deal",
+        "seller_holds_firm": "no_deal"
+      }
+    }
+  ]
+}

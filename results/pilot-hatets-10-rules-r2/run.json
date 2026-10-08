@@ -1,0 +1,88 @@
+{
+  "run_id": "pilot-hatets-10-rules-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "created": "2026-09-28T16:15:41",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v0 description-only draft: 5 options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7718,
+          "macro_f1": 0.7717,
+          "est_cost_usd": 0.047234,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 28,
+      "estimate": 0.72,
+      "note": "round1 revision: two_level women/immigration; H1 news, H2 narrowed (negative remark), H3 narrowed, H4 wall policy not hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7712,
+          "macro_f1": 0.7712,
+          "est_cost_usd": 0.085284,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 46,
+      "estimate": 0.74,
+      "note": "round2 revision: ensemble of two two_level variants; H5 generic women, H6 male/political target, H7 neutral story reference, violence+slur, disease stereotype",
+      "test": {
+        "jev": {
+          "accuracy": 0.7769,
+          "macro_f1": 0.7769,
+          "est_cost_usd": 0.181694,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 76,
+      "estimate": 0.82,
+      "note": "round3 revision: 4-member ensemble (v3,v3b,v4a,v4b); male-target and news examples; 27/30 uncertainty labels, 8/8 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.7826,
+          "macro_f1": 0.7825,
+          "est_cost_usd": 0.370211,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.83,
+      "note": "final: 4-member two_level ensemble; rounds 4-5 rules (interjections, addressed insults, dreamer deportation, politician-stop example); 48/50 labels, 8/8 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.7854,
+          "macro_f1": 0.7852,
+          "est_cost_usd": 0.41872,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

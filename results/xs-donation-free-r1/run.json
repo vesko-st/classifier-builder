@@ -1,0 +1,61 @@
+{
+  "run_id": "xs-donation-free-r1",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "free",
+  "created": "2026-09-30T11:09:25",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 203,
+    "num_turns": 25,
+    "total_cost_usd": 0.7203907999999999
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft: 6 options mapped to donated/not_donated from description only",
+      "test": {
+        "jev": {
+          "accuracy": 0.7314,
+          "macro_f1": 0.7058,
+          "est_cost_usd": 0.019162,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 100,
+      "estimate": 0.68,
+      "note": "ensemble of 2 wording variants of 9-option commitment classifier, decision donated>=0.75 (~60% pool donated, matches owner prior)",
+      "test": {
+        "luna": {
+          "accuracy": 0.7218,
+          "macro_f1": 0.7194,
+          "est_cost_usd": 0.117798,
+          "total": 417,
+          "answered": 417
+        },
+        "pplx": {
+          "accuracy": 0.7338,
+          "macro_f1": 0.7274,
+          "est_cost_usd": 0.032369,
+          "total": 417,
+          "answered": 417
+        },
+        "jev": {
+          "accuracy": 0.7026,
+          "macro_f1": 0.7003,
+          "est_cost_usd": 0.043262,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

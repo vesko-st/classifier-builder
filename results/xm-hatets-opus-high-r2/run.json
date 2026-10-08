@@ -1,0 +1,76 @@
+{
+  "run_id": "xm-hatets-opus-high-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:05:35",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 384,
+    "num_turns": 30,
+    "total_cost_usd": 1.1876338
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 39,
+      "estimate": 0.72,
+      "note": "v1 criteria draft from policy Qs + minimal pairs",
+      "test": {
+        "jev": {
+          "accuracy": 0.7769,
+          "macro_f1": 0.7695,
+          "est_cost_usd": 0.055912,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 83,
+      "estimate": 0.76,
+      "note": "v3: broadened misogyny per labels, men/idiom exclusions; narrowed immigration",
+      "test": {
+        "jev": {
+          "accuracy": 0.7735,
+          "macro_f1": 0.773,
+          "est_cost_usd": 0.063552,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.76,
+      "note": "v4 final: ensemble of v1 (narrow misogyny) + v3 (broad misogyny, tight immigration), threshold 0.5",
+      "test": {
+        "luna": {
+          "accuracy": 0.8188,
+          "macro_f1": 0.8155,
+          "est_cost_usd": 0.440272,
+          "total": 1766,
+          "answered": 1766
+        },
+        "pplx": {
+          "accuracy": 0.8075,
+          "macro_f1": 0.7993,
+          "est_cost_usd": 0.000129,
+          "total": 1766,
+          "answered": 1766
+        },
+        "jev": {
+          "accuracy": 0.8245,
+          "macro_f1": 0.8227,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

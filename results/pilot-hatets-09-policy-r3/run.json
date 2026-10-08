@@ -1,0 +1,73 @@
+{
+  "run_id": "pilot-hatets-09-policy-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-28T16:15:40",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.55,
+      "note": "description-only draft: generic group-identity hate choice",
+      "test": {
+        "jev": {
+          "accuracy": 0.6999,
+          "macro_f1": 0.685,
+          "est_cost_usd": 0.030693,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 39,
+      "estimate": 0.65,
+      "note": "criteria: imm generalisation OR women sexual-violence/demeaning, not counter-speech; mirrors owner answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.6721,
+          "macro_f1": 0.5878,
+          "est_cost_usd": 0.062439,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 79,
+      "estimate": 0.74,
+      "note": "broad choice+map: hostility to immigrants or women incl. interpersonal slurs and hostile deport slogans",
+      "test": {
+        "jev": {
+          "accuracy": 0.7831,
+          "macro_f1": 0.7831,
+          "est_cost_usd": 0.056579,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 99,
+      "estimate": 0.76,
+      "note": "ensemble v3+v4 (broad immigrant/women hostility), decision hate>=0.80 fit on 30 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.812,
+          "macro_f1": 0.8096,
+          "est_cost_usd": 0.121837,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "run_id": "xm-hatets-sonnet-high-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:19:44",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 161,
+    "num_turns": 22,
+    "total_cost_usd": 0.4080532
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 45,
+      "estimate": 0.7,
+      "note": "v1 criteria draft from policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.7678,
+          "macro_f1": 0.7677,
+          "est_cost_usd": 0.055318,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 85,
+      "estimate": 0.72,
+      "note": "v2: woman_abuse tightened to sincere hostile attack",
+      "test": {
+        "jev": {
+          "accuracy": 0.7877,
+          "macro_f1": 0.7861,
+          "est_cost_usd": 0.060881,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.73,
+      "note": "v4: ensemble of v2 + v3 (rape/violence added to woman_abuse); final",
+      "test": {
+        "jev": {
+          "accuracy": 0.7871,
+          "macro_f1": 0.7857,
+          "est_cost_usd": 0.122653,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

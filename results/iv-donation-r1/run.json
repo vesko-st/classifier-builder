@@ -1,0 +1,96 @@
+{
+  "run_id": "iv-donation-r1",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "interview",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T11:16:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 519,
+    "num_turns": 49,
+    "total_cost_usd": 2.1650902000000003
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v1: fine options from phenomena list, mapped; no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.7362,
+          "macro_f1": 0.7211,
+          "est_cost_usd": 0.022577,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 27,
+      "estimate": 0.72,
+      "note": "v2: owner policy - stated figure (even large/deferred) = donated; bare agreement = not_donated",
+      "test": {
+        "jev": {
+          "accuracy": 0.7266,
+          "macro_f1": 0.7164,
+          "est_cost_usd": 0.024503,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 67,
+      "estimate": 0.7,
+      "note": "v4: figures promised via website/own channel do not count; time-deferred figures still count",
+      "test": {
+        "jev": {
+          "accuracy": 0.729,
+          "macro_f1": 0.7192,
+          "est_cost_usd": 0.026412,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 83,
+      "estimate": 0.7,
+      "note": "v7: yes to a specific persuader-proposed figure counts as naming it; yes to a general ask does not",
+      "test": {
+        "jev": {
+          "accuracy": 0.7266,
+          "macro_f1": 0.7164,
+          "est_cost_usd": 0.029232,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.68,
+      "note": "v9: hedged figures = tentative; talk of other-cause giving = undecided",
+      "test": {
+        "jev": {
+          "accuracy": 0.7218,
+          "macro_f1": 0.7135,
+          "est_cost_usd": 0.030809,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

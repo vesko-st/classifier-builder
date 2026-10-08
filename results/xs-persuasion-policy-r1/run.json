@@ -1,0 +1,91 @@
+{
+  "run_id": "xs-persuasion-policy-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-30T10:05:35",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 482,
+    "num_turns": 45,
+    "total_cost_usd": 1.7455946
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description + standard P4G scheme knowledge, 19 options (closing->greeting)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5755,
+          "macro_f1": 0.5905,
+          "est_cost_usd": 0.098935,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 51,
+      "estimate": 0.5,
+      "note": "v2b: policy answers mirrored (closing/confirm/react-to-commitment->other, FITD narrowed, personal-related widened)",
+      "test": {
+        "jev": {
+          "accuracy": 0.588,
+          "macro_f1": 0.5881,
+          "est_cost_usd": 0.121754,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 88,
+      "estimate": 0.45,
+      "note": "v4: FITD restored per labels (small amounts help), ack narrowed to agreeing with stated points, persuader self-facts -> personal-story",
+      "test": {
+        "jev": {
+          "accuracy": 0.5946,
+          "macro_f1": 0.6062,
+          "est_cost_usd": 0.127632,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.5,
+      "note": "v5: proposition incl. would-you-donate yes/no questions, thanks-led -> thank, donation plans -> donation-information, reactions to ideas -> other",
+      "test": {
+        "luna": {
+          "accuracy": 0.6315,
+          "macro_f1": 0.6284,
+          "est_cost_usd": 0.308634,
+          "total": 1517,
+          "answered": 1517
+        },
+        "pplx": {
+          "accuracy": 0.6183,
+          "macro_f1": 0.609,
+          "est_cost_usd": 0.105608,
+          "total": 1517,
+          "answered": 1517
+        },
+        "jev": {
+          "accuracy": 0.5979,
+          "macro_f1": 0.6067,
+          "est_cost_usd": 0.135534,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

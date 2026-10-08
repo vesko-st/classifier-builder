@@ -1,0 +1,111 @@
+{
+  "run_id": "il-persuasion-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T12:15:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 818,
+    "num_turns": 57,
+    "total_cost_usd": 2.5423606
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description: 21 fine options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.592,
+          "macro_f1": 0.5693,
+          "est_cost_usd": 0.097987,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 22,
+      "estimate": 0.48,
+      "note": "v2: owner rules (stats->emotion vs credibility, specific amount->ask-amount, replies->other)",
+      "test": {
+        "jev": {
+          "accuracy": 0.592,
+          "macro_f1": 0.5675,
+          "est_cost_usd": 0.102791,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 70,
+      "estimate": 0.55,
+      "note": "v5: greeting replies, content-bearing replies tagged by content, hypothetical self-modeling, consistency->logical",
+      "test": {
+        "jev": {
+          "accuracy": 0.6025,
+          "macro_f1": 0.5753,
+          "est_cost_usd": 0.110692,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 70,
+      "estimate": 0.58,
+      "note": "e1: 3-member wording ensemble of v6 rules (adds personal-story rule H10)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6091,
+          "macro_f1": 0.5896,
+          "est_cost_usd": 0.357234,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 96,
+      "estimate": 0.55,
+      "note": "e4: ensemble; small talk/HIT talk/persuader chatter -> other, off-task = outside topics, personal-inquiry tied to cause; persuader hardship experiences -> personal-story",
+      "test": {
+        "jev": {
+          "accuracy": 0.6262,
+          "macro_f1": 0.5802,
+          "est_cost_usd": 0.392885,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.55,
+      "note": "e5: any-amount statements -> donation-information; general questions on typical donation size -> task-related-inquiry",
+      "test": {
+        "jev": {
+          "accuracy": 0.6282,
+          "macro_f1": 0.5792,
+          "est_cost_usd": 0.400849,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

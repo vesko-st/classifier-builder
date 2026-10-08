@@ -1,0 +1,243 @@
+{
+  "classifier": "persuasion_strategy_zero_shot",
+  "type": "choice",
+  "backend": "claude",
+  "total": 1517,
+  "answered": 1517,
+  "errors": {},
+  "cached": 1517,
+  "input_tokens_billed": 0,
+  "output_tokens_billed": 0,
+  "est_cost_usd": 0.0,
+  "prediction_counts": {
+    "donation-information": 231,
+    "acknowledgement": 183,
+    "emotion-appeal": 130,
+    "logical-appeal": 126,
+    "proposition-of-donation": 107,
+    "credibility-appeal": 88,
+    "self-modeling": 83,
+    "greeting": 76,
+    "thank": 71,
+    "ask-donation-amount": 68,
+    "praise-user": 64,
+    "off-task": 54,
+    "personal-related-inquiry": 48,
+    "foot-in-the-door": 46,
+    "source-related-inquiry": 44,
+    "task-related-inquiry": 44,
+    "other": 28,
+    "personal-story": 26
+  },
+  "labeled": 1517,
+  "accuracy": 0.4898,
+  "macro_f1": 0.5236,
+  "per_class": {
+    "acknowledgement": {
+      "n": 71,
+      "precision": 0.3169,
+      "recall": 0.8169,
+      "f1": 0.4567
+    },
+    "ask-donation-amount": {
+      "n": 26,
+      "precision": 0.3676,
+      "recall": 0.9615,
+      "f1": 0.5319
+    },
+    "credibility-appeal": {
+      "n": 247,
+      "precision": 0.7727,
+      "recall": 0.2753,
+      "f1": 0.406
+    },
+    "donation-information": {
+      "n": 124,
+      "precision": 0.3247,
+      "recall": 0.6048,
+      "f1": 0.4225
+    },
+    "emotion-appeal": {
+      "n": 95,
+      "precision": 0.5,
+      "recall": 0.6842,
+      "f1": 0.5778
+    },
+    "foot-in-the-door": {
+      "n": 51,
+      "precision": 0.5652,
+      "recall": 0.5098,
+      "f1": 0.5361
+    },
+    "greeting": {
+      "n": 79,
+      "precision": 0.6974,
+      "recall": 0.6709,
+      "f1": 0.6839
+    },
+    "logical-appeal": {
+      "n": 109,
+      "precision": 0.3651,
+      "recall": 0.422,
+      "f1": 0.3915
+    },
+    "off-task": {
+      "n": 36,
+      "precision": 0.3889,
+      "recall": 0.5833,
+      "f1": 0.4667
+    },
+    "other": {
+      "n": 256,
+      "precision": 0.75,
+      "recall": 0.082,
+      "f1": 0.1479
+    },
+    "personal-related-inquiry": {
+      "n": 40,
+      "precision": 0.5625,
+      "recall": 0.675,
+      "f1": 0.6136
+    },
+    "personal-story": {
+      "n": 35,
+      "precision": 0.4615,
+      "recall": 0.3429,
+      "f1": 0.3934
+    },
+    "praise-user": {
+      "n": 44,
+      "precision": 0.4688,
+      "recall": 0.6818,
+      "f1": 0.5556
+    },
+    "proposition-of-donation": {
+      "n": 81,
+      "precision": 0.6168,
+      "recall": 0.8148,
+      "f1": 0.7021
+    },
+    "self-modeling": {
+      "n": 49,
+      "precision": 0.4819,
+      "recall": 0.8163,
+      "f1": 0.6061
+    },
+    "source-related-inquiry": {
+      "n": 43,
+      "precision": 0.7273,
+      "recall": 0.7442,
+      "f1": 0.7356
+    },
+    "task-related-inquiry": {
+      "n": 50,
+      "precision": 0.4773,
+      "recall": 0.42,
+      "f1": 0.4468
+    },
+    "thank": {
+      "n": 81,
+      "precision": 0.8028,
+      "recall": 0.7037,
+      "f1": 0.75
+    }
+  },
+  "top_confusions": [
+    {
+      "gold": "credibility-appeal",
+      "predicted": "donation-information",
+      "n": 119
+    },
+    {
+      "gold": "other",
+      "predicted": "acknowledgement",
+      "n": 65
+    },
+    {
+      "gold": "other",
+      "predicted": "off-task",
+      "n": 31
+    },
+    {
+      "gold": "other",
+      "predicted": "donation-information",
+      "n": 26
+    },
+    {
+      "gold": "logical-appeal",
+      "predicted": "emotion-appeal",
+      "n": 25
+    },
+    {
+      "gold": "donation-information",
+      "predicted": "ask-donation-amount",
+      "n": 24
+    },
+    {
+      "gold": "credibility-appeal",
+      "predicted": "logical-appeal",
+      "n": 18
+    },
+    {
+      "gold": "thank",
+      "predicted": "praise-user",
+      "n": 16
+    },
+    {
+      "gold": "emotion-appeal",
+      "predicted": "logical-appeal",
+      "n": 16
+    },
+    {
+      "gold": "other",
+      "predicted": "greeting",
+      "n": 16
+    },
+    {
+      "gold": "other",
+      "predicted": "logical-appeal",
+      "n": 15
+    },
+    {
+      "gold": "credibility-appeal",
+      "predicted": "emotion-appeal",
+      "n": 15
+    },
+    {
+      "gold": "other",
+      "predicted": "self-modeling",
+      "n": 13
+    },
+    {
+      "gold": "foot-in-the-door",
+      "predicted": "logical-appeal",
+      "n": 13
+    },
+    {
+      "gold": "greeting",
+      "predicted": "acknowledgement",
+      "n": 13
+    }
+  ],
+  "accuracy_by_confidence": [
+    {
+      "confidence": "[0.5, 0.7)",
+      "n": 182,
+      "accuracy": 0.3187
+    },
+    {
+      "confidence": "[0.7, 0.9)",
+      "n": 857,
+      "accuracy": 0.4201
+    },
+    {
+      "confidence": "[0.9, 1.0]",
+      "n": 478,
+      "accuracy": 0.6799
+    }
+  ],
+  "claude": {
+    "model": "claude-sonnet-5",
+    "thinking": "disabled"
+  }
+}

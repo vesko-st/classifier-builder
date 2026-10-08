@@ -1,0 +1,118 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens6",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v3",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "immigrant_topic": {
+          "instructions": "Is the tweet's own message about immigrants, migrants, refugees, asylum seekers, people in the country illegally, or foreigners living in the country (foreign students, workers, a foreign religious or ethnic group) as people: what they are, what they do, or what should happen to them? Also answer yes when the tweet has little text of its own and its point is a demand or cheer for sending immigrants away (for example brief agreement followed by hashtags demanding that they be deported or go home). Answer no when the text is mainly about a politician, party, liberals, the media, an election, whether a wall works, or another subject and immigration only appears among appended hashtags."
+        },
+        "immigrant_hostile": {
+          "instructions": "Does the tweet show hostility toward immigrants, migrants or refugees as people, under this policy?",
+          "criteria": {
+            "true": "Yes if ANY of: (1) it demeans or dehumanises immigrants (invaders, animals, parasites, filth, rapists, criminals, disease carriers, stupid or useless people who cannot support themselves) or treats them with contempt or open hatred; (2) it generalises a negative trait to the group (they commit crimes, steal jobs, abuse welfare, bring disease, endanger children), including when it reports one crime by an immigrant and uses it to argue against immigrants generally or to demand deportations; (3) its point is to demand or cheer removing immigrants en masse (all of them deported, expelled or sent home), whether in the text or in hashtags that carry the tweet's message.",
+            "false": "No if it only argues a policy position without contempt for or generalisation about immigrants as people: supporting a border wall, ending a programme, enforcing the law, voting, defending the use of a legal term, or reporting news neutrally. No when the anger is aimed at politicians, parties, liberals, judges or the media rather than at immigrants, or the text is about another subject, even if a deportation hashtag is appended among others. Hostility aimed at other groups does not count unless they are framed as foreigners who should leave."
+          }
+        },
+        "misogyny": {
+          "instructions": "Is this tweet hateful toward women under this policy?",
+          "criteria": {
+            "true": "Yes if ANY of: (1) it makes a demeaning generalisation about women or girls as a group (for example calling women in general whores or worthless, or saying what all such women deserve); (2) it sexually degrades a woman or women (calls her sexually promiscuous as an insult, describes her as a sexual object, mocks or endorses rape or sexual violence); (3) it pairs a gendered insult at a woman with a threat or wish of physical violence or harm. (4) it taunts, mocks or belittles women addressed or described generically with gendered slurs (talking down to a crowd of women, or casting some type of woman as a whore), even when it is meant as a joke.",
+            "false": "No if gendered slang is used without degrading any woman: self-reference, affectionate or friendly banter, exclamations, boasting, song lyrics, the word used as a verb or filler, an insult aimed at a man, or criticising others for using such words. A plain angry, non-sexual insult at one specific woman in a personal quarrel, with no threat and no generalisation about women, is also No. The words alone never decide it: a woman or women must actually be degraded. Slang in a positive, encouraging, self-hyping or praising message is No. Also No when the slur is aimed at people in general, a mixed crowd or men (a gender-neutral insult for annoying people) rather than specifically at women."
+          }
+        }
+      },
+      "rule": [
+        [
+          "immigrant_topic",
+          "immigrant_hostile"
+        ],
+        [
+          "misogyny"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v3b",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "A tweet (mentions replaced by @user):\n{{input}}",
+      "questions": {
+        "immigrant_topic": {
+          "instructions": "Does this tweet's own content concern immigrants, migrants, refugees, asylum seekers, illegal immigrants, or foreigners residing in the country (such as foreign students or workers, or a foreign religious or ethnic group) as people, meaning who they are, how they behave, or what should be done with them? Count it as yes when the tweet says little itself and its point is approval of, or a demand for, sending immigrants away, carried by hashtags demanding deportation or that they go home. Count it as no when the content mainly concerns a politician, a party, liberals, the press, an election, whether a barrier works, or some other subject, with immigration only showing up in a trailing list of hashtags."
+        },
+        "immigrant_hostile": {
+          "instructions": "Under this policy, is the tweet hostile toward immigrants, migrants or refugees as people?",
+          "criteria": {
+            "true": "Yes when at least one holds: (1) it degrades or dehumanises immigrants, picturing them as invaders, animals, parasites, dirt, rapists, criminals, carriers of disease, or as stupid or useless people who cannot provide for themselves, or speaks of them with contempt or hatred; (2) it pins a negative trait on the group as a whole (crime, taking jobs, living off welfare, spreading disease, threatening children), which includes using a single crime by an immigrant as a case against immigrants in general or as grounds for deportations; (3) what it is saying is that immigrants should be removed en masse (all deported, expelled, sent home), in its text or in hashtags that carry its point.",
+            "false": "No when it just takes a policy stance with no contempt for immigrants and no generalisation about them: backing a border wall, ending a programme, enforcing the law, urging people to vote, defending a legal term, or neutral news. No when the hostility is directed at politicians, parties, liberals, judges or the media rather than immigrants, or the content is about something else, even if a deportation hashtag is tacked on among others. Hostility toward other groups only counts when they are presented as foreigners who should leave."
+          }
+        },
+        "misogyny": {
+          "instructions": "Under this policy, is the tweet hateful toward women?",
+          "criteria": {
+            "true": "Yes when at least one holds: (1) it demeans women or girls as a group with a sweeping generalisation (for instance treating women in general as whores or worthless, or saying what such women all deserve); (2) it degrades a woman or women sexually (insulting her as promiscuous, treating her as a sexual object, joking about or approving of rape or sexual violence); (3) it aims a gendered slur at a woman together with a threat or wish of physical harm or violence. (4) it mocks, taunts or talks down to women referred to generically with gendered slurs (a group of women being put down, or a kind of woman labelled a whore), even jokingly.",
+            "false": "No when gendered slang appears without any woman being degraded: talking about oneself, affectionate teasing among friends, exclamations, bragging, lyrics, the word used as a verb or filler, a slur aimed at a man, or objecting to other people's use of such words. Also No for an ordinary angry insult at one particular woman during a personal dispute that is not sexual, carries no threat and generalises nothing about women. The presence of the words never settles it on its own: some woman or women must really be degraded. Slang inside a positive message that encourages, hypes up or praises is No. Also No when the slur targets people at large, a mixed group or men (used as a gender-neutral insult) and not women in particular."
+          }
+        }
+      },
+      "rule": [
+        [
+          "immigrant_topic",
+          "immigrant_hostile"
+        ],
+        [
+          "misogyny"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v3c",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet to assess:\n{{input}}",
+      "questions": {
+        "immigrant_topic": {
+          "instructions": "Is the subject of this tweet immigrants themselves? That means migrants, refugees, asylum seekers, people living in the country unlawfully, or foreign residents such as foreign students, foreign workers or a foreign ethnic or religious community, and the tweet speaks about what they are, what they do or what ought to happen to them. A tweet with almost no text of its own whose point is cheering or demanding that immigrants be deported or sent home through its hashtags also counts. It does not count when the text is about a politician, a party, liberals, the media, an election, whether a wall would work, or something unrelated, and immigration hashtags are merely appended."
+        },
+        "immigrant_hostile": {
+          "instructions": "Is this tweet hostile to immigrants, migrants or refugees as people, by the rules below?",
+          "criteria": {
+            "true": "Hostile if any rule applies. Rule 1: it dehumanises or demeans immigrants (as invaders, animals, parasites, filth, rapists, criminals, disease carriers, or dim and useless people unable to support themselves) or shows contempt or hatred for them. Rule 2: it attributes a bad trait to immigrants as a group (crime, job theft, welfare abuse, disease, danger to children); turning one immigrant's crime into an argument against immigrants generally or into a demand for deportations also counts. Rule 3: the tweet's message is that immigrants should be removed en masse (deport them all, expel them, send them home), stated in text or in the hashtags that make up its message.",
+            "false": "Not hostile if it only takes a political or policy position without contempt or group generalisation: supporting a wall, ending a programme, law enforcement, voting, defending a legal term, neutral news reporting. Not hostile if the anger targets politicians, parties, liberals, judges or the media and not immigrants, or the tweet is about another topic, even with a deportation hashtag among appended ones. Hostility against other groups only counts if they are cast as foreigners who must leave."
+          }
+        },
+        "misogyny": {
+          "instructions": "Is this tweet hateful toward women, by the rules below?",
+          "criteria": {
+            "true": "Hateful if any rule applies. Rule 1: a degrading generalisation about women or girls as a whole (women in general as whores or worthless, or what all such women deserve). Rule 2: sexual degradation of a woman or women (attacking her as promiscuous, reducing her to a sexual object, mocking or endorsing rape or sexual violence). Rule 3: a gendered slur against a woman combined with a threat or wish of physical violence or harm. Rule 4: taunting, mocking or belittling women referred to generically with gendered slurs (putting down women as a crowd, or branding a type of woman a whore), even as a joke.",
+            "false": "Not hateful when gendered slang is used and no woman is degraded: self-description, friendly or affectionate banter, exclamations, bragging, lyrics, use as a verb or filler word, a slur directed at a man, or criticism of people who use such words. Also not hateful: a plain angry, non-sexual insult at a single woman in a personal quarrel with no threat and no claim about women generally. The words alone do not decide; a woman or women must actually be degraded. Not hateful: slang inside an encouraging, self-hyping or praising message. Not hateful either when the slur is directed at people generally, a mixed group or men, as a gender-neutral insult, rather than at women specifically."
+          }
+        }
+      },
+      "rule": [
+        [
+          "immigrant_topic",
+          "immigrant_hostile"
+        ],
+        [
+          "misogyny"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ]
+}

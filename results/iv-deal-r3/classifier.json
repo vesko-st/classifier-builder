@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "deal_v5",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "A buyer and a seller negotiated over chat about a Craigslist listing. Read the whole chat, especially how it ends, and pick the option that best describes the outcome of the negotiation.",
+  "state_template": "Listing and negotiation chat:\n{{input}}",
+  "criteria": {
+    "mutual_agreement": "By the end of the chat one side proposed a price or terms and the other side went along with it, so both parties agreed on the sale. Acceptance counts even when it is brief, reluctant or implicit: conceding the point, a short yes, moving straight on to pickup, payment, delivery or contact details, or saying they will now send the offer for the proposed price all mean the proposal was accepted.",
+    "agreement_with_formal_offer": "The two sides agreed on a price and one of them says they will now submit, send or enter the official offer for that agreed price.",
+    "counteroffer_left_open": "Real bargaining took place: at least one side already moved from its first position (the seller came down from the listed price in answer to the buyer, or the buyer raised an earlier offer), and the chat ends with the latest offer or counteroffer still open, neither accepted nor rejected in the text. Also this option when someone asks whether the offer they submitted works for the other side.",
+    "opening_offer_only": "No one ever moved from their first position: the chat ends right after a single opening offer from one side, possibly after the seller merely stated or repeated the listed price. Stating the asking price is not a counteroffer.",
+    "explicit_breakdown": "One side refuses the other's final price, walks away, or says they cannot reach an agreement; the negotiation ended without agreement.",
+    "no_price_negotiation": "The chat is only greetings, questions or product information; no price was agreed and no real negotiation took place before it ended.",
+    "broken_or_off_task": "The chat is confused or off task: participants discuss a different item, the website or a technical problem instead of negotiating this item.",
+    "conditional_unresolved": "One side makes acceptance depend on a new condition or demand at the very end, and the other side never answers it, so it is genuinely unclear whether they agreed. Not this option when the reply simply accepts and mentions logistics."
+  },
+  "map": {
+    "mutual_agreement": "deal",
+    "agreement_with_formal_offer": "deal",
+    "counteroffer_left_open": "deal",
+    "opening_offer_only": "no_deal",
+    "explicit_breakdown": "no_deal",
+    "no_price_negotiation": "no_deal",
+    "broken_or_off_task": "no_deal",
+    "conditional_unresolved": "no_deal"
+  }
+}

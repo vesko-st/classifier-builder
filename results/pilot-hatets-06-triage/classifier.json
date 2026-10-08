@@ -1,0 +1,41 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v3c",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "imm_target": {
+      "instructions": "Is this tweet about immigrants, migrants, refugees, asylum seekers, DACA recipients or illegal aliens, including specific immigrants or people (e.g. Muslims, foreign students) told to go back / be sent back / deported?"
+    },
+    "imm_hostile": {
+      "instructions": "In the author's own voice, is the tweet hostile to immigrants/refugees themselves: demanding or endorsing that they be deported, sent back, kept out or made unwelcome; portraying them as criminals, rapists, smugglers, thieves, disease carriers, a burden or a flood; demeaning or dehumanising them (scum, invaders, animals, 'rapefugees'); or calling for violence against them? Answer no when the tweet mainly shares or quotes a news headline or report, or makes a point about parties, voting, politicians, the media or border policy without the author saying the immigrants should be removed or are bad.",
+      "criteria": {
+        "true": "author demands their removal/exclusion or portrays immigrants as bad, criminal or subhuman",
+        "false": "shared news headline/report, or party/politics/policy talk without hostility to the immigrants themselves"
+      }
+    },
+    "slur_hostile": {
+      "instructions": "Does the tweet use gendered slurs (bitch, hoe, whore, slut, cunt) or talk about women with hostility, contempt or sexual degradation, aimed at a person or at women/'hoes'/'bitches' in general (insults, put-downs, telling someone off, sexualised insults, saying women/hoes are cheaters, worthless or only good for sex, or talk of rape or violence against women, even quoted or joking)? Answer no when the slur is affectionate or friendly ('I love you'), self-hype or positive ('real bitch', 'bad bitch', 'yass bitch'), a mere exclamation ('bitch please', 'bitch I ain't got money', 'life's a bitch'), or when the tweet criticises men or misogyny.",
+      "criteria": {
+        "true": "hostile, contemptuous or sexualised use of gendered slurs, or degradation/violence toward women",
+        "false": "affectionate, self-hype, exclamation, unrelated slang, or criticism of men/misogyny"
+      }
+    }
+  },
+  "rule": [
+    [
+      "imm_target",
+      "imm_hostile"
+    ],
+    [
+      "slur_hostile"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate",
+  "decision": {
+    "class": "hate",
+    "threshold": 0.75
+  }
+}

@@ -1,0 +1,99 @@
+{
+  "version": 1,
+  "name": "deal_v5",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v5_A",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A buyer and a seller negotiated over chat about a Craigslist item. After the chat, the buyer submitted a formal final offer (not shown) and the seller accepted or rejected it. Predict how it ended. Unfinished chats whose prices are already very close usually end in an accepted offer; they fail when the sides stay meaningfully apart, one side refuses, or the buyer never put a concrete price on the table. Pick the option that best describes the conversation.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "mutual_agreement": "Both sides clearly agreed on a price (one side proposed a price and the other accepted it, explicitly or by moving on to pickup, payment or delivery arrangements, or by saying they will submit/accept the offer). Later small talk does not undo it.",
+        "agreement_with_extra_terms": "One side accepted the other's price while adding a minor condition or extra, and nothing shows the other side refused it.",
+        "converging_unfinished": "The chat stops before an explicit acceptance, but a concrete price below the listing is on the table and the sides are nearly there: the latest prices differ by only a few percent of the item's price, the last move meets or nearly meets the other side's price, the seller's last move offers a reduced price the buyer never disputed, or the other side has already signalled it would accept.",
+        "offer_handoff": "The chat ends with the buyer handing over to the formal offer (saying the final offer is being sent or is shown separately) without having disputed the price or asked for a lower one; the seller did not object.",
+        "far_apart_unfinished": "The chat stops before an explicit acceptance and the latest prices are still meaningfully apart (roughly a tenth of the price or more), or one side holds a firm minimum the other is below, or the buyer's offer depends on questions that were never settled, or the buyer only says they will make some lower offer.",
+        "walk_away": "One side refused the last offer or ended the negotiation without agreeing (too far apart, cannot afford, not interested, no thanks), including saying that a deal is impossible if the other side's stated limit is final.",
+        "no_negotiation": "No concrete price below the listing was ever put on the table by either side: the chat is greetings, item questions, expressions of interest or logistics only, however keen the buyer sounds.",
+        "broken_chat": "The participants were confused or the chat broke down: talking about different items, mixed-up roles, complaints about the website or task, unable to submit, or a participant says the formal offer shows a price different from the one discussed or agreed."
+      },
+      "map": {
+        "mutual_agreement": "deal",
+        "agreement_with_extra_terms": "deal",
+        "converging_unfinished": "deal",
+        "offer_handoff": "deal",
+        "far_apart_unfinished": "no_deal",
+        "walk_away": "no_deal",
+        "no_negotiation": "no_deal",
+        "broken_chat": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v5_B",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a Craigslist price negotiation between a buyer and a seller. Once the chat ended, the buyer sent an official final offer that the seller either accepted or turned down; that step is not shown. Decide which situation the chat ends in. Chats that stop with the two prices nearly identical normally become accepted offers; negotiations fail when a real gap remains, someone refuses, or no concrete price was ever proposed by the buyer.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "mutual_agreement": "The two sides settled on a price: one proposed it and the other said yes, either in words or by going on to arrange payment, pickup or delivery, or by saying the offer will be submitted or accepted. Chatter after the agreement does not cancel it.",
+        "agreement_with_extra_terms": "A side agreed to the other's price but attached a small condition or bonus, and the other side did not turn it down.",
+        "converging_unfinished": "No explicit yes yet, but a specific reduced price is on the table and the two are almost aligned: their latest numbers are within a few percent of the price, the final move matches or nearly matches the other's number, the seller ends by volunteering a lower price that the buyer never pushed back on, or the other side already hinted it would agree.",
+        "offer_handoff": "The buyer closes by pointing to the official offer (it is being sent, or is shown separately) without having argued about the price or requested a cut, and the seller raised no objection.",
+        "far_apart_unfinished": "No explicit yes, and a real gap remains between the latest numbers (around ten percent of the price or more), or one side keeps a firm floor the other has not reached, or the buyer's price hinges on unanswered questions, or the buyer merely says some lower offer is coming.",
+        "walk_away": "Someone turned down the final proposal or quit without agreement (gap too big, unaffordable, lost interest, no thank you), including declaring that no deal is possible if the other's stated limit stands.",
+        "no_negotiation": "Neither side ever named a specific price below the listing; the conversation consists only of greetings, questions about the item, enthusiasm or logistics, no matter how eager the buyer is.",
+        "broken_chat": "The conversation fell apart or was confused: different items being discussed, roles swapped, complaints about the site or the task, trouble submitting, or someone notes the official offer carries a different price than the one talked about or agreed."
+      },
+      "map": {
+        "mutual_agreement": "deal",
+        "agreement_with_extra_terms": "deal",
+        "converging_unfinished": "deal",
+        "offer_handoff": "deal",
+        "far_apart_unfinished": "no_deal",
+        "walk_away": "no_deal",
+        "no_negotiation": "no_deal",
+        "broken_chat": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v5_C",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Predict whether a Craigslist buyer-seller negotiation ended in a closed deal.",
+        "context": "After the chat the buyer submitted a formal final offer, invisible here, which the seller accepted or rejected. Judge which ending the chat shows.",
+        "guidance": [
+          "An explicit agreement on a price means a deal.",
+          "An unfinished chat whose last prices are almost the same usually still became a deal.",
+          "A remaining gap of about a tenth of the price or more, a refusal, or a buyer who never named a concrete price means no deal."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "mutual_agreement": "{\"meaning\": \"Both parties accepted the same price.\", \"includes\": [\"the other side says yes to a proposed price\", \"moving on to payment, pickup or delivery after a price\", \"saying the offer will be submitted or accepted\"], \"note\": \"later small talk does not undo it\"}",
+        "agreement_with_extra_terms": "{\"meaning\": \"One party accepted the other's price while adding a minor condition or extra, and the other party did not refuse.\"}",
+        "converging_unfinished": "{\"meaning\": \"Chat stops before explicit acceptance, a concrete reduced price is on the table, and the parties are nearly agreed.\", \"includes\": [\"latest prices differ by only a few percent\", \"the last move meets or nearly meets the other's price\", \"the other side already signalled acceptance\", \"the seller's last move offers a reduced price that the buyer never disputed\"]}",
+        "offer_handoff": "{\"meaning\": \"The buyer ends by deferring to the formal offer (being sent now or shown separately) without having disputed the price or asked for a reduction, and the seller did not object.\"}",
+        "far_apart_unfinished": "{\"meaning\": \"Chat stops before explicit acceptance with the parties still meaningfully apart.\", \"includes\": [\"latest prices differ by roughly a tenth of the price or more\", \"one side's firm minimum is above what the other offered\", \"the buyer's offer depends on unresolved questions\", \"the buyer only promises some lower offer\"]}",
+        "walk_away": "{\"meaning\": \"A party rejected the last offer or ended talks without agreement.\", \"includes\": [\"too far apart, cannot afford, not interested, no thanks\", \"stating a deal is impossible if the other's stated limit is final\"]}",
+        "no_negotiation": "{\"meaning\": \"Neither side ever proposed a concrete price below the listing.\", \"includes\": [\"only greetings, item questions, interest or logistics, however eager\"]}",
+        "broken_chat": "{\"meaning\": \"The chat broke down or was confused.\", \"includes\": [\"different items\", \"mixed-up roles\", \"complaints about the website or task\", \"unable to submit\", \"a participant notes the formal offer shows a different price from the one discussed or agreed\"]}"
+      },
+      "map": {
+        "mutual_agreement": "deal",
+        "agreement_with_extra_terms": "deal",
+        "converging_unfinished": "deal",
+        "offer_handoff": "deal",
+        "far_apart_unfinished": "no_deal",
+        "walk_away": "no_deal",
+        "no_negotiation": "no_deal",
+        "broken_chat": "no_deal"
+      }
+    }
+  ]
+}

@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "name": "deal_ens2",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v8",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A buyer and a seller negotiated over chat about a Craigslist item. After the chat, the buyer could submit a formal price offer through the website and the seller could accept it; that step is not shown in the text, so a price left on the table at the end of the chat usually became a deal. Read the whole chat, paying most attention to how it ends, and pick the option that best describes the outcome. First check whether the last price proposed was accepted; only if it was not, decide whether it was left open or refused.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "One side proposed a price and the other side accepted it, however briefly or reluctantly (yes, ok, deal, fine, I'll take it, I guess we can settle), even if small questions follow afterwards. This includes a buyer accepting the seller's stated lowest price.",
+        "implicit_agreement": "The last price proposed was accepted through actions: the other side moves on to arranging pickup, delivery, payment or a meeting time without objecting to the price.",
+        "offer_submitted": "Someone says they have submitted, will submit, or are entering the formal offer, even if they also mention the website acting up.",
+        "open_final_offer": "The chat ends with a concrete price on the table that the other side has not refused, or a gap that is small: for example the seller's counteroffer or lowest price as the last message (the buyer can still accept it); the buyer's bid as the last message when the seller only made plain counteroffers; the buyer's last bid coming close to the seller's stated lowest price (within roughly a tenth of it) or moving most of the way toward it; or the buyer reacting positively to the seller's counter. A buyer's first bid after asking questions also counts. The seller's original asking price alone does not count while the buyer is still asking questions.",
+        "standoff": "The positions are still far apart at the end after a refusal: the seller already said the buyer's price was too low or named a firm floor, and the buyer's final message stays well below it (more than roughly a tenth away), or only asks the seller to go lower, pleads, or asks for extras without coming close; or the buyer declared the most they can pay and the seller's final message restates a clearly higher minimum. A small remaining gap is not a standoff, and it is never a standoff when the final message accepts the other side's price.",
+        "rejected": "One side explicitly refuses the last offer, walks away, or says they cannot reach an agreement.",
+        "questions_only": "The chat stops while the buyer is still asking or the seller still answering questions about the item, and the buyer has not yet proposed any price (the seller may have stated the asking price).",
+        "no_negotiation": "Only greetings or a few lines, no real negotiation about price.",
+        "off_task": "The two talk about different items, about the website or the task itself, or the chat makes no sense, and no offer is made or mentioned."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "implicit_agreement": "deal",
+        "offer_submitted": "deal",
+        "open_final_offer": "deal",
+        "standoff": "no_deal",
+        "rejected": "no_deal",
+        "questions_only": "no_deal",
+        "no_negotiation": "no_deal",
+        "off_task": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v8b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a chat between a seller and a buyer haggling over a Craigslist listing. The site let the buyer send a formal offer after chatting, which the seller could accept; that action does not appear here, so when the chat ends with a price nobody refused, it usually closed. Look closely at the final few messages. Step one: was the most recent price accepted? Step two, if not: was it left open, or had the other side already refused it? Choose the best description.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "The most recent price was accepted by the other party, even with a single word or grudgingly (ok, sure, deal, fine, I'll take it, I suppose that works). Minor follow-up questions after the acceptance do not matter. A buyer agreeing to the seller's stated minimum counts.",
+        "implicit_agreement": "No one says yes outright, but the other party goes straight to planning payment, pickup, delivery or a meeting time without disputing the most recent price.",
+        "offer_submitted": "A participant says they have entered, sent, or are about to send the formal offer, even while mentioning problems with the website.",
+        "open_final_offer": "The last thing on the table is a specific price the other party has not refused, or the two are nearly there. Situations: the seller ends by naming a counter price or their minimum (the buyer could still take it); the buyer ends by bidding after the seller only gave plain counters; the buyer's closing bid lands near the seller's stated minimum (about a tenth away or less) or closes most of the distance; the buyer answers the seller's counter approvingly; the buyer's first bid after asking about the item. A seller merely repeating the listing price while the buyer keeps asking questions is not this.",
+        "standoff": "After a refusal the two remain far apart: the seller had called the buyer's price too low or named a minimum, and the buyer's last message is still well under it (more than about a tenth short), or just asks for a lower price, pleads, or wants extras without getting close; or the buyer named their maximum and the seller's last message insists on a clearly higher amount. Not a standoff if the remaining gap is small, if the last message is the seller's own price the buyer never ruled out, or if the last message accepts the other party's price.",
+        "rejected": "A participant flatly turns down the last offer, leaves, or says no agreement is possible.",
+        "questions_only": "The chat ends while the buyer is still asking about the item and the seller answering, with no price proposed by the buyer yet (the seller may have mentioned the asking price).",
+        "no_negotiation": "Nothing but greetings or a couple of lines; price is never really negotiated.",
+        "off_task": "The participants discuss different items, the website or the task itself, or the chat is nonsense, and no offer is mentioned."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "implicit_agreement": "deal",
+        "offer_submitted": "deal",
+        "open_final_offer": "deal",
+        "standoff": "no_deal",
+        "rejected": "no_deal",
+        "questions_only": "no_deal",
+        "no_negotiation": "no_deal",
+        "off_task": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v8c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Decide how this Craigslist price negotiation ended. Important background: buyers could submit an official offer through the site once the chat was over, and sellers could accept it there; you cannot see that step, so an unrefused price at the end of the chat normally turned into a sale. Focus on the closing messages. Decide in this order: (a) did the other party accept the latest price? (b) if not, was that price still open, or had it already been refused? Then pick one option.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "Acceptance of the latest price by the other party, in any form, brief or reluctant (ok, deal, fine, sold, I'll take it, guess we can settle), even if a few small questions come after. This covers the buyer accepting the seller's lowest price.",
+        "implicit_agreement": "No one says yes outright, but the other party goes straight to planning payment, pickup, delivery or a meeting time without disputing the most recent price.",
+        "offer_submitted": "A participant says they have entered, sent, or are about to send the formal offer, even while mentioning problems with the website.",
+        "open_final_offer": "Still open or nearly settled: the final price on the table has not been turned down, or the gap is small. This covers the seller closing with a counter price or their lowest figure (the buyer can still accept it), the buyer closing with a bid after only plain counters from the seller, the buyer's closing bid sitting close to the seller's minimum (within about ten percent) or covering most of the distance, the buyer responding warmly to the seller's counter, and the buyer's first bid after questions. The listing price alone, while the buyer is still asking questions, does not count.",
+        "standoff": "A refusal stands and the sides are far apart. Either the seller has already said the buyer's price is too low or named a price they will not go below, and the buyer's final message is still well short of it (more than about ten percent) or merely asks for less, pleads, or requests extras without coming close; or the buyer has said the most they can pay and the seller's final message insists on clearly more. A small remaining gap, a final message that is the seller's own unrefused price, or a final message that accepts the other party's price is not a standoff.",
+        "rejected": "A participant flatly turns down the last offer, leaves, or says no agreement is possible.",
+        "questions_only": "The chat ends while the buyer is still asking about the item and the seller answering, with no price proposed by the buyer yet (the seller may have mentioned the asking price).",
+        "no_negotiation": "Nothing but greetings or a couple of lines; price is never really negotiated.",
+        "off_task": "The participants discuss different items, the website or the task itself, or the chat is nonsense, and no offer is mentioned."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "implicit_agreement": "deal",
+        "offer_submitted": "deal",
+        "open_final_offer": "deal",
+        "standoff": "no_deal",
+        "rejected": "no_deal",
+        "questions_only": "no_deal",
+        "no_negotiation": "no_deal",
+        "off_task": "no_deal"
+      }
+    }
+  ]
+}

@@ -1,0 +1,9 @@
+{
+  "name": "banking77_intents_fullpool",
+  "description": "Identify the intent of customer messages sent to a digital bank's support chat. Each message has exactly one intent from a fixed list of 77.",
+  "input": "A single customer message (usually one sentence).",
+  "label_type": "single",
+  "classes": "classes.json",
+  "metric": "accuracy",
+  "source": "Banking77 (PolyAI, CC-BY-4.0)"
+}

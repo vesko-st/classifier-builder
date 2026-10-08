@@ -1,0 +1,103 @@
+{
+  "run_id": "pilot-intents-12-uncertainty-r3",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-28T16:15:41",
+  "builder": {
+    "runner": "interactive pilot"
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 description-only flat choice, 77 options",
+      "test": {
+        "jev": {
+          "accuracy": 0.8432,
+          "macro_f1": 0.8374,
+          "est_cost_usd": 0.35118,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.8,
+      "note": "batch1 revision: descriptions fixed + bought texts as labelled_examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.8571,
+          "macro_f1": 0.8517,
+          "est_cost_usd": 0.417908,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.81,
+      "note": "batch2 revision",
+      "test": {
+        "jev": {
+          "accuracy": 0.8695,
+          "macro_f1": 0.8643,
+          "est_cost_usd": 0.474549,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.81,
+      "note": "batch3 revision",
+      "test": {
+        "jev": {
+          "accuracy": 0.8727,
+          "macro_f1": 0.869,
+          "est_cost_usd": 0.519034,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.82,
+      "note": "batch4 revision",
+      "test": {
+        "jev": {
+          "accuracy": 0.8773,
+          "macro_f1": 0.8756,
+          "est_cost_usd": 0.56339,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.83,
+      "note": "batch5 revision, final",
+      "test": {
+        "jev": {
+          "accuracy": 0.8802,
+          "macro_f1": 0.8786,
+          "est_cost_usd": 0.003365,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

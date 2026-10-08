@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v3",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "This tweet comes from a hate-speech dataset about two target groups: immigrants/refugees and women. The annotation policy is strict: a tweet is hateful only when its own words express hostility toward immigrants/refugees as people, or toward a woman or women in a degrading way. Swear words, slang, political hashtags and support for border policies are not hateful by themselves. Which description fits the tweet best?",
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "immigrants_attacked": "The tweet's own message is hostile to immigrants, refugees, migrants or 'illegals' as people: calls them invaders, criminals, rapists, savages, animals, parasites or diseased; says they steal jobs, IDs or welfare; presents crimes by an illegal alien, refugee or 'dreamer' as a reason to deport them or build the wall; mocks them sarcastically; or its main point is to stop immigration, ban refugees or migrants, or deport them all (even when said only through slogans like #StopImmigration, #NoRefugees, #DeportThemAll).",
+    "women_attacked": "Hostile, degrading attack on a woman or on women: calls her a bitch, hoe, whore, slut or cunt in anger or contempt, piles up such slurs, threatens her, wishes or jokes about rape or violence against her, or generalises that women/girls are hoes, whores or inferior.",
+    "immigration_politics": "Immigration policy talk that does not attack immigrants as people and does not demand that they be removed or kept out: praise for Trump, ICE or the wall as a project; legal or terminology arguments; vote counts; criticising Democrats, media or politicians; neutral news headlines.",
+    "hashtags_only": "The tweet is about something else (Trump, elections, liberals, taxes, TV, religion, another country's politics) and immigration slogans such as #SendThemBack, #BuildTheWall or #NoDACA are only appended hashtags.",
+    "slang_banter": "Uses bitch, hoe or similar as an exclamation, filler, form of address, joke, lyric or quote, with friends, about oneself, or in a casual complaint, without real contempt for a woman.",
+    "insult_at_man_or_unknown": "Insults or curses at a man, men, 'niggas', a politician, or an unknown person ('whoever...'), or says 'son of a bitch', 'bitch ass nigga', 'karma's a bitch'; not aimed at women as women.",
+    "neutral_or_supportive": "Neutral, positive, or supportive of immigrants or women; criticises racism or sexism."
+  },
+  "map": {
+    "immigrants_attacked": "hate",
+    "women_attacked": "hate",
+    "immigration_politics": "not_hate",
+    "hashtags_only": "not_hate",
+    "slang_banter": "not_hate",
+    "insult_at_man_or_unknown": "not_hate",
+    "neutral_or_supportive": "not_hate"
+  }
+}

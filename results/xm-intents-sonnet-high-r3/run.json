@@ -1,0 +1,107 @@
+{
+  "run_id": "xm-intents-sonnet-high-r3",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "created": "2026-09-30T10:24:40",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 332,
+    "num_turns": 33,
+    "total_cost_usd": 0.8628215
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v1 draft, 77 options with descriptions from names",
+      "test": {
+        "jev": {
+          "accuracy": 0.8114,
+          "macro_f1": 0.8051,
+          "est_cost_usd": 0.307599,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.72,
+      "note": "v3: descriptions revised after batch 1 (apple pay, verify_top_up, physical card, atm etc.)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8328,
+          "macro_f1": 0.8271,
+          "est_cost_usd": 0.327126,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.76,
+      "note": "v6: after batch 2 (transfer/topup/charge disambiguation)",
+      "test": {
+        "jev": {
+          "accuracy": 0.838,
+          "macro_f1": 0.8324,
+          "est_cost_usd": 0.34924,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.78,
+      "note": "v8: after batch 3",
+      "test": {
+        "jev": {
+          "accuracy": 0.8445,
+          "macro_f1": 0.8388,
+          "est_cost_usd": 0.362947,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.8,
+      "note": "v9: after batch 4",
+      "test": {
+        "jev": {
+          "accuracy": 0.8529,
+          "macro_f1": 0.8476,
+          "est_cost_usd": 0.380147,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.82,
+      "note": "v14: 3-variant ensemble of v13, final",
+      "test": {
+        "jev": {
+          "accuracy": 0.8558,
+          "macro_f1": 0.851,
+          "est_cost_usd": 1.189452,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

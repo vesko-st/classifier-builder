@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "name": "donation_v3_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v2",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "{{input}}",
+      "questions": {
+        "commit": {
+          "instructions": "In this chat a persuader asks the persuadee to donate part of their task payment to Save the Children; the donation is taken from the payment after the chat. By the end of the chat, has the persuadee said they will donate some money (any amount above $0, even a few cents, or any amount they name) from this task's payment?",
+          "criteria": {
+            "true": "The persuadee states, agrees to, or confirms a donation of some positive amount now, from this task (e.g. 'I'll donate $0.50', 'half', 'yes, 10 cents it is', 'let's donate the full amount').",
+            "false": "The persuadee refuses, chooses $0, only says they might or will think about it, never reaches a decision, or only talks about donating later or elsewhere."
+          }
+        },
+        "not_now": {
+          "instructions": "Does the persuadee, at the end of the chat, decline to give from this task's payment: choosing $0, refusing, or saying they will instead donate later, on the charity's website, or when they have more money?",
+          "criteria": {
+            "true": "The persuadee's final position is not to give from this task's payment now.",
+            "false": "The persuadee's final position includes giving some amount from this task's payment, or they never state a position."
+          }
+        },
+        "inflated": {
+          "instructions": "The persuadee's task payment is small (usually $2 or less, sometimes cents). Is the amount the persuadee says they will donate clearly larger than that payment (for example $5, $10, $20, $50, $200), as if they were not donating from the task payment?",
+          "criteria": {
+            "true": "The pledged amount is several dollars or more, beyond the small task payment.",
+            "false": "The pledged amount is within the task payment (cents, $1, $2, half, all of it), or no amount above the payment is named."
+          }
+        }
+      },
+      "rule": [
+        [
+          "commit",
+          "!not_now",
+          "!inflated"
+        ]
+      ],
+      "positive": "donated",
+      "negative": "not_donated"
+    },
+    {
+      "version": 1,
+      "name": "donation_v2b",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "{{input}}",
+      "questions": {
+        "commit": {
+          "instructions": "A persuader in this chat urges the persuadee to give part of the money they earn for this task to Save the Children; whatever they give is deducted from that payment. When the chat ends, has the persuadee agreed to give a positive amount (even a cent, or any sum they mention) out of this task's payment?",
+          "criteria": {
+            "true": "The persuadee states, agrees to, or confirms a donation of some positive amount now, from this task (e.g. 'I'll donate $0.50', 'half', 'yes, 10 cents it is', 'let's donate the full amount').",
+            "false": "The persuadee refuses, chooses $0, only says they might or will think about it, never reaches a decision, or only talks about donating later or elsewhere."
+          }
+        },
+        "not_now": {
+          "instructions": "Is the persuadee's final stance a refusal to give from this task's payment, i.e. they pick $0, say no, or say they would rather give later, via the website, or once they have more money?",
+          "criteria": {
+            "true": "The persuadee's final position is not to give from this task's payment now.",
+            "false": "The persuadee's final position includes giving some amount from this task's payment, or they never state a position."
+          }
+        },
+        "inflated": {
+          "instructions": "Payments for this task are small, normally $2 or under and sometimes only cents. Does the persuadee pledge a sum clearly bigger than that payment, such as $5, $10, $25, $100 or more?",
+          "criteria": {
+            "true": "The pledged amount is several dollars or more, beyond the small task payment.",
+            "false": "The pledged amount is within the task payment (cents, $1, $2, half, all of it), or no amount above the payment is named."
+          }
+        }
+      },
+      "rule": [
+        [
+          "commit",
+          "!not_now",
+          "!inflated"
+        ]
+      ],
+      "positive": "donated",
+      "negative": "not_donated"
+    },
+    {
+      "version": 1,
+      "name": "donation_v2c",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "{{input}}",
+      "questions": {
+        "commit": {
+          "instructions": "Save the Children donations in this study come out of the persuadee's task payment. Looking at the persuadee's last statements about giving, did they commit to donating something greater than zero from that payment (a few cents, a dollar, half, everything, or any amount they name)?",
+          "criteria": {
+            "true": "The persuadee states, agrees to, or confirms a donation of some positive amount now, from this task (e.g. 'I'll donate $0.50', 'half', 'yes, 10 cents it is', 'let's donate the full amount').",
+            "false": "The persuadee refuses, chooses $0, only says they might or will think about it, never reaches a decision, or only talks about donating later or elsewhere."
+          }
+        },
+        "not_now": {
+          "instructions": "By the end, does the persuadee turn down giving from this task's payment: choosing nothing, declining, or putting it off to a later time, their paycheck, or the charity's own website?",
+          "criteria": {
+            "true": "The persuadee's final position is not to give from this task's payment now.",
+            "false": "The persuadee's final position includes giving some amount from this task's payment, or they never state a position."
+          }
+        },
+        "inflated": {
+          "instructions": "The persuadee only earns a small amount (about $2 or less) for this task. Is the donation amount they state plainly more than that, for example $5, $20, $50 or $200?",
+          "criteria": {
+            "true": "The pledged amount is several dollars or more, beyond the small task payment.",
+            "false": "The pledged amount is within the task payment (cents, $1, $2, half, all of it), or no amount above the payment is named."
+          }
+        }
+      },
+      "rule": [
+        [
+          "commit",
+          "!not_now",
+          "!inflated"
+        ]
+      ],
+      "positive": "donated",
+      "negative": "not_donated"
+    }
+  ]
+}

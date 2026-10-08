@@ -1,0 +1,47 @@
+{
+  "run_id": "xm-hatets-haiku-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "created": "2026-09-29T15:37:39",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": null,
+    "wall_seconds": 234,
+    "num_turns": 52,
+    "total_cost_usd": 0.4071304500000002
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 58,
+      "estimate": 0.75,
+      "note": "Draft1: 3-option classifier based on policy questions",
+      "test": {
+        "jev": {
+          "accuracy": 0.7843,
+          "macro_f1": 0.7836,
+          "est_cost_usd": 0.041819,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 100,
+      "estimate": 0.88,
+      "note": "Final: Draft3 with clarified policy boundaries; 100% on 18 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7576,
+          "macro_f1": 0.7528,
+          "est_cost_usd": 0.049385,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "run_id": "ro-persuasion-uncertainty-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-04T17:49:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 882,
+    "num_turns": 56,
+    "total_cost_usd": 2.6763695999999997
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description: 20 fine options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.5775,
+          "macro_f1": 0.5505,
+          "est_cost_usd": 0.095838,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.5,
+      "note": "v2: batch-1 rules H1-H6 (thank appreciation, logical from partner's stated view, amount-choice=donation-info, own past experience=personal-story, website=credibility, post-commit reassurance=other, direct plea=proposition)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6012,
+          "macro_f1": 0.5736,
+          "est_cost_usd": 0.106457,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.52,
+      "note": "v4: batch-2 rules H8-H12 (other covers persuader small talk / other ways to help; praise vs thank; personal-story needs narrative; ask-amount only partner's own amount) as 3-member wording-variant ensemble",
+      "test": {
+        "jev": {
+          "accuracy": 0.6051,
+          "macro_f1": 0.57,
+          "est_cost_usd": 0.358562,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.55,
+      "note": "v5 ensemble: batch-3 rules H13-H19 (personal-inquiry = partner's own charity involvement; persuader matching offer = self-modeling; org matching partnerships = credibility; endorsement of org's work = credibility vs bare valuation = other; late pleasantries = other)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6256,
+          "macro_f1": 0.6133,
+          "est_cost_usd": 0.391684,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.57,
+      "note": "v6 ensemble: batch-4 rules H20-H22 (recalled partner statement takes class of the appeal it sets up; org's own activities/impact = credibility vs partner's donation effect = logical; reply arguing money well used = logical) + volunteering offer = other, narrower off-task",
+      "test": {
+        "jev": {
+          "accuracy": 0.6282,
+          "macro_f1": 0.6096,
+          "est_cost_usd": 0.421708,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.58,
+      "note": "v7 final ensemble: batch-5 rules H23 (question about raising money via others = task-inq), H25 (fragment completing own previous message takes its class), H26 (answering donation-mechanics question = donation-info); H24 (FITD vs logical) and H27 rewording dropped after tests. 42/50 on uncertainty-sampled labels.",
+      "test": {
+        "jev": {
+          "accuracy": 0.6361,
+          "macro_f1": 0.6149,
+          "est_cost_usd": 0.437321,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

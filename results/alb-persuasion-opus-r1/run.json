@@ -1,0 +1,63 @@
+{
+  "run_id": "alb-persuasion-opus-r1",
+  "task": "persuasion_strategy",
+  "budget": 0,
+  "strategy": "boundary",
+  "mode": "all_labels",
+  "created": "2026-10-03T17:20:04",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 20952,
+    "num_turns": 40,
+    "total_cost_usd": 14.361396600000004
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.544,
+      "note": "v1 draft: flat 18-option choice from PFG scheme definitions",
+      "test": {
+        "jev": {
+          "accuracy": 0.5999,
+          "macro_f1": 0.5814,
+          "est_cost_usd": 0.088126,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 0,
+      "estimate": 0.56,
+      "note": "v2: other split into 6 concrete sub-options mapped to other; sharper ack/thank/task-inquiry",
+      "test": {
+        "jev": {
+          "accuracy": 0.6394,
+          "macro_f1": 0.6129,
+          "est_cost_usd": 0.110692,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 0,
+      "estimate": 0.565,
+      "note": "v3b: vouching for charity/program results -> credibility; donation mechanics -> donation-information",
+      "test": {
+        "jev": {
+          "accuracy": 0.6341,
+          "macro_f1": 0.6123,
+          "est_cost_usd": 0.117582,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

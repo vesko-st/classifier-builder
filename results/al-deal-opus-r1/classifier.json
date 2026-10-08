@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "name": "deal_ens4",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a Craigslist listing and the chat in which a buyer and seller bargained over it. Right after the chat, one of them submitted a final price and the other either accepted or rejected it; that step is not shown. How likely is it that the negotiation closed with a deal?",
+      "state_template": "{{input}}",
+      "criteria": {
+        "certain_deal": "The chat itself shows both sides accepting the same price.",
+        "likely_deal": "No explicit acceptance, but both sides were cooperative, kept moving toward each other, and the last proposal is at or near a price the other side had shown willingness to pay or accept.",
+        "toss_up": "Real bargaining happened, but the chat stops with a moderate gap between the two sides and no sign whether the last proposal would be accepted.",
+        "likely_no_deal": "The chat stops with the two sides well apart, one side holding firm far from the other, or with only an opening offer that was never countered.",
+        "certain_no_deal": "One side refused or walked away, or no price was ever proposed (only greetings, item questions, or off-topic talk)."
+      },
+      "map": {
+        "certain_deal": "deal",
+        "likely_deal": "deal",
+        "toss_up": "no_deal",
+        "likely_no_deal": "no_deal",
+        "certain_no_deal": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v4b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "situation": "A buyer and a seller haggled over a Craigslist listing in the chat below. When the chat stopped, one of them formally proposed a final price and the other accepted or declined; that last step is missing from the transcript.",
+        "question": "Judging from where the chat left things, how probable is it that they ended up with a deal?"
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "certain_deal": "Acceptance is visible in the chat: both people agree to one price (or arrange pickup/payment after a price was accepted).",
+        "likely_deal": "Nobody said yes outright, but the bargaining was friendly and converging, and the final proposal is at, or very near, a number the other person had already signalled they could live with.",
+        "toss_up": "They really bargained, yet the chat ends with a middling gap and nothing suggests whether the last number will be taken.",
+        "likely_no_deal": "The chat ends with the two numbers still far apart, with one person insisting on a price far from the other's, or with a lone opening offer that never got a counter.",
+        "certain_no_deal": "Someone said no or lost interest, or no price ever came up (just hellos, questions about the item, or unrelated chatter)."
+      },
+      "map": {
+        "certain_deal": "deal",
+        "likely_deal": "deal",
+        "toss_up": "no_deal",
+        "likely_no_deal": "no_deal",
+        "certain_no_deal": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v4c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Craigslist negotiation transcript (listing, then chat). The outcome was decided by a hidden final step after the chat: a formal price offer that the other party accepted or rejected. Estimate the chance the parties closed a deal.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "certain_deal": "Closed in the chat: one party's price is explicitly accepted by the other (deal, ok, sure, yes, I'll take it), possibly followed by pickup or payment plans.",
+        "likely_deal": "Not explicitly closed, but the parties were cooperating and narrowing the gap, and the last price on the table matches or nearly matches what the other party had indicated they would accept.",
+        "toss_up": "Genuine back-and-forth on price, ending with a moderate unresolved gap and no hint about acceptance.",
+        "likely_no_deal": "Ends with a wide unresolved gap, a party holding a firm price far from the other's, or just one opening offer left uncountered.",
+        "certain_no_deal": "Ends in refusal or loss of interest, or price was never discussed (greetings, item questions, off-topic talk only)."
+      },
+      "map": {
+        "certain_deal": "deal",
+        "likely_deal": "deal",
+        "toss_up": "no_deal",
+        "likely_no_deal": "no_deal",
+        "certain_no_deal": "no_deal"
+      }
+    }
+  ],
+  "description": "Wording-variant ensemble of a 5-level deal-likelihood choice"
+}

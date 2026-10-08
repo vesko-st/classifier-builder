@@ -1,0 +1,96 @@
+{
+  "run_id": "iv-routing-r3",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "interview",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-05T11:16:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 490,
+    "num_turns": 46,
+    "total_cost_usd": 1.7869539999999997
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.6,
+      "note": "v1 draft: 75 fine intents mapped to teams from description alone",
+      "test": {
+        "jev": {
+          "accuracy": 0.7776,
+          "macro_f1": 0.7644,
+          "est_cost_usd": 0.29942,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 30,
+      "estimate": 0.8,
+      "note": "v3: mapping revised from 6 owner policy answers; removed vague missing-money option",
+      "test": {
+        "jev": {
+          "accuracy": 0.8698,
+          "macro_f1": 0.8643,
+          "est_cost_usd": 0.300067,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 74,
+      "estimate": 0.85,
+      "note": "v5: reverted card payments->disputes, unrecognised direct debits->fraud, cards/currencies for adding money->pricing (Visa/MC questions stay cards)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8951,
+          "macro_f1": 0.8949,
+          "est_cost_usd": 0.303948,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 86,
+      "estimate": 0.86,
+      "note": "v6b: Visa/MC choice questions->cards wording; partial ATM cash missing->disputes wording",
+      "test": {
+        "jev": {
+          "accuracy": 0.8948,
+          "macro_f1": 0.8943,
+          "est_cost_usd": 0.306923,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.88,
+      "note": "v7b final: found-lost card->cards, other cards for top-up->pricing, Visa/MC->cards, purchase fee->pricing, small unexplained extra amount->disputes",
+      "test": {
+        "jev": {
+          "accuracy": 0.8961,
+          "macro_f1": 0.8956,
+          "est_cost_usd": 0.316884,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "run_id": "ro-intents-uncertainty-r1",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-04T17:49:07",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 937,
+    "num_turns": 47,
+    "total_cost_usd": 2.1810680000000007
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: flat 77-option choice, descriptions from task + domain knowledge",
+      "test": {
+        "jev": {
+          "accuracy": 0.8542,
+          "macro_f1": 0.8509,
+          "est_cost_usd": 0.378976,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.78,
+      "note": "batch1 rules H1-H3,H5 + card_not_working rule; 3-wording ensemble",
+      "test": {
+        "jev": {
+          "accuracy": 0.8601,
+          "macro_f1": 0.8562,
+          "est_cost_usd": 1.40768,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.8,
+      "note": "batch2 rules: transfer direction, small/unknown charges, delivery, spare cards, PIN, receiving money, country support, source of funds",
+      "test": {
+        "jev": {
+          "accuracy": 0.8623,
+          "macro_f1": 0.8584,
+          "est_cost_usd": 1.493575,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.8,
+      "note": "batch3 rules: card network, initial PIN, named recipient, payment vs transfer pending, ATM wrong vs unrecognised",
+      "test": {
+        "jev": {
+          "accuracy": 0.864,
+          "macro_f1": 0.86,
+          "est_cost_usd": 1.538204,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.81,
+      "note": "batch4 rules: pending top-up, SWIFT, how transfers work, delay=pending_transfer, typo rule, card brands for top-up",
+      "test": {
+        "jev": {
+          "accuracy": 0.8659,
+          "macro_f1": 0.8629,
+          "est_cost_usd": 1.607541,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.81,
+      "note": "final: batch5 rules (shop-specific decline, unrecognised cash withdrawal priority, rate complaints, SEPA/SWIFT fee questions, can't make transfer=failed, top-up suspected wrong=failed, own-account incoming priority, small-amount charge)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8753,
+          "macro_f1": 0.8729,
+          "est_cost_usd": 1.675584,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

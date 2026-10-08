@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "name": "tweet_hate_draft3",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Classify tweets for hate speech targeting specific groups. Hate speech has two forms:\n\n1. GENDERED HATRED: Sexualized abuse, threats, or dehumanizing language directed at a woman/women as a woman. Examples: threats of sexual assault, rape references used to demean her, gendered slurs paired with sexual degradation. Casual profanity is not hate.\n\n2. MIGRANT HATRED: Either explicit dehumanizing terms ('rapefugee', 'animals', 'bottom feeders', 'infest') OR citing one or a few crimes/incidents to imply the group as a whole is criminal/dangerous/criminal, especially when paired with calls for exclusion/deportation.\n\nWhat is NOT hate: Policy slogans (#BuildTheWall, #DeportThemAll) alone, discussing immigration policy or status, citing incidents as standalone factual reports, or casual slurs in non-hateful context.",
+  "state_template": "{{input}}",
+  "criteria": {
+    "gendered_hate": "Sexualized abuse, threats of sexual violence, rape references to demean, or gendered slurs paired with sexual/degrading content aimed at women",
+    "migrant_dehumanization": "Explicit dehumanizing terms ('rapefugee', 'animals', 'infest', 'bottom feeders') OR using one/few crimes to imply the entire group is criminal/dangerous, especially with exclusionary/deportation hashtags",
+    "policy_speech": "Policy slogans, immigration policy discussion, factual crime citations without group generalization, or non-hateful uses of slurs"
+  },
+  "map": {
+    "gendered_hate": "hate",
+    "migrant_dehumanization": "hate",
+    "policy_speech": "not_hate"
+  }
+}

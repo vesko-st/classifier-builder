@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "name": "donation_v5",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "This is a chat in which a persuader urges the persuadee to give away part of their earnings from the study to Save the Children, a children's aid charity. After the chat the persuadee privately chooses how much (from $0 up to their whole payment, usually a couple of dollars or less) to actually give. What they say in the chat is only evidence: many people who agree in the chat give nothing when the moment comes. Judge how the persuadee ended the conversation and how genuine their commitment is.",
+    "rules": [
+      "Any positive amount counts as donating, however small.",
+      "The persuadee's last stated decision overrides earlier ones.",
+      "A promise to give later, elsewhere, or through the charity's website instead of from this study payment is not a donation in this task.",
+      "A commitment is genuine when the persuadee states a positive amount or share of the study payment and stays with it. Asking whether a small amount is enough before settling on it, voicing general distrust of charities after committing, or naming an odd amount out of enthusiasm still leave the commitment genuine.",
+      "A commitment is doubtful only in two situations: (a) the persuadee first declined or stressed that they need the money, and then concedes only a token or tentative amount after persistent pressure; (b) the persuadee merely goes along with an amount suggested by the persuader that is impossible given the study payment, or is plainly confused about the task or about who is asking whom.",
+      "The study payment is small (typically two dollars or less). A pledge of a sum larger than the whole payment (for example several dollars, tens or hundreds of dollars) shows the persuadee is not engaging with the real choice in this study; treat it as an oversized pledge, not a genuine commitment."
+    ]
+  },
+  "state_template": "Charity chat:\n{{input}}",
+  "criteria": {
+    "genuine_commit": "The persuadee commits to a positive amount no larger than the study payment, or a share of it (half, all of it), and stays with it.",
+    "oversized_pledge": "The persuadee pledges a sum larger than the whole study payment (several dollars or more), whether on their own or by accepting the persuader's suggestion.",
+    "doubtful_commit": "The persuadee names an amount, but only as a grudging token or tentative concession after declining or pleading need under persistent pressure, or by passively accepting an impossible suggested amount, or while plainly confused about the task.",
+    "agrees_vaguely": "The persuadee goes along with donating or with the persuader's proposal but never names an amount themselves.",
+    "outside_pledge": "The persuadee only promises to donate later, through another channel, or from other money, rather than from this study payment.",
+    "undecided": "The chat ends without the persuadee deciding either way.",
+    "refuses": "The persuadee declines, says they will give nothing or $0, or wants to keep their payment."
+  },
+  "map": {
+    "genuine_commit": "donated",
+    "oversized_pledge": "not_donated",
+    "doubtful_commit": "not_donated",
+    "agrees_vaguely": "donated",
+    "outside_pledge": "not_donated",
+    "undecided": "not_donated",
+    "refuses": "not_donated"
+  },
+  "decision": {
+    "class": "donated",
+    "threshold": 0.62
+  }
+}

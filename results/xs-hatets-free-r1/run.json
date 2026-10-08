@@ -1,0 +1,79 @@
+{
+  "run_id": "xs-hatets-free-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-05T16:50:03",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 386,
+    "num_turns": 35,
+    "total_cost_usd": 1.267796
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "draft v1 from description; 7 options mapped",
+      "test": {
+        "jev": {
+          "accuracy": 0.7412,
+          "macro_f1": 0.7408,
+          "est_cost_usd": 0.049311,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 49,
+      "estimate": 0.75,
+      "note": "v3: plain slur insults at women -> hate; expulsion calls -> hate (labels override owner answer)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7661,
+          "macro_f1": 0.7623,
+          "est_cost_usd": 0.066222,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 89,
+      "estimate": 0.72,
+      "note": "v6: v4 (hashtag-only rule, negative generalisations about women -> hate) + immigrant-crime stories as vilification",
+      "test": {
+        "jev": {
+          "accuracy": 0.8063,
+          "macro_f1": 0.8033,
+          "est_cost_usd": 0.077941,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 99,
+      "estimate": 0.74,
+      "note": "final: v6 re-snapshot after all 99 pts; random check n=15 macro-F1 0.785",
+      "test": {
+        "jev": {
+          "accuracy": 0.8063,
+          "macro_f1": 0.8033,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

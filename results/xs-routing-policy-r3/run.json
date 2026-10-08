@@ -1,0 +1,93 @@
+{
+  "run_id": "xs-routing-policy-r3",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "policy_first",
+  "mode": "budget",
+  "created": "2026-09-30T14:32:31",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 642,
+    "num_turns": 35,
+    "total_cost_usd": 1.5755569999999997
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "draft: 64 intent options mapped to teams by guess, no labels/answers yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.8045,
+          "macro_f1": 0.8053,
+          "est_cost_usd": 0.249924,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 40,
+      "estimate": 0.8,
+      "note": "v2: intent mapping updated from 5 policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.9169,
+          "macro_f1": 0.9139,
+          "est_cost_usd": 0.254579,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 66,
+      "estimate": 0.87,
+      "note": "v2 re-snapshot after 10 random labels: 10/10 correct; no threshold",
+      "test": {
+        "jev": {
+          "accuracy": 0.9169,
+          "macro_f1": 0.9139,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 88,
+      "estimate": 0.88,
+      "note": "3-variant wording ensemble of v5 options/mapping (+found-card rule); 21/21 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.924,
+          "macro_f1": 0.9205,
+          "est_cost_usd": 0.911455,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.91,
+      "note": "final: 3-variant ensemble; rules for transfer shortfall=fee, phone left somewhere=lost phone, fee on named transaction=pricing, beneficiary-blocked transfer=account; 27/27 on bought labels (10 random)",
+      "test": {
+        "jev": {
+          "accuracy": 0.925,
+          "macro_f1": 0.9216,
+          "est_cost_usd": 0.93948,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

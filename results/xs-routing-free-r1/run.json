@@ -1,0 +1,76 @@
+{
+  "run_id": "xs-routing-free-r1",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "free",
+  "created": "2026-09-30T11:16:04",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 374,
+    "num_turns": 29,
+    "total_cost_usd": 1.2058318000000001
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1: 77 banking intents mapped to 6 teams by guess, no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8422,
+          "macro_f1": 0.8193,
+          "est_cost_usd": 0.257424,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 99,
+      "estimate": 0.86,
+      "note": "v4: intent->team map corrected with 42 labels + owner answer (fees charged->pricing, wrong FX->disputes, swallowed card->fraud, verify top-up->account)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9201,
+          "macro_f1": 0.9178,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.87,
+      "note": "v8: 3-member wording ensemble of v7 (sharper PIN/extra-charge/cancel descriptions) on v4 map",
+      "test": {
+        "luna": {
+          "accuracy": 0.9354,
+          "macro_f1": 0.9344,
+          "est_cost_usd": 1.707998,
+          "total": 3080,
+          "answered": 3080
+        },
+        "pplx": {
+          "accuracy": 0.9331,
+          "macro_f1": 0.9281,
+          "est_cost_usd": 0.001133,
+          "total": 3080,
+          "answered": 3080
+        },
+        "jev": {
+          "accuracy": 0.9351,
+          "macro_f1": 0.9323,
+          "est_cost_usd": 0.808998,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

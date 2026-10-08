@@ -1,0 +1,363 @@
+{
+  "version": 1,
+  "name": "banking_intents_two_level",
+  "type": "two_level",
+  "state_template": "Customer message:\n{{input}}",
+  "router": {
+    "instructions": "Which area of banking is this customer message to a digital bank's support chat about?",
+    "criteria": {
+      "card_ordering_and_setup": "Getting, ordering, delivering, activating, linking or choosing a card (physical, virtual, disposable, spare), Apple/Google Pay, which cards and currencies are supported.",
+      "card_payments_and_card_problems": "Using a card to pay: card not working, declined, pending, reverted or unrecognised card payments, card payment fees or exchange rates, a card swallowed by an ATM.",
+      "cash_and_atm": "Withdrawing cash at an ATM: ATM support, withdrawal fees, declined, pending or unrecognised withdrawals, wrong amount or exchange rate.",
+      "transfers": "Bank transfers in or out: sending, receiving, cancelling, pending, failed or declined transfers, timing, fees, beneficiaries, balance not updated after a transfer.",
+      "top_ups": "Adding money to the account (topping up) by card, bank transfer, cash or cheque: pending, failed, reverted top-ups, limits, auto top-up, top-up fees and verification.",
+      "charges_refunds_and_fx": "Refunds, duplicate or extra charges, unrecognised direct debits, exchange rates and currency exchange in general.",
+      "security_and_account": "Lost, stolen or compromised card or phone, PIN and passcode, identity verification, source of funds, age, personal details, supported countries, closing the account."
+    }
+  },
+  "groups": {
+    "card_ordering_and_setup": {
+      "instructions": {
+        "task": "Which intent does this customer message to a digital bank's support chat express? Pick the single most specific intent.",
+        "guidance": [
+          "Distinguish the channel: card payment vs cash withdrawal (ATM) vs transfer vs top-up.",
+          "Distinguish the problem: pending, declined, failed, reverted, not recognised, fee charged, wrong exchange rate.",
+          "Messages often contain typos (e.g. 'pop-up' or 'topped off my car' for top-up); read for the intended meaning."
+        ]
+      },
+      "criteria": {
+        "activate_my_card": "How to activate a card they received; activation not working.",
+        "card_arrival": {
+          "meaning": "Ordered card is overdue / has not arrived after waiting; tracking a card that should already be here.",
+          "examples": [
+            "Is my new bank card on the way and is there a way to track it?"
+          ]
+        },
+        "card_delivery_estimate": {
+          "meaning": "When can I expect my card / how long card delivery takes (incl. to a given country); delivery time/options; express delivery.",
+          "examples": [
+            "When can I expect my card? I live in the US."
+          ]
+        },
+        "card_about_to_expire": {
+          "meaning": "Card is expiring / expired; getting a replacement card, including having it shipped to where they are abroad (e.g. China).",
+          "examples": [
+            "Am I able to get this shipped to China?"
+          ]
+        },
+        "get_physical_card": {
+          "meaning": "Where to find, get or set the PIN for the (physical) card.",
+          "examples": [
+            "How do I find the PIN?",
+            "How do I set my physical card PIN?"
+          ]
+        },
+        "order_physical_card": "How to order a physical card; ordering a new card; cost of ordering a card.",
+        "getting_spare_card": {
+          "meaning": "Getting an additional/extra/spare card, e.g. for a family member; how many cards can I have in total.",
+          "examples": [
+            "How do I go about ordering another card?",
+            "What's the limit on total number of cards I can have?"
+          ]
+        },
+        "getting_virtual_card": "How to get a (non-disposable) virtual card; cost of virtual card.",
+        "get_disposable_virtual_card": "How to get/create a disposable (single-use) virtual card.",
+        "disposable_card_limits": "Limits or restrictions of disposable virtual cards specifically (how many uses, how many disposable cards).",
+        "card_linking": {
+          "meaning": "Linking/adding a card to the app or account; card they already have is not showing in the app.",
+          "examples": [
+            "If my card was lost or stolen can I re-link it?"
+          ]
+        },
+        "visa_or_mastercard": {
+          "meaning": "Is the card Visa or Mastercard; which network; wanting to get a Visa or Mastercard card specifically.",
+          "examples": [
+            "Please help me get a Visa card."
+          ]
+        },
+        "apple_pay_or_google_pay": {
+          "meaning": "Anything involving Apple Pay, Google Pay or phone wallets: adding the card, using them, top-ups via Apple/Google Pay not working.",
+          "examples": [
+            "I got my American Express in Apple Pay, why is top up not working correctly?"
+          ]
+        },
+        "supported_cards_and_currencies": {
+          "meaning": "Which cards (Visa/Mastercard/American Express etc.) and currencies can be used to add money; why a particular card brand does not work for adding money.",
+          "examples": [
+            "Why doesn't it work when I use American Express to try to add money to my account?"
+          ]
+        }
+      }
+    },
+    "card_payments_and_card_problems": {
+      "instructions": {
+        "task": "Which intent does this customer message to a digital bank's support chat express? Pick the single most specific intent.",
+        "guidance": [
+          "Distinguish the channel: card payment vs cash withdrawal (ATM) vs transfer vs top-up.",
+          "Distinguish the problem: pending, declined, failed, reverted, not recognised, fee charged, wrong exchange rate.",
+          "Messages often contain typos (e.g. 'pop-up' or 'topped off my car' for top-up); read for the intended meaning."
+        ]
+      },
+      "criteria": {
+        "card_not_working": {
+          "meaning": "The card does not work / stopped working / something is wrong with the card in general, e.g. failed in several places (not specifically contactless, ATM, or virtual card).",
+          "examples": [
+            "There is something wrong with my card. Tried to use it a few times today in different places and it just didn't work."
+          ]
+        },
+        "contactless_not_working": "Contactless/tap payments not working.",
+        "virtual_card_not_working": {
+          "meaning": "A virtual card does not work / is declined.",
+          "examples": [
+            "What is the reason I got rejected for using my disposable virtual card to pay a subscription to the gym?"
+          ]
+        },
+        "card_acceptance": "Where the card is accepted; will shops/merchants accept it.",
+        "declined_card_payment": {
+          "meaning": "A specific card payment was declined/rejected at a shop or online and they ask why.",
+          "examples": [
+            "I could not get my card to work at a shop."
+          ]
+        },
+        "pending_card_payment": "A payment or purchase is pending or has not gone through yet; what a pending payment means.",
+        "reverted_card_payment?": "A card payment was reverted/returned/cancelled back to the account.",
+        "card_payment_not_recognised": "A card payment/purchase on the account they do not recognise or did not make.",
+        "card_payment_fee_charged": "Charged a fee on a card payment/purchase they made.",
+        "card_payment_wrong_exchange_rate": "Wrong or bad exchange rate applied to a card payment in a foreign currency.",
+        "card_swallowed": "The ATM explicitly kept/swallowed/retained the card."
+      }
+    },
+    "cash_and_atm": {
+      "instructions": {
+        "task": "Which intent does this customer message to a digital bank's support chat express? Pick the single most specific intent.",
+        "guidance": [
+          "Distinguish the channel: card payment vs cash withdrawal (ATM) vs transfer vs top-up.",
+          "Distinguish the problem: pending, declined, failed, reverted, not recognised, fee charged, wrong exchange rate.",
+          "Messages often contain typos (e.g. 'pop-up' or 'topped off my car' for top-up); read for the intended meaning."
+        ]
+      },
+      "criteria": {
+        "atm_support": "Which ATMs accept the card, where to find an ATM, can I use the card at ATMs.",
+        "cash_withdrawal_charge": {
+          "meaning": "Charged a fee for withdrawing cash at an ATM; ATM fees; an unexpected fee when they thought it was free.",
+          "examples": [
+            "Why did I get charged a fee, I thought it was free?"
+          ]
+        },
+        "cash_withdrawal_not_recognised": {
+          "meaning": "A cash withdrawal on the account they did not make; cash transactions showing in the app they do not recognise or did not receive.",
+          "examples": [
+            "THere is some cash that is showing up on my app.",
+            "Please freeze my card. Someone has withdrawn money using my card in odd remote town. I have not done this withdrawal."
+          ]
+        },
+        "declined_cash_withdrawal": "ATM cash withdrawal declined/refused; could not take cash out.",
+        "pending_cash_withdrawal": "A cash withdrawal is showing as pending.",
+        "wrong_amount_of_cash_received": "ATM gave the wrong amount of cash / less cash than requested.",
+        "wrong_exchange_rate_for_cash_withdrawal": {
+          "meaning": "Exchange rate or currency for cash withdrawals / foreign ATMs: which or wrong rate applied when getting cash, withdrawing in home currency abroad.",
+          "examples": [
+            "Can I make a withdraw in my home currency at an ATM? I'm on vacation. Is it possible to withdraw here without any additional costs or fees?",
+            "what is the exchange rate for foreign ATMs"
+          ]
+        }
+      }
+    },
+    "transfers": {
+      "instructions": {
+        "task": "Which intent does this customer message to a digital bank's support chat express? Pick the single most specific intent.",
+        "guidance": [
+          "Distinguish the channel: card payment vs cash withdrawal (ATM) vs transfer vs top-up.",
+          "Distinguish the problem: pending, declined, failed, reverted, not recognised, fee charged, wrong exchange rate.",
+          "Messages often contain typos (e.g. 'pop-up' or 'topped off my car' for top-up); read for the intended meaning."
+        ]
+      },
+      "criteria": {
+        "cancel_transfer": {
+          "meaning": "Wants to cancel, revert or reverse a transfer/transaction they just made (e.g. sent to wrong account); not cancelling a purchase from a merchant.",
+          "examples": [
+            "I want to revert this mornings transaction."
+          ]
+        },
+        "declined_transfer": "An outgoing transfer was declined/rejected by the bank.",
+        "failed_transfer": "An outgoing transfer failed/did not go through (not declined for beneficiary).",
+        "pending_transfer": {
+          "meaning": "A transfer they made is shown as pending / still in progress / taking long to complete (incl. international); how long must I wait for it.",
+          "examples": [
+            "How long do you expect me to wait for the transfer? It finally worked out, but has been pending for a long time and it's quite urgent.",
+            "When will the transaction post to my account?",
+            "It seems like I have been waiting forever for this international transfer. Why is it taking so long? All of the account information is correct, so how long will this take?"
+          ]
+        },
+        "transfer_into_account": "How to transfer/top up money into my account by bank transfer; transferring in not working.",
+        "transfer_not_received_by_recipient": {
+          "meaning": "Money I transferred has not arrived / is not there yet at the recipient or destination account, e.g. sent days ago and still not there.",
+          "examples": [
+            "I have done a transfer within the country the day before yesterday, but it's still not there yet. The account number is the right one.",
+            "I transferred some money but it is not here yet"
+          ]
+        },
+        "transfer_timing": "How long transfers take to arrive (e.g. from a UK account, international); normal time frame for a transfer.",
+        "transfer_fee_charged": {
+          "meaning": "Charged a fee for making a transfer, including higher or increased fees for using the account/banking abroad.",
+          "examples": [
+            "Could you inform me as to why I have been charged a higher fee for doing banking abroad.",
+            "I thought transfers could be made for free. I just made a purchase online from abroad and now see some strange fee.",
+            "I have used this account overseas recently. Has there been an increase in fees that I am unaware of?"
+          ]
+        },
+        "receiving_money": {
+          "meaning": "How to receive money/salary into the account; do I need to add my salary; can someone send me money.",
+          "examples": [
+            "Do I need to add my salary?"
+          ]
+        },
+        "beneficiary_not_allowed": {
+          "meaning": "Cannot add a beneficiary/payee, trouble transferring to a beneficiary, beneficiary not allowed, or a transfer to an account was not cleared/accepted.",
+          "examples": [
+            "My account transfer was not cleared.",
+            "I am having trouble transferring money to a beneficiery."
+          ]
+        },
+        "balance_not_updated_after_bank_transfer": {
+          "meaning": "Money sent into this account by bank transfer (e.g. from their UK account) has not appeared yet / balance not updated; asks the usual time frame because a transfer they just made is not showing.",
+          "examples": [
+            "How long does a transfer from the UK account usually take? After completing the transfer it is not showing up."
+          ]
+        }
+      }
+    },
+    "top_ups": {
+      "instructions": {
+        "task": "Which intent does this customer message to a digital bank's support chat express? Pick the single most specific intent.",
+        "guidance": [
+          "Distinguish the channel: card payment vs cash withdrawal (ATM) vs transfer vs top-up.",
+          "Distinguish the problem: pending, declined, failed, reverted, not recognised, fee charged, wrong exchange rate.",
+          "Messages often contain typos (e.g. 'pop-up' or 'topped off my car' for top-up); read for the intended meaning."
+        ]
+      },
+      "criteria": {
+        "automatic_top_up": "Auto top-up: setting it up, how it works, turning it off.",
+        "pending_top_up": {
+          "meaning": "A top-up is still pending / not completed yet.",
+          "examples": [
+            "Where are my funds? I topped off my car but it didn't seem to complete.",
+            "I'm not certain my top-up went through yet."
+          ]
+        },
+        "top_up_failed": {
+          "meaning": "A top-up failed / did not work / was declined; not sure whether the top-up went through; cannot access money because something is wrong with the top-up.",
+          "examples": [
+            "I'm not sure if my pop-up went through.",
+            "I can't access my money. Is it because somethings wrong with the top-up? I set it up correctly."
+          ]
+        },
+        "top_up_limits": "Limits on top-up amount; maximum top-up.",
+        "top_up_reverted": {
+          "meaning": "A top-up was reverted/cancelled/returned, or money taken for a top-up disappeared / top-up went through then vanished.",
+          "examples": [
+            "I already completed my 3D secure authentication when I tried the crypto top up but it's still not working. I also don't understand what happened to the money in my account"
+          ]
+        },
+        "topping_up_by_card": "How to top up with a card; card top-up questions (not fees, not failed).",
+        "top_up_by_cash_or_cheque": "Can I top up with cash or a cheque.",
+        "top_up_by_bank_transfer_charge": {
+          "meaning": "Questions that mention SWIFT or SEPA transfers (do you receive them, can I do one, is there a fee); fee for bank transfers into the account.",
+          "examples": [
+            "I want to do a swift transfer",
+            "Is there a charge for SEPA transfers?",
+            "Do you receive SWIFT transfers?"
+          ]
+        },
+        "top_up_by_card_charge": "Fee charged for topping up with a card.",
+        "verify_top_up": {
+          "meaning": "Verification code for a top-up card or card transfer (can't find/see the code); verifying a card used to top up.",
+          "examples": [
+            "I don't see the verification code for my card transfer."
+          ]
+        },
+        "balance_not_updated_after_cheque_or_cash_deposit": {
+          "meaning": "Deposited a cheque or cash but the balance has not updated.",
+          "examples": [
+            "the balance has not changed, but I have deposited some money"
+          ]
+        }
+      }
+    },
+    "charges_refunds_and_fx": {
+      "instructions": {
+        "task": "Which intent does this customer message to a digital bank's support chat express? Pick the single most specific intent.",
+        "guidance": [
+          "Distinguish the channel: card payment vs cash withdrawal (ATM) vs transfer vs top-up.",
+          "Distinguish the problem: pending, declined, failed, reverted, not recognised, fee charged, wrong exchange rate.",
+          "Messages often contain typos (e.g. 'pop-up' or 'topped off my car' for top-up); read for the intended meaning."
+        ]
+      },
+      "criteria": {
+        "request_refund": "Wants to request a refund for a purchase; how to get a refund.",
+        "Refund_not_showing_up": "A refund from a merchant has not appeared in the account yet.",
+        "transaction_charged_twice": "Charged twice / duplicate transaction.",
+        "extra_charge_on_statement": {
+          "meaning": "An unexplained extra charge on the statement they do not understand, especially a small amount like £1/$1 (even if it is pending or looks like a purchase).",
+          "examples": [
+            "My statement shows a 1£ purchase pending. I do not remember making this purchase."
+          ]
+        },
+        "direct_debit_payment_not_recognised": {
+          "meaning": "A direct debit on the account they do not recognise; charged by mistake on the debit statement.",
+          "examples": [
+            "I think I was charged by mistake on my debit statement."
+          ]
+        },
+        "exchange_rate": "What exchange rate is used / where to see current rates (not for cash withdrawals).",
+        "exchange_charge": "Fees for exchanging currencies; is there a charge for currency exchange.",
+        "exchange_via_app": "How to exchange/convert money between currencies in the app; which currencies can be exchanged.",
+        "fiat_currency_support": "Which fiat currencies are supported for holding/spending; can I hold X currency."
+      }
+    },
+    "security_and_account": {
+      "instructions": {
+        "task": "Which intent does this customer message to a digital bank's support chat express? Pick the single most specific intent.",
+        "guidance": [
+          "Distinguish the channel: card payment vs cash withdrawal (ATM) vs transfer vs top-up.",
+          "Distinguish the problem: pending, declined, failed, reverted, not recognised, fee charged, wrong exchange rate.",
+          "Messages often contain typos (e.g. 'pop-up' or 'topped off my car' for top-up); read for the intended meaning."
+        ]
+      },
+      "criteria": {
+        "compromised_card": "Worried the card details were compromised/hacked/used by someone else; fraud on the card while they still have it.",
+        "lost_or_stolen_card": {
+          "meaning": "The card was lost or stolen; wants to freeze/block the card immediately; help retrieving a missing card.",
+          "examples": [
+            "Can you provide information for freezing my card immediately?",
+            "Can you help me retrieve my card?"
+          ]
+        },
+        "lost_or_stolen_phone": "Their phone was lost or stolen; access to the app without the phone.",
+        "change_pin": "How to change the card PIN to a new one (not finding it, not blocked).",
+        "pin_blocked": "PIN is blocked after too many wrong attempts; unblock PIN.",
+        "passcode_forgotten": "Forgot the app passcode/password; reset passcode.",
+        "verify_my_identity": "How to verify identity; what documents are needed.",
+        "unable_to_verify_identity": "Trying to verify identity but it fails / cannot complete verification.",
+        "why_verify_identity": "Why identity verification is needed.",
+        "verify_source_of_funds": {
+          "meaning": "Verifying/proving the source of funds; finding out where funds come from or flow; seeing the source of available money.",
+          "examples": [
+            "How can I find out where the funds are flow?",
+            "Can I see my available money?"
+          ]
+        },
+        "age_limit": "Minimum/maximum age to open or use an account; can children/teens use it.",
+        "edit_personal_details": "Change name, address, email, phone or other personal details.",
+        "terminate_account": "Close or delete the account.",
+        "country_support": {
+          "meaning": "Which countries the service/account/card is available in; can people outside the UK/in the EU/US get a card or account; using it abroad or moving country.",
+          "examples": [
+            "Do you provide cards to people not in the UK?",
+            "Can the card be mailed to Europe?"
+          ]
+        }
+      }
+    }
+  }
+}
