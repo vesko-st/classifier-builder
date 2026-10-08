@@ -1,0 +1,111 @@
+{
+  "run_id": "v4-intents-lean-r1",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-08T01:49:49",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 835,
+    "num_turns": 48,
+    "total_cost_usd": 2.1013395999999998
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.78,
+      "note": "v1 flat 77-option choice from description + reading",
+      "test": {
+        "jev": {
+          "accuracy": 0.8429,
+          "macro_f1": 0.8373,
+          "est_cost_usd": 0.353622,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 30,
+      "estimate": 0.82,
+      "note": "v4: owner charge rules (Q1) refined with 8 verification labels; salary->receiving_money",
+      "test": {
+        "jev": {
+          "accuracy": 0.8523,
+          "macro_f1": 0.8471,
+          "est_cost_usd": 0.371603,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 58,
+      "estimate": 0.84,
+      "note": "v7: batch-2 rules (transfer not arrived->recipient, ATM refused->declined, not-allowed->beneficiary, delivery how->estimate, cancelled card payment->reverted), narrowed",
+      "test": {
+        "jev": {
+          "accuracy": 0.8542,
+          "macro_f1": 0.85,
+          "est_cost_usd": 0.400709,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 76,
+      "estimate": 0.85,
+      "note": "e10: 3-member wording-variant ensemble over v10 rules (batch-3 rules: found card->linking, card top-up money gone->topping_up_by_card, rate complaints->card_payment_wrong_exchange_rate, sent-transfer slow->not_received)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8646,
+          "macro_f1": 0.8614,
+          "est_cost_usd": 1.285434,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 94,
+      "estimate": 0.85,
+      "note": "e11: ensemble + batch-4 rules (pending_transfer needs explicit pending status, disappeared purchase->reverted, exchange_charge excludes wrong rate, own-account transfer not showing->balance_not_updated)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8679,
+          "macro_f1": 0.8647,
+          "est_cost_usd": 1.309495,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.86,
+      "note": "e13 FINAL: e11 + pending_transfer covers 'waiting to be processed' (0169)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8662,
+          "macro_f1": 0.863,
+          "est_cost_usd": 1.311048,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -53,13 +53,15 @@ from common import (
 
 ORACLE_MODEL = "claude-opus-5-5"
 # 1: Sonnet 5, answering from the guideline and the 150-record sample only.
-# 2: Opus 5.5, which also explores every labelled pool record through tools before answering.
-ORACLE_VERSION = 2
+# 2: Opus 5.5, which may explore every labelled pool record through tools before answering.
+# 3: as 2, but an answer given before any search is sent back, so every answer rests on a search of the labels.
+# 4: Opus 5.5 answering from the guideline and a fixed note on how all the labels apply it
+#    (tools/infer_policy.py), without searching per question.
+ORACLE_VERSION = 4
 LABEL_COST = 2
 QUESTION_COSTS = (2, 5, 10)
 SAMPLE_SIZE = 150
 MAX_QUESTION_CHARS = 1500
-MAX_TOOL_ROUNDS = 8
 LIST_LIMIT = 25
 SNIPPET_CHARS = 400
 ID_RE = re.compile(r"\b[a-z]{2,4}-(?:pool|val|test)-\d{4}\b")
@@ -75,12 +77,10 @@ asked, not more. Do not recite the whole policy, list every class boundary, or \
 volunteer rules the question did not ask about.
 - Ground answers in the policy and the labelled examples. If they conflict, the \
 labels win. If you are unsure, say so.
-- The sample below is only for orientation. Every labelled record in the pool is \
-available through your tools, and your answers must reflect all of them: before \
-stating a rule, a boundary or how a kind of message is labelled, search the pool \
-for the relevant messages and check how they are actually labelled. Answer as \
-truthfully as that analysis allows. The tools are free for the engineer; do not \
-mention them.
+- Below the policy is a note on how your labels actually apply it, written from \
+all of them. Treat it as your own knowledge of your data: where it differs from \
+the written policy, the note is right, because it describes the labels. The \
+sample is only for orientation. Do not mention the note.
 - Only reveal the label of a record, or cite example records, if the question \
 asks for it. Unrequested examples are billed to the engineer.
 - Speak in plain terms. Do not mention the policy document, how it is \
@@ -183,9 +183,13 @@ def _oracle_context(task: str, question: str) -> str:
     rng = random.Random(f"oracle-sample:{task}")
     sample = rng.sample(pool, min(SAMPLE_SIZE, len(pool)))
 
+    note = TASKS_DIR / task / "private" / "applied_policy.md"
+    if not note.exists():
+        raise OracleError(f"{note} not found; write it with tools/infer_policy.py {task}")
     parts = [
         "# Task as the engineer knows it\n" + json.dumps(public, indent=2),
         "# Labelling policy (private)\n" + guideline(task),
+        "# How the labels apply the policy (private)\n" + note.read_text(),
     ]
     for f in extra_files:
         # Identifiers like "beneficiary_not_allowed" get echoed back verbatim;
@@ -265,34 +269,17 @@ def _run_tool(pool: list[dict], name: str, args: dict) -> str:
     return f"unknown tool {name}"
 
 
-def _consult(client: Any, system: str, question: str, pool: list[dict]) -> tuple[str, dict, int]:
-    """Let the simulated user explore the labelled pool, then return its final text, token usage and tool calls."""
-    messages: list[dict] = [{"role": "user", "content": question}]
-    usage = {"input": 0, "output": 0}
-    calls = 0
-    for round_ in range(MAX_TOOL_ROUNDS + 1):
-        msg = client.messages.create(
-            model=ORACLE_MODEL,
-            max_tokens=8192,
-            thinking={"type": "adaptive"},
-            output_config={"effort": "low"},
-            system=system,
-            tools=TOOLS,
-            tool_choice={"type": "none"} if round_ == MAX_TOOL_ROUNDS else {"type": "auto"},
-            messages=messages,
-        )
-        usage["input"] += msg.usage.input_tokens
-        usage["output"] += msg.usage.output_tokens
-        uses = [b for b in msg.content if getattr(b, "type", None) == "tool_use"]
-        if not uses:
-            return "".join(b.text for b in msg.content if getattr(b, "type", None) == "text"), usage, calls
-        calls += len(uses)
-        messages.append({"role": "assistant", "content": msg.content})
-        messages.append({"role": "user", "content": [
-            {"type": "tool_result", "tool_use_id": b.id, "content": _run_tool(pool, b.name, dict(b.input))}
-            for b in uses
-        ]})
-    raise OracleError("oracle did not answer")
+def _answer(client: Any, system: str, question: str) -> tuple[str, dict]:
+    msg = client.messages.create(
+        model=ORACLE_MODEL,
+        max_tokens=8192,
+        thinking={"type": "adaptive"},
+        output_config={"effort": "medium"},
+        system=system,
+        messages=[{"role": "user", "content": question}],
+    )
+    usage = {"input": msg.usage.input_tokens, "output": msg.usage.output_tokens}
+    return "".join(b.text for b in msg.content if getattr(b, "type", None) == "text"), usage
 
 
 def _parse_reply(text: str) -> dict:
@@ -324,9 +311,7 @@ def ask(run_dir: Path, question: str) -> dict:
 
     load_env()
     client = Anthropic()
-    labelled_pool = read_jsonl(private_dir(run["task"]) / "pool.jsonl")
-    text, usage, tool_calls = _consult(
-        client, SYSTEM + "\n\n" + _oracle_context(run["task"], question), question, labelled_pool)
+    text, usage = _answer(client, SYSTEM + "\n\n" + _oracle_context(run["task"], question), question)
     reply = _parse_reply(text)
     parts_cost = sum(p["cost"] for p in reply["parts"])
     cost = max(parts_cost, LABEL_COST * reply["labels_revealed"])
@@ -353,7 +338,6 @@ def ask(run_dir: Path, question: str) -> dict:
             "cost": cost,
             "oracle_model": ORACLE_MODEL,
             "oracle_version": ORACLE_VERSION,
-            "oracle_tool_calls": tool_calls,
             "oracle_tokens": usage,
         }])
     return {"answer": reply["answer"], "cost": cost, "labels_added": revealed,

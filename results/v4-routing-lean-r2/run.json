@@ -1,0 +1,111 @@
+{
+  "run_id": "v4-routing-lean-r2",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-08T02:34:38",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 543,
+    "num_turns": 39,
+    "total_cost_usd": 1.6337609999999998
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "draft: 77 fine-grained request types mapped to 6 teams by guessed routing",
+      "test": {
+        "jev": {
+          "accuracy": 0.8071,
+          "macro_f1": 0.7896,
+          "est_cost_usd": 0.271608,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 30,
+      "estimate": 0.8,
+      "note": "v2: routing remapped per owner answer (fx errors->disputes, pending card->cards, PIN/passcode->fraud, Apple/Google Pay->cards, top-up verification->account)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9201,
+          "macro_f1": 0.9145,
+          "est_cost_usd": 0.277299,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 50,
+      "estimate": 0.82,
+      "note": "v3: H1 fee tied to transaction->pricing, H2 phone-wallet top-ups->cards, H3 found card->card_linking",
+      "test": {
+        "jev": {
+          "accuracy": 0.9231,
+          "macro_f1": 0.9179,
+          "est_cost_usd": 0.288683,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 70,
+      "estimate": 0.83,
+      "note": "v4: H4 fee vs extra amount, H5 PIN locate->cards, H6 salary currency->payments, H7 card limits->top_up_limits",
+      "test": {
+        "jev": {
+          "accuracy": 0.9269,
+          "macro_f1": 0.9218,
+          "est_cost_usd": 0.305629,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.86,
+      "note": "v7: H8 ATM-kept card->fraud, H9 narrowed fee objection->pricing, H11 external card acceptance->pricing, statement fee->disputes",
+      "test": {
+        "jev": {
+          "accuracy": 0.9377,
+          "macro_f1": 0.9321,
+          "est_cost_usd": 0.328526,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.86,
+      "note": "final: 3-member wording-variant ensemble of v7 (instructions rephrased), same rules",
+      "test": {
+        "jev": {
+          "accuracy": 0.9373,
+          "macro_f1": 0.9319,
+          "est_cost_usd": 0.984741,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

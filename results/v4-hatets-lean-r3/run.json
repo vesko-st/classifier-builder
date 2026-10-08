@@ -1,0 +1,96 @@
+{
+  "run_id": "v4-hatets-lean-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-08T02:31:51",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 633,
+    "num_turns": 50,
+    "total_cost_usd": 2.2531471999999995
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.6,
+      "note": "v1 draft from description: fine options mapped to hate/not_hate; no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.7678,
+          "macro_f1": 0.7674,
+          "est_cost_usd": 0.067928,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 25,
+      "estimate": 0.7,
+      "note": "v2: rules from owner answer (individual women attacks, stacked slurs, body-not-hashtags for immigration)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7712,
+          "macro_f1": 0.7712,
+          "est_cost_usd": 0.093665,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 77,
+      "estimate": 0.7,
+      "note": "e4: 3-wording ensemble; H1 affection overrides stacked slurs; H2 immigration hate needs contempt, not policy/logistics",
+      "test": {
+        "jev": {
+          "accuracy": 0.8007,
+          "macro_f1": 0.8004,
+          "est_cost_usd": 0.289007,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 77,
+      "estimate": 0.72,
+      "note": "e5t: + H3 interjection vs put-down in all variants, hate threshold 0.55",
+      "test": {
+        "jev": {
+          "accuracy": 0.8086,
+          "macro_f1": 0.808,
+          "est_cost_usd": 0.305992,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.72,
+      "note": "e6: + H4 friendly intent toward addressee makes slurs nicknames (all 3 variants), threshold 0.55. Final.",
+      "test": {
+        "jev": {
+          "accuracy": 0.8126,
+          "macro_f1": 0.8118,
+          "est_cost_usd": 0.315338,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

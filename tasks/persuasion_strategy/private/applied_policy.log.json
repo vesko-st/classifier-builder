@@ -1,0 +1,9 @@
+{
+  "task": "persuasion_strategy",
+  "model": "claude-opus-5-5",
+  "seconds": 190,
+  "input": 4237694,
+  "output": 10527,
+  "tool_calls": 40,
+  "rounds": 38
+}

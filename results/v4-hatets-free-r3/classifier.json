@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v4",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "Classify this tweet under a hate-speech annotation policy that protects exactly two target groups: women, and immigrants (refugees, migrants, asylum seekers, illegal aliens, and nationalities such as Mexicans or Africans when framed as migrants). Hostility toward anyone else (men, politicians, Democrats, liberals, Muslims as a religion without migration framing) is not hate under this policy.",
+    "rules": [
+      "Using gendered slurs (bitch, whore, hoe, slut, cunt, 'basic bitch') to label, describe, mock or insult women or a particular woman counts as hate, even when joking or casual, and so does stacking slurs in a personal fight with a woman. The author's motive is not checked.",
+      "Not hate: 'bitch' used as an exclamation or vocative toward a friend in banter ('bitch I'm omw', 'Lil bitch! you can't fuck with me 😂', 'tag me bitch'), affectionate use, calling oneself a bitch or hoe, idioms ('karma's a bitch', 'life's a bitch'), and slurs aimed at a man.",
+      "For immigration tweets the body of the tweet decides, not the hashtags. Plain support for the wall, border enforcement, deportation as legal process, or using 'illegal aliens' as a neutral term is not hate.",
+      "Immigration tweets are hate when they frame crime or disease as typical of immigrants, use dehumanising language (invaders, animals, rapefugees, bottom feeders, parasites), or call for immigrants to be sent back, deported or removed as a group."
+    ]
+  },
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "women_group_degraded": "Degrades, stereotypes or mocks women in general or a type of woman, e.g. 'these hoes', 'bitches think...', 'basic bitch', 'a hoe to a nigga that can't have you', treats women as sexual objects, or endorses rape or violence against women.",
+    "woman_attacked_with_slur": "Labels, insults, mocks or threatens a specific woman or girl as a bitch, whore, hoe, slut, cunt etc., or makes sexual/physical threats against her.",
+    "immigrants_dehumanised_or_criminalised": "Dehumanises immigrants or refugees, or frames crime, rape, disease or welfare abuse as typical of them.",
+    "immigrants_expulsion_call": "Calls for immigrants or refugees to be sent back, deported, removed or kept out as a group (in the tweet's own words, not just a hashtag).",
+    "immigration_politics_plain": "Discusses immigration, the wall, ICE, DACA, border security, or reports news, without degrading immigrants as people; hashtags alone do not make it hate.",
+    "slur_casual_or_friendly": "Uses bitch/hoe as an exclamation or vocative in friendly banter, affectionately, about oneself, or in an idiom, without labelling or degrading a woman.",
+    "insult_other_target": "Insults or attacks a man (including calling a man a bitch or hoe), a politician, or a group other than women or immigrants.",
+    "counter_speech_or_other": "Criticises hate or sexism, or anything else that is not hate."
+  },
+  "map": {
+    "women_group_degraded": "hate",
+    "woman_attacked_with_slur": "hate",
+    "immigrants_dehumanised_or_criminalised": "hate",
+    "immigrants_expulsion_call": "hate",
+    "immigration_politics_plain": "not_hate",
+    "slur_casual_or_friendly": "not_hate",
+    "insult_other_target": "not_hate",
+    "counter_speech_or_other": "not_hate"
+  }
+}

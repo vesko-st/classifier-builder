@@ -1,0 +1,9 @@
+{
+  "task": "tweet_hate_testsplit",
+  "model": "claude-opus-5-5",
+  "seconds": 159,
+  "input": 1243039,
+  "output": 8046,
+  "tool_calls": 35,
+  "rounds": 29
+}

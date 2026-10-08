@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "name": "donation_v7",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "Fundraising chat. One side (the persuader) asks the other side (the persuadee) to give up part of their task earnings as a gift to Save the Children. Afterwards the persuadee makes the real gift privately, and many who promise in the chat do not follow through. Pick the option that best describes the persuadee's stance and how believable their commitment is when the chat ends.",
+    "rules": [
+      "Only the persuadee's own decision matters; ignore what the persuader says they will give.",
+      "Read the whole chat: a commitment made early still counts if the persuadee never takes it back, even when the chat later drifts to small talk.",
+      "If the persuadee changes their mind, the last position they state wins.",
+      "Judge how the amount was reached: offered readily and warmly, or extracted after pushing and haggling.",
+      "A pledge must be stated as a decision (I will give, I'll do, that amount it is, yes to a confirmed amount). If the persuadee only floats an amount as a possibility (maybe, might, I could perhaps) and never confirms it afterwards, choose tentative_amount.",
+      "Agreement without an amount counts only if the persuadee says yes to actually giving from this task's payment (for example in reply to being asked whether they will donate part of their earnings today), or the persuader thanks them for an agreement the persuadee does not dispute. General goodwill (agreeing that helping children is important, saying they will consider it, a vague 'sure' to encouragement, talk of donating elsewhere or in the past) is not agreement: choose undecided or no_decision.",
+      "The task pays at most about two dollars. A pledge of more than that (for example ten, fifty or hundreds of dollars) cannot come from the task and counts as outside_task, even if stated eagerly.",
+      "Talk about money the persuadee gave to charities in the past is not a pledge.",
+      "If the persuadee's messages are garbled, written entirely in capitals, repetitive template text, nonsense, or trolling, choose low_quality whatever they pledged."
+    ]
+  },
+  "state_template": "{{input}}",
+  "criteria": {
+    "full_payment": "The persuadee pledges their entire task payment (all of it, the full amount).",
+    "willing_pledge": "The persuadee offers a specific positive amount or share (less than the full payment) of their own accord: readily, warmly, or after saying the persuader's arguments convinced them, without being pushed or haggled upward.",
+    "reluctant_pledge": "The persuadee concedes an amount only under continued pressure: haggled upward against their wishes, as a token minimum to make the persuader stop, or while annoyed or complaining. Earlier doubts that the persuadee says were resolved do not count as reluctance.",
+    "agreed_no_amount": "The persuadee clearly says yes to giving part of this task's payment, in reply to a request to donate from it, but never names an amount.",
+    "tentative_amount": "The persuadee only mentions an amount as a hedged possibility (maybe, might, I could perhaps) and never turns it into a definite commitment before the chat ends.",
+    "outside_task": "The persuadee pledges more than the task pays (anything over about two dollars, such as tens or hundreds of dollars), or says they will give later, on the charity website, or from other money rather than from this task now.",
+    "low_quality": "The persuadee's side is garbled, all in capitals, template-like, nonsensical, trolling, or rushing just to finish, so their words cannot be taken at face value.",
+    "refused": "The persuadee declines, says zero or nothing, insists they will only give through other channels, or retracts an earlier offer.",
+    "undecided": "The persuadee stays noncommittal (might, will consider it, wants to research first) or only expresses general goodwill toward the cause, and never commits to giving from this task by the end.",
+    "no_decision": "The chat never gets to the persuadee's decision: the donation is never asked about or answered, the talk is off-topic, or the chat stops before an answer."
+  },
+  "map": {
+    "full_payment": "donated",
+    "willing_pledge": "donated",
+    "reluctant_pledge": "donated",
+    "agreed_no_amount": "donated",
+    "tentative_amount": "not_donated",
+    "outside_task": "not_donated",
+    "low_quality": "not_donated",
+    "refused": "not_donated",
+    "undecided": "not_donated",
+    "no_decision": "not_donated"
+  }
+}

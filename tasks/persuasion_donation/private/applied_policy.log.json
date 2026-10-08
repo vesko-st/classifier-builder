@@ -1,0 +1,9 @@
+{
+  "task": "persuasion_donation",
+  "model": "claude-opus-5-5",
+  "seconds": 127,
+  "input": 5018564,
+  "output": 9729,
+  "tool_calls": 31,
+  "rounds": 31
+}

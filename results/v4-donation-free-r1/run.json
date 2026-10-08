@@ -1,0 +1,63 @@
+{
+  "run_id": "v4-donation-free-r1",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:39:04",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 494,
+    "num_turns": 26,
+    "total_cost_usd": 0.8553054
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.6,
+      "note": "v1 draft: final-position options mapped to donated/not; 81% predicted donated",
+      "test": {
+        "jev": {
+          "accuracy": 0.7482,
+          "macro_f1": 0.7263,
+          "est_cost_usd": 0.018531,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 99,
+      "estimate": 0.74,
+      "note": "v6: ensemble of 2 wording variants; specific nonzero amount committed = donated, vague/undecided/refuse/all-caps-or-garbled = not. 40 random labels: acc .825 mF1 .786 (design informed by them; base rate 65% vs owner's 54%)",
+      "test": {
+        "luna": {
+          "accuracy": 0.7122,
+          "macro_f1": 0.7031,
+          "est_cost_usd": 0.083452,
+          "total": 417,
+          "answered": 417
+        },
+        "pplx": {
+          "accuracy": 0.715,
+          "macro_f1": 0.7056,
+          "est_cost_usd": 0.000854,
+          "total": 417,
+          "answered": 414
+        },
+        "jev": {
+          "accuracy": 0.717,
+          "macro_f1": 0.7059,
+          "est_cost_usd": 0.038218,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

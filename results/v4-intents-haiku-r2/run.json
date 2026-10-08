@@ -1,0 +1,94 @@
+{
+  "run_id": "v4-intents-haiku-r2",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T03:31:08",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 351,
+    "num_turns": 55,
+    "total_cost_usd": 0.45090129999999995
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.25,
+      "note": "Initial draft: all 77 classes with descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.7974,
+          "macro_f1": 0.7904,
+          "est_cost_usd": 0.244313,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.35,
+      "note": "After batch 1 labels: refined descriptions, improved from 20% to 40% on labeled data",
+      "test": {
+        "jev": {
+          "accuracy": 0.7974,
+          "macro_f1": 0.7903,
+          "est_cost_usd": 0.249358,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 60,
+      "estimate": 0.38,
+      "note": "After batch 3: refined descriptions again, accuracy 36.7% on 30 labeled (11/30)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8,
+          "macro_f1": 0.7948,
+          "est_cost_usd": 0.263199,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 80,
+      "estimate": 0.82,
+      "note": "After batch 4: embedded batch 4 examples, accuracy 82.5% on 40 labeled (33/40)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8195,
+          "macro_f1": 0.816,
+          "est_cost_usd": 0.317401,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.65,
+      "note": "Final classifier: all 50 labeled records, accuracy 72% on labeled set (36/50). Estimate slightly lower on full distribution since labels are from uncertain records.",
+      "test": {
+        "jev": {
+          "accuracy": 0.8276,
+          "macro_f1": 0.8246,
+          "est_cost_usd": 0.305888,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

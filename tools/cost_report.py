@@ -4,7 +4,7 @@
 
 Columns (USD):
   builder   the builder agent's API cost (summary.json; pilot subagent runs have none)
-  user      the simulated user (oracle_log.jsonl tokens at Claude Sonnet 5 rates)
+  user      the simulated user (oracle_log.jsonl tokens at the rates of the model that answered)
   s1_build  System 1 calls the builder made while building. From
             system1_costs.jsonl when the run logged it; otherwise rebuilt from
             the uncached records of the result files in the run's work dir,
@@ -21,7 +21,8 @@ from pathlib import Path
 from common import ROOT, RUNS_DIR
 
 HARNESS = RUNS_DIR / "_harness"
-USER_RATE = (2.0, 10.0)  # Claude Sonnet 5, USD per 1M input / output tokens
+# USD per 1M input / output tokens; log entries without a model are from the Sonnet 5 simulated user.
+USER_RATES = {"claude-sonnet-5": (2.0, 10.0), "claude-opus-5-5": (5.0, 25.0)}
 JEV_RATE = 0.042  # USD per 1M input tokens
 
 
@@ -41,7 +42,8 @@ def user_cost(run: str) -> float:
     total = 0.0
     for e in read_jsonl(RUNS_DIR / run / "oracle_log.jsonl"):
         t = e.get("oracle_tokens") or {}
-        total += t.get("input", 0) / 1e6 * USER_RATE[0] + t.get("output", 0) / 1e6 * USER_RATE[1]
+        rate_in, rate_out = USER_RATES[e.get("oracle_model", "claude-sonnet-5")]
+        total += t.get("input", 0) / 1e6 * rate_in + t.get("output", 0) / 1e6 * rate_out
     return total
 
 

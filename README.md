@@ -8,9 +8,9 @@ Code and paper for *Building System 1: How Language Agents Construct and Use Cla
 | --- | --- |
 | `skill/` | The classifier-builder skill the agent reads, with the building strategies (`strategies/`) and the rules-only constraint (`constraints/`). |
 | `tools/` | Builder tools (run, label, ask, score, uncertain, sample, diff, threshold, snapshot), the simulated user (`ask_oracle.py`), the headless runner (`run_builder.py`), task preparation, baselines and scoring. |
-| `tasks/` | Task descriptions given to the builder and the private guidelines held by the simulated user. |
+| `tasks/` | Task descriptions given to the builder, and the private guideline and note on how the labels apply it (`applied_policy.md`, written by `tools/infer_policy.py`) held by the simulated user. |
 | `baselines/` | Zero-shot classifiers and baseline score summaries. |
-| `results/` | Every run's final classifier (`classifier.json`), its settings, points spent and the test score of each snapshot on each System 1 model (`run.json`), and an index of all runs (`runs.csv`). Written by `tools/export_results.py`. |
+| `results/` | Every run's final classifier (`classifier.json`), its settings, points spent and the test score of each snapshot on each System 1 model (`run.json`), and an index of all runs (`runs.csv`), whose `simulated_user_version` column marks the runs that asked questions of an earlier simulated user; the paper reports only version 4 and runs that asked nothing. Written by `tools/export_results.py`. |
 | `paper/` | The paper (`acl/paper.tex`, `acl/references.bib`) and the Markdown draft it was converted from (`paper.md`, `md_to_acl.py`). |
 
 ## Setup
@@ -25,6 +25,7 @@ API keys are read from the environment, or from `../.env` as `KEY=VALUE` lines: 
 PY=../.venv/bin/python
 $PY tools/prepare_tasks.py                      # build data/ splits from the public datasets
 $PY tools/zero_shot.py banking77_routing        # zero-shot baseline
+$PY tools/infer_policy.py banking77_routing     # the simulated user's note on its labels (once per task)
 $PY tools/new_run.py banking77_routing --budget 100 --strategy policy_first --run-id demo
 $PY tools/run_builder.py runs/demo --model claude-opus-5-5 --effort high --score
 ```

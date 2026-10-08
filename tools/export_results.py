@@ -8,7 +8,8 @@ For every run under runs/ with saved snapshots, writes
                                        snapshot with points spent, the builder's
                                        estimate and the test score on each System 1 model
 
-and results/runs.csv with one row per run. Bought labels, journals, transcripts
+and results/runs.csv with one row per run, including which version of the simulated
+user answered its questions (the paper reports version 4). Bought labels, journals, transcripts
 and per-record predictions stay in runs/.
 
     python tools/export_results.py [--exclude PREFIX ...]
@@ -86,6 +87,7 @@ def export(run_dir: Path) -> dict | None:
     (dest / "run.json").write_text(json.dumps(record, indent=2, ensure_ascii=False) + "\n")
 
     jev = scores.get(final["version"], {}).get("jev", {})
+    asks = [e for e in _jsonl(run_dir / "oracle_log.jsonl") if e.get("kind") == "ask"]
     return {
         "run_id": run_id,
         "task": settings.get("task"),
@@ -94,6 +96,8 @@ def export(run_dir: Path) -> dict | None:
         "constraints": "+".join(settings.get("constraints", [])),
         "builder_model": record["builder"].get("model", "claude-opus-5-5"),
         "budget": settings.get("budget"),
+        # Version 1 logs predate the field; blank when the run asked no questions.
+        "simulated_user_version": max((e.get("oracle_version", 1) for e in asks), default=None),
         "points_spent": final.get("points_spent"),
         "final_version": final["version"],
         "test_accuracy": jev.get("accuracy"),

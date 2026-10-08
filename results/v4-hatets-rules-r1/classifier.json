@@ -1,0 +1,137 @@
+{
+  "version": 1,
+  "name": "tweet_hate_e16",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "var_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Classify this tweet under a hate-speech annotation policy that covers only hate against women and hate against immigrants/refugees. Judge what the tweet's own words do, and who the target is. Pick the option that best describes the tweet.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogynistic_attack": "An angry, degrading attack on a woman or girl, women as a group, or a person who is not a man: insulting, threatening or sexually objectifying her/them, e.g. 'shut your bitch ass up, your hoe ass...', 'fucking whore', saying women are inferior or deserve harm. Real hostility toward the target is required. Also hate: putting someone down by saying what they are, 'you are (such) a bitch/hoe' ('why r u such a bitch') — not 'bitch' or 'hoe' used as a filler or form of address in ordinary talk ('bitch I ain't got that money', 'turn your map on bitch'), and degrading generalisations about women as hoes or bitches ('I don't follow hoes who are just cute'). Threatening violence against someone called a bitch or hoe ('you can get dragged bitch real quick') is also hate. Telling someone (not a man) to shut up while calling them a whore ('bitch shut the fuck up... ur fuckin whore') is hate.",
+        "slur_at_male_or_unclear_target": "A slur such as bitch, hoe, whore, cunt or son of a bitch used to insult a man (e.g. a male politician), men, or an unknown person in a mild way (e.g. 'whoever unfollowed me, you a bitch'). Not about women. A man is the target when the tweet says so (e.g. 'this dude... shut up little bitch'). The same goes for slurs aimed at a general or unknown audience ('anyone who doubted Louis is just a bitter bitch').",
+        "casual_or_self_slang": "Words like bitch or hoe used casually: addressing someone in a question, joke, banter or mild annoyance ('are those not grapes bitch?', 'you can't expose me on my birthday hoe'), affectionately to a friend, about oneself, as an exclamation or stream of swearing, about a situation, or the author complaining about being called such names. 'Bitch' or 'hoe' as a filler word or form of address ('bitch I ain't got that kinda money', 'okay bitch tf... whore 😜') belongs here. Karma remarks ('karma's a bitch hoe, you gon get yours') belong here.",
+        "immigrant_attack": "The tweet's text says something negative about immigrants, refugees, migrants or 'illegals' themselves: insults or dehumanises them (scum, pigs, savages, rapefugees), calls their arrival an invasion, presents them as criminals, rapists, diseased or a welfare burden (including news of a crime by an illegal immigrant), or itself says they should be deported or sent home. Also counts: a bare exclamation with no political target ('Well stated!', 'Can't be real!?') whose whole message is #DeportThemAll. Using a slur for refugees such as 'rapefugee', even in passing, also counts. Saying illegal immigrants are cheap labour that politicians protect over citizens, with #SendThemBack-type hashtags, also counts. The text itself calling immigration an invasion, even in passing ('walls are a valid response to an invasion'), or saying the country is being given away and cannot sustain them, also counts.",
+        "immigration_politics": "Tweets whose text is about a politician, president, party, Congress or court and what they do (thanks, pleas, advice, criticism, insults), even when they end with #DeportThemAll, #DeportAllOfThem, #BuildTheWall or #SendThemBack — but not when the text mocks or belittles the immigrants themselves (e.g. '@NancyPelosi and her precious illegal aliens! #DeportThemAll' is an attack). The text is about politicians, Democrats/liberals, the media, Twitter, elections, rallies, wall funding or ICE policy (including insults aimed at politicians or liberals), or is a bare slogan or joke with a hashtag, or just uses the term 'illegal aliens', and says nothing negative about immigrants themselves. Slogan hashtags such as #BuildTheWall, #SendThemBack or #SendThemHome do not by themselves make a tweet hateful: an insult at a politician, a neutral news headline about migration, or a vague remark followed by such hashtags is not hateful. Explaining or defending the term 'illegal alien' ('they are here illegally and alien to our soil, hence the term') is not an attack. A vague remark followed by a slogan hashtag ('Australia needs to do nothing of the sort. #sendthemback') is not an attack. A tweet about the media, politicians or election seats that only adds #StopTheInvasion-type hashtags ('the more they lie, the less people listen to MSM #StopTheInvasion', 'Illegals give blue states 20 congressional seats') is not an attack.",
+        "other": "Anything else, not hateful toward women or immigrants."
+      },
+      "map": {
+        "misogynistic_attack": "hate",
+        "slur_at_male_or_unclear_target": "not_hate",
+        "casual_or_self_slang": "not_hate",
+        "immigrant_attack": "hate",
+        "immigration_politics": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "var_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "You annotate tweets for a hate-speech dataset whose policy only covers hatred toward women and toward immigrants or refugees. Decide which description fits this tweet best, judging the tweet's actual message and its target.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogynistic_attack": "Genuinely hostile and degrading toward a woman, girls, women in general, or someone who is not a man: angry insults with slurs (e.g. 'shut your bitch ass up, your hoe ass', 'fucking whore'), threats, sexual objectification, or claims that women are inferior or deserve harm. Also hate: putting someone down by saying what they are, 'you are (such) a bitch/hoe' ('why r u such a bitch') — not 'bitch' or 'hoe' used as a filler or form of address in ordinary talk ('bitch I ain't got that money', 'turn your map on bitch'), and degrading generalisations about women as hoes or bitches ('I don't follow hoes who are just cute'). Threatening violence against someone called a bitch or hoe ('you can get dragged bitch real quick') is also hate. Telling someone (not a man) to shut up while calling them a whore ('bitch shut the fuck up... ur fuckin whore') is hate.",
+        "slur_at_male_or_unclear_target": "Insults a man, men (e.g. a male politician called a whore), or an unknown person mildly ('whoever did this, you a bitch') using words like bitch, hoe, cunt or son of a bitch. Women are not the target. A man is the target when the tweet says so (e.g. 'this dude... shut up little bitch'). The same goes for slurs aimed at a general or unknown audience ('anyone who doubted Louis is just a bitter bitch').",
+        "casual_or_self_slang": "Slang use of bitch/hoe with no real hostility to women: banter, questions, jokes or mild annoyance toward someone ('are those not grapes bitch?'), friendly address, self-description, exclamations or strings of swear words, talk about a situation, or complaining about being called names. 'Bitch' or 'hoe' as a filler word or form of address ('bitch I ain't got that kinda money', 'okay bitch tf... whore 😜') belongs here. Karma remarks ('karma's a bitch hoe, you gon get yours') belong here.",
+        "immigrant_attack": "Says something negative about immigrants, refugees, migrants or illegals themselves: insults or dehumanises them (scum, pigs, savages, rapefugees), calls them an invasion, criminals, rapists, diseased or a drain on welfare (including news of crimes by illegal immigrants), or says they should be deported, sent home or got out of the country. Also counts: a bare exclamation with no political target ('Well stated!', 'Can't be real!?') whose whole message is #DeportThemAll. Using a slur for refugees such as 'rapefugee', even in passing, also counts. Saying illegal immigrants are cheap labour that politicians protect over citizens, with #SendThemBack-type hashtags, also counts. The text itself calling immigration an invasion, even in passing ('walls are a valid response to an invasion'), or saying the country is being given away and cannot sustain them, also counts.",
+        "immigration_politics": "Tweets whose text is about a politician, president, party, Congress or court and what they do (thanks, pleas, advice, criticism, insults), even when they end with #DeportThemAll, #DeportAllOfThem, #BuildTheWall or #SendThemBack — but not when the text mocks or belittles the immigrants themselves (e.g. '@NancyPelosi and her precious illegal aliens! #DeportThemAll' is an attack). Political talk about politicians, Democrats, liberals, the media, Twitter, elections, rallies, the wall or ICE (insults at politicians included), a bare hashtag slogan or joke, or mere use of the term 'illegal aliens' — nothing negative said about immigrants as people. Slogan hashtags such as #BuildTheWall, #SendThemBack or #SendThemHome do not by themselves make a tweet hateful: an insult at a politician, a neutral news headline about migration, or a vague remark followed by such hashtags is not hateful. Explaining or defending the term 'illegal alien' ('they are here illegally and alien to our soil, hence the term') is not an attack. A vague remark followed by a slogan hashtag ('Australia needs to do nothing of the sort. #sendthemback') is not an attack. A tweet about the media, politicians or election seats that only adds #StopTheInvasion-type hashtags ('the more they lie, the less people listen to MSM #StopTheInvasion', 'Illegals give blue states 20 congressional seats') is not an attack.",
+        "other": "None of these; not hateful toward women or immigrants."
+      },
+      "map": {
+        "misogynistic_attack": "hate",
+        "slur_at_male_or_unclear_target": "not_hate",
+        "casual_or_self_slang": "not_hate",
+        "immigrant_attack": "hate",
+        "immigration_politics": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "var_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Under our annotation policy, a tweet is hate speech only if it is hateful toward women or toward immigrants/refugees. Which category does this tweet belong to? Consider who is targeted and whether the hostility is real.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "misogynistic_attack": {
+          "definition": "Real, degrading hostility aimed at a woman, women, or a person who is not a man.",
+          "includes": [
+            "angry slur attacks such as 'shut your bitch ass up, your hoe ass' or 'fucking whore'",
+            "threats or sexual objectification of women",
+            "saying women are inferior or deserve harm",
+            "putting someone down by saying what they are, 'you are (such) a bitch/hoe' ('why r u such a bitch') — not 'bitch' or 'hoe' used as a filler or form of address in ordinary talk ('bitch I ain't got that money', 'turn your map on bitch')",
+            "degrading generalisations about women as hoes or bitches ('I don't follow hoes who are just cute')",
+            "threatening violence against someone called a bitch or hoe ('you can get dragged bitch real quick')",
+            "telling someone (not a man) to shut up while calling them a whore ('bitch shut the fuck up... ur fuckin whore')"
+          ]
+        },
+        "slur_at_male_or_unclear_target": {
+          "definition": "A gendered slur (bitch, hoe, whore, cunt, son of a bitch) aimed at a man, men, or an unknown person in a mild way.",
+          "examples": [
+            "a male senator called a whore",
+            "'whoever unfollowed me you a bitch'",
+            "'this dude... shut the hell up little bitch'",
+            "'anyone who doubted Louis is just a bitter bitch' (a general or unknown audience)"
+          ]
+        },
+        "casual_or_self_slang": {
+          "definition": "bitch/hoe as everyday slang without real hostility.",
+          "includes": [
+            "banter, questions or mild annoyance ('are those not grapes bitch?')",
+            "affection between friends",
+            "talking about oneself",
+            "exclamations or swearing streams",
+            "complaining about being called names",
+            "bitch/hoe/whore as a filler word or form of address ('bitch I ain't got that kinda money', 'okay bitch tf... whore 😜')",
+            "karma remarks ('karma's a bitch hoe, you gon get yours')"
+          ]
+        },
+        "immigrant_attack": {
+          "definition": "Negative claims about immigrants, refugees, migrants or illegals as people, or wanting them removed.",
+          "includes": [
+            "insults or dehumanising terms (scum, pigs, savages, rapefugees)",
+            "invasion talk",
+            "portraying them as criminals, rapists, diseased or welfare burdens, including crime reports about illegal immigrants",
+            "saying they should be deported, sent home or got out",
+            "a bare exclamation with no political target ('Well stated!', 'Can't be real!?') whose whole message is #DeportThemAll",
+            "using a slur for refugees such as 'rapefugee', even in passing",
+            "saying illegal immigrants are cheap labour that politicians protect over citizens, with #SendThemBack-type hashtags",
+            "the text itself calling immigration an invasion, even in passing ('walls are a valid response to an invasion')",
+            "saying the country is being given away or cannot sustain them ('we are giving our country away, we cannot sustain this')"
+          ]
+        },
+        "immigration_politics": {
+          "definition": "Tweets whose text is about a politician, president, party, Congress or court and what they do (thanks, pleas, advice, criticism, insults), even when they end with #DeportThemAll, #DeportAllOfThem, #BuildTheWall or #SendThemBack — but not when the text mocks or belittles the immigrants themselves (e.g. '@NancyPelosi and her precious illegal aliens! #DeportThemAll' is an attack). Immigration-related politics that says nothing negative about immigrants themselves.",
+          "includes": [
+            "talk about politicians, Democrats, liberals, media, Twitter, elections, rallies, the wall or ICE, including insults at politicians",
+            "a bare slogan or joke with a hashtag",
+            "merely using the term 'illegal aliens'",
+            "explaining or defending the term 'illegal alien' ('they are here illegally and alien to our soil, hence the term')",
+            "a vague remark followed by a slogan hashtag ('Australia needs to do nothing of the sort. #sendthemback')",
+            "a tweet about the media, politicians or election seats that only adds #StopTheInvasion-type hashtags ('the more they lie, the less people listen to MSM #StopTheInvasion', 'Illegals give blue states 20 congressional seats')"
+          ],
+          "note": "Slogan hashtags such as #BuildTheWall, #SendThemBack or #SendThemHome do not by themselves make a tweet hateful: an insult at a politician, a neutral news headline about migration, or a vague remark followed by such hashtags is not hateful."
+        },
+        "other": "Anything else, not hateful toward women or immigrants."
+      },
+      "map": {
+        "misogynistic_attack": "hate",
+        "slur_at_male_or_unclear_target": "not_hate",
+        "casual_or_self_slang": "not_hate",
+        "immigrant_attack": "hate",
+        "immigration_politics": "not_hate",
+        "other": "not_hate"
+      }
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.46
+  }
+}

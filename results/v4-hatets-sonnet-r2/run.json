@@ -1,0 +1,64 @@
+{
+  "run_id": "v4-hatets-sonnet-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:12:31",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 150,
+    "num_turns": 22,
+    "total_cost_usd": 0.44838520000000004
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 50,
+      "estimate": 0.7,
+      "note": "criteria v1 from policy answers (draft, no labels)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7911,
+          "macro_f1": 0.791,
+          "est_cost_usd": 0.045824,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 100,
+      "estimate": 0.74,
+      "note": "criteria v2: stricter xeno question (fixes 2 labels, breaks 0); estimate from 25 labels, partly borderline-biased",
+      "test": {
+        "jev": {
+          "accuracy": 0.7871,
+          "macro_f1": 0.7861,
+          "est_cost_usd": 0.048124,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.72,
+      "note": "final: criteria v2; honest estimate ~0.72 (noisy single-bitch tweets are coin flips)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7871,
+          "macro_f1": 0.7861,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

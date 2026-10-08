@@ -1,0 +1,66 @@
+{
+  "run_id": "v4-hatets-lean-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-08T02:23:41",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 618,
+    "num_turns": 41,
+    "total_cost_usd": 1.7215604000000002
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "draft from description + reading; HatEval-style targets women/immigrants",
+      "test": {
+        "jev": {
+          "accuracy": 0.7961,
+          "macro_f1": 0.7955,
+          "est_cost_usd": 0.063922,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 72,
+      "estimate": 0.78,
+      "note": "v7: v1 base + owner rules on immigration body-vs-hashtags, male targets, idioms, group generalisation of hoes; 21/26 bought labels, 9/10 random",
+      "test": {
+        "jev": {
+          "accuracy": 0.8103,
+          "macro_f1": 0.8099,
+          "est_cost_usd": 0.089512,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.8,
+      "note": "final: ensemble of v7,v8,v9 wording variants; 34/40 bought labels (30 boundary), 9/10 random",
+      "test": {
+        "jev": {
+          "accuracy": 0.8058,
+          "macro_f1": 0.8053,
+          "est_cost_usd": 0.281738,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

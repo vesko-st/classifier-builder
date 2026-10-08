@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v2",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "hostile_slur_at_woman": {
+      "instructions": "Is this tweet using a slur (bitch, hoe, cunt) as a hostile attack directed at a woman (individual or women as a group)? Exclude: affectionate use, self-reference, idioms, male targets, exclamations, or reporting misogyny."
+    },
+    "degrade_immigrants_not_politics": {
+      "instructions": "Does the tweet's BODY degrade immigrants/migrants as criminals, animals, welfare drains, job thieves, or frame them as a threat/invasion/taking over the country? Exclude: political attacks on Democrats/Congress/politicians even if they mention immigration; policy discussions about legality, border funding, or legal immigration; and hashtag spam or off-topic uses."
+    }
+  },
+  "rule": [
+    [
+      "hostile_slur_at_woman"
+    ],
+    [
+      "degrade_immigrants_not_politics"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate",
+  "description": "Classify tweets as hateful based on policy: hate toward women via slurs or toward immigrants via dehumanization, not just hashtags"
+}

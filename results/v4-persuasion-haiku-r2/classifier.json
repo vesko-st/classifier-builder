@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "classifier",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Classify the persuader message by the persuasion strategy it uses in this charity donation conversation. Focus on the PRIMARY strategy, even if multiple are present.\n\nKey rules:\n- Greeting: opening social pleasantry (Hi, Hello, How are you)\n- Acknowledgement: short agreement with persuadee's point (You're right, Yes, Exactly)\n- Thank: thanking the persuadee\n- Praise-user: complimenting person/generosity after donation commitment (Great job, You're generous)\n- Emotion-appeal: child suffering, death statistics, war/hunger, sadness, guilt, or stories about a child the charity helped\n- Credibility-appeal: charity description, history, founding, fund percentages, achievements\n- Logical-appeal: reasoning why donation matters, moral arguments (we should help, children are the future), cost comparisons\n- Foot-in-the-door: small amounts are enough/matter (every little helps, pocket change, even pennies)\n- Self-modeling: persuader's own giving (intent, past, habitual)\n- Source-related-inquiry: asking if persuadee knows about Save the Children\n- Task-related-inquiry: opinion questions, Did-you-know quizzes\n- Personal-related-inquiry: questions about persuadee's life, kids, charity involvement\n- Ask-donation-amount: asking for specific amount (How much would you like to donate)\n- Proposition-of-donation: yes/no asks (Would you donate?) or plain statements requesting donation\n- Donation-information: how task donation works (amount ranges, payment methods)\n- Personal-story: persuader's own anecdote when no other strategy dominates - RARE\n- Off-task: genuine tangents - VERY RARE\n- Other: personal chit-chat, hostile remarks, task mechanics",
+  "state_template": "{{input}}",
+  "criteria": {
+    "greeting": "Opening social pleasantry in response to how-are-you questions: Hi, Hello, How are you, I'm doing well, Doing ok here, nice to meet you",
+    "acknowledgement": "Explicit agreement with persuadee's point: You're right, Yes exactly, That's correct, I agree, You make a good point",
+    "thank": "Thanking persuadee: Thank you, Thanks, Much appreciated",
+    "praise-user": "Complimenting person/generosity after donation: Great job, very generous, kind person, you're so thoughtful, that's so generous",
+    "emotion-appeal": "Child suffering, death/war statistics, sadness, guilt, imagining suffering. Stories about a child charity helped. War/violence/hunger affecting children",
+    "credibility-appeal": "Charity description, achievements, history, founding, fund %, credentials, organizational proof: 86% goes to programs, founded 1919, many countries, highly rated, proven track record",
+    "logical-appeal": "Reasoning why donation matters, moral arguments, why-donation-works: donation has impact, children are future, we should all help, investment in future",
+    "foot-in-the-door": "Emphasizes small amounts are enough/matter: every little helps, pocket change, even pennies, just a few dollars, as little as, $1 makes a difference",
+    "self-modeling": "Persuader's own giving: I'll donate $2, I'm a monthly donor, matching offers, I give annually, I have donated",
+    "source-related-inquiry": "Only asks if persuadee knows Save the Children: Have you heard of them, Do you know about them, Are you familiar with Save the Children",
+    "task-related-inquiry": "Opinion/inquiry questions, Did-you-know quizzes, asks for clarification: What do you think, Any questions, Did you know, what do you know about",
+    "personal-related-inquiry": "Questions about persuadee's life, kids, charity involvement, giving history: Do you donate, Have you volunteered, Do you have kids, what charities do you give to",
+    "ask-donation-amount": "Direct ask for specific amount with how-much framing: How much would you donate, What amount were you thinking, How much can you give",
+    "proposition-of-donation": "Yes/no donation asks or plain statements requesting donation: Would you donate, Would you consider giving, we're asking for donations, can you donate",
+    "donation-information": "How task donation works: $0 to $X range, deducted from payment, payment methods, major credit cards, donate button, how to donate",
+    "personal-story": "Persuader's own anecdote (travel experience, work experience, family story) when no other strategy dominates - RARE. Not third-party stories",
+    "off-task": "Genuine tangents unrelated to charity/donation: immigration, animal charities, sports, weather, unrelated topics - VERY RARE",
+    "other": "Catch-all: personal chit-chat about persuader, hostile remarks, bare fillers/acknowledgements (ok, sure, fine, me too), emotional reactions without persuasion content"
+  }
+}

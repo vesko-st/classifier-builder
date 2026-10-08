@@ -1,0 +1,94 @@
+{
+  "run_id": "v4-hatets-labelsfirst-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T02:43:12",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 639,
+    "num_turns": 35,
+    "total_cost_usd": 1.6132173999999997
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 30,
+      "estimate": 0.65,
+      "note": "v1 criteria draft from policy answers (women OR migrants)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7644,
+          "macro_f1": 0.7644,
+          "est_cost_usd": 0.057544,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 64,
+      "estimate": 0.72,
+      "note": "v2 choice with 13 fine options mapped; 16/17 bought labels, check 9/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.7678,
+          "macro_f1": 0.7678,
+          "est_cost_usd": 0.073491,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 64,
+      "estimate": 0.73,
+      "note": "v4 ensemble of 3 wording variants of v3 (tacked-on hashtag rule); 16/17 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7729,
+          "macro_f1": 0.7729,
+          "est_cost_usd": 0.22329,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 84,
+      "estimate": 0.75,
+      "note": "v6 ensemble: casual-address, male-target, reported-slur rules (narrowed by tests)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7837,
+          "macro_f1": 0.7836,
+          "est_cost_usd": 0.263047,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.78,
+      "note": "v10 final: ensemble of 3 variants; +illegal-alien terminology, praise, song titles, deport funding = not_hate; short anti-immigrant hashtag outrage & deport Dreamers = hate. 32/35 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7888,
+          "macro_f1": 0.7887,
+          "est_cost_usd": 0.298056,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

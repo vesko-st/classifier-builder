@@ -1,0 +1,79 @@
+{
+  "run_id": "v4-hatets-free-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:33:06",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 576,
+    "num_turns": 37,
+    "total_cost_usd": 1.4524065999999995
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description: choice with 8 options mapped to hate/not_hate; 62.5% hate on pool",
+      "test": {
+        "jev": {
+          "accuracy": 0.7542,
+          "macro_f1": 0.7539,
+          "est_cost_usd": 0.062884,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 48,
+      "estimate": 0.7,
+      "note": "v3: owner policy + tightened lone-bitch/male-target/politician rules; 11/14 on check (biased: check errors informed rules)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8018,
+          "macro_f1": 0.8016,
+          "est_cost_usd": 0.09641,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 62,
+      "estimate": 0.72,
+      "note": "v4: single-bitch not hate; law-abiding/sympathy immigration not hate; 17/21 on bought labels (biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.795,
+          "macro_f1": 0.7944,
+          "est_cost_usd": 0.101305,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.75,
+      "note": "ens2: v6a+v6b+v5a wording-variant ensemble, hate threshold 0.65; 32/40 bought (F1 .79), 20/25 random check (F1 .80, partly used for rules); pool 47.5% hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8205,
+          "macro_f1": 0.8178,
+          "est_cost_usd": 0.314745,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

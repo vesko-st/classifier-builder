@@ -1,0 +1,138 @@
+{
+  "version": 1,
+  "name": "donation_v6_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v5a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "In this chat a persuader asks the persuadee to give the charity Save the Children some of the money they are earning in this study. After the chat, the persuadee privately chose how much to actually give. Which description best fits the chat, as evidence of whether the persuadee really gave a positive amount?",
+        "guidance": [
+          "Judge the persuadee's final position by the end of the chat. A clear refusal stands unless the persuadee later explicitly commits to giving; vague friendly offers afterwards do not undo it.",
+          "Statements by the persuader about their own donation do not count.",
+          "Pay attention to whether the persuadee is a sincere, engaged participant who understood the study: coherent, on-topic, specific replies. A chat where either side writes garbled, nonsensical, all-capitals or broken text, or where the persuadee only repeats short agreeable replies without engaging, signals a participant who is unlikely to really give.",
+          "The study payment is small, usually up to about two dollars, so giving two dollars, half, or all of the payment is within range. Only an amount clearly above the whole payment (five dollars or more) suggests the persuadee did not understand the setup.",
+          "A persuadee who jokes around, makes flippant or crude remarks, or says they just want to get the task over with is not a sincere participant.",
+          "If the persuadee plans to pay by some other route (mail, card, the charity's website) instead of from the study payment, they are not giving from the study payment."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "pledged_all": "A sincere, coherent persuadee commits to giving their whole payment for the study.",
+        "pledged_amount": "A sincere, coherent persuadee commits to giving a specific positive amount or share within the study payment (cents, a dollar, half).",
+        "agreed_no_amount": "A sincere, coherent persuadee clearly agrees to give from their own study payment and the chat stays on that decision (for example the persuader thanks them for donating and they accept), but no amount is ever named. A passing 'yes' after which the chat drifts to unrelated topics is not agreement.",
+        "out_of_range_amount": "The persuadee names an amount clearly above the whole study payment (five dollars or more), or seems to think the donation is made some other way.",
+        "low_quality_participant": "Either side's messages are garbled, nonsensical, all capitals or broken, or the persuadee only repeats short agreeable replies without engaging, whatever is said about donating.",
+        "tentative_or_later": "The persuadee is only tentative (maybe, will think about it), or says they will give later, on the charity's website, by mail or card, or once paid, rather than now from the study payment.",
+        "skeptic_research": "The persuadee stays skeptical, wants to research the charity first, or ends without deciding.",
+        "stops_at_ask": "The chat ends right when the persuader asks how much they will give, with no answer.",
+        "refused": "The persuadee declines, chooses zero, or says they cannot afford anything.",
+        "never_discussed": "The chat is small talk or off-topic and the persuadee's donation is never discussed.",
+        "insincere_joking": "The persuadee treats the task as a joke or something to rush through: flippant, crude or silly remarks, even if they name an amount."
+      },
+      "map": {
+        "pledged_all": "donated",
+        "pledged_amount": "donated",
+        "agreed_no_amount": "donated",
+        "out_of_range_amount": "not_donated",
+        "low_quality_participant": "not_donated",
+        "tentative_or_later": "not_donated",
+        "skeptic_research": "not_donated",
+        "stops_at_ask": "not_donated",
+        "refused": "not_donated",
+        "never_discussed": "not_donated",
+        "insincere_joking": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v6_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "The persuadee in this conversation was asked to donate some of their pay from this research study to Save the Children. Once the conversation ended, they decided in private how much to hand over. Which situation does the conversation show, as a guide to whether they actually handed over any money?",
+        "rules": [
+          "What counts is where the persuadee stands at the close of the conversation. A firm no remains a no unless they afterwards plainly agree to give; warm but vague offers later on do not reverse it.",
+          "Ignore anything the persuader says about what they themselves will give.",
+          "Real givers tend to be sincere and attentive: their messages are coherent, relevant and specific. If either participant's messages are jumbled, meaningless, written in capitals or in badly broken language, or the persuadee merely echoes brief agreeable answers without taking part, the persuadee probably will not really give.",
+          "Pay for the study is low, normally at most around two dollars, so offering two dollars, half, or the entire pay is realistic. Only a figure well beyond the entire pay (five dollars or more) indicates the persuadee misunderstood how the donation works.",
+          "A persuadee who clowns around, makes flippant or vulgar comments, or wants to hurry through the task is not taking it seriously.",
+          "A persuadee who intends to give through a separate channel (post, credit card, the charity's own site) rather than out of the study pay is not giving out of the study pay."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "pledged_all": "The persuadee, writing sincerely and coherently, promises to give the entire study pay.",
+        "pledged_amount": "The persuadee, writing sincerely and coherently, promises a definite positive sum or fraction that fits within the study pay (some cents, a dollar, half).",
+        "agreed_no_amount": "The persuadee, writing sincerely and coherently, plainly agrees to give out of their own study pay and the conversation remains on that choice (for instance they accept the persuader's thanks for donating), though no sum is ever stated. A brief yes followed by the conversation wandering onto other subjects does not count.",
+        "out_of_range_amount": "The persuadee offers a sum well beyond the entire study pay (five dollars or more), or appears to believe the gift is made in some other way.",
+        "low_quality_participant": "One side or the other writes jumbled, meaningless, all-capitals or badly broken messages, or the persuadee just echoes short agreeable answers without taking part, regardless of what is said about giving.",
+        "tentative_or_later": "The persuadee only hedges (perhaps, will consider it), or says they will give in the future, through the charity's site, by post or card, or after being paid, instead of out of the study pay now.",
+        "skeptic_research": "The persuadee remains doubtful, wants to look into the charity first, or finishes without making up their mind.",
+        "stops_at_ask": "The conversation finishes just as the persuader asks how much they will give, and the persuadee never replies to it.",
+        "refused": "The persuadee says no, picks zero, or says they can't spare anything.",
+        "never_discussed": "The conversation is chit-chat or about other things and whether the persuadee gives never comes up.",
+        "insincere_joking": "The persuadee treats the task as a joke or a chore to rush: flippant, vulgar or silly comments, even when they mention a sum."
+      },
+      "map": {
+        "pledged_all": "donated",
+        "pledged_amount": "donated",
+        "agreed_no_amount": "donated",
+        "out_of_range_amount": "not_donated",
+        "low_quality_participant": "not_donated",
+        "tentative_or_later": "not_donated",
+        "skeptic_research": "not_donated",
+        "stops_at_ask": "not_donated",
+        "refused": "not_donated",
+        "never_discussed": "not_donated",
+        "insincere_joking": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v6_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "goal": "Decide which pattern this charity conversation follows. The persuadee was invited to give part of their earnings from the study to Save the Children and later chose an amount on their own. The pattern should indicate whether they truly gave more than zero.",
+        "definitions": {
+          "final_stance": "Use the persuadee's last stated position. Having said no, they stay a no unless they later make an explicit commitment; friendly vague gestures afterwards are not a commitment.",
+          "whose_words": "Only the persuadee's own commitment matters, not the persuader's plans for their own money.",
+          "sincerity": "Sincere participants write clear, relevant, concrete messages. Garbled, nonsensical, shouted (all caps) or heavily broken writing from either participant, or a persuadee who only gives short repetitive yes-type replies, points to someone unlikely to actually give. So does a persuadee who fools around, makes crude or flippant comments, or wants to finish quickly.",
+          "payment_size": "Study earnings are small, typically two dollars at most; two dollars, half, or everything is a plausible offer. Only offers well over the full earnings (five dollars or more) suggest a misunderstanding.",
+          "channel": "Plans to give by post, card, or on the charity's website instead of from study earnings do not count as giving from study earnings."
+        }
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "pledged_all": "Sincere, coherent persuadee commits all of their study earnings.",
+        "pledged_amount": "Sincere, coherent persuadee commits a concrete positive amount or portion within their study earnings (cents, a dollar, half).",
+        "agreed_no_amount": "Sincere, coherent persuadee clearly says yes to giving from their own study earnings, and the talk stays on that decision (e.g. accepts thanks for the donation), but never states an amount. A quick yes before the talk moves to unrelated matters is not a yes.",
+        "out_of_range_amount": "Persuadee offers well over the full study earnings (five dollars or more), or seems to think the gift happens some other way.",
+        "low_quality_participant": "Garbled, nonsensical, all-caps or heavily broken writing from either participant, or a persuadee giving only short repetitive yes-type replies, whatever the talk says about giving.",
+        "tentative_or_later": "Persuadee only hedges (maybe, will think it over) or will give at a later time, via the website, post or card, or after payment, not now from study earnings.",
+        "skeptic_research": "Persuadee stays doubtful, wants to research the charity first, or ends undecided.",
+        "stops_at_ask": "Talk ends right at the persuader's question about how much, with no reply from the persuadee.",
+        "refused": "Persuadee declines, picks zero, or says they cannot afford any.",
+        "never_discussed": "Talk is social or off-topic; the persuadee's giving never comes up.",
+        "insincere_joking": "Persuadee treats it as a joke or something to rush through, with flippant, crude or silly remarks, even if naming an amount."
+      },
+      "map": {
+        "pledged_all": "donated",
+        "pledged_amount": "donated",
+        "agreed_no_amount": "donated",
+        "out_of_range_amount": "not_donated",
+        "low_quality_participant": "not_donated",
+        "tentative_or_later": "not_donated",
+        "skeptic_research": "not_donated",
+        "stops_at_ask": "not_donated",
+        "refused": "not_donated",
+        "never_discussed": "not_donated",
+        "insincere_joking": "not_donated"
+      }
+    }
+  ]
+}

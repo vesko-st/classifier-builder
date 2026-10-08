@@ -1,0 +1,35 @@
+{
+  "version": 1,
+  "name": "craigslist_deal_v2",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "A buyer and a seller chatted to negotiate the price of a Craigslist item. After the chat the buyer could submit a formal offer that the seller accepts or rejects. Read the whole conversation, paying most attention to how it ends, and decide which pattern best describes how the negotiation ended.",
+    "rules": [
+      "If both sides accepted the same price, it is an agreement, even if pickup, delivery, paperwork, an application or submitting the formal offer still remains.",
+      "If prices went back and forth (at least one offer and one counter-offer) and the chat simply stops on the latest proposal without a reply or a refusal, choose the unanswered counter pattern: the gap was narrowing and the formal offer likely settled it.",
+      "If the only price ever proposed is the buyer's first offer (or no counter was made) and the chat stops there, choose the unanswered opening offer pattern.",
+      "Choose walked away only when someone explicitly refuses the last offer, says they cannot agree, or leaves.",
+      "A chat where the parties were confused about the item or roles counts as broken only if the confusion was never resolved; if they sorted it out and reached agreement, it is an agreement."
+    ]
+  },
+  "state_template": "{{input}}",
+  "criteria": {
+    "mutual_agreement": "Both parties clearly agreed on the same price and terms; the conversation ends with the deal accepted, possibly followed by logistics or thanks.",
+    "agreement_to_finalize_later": "They agreed on a price, and only paperwork, an application, a viewing, payment or submitting the formal offer remains.",
+    "unanswered_counter": "After real back-and-forth haggling (offers and counter-offers from both sides), the chat ends on a proposal, counter-offer or stated lowest price that the other side neither accepts nor refuses.",
+    "unanswered_opening_offer": "The chat ends right after the first price proposal of the negotiation (usually the buyer's opening offer), with no counter-offer or reply.",
+    "walked_away": "One party explicitly refuses the other's final offer, says they cannot agree, or leaves the negotiation.",
+    "no_price_talk": "The conversation stops early, after greetings or questions about the item, before any price was proposed.",
+    "broken_chat": "The chat is confused or broken and never recovers: the parties talk about different items, mix up roles, or complain about the task or website instead of negotiating."
+  },
+  "map": {
+    "mutual_agreement": "deal",
+    "agreement_to_finalize_later": "deal",
+    "unanswered_counter": "deal",
+    "unanswered_opening_offer": "no_deal",
+    "walked_away": "no_deal",
+    "no_price_talk": "no_deal",
+    "broken_chat": "no_deal"
+  }
+}

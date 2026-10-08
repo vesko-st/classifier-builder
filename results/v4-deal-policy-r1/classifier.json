@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "name": "deal_v7_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v6",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "A buyer and a seller chatted about a Craigslist listing. After the chat the buyer may submit a formal offer that the seller accepts or rejects; that outcome is not in the transcript. Which description best fits how the chat ended?",
+        "notes": [
+          "Look mainly at the last few messages, but use the whole chat to see who named which prices.",
+          "Acceptance is often informal and counts as agreement: 'yes', 'ok', 'okay', 'fair enough', 'sounds good', 'thank you!', 'I guess we can settle', 'you've got a deal', or replying to the last price by arranging pickup, delivery, payment or a viewing ('I'll have cash in hand', 'can you pick it up tonight?' 'yes').",
+          "If both sides end up stating the same price, it counts as agreed even when the acceptance is grudging ('I'm sorry but... since you have 9200'), phrased as 'X is a deal' / 'ok, X will do', or a minor term such as who picks it up or delivers is still being discussed.",
+          "An unresolved price gap is not a refusal. Only explicit statements like 'I'll pass', 'no thanks', 'that's too little', 'too far apart' count as walking away.",
+          "Use buyer_counter_last or seller_counter_last only when the last price named got no reply at all, or the reply was a different price."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed": "One side accepted the other's last price or terms in the chat, even informally ('ok', 'thanks!', 'deal', 'I guess we can settle') or by moving on to pickup, delivery, payment or viewing arrangements without objecting to the price; or they say the agreed offer will be submitted. Includes both sides naming the same final price even if acceptance is grudging or a small delivery/pickup detail is still open.",
+        "buyer_counter_last": "The negotiation ends on the BUYER naming a price (a counter-offer, possibly 'final') after the seller has already named or lowered a price, and the seller has not yet answered it.",
+        "seller_counter_last": "The negotiation ends on the SELLER naming a price or counter-offer (e.g. 'I can do 135', 'I'll go 5 lower', 'lowest I can go is 1600') and the buyer never answers it with acceptance or a new price.",
+        "buyer_opening_only": "The buyer made a first offer (often a lowball) and the chat ends before the seller replies to it with any counter-offer.",
+        "walked_away": "One side explicitly refused the last offer and gave up ('I'll pass', 'no thanks', 'that is too little', 'sorry, can't go that low, good luck', 'no.').",
+        "no_price_talk": "The chat is short or only greetings, questions about the item and answers; the buyer never made a price offer and there is no agreement.",
+        "broken_or_confused": "The chat is broken or off-task: talking about the wrong item, confused roles, complaints about the website or task, nonsense, and they never sorted it out into a normal negotiation."
+      },
+      "map": {
+        "agreed": "deal",
+        "buyer_counter_last": "no_deal",
+        "seller_counter_last": "no_deal",
+        "buyer_opening_only": "no_deal",
+        "walked_away": "no_deal",
+        "no_price_talk": "no_deal",
+        "broken_or_confused": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v6b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Below is a Craigslist listing and the chat between a would-be buyer and the seller. (Any formal offer is made after the chat and is not shown.) Pick the description that matches where the conversation stood when it stopped.",
+        "guidance": [
+          "Focus on the final exchanges; read earlier turns to see which prices each side proposed.",
+          "Agreement need not be formal: replies such as 'okay', 'yes', 'thanks!', 'fine, let's settle', 'that works', or going straight to arranging pick-up, drop-off, cash or a visit after a price was named all mean the price was accepted.",
+          "When the two sides land on the same number, treat it as agreed even if one side accepts reluctantly, says 'X is a deal' or 'X will do', or they are still sorting out a small pick-up or delivery detail.",
+          "A gap that is still open is not a rejection. Walking away needs an explicit no: 'I'll pass', 'no thanks', 'too little', 'we're too far apart'.",
+          "Pick buyer_counter_last or seller_counter_last only if the last price got no answer at all or was answered with a different price."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed": "The two sides settled on a price or terms in the chat: one accepted the other's latest price (formally or casually), or they moved on to logistics without objecting to the price, or they mention submitting the agreed offer. Also covers both naming the same final number with a reluctant yes or a small open delivery/pick-up detail.",
+        "buyer_counter_last": "The final price mentioned is a counter-offer from the BUYER (sometimes called 'final'), made after the seller had already quoted or reduced a price, and the seller never responded to it.",
+        "seller_counter_last": "The final price mentioned is a counter-offer or floor from the SELLER (e.g. 'I can do 135', 'lowest is 1600') and the buyer neither accepted it nor proposed another price.",
+        "buyer_opening_only": "The buyer put forward a first offer (often low) and the conversation stopped before the seller countered or answered it.",
+        "walked_away": "Someone explicitly turned down the latest offer and ended the haggling ('I'll pass', 'no thanks', 'that's too little', 'can't go that low, good luck', 'no.').",
+        "no_price_talk": "Little more than greetings or questions and answers about the item; the buyer never proposed a price and nothing was agreed.",
+        "broken_or_confused": "Off-task or broken chat: wrong item, mixed-up roles, complaints about the site or the task, gibberish, never turning into a normal negotiation."
+      },
+      "map": {
+        "agreed": "deal",
+        "buyer_counter_last": "no_deal",
+        "seller_counter_last": "no_deal",
+        "buyer_opening_only": "no_deal",
+        "walked_away": "no_deal",
+        "no_price_talk": "no_deal",
+        "broken_or_confused": "no_deal"
+      }
+    }
+  ]
+}

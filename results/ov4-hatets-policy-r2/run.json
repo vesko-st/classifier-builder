@@ -1,0 +1,93 @@
+{
+  "run_id": "ov4-hatets-policy-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T00:53:16",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 508,
+    "num_turns": 41,
+    "total_cost_usd": 1.7908394000000003
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 37,
+      "estimate": 0.72,
+      "note": "v1 criteria: misogyny&!male_target OR anti_immigrant, from 3 policy Qs + 6 minimal pairs; no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.7831,
+          "macro_f1": 0.7831,
+          "est_cost_usd": 0.08788,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 65,
+      "estimate": 0.74,
+      "note": "v5 ensemble of v1,v3,v4 (variants of immigration hashtag handling); 12/14 labels, 8/10 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.7945,
+          "macro_f1": 0.7944,
+          "est_cost_usd": 0.289823,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 81,
+      "estimate": 0.75,
+      "note": "v7 ensemble of 4 variants with hoes_general clause and hashtag-tweet rules; 20/22 labels, 8/10 random",
+      "test": {
+        "jev": {
+          "accuracy": 0.7633,
+          "macro_f1": 0.7629,
+          "est_cost_usd": 0.455138,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 99,
+      "estimate": 0.76,
+      "note": "v8 = v7 ensemble + hate threshold 0.55 (random labels showed 4 FP / 0 FN); 28/31 labels, 16/19 random",
+      "test": {
+        "luna": {
+          "accuracy": 0.7984,
+          "macro_f1": 0.7977,
+          "est_cost_usd": 0.903506,
+          "total": 1766,
+          "answered": 1766
+        },
+        "pplx": {
+          "accuracy": 0.823,
+          "macro_f1": 0.8215,
+          "est_cost_usd": 0.028443,
+          "total": 1766,
+          "answered": 1763
+        },
+        "jev": {
+          "accuracy": 0.7786,
+          "macro_f1": 0.7786,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

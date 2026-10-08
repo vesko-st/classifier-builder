@@ -1,0 +1,51 @@
+{
+  "version": 1,
+  "name": "classifier",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "classifier",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Classify a tweet as hateful or not. Hate speech targets two groups with hostile degradation: (1) women, via gendered slurs paired with hostility (insults, threats, appearance attacks, stacked slurs); (2) immigrants, via generalizations that degrade them (criminals, invaders, parasites, rapists, lazy, welfare drains, 'can't make it'). Mere presence of slurs is not hate: affectionate language ('You my bff bitch'), self-reference, idioms ('karma's a bitch'), lyrics and exclamations are not_hate. Bare policy views ('#BuildThatWall', enforcement support) are not_hate unless paired with degrading language.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "stacked_or_multiple_slurs": "Multiple gendered slurs (bitch, hoe, cunt) in one tweet, or one slur paired with appearance attacks ('ugly', 'dumb'), threats, or sexual degradation.",
+        "degrade_immigrant_group": "Generalizes immigrants as people: criminals, invaders, parasites, rapists, welfare drains, lazy, 'can't make it', 'bottom feeders'.",
+        "single_slur_hostility": "Single gendered slur aimed in hostility at a woman: not affectionate, not self-ref. Threats like 'I'll beat that bitch' count.",
+        "policy_not_degrading": "Immigration policy, enforcement, border control, deportation support. No degrading language about the people.",
+        "affectionate_or_neutral": "Affectionate slurs ('You my bff bitch'), self-reference, idioms, lyrics, exclamations. Neutral tweets."
+      },
+      "map": {
+        "stacked_or_multiple_slurs": "hate",
+        "degrade_immigrant_group": "hate",
+        "single_slur_hostility": "hate",
+        "policy_not_degrading": "not_hate",
+        "affectionate_or_neutral": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "classifier",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Classify tweet as hateful or not. Hate targets women or immigrants with hostile degradation. For women: gendered slurs ONLY in hostile context—threats, insults, appearance attacks, stacked slurs. For immigrants: slurs dehumanizing them (criminals, invaders, parasites, rapists, welfare drains) OR hostile framing (sarcasm implying typical crime). NOT hate: affectionate slurs, playful/humorous use, self-reference, idioms, lyrics. NOT hate: political views without degrading people.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "hostile_multiple_slurs": "Multiple slurs or slur with appearance/threat attacks. Clearly hostile context, not playful.",
+        "dehumanizing_generalization": "Describes immigrants as subhuman: criminals, invaders, parasites, rapists. Frames crime as typical. Excludes policy discussion.",
+        "hostile_sarcasm_or_irony": "Sarcastic attack on immigrants. Examples: crime news implying typical behavior, 'wonderful criminal'.",
+        "policy_or_factual": "Immigration policy, political support, border discussion, crime reporting. No hostility or dehumanizing language.",
+        "playful_or_affectionate": "Playful/humorous slurs, affectionate use, self-reference, jokes, idioms, lyrics. Friendly tone."
+      },
+      "map": {
+        "hostile_multiple_slurs": "hate",
+        "dehumanizing_generalization": "hate",
+        "hostile_sarcasm_or_irony": "hate",
+        "policy_or_factual": "not_hate",
+        "playful_or_affectionate": "not_hate"
+      }
+    }
+  ]
+}

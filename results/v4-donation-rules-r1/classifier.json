@@ -1,0 +1,170 @@
+{
+  "version": 1,
+  "name": "donation_v9",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v5_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a chat in which a persuader asks the persuadee to donate part of their task payment to Save the Children (the donation is made after the chat, from the task bonus). Did the persuadee end up donating? Judge by how the persuadee leaves things at the end of the chat: a willing agreement means they donated; an offer still wrapped in doubt or reluctance means they did not. The speaker tags are sometimes swapped: when the person tagged 'Persuader' is clearly the one being asked to donate (to Save the Children or to an unnamed children's charity), treat them as the persuadee; a pledge to some other named charity (for example one the tagged persuadee is promoting) does not count. If the chat only talks about a children's charity without naming it, a firm pledge still counts.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "committed_amount": "The persuadee agrees to donate and names, proposes or accepts an amount (even a few cents, even phrased as 'I think 10% is fair'). Once an amount is settled it counts even if they sound grudging about it, mention timing, or said no earlier. An unrealistic amount (more than the task pays, e.g. $50 or $100) still counts as a pledge. A plainly stated amount ('I can give 20 cents', 'i can donate 2 dollars') stays settled even if they refuse the persuader's request to go higher or the chat drifts off topic. A firm pledge ('I will match it') counts even if they go on to talk about other charities they like. Answering 'how much?' readily with an amount or a range ('I want to donate at least $50, maximum $200') also counts. In a rambling chat where both sides just trade how much they donate, the persuadee stating an amount they give (even past or habitual giving, e.g. 'i am donate $100', '5 to 6 dollars or more') counts. 'Yeah, I can do that. A dollar?' counts.",
+        "agreed_no_amount": "The persuadee says yes to donating now when asked, even if they are not sure how much yet; 'I will probably do that for sure' or 'maybe... ok I can' still count as yes when no doubt about the charity follows. A direct 'Ok, I will' to an explicit request to donate counts too, even if the persuader asked them to donate through the website.",
+        "reluctant_offer": "The persuadee only tentatively floats an amount and never settles it themselves: answers the persuader's specific ask with a questioning counter-offer of less ('what about 20 cents?'), or says they would 'probably' / 'maybe' give some amount while still doubting or unfamiliar with the charity, or would rather donate on their own via the website. The persuader thanking them for 'your donation' does not settle it. Also a conditional or vague offer after doubts about affording it, such as 'I could do a dollar or two' or 'I may could .25'. Also giving in to only a token amount (a penny) with 'I think maybe' after saying they need the money.",
+        "evasive_or_hedged": "The persuadee sounds sympathetic or says they want to help, but never actually says they will donate: maybe, might, will think about it, would give if circumstances allow, 'I would like to raise $50', or keeps asking what a normal amount is without ever naming one.",
+        "refused": "The persuadee declines to donate, says they cannot afford it, or wants to keep their payment.",
+        "later_elsewhere": "The persuadee only says they might donate some other time, on their own, through the charity's website ('I will take a look and send in my donation'), or to a different charity, without agreeing to an amount from this task now. This includes a persuadee who on their own initiative only says they will check out the website or consider it and closes with a vague 'I sure will' to the persuader's hope that they donate.",
+        "unclear": "The chat never gets to whether the persuadee will donate.",
+        "other_charity": "Roles reversed for another charity: the person tagged 'Persuadee' explicitly asks the other person to give to a named charity other than Save the Children (for example 'would you like to donate to St Jude Children's Hospital?'). A tagged Persuadee who merely says they support another organization, or asks generally about donating to a children's charity, is not this case."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "reluctant_offer": "not_donated",
+        "evasive_or_hedged": "not_donated",
+        "refused": "not_donated",
+        "later_elsewhere": "not_donated",
+        "unclear": "not_donated",
+        "other_charity": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v5_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Read this Save the Children donation chat. The persuader is trying to get the persuadee to give some of their task earnings, which are deducted after the chat. Decide where the persuadee landed by the end: did they donate? A settled, willing agreement means yes; an amount that was only floated with doubt and never settled means no. Sometimes the speaker labels are swapped; if the person labelled 'Persuader' is plainly the one being asked to give (to Save the Children or an unnamed children's charity), treat them as the persuadee. If the person labelled 'Persuadee' is actually asking the other to give to a different, named charity, nobody donated to Save the Children. A firm pledge to an unnamed children's charity still counts.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "committed_amount": "Agrees to give and settles on an amount, whether they name it, propose it ('10% seems fair') or accept the one offered. Even a few cents counts, and so does a grudging tone, a mention of timing, or an earlier refusal, once the amount is settled. A pledge larger than the task payment (say $50 or $100) still counts. Saying 'I can give X' settles it, even if they then refuse to raise it or the chat wanders off topic. A firm pledge such as 'I will match it' counts even if they then talk about other charities they like. A ready answer to 'how much?' with an amount or range ('I want to donate at least $50, maximum $200') counts as well. In a rambling chat where the two just swap how much they give, the persuadee naming an amount they give (even past or regular giving, like 'i am donate $100' or '5 to 6 dollars or more') counts. 'Yeah, I can do that. A dollar?' counts.",
+        "agreed_no_amount": "Answers the request to donate with a yes, even if unsure of the amount; a casual 'probably, for sure' still counts as yes when no doubt about the charity follows. A direct 'Ok, I will' to an explicit request to donate also counts, even when the persuader pointed them to the website.",
+        "reluctant_offer": "Floats an amount tentatively but never settles it: answers the persuader's specific ask with a questioning counter-offer of less ('what about 20 cents?'), or says 'probably'/'maybe' some amount while still unsure about or unfamiliar with the charity, or would rather give on their own through the website. The persuader saying thanks does not make it settled. Also a conditional, vague offer after worrying about affording it ('I could do a dollar or two', 'I may could .25'). Also caving to just a token amount (a penny) with 'I think maybe' after saying they need the money.",
+        "evasive_or_hedged": "Sympathetic, even says they want to help, but never says they will donate: maybe, might, will think about it, would if circumstances allowed, 'I'd like to raise $50', or keeps asking what is normal and never names an amount.",
+        "refused": "Says no: cannot afford it, wants to keep the payment, or declines.",
+        "later_elsewhere": "Only talks about giving at some other time, on their own, through the charity's website ('I'll have a look and send in my donation'), or to another charity, without agreeing to an amount from this task now. Includes someone who on their own initiative only says they'll check the website or consider it, then answers 'I sure will' to a vague hope that they donate.",
+        "unclear": "The chat never reaches the question of whether they will donate.",
+        "other_charity": "Reversed roles for another charity: the person labelled 'Persuadee' explicitly asks the other to give to a named charity other than Save the Children (e.g. 'would you donate to St Jude?'). Not this if they only mention supporting some other organization or ask generally about giving to a children's charity."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "reluctant_offer": "not_donated",
+        "evasive_or_hedged": "not_donated",
+        "refused": "not_donated",
+        "later_elsewhere": "not_donated",
+        "unclear": "not_donated",
+        "other_charity": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v5_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Predict whether the persuadee donated part of their task payment to Save the Children after this persuasion chat.",
+        "how_to_judge": [
+          "Look at the persuadee's final stance.",
+          "A settled amount or a clear 'I will donate' means donated.",
+          "An amount only floated tentatively, with doubt, and never settled by the persuadee means not donated."
+        ],
+        "speaker_tags": [
+          "Tags are sometimes swapped: if the person tagged 'Persuader' is clearly the one asked to give (to Save the Children or an unnamed children's charity), judge that person; their pledge, e.g. 'I pay fully', counts.",
+          "If the tagged Persuadee explicitly asks the other person to give to a different, named charity (e.g. St Jude), the answer is not donated.",
+          "A firm pledge to a children's charity that is never named still counts."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "committed_amount": {
+          "definition": "The persuadee agrees to donate and an amount is settled.",
+          "includes": [
+            "names an amount",
+            "proposes one, e.g. 'I think 10% is fair'",
+            "accepts the persuader's amount",
+            "a few cents",
+            "sounds grudging, mentions timing, or refused earlier, but settled the amount",
+            "an unrealistically large amount, more than the task pays (e.g. $50, $100)",
+            "states 'I can give X' and then refuses to raise it",
+            "states an amount and the chat then drifts off topic",
+            "a firm pledge ('I will match it') followed by talk of other charities they like",
+            "readily answers 'how much?' with an amount or range, e.g. 'I want to donate at least $50, maximum $200'",
+            "in a rambling chat where both sides trade how much they donate, states an amount they give, even past or habitual giving ('i am donate $100', '5 to 6 dollars or more')",
+            "'Yeah, I can do that. A dollar?'"
+          ]
+        },
+        "agreed_no_amount": {
+          "definition": "The persuadee clearly says they will donate now.",
+          "includes": [
+            "not sure how much yet",
+            "'I will probably do that for sure'",
+            "a yes that starts with 'maybe' but is not followed by doubts about the charity",
+            "a direct 'Ok, I will' to an explicit request to donate, even if the persuader pointed them to the website"
+          ]
+        },
+        "reluctant_offer": {
+          "definition": "The persuadee floats an amount tentatively and never settles it.",
+          "includes": [
+            "answers the persuader's specific ask with a questioning counter-offer of less ('what about 20 cents?')",
+            "'probably' or 'maybe' an amount while doubtful about or unfamiliar with the charity",
+            "prefers to donate on their own via the website",
+            "a conditional or vague offer after doubts about affording it, e.g. 'I could do a dollar or two', 'I may could .25'",
+            "caves to only a token amount (a penny) with 'I think maybe' after saying they need the money"
+          ],
+          "excludes": [
+            "counts as unsettled even if the persuader thanks them"
+          ]
+        },
+        "evasive_or_hedged": {
+          "definition": "Sympathetic, but never says they will donate.",
+          "includes": [
+            "maybe",
+            "might",
+            "will think about it",
+            "would if circumstances allowed",
+            "says they want to help or 'would like to raise $50' but never says they will donate",
+            "keeps asking what a normal amount is and never names one"
+          ]
+        },
+        "refused": {
+          "definition": "Declines to donate.",
+          "includes": [
+            "cannot afford it",
+            "wants to keep the payment"
+          ]
+        },
+        "later_elsewhere": {
+          "definition": "Only mentions giving later, on their own, or to another charity, with no amount agreed from this task now.",
+          "includes": [
+            "will look at the website and send in a donation themselves",
+            "on their own initiative only says they'll check the website or consider it, then a vague 'I sure will' to the persuader's hope that they donate"
+          ]
+        },
+        "unclear": {
+          "definition": "The chat never gets to whether the persuadee will donate."
+        },
+        "other_charity": {
+          "definition": "Roles reversed for a different charity: the tagged Persuadee explicitly asks the other person to donate to a named charity other than Save the Children (e.g. St Jude Children's Hospital).",
+          "excludes": [
+            "the tagged Persuadee only mentions supporting another organization",
+            "a general request to give to a children's charity",
+            "a tagged Persuadee who pledges money themselves"
+          ]
+        }
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "reluctant_offer": "not_donated",
+        "evasive_or_hedged": "not_donated",
+        "refused": "not_donated",
+        "later_elsewhere": "not_donated",
+        "unclear": "not_donated",
+        "other_charity": "not_donated"
+      }
+    }
+  ]
+}

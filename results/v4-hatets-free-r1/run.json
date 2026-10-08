@@ -1,0 +1,64 @@
+{
+  "run_id": "v4-hatets-free-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:30:50",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 394,
+    "num_turns": 27,
+    "total_cost_usd": 1.0162320000000002
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.6,
+      "note": "v1 draft from description: 5 options mapped to hate/not_hate; predicts 65% hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7373,
+          "macro_f1": 0.7364,
+          "est_cost_usd": 0.047753,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 55,
+      "estimate": 0.78,
+      "note": "v3: stricter women-side hostility rule; 0.95 on 20 check labels but tuned on them",
+      "test": {
+        "jev": {
+          "accuracy": 0.8148,
+          "macro_f1": 0.8111,
+          "est_cost_usd": 0.079128,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.78,
+      "note": "v9: 2-member wording ensemble; immigration presence-hostility rule, vocative-bitch not hate, slur-as-put-down hate, friendly teasing not hate. 19/20 check (tuned on), 13/15 uncertain (tuned on)",
+      "test": {
+        "jev": {
+          "accuracy": 0.808,
+          "macro_f1": 0.8048,
+          "est_cost_usd": 0.198976,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

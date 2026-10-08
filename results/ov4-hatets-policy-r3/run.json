@@ -1,0 +1,108 @@
+{
+  "run_id": "ov4-hatets-policy-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T00:53:16",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 478,
+    "num_turns": 38,
+    "total_cost_usd": 1.5990416
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.55,
+      "note": "v0 draft from description: misogyny OR anti-immigrant criteria; 70% hate on pool, likely over-predicts",
+      "test": {
+        "jev": {
+          "accuracy": 0.6874,
+          "macro_f1": 0.6822,
+          "est_cost_usd": 0.032919,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 36,
+      "estimate": 0.68,
+      "note": "v1 policy-mirroring criteria: misogyny OR immigrant_hate (body, not hashtags) OR deport_cheer; 608 hate / 392 not",
+      "test": {
+        "jev": {
+          "accuracy": 0.7769,
+          "macro_f1": 0.7769,
+          "est_cost_usd": 0.058285,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 66,
+      "estimate": 0.7,
+      "note": "v3 ensemble: fine-grained choice+map and criteria, unknown-gender slur targets count as women, deport_cheer narrowed; 591 hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7661,
+          "macro_f1": 0.7661,
+          "est_cost_usd": 0.130738,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 90,
+      "estimate": 0.72,
+      "note": "v5 ensemble of three choice+map versions (v3c,v4c,v5c); 20/22 bought labels (biased to hard cases), 9/10 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.7673,
+          "macro_f1": 0.7673,
+          "est_cost_usd": 0.214538,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.74,
+      "note": "final: v5 ensemble (three choice+map phrasings); 24/27 bought labels incl. 4/5 fresh near-ties after snapshot v04, 9/10 random check",
+      "test": {
+        "luna": {
+          "accuracy": 0.7758,
+          "macro_f1": 0.7757,
+          "est_cost_usd": 0.494215,
+          "total": 1766,
+          "answered": 1766
+        },
+        "pplx": {
+          "accuracy": 0.8017,
+          "macro_f1": 0.8004,
+          "est_cost_usd": 0.005828,
+          "total": 1766,
+          "answered": 1765
+        },
+        "jev": {
+          "accuracy": 0.7673,
+          "macro_f1": 0.7673,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

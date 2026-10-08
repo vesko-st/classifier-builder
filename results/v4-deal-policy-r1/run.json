@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-deal-policy-r1",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:29:14",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 382,
+    "num_turns": 39,
+    "total_cost_usd": 1.4812537999999997
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "draft from description: 5 end-state options mapped to deal/no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.8883,
+          "macro_f1": 0.8633,
+          "est_cost_usd": 0.01629,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 28,
+      "estimate": 0.79,
+      "note": "policy-mirroring: 6 end-state options; open late gap -> deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.8797,
+          "macro_f1": 0.8151,
+          "est_cost_usd": 0.022841,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 68,
+      "estimate": 0.84,
+      "note": "7 end-state options; only in-chat agreement -> deal; unanswered counters (either side) -> no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.8986,
+          "macro_f1": 0.8741,
+          "est_cost_usd": 0.024332,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 90,
+      "estimate": 0.85,
+      "note": "v4 + informal acceptance / logistics count as agreement (moved 8, 4 confirmed by labels)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9072,
+          "macro_f1": 0.8836,
+          "est_cost_usd": 0.026777,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.845,
+      "note": "v5 + same-final-price counts as agreed (fixed 3 labelled near-ties, moved 0 unlabelled)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9089,
+          "macro_f1": 0.8847,
+          "est_cost_usd": 0.029246,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.845,
+      "note": "final: 2-member wording-variant ensemble of v6; same label score, steadier near-ties",
+      "test": {
+        "jev": {
+          "accuracy": 0.9089,
+          "macro_f1": 0.8847,
+          "est_cost_usd": 0.055998,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

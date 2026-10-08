@@ -1,0 +1,370 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v8",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v6a",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "misogyny": {
+          "instructions": "Does this tweet use a gendered slur or degrading sexual term (bitch, hoe, whore, slut, cunt, thot, skank) to insult, degrade, sexually objectify or threaten a woman, girl, an @user addressee, or women in general?",
+          "criteria": {
+            "true": {
+              "definition": "The slur is aimed at someone as an insult or put-down, or describes women as a group degradingly.",
+              "includes": [
+                "hostile insults at the person addressed: '@user shut up bitch', 'you a obsessed hoe, move on'",
+                "stacked slurs ('dumb bitch ass hoe', 'whore ... bitch'), even in semi-playful jabs",
+                "insults in ordinary personal fights, including woman-on-woman trash talk about a named or described woman",
+                "statements about women in general: 'these hoes ain't loyal', 'bitches will whore around', including rap lyrics",
+                "threats or rape jokes about women"
+              ]
+            },
+            "false": {
+              "definition": "The word is not used to put down a woman or women.",
+              "includes": [
+                "filler or exclamation of surprise or amusement: 'bitch I'm on my way', 'uh BITCH i would've bought them', '@user Bitch what with my brand new uniform', 'Bitch, I'm fun for the whole family'",
+                "self-reference: 'I'm a whole new bitch', 'most sensitive bitch in the world'",
+                "affectionate banter: 'love you hoe', birthday wishes",
+                "idioms: 'life's a bitch', 'karma's a bitch', 'son of a bitch'",
+                "general rudeness at an unknown stranger: 'whoever took my parking spot is a bitch'",
+                "tweets reporting, quoting critically or condemning misogyny",
+                "tweets with no gendered slur"
+              ]
+            }
+          }
+        },
+        "male_target": {
+          "instructions": "Is the person being insulted in this tweet clearly a man or boy (e.g. a named man, a male politician, referred to as he/him, 'bitch boy', 'nigga' as the target)?",
+          "criteria": {
+            "true": "The insulted person is clearly male.",
+            "false": "The insulted person is a woman or girl, of unknown gender, women in general, or nobody is insulted."
+          }
+        },
+        "anti_immigrant": {
+          "instructions": "Judging by the tweet's own words (not just the hashtags it carries), is this tweet hostile to immigrants, refugees, migrants or 'illegal aliens' as people?",
+          "criteria": {
+            "true": {
+              "includes": [
+                "dehumanising or slur terms for them: invaders, rapefugees, fakefugees, bottom feeders, parasites, 'third world' scum - even when the tweet mainly attacks a politician",
+                "calls to remove the people themselves: send them back, get them out, go home, deport them all, I'll pay the plane fare",
+                "crime stories framed as typical of illegal aliens/migrants ('another illegal alien...', 'every day a crime by an illegal'), especially with deportation hashtags",
+                "claims that they steal jobs, use stolen IDs, drain welfare, spread disease, or that they are the poor being imported",
+                "calls for violence or harm against them, ironic mockery of them",
+                "a very short approving tweet made up mainly of deportation hashtags ('Well stated! #BuildThatWall #DeportThemAll')"
+              ]
+            },
+            "false": {
+              "includes": [
+                "neutral policy talk about the wall, borders, DACA, ICE funding or legal process",
+                "tweets attacking Democrats, Congress, liberals, Obama, the media or Twitter, with #DeportThemAll or #BuildThatWall tacked on",
+                "general pro-Trump / MAGA posts and hashtag spam, off-topic uses of the hashtags",
+                "hostility to Muslims, Jews, Black people or other groups with no migrant angle",
+                "tweets defending immigrants or criticising anti-immigrant hashtags"
+              ]
+            }
+          }
+        },
+        "hoes_general": {
+          "instructions": "Does this tweet talk about women or girls in general, or about third-person women, with degrading terms like hoes, bitches, whores or sluts (e.g. 'chasing hoes', 'that's what the hoes do', 'these bitches ain't loyal', 'fucking these hoes', 'bitches will whore around'), including rap-lyric style lines?",
+          "criteria": {
+            "true": "Women or girls as a group, or women being talked about, are called hoes/bitches/whores/sluts in a degrading way.",
+            "false": "No such degrading reference to women: the slur is only an exclamation, self-reference, idiom, affectionate, aimed at one man, or the tweet criticises misogyny."
+          }
+        }
+      },
+      "rule": [
+        [
+          "misogyny",
+          "!male_target"
+        ],
+        [
+          "hoes_general"
+        ],
+        [
+          "anti_immigrant"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v6b",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "misogyny": {
+          "instructions": "Does this tweet use a gendered slur or degrading sexual term (bitch, hoe, whore, slut, cunt, thot, skank) to insult, degrade, sexually objectify or threaten a woman, girl, an @user addressee, or women in general?",
+          "criteria": {
+            "true": {
+              "definition": "The slur is aimed at someone as an insult or put-down, or describes women as a group degradingly.",
+              "includes": [
+                "hostile insults at the person addressed: '@user shut up bitch', 'you a obsessed hoe, move on'",
+                "stacked slurs ('dumb bitch ass hoe', 'whore ... bitch'), even in semi-playful jabs",
+                "insults in ordinary personal fights, including woman-on-woman trash talk about a named or described woman",
+                "statements about women in general: 'these hoes ain't loyal', 'bitches will whore around', including rap lyrics",
+                "threats or rape jokes about women"
+              ]
+            },
+            "false": {
+              "definition": "The word is not used to put down a woman or women.",
+              "includes": [
+                "filler or exclamation of surprise or amusement: 'bitch I'm on my way', 'uh BITCH i would've bought them', '@user Bitch what with my brand new uniform', 'Bitch, I'm fun for the whole family'",
+                "self-reference: 'I'm a whole new bitch', 'most sensitive bitch in the world'",
+                "affectionate banter: 'love you hoe', birthday wishes",
+                "idioms: 'life's a bitch', 'karma's a bitch', 'son of a bitch'",
+                "general rudeness at an unknown stranger who annoyed the author: 'whoever took my parking spot is a bitch', 'whoever got the last pair of shoes you a bitch', 'whoever stole my purse... bitch'",
+                "tweets reporting, quoting critically or condemning misogyny",
+                "tweets with no gendered slur"
+              ]
+            }
+          }
+        },
+        "male_target": {
+          "instructions": "Who is the gendered slur (bitch, hoe, whore, cunt, slut) in this tweet aimed at? Is that target clearly a man or boy (a named man, a male politician, someone referred to as he/him, 'bitch boy')?",
+          "criteria": {
+            "true": "The slur is aimed at a man or boy.",
+            "false": "The slur is aimed at a woman or girl, at women in general ('these hoes'), at someone of unknown gender, or there is no slur - even if men are mentioned elsewhere in the tweet."
+          }
+        },
+        "anti_immigrant": {
+          "instructions": "Judging by the tweet's own words (not just the policy hashtags it carries), is this tweet hostile to immigrants, refugees, migrants or 'illegal aliens' as people? Exception: a slur word for refugees or migrants (rapefugee, invaders, marauders) counts even when it appears only as a hashtag. '#IllegalAliens', #BuildThatWall, #DeportThemAll and #SendThemBack are policy hashtags, not slurs.",
+          "criteria": {
+            "true": {
+              "includes": [
+                "dehumanising or slur terms for them, in the text or as a hashtag: invaders, rapefugees, fakefugees, marauders, bottom feeders, parasites - even when the tweet mainly attacks a politician or another group",
+                "calls to remove the people themselves: send them back, get them out, go home, deport them all, I'll pay the plane fare",
+                "crime stories framed as typical of illegal aliens/migrants ('another illegal alien...', 'every day a crime by an illegal'), especially with deportation hashtags",
+                "claims that they steal jobs, use stolen IDs, drain welfare, spread disease, or that they are the poor being imported",
+                "calls for violence or harm against them, ironic mockery of them",
+                "a very short approving tweet made up mainly of deportation hashtags ('Well stated! #BuildThatWall #DeportThemAll')"
+              ]
+            },
+            "false": {
+              "includes": [
+                "neutral policy talk about the wall, borders, DACA, ICE funding or legal process",
+                "tweets attacking Democrats, Congress, liberals, Obama, the media or Twitter, with #DeportThemAll or #BuildThatWall tacked on",
+                "general pro-Trump / MAGA posts and hashtag spam, off-topic uses of the hashtags",
+                "hostility to Muslims, Jews, Black people or other groups with no migrant angle",
+                "tweets defending immigrants or criticising anti-immigrant hashtags"
+              ]
+            }
+          }
+        },
+        "hoes_general": {
+          "instructions": "Does this tweet talk about women or girls in general, or about third-person women, with degrading terms like hoes, bitches, whores or sluts (e.g. 'chasing hoes', 'that's what the hoes do', 'these bitches ain't loyal', 'fucking these hoes', 'bitches will whore around'), including rap-lyric style lines?",
+          "criteria": {
+            "true": "Women or girls as a group, or women being talked about, are called hoes/bitches/whores/sluts in a degrading way.",
+            "false": "No such degrading reference to women: the slur is only an exclamation, self-reference, idiom, affectionate, aimed at one man, or the tweet criticises misogyny."
+          }
+        }
+      },
+      "rule": [
+        [
+          "misogyny",
+          "!male_target"
+        ],
+        [
+          "hoes_general"
+        ],
+        [
+          "anti_immigrant"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v6c",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "misogyny": {
+          "instructions": "Does this tweet use a gendered slur or degrading sexual term (bitch, hoe, whore, slut, cunt, thot, skank) to insult, degrade, sexually objectify or threaten a woman, girl, an @user addressee, or women in general?",
+          "criteria": {
+            "true": {
+              "definition": "The slur is aimed at someone as an insult or put-down, or describes women as a group degradingly.",
+              "includes": [
+                "hostile insults at the person addressed: '@user shut up bitch', 'you a obsessed hoe, move on'",
+                "stacked slurs ('dumb bitch ass hoe', 'whore ... bitch'), even in semi-playful jabs",
+                "insults in ordinary personal fights, including woman-on-woman trash talk about a named or described woman",
+                "statements about women in general: 'these hoes ain't loyal', 'bitches will whore around', including rap lyrics",
+                "threats or rape jokes about women"
+              ]
+            },
+            "false": {
+              "definition": "The word is not used to put down a woman or women.",
+              "includes": [
+                "filler or exclamation of surprise or amusement: 'bitch I'm on my way', 'uh BITCH i would've bought them', '@user Bitch what with my brand new uniform', 'Bitch, I'm fun for the whole family'",
+                "self-reference: 'I'm a whole new bitch', 'most sensitive bitch in the world'",
+                "affectionate banter: 'love you hoe', birthday wishes",
+                "idioms: 'life's a bitch', 'karma's a bitch', 'son of a bitch'",
+                "general rudeness at an unknown stranger who annoyed the author: 'whoever took my parking spot is a bitch', 'whoever got the last pair of shoes you a bitch', 'whoever stole my purse... bitch'",
+                "tweets reporting, quoting critically or condemning misogyny",
+                "tweets with no gendered slur"
+              ]
+            }
+          }
+        },
+        "male_target": {
+          "instructions": "Who is the gendered slur (bitch, hoe, whore, cunt, slut) in this tweet aimed at? Is that target clearly a man or boy (a named man, a male politician, someone referred to as he/him, 'bitch boy')?",
+          "criteria": {
+            "true": "The slur is aimed at a man or boy.",
+            "false": "The slur is aimed at a woman or girl, at women in general ('these hoes'), at someone of unknown gender, or there is no slur - even if men are mentioned elsewhere in the tweet."
+          }
+        },
+        "anti_immigrant": {
+          "instructions": "Is this tweet hostile to immigrants, refugees, migrants, dreamers or 'illegal aliens' as people? Read the whole tweet, including hashtags: a tweet that is mostly anti-immigrant hashtags with a short comment is hostile, but a news headline, link, or attack on politicians with such hashtags tacked on is not.",
+          "criteria": {
+            "true": {
+              "includes": [
+                "dehumanising or slur terms for them, in the text or as a hashtag: invaders, rapefugees, fakefugees, marauders, bottom feeders, parasites - even when the tweet mainly attacks a politician or another group",
+                "calls to remove the people themselves: send them back, get them out, go home, deport them all, I'll pay the plane fare",
+                "crime stories framed as typical of illegal aliens/migrants ('another illegal alien...', 'every day a crime by an illegal'), especially with deportation hashtags",
+                "claims that they steal jobs, use stolen IDs, drain welfare, spread disease, or that they are the poor being imported",
+                "calls for violence or harm against them, ironic mockery of them",
+                "a very short approving tweet made up mainly of deportation hashtags ('Well stated! #BuildThatWall #DeportThemAll')",
+                "short tweets made mostly of anti-immigrant hashtags plus a one-line comment ('this is infiltration #BuildThatWall #DeportThemAll', 'USA NEEDS TO WAKE UP! #NoRefugees #NoMigrants')",
+                "ironic or sarcastic jabs ('Another wonderful dreamer youngster #NoDACA')"
+              ]
+            },
+            "false": {
+              "includes": [
+                "news headlines, article titles or links with slogan hashtags appended ('Spanish town's mayor pleads for help after surge in migration #SendThemBack')",
+                "defending the term 'illegal aliens' or complaining that Twitter or the left bans it ('#IllegalAliens is TRUTH')",
+                "economic or legal policy arguments ('DACA lowers wages, we need E-Verify')",
+                "neutral policy talk about the wall, borders, DACA, ICE funding or legal process",
+                "tweets attacking Democrats, Congress, liberals, Obama, the media or Twitter, with #DeportThemAll or #BuildThatWall tacked on",
+                "general pro-Trump / MAGA posts and hashtag spam, off-topic uses of the hashtags",
+                "hostility to Muslims, Jews, Black people or other groups with no migrant angle",
+                "tweets defending immigrants or criticising anti-immigrant hashtags"
+              ]
+            }
+          }
+        },
+        "hoes_general": {
+          "instructions": "Does this tweet talk about women or girls in general, or about third-person women, with degrading terms like hoes, bitches, whores or sluts (e.g. 'chasing hoes', 'that's what the hoes do', 'these bitches ain't loyal', 'fucking these hoes', 'bitches will whore around'), including rap-lyric style lines?",
+          "criteria": {
+            "true": "Women or girls as a group, or women being talked about, are called hoes/bitches/whores/sluts in a degrading way.",
+            "false": "No such degrading reference to women: the slur is only an exclamation, self-reference, idiom, affectionate, aimed at one man, or the tweet criticises misogyny."
+          }
+        }
+      },
+      "rule": [
+        [
+          "misogyny",
+          "!male_target"
+        ],
+        [
+          "hoes_general"
+        ],
+        [
+          "anti_immigrant"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v6d",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "misogyny": {
+          "instructions": "Does this tweet use a gendered slur or degrading sexual term (bitch, hoe, whore, slut, cunt, thot, skank) to insult, degrade, sexually objectify or threaten a woman, girl, an @user addressee, or women in general?",
+          "criteria": {
+            "true": {
+              "definition": "The slur is aimed at someone as an insult or put-down, or describes women as a group degradingly.",
+              "includes": [
+                "hostile insults at the person addressed: '@user shut up bitch', 'you a obsessed hoe, move on'",
+                "stacked slurs ('dumb bitch ass hoe', 'whore ... bitch'), even in semi-playful jabs",
+                "insults in ordinary personal fights, including woman-on-woman trash talk about a named or described woman",
+                "statements about women in general: 'these hoes ain't loyal', 'bitches will whore around', including rap lyrics",
+                "threats or rape jokes about women"
+              ]
+            },
+            "false": {
+              "definition": "The word is not used to put down a woman or women.",
+              "includes": [
+                "filler or exclamation of surprise or amusement: 'bitch I'm on my way', 'uh BITCH i would've bought them', '@user Bitch what with my brand new uniform', 'Bitch, I'm fun for the whole family'",
+                "self-reference: 'I'm a whole new bitch', 'most sensitive bitch in the world'",
+                "affectionate banter: 'love you hoe', birthday wishes",
+                "idioms: 'life's a bitch', 'karma's a bitch', 'son of a bitch'",
+                "general rudeness at an unknown stranger: 'whoever took my parking spot is a bitch'",
+                "tweets reporting, quoting critically or condemning misogyny",
+                "tweets with no gendered slur"
+              ]
+            }
+          }
+        },
+        "male_target": {
+          "instructions": "Who is the gendered slur (bitch, hoe, whore, cunt, slut) in this tweet aimed at? Is that target clearly a man or boy (a named man, a male politician, someone referred to as he/him, 'bitch boy')?",
+          "criteria": {
+            "true": "The slur is aimed at a man or boy.",
+            "false": "The slur is aimed at a woman or girl, at women in general ('these hoes'), at someone of unknown gender, or there is no slur - even if men are mentioned elsewhere in the tweet."
+          }
+        },
+        "anti_immigrant": {
+          "instructions": "Judging by the tweet's own words (not the hashtags it carries), is this tweet hostile to immigrants, refugees, migrants or 'illegal aliens' as people? Hashtags never count on their own - slogans like #BuildThatWall, #DeportThemAll, #SendThemBack, #StopTheInvasion, #DefendEurope, #WhiteGenocide, #IllegalAliens do not make a tweet hostile. The one exception is a slur word for refugees such as #Rapefugee, which counts wherever it appears.",
+          "criteria": {
+            "true": {
+              "includes": [
+                "dehumanising or slur terms for them, in the text or as a hashtag: invaders, rapefugees, fakefugees, marauders, bottom feeders, parasites - even when the tweet mainly attacks a politician or another group",
+                "calls to remove the people themselves: send them back, get them out, go home, deport them all, I'll pay the plane fare",
+                "crime stories framed as typical of illegal aliens/migrants ('another illegal alien...', 'every day a crime by an illegal'), especially with deportation hashtags",
+                "claims that they steal jobs, use stolen IDs, drain welfare, spread disease, or that they are the poor being imported",
+                "calls for violence or harm against them, ironic mockery of them",
+                "a very short approving tweet made up mainly of deportation hashtags ('Well stated! #BuildThatWall #DeportThemAll')"
+              ]
+            },
+            "false": {
+              "includes": [
+                "news headlines, article titles or links with anti-immigrant slogan hashtags appended ('Spanish town's mayor pleads for help after surge in migration #SendThemBack')",
+                "defending the term 'illegal aliens' or complaining that Twitter or the left bans it ('#IllegalAliens is TRUTH', 'That's what they are - #IllegalAliens')",
+                "neutral policy talk about the wall, borders, DACA, ICE funding or legal process",
+                "tweets attacking Democrats, Congress, liberals, Obama, the media or Twitter, with #DeportThemAll or #BuildThatWall tacked on",
+                "general pro-Trump / MAGA posts and hashtag spam, off-topic uses of the hashtags",
+                "hostility to Muslims, Jews, Black people or other groups with no migrant angle",
+                "tweets defending immigrants or criticising anti-immigrant hashtags"
+              ]
+            }
+          }
+        },
+        "hoes_general": {
+          "instructions": "Does this tweet talk about women or girls in general, or about third-person women, with degrading terms like hoes, bitches, whores or sluts (e.g. 'chasing hoes', 'that's what the hoes do', 'these bitches ain't loyal', 'fucking these hoes', 'bitches will whore around'), including rap-lyric style lines?",
+          "criteria": {
+            "true": "Women or girls as a group, or women being talked about, are called hoes/bitches/whores/sluts in a degrading way.",
+            "false": "No such degrading reference to women: the slur is only an exclamation, self-reference, idiom, affectionate, aimed at one man, or the tweet criticises misogyny."
+          }
+        }
+      },
+      "rule": [
+        [
+          "misogyny",
+          "!male_target"
+        ],
+        [
+          "hoes_general"
+        ],
+        [
+          "anti_immigrant"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.55
+  }
+}

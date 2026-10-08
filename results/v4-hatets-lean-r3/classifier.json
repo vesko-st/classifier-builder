@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "name": "e6",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "e6_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate-speech annotation policy whose protected targets are women and immigrants (including refugees, migrants and illegal immigrants). Pick the option that best describes what the body of the tweet does.",
+        "notes": [
+          "Hate against women: hostile gendered slurs or threats aimed at a woman or girl (any motive, including personal fights and trash talk between women), generalisations that demean women as a category (also inside song lyrics), sexual degradation, and endorsing violence against women.",
+          "Not hate: a single gendered slur used as an exclamation, filler, term of affection, self-description, or venting about a situation; insults aimed at men; criticism of sexism.",
+          "Hate against immigrants: dehumanising or stereotyping them, explicit calls to deport, send back or remove them, short tweets that merely approve of deportation slogans, and crime reports presented as typical of immigrants with deportation slogans attached.",
+          "Not hate: the hashtags do not decide. Support for the border wall, border security or immigration law, attacks on politicians, Democrats or the media, and political chatter are not hate unless the body itself denigrates immigrants or calls for their removal."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "woman_slur_attack": "Insults, degrades or threatens a specific woman or girl, or a person addressed as a woman, with hostile gendered slurs (bitch, hoe, whore, slut, cunt), in any context including personal quarrels. The slur must be used to put the person down; a slur that only serves as an exclamation or a way of addressing someone, while the message itself is chat, news, excitement or bragging, does not count.",
+        "stacked_slurs_playful": "Piles several gendered slurs onto a person in a mocking, taunting or hostile way, even when half-joking. Not when the tweet plainly expresses love, friendship, praise or celebration of that person.",
+        "women_group_derogation": "Demeans women or girls as a category: generalises that women are whores, gold-diggers, worthless or sexual objects, talks contemptuously about 'hoes' or 'bitches' as a group, including in quoted rap lyrics.",
+        "sexual_violence_women": "Endorses, jokes about or threatens rape or violence against women.",
+        "casual_slur": "Uses gendered words casually: as an exclamation, filler, greeting, self-description, boasting, venting about a situation or an object, or affectionately addressing a friend with love or praise (even with more than one slur), with no woman being demeaned. This includes opening or punctuating a friendly, excited, surprised or boastful message with the word as an interjection or form of address. When the message is friendly toward the person it addresses (wishing them well, inviting them, asking to talk, praising or missing them), the slurs are nicknames and this option applies however many there are.",
+        "slur_at_man": "Insults a man or male public figure, even with gendered slurs.",
+        "criticises_sexism": "Criticises people who use slurs against women, reports being called a slur, or discusses the words themselves without attacking anyone.",
+        "immigrant_dehumanising": "Dehumanises or stereotypes immigrants or refugees as a group: invaders, rapists, criminals, parasites, animals, disease carriers, welfare cheats, job thieves, or a threat to the nation or race.",
+        "immigrant_removal_call": "The body itself demands, with hostility or contempt toward them, that immigrants, refugees or illegal aliens be deported, sent back, sent home, kept out or removed.",
+        "approving_slogan_only": "A very short tweet whose only content is approval or agreement plus deportation or send-back slogans, with no other topic.",
+        "immigrant_crime_typical": "Reports a crime by an immigrant or illegal alien framed as typical or as a reason to deport them, often with deportation slogans.",
+        "wall_or_policy_support": "Supports building or funding the border wall, border security, enforcing immigration law, or ending DACA, or discusses the cost, numbers, logistics or effectiveness of the wall or of deportation, without contempt for immigrants themselves.",
+        "attacks_politicians": "The body attacks or mocks politicians, Democrats, liberals, the media or officials; immigration hashtags are attached but immigrants are not the target.",
+        "politics_or_news": "Other political chatter, news headlines, rallies, elections, discussion of terminology, a bare reaction or slogan with no stated target, or unrelated topics with hashtags attached.",
+        "other": "Anything else that does not attack women or immigrants."
+      },
+      "map": {
+        "woman_slur_attack": "hate",
+        "stacked_slurs_playful": "hate",
+        "women_group_derogation": "hate",
+        "sexual_violence_women": "hate",
+        "casual_slur": "not_hate",
+        "slur_at_man": "not_hate",
+        "criticises_sexism": "not_hate",
+        "immigrant_dehumanising": "hate",
+        "immigrant_removal_call": "hate",
+        "approving_slogan_only": "hate",
+        "immigrant_crime_typical": "hate",
+        "wall_or_policy_support": "not_hate",
+        "attacks_politicians": "not_hate",
+        "politics_or_news": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "e6_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Under an annotation policy that protects only two groups, women and immigrants (refugees, migrants and people who entered illegally count as immigrants), what is this tweet doing?",
+        "policy": [
+          "Counts as hate toward women: attacking or threatening a woman or girl with hostile gendered insults, whatever the reason (personal fights and women trash-talking each other included); sweeping put-downs of women as a group, even when quoted from songs; sexual degradation; approval of violence against women.",
+          "Does not count: one gendered swear word used as an interjection, filler, affectionate nickname, self-label or complaint about circumstances; insults directed at men; tweets condemning sexism.",
+          "Counts as hate toward immigrants: dehumanising them or casting them as a group in a negative stereotype, explicitly demanding they be deported, sent back or removed, bare approval of deportation slogans, and crimes reported as typical of immigrants alongside deportation slogans.",
+          "Does not count: judge the body of the tweet, not the hashtags. Backing the wall, border security or immigration enforcement, going after politicians, Democrats or the press, and general political talk are not hate unless the text itself runs down immigrants or demands their removal."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "woman_slur_attack": "Aims hostile gendered insults (bitch, hoe, whore, slut, cunt) or threats at a particular woman or girl, or someone spoken to as a woman, for any reason including a personal argument. It only applies when the word actually belittles the person; when it is merely an interjection or a way of calling to someone in a message that is otherwise chatty, excited, informative or boastful, it does not apply.",
+        "stacked_slurs_playful": "Heaps more than one gendered insult on someone while mocking, taunting or being hostile, even if partly joking; does not apply when the tweet is clearly loving, friendly, praising or celebrating the person.",
+        "women_group_derogation": "Runs down women or girls as a whole: claims women are whores, gold-diggers, worthless or mere sex objects, or speaks with contempt about 'hoes' or 'bitches' in general, song lyrics included.",
+        "sexual_violence_women": "Approves of, jokes about or threatens rape of or violence toward women.",
+        "casual_slur": "Gendered words used loosely: interjection, filler, greeting, describing oneself, bragging, complaining about a situation or thing, or calling a friend names out of love or praise (even more than one), where no woman is put down. Covers starting or peppering an excited, surprised, friendly or bragging message with the word as an exclamation or way of addressing someone. If the tweet is friendly toward whoever it addresses (good wishes, an invitation, wanting to talk, praise, missing them), the slurs act as nicknames and this option fits no matter how many appear.",
+        "slur_at_man": "Insults directed at a man or a male public figure, gendered words included.",
+        "criticises_sexism": "Condemns people who use slurs on women, reports having been called a slur, or talks about the words themselves without attacking anyone.",
+        "immigrant_dehumanising": "Treats immigrants or refugees as a group as subhuman or as a negative stereotype: invaders, rapists, criminals, parasites, animals, carriers of disease, welfare cheats, job stealers, or a danger to the nation or race.",
+        "immigrant_removal_call": "The text itself, in a hostile or contemptuous way toward them, demands that immigrants, refugees or illegal aliens be deported, sent back, sent home, kept out or removed.",
+        "approving_slogan_only": "A very short tweet that only expresses agreement or approval and adds deportation or send-back slogans, with no other subject.",
+        "immigrant_crime_typical": "A report of a crime committed by an immigrant or illegal alien, presented as typical of them or as grounds for deportation, usually with deportation slogans.",
+        "wall_or_policy_support": "Backs building or paying for the border wall, border security, enforcement of immigration law, or ending DACA, or talks about the cost, numbers, logistics or whether the wall or deportation works, without running down immigrants as people.",
+        "attacks_politicians": "The text goes after politicians, Democrats, liberals, the press or officials; immigration hashtags are added but immigrants are not the ones attacked.",
+        "politics_or_news": "Other political talk, news headlines, rallies, elections, arguments about terminology, a bare reaction or slogan that names no target, or off-topic content with hashtags added.",
+        "other": "Anything else that attacks neither women nor immigrants."
+      },
+      "map": {
+        "woman_slur_attack": "hate",
+        "stacked_slurs_playful": "hate",
+        "women_group_derogation": "hate",
+        "sexual_violence_women": "hate",
+        "casual_slur": "not_hate",
+        "slur_at_man": "not_hate",
+        "criticises_sexism": "not_hate",
+        "immigrant_dehumanising": "hate",
+        "immigrant_removal_call": "hate",
+        "approving_slogan_only": "hate",
+        "immigrant_crime_typical": "hate",
+        "wall_or_policy_support": "not_hate",
+        "attacks_politicians": "not_hate",
+        "politics_or_news": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "e6_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This tweet is being annotated for hate speech. The policy protects women and immigrants (refugees, migrants and illegal immigrants included) and no other group. Decide on the tweet's main text rather than its hashtags. Hateful toward women: hostile gendered slurs or threats at a woman or girl for any reason, contemptuous generalisations about women (lyrics included), sexual degradation, approval of violence against women. Not hateful: a lone gendered swear used as exclamation, filler, endearment, self-description or venting; insults at men; criticism of sexism. Hateful toward immigrants: dehumanising them or stereotyping them as a group, explicitly demanding deportation or removal, bare approval of deportation slogans, crimes framed as typical of immigrants with deportation slogans. Not hateful: support for the wall, border security or enforcement, attacks on politicians, Democrats or media, and other political talk, unless the text itself demeans immigrants or demands their removal. Which description fits best?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "woman_slur_attack": "Hostile name-calling or threats against a specific woman or girl (or someone addressed as female) using gendered slurs such as bitch, hoe, whore, slut or cunt; motive does not matter, quarrels included. Requires a real put-down of the person; not when the slur is just an exclamation or term of address in an otherwise chatty, excited, informative or boastful message.",
+        "stacked_slurs_playful": "Several gendered slurs piled on one person in a mocking, taunting or hostile tone, even if half in jest; excluded when the tweet obviously shows love, friendship, praise or celebration.",
+        "women_group_derogation": "Contempt for women or girls collectively: says women are whores, gold-diggers, worthless or sex objects, or sneers at 'hoes' or 'bitches' as a class, quoted lyrics included.",
+        "sexual_violence_women": "Rape or violence against women endorsed, joked about or threatened.",
+        "casual_slur": "Loose use of gendered words: exclamation, filler, greeting, self-label, bragging, venting at a situation or object, or loving or praising nicknames for a friend (even two or more), with no woman demeaned. Includes the word as an interjection or term of address opening or punctuating a friendly, excited, surprised or boastful message. A message friendly toward its addressee (well-wishing, inviting, asking to talk, praising, missing them) uses the slurs as nicknames, so this fits regardless of their number.",
+        "slur_at_man": "Insult aimed at a man or male public figure, even with gendered slurs.",
+        "criticises_sexism": "Calls out people who use slurs on women, recounts being called a slur, or discusses the words without attacking anyone.",
+        "immigrant_dehumanising": "Immigrants or refugees as a group dehumanised or stereotyped: invaders, rapists, criminals, parasites, animals, disease bearers, welfare cheats, job thieves, or a threat to nation or race.",
+        "immigrant_removal_call": "Main text explicitly and contemptuously wants immigrants, refugees or illegal aliens deported, sent back, sent home, kept out or removed.",
+        "approving_slogan_only": "Very short: nothing but approval or agreement plus deportation or send-back slogans, no other subject.",
+        "immigrant_crime_typical": "Crime by an immigrant or illegal alien reported as typical of them or as a reason for deportation, often with deportation slogans.",
+        "wall_or_policy_support": "Support for building or funding the wall, border security, immigration enforcement or ending DACA, or talk of the cost, numbers, logistics or effectiveness of the wall or deportation, without demeaning immigrants as people.",
+        "attacks_politicians": "Main text attacks or mocks politicians, Democrats, liberals, the media or officials; immigration hashtags tacked on, immigrants not the target.",
+        "politics_or_news": "Other political commentary, headlines, rallies, elections, terminology debates, a bare reaction or slogan with no named target, or unrelated content with hashtags tacked on.",
+        "other": "Anything else not attacking women or immigrants."
+      },
+      "map": {
+        "woman_slur_attack": "hate",
+        "stacked_slurs_playful": "hate",
+        "women_group_derogation": "hate",
+        "sexual_violence_women": "hate",
+        "casual_slur": "not_hate",
+        "slur_at_man": "not_hate",
+        "criticises_sexism": "not_hate",
+        "immigrant_dehumanising": "hate",
+        "immigrant_removal_call": "hate",
+        "approving_slogan_only": "hate",
+        "immigrant_crime_typical": "hate",
+        "wall_or_policy_support": "not_hate",
+        "attacks_politicians": "not_hate",
+        "politics_or_news": "not_hate",
+        "other": "not_hate"
+      }
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.55
+  }
+}

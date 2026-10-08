@@ -1,0 +1,124 @@
+{
+  "run_id": "v4-routing-labelsfirst-r3",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T02:47:46",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1065,
+    "num_turns": 40,
+    "total_cost_usd": 1.7355785999999997
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 25,
+      "estimate": 0.75,
+      "note": "v1 draft: 80 intent options mapped to 6 teams per phase-1 policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.9377,
+          "macro_f1": 0.9345,
+          "est_cost_usd": 0.298514,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 45,
+      "estimate": 0.82,
+      "note": "v2: +cancel_order, exchange_overcharged, cash_withdrawal_rates -> disputes; check 10/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.9399,
+          "macro_f1": 0.9372,
+          "est_cost_usd": 0.313132,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 71,
+      "estimate": 0.86,
+      "note": "v4: SWIFT/transfer types->pricing, cash withdrawal not in balance->cards, direct debit refund->fraud, sharper beneficiary/source-of-funds/visa descriptions; 23/23 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9416,
+          "macro_f1": 0.939,
+          "est_cost_usd": 0.324645,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 87,
+      "estimate": 0.87,
+      "note": "ens2: 3 flat wording variants of v6 options (two_level member dropped); 29/31 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9422,
+          "macro_f1": 0.94,
+          "est_cost_usd": 1.262278,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 87,
+      "estimate": 0.88,
+      "note": "ens3: ens2 + pending unspecified payment->cards, own Visa/MC usable->cards; 31/31 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9412,
+          "macro_f1": 0.9394,
+          "est_cost_usd": 1.277413,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.89,
+      "note": "ens4: salary/receiving currencies->payments, accept my credit card/US card top-up->pricing, crypto purchase blocked->account, unexpected fees abroad->pricing; 36/37 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9464,
+          "macro_f1": 0.945,
+          "est_cost_usd": 1.296429,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 99,
+      "estimate": 0.89,
+      "note": "ens5 FINAL: ens4 + generic 'cancel a transaction' -> payments (cancel_transfer); 37/37 bought labels (tuned on them; random check 10/10)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9458,
+          "macro_f1": 0.9442,
+          "est_cost_usd": 1.30031,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

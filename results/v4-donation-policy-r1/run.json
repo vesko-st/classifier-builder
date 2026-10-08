@@ -1,0 +1,64 @@
+{
+  "run_id": "v4-donation-policy-r1",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:28:38",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 353,
+    "num_turns": 42,
+    "total_cost_usd": 1.4786626000000005
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 47,
+      "estimate": 0.6,
+      "note": "v1 draft: 8 owner-defined stance groups, ensemble of nested maps so P(donated)~owner's stated group rate; threshold 0.5 (rate>=0.44 => donated)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7122,
+          "macro_f1": 0.6739,
+          "est_cost_usd": 0.144919,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 47,
+      "estimate": 0.63,
+      "note": "v2: broadened spam/low-effort group (12 recs); threshold 0.7 so only willing/full pledges => donated (owner-rate expected macro-F1 0.644)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6715,
+          "macro_f1": 0.6711,
+          "est_cost_usd": 0.155428,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.64,
+      "note": "v3 final: v2 groups, threshold 0.66 (willing-dominant pledges => donated). 26 labels: acc 0.69/mF1 0.685; random check n=12 mF1 0.667; owner-rate model ~0.64",
+      "test": {
+        "jev": {
+          "accuracy": 0.693,
+          "macro_f1": 0.693,
+          "est_cost_usd": 0.0,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,139 @@
+{
+  "run_id": "v4-donation-rules-r1",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:47:44",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 965,
+    "num_turns": 67,
+    "total_cost_usd": 2.7429715999999997
+  },
+  "final_version": 8,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description: 6 fine options mapped to 2 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.7194,
+          "macro_f1": 0.6922,
+          "est_cost_usd": 0.019092,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.66,
+      "note": "round1: hedged intent = not donated (H1), firm amount = donated (H2), swapped tags only for Save the Children (H3)",
+      "test": {
+        "jev": {
+          "accuracy": 0.741,
+          "macro_f1": 0.7255,
+          "est_cost_usd": 0.021176,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 38,
+      "estimate": 0.68,
+      "note": "round2: reluctant/tentative offers not donated (H4 narrowed), settled amount even grudging = donated, other-charity role reversal option",
+      "test": {
+        "jev": {
+          "accuracy": 0.7362,
+          "macro_f1": 0.7211,
+          "est_cost_usd": 0.024749,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 38,
+      "estimate": 0.69,
+      "note": "3-member wording-variant ensemble of v4f + unrealistic pledge amounts still count",
+      "test": {
+        "jev": {
+          "accuracy": 0.7362,
+          "macro_f1": 0.7211,
+          "est_cost_usd": 0.075857,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 52,
+      "estimate": 0.7,
+      "note": "round3: 'probably, for sure' = yes (H6); stated amount stays settled when refusing to raise; deferring to website = not donated (H7)",
+      "test": {
+        "jev": {
+          "accuracy": 0.741,
+          "macro_f1": 0.7249,
+          "est_cost_usd": 0.080744,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 66,
+      "estimate": 0.7,
+      "note": "round4: conditional/ranged offers tentative (H8), wanting to help without 'I will' = not donated (H9), swapped tags extend to unnamed charity; other_charity only for an explicit named-charity request",
+      "test": {
+        "jev": {
+          "accuracy": 0.741,
+          "macro_f1": 0.7268,
+          "est_cost_usd": 0.085613,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 80,
+      "estimate": 0.7,
+      "note": "round5: question-form amount never restated = not donated (H4b); firm pledge counts despite other-charity talk; direct 'Ok, I will' counts; self-initiated 'consider/check website' = not donated (H10)",
+      "test": {
+        "jev": {
+          "accuracy": 0.741,
+          "macro_f1": 0.7262,
+          "est_cost_usd": 0.093897,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 94,
+      "estimate": 0.7,
+      "note": "round6: H4b dropped (0075 noise), token-penny cave = not donated, rambling amount-trading chats with stated amount = donated (H11)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7482,
+          "macro_f1": 0.7328,
+          "est_cost_usd": 0.096454,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

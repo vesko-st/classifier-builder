@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "name": "persuasion_strategy",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Classify the persuader's message by the strategy or dialogue function it performs. IMPORTANT: If a message contains any persuasion strategy content (facts about charity, suffering, asking to donate, etc.), classify by that strategy even if the message is long or complex. 'Other' is only for dialogue functions with zero strategy: answering questions about the persuader, personal reactions, closings, fillers. Look for the core action.",
+  "state_template": "Persuader message: {{input}}",
+  "description": "Classify persuader message by persuasion strategy",
+  "criteria": {
+    "greeting": "Opening or responding to greetings. 'Hello', 'Hi', 'How are you?', replies to 'how are you?' like 'I'm doing well', 'Doing alright', 'I'm good'. Includes greetings anywhere in chat. Nothing else persuasive.",
+    "acknowledgement": "Agreeing with or echoing what persuadee said (not greetings). 'Me too', 'I agree', 'Yes that's right', 'Absolutely', 'That's correct'. Positive reaction to persuadee's statements.",
+    "ask-donation-amount": "Directly asking HOW MUCH to donate. 'How much would you like to donate?', 'What amount?', 'How much are you willing?'. Must ask for a specific amount or number.",
+    "credibility-appeal": "Building trust in Save the Children. 'Top-rated charity', 'Trustworthy', 'Well-established', 'International', organization history/facts/leadership, website URLs. Praise of the ORGANIZATION itself.",
+    "donation-information": "Explaining HOW to donate (the mechanics/process). 'Deducted from payment', 'Can donate $0-$2', 'Accepts credit cards', 'Research team collects', payment info. Details about the DONATION PROCESS.",
+    "emotion-appeal": "Appeals through suffering/harm. 'Children dying', '1,000 killed in Syria', 'Heartbreaking', 'Starving', 'Prevented diseases', 'They are our future', suffering statistics. Makes people feel sad/guilty about hardship.",
+    "foot-in-the-door": "Emphasizes small amounts help. 'Every little bit helps', 'Pocket change', 'As little as 5 cents', 'Even small helps', '$1 makes a difference'. Explicitly normalizing minimal gifts.",
+    "logical-appeal": "Logical reasoning about impact/obligation. 'Donation helps children', 'Week of coffee saves a life', 'We should pitch in', 'Makes a difference', '$30 for weeks of needs', 'Can change a child's life'. Reasoning about EFFECTS and OBLIGATION.",
+    "off-task": "Completely unrelated to charity/donation. Weather talk, unrelated gossip, no connection to task.",
+    "other": "Dialogue functions with no strategy. Answering questions about the persuader, personal reactions ('I'd feel bad...'), 'you're welcome', closings, confirming amounts, talk about other charities, arguing, flat fillers ('OK', 'Fine'), task remarks. If a long message contains strategy content, use the strategy instead.",
+    "personal-related-inquiry": "Questions about persuadee's personal life. 'Do you have kids?', 'Where from?', 'What charities donate to?', 'Why don't you donate?', 'How's your family?'. About THEIR life/background/values/reasons.",
+    "personal-story": "Narrative about someone's life/experience. 'My friend in Africa lost a child', 'Bruce's story...', 'I worked in Africa and saw...'. A STORY about a person's journey or impact.",
+    "praise-user": "Compliments about persuadee. 'You're generous', 'People like you make the world better', 'That's amazing you'll help'. Direct praise OF THE PERSUADEE's character or actions.",
+    "proposition-of-donation": "Asking/requesting persuadee to donate. 'Would you donate?', 'Would you help?', 'Can I interest you?', 'We're asking you to donate', 'Will you give?'. A direct REQUEST or INVITATION. Not 'we should all donate' (that's logical-appeal).",
+    "self-modeling": "Persuader's own giving/commitment. 'I donated $50', 'Monthly donor', 'I'll match your donation', 'I give to charities', 'I'm willing to donate'. Persuader PERSONALLY showing/describing their giving.",
+    "source-related-inquiry": "Questions about Save the Children. 'Heard of them?', 'Familiar?', 'Know about organization?'. Questions specifically about KNOWING the CHARITY.",
+    "task-related-inquiry": "Other persuader questions. 'Any questions?', 'What think?', 'We've chatted 10 times', 'Any opinions?', 'How's it going?'. Questions not personal/source/greeting.",
+    "thank": "Expressing thanks. 'Thank you', 'Thanks', 'Appreciate it'. Gratitude."
+  }
+}

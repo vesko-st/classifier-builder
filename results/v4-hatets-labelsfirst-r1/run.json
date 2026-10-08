@@ -1,0 +1,94 @@
+{
+  "run_id": "v4-hatets-labelsfirst-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T02:36:26",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 375,
+    "num_turns": 32,
+    "total_cost_usd": 1.1546079999999999
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 35,
+      "estimate": 0.65,
+      "note": "v1 draft criteria: imm attack & !politics OR women slur attack & !casual",
+      "test": {
+        "jev": {
+          "accuracy": 0.7588,
+          "macro_f1": 0.7575,
+          "est_cost_usd": 0.061401,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 55,
+      "estimate": 0.72,
+      "note": "v2: imm rule loosened to count deport/sendhome conclusions on immigrant-topic tweets; check 10/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.7735,
+          "macro_f1": 0.7734,
+          "est_cost_usd": 0.063107,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 71,
+      "estimate": 0.72,
+      "note": "v4: imm_attack & !imm_absent OR women (exclusions folded in); 16/18 labels, check 10/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.7656,
+          "macro_f1": 0.7654,
+          "est_cost_usd": 0.062884,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 85,
+      "estimate": 0.74,
+      "note": "v5: v4 + hate threshold 0.60 (errors were all FP); 23/25 labels, check 10/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.7984,
+          "macro_f1": 0.7983,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.75,
+      "note": "FINAL v5: criteria imm_attack&!imm_absent OR women, hate threshold 0.60; 29/32 labels, random check 10/10; beat 2-variant ensemble 6-1 on disagreement labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7984,
+          "macro_f1": 0.7983,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

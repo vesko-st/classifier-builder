@@ -1,0 +1,78 @@
+{
+  "run_id": "v4-routing-free-r1",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:38:04",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 501,
+    "num_turns": 22,
+    "total_cost_usd": 1.02212
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v1: 77 intent options mapped to teams by guess",
+      "test": {
+        "jev": {
+          "accuracy": 0.814,
+          "macro_f1": 0.7983,
+          "est_cost_usd": 0.25906,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 59,
+      "estimate": 0.88,
+      "note": "v2: map updated from owner policy answer; 17/17 intent-probe labels agree",
+      "test": {
+        "jev": {
+          "accuracy": 0.9224,
+          "macro_f1": 0.9186,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.9,
+      "note": "v6: 3-member wording ensemble over 77 intents, descriptions refined from 20 hard labels; 33/37 bought labels",
+      "test": {
+        "luna": {
+          "accuracy": 0.9429,
+          "macro_f1": 0.9387,
+          "est_cost_usd": 1.848687,
+          "total": 3080,
+          "answered": 3080
+        },
+        "pplx": {
+          "accuracy": 0.9444,
+          "macro_f1": 0.9423,
+          "est_cost_usd": 0.010949,
+          "total": 3080,
+          "answered": 3075
+        },
+        "jev": {
+          "accuracy": 0.9412,
+          "macro_f1": 0.9365,
+          "est_cost_usd": 0.874846,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

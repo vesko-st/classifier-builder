@@ -1,0 +1,124 @@
+{
+  "version": 1,
+  "name": "ens789",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v7",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate-speech annotation policy whose protected targets are women and immigrants (including refugees, migrants, asylum seekers, illegal aliens). Pick the option that best describes what the tweet does.",
+        "notes": [
+          "Hate means the tweet attacks, degrades, dehumanises, threatens or incites against women or immigrants, either as a group or an individual targeted because she is a woman or because they are an immigrant.",
+          "Profanity alone is not hate. A slur used as an exclamation or filler, in a fixed idiom, about oneself, affectionately between friends, as a plain word for one's own or someone's girlfriend, or a single 'bitch' aimed at an unknown person with no further degradation, is not hate against women. A boast about one's own sex life that does not show contempt for the women is not hate. A slur thrown at a man or boy (including compound insults like calling a man a '<slur> ass' something) is not hate against women.",
+          "Hate against women needs contempt toward women: a hostile attack or threat on a woman or girl using slurs such as hoe, whore, slut or cunt, or degrading talk about women as a group. Contemptuous generalising about 'hoes' or 'bitches' as a class, or addressing 'you hoes' collectively with contempt, degrades women as a group, even in a lyric or casual register.",
+          "For immigration tweets the body decides, not the hashtags. When the body attacks politicians, Democrats, Congress, the media or Twitter, or argues about the term 'illegal alien', and immigration or deportation hashtags are tacked on, it is not hate. When the body targets the immigrants themselves - as criminals, burdens, invaders, or people to be thrown out - it is hate. A short approving tweet made mostly of deportation hashtags is hate.",
+          "A report of a crime committed by an illegal immigrant, posted with deportation hashtags or framed as typical of immigrants, counts as hate."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "women_attack": "Insults, degrades or threatens a specific woman or girl using gendered slurs or sexual degradation (calling her a whore, slut, hoe, bitch or cunt as an attack).",
+        "women_group": "Degrades women in general or a class of women: generalises with contempt about 'hoes' or 'bitches' as a group, treats women as whores or sexual objects, says women are inferior, or jokes about or wishes rape or violence on women.",
+        "immigrants_dehumanise": "Dehumanises or slurs immigrants or refugees as a group: calls them invaders, animals, parasites, vermin, rapists, or uses slur terms for them.",
+        "immigrants_stereotype_expel": "Targets immigrants or illegal aliens themselves: portrays them as criminals, disease carriers, welfare cheats, job thieves or a danger to citizens; reports their crimes as a reason to deport them; or demands they be deported, sent back or kept out.",
+        "immigration_politics": "About immigration or border policy, the wall, DACA, funding, voting, politicians, Democrats, Twitter or the term 'illegal alien', without attacking immigrants themselves; hashtags tacked on. Also neutral news.",
+        "profanity_no_target": "Uses slurs or profanity as an exclamation, in an idiom, about oneself, in boasting at no identifiable woman, or as affectionate banter; no hostile attack on a woman or women.",
+        "male_or_other_target": "Insults or attacks a man or boy, a male politician or celebrity, or a non-gendered target.",
+        "counter_speech": "Criticises racism or misogyny, or quotes slurs in order to condemn them.",
+        "other": "Anything else not attacking women or immigrants."
+      },
+      "map": {
+        "women_attack": "hate",
+        "women_group": "hate",
+        "immigrants_dehumanise": "hate",
+        "immigrants_stereotype_expel": "hate",
+        "immigration_politics": "not_hate",
+        "profanity_no_target": "not_hate",
+        "male_or_other_target": "not_hate",
+        "counter_speech": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v8",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate-speech annotation policy whose protected targets are women and immigrants (including refugees, migrants, asylum seekers, illegal aliens). Pick the option that best describes what the tweet does.",
+        "notes": [
+          "Hate means the tweet attacks, degrades, dehumanises, threatens or incites against women or immigrants, either as a group or an individual targeted because she is a woman or because they are an immigrant.",
+          "Profanity alone is not hate. A slur used as an exclamation or filler, in a fixed idiom, about oneself, affectionately between friends, or as a plain word for one's own or someone's girlfriend is not hate against women. A lone 'bitch' used as a form of address toward anyone, known or unknown, with no further degradation of her as a woman, is not hate. A boast about one's own sex life that does not show contempt for the women is not hate. A slur thrown at a man or boy (including compound insults like calling a man a '<slur> ass' something) is not hate against women.",
+          "Hate against women needs contempt toward women: a hostile attack or threat on a woman or girl using slurs such as hoe, whore, slut or cunt, or degrading talk about women as a group. Contemptuous generalising about 'hoes' or 'bitches' as a class, or addressing 'you hoes' collectively with contempt, degrades women as a group, even in a lyric or casual register.",
+          "For immigration tweets the body decides, not the hashtags. When the body is about parties, elections, politicians, Democrats, Congress, the media or Twitter, or argues about the term 'illegal alien' - even if it mentions open borders or crime in general - and immigration or deportation hashtags are tacked on, it is not hate. When the body targets the immigrants themselves - as criminals, burdens, invaders, or people to be thrown out - it is hate. A short emotional or approving tweet whose content is mainly anti-immigration or deportation hashtags is hate.",
+          "A report of a crime committed by an illegal immigrant, posted with deportation hashtags or framed as typical of immigrants, counts as hate."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "women_attack": "Insults, degrades or threatens a specific woman or girl using gendered slurs or sexual degradation (calling her a whore, slut, hoe, bitch or cunt as an attack).",
+        "women_group": "Degrades women in general or a class of women: generalises with contempt about 'hoes' or 'bitches' as a group, treats women as whores or sexual objects, says women are inferior, or jokes about or wishes rape or violence on women.",
+        "immigrants_dehumanise": "Dehumanises or slurs immigrants or refugees as a group: calls them invaders, animals, parasites, vermin, rapists, or uses slur terms for them.",
+        "immigrants_stereotype_expel": "Targets immigrants or illegal aliens themselves: portrays them as criminals, disease carriers, welfare cheats, job thieves or a danger to citizens; reports their crimes as a reason to deport them; demands they be deported, sent back or kept out; or is a short emotional tweet made mainly of anti-immigration hashtags.",
+        "immigration_politics": "About immigration or border policy, the wall, DACA, funding, voting, politicians, Democrats, Twitter or the term 'illegal alien', without attacking immigrants themselves; hashtags tacked on. Also neutral news.",
+        "profanity_no_target": "Uses slurs or profanity as an exclamation or filler, a lone 'bitch' as a form of address, in an idiom, about oneself, in boasting, or as affectionate banter; no contempt for a woman or women.",
+        "male_or_other_target": "Insults or attacks a man or boy, a male politician or celebrity, or a non-gendered target.",
+        "counter_speech": "Criticises racism or misogyny, or quotes slurs in order to condemn them.",
+        "other": "Anything else not attacking women or immigrants."
+      },
+      "map": {
+        "women_attack": "hate",
+        "women_group": "hate",
+        "immigrants_dehumanise": "hate",
+        "immigrants_stereotype_expel": "hate",
+        "immigration_politics": "not_hate",
+        "profanity_no_target": "not_hate",
+        "male_or_other_target": "not_hate",
+        "counter_speech": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v9",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate-speech annotation policy whose protected targets are women and immigrants (including refugees, migrants, asylum seekers, illegal aliens). Pick the option that best describes what the tweet does.",
+        "notes": [
+          "Hate means the tweet attacks, degrades, dehumanises, threatens or incites against women or immigrants, either as a group or an individual targeted because she is a woman or because they are an immigrant.",
+          "Profanity alone is not hate. A slur used as an exclamation or filler, in a fixed idiom, about oneself, affectionately between friends, or as a plain word for one's own or someone's girlfriend is not hate against women. A lone 'bitch' used as a form of address toward anyone, known or unknown, with no further degradation of her as a woman, is not hate. A boast about one's own sex life that does not show contempt for the women is not hate. A slur thrown at a man or boy (including compound insults like calling a man a '<slur> ass' something) is not hate against women.",
+          "Hate against women needs contempt toward women: a hostile attack or threat on a woman or girl using slurs such as hoe, whore, slut or cunt, or degrading talk about women as a group. Contemptuous generalising about 'hoes' or 'bitches' as a class, or addressing 'you hoes' collectively with contempt, degrades women as a group, even in a lyric or casual register.",
+          "For immigration tweets the body decides, not the hashtags. When the body is about parties, elections, politicians, Democrats, Congress, the media or Twitter, or argues about the term 'illegal alien' - even if it mentions open borders or crime in general - and immigration or deportation hashtags are tacked on, it is not hate. When the body targets the immigrants themselves - as criminals, burdens, invaders, or people to be thrown out - it is hate. A short emotional or approving tweet whose content is mainly hashtags demanding that immigration be stopped or immigrants be deported or sent back is hate. Hashtags only about the wall, MAGA, Trump, voting or parties do not make a tweet hate.",
+          "A report of a crime committed by an illegal immigrant, posted with deportation hashtags or framed as typical of immigrants, counts as hate."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "women_attack": "Insults, degrades or threatens a specific woman or girl using gendered slurs or sexual degradation (calling her a whore, slut, hoe, bitch or cunt as an attack).",
+        "women_group": "Degrades women in general or a class of women: generalises with contempt about 'hoes' or 'bitches' as a group, treats women as whores or sexual objects, says women are inferior, or jokes about or wishes rape or violence on women.",
+        "immigrants_dehumanise": "Dehumanises or slurs immigrants or refugees as a group: calls them invaders, animals, parasites, vermin, rapists, or uses slur terms for them.",
+        "immigrants_stereotype_expel": "Targets immigrants or illegal aliens themselves: portrays them as criminals, disease carriers, welfare cheats, job thieves or a danger to citizens; reports their crimes as a reason to deport them; demands they be deported, sent back or kept out; or is a short emotional tweet made mainly of hashtags demanding that immigration stop or immigrants be deported or sent back.",
+        "immigration_politics": "About immigration or border policy, the wall, DACA, funding, elections, parties, politicians, Democrats, Twitter or the term 'illegal alien', without attacking immigrants themselves; includes tweets of wall, MAGA or Trump hashtags with little else. Also neutral news.",
+        "profanity_no_target": "Uses slurs or profanity as an exclamation or filler, a lone 'bitch' as a form of address, in an idiom, about oneself, in boasting, or as affectionate banter; no contempt for a woman or women.",
+        "male_or_other_target": "Insults or attacks a man or boy, a male politician or celebrity, or a non-gendered target.",
+        "counter_speech": "Criticises racism or misogyny, or quotes slurs in order to condemn them.",
+        "other": "Anything else not attacking women or immigrants."
+      },
+      "map": {
+        "women_attack": "hate",
+        "women_group": "hate",
+        "immigrants_dehumanise": "hate",
+        "immigrants_stereotype_expel": "hate",
+        "immigration_politics": "not_hate",
+        "profanity_no_target": "not_hate",
+        "male_or_other_target": "not_hate",
+        "counter_speech": "not_hate",
+        "other": "not_hate"
+      }
+    }
+  ]
+}

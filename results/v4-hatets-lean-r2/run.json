@@ -1,0 +1,81 @@
+{
+  "run_id": "v4-hatets-lean-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-08T02:24:52",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 634,
+    "num_turns": 40,
+    "total_cost_usd": 1.8306682000000003
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description: fine options for women/immigrant hate mapped to 2 classes; expel+criminal framing+targeted abuse mapped to hate (guesses)",
+      "test": {
+        "jev": {
+          "accuracy": 0.808,
+          "macro_f1": 0.8063,
+          "est_cost_usd": 0.072897,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 25,
+      "estimate": 0.7,
+      "note": "v3: rules from owner answers (targeted slur at woman=hate, male target/casual=not, deport call in own words=hate, politician-attack+tacked hashtag=not, criminal framing=hate)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7678,
+          "macro_f1": 0.7678,
+          "est_cost_usd": 0.097077,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 65,
+      "estimate": 0.72,
+      "note": "v5: H4 narrowed (negative claims about immigrants as people = hate even in wall tweets; program/economic policy args not), H5 narrowed (boasting/men-as-hoes not hate; generalising about bitches/hoes as group still hate). 16/20 on boundary-biased labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7735,
+          "macro_f1": 0.7735,
+          "est_cost_usd": 0.108426,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 85,
+      "estimate": 0.75,
+      "note": "ens7: 3 wording variants of v5 + H7 (self/friend hype over rival hoes not hate) + H8 (insulting a foreign country / insisting on 'illegal aliens' term not hate). 25/30 on boundary-biased labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7814,
+          "macro_f1": 0.7813,
+          "est_cost_usd": 0.328021,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "run_id": "v4-hatets-sonnet-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:12:31",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 169,
+    "num_turns": 26,
+    "total_cost_usd": 0.4872839
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 42,
+      "estimate": 0.7,
+      "note": "criteria v1 from policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.7101,
+          "macro_f1": 0.7091,
+          "est_cost_usd": 0.048569,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 82,
+      "estimate": 0.7,
+      "note": "v2 stricter woman_abuse + hate threshold 0.6; 20 random labels, macro-F1 0.76 (fit on them, optimistic)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7701,
+          "macro_f1": 0.7688,
+          "est_cost_usd": 0.05072,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.68,
+      "note": "v2 + hate threshold 0.65 (fit on 29 labels; 20 random + 9 hard)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7814,
+          "macro_f1": 0.7786,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.7,
+      "note": "ensemble of loose + strict migrant wording, threshold 0.575; 29 labels F1 0.77 in-sample",
+      "test": {
+        "jev": {
+          "accuracy": 0.816,
+          "macro_f1": 0.8128,
+          "est_cost_usd": 0.104036,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

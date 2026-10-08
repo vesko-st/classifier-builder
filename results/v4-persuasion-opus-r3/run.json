@@ -1,0 +1,93 @@
+{
+  "run_id": "v4-persuasion-opus-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:18:02",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 549,
+    "num_turns": 39,
+    "total_cost_usd": 1.5078858
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description: flat choice, 19 options (closing->other), P4G-style descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.5926,
+          "macro_f1": 0.5747,
+          "est_cost_usd": 0.087494,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 42,
+      "estimate": 0.5,
+      "note": "v2: policy-mirroring choice, 22 options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.6309,
+          "macro_f1": 0.6133,
+          "est_cost_usd": 0.119289,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 78,
+      "estimate": 0.55,
+      "note": "v4: 3-member wording ensemble of v2 policy options (+story/answer rules)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6328,
+          "macro_f1": 0.6147,
+          "est_cost_usd": 0.401671,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 99,
+      "estimate": 0.6,
+      "note": "v8: 3-member wording ensemble, v4 + Q4 rules (TRI catch-all for questions, 'Did you know' by content, why-won't-you-donate -> other, answering about own preferences -> other)",
+      "test": {
+        "luna": {
+          "accuracy": 0.6454,
+          "macro_f1": 0.6204,
+          "est_cost_usd": 0.90305,
+          "total": 1517,
+          "answered": 1517
+        },
+        "pplx": {
+          "accuracy": 0.6354,
+          "macro_f1": 0.6162,
+          "est_cost_usd": 0.012966,
+          "total": 1517,
+          "answered": 1514
+        },
+        "jev": {
+          "accuracy": 0.6447,
+          "macro_f1": 0.6288,
+          "est_cost_usd": 0.422973,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,79 @@
+{
+  "run_id": "ov4-routing-policy-r1",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T00:53:16",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 602,
+    "num_turns": 43,
+    "total_cost_usd": 1.6354037999999997
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.72,
+      "note": "draft: 77 banking intents mapped to teams by guess, no owner input",
+      "test": {
+        "jev": {
+          "accuracy": 0.8091,
+          "macro_f1": 0.7978,
+          "est_cost_usd": 0.259577,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 42,
+      "estimate": 0.82,
+      "note": "v2: intent map rebuilt from 4 policy answers + 2 minimal pairs",
+      "test": {
+        "jev": {
+          "accuracy": 0.939,
+          "macro_f1": 0.934,
+          "est_cost_usd": 0.30343,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 86,
+      "estimate": 0.88,
+      "note": "v6: 3-variant wording ensemble; rules for receiving currency, Visa/MC, country availability, card-cancel vs generic cancel",
+      "test": {
+        "jev": {
+          "accuracy": 0.9422,
+          "macro_f1": 0.9373,
+          "est_cost_usd": 0.934869,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.88,
+      "note": "v8 final: ATM-abroad rates -> disputes, recipient got less -> transfer fee, wrong-rate complaints -> disputes",
+      "test": {
+        "jev": {
+          "accuracy": 0.9451,
+          "macro_f1": 0.9411,
+          "est_cost_usd": 0.963199,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

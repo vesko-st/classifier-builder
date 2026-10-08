@@ -1,0 +1,139 @@
+{
+  "run_id": "v4-hatets-rules-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:45:53",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1368,
+    "num_turns": 63,
+    "total_cost_usd": 3.1772183999999997
+  },
+  "final_version": 8,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.6,
+      "note": "v1 draft from description: 5 options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.752,
+          "macro_f1": 0.7519,
+          "est_cost_usd": 0.046047,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 34,
+      "estimate": 0.72,
+      "note": "v8: H1-H6 rules; 17/17 bought labels (biased: uncertainty/test picks)",
+      "test": {
+        "jev": {
+          "accuracy": 0.812,
+          "macro_f1": 0.8106,
+          "est_cost_usd": 0.060659,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 52,
+      "estimate": 0.74,
+      "note": "e4: 3-variant wording ensemble with H1-H8; 26/26 bought labels (biased picks)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8284,
+          "macro_f1": 0.8257,
+          "est_cost_usd": 0.213871,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 54,
+      "estimate": 0.75,
+      "note": "e5: ensemble, politician exception for deport hashtags; 27/27 bought labels (biased picks)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8301,
+          "macro_f1": 0.8271,
+          "est_cost_usd": 0.217283,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 68,
+      "estimate": 0.76,
+      "note": "e8: ensemble + H9-H12 (predicative bitch insult, hoes generalisation, threats, rapefugee); 34/34 bought labels (biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8222,
+          "macro_f1": 0.8199,
+          "est_cost_usd": 0.270983,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 72,
+      "estimate": 0.76,
+      "note": "e10: e8 + general-audience slur rule; 36/36 bought labels (biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8233,
+          "macro_f1": 0.8205,
+          "est_cost_usd": 0.276472,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 86,
+      "estimate": 0.76,
+      "note": "e13: e10 + round-4 examples; 41/43 bought labels (biased; 0080/0215 near-tie)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8239,
+          "macro_f1": 0.8211,
+          "est_cost_usd": 0.302432,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 100,
+      "estimate": 0.74,
+      "note": "e16 FINAL: 3-variant ensemble with rules H1-H12, threshold hate>=0.46; 49/50 bought labels (biased), 0080 suspected noise",
+      "test": {
+        "jev": {
+          "accuracy": 0.8233,
+          "macro_f1": 0.821,
+          "est_cost_usd": 0.32906,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

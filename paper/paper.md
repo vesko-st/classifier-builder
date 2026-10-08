@@ -50,7 +50,7 @@ effective as a supervised classifier trained on the same labels?
 - **RQ2:** without labelled data, how well can an agent build them from a task description, unlabelled data and a short user interview?
 - **RQ3:** which interview strategies work well, and does the answer depend on the task?
 
-We find that a frontier model can use an NL classifier effectively as a System 1 routine. On six classification tasks, a frontier model (Claude Opus 5.5) using Jev matches or beats a fine-tuned RoBERTa when both are given a full labelled set. With a budget equivalent to about 50 labels of a simulated user's time, it beats zero-shot wherever the user has something to teach, and on two tasks beats RoBERTa fine-tuned on twenty times as many labels. The best strategy depends on where the missing knowledge lies: following the classifier's uncertainty works when the definition is in the text, and fails when it is a private policy the agent must discover. We also find that other available options can play the role of System 1 with little difference in accuracy, but the System 2 model is important: the performance deteriorates with less capable models in the same model family.
+We find that a frontier model can use an NL classifier effectively as a System 1 routine. On six classification tasks, a frontier model (Claude Opus 5.5) using Jev matches or beats a fine-tuned RoBERTa when both are given a full labelled set. With a budget equivalent to about 50 labels of a simulated user's time, it beats zero-shot wherever the user has something to teach, and on two tasks beats RoBERTa fine-tuned on twenty times as many labels. The best strategy depends on where the missing knowledge lies: following the classifier's uncertainty works when the definition is in the text, and fails when it is a private policy the agent must discover. We also find that other available options can play the role of System 1 with little difference in accuracy, but the System 2 model matters: the smallest builder in the model family, Haiku 4.5, builds clearly worse classifiers, while Sonnet 5.5 is close to Opus 5.5.
 
 We start with a review of related work in Section 2. Section 3 formulates budgeted building with a simulated user, and Section 4 describes the toolkit and builder. We describe the experiments in Section 5 and discuss the results in Section 6. Finally, we conclude with a discussion of monitoring and updating deployed classifiers as part of a functioning agentic system in Section 7.
 
@@ -80,7 +80,7 @@ We model building as an interaction between an agent, the **builder**, and a **u
 
 A message can contain multiple questions, and their costs are added up. Requests that would exceed the budget are refused, and points left over do not affect the score.
 
-**The simulated user.** A language model plays the user (Claude Sonnet 5 [Anthropic 2026]). It sees the task description, the private guideline, the records a question mentions and a fixed labelled sample of 150 pool records, and it prices each message by the rubric above. It is instructed to answer as a busy domain expert would: only what is asked, without reciting the guideline or volunteering rules, and in summary for open-ended questions. Where the guideline and the labelled sample conflict, it is told that the labels win, so that its answers describe the definition as applied. Section 6 shows that its answers can still drift towards the guideline, as a real user's might.
+**The simulated user.** A language model plays the user (Claude Opus 5.5 [Anthropic 2026]). A user who wrote a guideline and a user who labelled the data know different things: annotators settle cases the guideline does not cover and apply it more loosely or strictly in places. We want the user's answers to agree with the labels the builder is scored on, so before any run the same model reads each task's labelled pool through search tools and writes a private note of at most about 1,200 words on how the labels apply the guideline, including where they depart from it and how consistent they are. When answering, the user sees the task description, the guideline, this note, the records a question mentions and a fixed labelled sample of 150 pool records, and is told that where the note and the guideline differ, the note is right. It prices each message by the rubric above and answers as a busy domain expert would: only what is asked, without reciting the guideline or volunteering rules, and in summary for open-ended questions. Requests for labels always return the gold labels. An earlier simulated user without the note drifted towards the guideline; Section 6.3 shows how that changed the results.
 
 **Evaluation.** Each task also has a validation split, used only to tune the baselines, and a sealed **test** split; the builder never sees the labels of either. After its first draft and after every revision it keeps, the builder saves a **snapshot** of its classifier together with its own estimate of the score. After the run we score every snapshot on the test set. The final snapshot defines the run's result, and the earlier ones trace how the score develops as points are spent. Builders work in isolation and cannot read the labelled data, the task files or other runs (Section 4).
 
@@ -151,7 +151,7 @@ We write each task's description and private guideline from the corpus's annotat
 
 The main experiments use Claude Opus 5.5 [Anthropic 2026], and we repeat the key cells with Claude Sonnet 5.5 and Claude Haiku 4.5 to measure how much building depends on the builder's capability. Builders run headlessly through the Claude Agent SDK at high reasoning effort, with one prompt template for every task and model, and every session transcript is kept. A pilot on Banking77 intents and hate speech ran Opus builders interactively.
 
-A **strategy** is a one-page instruction that replaces the skill's generic building step. We compare seven:
+A **strategy** is a one-page instruction that replaces the skill's generic building step. We compare six:
 
 | Strategy             | Summary                                                                                                                                                                         |
 | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -160,16 +160,15 @@ A **strategy** is a one-page instruction that replaces the skill's generic build
 | Uncertainty + rules  | As above, but turn errors into general rules, and test any rule that moves many pool predictions with a label on a moved record.                                                |
 | Policy first         | Ask the user about the main policy decisions, build a classifier that mirrors the answers, then calibrate with random labels.                                                   |
 | Policy, labels first | Ask policy questions, then check the draft against random labels before testing edge cases, and follow labels where they contradict the user.                                   |
-| Interview            | Read 200 pool records and list the phenomena; ask about those the text cannot settle; buy check labels and labels spread over the options; then refine on uncertain records.    |
 | Interview, lean      | Read the pool and mark each phenomenon inferable or private; ask only about the private ones; spend the rest on whatever labels the builder chooses.                            |
 
-The pilot also tried a category-by-category audit, a committee of three classifiers, a triage step and policy + rules; none beat the best strategy on either pilot task. Any strategy can run under the **rules-only constraint**, under which labels are evidence for rules and never enter the classifier: the definition may contain no text from a pool record, and a rule is kept only if it holds on records beyond the one that prompted it. Both interview strategies run under it.
+The pilot also tried a category-by-category audit, a committee of three classifiers, a triage step and policy + rules; none beat the best strategy on either pilot task. A fuller interview, with fixed allowances for questions, coverage labels and a check set, ran only with the earlier simulated user and is not reported. Any strategy can run under the **rules-only constraint**, under which labels are evidence for rules and never enter the classifier: the definition may contain no text from a pool record, and a rule is kept only if it holds on records beyond the one that prompted it. The lean interview runs under it.
 
 ### 5.3 Settings
 
 **All labels (RQ1).** The builder receives the gold label of every training record and no budget. For the Banking77 tasks and deal reached this is the full training split (9,792 messages and 4,947 negotiations); for the other three it is the pool, which is all their labelled data outside the validation and test splits. The labels do not fit in context, so the builder queries them through tools (per-class scores, frequent confusions, scores on subsets), splits them into a building set and a development set of its choosing, and estimates its score on the latter. It gets no strategy; the prompt asks only that it hold out a development set, work from per-class scores and confusions, and state general rules rather than copy training records. We run Opus on all six tasks and Sonnet and Haiku on three, one run each.
 
-**User interview (RQ2 and RQ3).** The budgeted grid has two parts. The **cross-model** part runs Banking77 intents, hate speech and persuasion strategy with all three builders, three runs each, using the best pilot strategy for each task (uncertainty for Banking77 intents, policy first for the other two). The **cross-strategy** part runs Opus on routing, donation and deal with the first five strategies, three runs each on routing and one on the other two. We then ran both interview strategies on all six tasks, three runs each, filled the missing strategy cells on the pilot tasks, and ran the rules-only constraint in ten runs matched to earlier ones.
+**User interview (RQ2 and RQ3).** The budgeted grid has two parts. The **cross-model** part runs Banking77 intents, hate speech and persuasion strategy with all three builders, three runs each, using the best pilot strategy for each task (uncertainty for Banking77 intents, policy first for the other two). The **cross-strategy** part runs Opus on routing, donation and deal with the first four strategies, three runs each on routing and one on the other two, and policy with labels first on routing and hate speech, three runs each. We then ran the lean interview on all six tasks, three runs each, filled the missing strategy cells on the pilot tasks, and ran the rules-only constraint in five runs matched to earlier uncertainty runs. Every reported run that asked the user a question uses the simulated user of Section 3; runs that only bought labels do not depend on the simulated user and were kept from earlier rounds.
 
 ### 5.4 System 1 models
 
@@ -194,11 +193,11 @@ Planned, not yet run: tasks varying class count, text length and multi-label out
 | Task                           | Labels | Zero-shot | RoBERTa, 50 labels | Opus, 100 pts | RoBERTa, all labels | Opus, all labels | Sonnet 5.5, all labels | Haiku 4.5, all labels |
 | ------------------------------ | ------ | --------- | ------------------ | ------------- | ------------------- | ---------------- | ---------------------- | --------------------- |
 | Banking77 intents (acc)        | 9,792  | 80.2      | 18.1               | 86.8          | 91.1                | **91.9**         | 91.3                   | 79.4                  |
-| Banking77 routing (acc)        | 9,792  | 73.7      | —                  | 90.5          | 96.8                | **97.5**         | —                      | —                     |
-| Hate speech (macro-F1)         | 1,000  | 0.741     | 0.635              | 0.804         | 0.780               | **0.823**        | 0.803                  | 0.729                 |
+| Banking77 routing (acc)        | 9,792  | 73.7      | —                  | 91.3          | 96.8                | **97.5**         | —                      | —                     |
+| Hate speech (macro-F1)         | 1,000  | 0.741     | 0.635              | 0.789         | 0.780               | **0.823**        | 0.803                  | 0.729                 |
 | Persuasion strategy (macro-F1) | 1,002  | 0.455     | 0.137              | 0.603         | 0.582               | 0.616            | **0.629**              | 0.486                 |
-| Donation outcome (macro-F1)    | 500    | **0.733** | —                  | 0.720         | 0.675               | 0.680            | —                      | —                     |
-| Deal reached (macro-F1)        | 4,947  | 0.889     | —                  | 0.871         | 0.889               | **0.896**        | —                      | —                     |
+| Donation outcome (macro-F1)    | 500    | **0.733** | —                  | 0.716         | 0.675               | 0.680            | —                      | —                     |
+| Deal reached (macro-F1)        | 4,947  | 0.889     | —                  | 0.889         | 0.889               | **0.896**        | —                      | —                     |
 
 *Table 2: test scores with Jev as System 1. Labels is the number of training labels in the all-labels setting. Opus at 100 points is the mean of the budgeted runs in Table 4. RoBERTa with 50 labels averages three seeds; all-labels cells are single runs.*
 
@@ -220,58 +219,57 @@ Planned, not yet run: tasks varying class count, text length and multi-label out
 
 ### 6.2 RQ2: building from a user interview
 
-**Without labels, Opus beats zero-shot wherever the user has something to teach** (Table 4). On Banking77 intents, routing, hate speech and persuasion strategy, the final classifier beats zero-shot in every run, by 6.6 points, 16.8 points, 0.063 and 0.148 on average, closing 56%, 71%, 77% and 92% of the gap to the all-labels builder. Having seen about 50 labels, it beats RoBERTa fine-tuned on all 1,000 on hate speech and persuasion strategy, while RoBERTa fine-tuned on the same 50 labels is far behind on every task. The encoder needs labels to learn what the classes mean; the builder brings that knowledge and uses labels to learn where the user draws the lines.
+**Without labels, Opus beats zero-shot wherever the user has something to teach** (Table 4). On Banking77 intents, routing, hate speech and persuasion strategy, the final classifier beats zero-shot in every run, by 6.6 points, 17.6 points, 0.048 and 0.148 on average, closing 56%, 74%, 59% and 92% of the gap to the all-labels builder. With a budget worth about 50 labels, it beats RoBERTa fine-tuned on all 1,000 on hate speech and persuasion strategy on average, while RoBERTa fine-tuned on 50 labels is far behind on every task. The encoder needs labels to learn what the classes mean; the builder brings that knowledge and uses labels to learn where the user draws the lines.
 
 | Task                | Metric   | Zero-shot | First draft | Final (100 pts)     | Runs |
 | ------------------- | -------- | --------- | ----------- | ------------------- | ---- |
 | Banking77 intents   | acc      | 80.2      | 84.6        | 86.8 (85.8–87.3)    | 3    |
-| Hate speech         | macro-F1 | 0.741     | 0.795       | 0.804 (0.792–0.823) | 3    |
-| Persuasion strategy | macro-F1 | 0.455     | 0.593       | 0.603 (0.567–0.635) | 3    |
-| Banking77 routing   | acc      | 73.7      | 83.5        | 90.5 (84.6–93.5)    | 15   |
-| Donation outcome    | macro-F1 | 0.733     | 0.721       | 0.720 (0.699–0.734) | 5    |
-| Deal reached        | macro-F1 | 0.889     | 0.853       | 0.871 (0.827–0.908) | 5    |
+| Hate speech         | macro-F1 | 0.741     | 0.752       | 0.789 (0.767–0.820) | 3    |
+| Persuasion strategy | macro-F1 | 0.455     | 0.576       | 0.603 (0.589–0.629) | 3    |
+| Banking77 routing   | acc      | 73.7      | 83.5        | 91.3 (84.6–94.9)    | 15   |
+| Donation outcome    | macro-F1 | 0.733     | 0.703       | 0.716 (0.693–0.734) | 4    |
+| Deal reached        | macro-F1 | 0.889     | 0.869       | 0.889 (0.873–0.908) | 4    |
 
 *Table 4: Opus builders with 100 points, test set. The first three rows use the cross-model strategy for the task; the others average the cross-strategy runs. Ranges give the lowest and highest run.*
 
-**Much of the gain comes before the first label.** On Banking77 intents, the first draft, written from the description and the pool, closes 4.4 of the 6.6 points, and on persuasion strategy first drafts already reach 0.57–0.59 from the builder's knowledge of the scheme. On hate speech the gain comes from the user: the policy-first draft saved after the policy questions closes 0.054 of the 0.063 gap. On routing, first drafts close 9.8 of the 16.8 points, and the budget, which reveals the private mapping, supplies the rest.
+**Much of the gain comes before the first label.** On Banking77 intents, the first draft, written from the description and the pool, closes 4.4 of the 6.6 points, and on persuasion strategy first drafts already reach 0.56–0.59 from the builder's knowledge of the scheme. On hate speech the gain comes from the user: the policy-first drafts saved right after the policy questions average 0.784, closing 0.043 of the 0.048 gap. On routing, first drafts close 9.8 of the 17.6 points, and the budget, which reveals the private mapping, supplies the rest.
 
-**Where no definition decides the label, building does not help.** No run beats zero-shot on donation outcome. On deal reached, where zero-shot already scores 0.889, three of five runs match or beat it and two end well below it. When the zero-shot classifier is already good, building mainly adds the risk of moving it.
+**Where no definition decides the label, building does not help.** No run beats zero-shot on donation outcome by more than 0.001. On deal reached, where zero-shot already scores 0.889, two of four runs match or beat it and two end below it. When the zero-shot classifier is already good, building mainly adds the risk of moving it.
 
-**Smaller builders are worse at building.** Opus leads Sonnet 5.5, which leads Haiku 4.5, on all three cross-model tasks (Table 5). Every pairwise gap is significant under the paired bootstrap (p ≤ 0.021), but the evidence that the builders themselves differ is weaker: the Banking77 runs separate completely (permutation p = 0.05, the minimum, for each pair), on hate speech only Opus and Haiku do, and the persuasion runs overlap. Haiku also skips steps: in six of its nine runs it saved its first snapshot only after spending 65–98 points. Its estimates of its own score were off by 0.166 on average, in both directions, because it scored itself on check sets of 10–14 labels or on the uncertain records it had bought.
+**The smallest builder is worse at building.** Haiku 4.5 trails Opus 5.5 and Sonnet 5.5 on all three cross-model tasks (Table 5), by 4.3–6.6 points on Banking77 intents and 0.02–0.04 macro-F1 on the other two (paired bootstrap p ≤ 0.003; permutation over runs p = 0.05–0.1). Opus and Sonnet are level where the user's answers matter: Sonnet is ahead by 0.009 on hate speech and 0.011 on persuasion strategy, within the variance between runs (permutation p = 0.3 and 0.2), while on Banking77 intents, which needs no questions, the Opus runs all beat the Sonnet runs (p = 0.05, the minimum). Haiku spends the budget differently: on hate speech and persuasion it put 54–79 of its 100 points into questions, against 36–54 for the larger builders, and in five of these six runs it saved its first snapshot only after spending 65–99 points. Its estimates of its own score were off by 0.15 on average, in both directions.
 
-| Task                           | Opus 5.5                        | Sonnet 5.5                  | Haiku 4.5                   |
-| ------------------------------ | ------------------------------- | --------------------------- | --------------------------- |
-| Banking77 intents (acc)        | 87.3, 87.3, 85.8 (**86.8**)     | 84.6, 83.3, 85.6 (84.5)     | 78.6, 79.3, 79.3 (79.1)     |
-| Hate speech (macro-F1)         | 0.792, 0.823, 0.798 (**0.804**) | 0.751, 0.793, 0.786 (0.777) | 0.777, 0.690, 0.736 (0.734) |
-| Persuasion strategy (macro-F1) | 0.607, 0.567, 0.635 (**0.603**) | 0.580, 0.571, 0.607 (0.586) | 0.560, 0.588, 0.562 (0.570) |
-| Builder cost per run (USD)     | 1.39                            | 0.62                        | 0.46                        |
+| Task                           | Opus 5.5                        | Sonnet 5.5                      | Haiku 4.5                   |
+| ------------------------------ | ------------------------------- | ------------------------------- | --------------------------- |
+| Banking77 intents (acc)        | 87.3, 87.3, 85.8 (**86.8**)     | 84.6, 83.3, 85.6 (84.5)         | 78.6, 82.8, 79.3 (80.2)     |
+| Hate speech (macro-F1)         | 0.820, 0.779, 0.767 (0.789)     | 0.813, 0.786, 0.795 (**0.798**) | 0.731, 0.761, 0.778 (0.757) |
+| Persuasion strategy (macro-F1) | 0.589, 0.592, 0.629 (0.603)     | 0.611, 0.617, 0.615 (**0.614**) | 0.573, 0.590, 0.583 (0.582) |
+| Builder cost per run (USD)     | 1.37                            | 0.59                            | 0.39                        |
 
 *Table 5: final test scores of three runs per cell, mean in parentheses. Cost is the mean over the nine runs of each model.*
 
 ### 6.3 RQ3: which interview strategies work
 
-**The best strategy depends on where the missing knowledge lies** (Table 6). On Banking77 intents, whose meaning is in the text, uncertainty sampling is best, and policy first, which spends a third of the budget on questions, trails it by 2.8 points. On hate speech, where the labels follow a policy the builder cannot infer, the order reverses: policy first beats uncertainty + rules in all three repeats (McNemar p < 0.001 for the first pair) and pure uncertainty by 0.06, which swings the decision boundary with each noisy batch of labels. On persuasion strategy, a scheme the builder largely knows, the strategies differ less than repeats of one strategy.
+**The best strategy depends on where the missing knowledge lies** (Table 6). On Banking77 intents, whose meaning is in the text, uncertainty sampling is best, and policy first, which spends a third of the budget on questions, trails it by 1.7 points. On hate speech, where the labels follow a policy the builder cannot infer, the policy can be learned either way: by asking, as policy first (0.789), policy with labels first (0.801) and the lean interview (0.799) do, or from labels turned into rules, as uncertainty + rules does without asking a single question (0.807). Only pure uncertainty sampling falls behind (0.751), as it swings the decision boundary with each noisy batch of labels. On persuasion strategy, a scheme the builder largely knows, the strategies differ less than repeats of one strategy.
 
 | Strategy             | Banking77 intents (acc) | Hate speech (macro-F1) | Persuasion strategy | Banking77 routing | Donation outcome | Deal reached   |
 | -------------------- | ----------------------- | ---------------------- | ------------------- | ----------------- | ---------------- | -------------- |
 | Zero-shot (0 pts)    | 80.2                    | 0.741                  | 0.455               | 73.7              | 0.733            | 0.889          |
-| Free                 | 86.3 (3 runs)           | 0.790 (3 runs)         | 0.604               | 92.6 (3 runs)     | 0.700            | 0.897          |
+| Free                 | 86.3 (3 runs)           | 0.799 (3 runs)         | **0.606**           | 92.8 (3 runs)     | 0.706            | 0.873          |
 | Uncertainty          | **87.9** (3 runs)       | 0.751                  | 0.585               | 87.4 (3 runs)     | **0.734**        | 0.890          |
-| Uncertainty + rules  | 87.4                    | 0.790 (3 runs)         | 0.570               | 88.9 (3 runs)     | 0.732            | **0.908**      |
-| Policy first         | 85.1                    | **0.813** (3 runs)     | **0.607**           | 91.3 (3 runs)     | 0.733            | 0.832          |
-| Policy, labels first | 86.2 (3 runs)           | 0.795 (2 runs)         | 0.549               | 92.4 (3 runs)     | 0.699            | 0.827          |
-| Interview            | 85.9 (3 runs)           | 0.791 (3 runs)         | 0.590 (3 runs)      | 89.7 (3 runs)     | 0.720 (3 runs)   | 0.870 (3 runs) |
-| Interview, lean      | 86.4 (3 runs)           | 0.791 (3 runs)         | 0.584 (3 runs)      | **93.0** (3 runs) | 0.722 (3 runs)   | 0.868 (3 runs) |
+| Uncertainty + rules  | 87.4                    | **0.807** (3 runs)     | **0.606**           | 88.9 (3 runs)     | 0.733            | **0.908**      |
+| Policy first         | 86.2                    | 0.789 (3 runs)         | 0.603 (3 runs)      | 93.4 (3 runs)     | 0.693            | 0.885          |
+| Policy, labels first | —                       | 0.801 (3 runs)         | —                   | **94.0** (3 runs) | —                | —              |
+| Interview, lean      | 86.3 (3 runs)           | 0.799 (3 runs)         | 0.600 (3 runs)      | 93.2 (3 runs)     | 0.720 (3 runs)   | 0.853 (3 runs) |
 
-*Table 6: final test score by strategy, Opus builders, 100 points, one run per cell unless marked. The Banking77 intents and hate speech cells for uncertainty, uncertainty + rules and policy first, and policy with labels first on hate speech, come from the interactive pilot.*
+*Table 6: final test score by strategy, Opus builders, 100 points, one run per cell unless marked. The Banking77 intents cells for uncertainty and uncertainty + rules, uncertainty on hate speech and one of the three uncertainty + rules runs on hate speech come from the interactive pilot. Policy first on hate speech and persuasion strategy is the cross-model cell of Table 5.*
 
-**On routing, the strategies that probe the private mapping win.** Every run of free, policy first and policy with labels first scored 90.0–93.5%, and every run of uncertainty and uncertainty + rules scored 84.6–89.8% (permutation test over 15 runs, p < 0.001). The better strategies ask which team gets each kind of message, or buy one label for each intent whose team the builder cannot guess. Uncertainty sampling instead buys the records on which the classifier is torn between two teams, but a counter-intuitive assignment sends a whole intent to the wrong team with confidence, so its records never look uncertain. The lean interview, which asks only about what reading the pool cannot settle, does best: one message of questions about the routing rules lifts the first draft from about 81% to 88–91%, and its runs finish at 93.0% on average. The full interview, which adds fixed allowances for questions, coverage labels and a check set, is below the best strategy on every task, because the allowances leave too few labels for what the builder needs to learn.
+**On routing, the strategies that probe the private mapping win.** Every run of free, policy first and policy with labels first scored 92.0–94.9%, and every run of uncertainty and uncertainty + rules scored 84.6–89.8% (permutation test over 15 runs, p < 0.001). The better strategies ask which team gets each kind of message, or buy one label for each intent whose team the builder cannot guess. Uncertainty sampling instead buys the records on which the classifier is torn between two teams, but a counter-intuitive assignment sends a whole intent to the wrong team with confidence, so its records never look uncertain. Questions about the routing rules lift a first draft from 78–81% to 92–94% in one step, and policy with labels first, which asks such questions before its first draft and then checks it against random labels, finishes highest, at 94.0%.
 
-**Where nothing is left to learn, questions can hurt.** On donation outcome no strategy beats zero-shot. On deal reached the label-driven strategies match or beat zero-shot, while both policy strategies fall to 0.83 by moving the decision boundary, in opposite directions: policy first took the user's answers about conditional agreements as a stricter definition of a deal, and policy with labels first over-corrected.
+**Where nothing is left to learn, questions can hurt.** On donation outcome no strategy beats zero-shot. On deal reached the label-driven strategies match or beat zero-shot, while the strategies that ask end at 0.853–0.885. Every lean-interview and policy-first run on deal reached saved a snapshot right after the user's answers, and every one of those snapshots scored 0.016–0.051 below the draft before it: the answers about borderline negotiations moved a boundary that was already in the right place, and only policy first won the loss back with labels.
 
-**Labels must be able to overrule the user.** The simulated user's answers about edge cases were stricter than the gold labels in every pilot hate speech run that asked them, as annotation guidelines often are stricter than annotators. Builders that mirrored those answers fell to 0.61–0.68 macro-F1 before recovering with labels. Checking random labels before testing edge cases removed the drop, but not the gap to policy first.
+**The simulated user shaped the conclusions.** Our first simulated user answered from the guideline and the 150-record sample alone. Its answers about edge cases were stricter than its own labels, as annotation guidelines often are stricter than annotators, and builders that followed them paid for it: on hate speech, builders that mirrored the answers fell to 0.61–0.68 macro-F1 before recovering with labels, and on deal reached policy first ended at 0.832. Writing the note of Section 3 removed most of these conflicts, and we reran every run that asked a question. The ordering on Banking77 intents and routing held, and the gap between policy first and pure uncertainty on routing grew, but the lead of policy first on hate speech, 0.813 against 0.790 for uncertainty + rules under the first user, disappeared, and so did the gap between Opus and Sonnet in Table 5. A simulated user that knows only the written definition rewards builders for trusting labels over answers; one that knows how the labels apply it does not.
 
-**Budgeted builders paste labels into the classifier, though they need not.** Under uncertainty sampling, 14 to 199 pool records per run share an eight-word run with the final definition, and one persuasion classifier gives every option a field of labelled examples. The all-labels classifiers copy almost nothing and describe patterns instead. Under the rules-only constraint (Table 7), every builder kept pool text out of its classifier and none lost accuracy, with the largest gains where the unconstrained builders had copied most. With one run per cell, the conclusion is that examples are not needed, not that rules are better.
+**Budgeted builders paste labels into the classifier, though they need not.** Under uncertainty sampling, 14 to 199 pool records per run share an eight-word run with the final definition, and one persuasion classifier gives every option a field of labelled examples. The all-labels classifiers copy almost nothing and describe patterns instead. Under the rules-only constraint (Table 7), every builder kept pool text out of its classifier and none lost more than 0.003, with the largest gains where the unconstrained builders had copied most. With one run per cell, the conclusion is that examples are not needed, not that rules are better.
 
 | Task                | Strategy     | Rules only | Without constraint | Records copied (rules only / without) |
 | ------------------- | ------------ | ---------- | ------------------ | ------------------------------------- |
@@ -280,15 +278,10 @@ Planned, not yet run: tasks varying class count, text length and multi-label out
 | Banking77 intents   | Uncertainty  | 87.5       | 86.8 (3 runs)      | 0 / 26–48                             |
 | Banking77 routing   | Uncertainty  | 87.7       | 87.4 (3 runs)      | 0 / 32–45                             |
 | Donation outcome    | Uncertainty  | 0.731      | 0.734              | 0 / 28                                |
-| Persuasion strategy | Free         | 0.607      | 0.604              | 0 / 15                                |
-| Banking77 routing   | Free         | 92.7       | 92.6 (3 runs)      | 0 / 1–2                               |
-| Hate speech         | Policy first | 0.804      | 0.804 (3 runs)     | 0 / 0–4                               |
-| Deal reached        | Free         | 0.895      | 0.897              | 0 / 0                                 |
-| Donation outcome    | Free         | 0.690      | 0.700              | 0 / 2                                 |
 
-*Table 7: the rules-only constraint against the same strategy without it, Opus builders, 100 points, one rules-only run per cell. Records copied are pool records sharing a six-word run with the final definition.*
+*Table 7: the rules-only constraint against the same strategy without it, Opus builders, 100 points, one rules-only run per cell. Records copied are pool records sharing a six-word run with the final definition. Five further matched runs, with strategies that ask questions, used the earlier simulated user and are omitted.*
 
-In short, the budget should go to the definition when the definition is what the builder lacks, and labels must be able to overrule what the user says. When the builder already knows the definition, or no definition decides the label, most strategies add little after a good first draft, and none of ours encodes when to stop.
+In short, the budget should go to the definition when the definition is what the builder lacks and labels cannot reveal it cheaply, as with routing's private mapping. Where a policy shows in the labels, as on hate speech, rules drawn from labels do as well as questions. When the builder already knows the definition, or no definition decides the label, most strategies add little after a good first draft, questions can move a boundary that was already right, and none of our strategies encodes when to stop.
 
 ### 6.4 Other System 1 models
 
@@ -306,37 +299,36 @@ In short, the budget should go to the definition when the definition is what the
 
 *Table 8: the zero-shot and Opus all-labels classifiers, built against Jev and run unchanged on four System 1 models. Sonnet costs are at batch (half) price.*
 
-The budgeted classifiers transfer even better (Table 9). Luna matches or beats Jev on every task mean and in 12 of the 14 runs, and Perplexity's decision model stays within 0.4 points and 0.014 macro-F1 of Jev. These classifiers were tuned on a few dozen labels rather than fitted option by option to Jev's answers on thousands of records, which may be why they lose nothing in transfer.
+The budgeted classifiers transfer at least as well (Table 9). Luna is within 0.003 of Jev on every task mean and matches or beats it in 10 of the 14 runs, and Perplexity's decision model is within 0.4 points of Jev on Banking77 and level with it or ahead on the conversation tasks, by up to 0.028 macro-F1 on hate speech. These classifiers were tuned on a few dozen labels rather than fitted option by option to Jev's answers on thousands of records, which may be why they lose nothing in transfer.
 
 | Task                              | Runs | Jev                         | Luna                            | Perplexity                  |
 | --------------------------------- | ---- | --------------------------- | ------------------------------- | --------------------------- |
 | Banking77 intents (acc)           | 3    | 87.3, 87.3, 85.8 (86.8)     | 88.2, 87.9, 86.8 (**87.6**)     | 87.5, 86.3, 85.4 (86.4)     |
-| Banking77 routing, free (acc)     | 3    | 93.5, 92.1, 92.4 (92.6)     | 93.5, 92.2, 92.9 (**92.9**)     | 93.3, 92.2, 92.1 (92.5)     |
-| Hate speech (macro-F1)            | 3    | 0.792, 0.823, 0.798 (0.804) | 0.817, 0.816, 0.807 (**0.813**) | 0.812, 0.799, 0.786 (0.799) |
-| Persuasion strategy (macro-F1)    | 3    | 0.607, 0.567, 0.635 (0.603) | 0.628, 0.576, 0.629 (**0.611**) | 0.609, 0.585, 0.627 (0.607) |
-| Donation outcome, free (macro-F1) | 1    | 0.700                       | 0.719                           | **0.727**                   |
-| Deal reached, free (macro-F1)     | 1    | 0.897                       | **0.902**                       | 0.883                       |
+| Banking77 routing, free (acc)     | 3    | 94.1, 92.1, 92.4 (92.8)     | 94.3, 92.2, 92.9 (**93.1**)     | 94.4, 92.2, 92.1 (92.9)         |
+| Hate speech (macro-F1)            | 3    | 0.820, 0.779, 0.767 (0.789) | 0.809, 0.798, 0.776 (0.794)     | 0.829, 0.822, 0.800 (**0.817**) |
+| Persuasion strategy (macro-F1)    | 3    | 0.589, 0.592, 0.629 (0.603) | 0.593, 0.592, 0.620 (0.602)     | 0.611, 0.617, 0.616 (**0.615**) |
+| Donation outcome, free (macro-F1) | 1    | **0.706**                   | 0.703                           | **0.706**                       |
+| Deal reached, free (macro-F1)     | 1    | 0.873                       | **0.880**                       | 0.873                           |
 
 *Table 9: final classifiers of budgeted Opus builders (the cross-model runs of Table 5, and the free-strategy runs on the other tasks), built against Jev and run unchanged on Luna and Perplexity's decision model. Means in parentheses.*
 
 ### 6.5 Cost
 
-Building a classifier from a user interview costs $1.03–3.70 per run (Table 10), most of it the builder's own API calls; the simulated user adds $0.06–0.33. With every label, running drafts over thousands of records raises the System 1 cost of building to $3–6 per run. Once built, the classifiers cost $0.07–0.25 per 1,000 records with Jev, two to four times as much with Luna, and $4.8–16.7 with Sonnet 5 even at batch price. Fine-tuning RoBERTa-base took from a minute to five hours on one M4 Max GPU, depending on the task. All runs in this paper cost about $855 in API calls.
+Building a classifier from a user interview costs $1.53–5.37 per run (Table 10), most of it the builder's own API calls and System 1 calls while building; the simulated user adds up to $0.89, about $0.08 per question, and writing its note on how the labels apply the policy cost $6–25 per task, once. With every label, running drafts over thousands of records raises the System 1 cost of building to $3–6 per run. Once built, the classifiers cost $0.07–0.35 per 1,000 records with Jev, two to four times as much with Luna, and $4.8–16.7 with Sonnet 5 even at batch price. Fine-tuning RoBERTa-base took from a minute to five hours on one M4 Max GPU, depending on the task. All runs in this paper, including those with the earlier simulated user, cost about $1,250 in API calls.
 
 | Setting                         | Runs | Builder | Simulated user | System 1 while building | Total to build | Minutes | Final classifier, per 1,000 records |
 | ------------------------------- | ---- | ------- | -------------- | ----------------------- | -------------- | ------- | ----------------------------------- |
-| Budgeted, Opus (cross-model)    | 9    | 1.39    | 0.18           | 0.66                    | 2.24           | 8.6     | 0.25                                |
-| Budgeted, Sonnet (cross-model)  | 9    | 0.62    | 0.16           | 0.62                    | 1.40           | 5.3     | 0.15                                |
-| Budgeted, Haiku (cross-model)   | 9    | 0.46    | 0.33           | 0.24                    | 1.03           | 8.5     | 0.07                                |
-| Budgeted, Opus (cross-strategy) | 30   | 1.48    | 0.11           | 1.03                    | 2.62           | 7.9     | 0.20                                |
-| Budgeted, Opus, rules only      | 10   | 1.75    | 0.06           | 1.88                    | 3.69           | 9.4     | 0.25                                |
-| Budgeted, Opus, interview       | 18   | 1.96    | 0.11           | 1.11                    | 3.18           | 9.2     | 0.16                                |
-| Budgeted, Opus, interview lean  | 18   | 1.91    | 0.08           | 1.70                    | 3.70           | 10.3    | 0.21                                |
+| Budgeted, Opus (cross-model)    | 9    | 1.37    | 0.46           | 0.72                    | 2.55           | 7.9     | 0.29                                |
+| Budgeted, Sonnet (cross-model)  | 9    | 0.59    | 0.35           | 0.70                    | 1.65           | 4.9     | 0.18                                |
+| Budgeted, Haiku (cross-model)   | 9    | 0.39    | 0.89           | 0.26                    | 1.53           | 6.1     | 0.07                                |
+| Budgeted, Opus (cross-strategy) | 50   | 1.37    | 0.23           | 1.33                    | 2.93           | 8.3     | 0.23                                |
+| Budgeted, Opus, rules only      | 5    | 2.30    | —              | 3.07                    | 5.37           | 12.7    | 0.35                                |
+| Budgeted, Opus, interview lean  | 18   | 2.14    | 0.28           | 1.75                    | 4.17           | 12.2    | 0.24                                |
 | All labels, Opus                | 6    | 1.93    | —              | 6.09                    | 8.02           | 19.6    | 0.25                                |
 | All labels, Sonnet              | 3    | 0.71    | —              | 3.14                    | 3.85           | 8.7     | 0.12                                |
 | All labels, Haiku               | 3    | 0.55    | —              | 5.06                    | 5.61           | 11.7    | 0.12                                |
 
-*Table 10: mean cost per run in USD. Builder is the agent's API cost; the simulated user is Claude Sonnet 5; System 1 while building is the builder's Jev calls. The last column is the Jev cost of running the final classifier.*
+*Table 10: mean cost per run in USD. Builder is the agent's API cost; the simulated user is Claude Opus 5.5, and the rules-only runs asked it nothing; System 1 while building is the builder's Jev calls. The last column is the Jev cost of running the final classifier.*
 
 ## 7 Discussion: monitoring and updating
 

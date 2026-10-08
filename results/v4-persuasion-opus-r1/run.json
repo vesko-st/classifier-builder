@@ -1,0 +1,78 @@
+{
+  "run_id": "v4-persuasion-opus-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:15:35",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 353,
+    "num_turns": 32,
+    "total_cost_usd": 1.0875698
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v0 draft from description + prior knowledge of P4G scheme, flat 18-option choice",
+      "test": {
+        "jev": {
+          "accuracy": 0.5722,
+          "macro_f1": 0.5615,
+          "est_cost_usd": 0.072577,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 52,
+      "estimate": 0.5,
+      "note": "v1: 25 fine options mapped to 18 classes, mirrors owner policy answers Q1-Q4 + minimal pairs",
+      "test": {
+        "jev": {
+          "accuracy": 0.6196,
+          "macro_f1": 0.5941,
+          "est_cost_usd": 0.141475,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.55,
+      "note": "v3 ensemble: 3 wording/order variants of the 27-option mapped choice; adds donate-what-you-can->donation-info, check-in->other. 17/24 bought labels (9/10 random check, biased up by rule-making)",
+      "test": {
+        "luna": {
+          "accuracy": 0.6157,
+          "macro_f1": 0.5932,
+          "est_cost_usd": 0.903251,
+          "total": 1517,
+          "answered": 1517
+        },
+        "pplx": {
+          "accuracy": 0.6372,
+          "macro_f1": 0.611,
+          "est_cost_usd": 0.012189,
+          "total": 1517,
+          "answered": 1516
+        },
+        "jev": {
+          "accuracy": 0.619,
+          "macro_f1": 0.5892,
+          "est_cost_usd": 0.454009,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

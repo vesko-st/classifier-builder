@@ -1,0 +1,69 @@
+{
+  "version": 1,
+  "name": "hate_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "hate_criteria_v2_t",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "woman_abuse": {
+          "instructions": "Is the tweet a clearly hostile personal attack on a woman, or contemptuous abuse of women as a group? Yes needs real hostility: two or more slurs or insults stacked together (bitch, hoe, whore, slut, cunt, ugly, dumb, worthless), insults about her body or worth, contempt for women as a type ('these hoes', 'all women are...'), or threats, violence or rape wishes against her. A single casual 'bitch' or 'hoe' used as filler, banter, a nickname, a vocative or a brag ('bitch I'm fine', 'Britney, bitch'), slurs in an argument between friends, and slurs aimed at men, politicians or celebrities for their politics are a no."
+        },
+        "benign_use": {
+          "instructions": "Is the slur used in a non-hostile way: joking or affectionate between friends, the author describing themselves ('I'm that bitch'), an exclamation or idiom ('karma's a bitch', 'life's a bitch', 'bitch please'), a song lyric, quoting or calling out someone else's use of the word, or merely reporting or discussing the word?"
+        },
+        "migrant_hostile": {
+          "instructions": "Is the tweet hostile toward immigrants, refugees, migrants, 'illegal aliens' or Muslims-as-migrants as a group: dehumanising or derogatory language about them, presenting crimes by individual immigrants as typical of the group, or approvingly calling for them to be deported, sent back, kept out or removed (e.g. 'send them back', 'deport them all', 'refugees not welcome')? Neutral news, policy debate, wall funding or immigration-law talk, political attacks on parties or politicians with immigration hashtags tacked on, and criticism of racism are NOT a yes."
+        }
+      },
+      "rule": [
+        [
+          "woman_abuse",
+          "!benign_use"
+        ],
+        [
+          "migrant_hostile"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "hate_criteria_v3",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "woman_abuse": {
+          "instructions": "Is the tweet a clearly hostile personal attack on a woman, or contemptuous abuse of women as a group? Yes needs real hostility: two or more slurs or insults stacked together (bitch, hoe, whore, slut, cunt, ugly, dumb, worthless), insults about her body or worth, contempt for women as a type ('these hoes', 'all women are...'), or threats, violence or rape wishes against her. A single casual 'bitch' or 'hoe' used as filler, banter, a nickname, a vocative or a brag ('bitch I'm fine', 'Britney, bitch'), slurs in an argument between friends, and slurs aimed at men, politicians or celebrities for their politics are a no."
+        },
+        "benign_use": {
+          "instructions": "Is the slur used in a non-hostile way: joking or affectionate between friends, the author describing themselves ('I'm that bitch'), an exclamation or idiom ('karma's a bitch', 'life's a bitch', 'bitch please'), a song lyric, quoting or calling out someone else's use of the word, or merely reporting or discussing the word?"
+        },
+        "migrant_hostile": {
+          "instructions": "Is the tweet openly contemptuous of immigrants, refugees, migrants or 'illegal aliens' as a group: dehumanising or derogatory words about them (animals, vermin, rapefugees, invaders, bottom feeders), blaming the group as a whole for crime, disease or ruin, or explicitly demanding that they be deported, sent back or kept out because of who they are (e.g. 'send them all back', 'refugees not welcome')? A news headline or crime report, a hashtag alone (#BuildThatWall, #DeportThemAll, #NoDACA), a policy or law opinion, a sarcastic or political jab at politicians, voters or parties, questions, and criticism of racism are NOT a yes."
+        }
+      },
+      "rule": [
+        [
+          "woman_abuse",
+          "!benign_use"
+        ],
+        [
+          "migrant_hostile"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.575
+  }
+}

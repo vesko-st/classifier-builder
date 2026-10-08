@@ -1,0 +1,9 @@
+{
+  "task": "craigslist_deal",
+  "model": "claude-opus-5-5",
+  "seconds": 90,
+  "input": 2155503,
+  "output": 7894,
+  "tool_calls": 29,
+  "rounds": 27
+}

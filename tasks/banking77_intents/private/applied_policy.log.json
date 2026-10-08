@@ -1,0 +1,9 @@
+{
+  "task": "banking77_intents",
+  "model": "claude-opus-5-5",
+  "seconds": 133,
+  "input": 1651806,
+  "output": 14129,
+  "tool_calls": 88,
+  "rounds": 40
+}

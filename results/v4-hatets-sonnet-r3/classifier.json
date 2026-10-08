@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "name": "hate_ens2_t65",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "hate_criteria3",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "women_attack": {
+          "instructions": "Is this tweet a clearly hostile, contemptuous attack on a woman or on women (one specific woman, or women in general), using gendered slurs such as bitch, hoe, whore, slut, cunt as insults? The target must be female: answer no if the target is a man, a male politician or a man called a bitch/whore, or if no female target is evident. Answer no when the slur is affectionate, friendly banter, self-description ('bad bitch'), an exclamation, filler or an idiom ('karma's a bitch'), a casual remark with no real hostility, or an insult without any gendered slur. Stacked slurs, threats or sustained abuse of a woman are yes."
+        },
+        "migrant_attack": {
+          "instructions": "Does this tweet express hostility toward immigrants, illegal aliens, refugees or migrants as a group (including Mexicans, Hispanics, Africans or Muslims framed as migrants)? Yes if it demeans, dehumanises, vilifies or blames them (criminals, rapists, scum, invaders, parasites, stealing jobs, draining welfare, crimes framed as typical of them) or demands that they be deported, removed or sent back, including very short tweets of mainly anti-immigrant hashtags. No for plain support of a border wall or immigration policy, a bare news report of a crime, a count or progress update on the wall, unrelated tweets that merely carry a hashtag, or attacks on politicians that only have immigration hashtags added. Also no if the tweet insults someone (e.g. 'shut up') and only carries a wall hashtag, or merely cheers or counts progress with hashtags, without expressing hostility to immigrants."
+        }
+      },
+      "rule": [
+        [
+          "women_attack"
+        ],
+        [
+          "migrant_attack"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "hate_criteria4",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "women_attack": {
+          "instructions": "Does this tweet viciously insult or demean a woman or women with gendered slurs (bitch, hoe, whore, slut, cunt)? Requires a female target, one woman or women as a group. It does not count when: the target is male or unclear; the slur is friendly, joking, self-referential, an exclamation, filler or idiom; or the tweet is just casual chat. It counts when the slurs are clearly used to attack, humiliate or threaten a woman, especially stacked slurs."
+        },
+        "migrant_attack": {
+          "instructions": "Is this tweet hostile to immigrants, illegal aliens, refugees or migrants as a group (Mexicans, Hispanics, Africans or Muslims framed as migrants count)? Yes: it demeans, dehumanises or blames them (criminals, rapists, scum, invaders, stealing jobs or welfare, crimes presented as typical of them) or demands they be deported, removed or sent back, including short tweets of mainly anti-immigrant hashtags. No: plain support for a wall or immigration policy, merely cheering or counting progress, a bare crime news report, abuse of a person that only carries a wall hashtag, or attacks on politicians with immigration hashtags added."
+        }
+      },
+      "rule": [
+        [
+          "women_attack"
+        ],
+        [
+          "migrant_attack"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.65
+  }
+}

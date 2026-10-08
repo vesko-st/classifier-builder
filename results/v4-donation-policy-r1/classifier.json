@@ -1,0 +1,187 @@
+{
+  "version": 1,
+  "name": "donation_policy",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_stance",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "{\"task\": \"This is a chat in which a persuader asks the persuadee (an online crowd worker) to donate part of their task payment (usually $0-$2, sometimes $0.30-$0.75) to Save the Children. After the chat the persuadee privately chose an amount. We want to predict whether they really donated more than $0.\", \"note\": \"Check first whether the persuadee's messages are spammy/low-effort (spam_or_troll); that overrides everything else.\", \"question\": \"Which description best fits the PERSUADEE's final stance and behaviour in this chat? Judge the persuadee's own messages, not the persuader's. Use their last word on the matter if they changed their mind.\"}",
+      "state_template": "{{input}}",
+      "criteria": {
+        "full_payment_pledge": "The persuadee commits to donate their WHOLE task payment (all of it, the full $2 / full amount), freely or gladly.",
+        "willing_pledge": "The persuadee willingly commits to a specific amount for this task that is part of their payment (e.g. $1, half, 50 cents, even a few cents), said readily, cheerfully or without much resistance.",
+        "grudging_token_pledge": "The persuadee only agrees to a small token amount after reluctance, pushback, pressure or haggling (e.g. first says they can't afford it, then 'fine, 10 cents'), or names an amount half-heartedly ('maybe 10 cents').",
+        "out_of_range_or_later": "The persuadee names an amount larger than the task payment (e.g. $5, $20, $50, $100), or promises to donate later, elsewhere, on the website, when they get paid, rather than a clear amount from this task's payment now.",
+        "warm_vague": "The persuadee is positive and sympathetic about the charity or says they'd like to help/consider it, but never commits to a specific amount from this task.",
+        "skeptic_no_amount": "The persuadee is skeptical, doubtful, uninterested or noncommittal, asks critical questions or prefers other causes, and never commits to an amount.",
+        "firm_refusal": "The persuadee clearly refuses: says no, says they will donate $0 or nothing, or that they need the money; possibly repeatedly.",
+        "spam_or_troll": "Low-effort or not-genuine persuadee, REGARDLESS of any amount pledged: messages written in ALL CAPS; garbled or broken text; repetitive template-like replies ('ok i will do', 'yes', 'yes i have') that don't engage with what was said; nonsensical or copy-pasted lines; trolling or joking amounts; or clearly rushing just to get through the required turns. Choose this whenever the persuadee's writing looks like this, even if they state an amount."
+      },
+      "map": {
+        "full_payment_pledge": "donated",
+        "willing_pledge": "donated",
+        "grudging_token_pledge": "donated",
+        "out_of_range_or_later": "donated",
+        "warm_vague": "donated",
+        "skeptic_no_amount": "donated",
+        "firm_refusal": "not_donated",
+        "spam_or_troll": "donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_stance",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "{\"task\": \"This is a chat in which a persuader asks the persuadee (an online crowd worker) to donate part of their task payment (usually $0-$2, sometimes $0.30-$0.75) to Save the Children. After the chat the persuadee privately chose an amount. We want to predict whether they really donated more than $0.\", \"note\": \"Check first whether the persuadee's messages are spammy/low-effort (spam_or_troll); that overrides everything else.\", \"question\": \"Which description best fits the PERSUADEE's final stance and behaviour in this chat? Judge the persuadee's own messages, not the persuader's. Use their last word on the matter if they changed their mind.\"}",
+      "state_template": "{{input}}",
+      "criteria": {
+        "full_payment_pledge": "The persuadee commits to donate their WHOLE task payment (all of it, the full $2 / full amount), freely or gladly.",
+        "willing_pledge": "The persuadee willingly commits to a specific amount for this task that is part of their payment (e.g. $1, half, 50 cents, even a few cents), said readily, cheerfully or without much resistance.",
+        "grudging_token_pledge": "The persuadee only agrees to a small token amount after reluctance, pushback, pressure or haggling (e.g. first says they can't afford it, then 'fine, 10 cents'), or names an amount half-heartedly ('maybe 10 cents').",
+        "out_of_range_or_later": "The persuadee names an amount larger than the task payment (e.g. $5, $20, $50, $100), or promises to donate later, elsewhere, on the website, when they get paid, rather than a clear amount from this task's payment now.",
+        "warm_vague": "The persuadee is positive and sympathetic about the charity or says they'd like to help/consider it, but never commits to a specific amount from this task.",
+        "skeptic_no_amount": "The persuadee is skeptical, doubtful, uninterested or noncommittal, asks critical questions or prefers other causes, and never commits to an amount.",
+        "firm_refusal": "The persuadee clearly refuses: says no, says they will donate $0 or nothing, or that they need the money; possibly repeatedly.",
+        "spam_or_troll": "Low-effort or not-genuine persuadee, REGARDLESS of any amount pledged: messages written in ALL CAPS; garbled or broken text; repetitive template-like replies ('ok i will do', 'yes', 'yes i have') that don't engage with what was said; nonsensical or copy-pasted lines; trolling or joking amounts; or clearly rushing just to get through the required turns. Choose this whenever the persuadee's writing looks like this, even if they state an amount."
+      },
+      "map": {
+        "full_payment_pledge": "donated",
+        "willing_pledge": "donated",
+        "grudging_token_pledge": "donated",
+        "out_of_range_or_later": "donated",
+        "warm_vague": "donated",
+        "skeptic_no_amount": "donated",
+        "firm_refusal": "not_donated",
+        "spam_or_troll": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_stance",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "{\"task\": \"This is a chat in which a persuader asks the persuadee (an online crowd worker) to donate part of their task payment (usually $0-$2, sometimes $0.30-$0.75) to Save the Children. After the chat the persuadee privately chose an amount. We want to predict whether they really donated more than $0.\", \"note\": \"Check first whether the persuadee's messages are spammy/low-effort (spam_or_troll); that overrides everything else.\", \"question\": \"Which description best fits the PERSUADEE's final stance and behaviour in this chat? Judge the persuadee's own messages, not the persuader's. Use their last word on the matter if they changed their mind.\"}",
+      "state_template": "{{input}}",
+      "criteria": {
+        "full_payment_pledge": "The persuadee commits to donate their WHOLE task payment (all of it, the full $2 / full amount), freely or gladly.",
+        "willing_pledge": "The persuadee willingly commits to a specific amount for this task that is part of their payment (e.g. $1, half, 50 cents, even a few cents), said readily, cheerfully or without much resistance.",
+        "grudging_token_pledge": "The persuadee only agrees to a small token amount after reluctance, pushback, pressure or haggling (e.g. first says they can't afford it, then 'fine, 10 cents'), or names an amount half-heartedly ('maybe 10 cents').",
+        "out_of_range_or_later": "The persuadee names an amount larger than the task payment (e.g. $5, $20, $50, $100), or promises to donate later, elsewhere, on the website, when they get paid, rather than a clear amount from this task's payment now.",
+        "warm_vague": "The persuadee is positive and sympathetic about the charity or says they'd like to help/consider it, but never commits to a specific amount from this task.",
+        "skeptic_no_amount": "The persuadee is skeptical, doubtful, uninterested or noncommittal, asks critical questions or prefers other causes, and never commits to an amount.",
+        "firm_refusal": "The persuadee clearly refuses: says no, says they will donate $0 or nothing, or that they need the money; possibly repeatedly.",
+        "spam_or_troll": "Low-effort or not-genuine persuadee, REGARDLESS of any amount pledged: messages written in ALL CAPS; garbled or broken text; repetitive template-like replies ('ok i will do', 'yes', 'yes i have') that don't engage with what was said; nonsensical or copy-pasted lines; trolling or joking amounts; or clearly rushing just to get through the required turns. Choose this whenever the persuadee's writing looks like this, even if they state an amount."
+      },
+      "map": {
+        "full_payment_pledge": "donated",
+        "willing_pledge": "donated",
+        "grudging_token_pledge": "donated",
+        "out_of_range_or_later": "donated",
+        "warm_vague": "donated",
+        "skeptic_no_amount": "not_donated",
+        "firm_refusal": "not_donated",
+        "spam_or_troll": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_stance",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "{\"task\": \"This is a chat in which a persuader asks the persuadee (an online crowd worker) to donate part of their task payment (usually $0-$2, sometimes $0.30-$0.75) to Save the Children. After the chat the persuadee privately chose an amount. We want to predict whether they really donated more than $0.\", \"note\": \"Check first whether the persuadee's messages are spammy/low-effort (spam_or_troll); that overrides everything else.\", \"question\": \"Which description best fits the PERSUADEE's final stance and behaviour in this chat? Judge the persuadee's own messages, not the persuader's. Use their last word on the matter if they changed their mind.\"}",
+      "state_template": "{{input}}",
+      "criteria": {
+        "full_payment_pledge": "The persuadee commits to donate their WHOLE task payment (all of it, the full $2 / full amount), freely or gladly.",
+        "willing_pledge": "The persuadee willingly commits to a specific amount for this task that is part of their payment (e.g. $1, half, 50 cents, even a few cents), said readily, cheerfully or without much resistance.",
+        "grudging_token_pledge": "The persuadee only agrees to a small token amount after reluctance, pushback, pressure or haggling (e.g. first says they can't afford it, then 'fine, 10 cents'), or names an amount half-heartedly ('maybe 10 cents').",
+        "out_of_range_or_later": "The persuadee names an amount larger than the task payment (e.g. $5, $20, $50, $100), or promises to donate later, elsewhere, on the website, when they get paid, rather than a clear amount from this task's payment now.",
+        "warm_vague": "The persuadee is positive and sympathetic about the charity or says they'd like to help/consider it, but never commits to a specific amount from this task.",
+        "skeptic_no_amount": "The persuadee is skeptical, doubtful, uninterested or noncommittal, asks critical questions or prefers other causes, and never commits to an amount.",
+        "firm_refusal": "The persuadee clearly refuses: says no, says they will donate $0 or nothing, or that they need the money; possibly repeatedly.",
+        "spam_or_troll": "Low-effort or not-genuine persuadee, REGARDLESS of any amount pledged: messages written in ALL CAPS; garbled or broken text; repetitive template-like replies ('ok i will do', 'yes', 'yes i have') that don't engage with what was said; nonsensical or copy-pasted lines; trolling or joking amounts; or clearly rushing just to get through the required turns. Choose this whenever the persuadee's writing looks like this, even if they state an amount."
+      },
+      "map": {
+        "full_payment_pledge": "donated",
+        "willing_pledge": "donated",
+        "grudging_token_pledge": "not_donated",
+        "out_of_range_or_later": "donated",
+        "warm_vague": "donated",
+        "skeptic_no_amount": "not_donated",
+        "firm_refusal": "not_donated",
+        "spam_or_troll": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_stance",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "{\"task\": \"This is a chat in which a persuader asks the persuadee (an online crowd worker) to donate part of their task payment (usually $0-$2, sometimes $0.30-$0.75) to Save the Children. After the chat the persuadee privately chose an amount. We want to predict whether they really donated more than $0.\", \"note\": \"Check first whether the persuadee's messages are spammy/low-effort (spam_or_troll); that overrides everything else.\", \"question\": \"Which description best fits the PERSUADEE's final stance and behaviour in this chat? Judge the persuadee's own messages, not the persuader's. Use their last word on the matter if they changed their mind.\"}",
+      "state_template": "{{input}}",
+      "criteria": {
+        "full_payment_pledge": "The persuadee commits to donate their WHOLE task payment (all of it, the full $2 / full amount), freely or gladly.",
+        "willing_pledge": "The persuadee willingly commits to a specific amount for this task that is part of their payment (e.g. $1, half, 50 cents, even a few cents), said readily, cheerfully or without much resistance.",
+        "grudging_token_pledge": "The persuadee only agrees to a small token amount after reluctance, pushback, pressure or haggling (e.g. first says they can't afford it, then 'fine, 10 cents'), or names an amount half-heartedly ('maybe 10 cents').",
+        "out_of_range_or_later": "The persuadee names an amount larger than the task payment (e.g. $5, $20, $50, $100), or promises to donate later, elsewhere, on the website, when they get paid, rather than a clear amount from this task's payment now.",
+        "warm_vague": "The persuadee is positive and sympathetic about the charity or says they'd like to help/consider it, but never commits to a specific amount from this task.",
+        "skeptic_no_amount": "The persuadee is skeptical, doubtful, uninterested or noncommittal, asks critical questions or prefers other causes, and never commits to an amount.",
+        "firm_refusal": "The persuadee clearly refuses: says no, says they will donate $0 or nothing, or that they need the money; possibly repeatedly.",
+        "spam_or_troll": "Low-effort or not-genuine persuadee, REGARDLESS of any amount pledged: messages written in ALL CAPS; garbled or broken text; repetitive template-like replies ('ok i will do', 'yes', 'yes i have') that don't engage with what was said; nonsensical or copy-pasted lines; trolling or joking amounts; or clearly rushing just to get through the required turns. Choose this whenever the persuadee's writing looks like this, even if they state an amount."
+      },
+      "map": {
+        "full_payment_pledge": "donated",
+        "willing_pledge": "donated",
+        "grudging_token_pledge": "not_donated",
+        "out_of_range_or_later": "not_donated",
+        "warm_vague": "not_donated",
+        "skeptic_no_amount": "not_donated",
+        "firm_refusal": "not_donated",
+        "spam_or_troll": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_stance",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "{\"task\": \"This is a chat in which a persuader asks the persuadee (an online crowd worker) to donate part of their task payment (usually $0-$2, sometimes $0.30-$0.75) to Save the Children. After the chat the persuadee privately chose an amount. We want to predict whether they really donated more than $0.\", \"note\": \"Check first whether the persuadee's messages are spammy/low-effort (spam_or_troll); that overrides everything else.\", \"question\": \"Which description best fits the PERSUADEE's final stance and behaviour in this chat? Judge the persuadee's own messages, not the persuader's. Use their last word on the matter if they changed their mind.\"}",
+      "state_template": "{{input}}",
+      "criteria": {
+        "full_payment_pledge": "The persuadee commits to donate their WHOLE task payment (all of it, the full $2 / full amount), freely or gladly.",
+        "willing_pledge": "The persuadee willingly commits to a specific amount for this task that is part of their payment (e.g. $1, half, 50 cents, even a few cents), said readily, cheerfully or without much resistance.",
+        "grudging_token_pledge": "The persuadee only agrees to a small token amount after reluctance, pushback, pressure or haggling (e.g. first says they can't afford it, then 'fine, 10 cents'), or names an amount half-heartedly ('maybe 10 cents').",
+        "out_of_range_or_later": "The persuadee names an amount larger than the task payment (e.g. $5, $20, $50, $100), or promises to donate later, elsewhere, on the website, when they get paid, rather than a clear amount from this task's payment now.",
+        "warm_vague": "The persuadee is positive and sympathetic about the charity or says they'd like to help/consider it, but never commits to a specific amount from this task.",
+        "skeptic_no_amount": "The persuadee is skeptical, doubtful, uninterested or noncommittal, asks critical questions or prefers other causes, and never commits to an amount.",
+        "firm_refusal": "The persuadee clearly refuses: says no, says they will donate $0 or nothing, or that they need the money; possibly repeatedly.",
+        "spam_or_troll": "Low-effort or not-genuine persuadee, REGARDLESS of any amount pledged: messages written in ALL CAPS; garbled or broken text; repetitive template-like replies ('ok i will do', 'yes', 'yes i have') that don't engage with what was said; nonsensical or copy-pasted lines; trolling or joking amounts; or clearly rushing just to get through the required turns. Choose this whenever the persuadee's writing looks like this, even if they state an amount."
+      },
+      "map": {
+        "full_payment_pledge": "donated",
+        "willing_pledge": "not_donated",
+        "grudging_token_pledge": "not_donated",
+        "out_of_range_or_later": "not_donated",
+        "warm_vague": "not_donated",
+        "skeptic_no_amount": "not_donated",
+        "firm_refusal": "not_donated",
+        "spam_or_troll": "not_donated"
+      }
+    }
+  ],
+  "weights": [
+    0.02,
+    0.1,
+    0.25,
+    0.05,
+    0.15,
+    0.15
+  ],
+  "decision": {
+    "class": "donated",
+    "threshold": 0.66
+  }
+}

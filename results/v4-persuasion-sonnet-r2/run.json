@@ -1,0 +1,94 @@
+{
+  "run_id": "v4-persuasion-sonnet-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:21:20",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 401,
+    "num_turns": 25,
+    "total_cost_usd": 0.5479868
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.4,
+      "note": "draft from description, flat 18-way choice",
+      "test": {
+        "jev": {
+          "accuracy": 0.497,
+          "macro_f1": 0.5226,
+          "est_cost_usd": 0.079719,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 39,
+      "estimate": 0.5,
+      "note": "policy-informed flat choice, off-task dropped",
+      "test": {
+        "jev": {
+          "accuracy": 0.6065,
+          "macro_f1": 0.5737,
+          "est_cost_usd": 0.101843,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 74,
+      "estimate": 0.55,
+      "note": "v3: owner rules for intros, closings, offers",
+      "test": {
+        "jev": {
+          "accuracy": 0.6355,
+          "macro_f1": 0.6018,
+          "est_cost_usd": 0.108986,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 74,
+      "estimate": 0.55,
+      "note": "v4: 3-variant wording ensemble of v3",
+      "test": {
+        "jev": {
+          "accuracy": 0.6374,
+          "macro_f1": 0.6032,
+          "est_cost_usd": 0.325819,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.5,
+      "note": "v6: 3-variant ensemble with rules from hard labels (other broadened, praise-user short cheers, donation range)",
+      "test": {
+        "jev": {
+          "accuracy": 0.648,
+          "macro_f1": 0.6167,
+          "est_cost_usd": 0.362038,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

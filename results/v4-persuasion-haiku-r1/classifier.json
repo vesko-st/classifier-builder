@@ -1,0 +1,29 @@
+{
+  "version": 1,
+  "name": "persuasion_strategy",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Classify the persuader message according to the persuasion strategy or dialogue act it uses in a charity-donation conversation.\n\nKey distinctions:\n- Acknowledgement: Reacting to what the persuadee said (agreeing with their opinion/fact/concern)\n- Praise-user: Bare affirmation (\"Great!\", \"Awesome!\") right after persuadee commits to donating\n- Thank: Expressions of gratitude\n- Greeting: Hello, Hi, or responses to \"how are you\"\n- Ask-donation-amount: Questions asking persuadee to name their own donation amount\n- Proposition-of-donation: Asking whether they will donate at all (yes/no choice)\n- Emotion-appeal: Statistics/facts about child suffering, sadness expressions, \"imagine...\" statements\n- Logical-appeal: Claims donation has impact, moral reasoning, cost comparisons\n- Credibility-appeal: Facts about the charity's history/reach/accomplishments, website links\n- Donation-information: Mechanics only - payment range ($0-$2), deduction from task payment, how to pay\n- Foot-in-the-door: Persuading by emphasizing even small donations matter (\"even 5 cents\", \"pocket change\")\n- Personal-related-inquiry: Questions about persuadee's own life/experience/past donations\n- Personal-story: Persuader sharing a personal anecdote (rare)\n- Self-modeling: Persuader describing their own giving or matching offers\n- Source-related-inquiry: Questions about whether persuadee knows Save the Children\n- Task-related-inquiry: Other general questions about opinions/preferences\n- Off-task: Irrelevant tangents (rare)\n- Other: Fillers/filler responses, hostility, meta-task remarks, arguments",
+  "state_template": "Persuader message to classify:\n{{input}}",
+  "description": "Persuasion strategy in charity-donation conversation",
+  "criteria": {
+    "acknowledgement": "Agreeing with or validating something the persuadee said",
+    "ask-donation-amount": "Asking persuadee to specify how much they want to donate",
+    "credibility-appeal": "Facts about the charity's history, reach, accomplishments, or website",
+    "donation-information": "Mechanics of donating - payment range, task payment deduction, payment methods",
+    "emotion-appeal": "Statistics about child suffering, sadness expressions, or 'imagine' statements",
+    "foot-in-the-door": "Emphasizing that even small donations matter significantly",
+    "greeting": "Greeting or response to 'how are you'",
+    "logical-appeal": "Claims that donation has impact, moral reasoning, or cost-benefit comparisons",
+    "off-task": "Irrelevant tangents or off-topic remarks",
+    "other": "Fillers, hostility, meta-task remarks, or arguments",
+    "personal-related-inquiry": "Questions about persuadee's life, experience, or past donations",
+    "personal-story": "Persuader sharing their own personal anecdote",
+    "praise-user": "Affirmation after persuadee commits to donating",
+    "proposition-of-donation": "Asking whether they will donate at all",
+    "self-modeling": "Persuader describing their own giving or matching donations",
+    "source-related-inquiry": "Questions about whether persuadee knows Save the Children",
+    "task-related-inquiry": "General questions about opinions, preferences, or other topics",
+    "thank": "Expressions of gratitude"
+  }
+}

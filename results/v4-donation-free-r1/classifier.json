@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "name": "donation_v6",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v5a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "In this chat a persuader asks the persuadee to donate part of their task payment to Save the Children. Which option best describes what the persuadee committed to by the end of the chat? First check whether the persuadee writes in all caps or gibberish.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "all_caps_or_garbled": "Most of the persuadee's messages are written in ALL CAPITAL letters, or are garbled, scrambled or nonsensical replies that do not follow the conversation. This takes priority over anything they pledge.",
+        "full_amount": "The persuadee commits to donating their entire task payment or all of it.",
+        "specific_amount": "The persuadee commits to donating a specific nonzero amount (even a few cents, even if agreed after negotiating or pressure), and does not take it back.",
+        "agrees_vague": "The persuadee says they will donate or would like to, but never names an amount.",
+        "undecided_or_later": "The persuadee is undecided, wants to think about it or research the charity first, or says they will donate some other time or some other way.",
+        "refuses": "The persuadee declines, says they cannot afford it, wants to keep their payment, or says they will give $0."
+      },
+      "map": {
+        "all_caps_or_garbled": "not_donated",
+        "full_amount": "donated",
+        "specific_amount": "donated",
+        "agrees_vague": "not_donated",
+        "undecided_or_later": "not_donated",
+        "refuses": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v5b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Read this conversation, where one person tries to convince the other to give some of the money they earn for this task to the charity Save the Children. Where did the person being persuaded end up? First check whether the persuaded person writes in all caps or gibberish.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "all_caps_or_garbled": "Most of the persuadee's messages are written in ALL CAPITAL letters, or are garbled, scrambled or nonsensical replies that do not follow the conversation. This takes priority over anything they pledge.",
+        "full_amount": "They agree to give everything they earn for the task.",
+        "specific_amount": "They settle on a definite sum greater than zero to give (small sums and sums reached by bargaining count), without backing out.",
+        "agrees_vague": "They say yes to giving, or that they want to give, without ever stating how much.",
+        "undecided_or_later": "They remain unsure, want to look into the charity first, or say they will give at a later time or through another route.",
+        "refuses": "They say no, say they can't spare the money, prefer to keep their earnings, or choose to give nothing."
+      },
+      "map": {
+        "all_caps_or_garbled": "not_donated",
+        "full_amount": "donated",
+        "specific_amount": "donated",
+        "agrees_vague": "not_donated",
+        "undecided_or_later": "not_donated",
+        "refuses": "not_donated"
+      }
+    }
+  ]
+}

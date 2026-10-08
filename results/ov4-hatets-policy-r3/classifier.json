@@ -1,0 +1,97 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v5_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v3_choice",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Under a policy on hate speech against women and immigrants, which best describes this tweet? Judge the words of the tweet itself; hashtags alone don't decide it.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "slur_attack_on_a_woman": "Uses bitch, hoe, whore, slut, cunt or similar with hostility at a specific person who is a woman or whose gender isn't revealed (an @user, 'you', 'whoever did this'): insulting, belittling, mocking or threatening them (a personal fight, trash talk, a female celebrity or politician). Count 'bitch ass' / 'hoe ass' here unless it attaches to a man.",
+        "degrades_women_in_general": "Demeans women or girls in general with slurs or stereotypes ('these hoes ain't loyal', 'bitches will whore around'), including such lines in lyrics, or makes light of rape or violence against women.",
+        "demeans_immigrants": "Attacks immigrants, refugees, migrants or illegal aliens as people (including Muslims or Africans framed as migrants): crime or rape framed as typical of them, invader/animal/parasite/rapefugee language, draining welfare, stealing jobs, taking over, white genocide, or calling for them to be deported, sent home, removed or attacked.",
+        "deportation_cheer": "A very short tweet that mainly cheers deporting or sending immigrants back, made up mostly of hashtags like #DeportThemAll or #SendThemBack.",
+        "slur_as_exclamation_or_self": "Uses bitch, hoe etc. as an exclamation or filler ('BITCH I'm so proud', 'drink water bitch'), about the author themself ('a whole new bitch'), affectionately with friends, or in an idiom ('life's a bitch', 'karma's a bitch').",
+        "slur_at_a_man": "Uses bitch, hoe, whore etc. to insult someone recognisably male: a named man, 'he', 'Trump's a bitch', 'bitch ass nigga', 'bitch boy'.",
+        "immigration_policy_or_news": "Supports or discusses immigration policy without demeaning immigrants as people: build or fund the wall, end DACA, enforce the law, immigrate legally, a neutral news item, or a debate about the term 'illegal alien'.",
+        "politics_or_other_group": "Political talk (Trump, Democrats, liberals, elections) with immigration hashtags tacked on, or hostility toward groups other than women and immigrants (Muslims or Islam with no migrant angle, racial slurs, politicians).",
+        "unrelated": "Anything else, not about women, slurs or immigration."
+      },
+      "map": {
+        "slur_attack_on_a_woman": "hate",
+        "degrades_women_in_general": "hate",
+        "demeans_immigrants": "hate",
+        "deportation_cheer": "hate",
+        "slur_as_exclamation_or_self": "not_hate",
+        "slur_at_a_man": "not_hate",
+        "immigration_policy_or_news": "not_hate",
+        "politics_or_other_group": "not_hate",
+        "unrelated": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v4_choice",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Under a policy on hate speech against women and immigrants, which best describes this tweet? Judge the words of the tweet itself; hashtags alone don't decide it.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "slur_attack_on_a_woman": "Uses bitch, hoe, whore, slut, cunt or similar with hostility at a specific person who is a woman or whose gender isn't revealed (an @user, 'you', 'whoever did this'): insulting, belittling, mocking or threatening them (a personal fight, trash talk, a female celebrity or politician). Count 'bitch ass' / 'hoe ass' here unless it attaches to a man.",
+        "degrades_women_in_general": "Demeans women or girls in general with slurs or stereotypes ('these hoes ain't loyal', 'bitches will whore around'), including such lines in lyrics, or makes light of rape or violence against women.",
+        "demeans_immigrants": "Attacks immigrants, refugees, migrants or illegal aliens as people (including Muslims or Africans framed as migrants): crime or rape framed as typical of them, implying border crossers are dangerous or criminals, invader/animal/parasite/rapefugee language, draining welfare, stealing jobs, taking over, white genocide, wanting to ban or keep out people of a religion or origin (Muslim ban, 'no people from these countries', end diversity), or calling for them to be deported, sent home, removed or attacked.",
+        "deportation_cheer": "A very short tweet that mainly cheers deporting or sending immigrants back, made up mostly of hashtags like #DeportThemAll or #SendThemBack.",
+        "slur_as_exclamation_or_self": "Uses bitch, hoe etc. as an exclamation or filler ('BITCH I'm so proud', 'drink water bitch'), about the author themself ('a whole new bitch'), affectionately with friends, or in an idiom ('life's a bitch', 'karma's a bitch').",
+        "slur_at_a_man": "Uses bitch, hoe, whore etc. to insult someone recognisably male: a named man, 'he', 'Trump's a bitch', 'bitch ass nigga', 'bitch boy'.",
+        "immigration_policy_or_news": "Supports or discusses immigration policy without demeaning immigrants as people: build or fund the wall, end DACA, enforce the law, immigrate legally, a neutral news item, or a debate about the term 'illegal alien'.",
+        "politics_or_other_group": "Political talk (Trump, Democrats, liberals, elections) with immigration hashtags tacked on, or hostility toward groups other than women and immigrants (Muslims or Islam with no migrant angle, racial slurs, politicians).",
+        "unrelated": "Anything else, not about women, slurs or immigration."
+      },
+      "map": {
+        "slur_attack_on_a_woman": "hate",
+        "degrades_women_in_general": "hate",
+        "demeans_immigrants": "hate",
+        "deportation_cheer": "hate",
+        "slur_as_exclamation_or_self": "not_hate",
+        "slur_at_a_man": "not_hate",
+        "immigration_policy_or_news": "not_hate",
+        "politics_or_other_group": "not_hate",
+        "unrelated": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v5_choice",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Under a policy on hate speech against women and immigrants, which best describes this tweet? Judge the words of the tweet itself; hashtags alone don't decide it.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "slur_attack_on_a_woman": "Uses bitch, hoe, whore, slut, cunt or similar with hostility at a specific person who is a woman or whose gender isn't revealed (an @user, 'you', 'whoever did this'): insulting, belittling, mocking or threatening them (a personal fight, trash talk, a female celebrity or politician). Count 'bitch ass' / 'hoe ass' here unless it attaches to a man.",
+        "degrades_women_in_general": "Demeans women or girls in general with slurs or stereotypes ('these hoes ain't loyal', 'bitches will whore around', 'you been chasing hoes'), including such lines in lyrics or brags, or makes light of rape or violence against women.",
+        "demeans_immigrants": "Attacks immigrants, refugees, migrants or illegal aliens as people (including Muslims or Africans framed as migrants): crime or rape framed as typical of them, presenting the people caught crossing the border as criminals or a threat, invader/animal/parasite/rapefugee language, draining welfare, stealing jobs, taking over, white genocide, or calling for them to be deported, sent home, removed or attacked.",
+        "deportation_cheer": "A tweet with almost no words of its own that mainly rejects immigrants as people through hashtags like #DeportThemAll, #SendThemBack, #NoRefugees, #NoMigrants, #NoImmigrants.",
+        "slur_as_exclamation_or_self": "Uses bitch, hoe etc. as an exclamation or filler ('BITCH I'm so proud', 'drink water bitch'), about the author themself ('a whole new bitch'), affectionately with friends, or in an idiom ('life's a bitch', 'karma's a bitch').",
+        "slur_at_a_man": "Uses bitch, hoe, whore etc. to insult someone recognisably male: a named man, 'he', 'Trump's a bitch', 'bitch ass nigga', 'bitch boy'.",
+        "immigration_policy_or_news": "Supports or discusses immigration policy without demeaning immigrants as people: build or fund the wall, end DACA, enforce the law, immigrate legally, a neutral news item, or a debate about the term 'illegal alien'.",
+        "politics_or_other_group": "Political talk (Trump, Democrats, liberals, elections, courts) with immigration hashtags such as #DeportThemAll tacked on, immigration restriction argued on values or numbers, or hostility toward groups other than women and immigrants (Muslims or Islam with no migrant angle, racial slurs, politicians).",
+        "unrelated": "Anything else, not about women, slurs or immigration."
+      },
+      "map": {
+        "slur_attack_on_a_woman": "hate",
+        "degrades_women_in_general": "hate",
+        "demeans_immigrants": "hate",
+        "deportation_cheer": "hate",
+        "slur_as_exclamation_or_self": "not_hate",
+        "slur_at_a_man": "not_hate",
+        "immigration_policy_or_news": "not_hate",
+        "politics_or_other_group": "not_hate",
+        "unrelated": "not_hate"
+      }
+    }
+  ]
+}

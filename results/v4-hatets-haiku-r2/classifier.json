@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "name": "tweet_hate",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "hostile_gendered": {
+      "instructions": "Does this tweet use gendered slurs (bitch, hoe, whore, slut, etc.) with HOSTILITY at women? Look for: insults, degradation, threats, sexual objectification, or attacks on women as a group. Exclude: praise, affection, self-reference, banter, or mocking others.",
+      "criteria": {
+        "true": "Yes, uses gendered slurs with hostility at women",
+        "false": "No hostility toward women"
+      }
+    },
+    "dehumanizes_migrants": {
+      "instructions": "Does this tweet dehumanize or attack immigrants, migrants, or refugees? Look for: dehumanizing slurs like 'rapefugee', framing as invaders/criminals/animals/parasites/threats, generalizations, crime paired with deportation calls, or existential-threat rhetoric. Exclude: neutral reporting, policy criticism, simple 'illegal/alien' language.",
+      "criteria": {
+        "true": "Yes, dehumanizes or attacks migrants",
+        "false": "No dehumanization"
+      }
+    }
+  },
+  "rule": [
+    [
+      "hostile_gendered"
+    ],
+    [
+      "dehumanizes_migrants"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate"
+}

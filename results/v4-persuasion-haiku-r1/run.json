@@ -1,0 +1,49 @@
+{
+  "run_id": "v4-persuasion-haiku-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:24:09",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 260,
+    "num_turns": 38,
+    "total_cost_usd": 0.2581453
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 78,
+      "estimate": 0.5,
+      "note": "Initial draft from policy questions, before labeling",
+      "test": {
+        "jev": {
+          "accuracy": 0.5583,
+          "macro_f1": 0.5731,
+          "est_cost_usd": 0.082121,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 98,
+      "estimate": 0.55,
+      "note": "Final classifier after policy questions and 10-record calibration. Random label accuracy 60%, macro-F1 0.567. Main confusions: foot-in-the-door vs logical-appeal (known noise), credibility vs source-inquiry (framing matters), personal-story classification.",
+      "test": {
+        "jev": {
+          "accuracy": 0.5583,
+          "macro_f1": 0.5731,
+          "est_cost_usd": 0.0,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

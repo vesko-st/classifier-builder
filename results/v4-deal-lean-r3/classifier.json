@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "name": "deal_v7",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v7_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "A buyer and a seller chat about a Craigslist listing. After the chat, the buyer may submit a formal offer that the seller accepts or rejects; that hidden step decides whether a deal closed. Classify how the visible chat ends, which predicts that outcome.",
+        "how_to_judge": [
+          "Focus on the end of the chat: the last price proposed, who proposed it, and how the other side responded.",
+          "Acceptance can be explicit (yes, deal, I accept) or shown by moving on to pickup, delivery, payment or move-in arrangements.",
+          "If anyone's last reply accepts the latest price (ok, fine, I'll take it, deal) or wraps up a sale, the chat ended in agreement, whatever came before.",
+          "When the chat stops on a proposal nobody answered, decide whether it came after real back-and-forth haggling or was the buyer's very first price with no reply.",
+          "Pick the option that best describes the final state of the chat."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "Both sides clearly agreed on a price (and any extra terms): one proposed it and the other accepted it, including a buyer saying they will take the item at the stated price, or a closing message thanking the other for the purchase.",
+        "implicit_acceptance": "After a price was proposed, the other side responded positively or moved on to arranging pickup, delivery, payment or move-in, showing they accepted it.",
+        "will_submit_offer": "Someone says they will submit, send or enter the formal offer (or asks the other to), and the chat ends there without a refusal.",
+        "unanswered_counter_after_haggling": "Specific counter-offers had already been traded (the buyer named a price and the seller answered with a different one, or the reverse), and the chat ends on a further counter-offer from either side that the other never answered, without anyone refusing.",
+        "seller_final_price_unanswered": "The chat ends with the seller naming their lowest, final or counter price as something the buyer could take (including a price followed by an invitation to close), and the buyer never answered.",
+        "seller_refuses_buyer_price": "The very last message is the seller explicitly saying no to the buyer's latest price (they cannot accept or do it, it is too low, or no deal is possible at it), and nothing shows the buyer accepted. A seller who only states a floor or counter price without refusing belongs under the seller's final price.",
+        "buyer_first_offer_unanswered": "The chat ends on the first specific price the buyer has named, with no reply to it. The seller may have stated the asking price or said they are flexible, but no counter-offers had been traded yet.",
+        "rejected": "One side clearly refused the last offer or walked away (said no, too low, will pass, not a match) and the sides did not agree.",
+        "no_price_discussed": "The chat never got to bargaining: only greetings, questions and answers about the item, small talk, or the listing price stated, with nobody proposing a different price and nobody saying they will take it.",
+        "unresolved_confusion": "The two people were confused about their roles or which item is for sale, or complained about the chat tool, and never sorted it out to negotiate."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "implicit_acceptance": "deal",
+        "will_submit_offer": "deal",
+        "unanswered_counter_after_haggling": "deal",
+        "seller_final_price_unanswered": "deal",
+        "seller_refuses_buyer_price": "no_deal",
+        "buyer_first_offer_unanswered": "no_deal",
+        "rejected": "no_deal",
+        "no_price_discussed": "no_deal",
+        "unresolved_confusion": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v7_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "context": "This is a Craigslist negotiation chat between a buyer and a seller. Once the chat is over, the buyer can send a formal offer and the seller accepts or declines it; whether a sale closed is decided by that step, which you cannot see. Your job is to say which kind of ending the chat has.",
+        "guidance": [
+          "Read the final few turns closely: what price was last on the table, who put it there, and what the reply was.",
+          "Agreement may be spoken (yes, deal, accepted) or implied by turning to logistics such as pickup, drop-off, payment or move-in.",
+          "If someone's final reply goes along with the latest price or wraps up the sale, the chat ended in agreement regardless of earlier disputes.",
+          "For a proposal left hanging, check whether prices had already been traded back and forth or whether it was the buyer's first number."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "Both people openly agreed on one price and any conditions: one side proposed it and the other said yes, including a buyer saying they'll take the item at the quoted price or a closing thank-you for the purchase.",
+        "implicit_acceptance": "A price was proposed and the reply was positive or went straight to arranging pickup, delivery, payment or moving in, which shows it was accepted.",
+        "will_submit_offer": "One side says they will send, enter or submit the formal offer (or tells the other to), and the chat stops without anyone refusing.",
+        "unanswered_counter_after_haggling": "The two sides had already traded different specific prices, and the chat stops on yet another counter-offer that got no reply and no refusal.",
+        "seller_final_price_unanswered": "The chat stops on the seller giving their lowest, final or counter price as an offer the buyer could take (possibly with an invitation to close), with no answer from the buyer.",
+        "seller_refuses_buyer_price": "The last message is the seller plainly declining the buyer's most recent price (can't do it, too low, no deal at that number) and nothing shows the buyer agreed. Merely stating a floor or counter price without declining goes under the seller's final price.",
+        "buyer_first_offer_unanswered": "The chat stops on the buyer's first specific price, with no reply. The seller may have quoted the asking price or said they're flexible, but no counter-offers had been traded.",
+        "rejected": "Someone clearly turned down the last offer or walked away (no, too low, I'll pass, not a match) and they never agreed.",
+        "no_price_discussed": "There was never any bargaining: only greetings, item questions and answers, chit-chat, or the asking price quoted with nobody proposing another price or saying they'll take it.",
+        "unresolved_confusion": "The people were mixed up about who is selling or which item is listed, or complained about the chat tool, and never sorted it out enough to negotiate."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "implicit_acceptance": "deal",
+        "will_submit_offer": "deal",
+        "unanswered_counter_after_haggling": "deal",
+        "seller_final_price_unanswered": "deal",
+        "seller_refuses_buyer_price": "no_deal",
+        "buyer_first_offer_unanswered": "no_deal",
+        "rejected": "no_deal",
+        "no_price_discussed": "no_deal",
+        "unresolved_confusion": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v7_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a chat in which a buyer and a seller haggle over a Craigslist item. A hidden formal offer, made by the buyer after the chat and then accepted or rejected by the seller, determines whether they closed a deal. Choose the description that best fits how the chat ends. Look hardest at the last price mentioned, who said it, and the reply. A final reply that goes along with the latest price or wraps up the sale means agreement, even after earlier disputes. When a proposal is left unanswered, distinguish a chat where counter-offers were already exchanged from one where the buyer had only just named a first price.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "Clear agreement on a single price and terms: a proposal followed by an acceptance, a buyer committing to take the item at the quoted price, or a closing message thanking the other side for the sale.",
+        "implicit_acceptance": "Following a price proposal, the other side reacts favourably or moves on to pickup, delivery, payment or move-in details, implying acceptance.",
+        "will_submit_offer": "A participant states they will submit, send or enter the official offer, or asks the other to, and nobody refuses before the chat ends.",
+        "unanswered_counter_after_haggling": "After the sides had exchanged differing specific prices, the chat ends on one more counter-offer from either side that was neither answered nor refused.",
+        "seller_final_price_unanswered": "The chat ends on the seller presenting a lowest, last or counter price the buyer could accept, sometimes with an invitation to close the deal, and the buyer does not reply.",
+        "seller_refuses_buyer_price": "The final message is the seller clearly declining the buyer's latest number (cannot accept, too low, no deal possible at that price), with no sign of the buyer agreeing. A seller who just names a floor or counter without declining fits the seller's final price instead.",
+        "buyer_first_offer_unanswered": "The chat ends on the buyer's first concrete price and no response follows. Before it there may have been an asking price or talk of flexibility, but no exchange of counter-offers.",
+        "rejected": "A clear refusal of the latest offer or a walk-away by either side (no, too low, pass, not a good match), with no agreement.",
+        "no_price_discussed": "Bargaining never began: just greetings, questions and answers about the item, small talk, or the asking price mentioned with no one offering a different price or agreeing to take it.",
+        "unresolved_confusion": "The participants were confused about their roles or the item for sale, or griped about the chat interface, and never resolved it to the point of negotiating."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "implicit_acceptance": "deal",
+        "will_submit_offer": "deal",
+        "unanswered_counter_after_haggling": "deal",
+        "seller_final_price_unanswered": "deal",
+        "seller_refuses_buyer_price": "no_deal",
+        "buyer_first_offer_unanswered": "no_deal",
+        "rejected": "no_deal",
+        "no_price_discussed": "no_deal",
+        "unresolved_confusion": "no_deal"
+      }
+    }
+  ]
+}

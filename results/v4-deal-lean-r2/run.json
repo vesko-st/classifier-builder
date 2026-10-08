@@ -1,0 +1,66 @@
+{
+  "run_id": "v4-deal-lean-r2",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-08T02:05:23",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 750,
+    "num_turns": 53,
+    "total_cost_usd": 2.1157051999999994
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft from description + reading: 6 ending-type options mapped to deal/no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.8918,
+          "macro_f1": 0.8665,
+          "est_cost_usd": 0.020593,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 17,
+      "estimate": 0.78,
+      "note": "v2: owner rule - unanswered counter after haggling -> deal; unanswered opening offer -> no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9003,
+          "macro_f1": 0.8514,
+          "est_cost_usd": 0.024772,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.8,
+      "note": "final = v2 re-snapshotted: 13/14 on random check labels, 33/41 overall (boundary-heavy); all later revisions broke >1 bought label",
+      "test": {
+        "jev": {
+          "accuracy": 0.9003,
+          "macro_f1": 0.8514,
+          "est_cost_usd": 0.0,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

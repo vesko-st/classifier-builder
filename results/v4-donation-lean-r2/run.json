@@ -1,0 +1,111 @@
+{
+  "run_id": "v4-donation-lean-r2",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-08T02:11:54",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 692,
+    "num_turns": 54,
+    "total_cost_usd": 2.6061024
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v1 draft from description: 7 decision-state options mapped to 2 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.7458,
+          "macro_f1": 0.7272,
+          "est_cost_usd": 0.022034,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 19,
+      "estimate": 0.62,
+      "note": "v3: owner signals (full payment, willing vs reluctant pledge, outside-task/over-$2 pledges, low-quality chats) as 9 options; 55% donated on pool",
+      "test": {
+        "jev": {
+          "accuracy": 0.6954,
+          "macro_f1": 0.6944,
+          "est_cost_usd": 0.026448,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 59,
+      "estimate": 0.68,
+      "note": "v5: reluctant pledges map to donated (labels: 5/5 grudging in-range pledges donated); outside-task pledges stay not_donated",
+      "test": {
+        "jev": {
+          "accuracy": 0.7338,
+          "macro_f1": 0.727,
+          "est_cost_usd": 0.02685,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 65,
+      "estimate": 0.7,
+      "note": "v6: hedged amounts never firmed up -> tentative_amount (not_donated); verified 3/3 moved records",
+      "test": {
+        "jev": {
+          "accuracy": 0.729,
+          "macro_f1": 0.7247,
+          "est_cost_usd": 0.028777,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 81,
+      "estimate": 0.7,
+      "note": "v7: agreement without amount must answer a request to give from this task; general goodwill -> undecided",
+      "test": {
+        "jev": {
+          "accuracy": 0.729,
+          "macro_f1": 0.7244,
+          "est_cost_usd": 0.031159,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.68,
+      "note": "FINAL = v7 re-snapshotted. 40 labels: 32/40 right (in-sample, boundary-heavy); random check set 6/9 (macro-F1 0.65). Ensemble rejected.",
+      "test": {
+        "jev": {
+          "accuracy": 0.729,
+          "macro_f1": 0.7244,
+          "est_cost_usd": 0.0,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

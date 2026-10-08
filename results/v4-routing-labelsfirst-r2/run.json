@@ -1,0 +1,64 @@
+{
+  "run_id": "v4-routing-labelsfirst-r2",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T02:46:44",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 367,
+    "num_turns": 32,
+    "total_cost_usd": 1.112033
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 30,
+      "estimate": 0.8,
+      "note": "draft: 68 intent options mapped to 6 teams per owner policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.936,
+          "macro_f1": 0.9329,
+          "est_cost_usd": 0.271219,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 76,
+      "estimate": 0.86,
+      "note": "v5: label-driven rules (reverted/cancelled payments->disputes, PIN location->cards, not-allowed transfers & source of funds & sign-up country->account, extra fee on statement->disputes, purchase fees->pricing)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9445,
+          "macro_f1": 0.9424,
+          "est_cost_usd": 0.298514,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.89,
+      "note": "v7: + non-received cash->fraud, pending/slow payment->cards, receiving salary/money in other currency->payments, revert own transaction->payments, card choice->cards; 34/35 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9494,
+          "macro_f1": 0.9472,
+          "est_cost_usd": 0.310027,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

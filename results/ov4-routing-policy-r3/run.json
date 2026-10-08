@@ -1,0 +1,79 @@
+{
+  "run_id": "ov4-routing-policy-r3",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T00:53:16",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 421,
+    "num_turns": 32,
+    "total_cost_usd": 1.3156896000000002
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v1 draft from description: 48 fine options mapped to 6 teams; team assignment of fees/declines/lost cards guessed",
+      "test": {
+        "jev": {
+          "accuracy": 0.8101,
+          "macro_f1": 0.8009,
+          "est_cost_usd": 0.197484,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 48,
+      "estimate": 0.82,
+      "note": "v2 mirrors owner policy: security/PIN/swallowed->fraud; declined/pending card->cards; wrong-rate/extra charge/cash abroad->disputes; verify top-up->account; apple pay->cards",
+      "test": {
+        "jev": {
+          "accuracy": 0.9146,
+          "macro_f1": 0.9057,
+          "est_cost_usd": 0.223615,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 84,
+      "estimate": 0.84,
+      "note": "v3: neutral exchange-fee qs->pricing; Visa/Mastercard->cards; cancelled/missing payment->disputes; unreceived cash->fraud; 18/18 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.924,
+          "macro_f1": 0.9189,
+          "est_cost_usd": 0.233964,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.88,
+      "note": "v7 final: v5 + small unexplained statement amounts->disputes, ATM refused->cards, choosing card->cards, 'what is this fee on statement'->disputes; 25/26 bought labels (10/10 random)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9357,
+          "macro_f1": 0.9326,
+          "est_cost_usd": 0.244183,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

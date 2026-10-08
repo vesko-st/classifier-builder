@@ -1,0 +1,64 @@
+{
+  "run_id": "v4-persuasion-free-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:35:58",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 554,
+    "num_turns": 34,
+    "total_cost_usd": 1.2054152
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.55,
+      "note": "v1 draft from description + knowledge of the scheme; fine options mapped, 'other' split into answer/closing/welcome/confirm/misc",
+      "test": {
+        "jev": {
+          "accuracy": 0.5992,
+          "macro_f1": 0.5889,
+          "est_cost_usd": 0.109428,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 73,
+      "estimate": 0.58,
+      "note": "v3 ensemble of 3 wording variants; rules from Q1-Q3 + audit labels (18/19 on biased audit set)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6203,
+          "macro_f1": 0.5767,
+          "est_cost_usd": 0.394781,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.62,
+      "note": "v4 ensemble (weights 1,1,0.5): personal-related-inquiry covers persuadee's own donating/volunteering history; appreciation->thank; donation-process answers->donation-info; 27/32 on bought (biased) labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6374,
+          "macro_f1": 0.6061,
+          "est_cost_usd": 0.418485,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

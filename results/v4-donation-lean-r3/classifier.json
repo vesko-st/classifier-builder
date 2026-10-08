@@ -1,0 +1,112 @@
+{
+  "version": 1,
+  "name": "donation_ens2",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v5",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "In this chat a persuader tries to get the persuadee to give some of what they earn for this online job to Save the Children, a children's charity. After the chat, the persuadee privately chooses how much of the job's pay (from $0 up to all of it) to give away; what they say in the chat is not binding. Pick the description that best fits the persuadee's behaviour and stated decision.",
+        "focus": "Only the persuadee's own decision matters, not what the persuader says they will give. If the persuadee changes their mind, their last stated position counts.",
+        "quality_first": "Check first whether the persuadee's messages are low-effort or not genuine (see the low_effort option); if so, choose that option whatever amount they name.",
+        "payment": "The task payment is small: a few dollars at most (often well under a dollar or up to about two dollars)."
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "low_effort": "Most of the persuadee's messages are written in capital letters, scrambled or reversed, nonsensical, or copy-pasted/template-like, so the persuadee is plainly not engaging genuinely, even if they name an amount. Simple, short or non-native English on its own does not count.",
+        "pledges_all_or_most": "A genuine, engaged persuadee pledges the whole task payment or most of it.",
+        "pledges_amount": "A genuine persuadee freely names or accepts a positive amount within the task payment that is less than most of it (a part, about half, a dollar, or even a few cents offered cheerfully).",
+        "grudging_token": "The persuadee settles on an amount only reluctantly: a token amount given after pressure or while annoyed, joking, trolling or rushing to finish, or an amount pushed up step by step in haggling and conceded grudgingly.",
+        "oversized_amount": "The persuadee says they will give an amount larger than the whole task payment (for example tens or hundreds of dollars), apparently meaning to give something.",
+        "elsewhere_or_later": "The persuadee says they will give later, on the charity's website, by phone, when they get paid, or with their own money, rather than from this task payment, and does not also give part of the task payment.",
+        "agrees_no_amount": "The persuadee clearly says yes to giving part of this task payment (for example agrees when asked, or says they will give once the chat is over) but never names an amount. Only showing interest, asking how to give, or saying they might consider it does not count.",
+        "warm_undecided": "The persuadee is warm and positive about the charity or says they would like to help, but never agrees to give part of the task payment or names an amount; includes friendly chats that drift into small talk.",
+        "skeptic_undecided": "The persuadee stays doubtful or noncommittal, asks for proof, or ends wanting to research the charity first, without naming an amount.",
+        "refuses": "The persuadee declines, says they will give nothing or $0, or takes back an earlier offer."
+      },
+      "map": {
+        "low_effort": "not_donated",
+        "pledges_all_or_most": "donated",
+        "pledges_amount": "donated",
+        "grudging_token": "not_donated",
+        "oversized_amount": "donated",
+        "elsewhere_or_later": "not_donated",
+        "agrees_no_amount": "donated",
+        "warm_undecided": "not_donated",
+        "skeptic_undecided": "not_donated",
+        "refuses": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v5b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "setting": "Below is a conversation where one person (the persuader) asks the other (the persuadee) to give part of their pay for this short online job to Save the Children (an organisation helping children). The pay is small, a few dollars at most. Once the conversation ends the persuadee decides in private how much of that pay to give, anywhere from nothing to all of it; nothing said in the chat binds them.",
+        "question": "Which description best matches how the persuadee behaves and what they finally say about giving?",
+        "notes": "Judge only the persuadee, not the persuader's own giving. When the persuadee changes position, use the last one. Decide first whether the persuadee's writing is plainly not genuine (the low_effort description); if it is, pick that regardless of any amount they name."
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "low_effort": "Nearly all of the persuadee's lines are in upper case, jumbled or backwards, meaningless, or read like pasted boilerplate, showing they are not really taking part, whatever sum they mention. Plain, terse or non-native English by itself is not enough.",
+        "pledges_all_or_most": "A sincere persuadee says they will give all or nearly all of the job's pay.",
+        "pledges_amount": "A sincere persuadee willingly offers or agrees to a positive sum within the job's pay that is below most of it: some of it, roughly half, a dollar, or a few cents given gladly.",
+        "grudging_token": "The persuadee agrees to a sum only unwillingly: a token sum handed over under pressure, in irritation, as a joke, as trolling or to get the chat over with, or a sum raised bit by bit through bargaining and given up grudgingly.",
+        "oversized_amount": "The persuadee promises a sum bigger than the entire job pay (tens or hundreds of dollars, say), seemingly intending to give something.",
+        "elsewhere_or_later": "Instead of giving from this job's pay, the persuadee says they will give at a later time, through the charity's site or phone line, once paid, or from their own funds, without also giving part of the job's pay.",
+        "agrees_no_amount": "The persuadee gives a definite yes to donating some of this job's pay (agreeing when asked, or saying they will give when the job ends) yet never states a sum. Merely sounding interested, asking how giving works, or saying they may think about it is not enough.",
+        "warm_undecided": "The persuadee is friendly and approving of the charity or says they want to help, but never definitely agrees to give from the job's pay nor states a sum; this covers pleasant chats that wander into small talk.",
+        "skeptic_undecided": "The persuadee remains unsure or uncommitted, wants evidence, or closes by saying they would research the charity first, with no sum named.",
+        "refuses": "The persuadee says no, says they will give nothing or zero, or withdraws an offer made earlier."
+      },
+      "map": {
+        "low_effort": "not_donated",
+        "pledges_all_or_most": "donated",
+        "pledges_amount": "donated",
+        "grudging_token": "not_donated",
+        "oversized_amount": "donated",
+        "elsewhere_or_later": "not_donated",
+        "agrees_no_amount": "donated",
+        "warm_undecided": "not_donated",
+        "skeptic_undecided": "not_donated",
+        "refuses": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v5c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A persuader is trying to talk the persuadee into donating some of the small payment (at most a few dollars) they get for this online task to Save the Children, which helps kids. After the conversation the persuadee secretly picks a donation between zero and the full payment, so their words are not a binding commitment. Classify the persuadee's conduct and final stance. Consider the persuadee only (ignore what the persuader pledges), take their latest position if it changes, and if their messages are clearly not genuine (low_effort) choose that even when they name a figure.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "low_effort": "The persuadee mostly types in all caps, in scrambled or reversed word order, in nonsense, or in canned/template text, so they are clearly not participating for real, even when naming a figure. Merely simple or imperfect English does not qualify.",
+        "pledges_all_or_most": "An earnest persuadee commits the entire task payment or the bulk of it.",
+        "pledges_amount": "An earnest persuadee readily proposes or accepts a positive figure inside the task payment but under most of it, such as a portion, around half, a dollar, or a few cents offered happily.",
+        "grudging_token": "The persuadee settles on a figure reluctantly: a token figure yielded under pressure, annoyance, joking, trolling or haste to finish, or a figure bargained upward step by step and conceded unwillingly.",
+        "oversized_amount": "The persuadee pledges a figure exceeding the whole task payment (e.g. tens or hundreds of dollars), apparently meaning to donate something.",
+        "elsewhere_or_later": "The persuadee plans to give in the future, via the charity's website or phone, after a paycheck, or from personal money, in place of the task payment, and does not also give part of the task payment.",
+        "agrees_no_amount": "The persuadee firmly agrees to donate part of the task payment (accepting the request, or stating they will donate when the task finishes) but never specifies a figure. Simply expressing interest, asking how to donate, or saying they might consider it does not qualify.",
+        "warm_undecided": "The persuadee is pleasant and supportive of the charity or keen to help, yet never firmly agrees to give from the task payment nor names a figure; friendly chats that drift into small talk belong here.",
+        "skeptic_undecided": "The persuadee stays hesitant or noncommittal, asks for proof, or ends planning to research the charity first, naming no figure.",
+        "refuses": "The persuadee declines, chooses zero or nothing, or retracts an earlier offer."
+      },
+      "map": {
+        "low_effort": "not_donated",
+        "pledges_all_or_most": "donated",
+        "pledges_amount": "donated",
+        "grudging_token": "not_donated",
+        "oversized_amount": "donated",
+        "elsewhere_or_later": "not_donated",
+        "agrees_no_amount": "donated",
+        "warm_undecided": "not_donated",
+        "skeptic_undecided": "not_donated",
+        "refuses": "not_donated"
+      }
+    }
+  ]
+}

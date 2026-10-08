@@ -1,0 +1,9 @@
+{
+  "task": "banking77_routing",
+  "model": "claude-opus-5-5",
+  "seconds": 198,
+  "input": 2408841,
+  "output": 13480,
+  "tool_calls": 71,
+  "rounds": 53
+}

@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "name": "hate_c2",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "sexist": {
+      "instructions": "Does this tweet use hostile, degrading language against a woman or women: an insult with a sexist slur (bitch, whore, hoe, slut, cunt) meant as an attack, a threat of violence or sexual degradation aimed at a woman, or a demeaning generalisation about women? Answer no if the word is used affectionately or jokingly between friends, about oneself, as an exclamation or idiom ('karma's a bitch', 'that bitch of a song'), if the target is a man or is not a person, if the tweet only mentions the words as a quote or complaint about being called them, or if it insults a female public figure for her politics without a sexist slur."
+    },
+    "xeno": {
+      "instructions": "Does this tweet explicitly demean or dehumanise immigrants, refugees or 'illegal aliens' as a group (calling them criminals, rapists, invaders, vermin, parasites, 'rapefugees', saying they are all dangerous or a plague), or does it directly tell immigrants to leave / demand that people be deported, removed or sent back because they do not belong? Answer no if the tweet is only: support for border security, the wall, immigration law or a party, opinion about a politician or party, a news headline or factual report without a comment about immigrants as a group, a question, hashtags only, or an argument about policy or the economy, even if it is critical of immigration."
+    },
+    "reporting": {
+      "instructions": "Is the tweet mainly criticising, condemning, reporting or quoting hateful language or racism/sexism by others, rather than expressing hostility itself?"
+    }
+  },
+  "rule": [
+    [
+      "sexist",
+      "!reporting"
+    ],
+    [
+      "xeno",
+      "!reporting"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate"
+}

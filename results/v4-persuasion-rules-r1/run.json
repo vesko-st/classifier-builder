@@ -1,0 +1,94 @@
+{
+  "run_id": "v4-persuasion-rules-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:47:36",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1139,
+    "num_turns": 57,
+    "total_cost_usd": 2.7356824000000004
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.5,
+      "note": "v1 draft from description, 21 options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.5926,
+          "macro_f1": 0.6003,
+          "est_cost_usd": 0.10475,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 32,
+      "estimate": 0.55,
+      "note": "ensemble of 3 wording variants with H1-H5 rules; 16/16 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6276,
+          "macro_f1": 0.6209,
+          "est_cost_usd": 0.346236,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 54,
+      "estimate": 0.57,
+      "note": "ens3: H1-H11 applied to all 3 wording variants; 27/27 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6282,
+          "macro_f1": 0.6178,
+          "est_cost_usd": 0.411658,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 76,
+      "estimate": 0.58,
+      "note": "ens5: H1-H18; 38/38 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6262,
+          "macro_f1": 0.6159,
+          "est_cost_usd": 0.494526,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.58,
+      "note": "ens9: H1-H24 + hit-logistics/small-talk options mapped to other; 50/50 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6374,
+          "macro_f1": 0.6055,
+          "est_cost_usd": 0.591617,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

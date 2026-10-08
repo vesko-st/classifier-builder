@@ -1,0 +1,45 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v5",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "imm_attack": {
+      "instructions": "Is this tweet hostile to immigrants, refugees, asylum seekers or 'illegal aliens' themselves?",
+      "criteria": {
+        "true": "Yes: it demeans or dehumanises them (e.g. rapefugees, invaders, thieves, bottom feeders, criminals, disease carriers, welfare leeches), presents a crime by an immigrant as typical of them, mocks them ironically, or the tweet is about immigrants or refugees (their numbers, crimes, costs, arrival) and endorses deporting them, sending them home or keeping them out, including when that conclusion is given by a hashtag such as #SendThemHome or #DeportThemAll; or it is a short approving message whose point is deporting them.",
+        "false": "No: the body is about policy mechanics, politicians, parties, the media, voting, or something unrelated, and immigrants appear only in hashtags tacked on, or neutrally."
+      }
+    },
+    "imm_absent": {
+      "instructions": "Leaving hashtags aside, are immigrants, migrants, refugees or illegal aliens absent from what the tweet's words talk about?",
+      "criteria": {
+        "true": "Yes: the words are about politicians, parties, Congress, elections, the wall's funding or construction, the media, or something unrelated, and immigrants themselves are not discussed except through hashtags.",
+        "false": "No: the tweet's words discuss immigrants, migrants, refugees, DACA recipients or illegal aliens themselves (their crimes, numbers, arrival, costs, removal), or the tweet is a short message or slogan whose whole point is stopping immigration or deporting them."
+      }
+    },
+    "women": {
+      "instructions": "Is this tweet hostile toward women: does it use gendered slurs (bitch, hoe, whore, cunt, slut) to insult, degrade or threaten a woman or women?",
+      "criteria": {
+        "true": "Yes: it hurls gendered slurs at a woman or girl (including in a personal fight or woman-on-woman trash talk), stacks slurs like 'bitch' and 'hoe' at someone female, generalises about women as hoes/bitches/whores (including in lyrics), or threatens, sexually degrades or advocates violence against women.",
+        "false": "No: the slur is an exclamation ('bitch I'm omw'), a simile or figure of speech ('like a bitch'), about the author themself, affectionate praise of a friend, aimed at a man, or used while criticising sexism; or there is no gendered slur aimed at women."
+      }
+    }
+  },
+  "rule": [
+    [
+      "imm_attack",
+      "!imm_absent"
+    ],
+    [
+      "women"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate",
+  "decision": {
+    "class": "hate",
+    "threshold": 0.6
+  }
+}

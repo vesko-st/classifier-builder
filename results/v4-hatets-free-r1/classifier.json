@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "name": "hate_ens_v9",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "hate_v9a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate-speech annotation policy whose only protected targets are immigrants (including refugees and migrants) and women. Pick the option that best describes the tweet.",
+        "rules": [
+          "Immigration: supporting the wall, deportation, ending DACA or stricter borders is NOT hate on its own. It is hate only when the tweet's own text degrades immigrants as people: calls them invaders, animals, scum, criminals or rapists, welfare drains, presents crime stories as typical of them, or calls to send them back, remove or attack them.",
+          "Hashtags alone do not decide. A tweet whose body attacks Democrats, politicians or the media, with #DeportThemAll or #BuildThatWall tacked on, is not hate.",
+          "Insisting on the term 'illegal aliens', defending it, or mocking people who object to it is terminology or policy talk, not hate, unless the tweet adds dehumanising or hostile content (invaders, criminals, 'get them out'). Crime reports framed around an immigrant or MS-13 perpetrator with deportation or alien framing are hate, and saying such crimes are becoming the norm is a generalisation about immigrants and is hate.",
+          "Women: a slur (bitch, hoe, whore, slut, cunt) counts as hate only when it is used to attack a woman or women: insulting, threatening, shaming, demeaning or sexually degrading them with real hostility. It can be a single woman and needs no misogynist motive. Not hate: 'bitch' as an exclamation or attention-getter in an otherwise harmless message, affectionate or playful address to friends, self-referential use, boasting, idioms ('karma's a bitch', 'bitch please'), song lyrics, quoting what someone else said, or casual 'my bitch'/'these hoes' talk without an attack.",
+          "Muslims, Jews, men and other groups are out of scope unless the attack is tied to migrants/refugees or to women.",
+          "'Bitch' used only as a vocative or interjection that opens an otherwise ordinary remark, argument or joke ('bitch do it look like we play', 'bitch the whole joke is...') is not hate.",
+          "By contrast, when the slur itself is the put-down aimed at a woman, with contempt or a threat ('you can get dragged bitch real quick', 'bum ass hoe you lame as hell', 'u always a hoe'), it is hate.",
+          "Friendly teasing stays not hate even with slurs: birthday wishes, joking with friends, laughing emojis aimed at a friend, hyping someone up ('happy birthday bitch', 'slay bitch').",
+          "Immigrants: also hate when the tweet shows hostility to immigrants' or refugees' presence: cheering that they are not welcome (#RefugeesNotWelcome), blaming immigrants or the officials who let them in for murders and crimes, calling migrant families human traffickers, complaining that taxpayers must feed and house them, or 'they just keep on coming'."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrants_degraded": "The text degrades immigrants, refugees or migrants as people: dehumanising words (invaders, animals, scum, rapefugees, bottom feeders), generalising them as criminals, rapists, diseased or welfare drains, crime reports framed around immigrant perpetrators, or calling to send them back, remove, keep out or harm them.",
+        "immigration_policy": "Talks about immigration, the wall, DACA, ICE, borders, elections or immigration news without degrading immigrants as people; includes attacks on Democrats or politicians with immigration hashtags added, and insisting on or defending the term 'illegal aliens'.",
+        "slur_at_woman": "Attacks a specific woman or girl with real hostility: insults, threatens, mocks, shames or sexually degrades her, using slurs or degrading words.",
+        "slur_at_women_group": "Attacks women in general or a group of women with real hostility: insults, contempt, degrading generalisations ('you hoes are trash', 'women are...').",
+        "slang_not_hostile": "Uses bitch, hoe or similar without attacking a woman: exclamation or attention-getter in a harmless message, affectionate or playful address to friends, self-referential, boasting, idiom, song lyrics, quoting someone, casual 'my bitch'/'these hoes' talk, or complaining about a situation.",
+        "slur_at_male_or_other": "Insults directed at a man, boy, or someone not identified as a woman, or other groups (Muslims, Jews) not tied to migrants.",
+        "unrelated": "Anything else: neutral, unrelated, or not about immigrants or women."
+      },
+      "map": {
+        "immigrants_degraded": "hate",
+        "immigration_policy": "not_hate",
+        "slur_at_woman": "hate",
+        "slur_at_women_group": "hate",
+        "slang_not_hostile": "not_hate",
+        "slur_at_male_or_other": "not_hate",
+        "unrelated": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "hate_v9b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "goal": "Decide which description fits this tweet, following an annotation policy on hate speech. Under this policy the only groups that can be targets of hate are women and immigrants (refugees and migrants included).",
+        "immigrants": [
+          "Backing the border wall, deportation, ending DACA or tougher border control does not by itself make a tweet hateful.",
+          "A tweet is hateful toward immigrants when its words degrade them as human beings: invaders, animals, scum, criminals, rapists, burdens on welfare; when it reports crimes in a way that blames immigrant perpetrators or treats such crime as normal for them; or when it demands they be sent back, thrown out or attacked.",
+          "Hashtags by themselves do not settle it: a body that attacks Democrats, politicians or the press with #BuildThatWall or #DeportThemAll appended is not hateful.",
+          "Using, defending or insisting on the term 'illegal aliens', or mocking objections to it, is not hateful without other dehumanising or hostile content.",
+          "Hostility to immigrants' or refugees' presence is hateful too: celebrating that they are not welcome (#RefugeesNotWelcome), holding immigrants or the officials who admitted them responsible for murders and crimes, branding migrant parents human traffickers, resenting that taxpayers feed and house them, or 'they just keep on coming'."
+        ],
+        "women": [
+          "A slur such as bitch, hoe, whore, slut or cunt is hateful only when it is used as a hostile attack on a woman or on women: insulting, threatening, humiliating, shaming or sexually degrading them. One targeted woman is enough; no misogynist motive is required.",
+          "Not hateful: 'bitch' as an interjection or a way of addressing someone in a harmless or friendly message, playful teasing among friends, describing oneself, bragging, set phrases ('karma's a bitch', 'bitch please'), rap or song lyrics, quoting another person, or casual talk about 'my bitch' or 'these hoes' that attacks no one.",
+          "If 'bitch' is only an opening interjection or form of address in an ordinary remark, argument or joke ('bitch do it look like we play', 'bitch the whole joke is...'), it is not hateful.",
+          "But when the slur itself is the put-down aimed at a woman, with contempt or a threat ('you can get dragged bitch real quick', 'bum ass hoe you lame as hell', 'u always a hoe'), it is hateful.",
+          "Teasing between friends is still not hateful even with slurs: birthday wishes, jokes with laughing emojis, hyping someone up ('happy birthday bitch', 'slay bitch')."
+        ],
+        "out_of_scope": "Attacks on Muslims, Jews, men or other groups do not count unless they are tied to migrants/refugees or to women."
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrants_degraded": "Degrades immigrants, refugees or migrants as people: dehumanising labels, painting them as criminals, rapists, disease carriers or welfare burdens, crime reports that pin crimes on immigrant perpetrators, or demands to send them back, expel or hurt them.",
+        "immigration_policy": "Immigration, wall, DACA, ICE, border, election or immigration-news talk that does not degrade immigrants as people, including Democrat- or politician-bashing with immigration hashtags and defending the term 'illegal aliens'.",
+        "slur_at_woman": "A hostile attack on a particular woman or girl: insulting, threatening, ridiculing, shaming or sexually degrading her.",
+        "slur_at_women_group": "A hostile attack on women in general or a group of women: contempt, insults or degrading generalisations.",
+        "slang_not_hostile": "Slang like bitch or hoe with no attack on a woman: interjections, friendly or playful address, self-description, bragging, set phrases, lyrics, quotes, casual 'my bitch'/'these hoes' talk, or venting about a situation.",
+        "slur_at_male_or_other": "Insults aimed at a man, a boy, someone whose gender is not female, or other groups (Muslims, Jews) not tied to migrants.",
+        "unrelated": "Anything else: neutral or unrelated content not about immigrants or women."
+      },
+      "map": {
+        "immigrants_degraded": "hate",
+        "immigration_policy": "not_hate",
+        "slur_at_woman": "hate",
+        "slur_at_women_group": "hate",
+        "slang_not_hostile": "not_hate",
+        "slur_at_male_or_other": "not_hate",
+        "unrelated": "not_hate"
+      }
+    }
+  ]
+}

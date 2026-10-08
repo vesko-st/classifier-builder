@@ -1,0 +1,81 @@
+{
+  "run_id": "v4-routing-lean-r3",
+  "task": "banking77_routing",
+  "budget": 100,
+  "strategy": "interview_lean",
+  "constraints": [
+    "rules_only"
+  ],
+  "mode": "budget",
+  "created": "2026-10-08T02:35:48",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 553,
+    "num_turns": 38,
+    "total_cost_usd": 1.6518630000000003
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.72,
+      "note": "v1: 78 intent options mapped to teams by guess; no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.8175,
+          "macro_f1": 0.8097,
+          "est_cost_usd": 0.34536,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 56,
+      "estimate": 0.85,
+      "note": "v2: intent->team map corrected from 28 targeted labels (PIN, swallowed card -> fraud; verify top-up -> account; pending card/cash, Apple Pay -> cards; supported cards -> pricing)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9023,
+          "macro_f1": 0.8877,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 82,
+      "estimate": 0.88,
+      "note": "v3: rules for salary/foreign-currency pay (receiving), fees on incoming money (pricing), small unexplained charges (disputes), unexpected incoming money (fraud); 40/41 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9114,
+          "macro_f1": 0.8975,
+          "est_cost_usd": 0.358421,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.9,
+      "note": "v5: PIN-not-yet-received -> cards, terminated/missing card payment -> reverted (disputes), misplaced phone -> fraud, cards for non-residents -> country support; 49/50 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9185,
+          "macro_f1": 0.9048,
+          "est_cost_usd": 0.368239,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

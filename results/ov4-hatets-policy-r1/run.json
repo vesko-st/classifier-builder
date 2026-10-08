@@ -1,0 +1,108 @@
+{
+  "run_id": "ov4-hatets-policy-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T00:53:16",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 383,
+    "num_turns": 36,
+    "total_cost_usd": 1.2944790000000002
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 38,
+      "estimate": 0.72,
+      "note": "v1 criteria: imm_hate OR women_hate, built from policy answers; no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.7916,
+          "macro_f1": 0.7916,
+          "est_cost_usd": 0.066073,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 58,
+      "estimate": 0.7,
+      "note": "v2 = v1 + decision threshold hate>=0.75 (fit on 10 random labels, 3 FP/1 FN)",
+      "test": {
+        "jev": {
+          "accuracy": 0.812,
+          "macro_f1": 0.8089,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 68,
+      "estimate": 0.7,
+      "note": "v4 ensemble of 2 criteria wording variants (v3 wording + rephrased), hashtag/POS rules, threshold 0.75",
+      "test": {
+        "jev": {
+          "accuracy": 0.8228,
+          "macro_f1": 0.821,
+          "est_cost_usd": 0.134595,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 92,
+      "estimate": 0.71,
+      "note": "v6 = v4 ensemble + women rule: single bitch in banter/joke is not_hate; v5 hashtag-only rule rejected",
+      "test": {
+        "jev": {
+          "accuracy": 0.8222,
+          "macro_f1": 0.8201,
+          "est_cost_usd": 0.139045,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.7,
+      "note": "final: v6 unchanged; 4 more uncertain labels (3/4 right), threshold 0.75 still best on 31 labels",
+      "test": {
+        "luna": {
+          "accuracy": 0.8103,
+          "macro_f1": 0.8092,
+          "est_cost_usd": 0.379422,
+          "total": 1766,
+          "answered": 1766
+        },
+        "pplx": {
+          "accuracy": 0.8321,
+          "macro_f1": 0.8289,
+          "est_cost_usd": 0.002833,
+          "total": 1766,
+          "answered": 1763
+        },
+        "jev": {
+          "accuracy": 0.8222,
+          "macro_f1": 0.8201,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "run_id": "v4-persuasion-haiku-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:24:58",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 343,
+    "num_turns": 51,
+    "total_cost_usd": 0.3951416500000001
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 89,
+      "estimate": 0.78,
+      "note": "Draft 1 revised: improved acknowledgement/other/greeting distinctions, 80% on check set",
+      "test": {
+        "jev": {
+          "accuracy": 0.6045,
+          "macro_f1": 0.5897,
+          "est_cost_usd": 0.104498,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 99,
+      "estimate": 0.82,
+      "note": "Final classifier: 80% accuracy on 15 labels (macro-F1 0.853), improved boundaries between acknowledgement/other/greeting and emotion/credibility",
+      "test": {
+        "jev": {
+          "accuracy": 0.6045,
+          "macro_f1": 0.5897,
+          "est_cost_usd": 0.0,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

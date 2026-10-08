@@ -1,0 +1,78 @@
+{
+  "run_id": "v4-persuasion-opus-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:15:51",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 378,
+    "num_turns": 29,
+    "total_cost_usd": 1.1224572
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 36,
+      "estimate": 0.55,
+      "note": "v1: 21-option choice mapped to 18 classes, built from owner policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.6256,
+          "macro_f1": 0.5914,
+          "est_cost_usd": 0.126179,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 72,
+      "estimate": 0.62,
+      "note": "v3: 3-variant wording ensemble with rules from 8 uncertain labels; 8/10 on random check, 15/18 on all labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6295,
+          "macro_f1": 0.5939,
+          "est_cost_usd": 0.419875,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.63,
+      "note": "v5: v4 + FITD limited to 'small requested amount'; wasteful-spending arguments -> logical. 25/32 labels, 8/10 random check",
+      "test": {
+        "luna": {
+          "accuracy": 0.6223,
+          "macro_f1": 0.5918,
+          "est_cost_usd": 0.985065,
+          "total": 1517,
+          "answered": 1517
+        },
+        "pplx": {
+          "accuracy": 0.6433,
+          "macro_f1": 0.6174,
+          "est_cost_usd": 0.013341,
+          "total": 1517,
+          "answered": 1514
+        },
+        "jev": {
+          "accuracy": 0.6262,
+          "macro_f1": 0.592,
+          "est_cost_usd": 0.439407,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

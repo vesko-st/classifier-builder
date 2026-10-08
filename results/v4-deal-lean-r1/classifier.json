@@ -1,0 +1,30 @@
+{
+  "version": 1,
+  "name": "deal_v8",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Read the Craigslist item listing and the buyer-seller chat. The outcome (deal or not) was settled by a formal offer submitted after the chat, which you cannot see; the chat is evidence of whether that offer was likely made and accepted. Parties who have genuinely bargained, with both sides naming prices or one side moving its price toward the other, usually closed even if the last price was never answered in the text. But when only one price proposal was ever made and the other side never responded to it with a price or an acceptance, there was usually no deal, however eager the tone. Pick the option that best describes how the chat ends. Only treat a chat as stalled when the remaining gap between the two sides' last prices is large (a big share of the price) and neither side gives ground; a small remaining gap almost always closed. A reply that keeps the other side's price but changes only a small non-price detail (pickup instead of delivery, an extra left out) is an acceptance, not a counteroffer.",
+  "state_template": "{{input}}",
+  "criteria": {
+    "mutual_agreement": "One side proposed a price or terms and the other side accepted: agreed, said it is a deal, said a short 'ok' or 'yes' to it, or replied by arranging pickup, viewing, meeting, delivery, payment or paperwork without objecting to the price. Also counts when a side agrees to the other's price but changes a minor non-price term, such as who handles pickup or delivery, or an extra being dropped or added.",
+    "agreement_pending_formal_offer": "The parties agreed, or one says they will submit, send or enter the formal offer.",
+    "conditional_acceptance_met": "One side accepted provided some extra condition (delivery, an included accessory, a lease term), and the other side agreed to that condition.",
+    "haggling_unanswered": "A real price exchange happened: both sides have named prices, or one side has moved its price in response to the other. The chat then stops on the latest offer, counteroffer, new 'lowest price' or 'final offer' without a reply in the text, and the two sides are either close (within roughly 15% of the price) or the last speaker has just moved toward the other. No one has walked away.",
+    "deadlock_far_apart": "Both sides have named prices and one side has rejected the other's latest offer by repeating a final or lowest price it had already stated (refusing to move again), while the other side's last price is still well apart, roughly more than 15% of the price away. Neither side accepts afterwards.",
+    "lone_opening_offer": "Only one price proposal appears in the whole chat (a buyer's first offer, or a seller just stating or restating the asking price or a first discount), and the other side never answers it with a price of their own or an acceptance. Includes a buyer only asking whether the price is negotiable. The tone may be friendly or eager.",
+    "explicit_refusal": "One or both sides refused the last offer, said they are too far apart, declined, or walked away without agreeing. Includes a closing message that turns down the other side's latest price by restating one's own limit (for example, saying they cannot go beyond their number, with an apology).",
+    "no_price_discussed": "The chat is only greetings or questions about the item; no price offer is ever made by either side.",
+    "confused_or_broken": "The participants are talking about different items, about technical problems with the chat or task, or otherwise never negotiate this item, and this is not resolved."
+  },
+  "map": {
+    "mutual_agreement": "deal",
+    "agreement_pending_formal_offer": "deal",
+    "conditional_acceptance_met": "deal",
+    "haggling_unanswered": "deal",
+    "deadlock_far_apart": "no_deal",
+    "lone_opening_offer": "no_deal",
+    "explicit_refusal": "no_deal",
+    "no_price_discussed": "no_deal",
+    "confused_or_broken": "no_deal"
+  }
+}

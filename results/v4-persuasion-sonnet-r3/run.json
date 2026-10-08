@@ -1,0 +1,64 @@
+{
+  "run_id": "v4-persuasion-sonnet-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T01:22:11",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 241,
+    "num_turns": 28,
+    "total_cost_usd": 0.5070732
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 44,
+      "estimate": 0.4,
+      "note": "draft policy-mirroring choice, 18 options",
+      "test": {
+        "jev": {
+          "accuracy": 0.6183,
+          "macro_f1": 0.6079,
+          "est_cost_usd": 0.117898,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 78,
+      "estimate": 0.5,
+      "note": "v2: spending habit, money-only self-modeling, check-ins/life remarks -> other (fixes 3 of 5 errors on random labels, fit to them)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6309,
+          "macro_f1": 0.6164,
+          "est_cost_usd": 0.121122,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.5,
+      "note": "v4: 3-member wording/order ensemble of v3 (moral statements->emotion, 'yes you are correct'->other, suggested amount statements->donation-info). 21/23 labels but fitted; honest est ~0.5",
+      "test": {
+        "jev": {
+          "accuracy": 0.6348,
+          "macro_f1": 0.6145,
+          "est_cost_usd": 0.373606,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

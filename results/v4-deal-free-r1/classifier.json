@@ -1,0 +1,141 @@
+{
+  "version": 1,
+  "name": "deal_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a Craigslist negotiation chat. After the chat ended, the buyer submitted a formal price offer which the seller accepted or rejected; that step is not shown. Classify how the chat itself ends. Pay attention to the last few messages: who spoke last, the latest price each side named, and whether the buyer's latest price is still below the lowest price the seller said they would take.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed": "Both sides agreed on a price in the chat: one side's offer was explicitly accepted by the other ('deal', 'sounds good', 'I'll take it', 'ok', 'see you then').",
+        "buyer_meets_seller_price": "The chat ends with the buyer accepting, matching or offering at least the seller's latest asking price, and the seller has not replied yet.",
+        "seller_concession_unanswered": "The buyer named a price, and the chat ends on the seller's counteroffer that moves meaningfully toward the buyer's price (a real compromise), with no reply from the buyer yet and nothing suggesting the buyer refuses.",
+        "seller_holds_firm": "The chat ends with the seller insisting on (or barely moving from) a price well above what the buyer offered, e.g. 'that's my floor', 'I'm firm', 'it's a steal at 50', while the buyer wanted much lower.",
+        "seller_opening_only": "The buyer never named a price: the chat is very short and ends with the seller just stating the asking or opening price (e.g. 'I will let it go for $260'), with no offer or reply from the buyer.",
+        "buyer_still_below_floor": "The chat ends on the buyer's price or plea that is still below the lowest price the seller has said they would accept (a gap remains), or the buyer asks the seller to name their lowest price after the seller rejected the buyer's offer.",
+        "first_offer_unanswered": "The chat ends right after the buyer's very first price offer; the seller never responded to any price from the buyer.",
+        "seller_refused": "The seller's last word is a flat refusal of the buyer's price (e.g. 'no, that's too low', 'I can't go that low') with no new price the buyer accepted.",
+        "broke_down": "The negotiation broke down: one side walked away, said they would look elsewhere, or the prices stayed far apart with hostility.",
+        "no_price_talk": "The chat stops early: only greetings or questions about the item; the buyer never named a price."
+      },
+      "map": {
+        "agreed": "deal",
+        "buyer_meets_seller_price": "deal",
+        "seller_concession_unanswered": "deal",
+        "seller_holds_firm": "no_deal",
+        "seller_opening_only": "no_deal",
+        "buyer_still_below_floor": "no_deal",
+        "first_offer_unanswered": "no_deal",
+        "seller_refused": "no_deal",
+        "broke_down": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v4b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a chat between a buyer and a seller haggling over a Craigslist listing. Once the chat was over, the buyer sent a formal offer and the seller either took it or turned it down (not shown). Decide which description best fits the way the chat ends. Look closely at the final messages: which side wrote last, the most recent price from each side, and whether the buyer is still under the minimum the seller said they would accept.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed": "A price was settled in the chat: one party proposed it and the other plainly said yes (e.g. 'deal', 'works for me', 'I'll take it', 'ok', 'see you tomorrow').",
+        "buyer_meets_seller_price": "The final message is the buyer agreeing to, matching, or offering at least the seller's most recent price; the seller hasn't answered.",
+        "seller_concession_unanswered": "After the buyer proposed a price, the seller's last message offers a genuine compromise that comes clearly closer to the buyer's number; the buyer hasn't answered and shows no sign of refusing.",
+        "seller_holds_firm": "The seller ends by sticking to (or only slightly lowering) a price far above the buyer's offer, e.g. 'that is my lowest', 'price is firm', 'it's already a bargain', while the buyer wanted much less.",
+        "seller_opening_only": "A very short chat in which the buyer never proposes a price; it ends with the seller merely stating the asking or opening price and no buyer response.",
+        "buyer_still_below_floor": "The last message is the buyer's offer or request that remains under the lowest price the seller said they'd take (the gap is not closed), or the buyer asks for the seller's best price after the seller turned down the buyer's offer.",
+        "first_offer_unanswered": "The chat stops immediately after the buyer's first price proposal, with no seller reaction to any buyer price.",
+        "seller_refused": "The seller's final word plainly rejects the buyer's price ('too low', 'can't do that') without any new price that the buyer accepted.",
+        "broke_down": "The talks collapsed: someone walked off, said they'd shop elsewhere, or the two sides stayed far apart and got hostile.",
+        "no_price_talk": "The chat ends early with only greetings or questions about the item; the buyer never proposes a price."
+      },
+      "map": {
+        "agreed": "deal",
+        "buyer_meets_seller_price": "deal",
+        "seller_concession_unanswered": "deal",
+        "seller_holds_firm": "no_deal",
+        "seller_opening_only": "no_deal",
+        "buyer_still_below_floor": "no_deal",
+        "first_offer_unanswered": "no_deal",
+        "seller_refused": "no_deal",
+        "broke_down": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v4c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Categorize the ending of this Craigslist price negotiation.",
+        "context": "The buyer made a formal offer after the chat, which the seller accepted or rejected; that step is hidden. The chat's ending is the evidence.",
+        "focus": [
+          "Who sent the last message",
+          "The latest price named by buyer and by seller",
+          "Whether a price was explicitly accepted",
+          "Whether the buyer is still below the seller's stated minimum"
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed": {
+          "definition": "Both parties explicitly accepted one price in the chat.",
+          "examples": [
+            "Seller:  and it's yours. Buyer: deal",
+            "Buyer: can you do 9? Seller: Yes"
+          ]
+        },
+        "buyer_meets_seller_price": {
+          "definition": "Chat ends with the buyer accepting or matching the seller's latest price (or offering more); seller has not replied."
+        },
+        "seller_concession_unanswered": {
+          "definition": "Buyer named a price; chat ends on the seller's counteroffer that is a real step toward the buyer; buyer has not replied and does not seem to refuse."
+        },
+        "seller_holds_firm": {
+          "definition": "Chat ends with the seller keeping a price far above the buyer's offer.",
+          "examples": [
+            "2500 is my floor",
+            "I'm firm with the rate",
+            "it's a steal for 50 dollars"
+          ]
+        },
+        "seller_opening_only": {
+          "definition": "Very short chat; buyer never named a price; it ends with the seller stating the asking/opening price."
+        },
+        "buyer_still_below_floor": {
+          "definition": "Chat ends on the buyer's price or plea that is still under the seller's stated minimum, or the buyer asking for the seller's lowest price after a rejection."
+        },
+        "first_offer_unanswered": {
+          "definition": "Chat ends right after the buyer's first price; the seller never responded to a buyer price."
+        },
+        "seller_refused": {
+          "definition": "Seller's last message flatly refuses the buyer's price with no accepted alternative."
+        },
+        "broke_down": {
+          "definition": "Negotiation collapsed: walking away, looking elsewhere, or far apart and hostile."
+        },
+        "no_price_talk": {
+          "definition": "Only greetings or item questions; the buyer never named a price."
+        }
+      },
+      "map": {
+        "agreed": "deal",
+        "buyer_meets_seller_price": "deal",
+        "seller_concession_unanswered": "deal",
+        "seller_holds_firm": "no_deal",
+        "seller_opening_only": "no_deal",
+        "buyer_still_below_floor": "no_deal",
+        "first_offer_unanswered": "no_deal",
+        "seller_refused": "no_deal",
+        "broke_down": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    }
+  ]
+}
