@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-intents-labelsfirst-r2",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T10:47:21",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 710,
+    "num_turns": 46,
+    "total_cost_usd": 1.8665944000000003
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 flat 77-option choice, descriptions from task + domain knowledge",
+      "test": {
+        "jev": {
+          "accuracy": 0.8386,
+          "macro_f1": 0.8335,
+          "est_cost_usd": 0.320014,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 30,
+      "estimate": 0.78,
+      "note": "v2: flat choice, descriptions rewritten per owner answers on top-up, transfer and charge families",
+      "test": {
+        "jev": {
+          "accuracy": 0.8464,
+          "macro_f1": 0.8421,
+          "est_cost_usd": 0.364747,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 70,
+      "estimate": 0.85,
+      "note": "v4e: 3-member wording ensemble; rules for card_not_working vs declined, reverted/cancelled card payment, pending payment, country_support for non-UK card questions",
+      "test": {
+        "jev": {
+          "accuracy": 0.8597,
+          "macro_f1": 0.8559,
+          "est_cost_usd": 1.30619,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 84,
+      "estimate": 0.86,
+      "note": "v6e: ensemble + 'transfer not possible/not allowed notice' -> beneficiary_not_allowed; plain can't-transfer -> failed_transfer",
+      "test": {
+        "jev": {
+          "accuracy": 0.8636,
+          "macro_f1": 0.8614,
+          "est_cost_usd": 1.328339,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 96,
+      "estimate": 0.87,
+      "note": "v9e: + fee boundary (hidden/too many fees->card fee), country shipping->country_support, physical card wants->order, PIN->get_physical_card, ATM can't withdraw->declined_cash_withdrawal, new-card shipping/express->card_about_to_expire, 'not here yet'->not_received",
+      "test": {
+        "jev": {
+          "accuracy": 0.8656,
+          "macro_f1": 0.8625,
+          "est_cost_usd": 1.38692,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.87,
+      "note": "v10e final: + 'money transferred to me, can't see it' -> pending_transfer; domestic transfer days ago not showing -> not_received",
+      "test": {
+        "jev": {
+          "accuracy": 0.8672,
+          "macro_f1": 0.8646,
+          "est_cost_usd": 1.402505,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "name": "deal_v5_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "How does this Craigslist buyer-seller negotiation chat end? Pick the option that best describes the state of the negotiation at the end of the chat.",
+      "state_template": "Craigslist listing and the buyer-seller negotiation chat:\n{{input}}",
+      "criteria": {
+        "agreed": "Both sides agreed on a specific price: one side proposed it (possibly with pickup, delivery or extras) and the other accepted it, explicitly ('deal', 'ok', 'sounds good', 'I accept', 'I'll take it') or implicitly ('fair enough', 'fine, make the offer', 'I'll submit it', or the other side closes with 'great doing business with you' or arranges pickup at that price). Includes agreements followed by thanks, scheduling, or talk of submitting/sending the offer. Jokes, banter, odd extras (pets, trade-ins) or an earlier mix-up about the item do not matter as long as a real price was accepted at the end.",
+        "offer_to_submit": "No explicit acceptance in the chat, but one side says it will submit, send or make the formal offer at a stated price (e.g. 'I will submit the final offer', 'I'll send you an offer for 500').",
+        "pending_buyer_offer": "Real price negotiation happened, and the chat ends with the buyer's counteroffer or proposed price still unanswered or not clearly accepted.",
+        "pending_seller_offer": "Real price negotiation happened, and the chat ends with the seller's counteroffer, 'lowest I can go' or 'final' price still unanswered or not clearly accepted.",
+        "refused": "The chat ends with a refusal or walk-away: one side rejects the other's price and says no, passes, or says they are too far apart, with no later agreement; or an agreement was retracted, or after agreeing a side says the formal offer shows a different price than agreed or cannot be accepted.",
+        "joke_agreement": "Apparent agreement that is not a real transaction: an absurd price far below the listing offered as a joke while leaving (e.g. 'sorry gtg, $20 lol'), trolling, or a party plainly not intending to buy or sell. Humor or banter around a genuine price acceptance is NOT this option; that is 'agreed'.",
+        "no_negotiation": "No real price negotiation: only greetings, questions about the item or small talk, an opening price with no response, a broken, off-topic or confused chat (wrong item, task problems), or a near-empty chat."
+      },
+      "map": {
+        "agreed": "deal",
+        "offer_to_submit": "deal",
+        "pending_buyer_offer": "no_deal",
+        "pending_seller_offer": "deal",
+        "refused": "no_deal",
+        "joke_agreement": "no_deal",
+        "no_negotiation": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v4_alt",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Read the listing and the chat between the buyer and the seller. Where did the price negotiation stand when the chat stopped?",
+      "state_template": "Craigslist listing and the buyer-seller negotiation chat:\n{{input}}",
+      "criteria": {
+        "agreed": "The two sides settled on a price. One named a price (maybe with pickup, delivery or add-ons) and the other said yes to it, outright ('deal', 'ok', 'works for me', 'I accept', 'I'll take it') or in effect ('fair enough', 'fine, make the offer', 'I'll submit it', a 'great doing business' sign-off, or setting up pickup at that price). Thanks, scheduling or talk of sending the offer afterwards still count. Jokes, banter, unusual extras (pets, trade-ins) or an early mix-up about the item don't change this if a real price was accepted at the end.",
+        "offer_to_submit": "Nobody says yes in the chat, but one side announces it will submit, send or make the formal offer at a stated price (e.g. 'I will submit the final offer', 'I'll send you an offer for 500').",
+        "pending_buyer_offer": "The sides really bargained over price, and the last word is the buyer's price or counteroffer, which the seller never answers or never clearly accepts.",
+        "pending_seller_offer": "The sides really bargained over price, and the last word is the seller's counteroffer, lowest or final price, which the buyer never answers or never clearly accepts.",
+        "refused": "It ends in a no: one side turns down the other's price and declines, passes, or says the gap is too big, and nothing is agreed later; or an agreed price is taken back; or after agreeing, a side says the formal offer shows a different price than agreed or can't be accepted.",
+        "joke_agreement": "Looks like a yes but is not a real sale: a ridiculous joke price far under the listing thrown out while leaving (e.g. 'sorry gtg, $20 lol'), trolling, or someone obviously not meaning to buy or sell. Joking around a genuine accepted price is 'agreed', not this.",
+        "no_negotiation": "No real haggling over price: just greetings, questions about the item or chit-chat, an opening price nobody responds to, a broken, off-topic or confused chat (wrong item, problems with the task), or almost nothing said."
+      },
+      "map": {
+        "agreed": "deal",
+        "offer_to_submit": "deal",
+        "pending_buyer_offer": "no_deal",
+        "pending_seller_offer": "deal",
+        "refused": "no_deal",
+        "joke_agreement": "no_deal",
+        "no_negotiation": "no_deal"
+      }
+    }
+  ]
+}

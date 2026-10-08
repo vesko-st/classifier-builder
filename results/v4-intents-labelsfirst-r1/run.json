@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-intents-labelsfirst-r1",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T10:47:21",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 826,
+    "num_turns": 49,
+    "total_cost_usd": 2.2415752000000007
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 25,
+      "estimate": 0.78,
+      "note": "draft: flat 77-option choice, descriptions + owner policy answers Q1-Q4",
+      "test": {
+        "jev": {
+          "accuracy": 0.8659,
+          "macro_f1": 0.8644,
+          "est_cost_usd": 0.379106,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 45,
+      "estimate": 0.8,
+      "note": "v3: failed_transfer covers payment errors (flat/mortgage); 10/10 on check labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8656,
+          "macro_f1": 0.8638,
+          "est_cost_usd": 0.381564,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 61,
+      "estimate": 0.82,
+      "note": "v5: 3-member wording ensemble; rules from 8 rule-testing labels (PIN set-up, source of funds, why verify, compromised vs not-recognised, direct debit)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8734,
+          "macro_f1": 0.872,
+          "est_cost_usd": 1.175097,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 73,
+      "estimate": 0.82,
+      "note": "v6: rejected transfers -> failed_transfer; where to get physical card -> order_physical_card",
+      "test": {
+        "jev": {
+          "accuracy": 0.8744,
+          "macro_f1": 0.873,
+          "est_cost_usd": 1.186345,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 85,
+      "estimate": 0.81,
+      "note": "v8: virtual card rejections, vague 'charge' -> direct debit, set-up new PIN -> change_pin, top-up not through -> pending_top_up",
+      "test": {
+        "jev": {
+          "accuracy": 0.8747,
+          "macro_f1": 0.873,
+          "est_cost_usd": 1.214674,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.83,
+      "note": "v10 final: 3-flat wording ensemble; PIN/linking/virtual card/charge-for-something-not-bought fixes from last 7 labels; 35/37 bought labels, 10/10 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.8782,
+          "macro_f1": 0.8764,
+          "est_cost_usd": 1.234467,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

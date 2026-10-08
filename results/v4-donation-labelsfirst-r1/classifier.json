@@ -1,0 +1,91 @@
+{
+  "version": 1,
+  "name": "donation_v8_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v3",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "In this chat a persuader asks the persuadee to donate part of their task payment (usually between $0 and $2, sometimes $0.30 or $0.75) to Save the Children. Classify the PERSUADEE's final stance on donating from the task payment, as it stands at the end of the chat.",
+        "notes": [
+          "FIRST check the persuadee's writing. If their replies are garbled, broken or template-like English, mostly all caps, repetitive one-word answers, nonsense, or replies that do not follow what the persuader said, or if they are trolling, choose low_quality no matter what amount they pledge. Casual, chatty or slangy but coherent English is NOT low_quality.",
+          "Judge what the persuadee says. A persuader thanking them 'for your donation' does not count unless the persuadee themselves agreed.",
+          "If the persuadee changes their mind, use their last stated position.",
+          "The persuader's own donation does not matter.",
+          "Simply answering 'how much would you like to donate?' with an amount is a free pledge, not a grudging one.",
+          "Agreeing to a specific amount the persuader proposed ('sure, that would be fine', 'yes, that's OK') counts as pledging that amount."
+        ]
+      },
+      "state_template": "Charity-donation chat:\n{{input}}",
+      "criteria": {
+        "full_amount": "The persuadee commits to donating ALL of their task payment ('all of it', 'the full amount', the whole $2).",
+        "free_pledge": "The persuadee willingly names or accepts a specific positive amount that fits within the task payment (e.g. 10 cents, $0.25, $0.50, $1, half), without having first refused and without being haggled up. Small amounts offered cheerfully belong here.",
+        "grudging_pledge": "The persuadee first refused or said they could not afford it, and only after repeated pushing agreed to a token amount ('fine, .12', 'I guess a penny'); or the persuader haggled them up to a higher amount than they offered.",
+        "yes_no_amount": "The persuadee clearly says yes, they will donate (e.g. 'I would love to', 'let's donate') but never names an amount.",
+        "out_of_range": "The persuadee pledges an amount larger than the task payment ($5, $10, $20, $50, $115...) that cannot come from the task payment.",
+        "deferred": "The persuadee says they will donate later, on the charity website, when they get paid, or to another charity, instead of from the task payment now, without explicitly saying $0.",
+        "warm_undecided": "The persuadee is friendly and positive about the charity but never states a decision; the chat drifts into small talk or ends without a yes or no.",
+        "skeptic_undecided": "The persuadee is hesitant or skeptical, wants to research first, says they are not ready, or the chat stops just before an amount is named, with no commitment.",
+        "refusal": "The persuadee clearly declines, chooses $0, or says they will not donate through this task.",
+        "low_quality": "The persuadee writes garbled, broken or template-like English, mostly all caps, repetitive replies (the same short phrase like 'ok thank you' over and over), nonsensical replies that don't follow the conversation, or is trolling. Choose this regardless of any amount they pledge. Casual but coherent writing is not low_quality."
+      },
+      "map": {
+        "full_amount": "donated",
+        "free_pledge": "donated",
+        "grudging_pledge": "donated",
+        "yes_no_amount": "not_donated",
+        "out_of_range": "not_donated",
+        "deferred": "not_donated",
+        "warm_undecided": "not_donated",
+        "skeptic_undecided": "not_donated",
+        "refusal": "not_donated",
+        "low_quality": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v3b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "context": "Chat log: a persuader tries to get the persuadee to give some of their pay for this task (normally up to $2; sometimes $0.30 or $0.75) to the charity Save the Children.",
+        "question": "Where did the persuadee end up on giving from their task pay? Pick the description that matches the persuadee's last word on it.",
+        "rules": [
+          "Before anything else, look at how the persuadee writes. Broken or copy-paste English, ALL CAPS, one-word repeated replies, nonsense, answers that ignore the persuader, or trolling means low_quality, whatever they say they will give. Informal but sensible chatting is not low_quality.",
+          "Only the persuadee's own words count; the persuader saying 'thank you for donating' is not a commitment by the persuadee.",
+          "When the persuadee changes position, use the latest one. Ignore what the persuader gives.",
+          "Replying to 'how much would you like to donate?' with an amount is a willing pledge.",
+          "Saying yes to a particular amount the persuader suggested ('sure, that's fine') is the same as pledging that amount."
+        ]
+      },
+      "state_template": "Persuasion chat:\n{{input}}",
+      "criteria": {
+        "full_amount": "Gives the entire task pay: 'all of it', 'the full amount', the whole $2.",
+        "free_pledge": "Willingly offers or accepts a definite amount above zero that fits inside the task pay (a few cents, a quarter, 50 cents, a dollar, half), without first saying no and without being bargained upward.",
+        "grudging_pledge": "Said no or 'I can't afford it' first, and agreed to a token sum only after being pushed again ('ok fine, a penny'); or was talked up from the amount they first offered.",
+        "yes_no_amount": "Clearly agrees to give from the task pay ('I'd love to', 'yes let's donate') but no amount is ever stated.",
+        "out_of_range": "Names a sum the task pay cannot cover ($5, $10, $20, $50, $100 or more).",
+        "deferred": "Plans to give later, on the website, after payday, or to some other charity rather than from this task's pay, without saying zero.",
+        "warm_undecided": "Likes the charity and is friendly, but never says yes or no; the talk wanders or stops without a decision.",
+        "skeptic_undecided": "Doubtful, wants to look into it, not ready yet, or the chat breaks off right before an amount is given; no commitment.",
+        "refusal": "Says no, picks $0, or won't give through this task.",
+        "low_quality": "Garbled, broken or template English, mostly capitals, the same short reply repeated again and again ('ok thank you', 'ok thank you'), nonsense replies that don't follow the chat, or trolling — regardless of any pledge. Informal but coherent chat does not count."
+      },
+      "map": {
+        "full_amount": "donated",
+        "free_pledge": "donated",
+        "grudging_pledge": "donated",
+        "yes_no_amount": "not_donated",
+        "out_of_range": "not_donated",
+        "deferred": "not_donated",
+        "warm_undecided": "not_donated",
+        "skeptic_undecided": "not_donated",
+        "refusal": "not_donated",
+        "low_quality": "not_donated"
+      }
+    }
+  ]
+}

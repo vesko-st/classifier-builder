@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-donation-labelsfirst-r1",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-08T10:47:21",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 428,
+    "num_turns": 35,
+    "total_cost_usd": 1.6451994000000003
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 20,
+      "estimate": 0.62,
+      "note": "v1 draft: 11 graded stance options mapped to 2 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.7122,
+          "macro_f1": 0.7108,
+          "est_cost_usd": 0.025554,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 50,
+      "estimate": 0.62,
+      "note": "v3: cleaner stance taxonomy + low_quality (garbled/template/troll) override -> not_donated; check 6/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.7194,
+          "macro_f1": 0.7182,
+          "est_cost_usd": 0.027638,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 66,
+      "estimate": 0.62,
+      "note": "v5: 2-wording ensemble; yes_no_amount (agrees but never names amount) -> not_donated; fixes 0269,0024, breaks 0142; all labels 11/18",
+      "test": {
+        "jev": {
+          "accuracy": 0.7026,
+          "macro_f1": 0.7026,
+          "est_cost_usd": 0.053438,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 82,
+      "estimate": 0.61,
+      "note": "v6: low_quality no longer includes 'rushing'/casual English; accepting persuader-proposed amount = pledge; all labels 15/26",
+      "test": {
+        "jev": {
+          "accuracy": 0.705,
+          "macro_f1": 0.7049,
+          "est_cost_usd": 0.055172,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 82,
+      "estimate": 0.61,
+      "note": "v7: low_quality also covers the same short reply repeated; fixes 0366; all labels 16/26",
+      "test": {
+        "jev": {
+          "accuracy": 0.7026,
+          "macro_f1": 0.7025,
+          "est_cost_usd": 0.055715,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.6,
+      "note": "v8 FINAL: grudging_pledge -> donated (labels 6/10 donated in that category, contra owner's 'leans not'); fixes 5 breaks 3; all labels 21/35, check 6/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.7218,
+          "macro_f1": 0.7191,
+          "est_cost_usd": 0.0,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}
