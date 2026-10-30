@@ -1,0 +1,64 @@
+{
+  "run_id": "v4-donation-labelsfirst-r3",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:29:41",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 641,
+    "num_turns": 32,
+    "total_cost_usd": 1.4367016000000004
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 34,
+      "estimate": 0.62,
+      "note": "v1 draft: 9 outcome options mapped to classes, from owner's policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.7194,
+          "macro_f1": 0.7171,
+          "est_cost_usd": 0.024013,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 90,
+      "estimate": 0.62,
+      "note": "v3: v1 with reluctant pledges mapped to donated (labels 4/7 donated); fixes 2 labels, breaks 0",
+      "test": {
+        "jev": {
+          "accuracy": 0.7386,
+          "macro_f1": 0.7306,
+          "est_cost_usd": 0.0,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.62,
+      "note": "v4 final: 2-member wording-variant ensemble of v3; same 33-label score as v3 (acc .636, mF1 .542 on biased labels; check n=10 mF1 .60)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7434,
+          "macro_f1": 0.7355,
+          "est_cost_usd": 0.047553,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

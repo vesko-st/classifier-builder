@@ -1,0 +1,139 @@
+{
+  "run_id": "b200-routing-labelsfirst-r2",
+  "task": "banking77_routing",
+  "budget": 200,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:55:29",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1754,
+    "num_turns": 43,
+    "total_cost_usd": 1.7039296000000004
+  },
+  "final_version": 8,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 49,
+      "estimate": 0.8,
+      "note": "draft: 75 intent options mapped to 6 teams per owner answers Q1-Q4",
+      "test": {
+        "jev": {
+          "accuracy": 0.9201,
+          "macro_f1": 0.9093,
+          "est_cost_usd": 0.300972,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 75,
+      "estimate": 0.85,
+      "note": "v2: passcode forgotten -> fraud (3 labels), card fees -> cards",
+      "test": {
+        "jev": {
+          "accuracy": 0.9318,
+          "macro_f1": 0.9247,
+          "est_cost_usd": 0.30566,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 99,
+      "estimate": 0.87,
+      "note": "v3: general exchange-fee questions -> pricing, exchange complaints -> disputes",
+      "test": {
+        "jev": {
+          "accuracy": 0.9441,
+          "macro_f1": 0.9417,
+          "est_cost_usd": 0.310732,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 129,
+      "estimate": 0.88,
+      "note": "e1: ensemble of 3 wording variants of v5 (v4/v5 option fixes: Apple/Google Pay->cards, PIN questions->cards, ATM no cash->disputes, sign up from country->account)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9497,
+          "macro_f1": 0.9463,
+          "est_cost_usd": 1.162822,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 129,
+      "estimate": 0.88,
+      "note": "e2: exchange_rate option limited to general questions",
+      "test": {
+        "jev": {
+          "accuracy": 0.9503,
+          "macro_f1": 0.9473,
+          "est_cost_usd": 1.170966,
+          "total": 3080,
+          "answered": 3078
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 157,
+      "estimate": 0.89,
+      "note": "e4: rules from 14 uncertain labels (lost phone wording, cash abroad -> disputes, pending payment -> cards, blocked transfers -> account, unknown charge -> fraud)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9549,
+          "macro_f1": 0.9525,
+          "est_cost_usd": 1.206653,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 181,
+      "estimate": 0.89,
+      "note": "e5: dispute a debit transaction -> fraud, pending generic payment -> cards, Amex add funds -> pricing",
+      "test": {
+        "jev": {
+          "accuracy": 0.9549,
+          "macro_f1": 0.9523,
+          "est_cost_usd": 1.211306,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 199,
+      "estimate": 0.89,
+      "note": "e6 final: direct-debit refund/cancel and cancel card txn -> fraud, who sends me money -> account, which cards you carry -> cards; 71/75 labels, 10/10 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.9549,
+          "macro_f1": 0.952,
+          "est_cost_usd": 1.223729,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

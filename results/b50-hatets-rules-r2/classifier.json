@@ -1,0 +1,107 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens3",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "variant_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate speech annotation policy. Hate speech is content that attacks, demeans, dehumanises, threatens or incites hostility against a person or group because of who they are, notably immigrants/refugees or women. Pick the option that best describes the tweet.",
+        "notes": [
+          "Immigration talk that is really about politics (supporting or funding the wall, accusing politicians of keeping borders open or courting voters, elections, the media, other countries) is not hateful by itself, even with hashtags like #BuildThatWall or #IllegalAliens. A tweet is hateful when it targets immigrants, refugees or illegal aliens themselves: calling for them to be deported or sent back as a group, denying them amnesty, portraying them as criminals (smugglers, killers, gang members), invaders or vermin, or resenting them as a burden. Judge the tweet's own words: hashtags like #StopTheInvasion or #WhiteGenocide alone, added to a headline or remark that doesn't attack immigrants, do not make it hateful.",
+          "Gendered slurs (bitch, hoe, whore, cunt) are hateful when used to insult, degrade or threaten a woman or women, including someone addressed in a personal argument. They are not hateful when aimed at a man or at an anonymous 'whoever did this', or used as an interjection or form of address without insulting anyone, about oneself, or affectionately among friends.",
+          "Tweets that report, quote or condemn someone else's misogynistic abuse are not hateful."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_hate": "Expresses hostility toward immigrants, refugees or illegal aliens themselves, as a group: explicitly calls for them to be deported, sent back or got rid of ('arrest them and deport them all', 'send them all back! #NoMoreRefugees', 'get rid of illegals'); denies them amnesty or legal status; portrays them as criminals, smugglers, killers, rapists, invaders, scum or parasites, including news stories that highlight crimes by an illegal alien ('Manhunt for Illegal Alien who almost killed teacher that an Open Borders judge released', 'how many DACA have been arrested for smuggling?'); uses slurs like 'rapefugee'; resents them as a burden ('sick of illegals', 'we won't pay for these illegal children or their parents', 'we can't afford them'); or calls for violence against them.",
+        "immigration_opinion": "Mentions immigration, the wall, DACA, borders or related hashtags, but does not express hostility toward immigrants themselves: supporting the wall or border security, wall funding or legal questions, rally posts, election talk; accusing politicians or parties of keeping borders open or courting immigrant voters ('@user will walk across broken glass to keep our borders wide open; #IllegalAliens are determining the balance of power', 'they put new voters in hotels while the homeless and veterans live on the streets'); attacks on a specific politician or user ('Kick the @user out of the United States #SendThemBack'); criticism of the media or other countries, where any immigration hashtag is incidental to the tweet's own point. Hashtags such as #StopTheInvasion, #WhiteGenocide, #DefendEurope or #SendThemBack appended to a tweet whose own words don't target immigrants (e.g. a headline like 'How do We Make Babies?: White Genocide Propaganda in French Educational Books for Children #defendeurope #stoptheinvasion') do not make it hostile. Also economic or policy arguments about DACA or immigration that don't demean immigrants ('DACA lowers wages and hurts our workers. Need E-Verify. No DACA!').",
+        "misogynistic_attack": "Insults, degrades, threatens or sexually objectifies a woman or women with hostility or contempt: calls her or them a bitch, hoe, whore, slut or cunt as an insult (e.g. 'dumb ass lil hoe', 'you a nasty bitch', 'y'all hoes are trash'), even within a personal argument.",
+        "casual_slang": "Uses 'bitch' or 'hoe' as an interjection or a form of address without insulting anyone ('bitch do it look like we play', 'bitch I ain't got that kinda money'), about oneself, affectionately or jokingly among friends, or about a thing or situation. Also 'bitch' or 'hoe' as an everyday word for a woman or partner in a general remark that doesn't insult her ('if a guy gets out of a relationship and he fuckin a new bitch the next day then y'all saying he a hoe???').",
+        "other_group_hate": "Attacks or demeans another group (religion, race, ethnicity, sexual orientation) with slurs or dehumanising language.",
+        "insult_at_man": "Uses gendered slurs (bitch, whore, etc.) to insult a man, a boy or a male politician ('bitch boy', 'fuck your bitch ass, soft ass muhfugga', 'this guy is a political whore'), or calls an anonymous unknown person 'bitch' for something they did ('whoever called my phone private, bitch don't do it', 'whoever stole my purse, karma gets you, bitch'). No woman is the target.",
+        "other": "Anything else that is not hateful, including tweets that report, quote or condemn misogynistic abuse rather than commit it ('>Harasses women and calls them bitch and crabby >They block him >Plays the victim', 'he called me a bitch and a whore as he drove by, grow up')."
+      },
+      "map": {
+        "immigrant_hate": "hate",
+        "immigration_opinion": "not_hate",
+        "misogynistic_attack": "hate",
+        "casual_slang": "not_hate",
+        "other_group_hate": "hate",
+        "insult_at_man": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "variant_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Under our hate speech annotation policy, which description fits this tweet best?",
+        "policy": "A tweet counts as hate speech when it is hostile to women or to immigrants/refugees as such: it insults, degrades, threatens or dehumanises them, or demands that immigrants be removed.",
+        "guidance": [
+          "Women: an insult such as bitch, hoe, whore or cunt thrown at a woman or at women (also when it is a personal quarrel with the person addressed) is hate. The same words are not hate when the target is a man, when they are aimed at an unknown 'whoever did this', or when they are just a greeting, a form of address, an exclamation, self-description or friendly banter. Reporting, quoting or condemning someone else's sexist abuse is not hate.",
+          "Immigrants: it is hate to demand deportation or removal of immigrants as a group, to deny them amnesty, to paint them as criminals, invaders or vermin (including crime stories about an illegal alien), or to resent them as a cost. It is not hate to simply back the wall or border security, to attack politicians for open borders or courting immigrant voters, or to attack a particular person, the media or another country while using immigration hashtags. Hashtags on their own (#StopTheInvasion, #WhiteGenocide, #SendThemBack) don't make a tweet hate when its own words don't target immigrants."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_hate": "Hostile to immigrants, refugees or illegal aliens as people. Examples: demanding they all be deported or sent back ('Arrest them and DEPORT THEM ALL', 'Send them all back! #NoMoreRefugees', 'get rid of illegals'); no amnesty for illegals; casting them as criminals, smugglers, killers, rapists, invaders, scum or parasites, e.g. crime news like 'Manhunt for Illegal Alien who almost killed teacher that an Open Borders judge released' or 'how many DACA have been arrested for smuggling?'; slurs like 'rapefugee'; resenting them as a burden ('sick of illegals', 'we won't pay for these illegal children or their parents', 'we can't afford them'); violence against them.",
+        "immigration_opinion": "Touches on immigration, the wall, DACA or borders, or uses such hashtags, without hostility toward immigrants themselves. Examples: backing the wall or border security, wall funding, legal questions, rallies, elections; blaming politicians for open borders or for courting immigrant voters ('@user will walk across broken glass to keep our borders wide open; #IllegalAliens are determining the balance of power', 'they put new voters in hotels while the homeless and veterans live on the streets'); going after one particular person ('Kick the @user out of the United States #SendThemBack'); criticising the media or another country with incidental immigration hashtags. Also: a headline or remark that does not itself attack immigrants, followed by hashtags like #StopTheInvasion, #WhiteGenocide, #DefendEurope or #SendThemBack ('How do We Make Babies?: White Genocide Propaganda in French Educational Books for Children #defendeurope #stoptheinvasion'). Also economic or policy arguments about DACA or immigration that don't demean immigrants ('DACA lowers wages and hurts our workers. Need E-Verify. No DACA!').",
+        "misogynistic_attack": "Hostile toward a woman or women: insulting, degrading, threatening or sexually objectifying her or them with words like bitch, hoe, whore, slut or cunt ('dumb ass lil hoe', 'you a nasty bitch', 'y'all hoes are trash'), including in a personal argument with the person addressed.",
+        "casual_slang": "'Bitch' or 'hoe' used without insulting anyone: as an exclamation or a way of addressing someone ('bitch do it look like we play', 'bitch I ain't got that kinda money'), about oneself, as friendly teasing, or about an object or situation. Also bitch or hoe as a plain word for a woman or partner in a general remark that insults nobody ('if a guy gets out of a relationship and he fuckin a new bitch the next day then y'all saying he a hoe???').",
+        "insult_at_man": "Slurs like bitch or whore aimed at a man, boy or male politician ('bitch boy', 'fuck your bitch ass, soft ass muhfugga', 'this guy is a political whore'), or at an unknown 'whoever' for something they did ('whoever called my phone private, bitch don't do it', 'whoever stole my purse, karma gets you, bitch'). No woman is targeted.",
+        "other_group_hate": "Hostile to another group (religion, race, ethnicity, sexual orientation) with slurs or dehumanising language.",
+        "other": "Anything else that is not hate speech, for example tweets reporting, quoting or condemning misogynistic abuse by someone else ('>Harasses women and calls them bitch and crabby >They block him >Plays the victim', 'he called me a bitch and a whore as he drove by, grow up')."
+      },
+      "map": {
+        "immigrant_hate": "hate",
+        "immigration_opinion": "not_hate",
+        "misogynistic_attack": "hate",
+        "casual_slang": "not_hate",
+        "insult_at_man": "not_hate",
+        "other_group_hate": "hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "variant_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Decide which category this tweet belongs to, following an annotation policy for hate speech aimed at women and at immigrants.",
+        "rules": {
+          "hate_against_women": "Using bitch, hoe, whore, slut or cunt to demean, abuse or threaten a female target, or women in general, including someone the author is fighting with.",
+          "not_hate_against_women": "Those words aimed at a male target or at an unidentified 'whoever'; used as an interjection, a term of address, self-reference or affectionate teasing. Reports, quotes or condemnations of someone else's sexist abuse.",
+          "hate_against_immigrants": "Calls to deport or expel immigrants or refugees as a group, opposition to amnesty for illegals, depicting them as criminals, invaders or vermin (crime reports about illegal aliens included), or resenting them as a drain on resources.",
+          "not_hate_against_immigrants": "Plain support for the wall or border security, criticism of politicians over open borders or chasing immigrant votes, attacks on one specific person, the media or a foreign country, with immigration hashtags on the side. Hashtags alone (#StopTheInvasion, #WhiteGenocide, #DefendEurope) on a headline or remark that doesn't itself attack immigrants."
+        }
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_hate": "Hostile to immigrants, refugees or illegal aliens as people. Examples: demanding they all be deported or sent back ('Arrest them and DEPORT THEM ALL', 'Send them all back! #NoMoreRefugees', 'get rid of illegals'); no amnesty for illegals; casting them as criminals, smugglers, killers, rapists, invaders, scum or parasites, e.g. crime news like 'Manhunt for Illegal Alien who almost killed teacher that an Open Borders judge released' or 'how many DACA have been arrested for smuggling?'; slurs like 'rapefugee'; resenting them as a burden ('sick of illegals', 'we won't pay for these illegal children or their parents', 'we can't afford them'); violence against them.",
+        "immigration_opinion": "Touches on immigration, the wall, DACA or borders, or uses such hashtags, without hostility toward immigrants themselves. Examples: backing the wall or border security, wall funding, legal questions, rallies, elections; blaming politicians for open borders or for courting immigrant voters ('@user will walk across broken glass to keep our borders wide open; #IllegalAliens are determining the balance of power', 'they put new voters in hotels while the homeless and veterans live on the streets'); going after one particular person ('Kick the @user out of the United States #SendThemBack'); criticising the media or another country with incidental immigration hashtags. Also: a headline or remark that does not itself attack immigrants, followed by hashtags like #StopTheInvasion, #WhiteGenocide, #DefendEurope or #SendThemBack ('How do We Make Babies?: White Genocide Propaganda in French Educational Books for Children #defendeurope #stoptheinvasion'). Also economic or policy arguments about DACA or immigration that don't demean immigrants ('DACA lowers wages and hurts our workers. Need E-Verify. No DACA!').",
+        "misogynistic_attack": "Demeans, abuses, sexually objectifies or threatens a female target or women in general using bitch, hoe, whore, slut or cunt as an insult (for instance 'dumb ass lil hoe', 'you a nasty bitch', 'y'all hoes are trash'); this includes someone the author is quarrelling with.",
+        "casual_slang": "Bitch or hoe used as an interjection or a term of address with no insult intended ('bitch do it look like we play', 'bitch I ain't got that kinda money'), as self-reference, as affectionate teasing among friends, or about a thing or situation. Also bitch or hoe as a plain word for a woman or partner in a general remark that insults nobody ('if a guy gets out of a relationship and he fuckin a new bitch the next day then y'all saying he a hoe???').",
+        "insult_at_man": "Slurs like bitch or whore aimed at a man, boy or male politician ('bitch boy', 'fuck your bitch ass, soft ass muhfugga', 'this guy is a political whore'), or at an unknown 'whoever' for something they did ('whoever called my phone private, bitch don't do it', 'whoever stole my purse, karma gets you, bitch'). No woman is targeted.",
+        "other_group_hate": "Hostile to another group (religion, race, ethnicity, sexual orientation) with slurs or dehumanising language.",
+        "other": "Anything else that is not hate speech, for example tweets reporting, quoting or condemning misogynistic abuse by someone else ('>Harasses women and calls them bitch and crabby >They block him >Plays the victim', 'he called me a bitch and a whore as he drove by, grow up')."
+      },
+      "map": {
+        "immigrant_hate": "hate",
+        "immigration_opinion": "not_hate",
+        "misogynistic_attack": "hate",
+        "casual_slang": "not_hate",
+        "insult_at_man": "not_hate",
+        "other_group_hate": "hate",
+        "other": "not_hate"
+      }
+    }
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "run_id": "vs-persuasion-haiku-rules-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T17:23:44",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 429,
+    "num_turns": 62,
+    "total_cost_usd": 0.46256395000000006
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 65,
+      "estimate": 0.65,
+      "note": "Better definitions for 'other', credibility-appeal, logical-appeal, foot-in-the-door. Accuracy on 22 labels: 0.727",
+      "test": {
+        "jev": {
+          "accuracy": 0.5939,
+          "macro_f1": 0.5622,
+          "est_cost_usd": 0.08201,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 90,
+      "estimate": 0.72,
+      "note": "Refined definitions based on oracle clarifications on task-related-inquiry. Accuracy on 32 labels: 0.750, macro-F1 0.615",
+      "test": {
+        "jev": {
+          "accuracy": 0.584,
+          "macro_f1": 0.5545,
+          "est_cost_usd": 0.084163,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

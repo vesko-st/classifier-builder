@@ -1,0 +1,49 @@
+{
+  "run_id": "v4-donation-free-r2",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T11:44:54",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 256,
+    "num_turns": 35,
+    "total_cost_usd": 1.0187024
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "draft from description: stance at end of chat, 5 options mapped",
+      "test": {
+        "jev": {
+          "accuracy": 0.7386,
+          "macro_f1": 0.7191,
+          "est_cost_usd": 0.018374,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 100,
+      "estimate": 0.68,
+      "note": "ensemble of 3 criteria members: committed AND sincere(3 wordings) AND !pressured AND !deferred; threshold 0.25 (~50% donated on pool). 48 random labels: macro-F1 0.771 in-sample (design chosen on them), honest ~0.68",
+      "test": {
+        "jev": {
+          "accuracy": 0.6691,
+          "macro_f1": 0.669,
+          "est_cost_usd": 0.049919,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,120 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens7",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "member_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate speech annotation policy. The policy only covers hatred toward two groups: women, and immigrants/refugees/migrants. A tweet is hateful when it attacks a woman or women (insulting, degrading or threatening a female target, often with gendered slurs), or when it vilifies or dehumanises immigrants as people. Merely mentioning immigration, using hashtags, discussing policy, or swearing is not enough.",
+        "rules": [
+          "Insults aimed at a man or boy (he/him, a male name) are not hateful under this policy, however crude.",
+          "Words like bitch or hoe used affectionately, as self-description or sexual self-reference, in compliments, idioms ('Life's a bitch'), lyrics, quoted speech, as a noun for a thing or joke ('the whole bitch thing you did to my bio'), or as an exclamation or interjection ('Bitch, I'm sitting at the airport', 'BITCH. They ship today') are not hateful.",
+          "Reporting that someone else called you a slur ('I got called a slut and bitch') is not itself an attack.",
+          "A gendered slur thrown at an addressed person ('you're a bitch', 'bitch fuck you hoe', 'bitch if you ain't screwed up lace ya shoes up') counts as an attack on a woman unless the target is clearly male. So does referring to other women dismissively as hoes or bitches ('im hotter than them hoes', 'I don't follow hoes who are just cute') or sexually degrading women.",
+          "Hostility toward immigrants as a group is hateful: negative generalisations (they steal, carry disease, are criminals or gang members), saying they are not welcome (#RefugeesNotWelcome), cheering actions against them, or demanding they be sent back or kept out because of who they are.",
+          "Neutral news, policy mechanics (deportation numbers or funding, beds for minors), criticism of politicians, or tweets sympathetic to immigrants are not hateful even with hashtags like #DeportThemAll, unless the tweet's own stance disparages immigrants.",
+          "Insults at politicians inside political commentary ('bitch face clinton would have put us into hell') and tweets discussing a specific crime case are not hateful under this policy; it targets hostility to women or immigrants as such."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "attack_on_woman": "Insults, degrades, sexually demeans or threatens a woman, girl, or an addressed person not clearly male, or talks about women dismissively as hoes/bitches, e.g. 'you're a bitch whoever it was', 'So now you friends with him bitch fuck you hoe', 'im hotter than them hoes that you chill w', 'Run a train on a bitch', 'dumb ass hoe', 'I can't stand you hoe', 'I wasnt talking about you in my tweet But if that shoe fits ya then lace that bitch up and wear it', 'bitch, i will dog walk you like the rest of these hoes'; or says women in general are inferior or deserve harm.",
+        "insult_at_male": "A crude insult or slur aimed at a man or boy, e.g. 'Ronnie is a cunt', 'he is that bitch', a male celebrity called a bitch.",
+        "slang_not_attack": "Bitch/hoe/etc. as casual slang, interjection, idiom, quoted speech, self-reference or sexual self-reference, friendly banter, compliments, song lyrics, mocking oneself or a situation, or reporting being called a slur, e.g. 'you valued bitch, you are a special treasure', 'Bitch, Im sitting on the floor of the airport', 'BITCH. They ship TODAY ... UP UR GAME HOES', 'So I got called a slut, whore and bitch', 'can't hit depth. lol. You bitch', 'Life's a bitch because a slut would be too easy', 'i need a bad bitch to rape me today', 'The swamp yeah lol \"You from Baltimore bitch\"', 'the whole bitch thing you did to my bio', '@user bitch do it look like WE play ?!', 'Being gay is a fucking superpower embrace it bitch you Betts shut these hoes down'.",
+        "dehumanising_immigrants": "Hostile toward immigrants, refugees or migrants themselves: scum, invaders, rapefugees; portraying them as a group as criminals, gang members, thieves, disease carriers or burdens; saying they are not welcome or cheering harm to them; or demanding they be sent back or kept out. E.g. '#Illegals are not immunized therefore bringing more illness into our country', 'they wreck the car with stolen plates ... #SendThemBack', '#BuildThatWall and get this @user out of this country', 'Whoever did this deserves an OBE. #RefugeesNotWelcome', '500 ex DACA Criminal Gang Members still at Large. Will they get Amnesty too?', '#stopimmigration #banislam', 'promoting lawlessness from illegals and wants to turn ATL into a 3rd world city', '#WEST is rescuing people that will kill them. #SendThemHome ... throw them out', 'YOU OWE HER FAMILY AN APOLOGY FOR BRINGING HER MURDERER TO CANADA ... taxpayers are paying to feed, house and protect him #NOMOREREFUGEES'.",
+        "immigration_politics": "Reports news or discusses immigration policy, borders, the wall, DACA, sanctuary laws, deportation budgets or numbers, or lists hashtags like #BuildThatWall, #IllegalAliens, #DeportThemAll, #stoptheinvasion, without itself disparaging immigrants as people, e.g. 'Only $10 million to deport 20 million #IllegalAliens?', 'Senate Leader: Half Of My Family Eligible For Deportation ... #DeportThemAll', 'additional beds are for (illegal alien) minors who crossed alone', 'working #IllegalAliens for pennies ... unfair to illegals, unfair to citizens', 'If #IllegalAliens don't like being called illegal, they shouldn't break the law. They can follow the established protocols or stay home'.",
+        "other": "Anything else: unrelated content, insults at politicians within political commentary (e.g. 'the future hell bitch face clinton would have put us into ... #MAGA'), comparing or discussing specific crime cases (e.g. 'That 21 year old rapefugee raped the 17 year old ... Brock Turner raped a drunk girl ... situations were different'), news, criticism of hate."
+      },
+      "map": {
+        "attack_on_woman": "hate",
+        "insult_at_male": "not_hate",
+        "slang_not_attack": "not_hate",
+        "dehumanising_immigrants": "hate",
+        "immigration_politics": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "member_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Under our hate speech annotation policy, which description fits this tweet best?",
+        "policy_scope": "Only two protected targets count: women, and immigrants (including refugees and migrants). Hostility toward anyone else, profanity, or political opinions alone do not make a tweet hateful.",
+        "hateful_when": [
+          "it insults, belittles, degrades, sexualises or threatens a woman, an addressed person who is not clearly male, or women spoken of dismissively as 'hoes' or 'bitches'",
+          "it expresses hostility toward immigrants as people: negative generalisations (criminals, thieves, disease, burden, lawlessness), saying they are unwelcome, cheering harm, or demanding they be removed or kept out"
+        ],
+        "not_hateful_when": [
+          "the slur targets a man or boy",
+          "bitch/hoe is used as an interjection, idiom, lyric, quote, compliment, joke, self-description, sexual self-reference, or in reporting being called names",
+          "the tweet is neutral news, policy mechanics, sympathetic to immigrants, or insults a politician as part of political commentary, or discusses a particular crime case, even when it carries hashtags like #DeportThemAll or #BuildThatWall"
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "attack_on_woman": {
+          "definition": "A woman, girl, women in general, or an addressed person not clearly male is the target of a degrading insult, sexual degradation, contempt or a threat.",
+          "examples": "'you're a bitch whoever it was', 'So now you friends with him bitch fuck you hoe', 'im hotter than them hoes that you chill w', 'Run a train on a bitch', 'dumb ass hoe', 'I can't stand you hoe', 'I wasnt talking about you in my tweet But if that shoe fits ya then lace that bitch up and wear it', 'bitch, i will dog walk you like the rest of these hoes'; or says women in general are inferior or deserve harm"
+        },
+        "insult_at_male": {
+          "definition": "The crude insult or slur is aimed at a man or boy.",
+          "examples": "'Ronnie is a cunt', 'he is that bitch', a male celebrity called a bitch"
+        },
+        "slang_not_attack": {
+          "definition": "Gendered slurs appear without attacking anyone: slang, interjection, idiom, quotation, lyrics, banter, compliments, self-reference, or reporting being called names.",
+          "examples": "'you valued bitch, you are a special treasure', 'Bitch, Im sitting on the floor of the airport', 'BITCH. They ship TODAY ... UP UR GAME HOES', 'So I got called a slut, whore and bitch', 'can't hit depth. lol. You bitch', 'Life's a bitch because a slut would be too easy', 'i need a bad bitch to rape me today', 'The swamp yeah lol \"You from Baltimore bitch\"', 'the whole bitch thing you did to my bio', '@user bitch do it look like WE play ?!', 'Being gay is a fucking superpower embrace it bitch you Betts shut these hoes down'"
+        },
+        "dehumanising_immigrants": {
+          "definition": "The tweet's own stance is hostile to immigrants, refugees or migrants as people: vilifying, stereotyping as criminal or a burden, calling them unwelcome, or demanding they be expelled or kept out.",
+          "examples": "'#Illegals are not immunized therefore bringing more illness into our country', 'they wreck the car with stolen plates ... #SendThemBack', '#BuildThatWall and get this @user out of this country', 'Whoever did this deserves an OBE. #RefugeesNotWelcome', '500 ex DACA Criminal Gang Members still at Large. Will they get Amnesty too?', '#stopimmigration #banislam', 'promoting lawlessness from illegals and wants to turn ATL into a 3rd world city', '#WEST is rescuing people that will kill them. #SendThemHome ... throw them out', 'YOU OWE HER FAMILY AN APOLOGY FOR BRINGING HER MURDERER TO CANADA ... taxpayers are paying to feed, house and protect him #NOMOREREFUGEES'"
+        },
+        "immigration_politics": {
+          "definition": "Immigration is discussed (news, policy, numbers, the wall, DACA, hashtags) without the tweet itself disparaging immigrants as people.",
+          "examples": "'Only $10 million to deport 20 million #IllegalAliens?', 'Senate Leader: Half Of My Family Eligible For Deportation ... #DeportThemAll', 'additional beds are for (illegal alien) minors who crossed alone', 'working #IllegalAliens for pennies ... unfair to illegals, unfair to citizens', 'If #IllegalAliens don't like being called illegal, they shouldn't break the law. They can follow the established protocols or stay home'"
+        },
+        "other": {
+          "definition": "Anything else, including insults at politicians in political commentary, discussion of specific crime cases, unrelated content, and criticism of hate.",
+          "examples": "'the future hell bitch face clinton would have put us into ... #MAGA'), comparing or discussing specific crime cases (e.g. 'That 21 year old rapefugee raped the 17 year old ... Brock Turner raped a drunk girl ... situations were different'), news, criticism of hate"
+        }
+      },
+      "map": {
+        "attack_on_woman": "hate",
+        "insult_at_male": "not_hate",
+        "slang_not_attack": "not_hate",
+        "dehumanising_immigrants": "hate",
+        "immigration_politics": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "member_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "You are applying an annotation policy for hate speech on Twitter. The policy protects only women and immigrants/refugees/migrants. Label a tweet hateful if it demeans, sexually degrades or threatens a woman (or an addressed person who is not clearly a man), talks about women contemptuously as hoes or bitches, or if its own stance is hostile to immigrants as people (stereotyping them as criminals, diseased, freeloaders or a source of lawlessness, saying they are not welcome, or wanting them thrown out). Do not label hateful: slurs at men; slang, interjections, idioms, lyrics, quotes, compliments, jokes or self-references using bitch/hoe; reporting being called names; neutral immigration news or policy talk, even with hard-line hashtags; insults at politicians in political commentary; discussion of a specific crime case. Choose the best-fitting description.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "attack_on_woman": "The tweet targets a woman, women, or an addressed person not clearly male with a degrading insult, sexual degradation, contempt or a threat. Examples: 'you're a bitch whoever it was', 'So now you friends with him bitch fuck you hoe', 'im hotter than them hoes that you chill w', 'Run a train on a bitch', 'dumb ass hoe', 'I can't stand you hoe', 'I wasnt talking about you in my tweet But if that shoe fits ya then lace that bitch up and wear it', 'bitch, i will dog walk you like the rest of these hoes'; or says women in general are inferior or deserve harm.",
+        "insult_at_male": "The insult or slur is directed at a man or boy. Examples: 'Ronnie is a cunt', 'he is that bitch', a male celebrity called a bitch.",
+        "slang_not_attack": "Bitch, hoe and similar words appear but nobody is being attacked: slang, interjections, idioms, quotes, lyrics, compliments, banter, self-reference, or being called names. Examples: 'you valued bitch, you are a special treasure', 'Bitch, Im sitting on the floor of the airport', 'BITCH. They ship TODAY ... UP UR GAME HOES', 'So I got called a slut, whore and bitch', 'can't hit depth. lol. You bitch', 'Life's a bitch because a slut would be too easy', 'i need a bad bitch to rape me today', 'The swamp yeah lol \"You from Baltimore bitch\"', 'the whole bitch thing you did to my bio', '@user bitch do it look like WE play ?!', 'Being gay is a fucking superpower embrace it bitch you Betts shut these hoes down'.",
+        "dehumanising_immigrants": "The tweet itself is hostile to immigrants, refugees or migrants as people: vilifying or stereotyping them, calling them unwelcome, or wanting them expelled or kept out. Examples: '#Illegals are not immunized therefore bringing more illness into our country', 'they wreck the car with stolen plates ... #SendThemBack', '#BuildThatWall and get this @user out of this country', 'Whoever did this deserves an OBE. #RefugeesNotWelcome', '500 ex DACA Criminal Gang Members still at Large. Will they get Amnesty too?', '#stopimmigration #banislam', 'promoting lawlessness from illegals and wants to turn ATL into a 3rd world city', '#WEST is rescuing people that will kill them. #SendThemHome ... throw them out', 'YOU OWE HER FAMILY AN APOLOGY FOR BRINGING HER MURDERER TO CANADA ... taxpayers are paying to feed, house and protect him #NOMOREREFUGEES'.",
+        "immigration_politics": "The tweet is about immigration (news, policy, numbers, wall, DACA, hashtags) but does not itself disparage immigrants as people. Examples: 'Only $10 million to deport 20 million #IllegalAliens?', 'Senate Leader: Half Of My Family Eligible For Deportation ... #DeportThemAll', 'additional beds are for (illegal alien) minors who crossed alone', 'working #IllegalAliens for pennies ... unfair to illegals, unfair to citizens', 'If #IllegalAliens don't like being called illegal, they shouldn't break the law. They can follow the established protocols or stay home'.",
+        "other": "Something else: political insults at politicians, discussing a specific crime case, unrelated content, criticism of hate. Examples: 'the future hell bitch face clinton would have put us into ... #MAGA'), comparing or discussing specific crime cases (e.g. 'That 21 year old rapefugee raped the 17 year old ... Brock Turner raped a drunk girl ... situations were different'), news, criticism of hate."
+      },
+      "map": {
+        "attack_on_woman": "hate",
+        "insult_at_male": "not_hate",
+        "slang_not_attack": "not_hate",
+        "dehumanising_immigrants": "hate",
+        "immigration_politics": "not_hate",
+        "other": "not_hate"
+      }
+    }
+  ]
+}

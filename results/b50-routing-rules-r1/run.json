@@ -1,0 +1,79 @@
+{
+  "run_id": "b50-routing-rules-r1",
+  "task": "banking77_routing",
+  "budget": 50,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:54:11",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 677,
+    "num_turns": 29,
+    "total_cost_usd": 1.1616572
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "draft: 46 fine-grained issue options mapped to 6 teams, from description only",
+      "test": {
+        "jev": {
+          "accuracy": 0.8327,
+          "macro_f1": 0.8227,
+          "est_cost_usd": 0.185522,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 22,
+      "estimate": 0.82,
+      "note": "round 1 rules: H5 pending->cards, H3 salary currency->payments, H6' cancel purchase->disputes, H1 SWIFT->pricing, H2 own transaction->payments, H4",
+      "test": {
+        "jev": {
+          "accuracy": 0.8562,
+          "macro_f1": 0.8371,
+          "est_cost_usd": 0.204599,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 42,
+      "estimate": 0.84,
+      "note": "round 2 rules: H7 payment not gone through->cards, H8 cancelled/reverted card payment->disputes, H9' mysterious statement charge->disputes (fee on own payment stays pricing)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8698,
+          "macro_f1": 0.8581,
+          "est_cost_usd": 0.21268,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 50,
+      "estimate": 0.83,
+      "note": "final: round 3 rules H10 generic transaction cancel->payments, H11 cash not received->disputes, H12 declined card purchase->payments (untested, budget spent)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8558,
+          "macro_f1": 0.8484,
+          "est_cost_usd": 0.217594,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-intents-uncertainty-r3",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T11:49:25",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 419,
+    "num_turns": 30,
+    "total_cost_usd": 1.2240976000000003
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft: flat 77-option choice with hand-written descriptions, no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8406,
+          "macro_f1": 0.8359,
+          "est_cost_usd": 0.361642,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.82,
+      "note": "v2: batch-1 lessons (payment returned->reverted_card_payment, source-of-funds, auto top-up limits, disposable limits, top-up fee defaults to card), bought texts as examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.8464,
+          "macro_f1": 0.8415,
+          "est_cost_usd": 0.423476,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.82,
+      "note": "v3: batch-2 lessons (PIN-finding->get_physical_card, debit statement->direct debit, retrieve card->lost, generic payment pending->pending_card_payment)",
+      "test": {
+        "jev": {
+          "accuracy": 0.863,
+          "macro_f1": 0.8586,
+          "est_cost_usd": 0.466812,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.82,
+      "note": "v4: batch-3 lessons (deposit->cheque/cash, sent-not-arrived->not_received_by_recipient, virtual card not received->getting_virtual_card, unsure top-up->top_up_failed, overseas fees->transfer_fee)",
+      "test": {
+        "jev": {
+          "accuracy": 0.864,
+          "macro_f1": 0.86,
+          "est_cost_usd": 0.518776,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.83,
+      "note": "v5: batch-4 lessons (cancel purchase/refund timing->request_refund, unreceived cash->cash_withdrawal_not_recognised, when to expect card->delivery_estimate, generic extra charges->transfer_fee_charged)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8656,
+          "macro_f1": 0.8613,
+          "est_cost_usd": 0.5562,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.84,
+      "note": "v6 final: batch-5 lessons (in-progress money not received->pending_cash_withdrawal, money transferred to me not visible->pending_transfer/balance_not_updated, others topping up->topping_up_by_card, security->verify_source_of_funds); 50/50 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8711,
+          "macro_f1": 0.8674,
+          "est_cost_usd": 0.595784,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -28,6 +28,7 @@ import argparse
 import asyncio
 import dataclasses
 import json
+import os
 import re
 import subprocess
 import sys
@@ -69,7 +70,11 @@ CLAUDE_PROJECTS = Path.home() / ".claude" / "projects"
 
 
 def _resolve(raw: str, base: Path) -> Path:
-    path = Path(raw).expanduser()
+    try:
+        path = Path(raw).expanduser()
+    except RuntimeError:
+        # "~55%" or "~user" with no such user: not a home path, and a raising hook lets the call through.
+        path = Path(raw)
     return (path if path.is_absolute() else base / path).resolve()
 
 
@@ -175,7 +180,10 @@ class Guard:
         tool = hook_input.get("tool_name", "")
         tool_input = hook_input.get("tool_input", {}) or {}
         self.session_id = hook_input.get("session_id") or self.session_id
-        problem = self.check(tool, tool_input)
+        try:
+            problem = self.check(tool, tool_input)
+        except Exception as e:
+            problem = f"the harness could not check this call ({type(e).__name__}); rephrase it"
         if problem is None:
             return {}
         with self.log_path.open("a") as f:
@@ -269,6 +277,10 @@ def main() -> int:
     out_dir.mkdir(parents=True, exist_ok=True)
     if (out_dir / "builder.jsonl").exists():
         parser.error(f"{out_dir}/builder.jsonl exists: this run already had a builder")
+    try:
+        os.close(os.open(out_dir / ".builder_started", os.O_CREAT | os.O_EXCL | os.O_WRONLY))
+    except FileExistsError:
+        parser.error(f"{out_dir}/.builder_started exists: another process started this run")
 
     load_env()
     started = time.time()

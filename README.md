@@ -33,7 +33,7 @@ The skill's files: [`SKILL.md`](skills/jev-classifier-builder/SKILL.md) (the wor
 
 ## The paper
 
-The skill comes from *Building System 1: How Language Agents Construct and Use Classifiers Under an Information Budget*. In the paper, a coding agent (System 2) builds natural-language classifiers that Jev runs (System 1). Given every training label, an Opus builder matches or beats RoBERTa fine-tuned on them on six tasks. Without labels, spending a budget of a simulated user's time on labels and questions, it beats zero-shot wherever the user has something to teach, and the best strategy depends on where the missing knowledge lies. The skill's strategies are the ones that worked, rewritten for a real user in place of the simulated one and its point budget.
+The skill comes from *Building System 1: How Language Agents Construct and Use Classifiers Under an Information Budget* ([PDF](paper/acl/paper.pdf)). In the paper, a coding agent (System 2) builds natural-language classifiers that Jev runs (System 1). Given every training label, an Opus builder matches or beats RoBERTa fine-tuned on them on six tasks. Without labels, spending a budget of a simulated user's time on labels and questions, it beats zero-shot wherever the user has something to teach, and the best strategy depends on where the missing knowledge lies. The skill's strategies are the ones that worked, rewritten for a real user in place of the simulated one and its point budget.
 
 ### Layout
 
@@ -45,7 +45,7 @@ The skill comes from *Building System 1: How Language Agents Construct and Use C
 | `tasks/` | Task descriptions given to the builder, and the private guideline and note on how the labels apply it (`applied_policy.md`, written by `tools/infer_policy.py`) held by the simulated user. |
 | `baselines/` | Zero-shot classifiers and baseline score summaries. |
 | `results/` | Every run's final classifier (`classifier.json`), its settings, points spent and the test score of each snapshot on each System 1 model (`run.json`), and an index of all runs (`runs.csv`), whose `simulated_user_version` column marks the runs that asked questions of an earlier simulated user; the paper reports only version 4 and runs that asked nothing. Written by `tools/export_results.py`. |
-| `paper/` | The paper (`acl/paper.tex`, `acl/references.bib`) and the Markdown draft it was converted from (`paper.md`, `md_to_acl.py`). |
+| `paper/` | The paper: [`acl/paper.pdf`](paper/acl/paper.pdf), built from `acl/paper.tex` and `acl/references.bib`. |
 
 ### Reproducing the experiments
 

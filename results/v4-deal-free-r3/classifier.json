@@ -1,0 +1,74 @@
+{
+  "version": 1,
+  "name": "deal_ens5",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v5a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Read the Craigslist listing and the buyer-seller chat. After the chat the buyer submits a formal offer and the seller accepts or rejects it. Decide how the chat ended.",
+        "notes": [
+          "Acceptance is often informal: 'ok', 'fair enough', 'I'll take it', 'sounds good', 'deal', 'that works', or simply moving on to pickup or payment after a price was named.",
+          "A seller saying 'X and you have a deal' counts as agreement if the buyer was already willing to pay X or responds positively.",
+          "A buyer saying they want to buy at the listed price, with no objection from the seller, counts as agreement.",
+          "A low offer from the buyer that the seller never answered or accepted is not an agreement.",
+          "If the seller's last word on price is a number they say they will sell for (a counteroffer, 'X is the lowest I'll go', 'make it X and it's a deal') and the buyer did not reject it, the buyer can simply offer that price: classify as seller_named_final_price."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed_price": "Both sides accepted the same price, formally or informally, and nobody backed out afterwards.",
+        "agreed_then_logistics": "A price was accepted (possibly implicitly) and the chat moved on to pickup, delivery, payment, paperwork or submitting the offer.",
+        "buyer_accepts_seller_terms": "The buyer accepted the seller's last price or terms, even with odd wording (e.g. 'fair enough', 'I'll take it', 'today works').",
+        "pending_offer": "The chat ends with the buyer's offer or request for a lower price that the seller did not accept or answer.",
+        "refused_or_walked_away": "One side rejected the last price or ended the negotiation without agreement.",
+        "never_negotiated": "The chat stops before any real negotiation: greetings, item questions only, or a single message.",
+        "nonsense": "The chat is gibberish, about a different item, or the participants are not seriously negotiating.",
+        "seller_named_final_price": "The seller's last price message names a price they are willing to sell for (counteroffer, lowest price, conditional deal), and the buyer did not reject it afterwards."
+      },
+      "map": {
+        "agreed_price": "deal",
+        "agreed_then_logistics": "deal",
+        "buyer_accepts_seller_terms": "deal",
+        "pending_offer": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "never_negotiated": "no_deal",
+        "nonsense": "no_deal",
+        "seller_named_final_price": "deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v5b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Craigslist negotiation chat. After the chat the buyer submits a formal offer and the seller accepts or rejects it. Look at the last few messages. Is there a price that the seller has said they will accept and that the buyer has not rejected?",
+        "notes": [
+          "It does not matter who spoke last. If the seller named a final price and the buyer replied 'I'll take it', 'fair enough', 'ok', 'today works' or similar, both have accepted that price.",
+          "If the buyer offered a price and the seller replied positively or moved on to arranging pickup, both have accepted that price.",
+          "If the last message is the buyer's lower offer or a request to go lower that the seller never accepted, there is no price the seller has accepted.",
+          "If the seller's last message names the price they will sell for (a counteroffer, 'X is my lowest', 'make it X and you have a deal') and the buyer did not reject it, the buyer can simply offer that price: answer yes_seller_final_price."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "yes_mutual_price": "Yes: both buyer and seller stated or accepted the same price, and neither withdrew.",
+        "yes_seller_final_price": "Yes: the seller's last price message names a price they will sell for, and the buyer has not rejected it.",
+        "no_buyer_offer_unanswered": "No: the chat ends on the buyer's lower offer or request for a discount that the seller has not accepted.",
+        "no_rejected": "No: the buyer rejected the seller's price, or one side gave up.",
+        "no_never_got_to_price": "No: the chat never got to a price, or it is incomplete or nonsensical."
+      },
+      "map": {
+        "yes_mutual_price": "deal",
+        "yes_seller_final_price": "deal",
+        "no_buyer_offer_unanswered": "no_deal",
+        "no_rejected": "no_deal",
+        "no_never_got_to_price": "no_deal"
+      }
+    }
+  ]
+}

@@ -1,0 +1,184 @@
+{
+  "version": 1,
+  "name": "e5",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "e5_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a charity-donation chat where a persuader tries to get the persuadee to donate to Save the Children. Classify ONLY the final 'Persuader message to tag' by the persuasion strategy or dialogue act it uses, using the earlier chat only as context.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "greeting": "Greeting or opening pleasantry: hello, hi, how are you, nice to meet you, also replying to 'how are you' with 'I'm fine'. Only openings of the conversation; closing well-wishes at the end are other.",
+        "acknowledgement": "Short acknowledgement or agreement with what the persuadee just said, without new persuasion content: 'I agree', 'yes it is', 'that's true', 'I understand', 'okay', 'same here', 'that's great'. A bare one-word reaction such as 'great!' or 'ok' that just receives the persuadee's answer is acknowledgement.",
+        "thank": "Thanking the persuadee (for time, chatting, or donating), including closing thank-yous. Includes gratitude expressed on behalf of the children, e.g. 'the children will greatly appreciate it'.",
+        "praise-user": "Complimenting or praising the persuadee personally: 'that is very generous', 'you are a kind person', 'that's great of you'. Includes positive evaluations of the persuadee's giving or generosity, e.g. 'very very good' after the persuadee says they donate regularly, 'That's wonderful!' after they commit to a donation.",
+        "ask-donation-amount": "Asking how much the persuadee would like to donate, or asking them to state an amount.",
+        "proposition-of-donation": "Directly asking or proposing that the persuadee donate (some or all of their task payment) to Save the Children, without asking a specific amount and without starting from a small request. A rhetorical question inside an argument about other ways of helping is logical-appeal, not a proposition. Includes encouragement aimed at the persuadee's own donation such as 'any donation will help'. General statements that everyone should help, not addressed as a request to the persuadee, are logical-appeal. A statement about what the persuadee's donation would achieve is logical-appeal.",
+        "foot-in-the-door": "Starting with a small request to make donating easier: asking for just a little, even a small amount, any small bit helps, a few cents, then possibly more.",
+        "donation-information": "Practical information about how the donation in this task works: it is deducted from the task payment, the range $0 to $2, researchers pass it to the charity, how/where to donate, links to donation procedure. Includes remarks about the allowed range of the amount or that the amount is the persuadee's own judgement ('anywhere from zero to the full amount', 'you can judge it yourself').",
+        "credibility-appeal": "Establishing the organization's credibility and trustworthiness: describing what Save the Children is and does, where it works, its history, track record, ratings, how funds are used, its website/URL as a source. Includes factual statements about the organization's history, founder, achievements and results (e.g. 'it was founded by Eglantyne Jebb', 'it has brought families together'), also when they answer the persuadee's question about the organization. Includes claims about the difference the organization makes or its impact ('they really make a difference to the lives of children in poverty').",
+        "logical-appeal": "Reasoning and evidence that donating has real impact: facts and statistics, cause-and-effect arguments (your money will buy X, small amounts add up, we spend money on unnecessary things), arguments about why helping makes sense. Includes arguments that contrast other ways of helping (volunteering, time) with donating now, e.g. 'volunteering is great, but in the meantime how can you help?'. Includes stated beliefs or principles that people (we, everyone) should help or give (e.g. 'I strongly believe we should all pitch in and help', 'we have a moral responsibility to help'), even when phrased as agreement. Includes statements about what the persuadee's own donation would achieve or where it would go ('your donation would be of great help and most would go directly to helping these kids'), even if they encourage donating; these are not proposition-of-donation.",
+        "emotion-appeal": "Eliciting emotions such as sympathy, sadness, guilt, or hope about children suffering: vivid descriptions of children dying, starving, in war, or appeals to the persuadee's feelings and conscience. Includes statements about children's plight, needs, future, or what children deserve or should not suffer (e.g. 'children shouldn't be separated from their families', 'our children need help, they are our future, without them we are nothing'); these are emotion-appeal, not logical-appeal. Includes the persuader sharing their own guilt or sadness about others' hardship ('sometimes I feel guilty that I haven't tried to do more to help others'), and shocking facts about children dying or suffering, also when phrased as 'did you know ...?' (e.g. 'Did you know that 16,000 children under the age of 5 die each day?').",
+        "personal-story": "Telling a narrative story about a specific person or child (e.g. a child named Bruce) or about the persuader's own experiences with someone.",
+        "self-modeling": "The persuader states their own intention or action to donate ('I will donate too', 'I give $30 a month'), modeling the behaviour for the persuadee. Requires the persuader to explicitly state their own donation or intention; a bare 'me too' / 'same here' reply is other.",
+        "source-related-inquiry": "Asking whether the persuadee knows or has heard about Save the Children or the organization. Only questions about whether the persuadee knows or has heard of Save the Children / the organization; 'did you know that?' about a fact is task-related-inquiry.",
+        "task-related-inquiry": "Asking the persuadee's opinion, thoughts, or experience related to the donation task or charity in general: do you donate to charities, what do you think about helping children, would you be interested. Asks the persuadee's opinion, knowledge or feelings about the topic or the information just presented (a bare 'did you know that?', 'what do you think about child abuse?'), not about their own past charity habits, and not whether they have heard of Save the Children. A 'did you know' question that itself states a fact about children dying or suffering is emotion-appeal.",
+        "personal-related-inquiry": "Asking about the persuadee's personal life unrelated to donating: do you have kids, what do you do, tell me about your life, where are you from. Includes questions about the persuadee's own past experience or habits with charity, donating or volunteering ('do you ever volunteer?', 'do you donate to charities often?', 'have you donated before?').",
+        "off-task": "Talk unrelated to the persuasion task: chit-chat about other topics, comments about the HIT/MTurk mechanics, the number of chats needed, technical issues.",
+        "other": "Any other message that fits none of the above: responses to the persuadee's questions, personal opinions, filler, clarifications, partial sentences. Includes questions that challenge or dispute something the persuadee said, or ask why they won't donate (e.g. 'how do you know nothing in your neighborhood is funded by them?', 'why don't you want to donate?'). Includes short replies like 'me too' that do not themselves state a donation, and closing well-wishes such as 'have a great day!' or 'have a nice night' (these are not greetings)."
+      }
+    },
+    {
+      "version": 1,
+      "name": "e5_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Tag the persuader's final message with the persuasion strategy or dialogue act of the annotation scheme.",
+        "setting": "Charity-donation chats: the persuader tries to convince the persuadee to donate part of their task payment to Save the Children.",
+        "notes": [
+          "Only the message after 'Persuader message to tag' is tagged; earlier turns are context and may be out of order.",
+          "Pick the single tag that best fits the message's main function."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "greeting": {
+          "definition": "Greeting or opening pleasantry: hello, hi, how are you, nice to meet you, also replying to 'how are you' with 'I'm fine'.",
+          "rules": [
+            "Only openings of the conversation; closing well-wishes at the end are other."
+          ]
+        },
+        "thank": {
+          "definition": "Thanking the persuadee (for time, chatting, or donating), including closing thank-yous.",
+          "rules": [
+            "Includes gratitude expressed on behalf of the children, e.g. 'the children will greatly appreciate it'."
+          ]
+        },
+        "acknowledgement": {
+          "definition": "Short acknowledgement or agreement with what the persuadee just said, without new persuasion content: 'I agree', 'yes it is', 'that's true', 'I understand', 'okay', 'same here', 'that's great'.",
+          "rules": [
+            "A bare one-word reaction such as 'great!' or 'ok' that just receives the persuadee's answer is acknowledgement."
+          ]
+        },
+        "praise-user": {
+          "definition": "Complimenting or praising the persuadee personally: 'that is very generous', 'you are a kind person', 'that's great of you'.",
+          "rules": [
+            "Includes positive evaluations of the persuadee's giving or generosity, e.g. 'very very good' after the persuadee says they donate regularly, 'That's wonderful!' after they commit to a donation."
+          ]
+        },
+        "other": {
+          "definition": "Any other message that fits none of the above: responses to the persuadee's questions, personal opinions, filler, clarifications, partial sentences.",
+          "rules": [
+            "Includes questions that challenge or dispute something the persuadee said, or ask why they won't donate (e.g. 'how do you know nothing in your neighborhood is funded by them?', 'why don't you want to donate?').",
+            "Includes short replies like 'me too' that do not themselves state a donation, and closing well-wishes such as 'have a great day!' or 'have a nice night' (these are not greetings)."
+          ]
+        },
+        "off-task": {
+          "definition": "Talk unrelated to the persuasion task: chit-chat about other topics, comments about the HIT/MTurk mechanics, the number of chats needed, technical issues."
+        },
+        "source-related-inquiry": {
+          "definition": "Asking whether the persuadee knows or has heard about Save the Children or the organization.",
+          "rules": [
+            "Only questions about whether the persuadee knows or has heard of Save the Children / the organization; 'did you know that?' about a fact is task-related-inquiry."
+          ]
+        },
+        "task-related-inquiry": {
+          "definition": "Asking the persuadee's opinion, thoughts, or experience related to the donation task or charity in general: do you donate to charities, what do you think about helping children, would you be interested.",
+          "rules": [
+            "Asks the persuadee's opinion, knowledge or feelings about the topic or the information just presented (a bare 'did you know that?', 'what do you think about child abuse?'), not about their own past charity habits, and not whether they have heard of Save the Children. A 'did you know' question that itself states a fact about children dying or suffering is emotion-appeal."
+          ]
+        },
+        "personal-related-inquiry": {
+          "definition": "Asking about the persuadee's personal life unrelated to donating: do you have kids, what do you do, tell me about your life, where are you from.",
+          "rules": [
+            "Includes questions about the persuadee's own past experience or habits with charity, donating or volunteering ('do you ever volunteer?', 'do you donate to charities often?', 'have you donated before?')."
+          ]
+        },
+        "proposition-of-donation": {
+          "definition": "Directly asking or proposing that the persuadee donate (some or all of their task payment) to Save the Children, without asking a specific amount and without starting from a small request.",
+          "rules": [
+            "A rhetorical question inside an argument about other ways of helping is logical-appeal, not a proposition.",
+            "Includes encouragement aimed at the persuadee's own donation such as 'any donation will help'.",
+            "General statements that everyone should help, not addressed as a request to the persuadee, are logical-appeal.",
+            "A statement about what the persuadee's donation would achieve is logical-appeal."
+          ]
+        },
+        "ask-donation-amount": {
+          "definition": "Asking how much the persuadee would like to donate, or asking them to state an amount."
+        },
+        "foot-in-the-door": {
+          "definition": "Starting with a small request to make donating easier: asking for just a little, even a small amount, any small bit helps, a few cents, then possibly more."
+        },
+        "donation-information": {
+          "definition": "Practical information about how the donation in this task works: it is deducted from the task payment, the range $0 to $2, researchers pass it to the charity, how/where to donate, links to donation procedure.",
+          "rules": [
+            "Includes remarks about the allowed range of the amount or that the amount is the persuadee's own judgement ('anywhere from zero to the full amount', 'you can judge it yourself')."
+          ]
+        },
+        "self-modeling": {
+          "definition": "The persuader states their own intention or action to donate ('I will donate too', 'I give $30 a month'), modeling the behaviour for the persuadee.",
+          "rules": [
+            "Requires the persuader to explicitly state their own donation or intention; a bare 'me too' / 'same here' reply is other."
+          ]
+        },
+        "credibility-appeal": {
+          "definition": "Establishing the organization's credibility and trustworthiness: describing what Save the Children is and does, where it works, its history, track record, ratings, how funds are used, its website/URL as a source.",
+          "rules": [
+            "Includes factual statements about the organization's history, founder, achievements and results (e.g. 'it was founded by Eglantyne Jebb', 'it has brought families together'), also when they answer the persuadee's question about the organization.",
+            "Includes claims about the difference the organization makes or its impact ('they really make a difference to the lives of children in poverty')."
+          ]
+        },
+        "logical-appeal": {
+          "definition": "Reasoning and evidence that donating has real impact: facts and statistics, cause-and-effect arguments (your money will buy X, small amounts add up, we spend money on unnecessary things), arguments about why helping makes sense.",
+          "rules": [
+            "Includes arguments that contrast other ways of helping (volunteering, time) with donating now, e.g. 'volunteering is great, but in the meantime how can you help?'.",
+            "Includes stated beliefs or principles that people (we, everyone) should help or give (e.g. 'I strongly believe we should all pitch in and help', 'we have a moral responsibility to help'), even when phrased as agreement.",
+            "Includes statements about what the persuadee's own donation would achieve or where it would go ('your donation would be of great help and most would go directly to helping these kids'), even if they encourage donating; these are not proposition-of-donation."
+          ]
+        },
+        "emotion-appeal": {
+          "definition": "Eliciting emotions such as sympathy, sadness, guilt, or hope about children suffering: vivid descriptions of children dying, starving, in war, or appeals to the persuadee's feelings and conscience.",
+          "rules": [
+            "Includes statements about children's plight, needs, future, or what children deserve or should not suffer (e.g. 'children shouldn't be separated from their families', 'our children need help, they are our future, without them we are nothing'); these are emotion-appeal, not logical-appeal.",
+            "Includes the persuader sharing their own guilt or sadness about others' hardship ('sometimes I feel guilty that I haven't tried to do more to help others'), and shocking facts about children dying or suffering, also when phrased as 'did you know ...?' (e.g. 'Did you know that 16,000 children under the age of 5 die each day?')."
+          ]
+        },
+        "personal-story": {
+          "definition": "Telling a narrative story about a specific person or child (e.g. a child named Bruce) or about the persuader's own experiences with someone."
+        }
+      }
+    },
+    {
+      "version": 1,
+      "name": "e5_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Annotation scheme for persuasion dialogues (donating to Save the Children). Which strategy or dialogue act does the last persuader message ('Persuader message to tag') use? Read the preceding chat only for context.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "other": "Any other message that fits none of the above: responses to the persuadee's questions, personal opinions, filler, clarifications, partial sentences. Includes questions that challenge or dispute something the persuadee said, or ask why they won't donate (e.g. 'how do you know nothing in your neighborhood is funded by them?', 'why don't you want to donate?'). Includes short replies like 'me too' that do not themselves state a donation, and closing well-wishes such as 'have a great day!' or 'have a nice night' (these are not greetings).",
+        "off-task": "Talk unrelated to the persuasion task: chit-chat about other topics, comments about the HIT/MTurk mechanics, the number of chats needed, technical issues.",
+        "personal-related-inquiry": "Asking about the persuadee's personal life unrelated to donating: do you have kids, what do you do, tell me about your life, where are you from. Includes questions about the persuadee's own past experience or habits with charity, donating or volunteering ('do you ever volunteer?', 'do you donate to charities often?', 'have you donated before?').",
+        "task-related-inquiry": "Asking the persuadee's opinion, thoughts, or experience related to the donation task or charity in general: do you donate to charities, what do you think about helping children, would you be interested. Asks the persuadee's opinion, knowledge or feelings about the topic or the information just presented (a bare 'did you know that?', 'what do you think about child abuse?'), not about their own past charity habits, and not whether they have heard of Save the Children. A 'did you know' question that itself states a fact about children dying or suffering is emotion-appeal.",
+        "source-related-inquiry": "Asking whether the persuadee knows or has heard about Save the Children or the organization. Only questions about whether the persuadee knows or has heard of Save the Children / the organization; 'did you know that?' about a fact is task-related-inquiry.",
+        "self-modeling": "The persuader states their own intention or action to donate ('I will donate too', 'I give $30 a month'), modeling the behaviour for the persuadee. Requires the persuader to explicitly state their own donation or intention; a bare 'me too' / 'same here' reply is other.",
+        "personal-story": "Telling a narrative story about a specific person or child (e.g. a child named Bruce) or about the persuader's own experiences with someone.",
+        "emotion-appeal": "Eliciting emotions such as sympathy, sadness, guilt, or hope about children suffering: vivid descriptions of children dying, starving, in war, or appeals to the persuadee's feelings and conscience. Includes statements about children's plight, needs, future, or what children deserve or should not suffer (e.g. 'children shouldn't be separated from their families', 'our children need help, they are our future, without them we are nothing'); these are emotion-appeal, not logical-appeal. Includes the persuader sharing their own guilt or sadness about others' hardship ('sometimes I feel guilty that I haven't tried to do more to help others'), and shocking facts about children dying or suffering, also when phrased as 'did you know ...?' (e.g. 'Did you know that 16,000 children under the age of 5 die each day?').",
+        "logical-appeal": "Reasoning and evidence that donating has real impact: facts and statistics, cause-and-effect arguments (your money will buy X, small amounts add up, we spend money on unnecessary things), arguments about why helping makes sense. Includes arguments that contrast other ways of helping (volunteering, time) with donating now, e.g. 'volunteering is great, but in the meantime how can you help?'. Includes stated beliefs or principles that people (we, everyone) should help or give (e.g. 'I strongly believe we should all pitch in and help', 'we have a moral responsibility to help'), even when phrased as agreement. Includes statements about what the persuadee's own donation would achieve or where it would go ('your donation would be of great help and most would go directly to helping these kids'), even if they encourage donating; these are not proposition-of-donation.",
+        "credibility-appeal": "Establishing the organization's credibility and trustworthiness: describing what Save the Children is and does, where it works, its history, track record, ratings, how funds are used, its website/URL as a source. Includes factual statements about the organization's history, founder, achievements and results (e.g. 'it was founded by Eglantyne Jebb', 'it has brought families together'), also when they answer the persuadee's question about the organization. Includes claims about the difference the organization makes or its impact ('they really make a difference to the lives of children in poverty').",
+        "donation-information": "Practical information about how the donation in this task works: it is deducted from the task payment, the range $0 to $2, researchers pass it to the charity, how/where to donate, links to donation procedure. Includes remarks about the allowed range of the amount or that the amount is the persuadee's own judgement ('anywhere from zero to the full amount', 'you can judge it yourself').",
+        "foot-in-the-door": "Starting with a small request to make donating easier: asking for just a little, even a small amount, any small bit helps, a few cents, then possibly more.",
+        "proposition-of-donation": "Directly asking or proposing that the persuadee donate (some or all of their task payment) to Save the Children, without asking a specific amount and without starting from a small request. A rhetorical question inside an argument about other ways of helping is logical-appeal, not a proposition. Includes encouragement aimed at the persuadee's own donation such as 'any donation will help'. General statements that everyone should help, not addressed as a request to the persuadee, are logical-appeal. A statement about what the persuadee's donation would achieve is logical-appeal.",
+        "ask-donation-amount": "Asking how much the persuadee would like to donate, or asking them to state an amount.",
+        "praise-user": "Complimenting or praising the persuadee personally: 'that is very generous', 'you are a kind person', 'that's great of you'. Includes positive evaluations of the persuadee's giving or generosity, e.g. 'very very good' after the persuadee says they donate regularly, 'That's wonderful!' after they commit to a donation.",
+        "thank": "Thanking the persuadee (for time, chatting, or donating), including closing thank-yous. Includes gratitude expressed on behalf of the children, e.g. 'the children will greatly appreciate it'.",
+        "acknowledgement": "Short acknowledgement or agreement with what the persuadee just said, without new persuasion content: 'I agree', 'yes it is', 'that's true', 'I understand', 'okay', 'same here', 'that's great'. A bare one-word reaction such as 'great!' or 'ok' that just receives the persuadee's answer is acknowledgement.",
+        "greeting": "Greeting or opening pleasantry: hello, hi, how are you, nice to meet you, also replying to 'how are you' with 'I'm fine'. Only openings of the conversation; closing well-wishes at the end are other."
+      }
+    }
+  ]
+}

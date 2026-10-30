@@ -1,0 +1,71 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens67",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v6",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Under a hate speech annotation policy, a tweet is hateful if its own text is hostile to immigrants/refugees as people or calls for their exclusion (invasion or crime-by-immigrants framing, riots or violence, 'send them home', 'no illegals', a very short approving tweet made mostly of exclusion hashtags), or if it expresses strong hostility toward women (threats, sexual degradation or violence, angry name-calling with stacked slurs such as 'you fucking bitch, you fucking whore', shaming generalisations such as 'rat hoe', contempt for women as a group). It is NOT hateful when the body complains about or attacks Democrats, liberals, politicians, activists, voters, 'traitors' or others and immigration hashtags such as #StopTheInvasion or #sendthemhome are merely appended, when immigration, crime news or policy is just discussed or the term 'illegal aliens' is trended, or when slang such as bitch/hoe/whore is used in banter, an ordinary quarrel, gossip, a single casual insult, or self-referentially. Which description best fits this tweet?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrants_dehumanizing": "Text hostile to immigrants, refugees, illegal aliens or a nationality/religion group as people: insults, dehumanising, blaming them as a group for crime, fraud, disease or for sucking money/welfare/jobs out of the country (scum, criminals, rapists, invaders, parasites, lazy, burden on taxpayers)",
+        "immigrants_expel_or_harm": "Calls for immigrants/refugees to be deported, sent back/home, kept out ('no illegals'), or harmed, or refers to riots/violence against them, with a hostile tone toward them as people",
+        "stop_immigration_slogan": "A very short tweet that is mostly exclusion hashtags or a bare demand to stop immigration or deport them ('StopImmigration', '#DeportThemAll', '#NoIllegals #NoChainMigration', mocking 'precious illegal aliens! #DeportThemAll')",
+        "women_direct_attack": "Strong hostility toward women: threats, sexual degradation or sexual violence, angry name-calling with stacked slurs ('You fucking bitch! You fucking whore!'), shaming generalisations about women as sluts ('rat hoe', 'bitches be selling they body'), an enraged sustained attack on a woman",
+        "other_slur_hate": "Hateful slurs or hostility against another protected group (race, religion, ethnicity)",
+        "immigration_policy_neutral": "Discusses immigration, the border, a wall, wall funding, deportation policy, demographics or crime news (even crimes by named immigrants) without hostility toward immigrants as a group; trending/defending the term 'illegal aliens', bare hashtags, calls to trend, spam, news, opinion on policy",
+        "attack_on_non_target": "The body complains about or attacks Democrats, liberals, politicians, activists, voters, 'traitors', parties, the media, celebrities or others who are not women or immigrants as such, with immigration hashtags (#StopTheInvasion, #sendthemhome) or words like 'rapefugee' appended or aimed at politicians",
+        "casual_slang": "Words like bitch, hoe, slut used casually, jokingly, affectionately, proudly or self-referentially; to a friend or man; in an ordinary quarrel, a single casual insult, gossip or banter; song lyrics, quotes",
+        "other_unrelated": "Anything else: unrelated or neutral"
+      },
+      "map": {
+        "immigrants_dehumanizing": "hate",
+        "immigrants_expel_or_harm": "hate",
+        "stop_immigration_slogan": "hate",
+        "women_direct_attack": "hate",
+        "other_slur_hate": "hate",
+        "immigration_policy_neutral": "not_hate",
+        "attack_on_non_target": "not_hate",
+        "casual_slang": "not_hate",
+        "other_unrelated": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v7",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Under a hate speech annotation policy, a tweet is hateful if its own text is hostile to immigrants/refugees as people or calls for their exclusion (invasion or crime-by-immigrants framing, riots or violence, 'send them home', 'no illegals', a very short approving tweet made mostly of exclusion hashtags), or if it expresses strong hostility toward women (threats, sexual degradation or violence, angry name-calling with stacked slurs such as 'you fucking bitch, you fucking whore', shaming generalisations such as 'rat hoe', contempt for women as a group). It is NOT hateful when the body complains about or attacks Democrats, liberals, politicians, activists, voters, 'traitors' or others and immigration hashtags such as #StopTheInvasion or #sendthemhome are merely appended, when immigration, crime news or policy is just discussed or the term 'illegal aliens' is trended, or when slang such as bitch/hoe/whore is used in friendly or joking banter, gossip, or proudly or self-referentially. Which description best fits this tweet?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrants_dehumanizing": "Text hostile to immigrants, refugees, illegal aliens or a nationality/religion group as people: insults, dehumanising, blaming them as a group for crime, fraud, disease or for sucking money/welfare/jobs out of the country (scum, criminals, rapists, invaders, parasites, lazy, burden on taxpayers)",
+        "immigrants_expel_or_harm": "Calls for immigrants/refugees to be deported, sent back/home, kept out ('no illegals'), or harmed, or refers to riots/violence against them, or abusive name-calling toward them with #SendThemBack, with a hostile tone toward them as people",
+        "stop_immigration_slogan": "A very short tweet that is mostly exclusion hashtags or a bare demand to stop immigration or deport them ('StopImmigration', '#DeportThemAll', '#NoIllegals #NoChainMigration', mocking 'precious illegal aliens! #DeportThemAll')",
+        "women_direct_attack": "Hostility toward women: insults aimed at a woman ('go take a bath bitch'), threats, sexual degradation or sexual violence or joking about rape ('u scared to rape a bitch?', 'run a train on a bitch'), angry name-calling with stacked slurs ('You fucking bitch! You fucking whore!'), shaming generalisations about women as sluts ('rat hoe', 'dick sucking hoes', 'bitches be selling they body'), an enraged attack on a woman",
+        "other_slur_hate": "Hateful slurs or hostility against another protected group (race, religion, ethnicity)",
+        "immigration_policy_neutral": "Discusses immigration, the border, a wall, wall funding, deportation policy, demographics or crime news (even crimes by named immigrants) without hostility toward immigrants as a group; trending/defending the term 'illegal aliens', bare hashtags, calls to trend, spam, news, opinion on policy",
+        "attack_on_non_target": "The body complains about or attacks Democrats, liberals, politicians, activists, voters, 'traitors', parties, the media, celebrities or others who are not women or immigrants as such, with immigration hashtags (#StopTheInvasion, #sendthemhome) or words like 'rapefugee' appended or aimed at politicians",
+        "casual_slang": "Words like bitch, hoe, slut used in friendly or joking banter (laughing, emojis), affectionately, proudly or self-referentially; said to a friend or a man; gossip or lyrics/quotes. No real contempt, insult or degrading content aimed at a woman",
+        "other_unrelated": "Anything else: unrelated or neutral"
+      },
+      "map": {
+        "immigrants_dehumanizing": "hate",
+        "immigrants_expel_or_harm": "hate",
+        "stop_immigration_slogan": "hate",
+        "women_direct_attack": "hate",
+        "other_slur_hate": "hate",
+        "immigration_policy_neutral": "not_hate",
+        "attack_on_non_target": "not_hate",
+        "casual_slang": "not_hate",
+        "other_unrelated": "not_hate"
+      }
+    }
+  ],
+  "weights": [
+    1,
+    1
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-persuasion-rules-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:18:33",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 894,
+    "num_turns": 62,
+    "total_cost_usd": 2.3850779999999996
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description + P4G scheme knowledge, 21 options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.5979,
+          "macro_f1": 0.6069,
+          "est_cost_usd": 0.104434,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 26,
+      "estimate": 0.5,
+      "note": "v3: round-1 hypotheses narrowed after tests; 12/13 labels (0326 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6289,
+          "macro_f1": 0.6287,
+          "est_cost_usd": 0.129086,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 52,
+      "estimate": 0.55,
+      "note": "v5: round-2 rules (did-you-know=task inquiry, kill stats=emotion, volunteering info=donation-info) tested; 25/26 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6144,
+          "macro_f1": 0.6167,
+          "est_cost_usd": 0.150135,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 72,
+      "estimate": 0.55,
+      "note": "v8: round-3 rules (small-amount FITD vs reasoned logical, tangent chit-chat=other, challenge q=task inquiry); 34/36 labels (2 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6236,
+          "macro_f1": 0.6216,
+          "est_cost_usd": 0.167644,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 94,
+      "estimate": 0.55,
+      "note": "ens12: 3 wording variants of v12 (round-4 rules: confirm amount=other, specific suggestion=proposition, rhetorical q=task inquiry); 45/47 labels (2 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6276,
+          "macro_f1": 0.6266,
+          "est_cost_usd": 0.553628,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.55,
+      "note": "FINAL ens14: 3 wording variants of v14; agrees with 48/50 labels (0326, 0617 suspected noise). Labels were uncertainty/test picks, so no unbiased estimate.",
+      "test": {
+        "jev": {
+          "accuracy": 0.6276,
+          "macro_f1": 0.6261,
+          "est_cost_usd": 0.567281,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

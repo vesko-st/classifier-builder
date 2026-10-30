@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "persuasion_strategy",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Classify the persuader's message by its primary persuasion tactic or dialogue act. Be generous with 'other' for vague, unclear, or meta-conversation statements that don't fit the main categories.",
+  "state_template": "Persuader message to classify:\n{{input}}",
+  "criteria": {
+    "acknowledgement": "simply agrees, validates, or acknowledges the other person's statement without strong praise or new persuasive content (e.g., 'That's great', 'You're right', 'I agree')",
+    "ask-donation-amount": "directly asks 'how much' or requests a specific amount for donation (e.g., 'Would you like to donate $20?', 'How much can you give?')",
+    "credibility-appeal": "describes the charity's trustworthiness, scope, mission, work areas, operations, impact, or track record (e.g., 'Education, poverty issues, healthcare', 'They work in 120 countries', 'They spend 86% on direct aid')",
+    "donation-information": "explains the logistics of HOW to donate: payment methods, the process, timing, specific steps (e.g., 'You can donate via credit card', 'Click this link', 'Donations are deducted from your payment', 'You can give as much as you want')",
+    "emotion-appeal": "uses emotional appeals, empathy, sad/heartwarming stories, or vivid descriptions of suffering (e.g., '16,000 children under 5 die each day', 'imagine your child in that situation')",
+    "foot-in-the-door": "lowers the barrier to donation by framing it as small or easy (e.g., 'even a few dollars helps', 'it's less than your daily coffee', 'anything you can spare')",
+    "greeting": "greets, opens conversation, or engages in social pleasantries (e.g., 'Hello', 'How are you?', 'Hi there!')",
+    "logical-appeal": "uses facts, statistics, data, or logical reasoning/arguments to justify donation (e.g., '1,000 children were killed in Syria', 'they are ranked #1 charity', 'we can work to make up the amount')",
+    "off-task": "clearly off-topic or unrelated to charity or donation",
+    "other": "vague, unclear, meta-conversation about the task/survey, or statements that don't fit other categories (e.g., 'It seems vaguely familiar', 'Good Deal', 'Hold ten?', 'There are lots of opportunities')",
+    "personal-related-inquiry": "asks about the OTHER person's beliefs, preferences, situation, life, or opinions (e.g., 'Do you have children?', 'What do you think about charity?', 'Are you interested?')",
+    "personal-story": "shares a personal anecdote or experience to illustrate a point (e.g., 'I donated last year and felt great', 'My friend's child benefited from this', 'I've been to other countries')",
+    "praise-user": "specifically compliments, flatters, or praises the other person (e.g., 'You're so kind', 'That's generous of you', 'You have a good heart')",
+    "proposition-of-donation": "proposes, suggests, or offers the donation option to them (e.g., 'Would you be willing to donate?', 'What if you donated today?', 'you can give how much you want')",
+    "self-modeling": "demonstrates or models desired behavior by talking about the speaker's own actions (e.g., 'I donate regularly', 'I support this cause', 'I'm contributing too')",
+    "source-related-inquiry": "asks about the charity itself or inquires regarding Save the Children (e.g., 'Do you know about Save the Children?', 'Have you heard of them?', 'Do you know what they do?')",
+    "task-related-inquiry": "asks about the task/survey mechanics, especially in the context of how donations work in the task (e.g., 'How much of your payment would you donate?', 'Do you understand the survey process?')",
+    "thank": "thanks, expresses gratitude, or acknowledges a contribution (e.g., 'Thank you', 'We appreciate your donation', 'Thanks for your time')"
+  }
+}

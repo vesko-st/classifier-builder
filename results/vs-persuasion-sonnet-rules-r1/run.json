@@ -1,0 +1,109 @@
+{
+  "run_id": "vs-persuasion-sonnet-rules-r1",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T17:07:35",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 862,
+    "num_turns": 41,
+    "total_cost_usd": 0.9025204
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.4,
+      "note": "draft v1 from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.5214,
+          "macro_f1": 0.5273,
+          "est_cost_usd": 0.082627,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 26,
+      "estimate": 0.55,
+      "note": "v3: org-focused credibility, stats->emotion, did-you-know->task inquiry, challenge->other",
+      "test": {
+        "jev": {
+          "accuracy": 0.5452,
+          "macro_f1": 0.5323,
+          "est_cost_usd": 0.089896,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 42,
+      "estimate": 0.55,
+      "note": "v5: how-much vs whether-to-donate split; revert praise/ack",
+      "test": {
+        "jev": {
+          "accuracy": 0.557,
+          "macro_f1": 0.5395,
+          "est_cost_usd": 0.093562,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 66,
+      "estimate": 0.6,
+      "note": "v6: amount ranges/suggestions are donation-information; probing why-questions other",
+      "test": {
+        "jev": {
+          "accuracy": 0.5722,
+          "macro_f1": 0.5561,
+          "est_cost_usd": 0.094447,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 92,
+      "estimate": 0.62,
+      "note": "ensemble of 3 wording variants of v6",
+      "test": {
+        "jev": {
+          "accuracy": 0.5583,
+          "macro_f1": 0.5454,
+          "est_cost_usd": 0.281761,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.5,
+      "note": "final: ensemble of 3 wording variants of v6 (H9 not adopted). Estimate from 4 random labels (1/4) + hard-biased 46 labels (0.67 acc)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5583,
+          "macro_f1": 0.5454,
+          "est_cost_usd": 0.0,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-intents-rules-r3",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:11:47",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1402,
+    "num_turns": 57,
+    "total_cost_usd": 2.6181958
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.83,
+      "note": "v1 flat 77-option choice from description + banking prior knowledge; no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8471,
+          "macro_f1": 0.8422,
+          "est_cost_usd": 0.346912,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 22,
+      "estimate": 0.84,
+      "note": "round 1: H1 narrowed, H3, H4, H5, refund wording; 11/11 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8575,
+          "macro_f1": 0.8539,
+          "est_cost_usd": 0.371344,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 50,
+      "estimate": 0.85,
+      "note": "round 2: H7 narrowed (balance not updated after transfer), H8 unknown charge, H9 declined at shop, H10 narrowed; 0010 noise; switched to 3-variant wording ensemble; 24/25 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8633,
+          "macro_f1": 0.8605,
+          "est_cost_usd": 1.465598,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 66,
+      "estimate": 0.86,
+      "note": "round 3: H13 deposit, H14 wrong-rate complaints (confirmed), H15 take back transaction; PIN-only get_physical_card; 32/33 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8682,
+          "macro_f1": 0.8655,
+          "est_cost_usd": 1.536228,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 84,
+      "estimate": 0.86,
+      "note": "round 4: receiving money in a currency, put-in money → deposit class, retrieve card → lost, transfer error/rejected → failed_transfer (H3 narrowed); 41/42 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8714,
+          "macro_f1": 0.8684,
+          "est_cost_usd": 1.632084,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.87,
+      "note": "final: round 5 rules (Visa brand, salary → receiving_money, balance-update wording, 0745 noise example), transfer_not_received narrowed (0666), near-tie repairs; 49/50 labels (0010 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8731,
+          "macro_f1": 0.8698,
+          "est_cost_usd": 1.712029,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

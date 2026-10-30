@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "classifier",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Classify the persuader's message in a charity donation dialogue. Identify the dialogue act or persuasion strategy being used.\n\nKEY DISTINCTIONS:\n- Credibility-appeal: any statement ABOUT THE CHARITY (what it does, where it works, fund statistics, introducing by name, website, praise)\n- Logical-appeal: about the ACT OF GIVING (donation impact, moral reasoning, why giving matters, cost comparisons)\n- Proposition-of-donation: ANY direct ask to donate (even hypothetical or tentative, e.g., 'Would you consider donating?')\n- Foot-in-the-door: stressing that small amounts are enough (\"every little bit helps\", \"only pocket change\")\n- Ask-donation-amount: asking specifically how much they want to donate\n- Task-related-inquiry: open questions about the cause/conversation (\"what do you think?\", \"how should we help?\", \"what are your thoughts on child abuse?\") NOT about chat mechanics\n- Self-modeling: sharing personal action/behavior (\"I'm going to donate...\", \"I did...\")\n- Other: answering persuadee's questions (yes/no/neutral), closings, confirming amounts, asking for more, arguing, flat fillers, task remarks, talking about other charities\n\nThe message appears after the separator '---'.",
+  "state_template": "{{input}}",
+  "criteria": {
+    "greeting": "Opening/closing pleasantry, saying hello or goodbye",
+    "acknowledgement": "Directly affirming or agreeing with what the persuadee said (e.g., confirming an amount)",
+    "thank": "Expressing thanks or gratitude",
+    "personal-related-inquiry": "Asking about the other person's personal life, feelings, experiences, family",
+    "personal-story": "Telling a story about a person or child, their background, experiences, or situation",
+    "source-related-inquiry": "Asking specifically about the charity organization itself (\"What do they do?\", \"Where do they work?\")",
+    "task-related-inquiry": "Open questions about the cause and conversation (\"What are your thoughts?\", \"How could we help?\", \"What do you think about child abuse?\")",
+    "ask-donation-amount": "Specifically asking how much money the person wants or will donate",
+    "proposition-of-donation": "Any direct ask to donate, even if hypothetical/tentative (\"Would you consider donating?\")",
+    "donation-information": "Providing information about how to donate, payment methods, or donation options",
+    "logical-appeal": "About the act of giving: donation impact, moral reasoning about giving, cost comparisons",
+    "emotion-appeal": "Appealing to emotions; emphasizing suffering, loss, heartfelt stories of those in need",
+    "credibility-appeal": "Statement about the charity: what it does, where it works, statistics about fund use, ratings, praise, introducing/naming it",
+    "self-modeling": "Sharing personal action or behavior (\"I'm going to donate...\", \"I donated...\", \"I believe...\")",
+    "praise-user": "Complimenting or praising the other person's views, character, generosity, or choices",
+    "foot-in-the-door": "Stressing that small amounts are enough (\"every little bit helps\", \"only pocket change\", \"even the smallest donation\")",
+    "off-task": "Going off-topic or discussing something unrelated to the donation charity task",
+    "other": "Answering persuadee questions, closings, confirming amounts, asking for more, arguing, flat fillers, task remarks, other charities"
+  }
+}

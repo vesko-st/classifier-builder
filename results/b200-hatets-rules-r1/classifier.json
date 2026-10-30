@@ -1,0 +1,206 @@
+{
+  "version": 1,
+  "name": "v29_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "v8a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate speech annotation policy. Hate speech is language that expresses hatred, contempt, dehumanisation or incitement to harm or exclusion against women or immigrants (as groups, or individuals targeted as women or immigrants). Pick the option that best describes the tweet.",
+        "notes": [
+          "User mentions are anonymised as @user.",
+          "Judge the body of the tweet, not just its hashtags."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrants_dehumanised_or_criminalised": "Attacks immigrants, refugees or migrants themselves: dehumanising names (invaders, animals, rapefugees, bottom feeders, scum), or portraying them as criminals, rapists, killers, smugglers, disease carriers, thieves or parasites robbing and draining Americans, or dangerous - including citing a crime by an illegal alien or DACA recipient to argue against immigration. Also portraying border crossers as bringing drugs (fentanyl) and death into the country, even while mainly insulting someone who defends them. Also branding them as liars and lawbreakers who lie to get in and crash the borders. Also describing them as a flood or horde swamping the country ('you want #illegals to flood our state').",
+        "immigrants_expulsion_call": "Calls in its own words for immigrants as a group to be expelled or removed ('deport every illegal alien!', 'send them all back', 'get them out', 'take our nation back'), or is a short tweet that is essentially just an exclusion slogan (#DeportThemAll, #SendThemBack, 'StopImmigration'). A tweet whose content is mainly a string of rejecting slogans aimed at immigrants or refugees as people (#NoRefugees #NoMigrants #NoImmigrants) counts. Also fear-mongering rejection of immigrants of a whole religion or nationality as an unwanted threat ('we do not want this in US. #MuslimBan ... It is really scary imagine #ShariaLaw #EndDiversity'). Also contemptuously telling migrants to go home, waving away concern for them ('No we do not... Go home and make your country better... we can't afford them'). Also demanding that a particular person be thrown out of the country ('#BuildThatWall and get this @user out of this country').",
+        "women_slur_attack": "Attacks, insults, puts down or threatens a woman or someone not identified as male with gendered slurs (bitch, hoe, whore, slut, cunt) in a confrontational or contemptuous way. Includes mocking put-downs of a woman or of 'one of them' girls, such as 'You one of them who take pictures of his legs at the beach basic bitch hoein'. Hostile 'fuck you hoe' at a woman counts even if a laughing reply follows ('So now you friends with JAVEN bitch fuck you hoe ! ... — OMG BITCH😂').",
+        "women_contempt_or_sexual_violence": "Expresses contempt for women as a group, degrades or sexually objectifies women, or jokes about, endorses or trivialises rape or violence against women. This includes quoting or reproducing lyrics, song titles or someone else's words that degrade, threaten or sexually abuse women ('killing you hoes', 'I catch ya bitch and I rape her') unless the author clearly condemns them. Also sweeping remarks about women such as 'that's what the hoes do', even inside an insult at a man. Also treating a woman as a disposable sex object ('Soon I'm done fucking, bitch put your shoes on').",
+        "immigration_policy_talk": "Immigration, border, wall, DACA or deportation politics that does not attack immigrants themselves: supporting the wall, limiting or stopping immigration as policy, enforcing the law, 'apply legally', insisting on or tagging the term 'illegal aliens', arguments about cost or voting, partisan claims about what a party's policies bring, or anti-immigration hashtags tacked onto a body about Democrats, Congress, Twitter or something else. Also a vague comment whose body says nothing about immigrants, with a single anti-immigrant hashtag added ('Wake the eff up, Western Society #stoptheinvasion'). E.g. 'A little louder for the liberals in the back. #SendThemBack #BuildTheWall' - the body taunts liberals, the hashtags are tacked on. Also arguing to stop or pause immigration from certain countries as policy (different values, economics, votes) without fear-mongering about the people. Telling illegal immigrants to go home and apply for a visa like legal immigrants did is policy talk too. Likewise '#Immigration will decide the fate of our nation. #StopTheInvasion'. Enforcement proposals stay here too ('ICE should ... start deportation. DACA has to end. #deport'). A long string of assorted political hashtags (#MAGA #DrainTheSwamp #BoycottNFL ... #SendThemBack) after a short reply is not an expulsion call. A body attacking Democrats or making a political point followed by many hashtags incl. #DeportThemAll #StopTheInvasion is not an expulsion call ('#FactCheck changing the words doesNot Change TheTruth ... #DemocratsHateAmerica #BuildTheWall #DeportThemAll'). Claims that Democrats bring illegals to vote, with jabs like 'Libtardology' and hashtags, are policy talk. Complaints that migrants get hotels or benefits while homeless people or veterans don't, even ending in #sendthemhome, are policy talk. Complaining that a politician broke their word, with #DeportThemAll tacked on ('Why have you forsaken us... Keep your word for a change #BTW #DeportThemAll'), is not an expulsion call. Urging a politician to prioritise the wall, with #BuildThatWall #DeportThemAll tacked on, is policy talk. Insulting a Democrat or pundit followed by a hashtag salad ('Bob is a lying Socialist liberal Democrat party media talking head ... #BuildTheWall #NoDACA #DeportAllOfThem') is not an expulsion call. Likewise thanking the President ('Thank you Mr. President for putting America and its Citizens First #BuildTheWall ...') or taunting a Democrat about 'HUMAN TRAFFICKERS' at the border with #DemocratsAreSociopaths #DeportThemAll tacked on.",
+        "casual_slur_use": "Uses bitch, hoe etc. without hostility toward a woman: as slang, an exclamation or friendly vocative ('bitch I ain't got that kinda money'), about oneself, banter among friends, lyrics where the slur is not aimed at women (\"Life's a slut, a dirty hoe\"), storytelling, or insults aimed at men (calling a man a bitch). Includes 'BITCH HOLD UP' style exclamations, even when defending a woman, and playful trash talk with a friend ('stop acting like I don't always chop u up Bitch'). Also offhand references to a character or celebrity in storytelling or commentary ('beauty and the beast. that bitch fell in love w a whole animal'). Also playful, consensual bedroom talk about name-calling during sex ('if I call you a bitch or whore during sex don't be afraid to smack me'). Also affectionate or laughing address to a friend ('happy birthday bitch! ... you hoe', 'Hahahaha bitch, I watched that video'). Insults at a man stay here even when harsh ('This dude... Shut the hell up little Bitch... whore page'). Also bragging or joking where 'bitch'/'hoes' is a general exclamation or playful taunt with no woman targeted ('Bitch I like to smoke I'm living the life hoes', 'Lil' bitch! You can't fuck with me... these is Walmart shoes! 😂'). Slurs thrown at a male politician ('Senatorial WHORE. Throw money at this bitch & he'll forget...') also stay here. E.g. '@user bitch do it look like WE play ?!'. Laughing reactions and quoted banter ('😂😂 ... BITCH YOU HAVE OTHER JOBS 2 DO!!', 'The swamp yeah lol \"You from Baltimore bitch\"') are casual. Friendly requests or mentions of the word itself ('turn your snapchat map on bitch i just wanna talk', 'the whole bitch thing you did to my bio') are casual too. Also crude insults at a named man ('fuck marty that cunt ass pussy bitch'), laughing jabs at whoever has an old video ('youza creep ass bitch😂'), and calling out double standards about guys ('he fuckin a new bitch the next day then yall saying he a hoe??? Smfh'). Also self-mocking jokes ('still can't hit depth. lol. You bitch'), playful warnings to an unknown caller ('whoever called my phone private bitch don't do it, you don't want it😉') and offhand commands like '@user Smoke weed bitch'.",
+        "woman_criticised_non_gendered": "Criticises a particular woman (e.g. a female politician) on non-gendered grounds such as corruption, incompetence or policy, without gendered slurs.",
+        "counter_speech_or_news": "Explicitly criticises racism, sexism or rape culture - including sarcastic criticism such as 'welcome to X, we find rape culture very humorous... smh' - or neutrally reports news about immigrants, refugees or women without the author's own hostility toward them. Also serious statements about rape that take it seriously ('rape could happen to anyone... everyone is a potential rapist'), even with an exclamatory 'bitch'. Also hitting back at someone over racism ('Instead of calling me a nigger, call out your racist friend... bitch'). A news headline with an anti-immigrant hashtag added ('Spanish town's mayor pleads for help after surge in migration #SendThemBack') counts as news. A bare news headline about one crime by an illegal immigrant, with only hashtags added ('#BuildThatWall #StandWithICE Police: Illegal Immigrant Arrested In Shooting Of Upper Darby Store Owner'), counts as news.",
+        "other": "Anything else not hateful toward women or immigrants, including spam-like hashtag dumps with a stray insult not aimed at women ('STAY THE HELL OUT OF THE WATER... Stupid cunts. #nuclearban #solarban ...')."
+      },
+      "map": {
+        "immigrants_dehumanised_or_criminalised": "hate",
+        "immigrants_expulsion_call": "hate",
+        "women_slur_attack": "hate",
+        "women_contempt_or_sexual_violence": "hate",
+        "immigration_policy_talk": "not_hate",
+        "casual_slur_use": "not_hate",
+        "woman_criticised_non_gendered": "not_hate",
+        "counter_speech_or_news": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "v8b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Under a hate speech policy covering hatred toward women and toward immigrants, which description fits this tweet best?",
+        "guidance": [
+          "Hate means the tweet itself attacks, demeans, dehumanises or calls for the exclusion of women or immigrants, or of an individual because she is a woman or because they are an immigrant.",
+          "Profanity alone, or political talk about immigration, is not hate.",
+          "The body of the tweet decides, not hashtags tacked on."
+        ]
+      },
+      "state_template": {
+        "tweet": "{{input}}"
+      },
+      "criteria": {
+        "immigrants_dehumanised_or_criminalised": "The tweet demeans migrants/refugees/illegal aliens as people - calls them vermin, invaders, rapefugees, scum, or paints them as criminals, predators, murderers, drug smugglers, diseased, freeloaders robbing Americans of their money or benefits, or a threat (e.g. using a crime by one illegal alien or DACA recipient as an argument against immigration). This includes linking people sneaking across the border to drugs like fentanyl and overdose deaths, even when the insult is aimed at their defenders. Calling them people who lie to get in and crash our borders counts too. Talking of illegals 'flooding' the state like a horde counts too.",
+        "immigrants_expulsion_call": "The tweet itself demands that immigrants as a group be thrown out: deport them all, send them back, get them out, take our country back - or it is a short message consisting mostly of such a slogan (#DeportThemAll, #SendThemBack, StopImmigration). Also a tweet made up mostly of rejection hashtags like #NoRefugees #NoMigrants #NoImmigrants. Also fear-mongering that people of a religion or nation are a scary threat who must be kept out (#MuslimBan, #ShariaLaw, #EndDiversity). Dismissively telling migrants to go home because 'we can't afford them' counts too. Demanding a specific person be kicked out of the country ('get this @user out of this country') counts too.",
+        "women_slur_attack": "The tweet insults, belittles or threatens a woman (or a person not identified as a man) using words like bitch, hoe, whore, slut or cunt as an attack or put-down. Mocking a woman as a 'basic bitch' who is 'hoein' counts ('You one of them who take pictures of his legs at the beach basic bitch hoein'). Hostile 'fuck you hoe' at a woman counts even if a laughing reply follows ('So now you friends with JAVEN bitch fuck you hoe ! ... — OMG BITCH😂').",
+        "women_contempt_or_sexual_violence": "The tweet shows contempt for women in general, degrades or objectifies them sexually, or makes light of, endorses or jokes about rape or violence against women. Reproducing rap lyrics, song titles or quotes that degrade, threaten or rape women counts too, unless the author clearly condemns them. Sweeping generalisations like 'that's what the hoes do' count even when the insult is aimed at a man. Treating a woman as something to use for sex and dismiss ('done fucking, bitch put your shoes on') counts.",
+        "immigration_policy_talk": "The tweet discusses immigration politics without attacking immigrants as people: the wall, limiting immigration, DACA, enforcing the law, legal channels, using the term 'illegal aliens', costs, votes, party politics, or a body about Democrats, Congress or Twitter with anti-immigration hashtags added. Also a vague wake-up call whose only anti-immigrant content is one hashtag like #stoptheinvasion. For instance a jab at liberals followed by #SendThemBack #BuildTheWall. Arguing for a stop to immigration from some countries on policy grounds also belongs here. 'Let them go home and apply for a visa like legal immigrants' is policy talk. E.g. '#Immigration will decide the fate of our nation. #StopTheInvasion'. Enforcement proposals such as having ICE start deportations or ending DACA belong here. A short reply followed by a long mixed list of political hashtags that happens to include #SendThemBack belongs here. A body attacking Democrats or making a political point followed by many hashtags incl. #DeportThemAll #StopTheInvasion is not an expulsion call ('#FactCheck changing the words doesNot Change TheTruth ... #DemocratsHateAmerica #BuildTheWall #DeportThemAll'). Claims that Democrats bring illegals to vote, with jabs like 'Libtardology' and hashtags, are policy talk. Complaints that migrants get hotels or benefits while homeless people or veterans don't, even ending in #sendthemhome, are policy talk. Complaining that a politician broke their word, with #DeportThemAll tacked on ('Why have you forsaken us... Keep your word for a change #BTW #DeportThemAll'), is not an expulsion call. Urging a politician to prioritise the wall, with #BuildThatWall #DeportThemAll tacked on, is policy talk. Insulting a Democrat or pundit followed by a hashtag salad ('Bob is a lying Socialist liberal Democrat party media talking head ... #BuildTheWall #NoDACA #DeportAllOfThem') is not an expulsion call. Likewise thanking the President ('Thank you Mr. President for putting America and its Citizens First #BuildTheWall ...') or taunting a Democrat about 'HUMAN TRAFFICKERS' at the border with #DemocratsAreSociopaths #DeportThemAll tacked on.",
+        "casual_slur_use": "Words like bitch or hoe appear only as slang, exclamation, a friendly form of address, self-description, joking among friends, lyrics using slurs metaphorically (life, things) rather than at women, anecdote, or as an insult to a man - not as hostility toward a woman. Exclamations like 'BITCH hold up' and joking trash talk between friends belong here. Offhand jokey commentary about a fictional character or celebrity ('that bitch fell in love w a whole animal') also belongs here. Joking about consensual dirty talk during sex belongs here too. Affectionate greetings and laughing chat with a friend ('happy birthday bitch!', 'Hahahaha bitch') count as casual. Harsh insults clearly aimed at a man ('this dude... little Bitch') still belong here. Brags and jokes using 'bitch' or 'hoes' as an exclamation or playful taunt, with no woman as the target ('Bitch I like to smoke', 'Lil' bitch! ... Walmart shoes 😂'), belong here. Calling a male politician a whore or bitch ('...this bitch & he'll forget all about ARKANSAS') also belongs here. E.g. 'bitch do it look like WE play ?!'. Laughing reactions and quoted banter ('😂😂 ... BITCH YOU HAVE OTHER JOBS 2 DO!!', 'The swamp yeah lol \"You from Baltimore bitch\"') are casual. Friendly requests or mentions of the word itself ('turn your snapchat map on bitch i just wanna talk', 'the whole bitch thing you did to my bio') are casual too. Also crude insults at a named man ('fuck marty that cunt ass pussy bitch'), laughing jabs at whoever has an old video ('youza creep ass bitch😂'), and calling out double standards about guys ('he fuckin a new bitch the next day then yall saying he a hoe??? Smfh'). Also self-mocking jokes ('still can't hit depth. lol. You bitch'), playful warnings to an unknown caller ('whoever called my phone private bitch don't do it, you don't want it😉') and offhand commands like '@user Smoke weed bitch'.",
+        "woman_criticised_non_gendered": "The tweet criticises a specific woman such as a politician for her conduct, character or policies without gendered slurs.",
+        "counter_speech_or_news": "The tweet condemns racism, sexism or rape culture, including by sarcasm or mock praise ('we find rape culture very humorous smh'), or reports news about immigrants, refugees or women in a neutral way. Earnest remarks that rape is serious or can happen to anyone also belong here, even with slang like 'bitch'. Firing back at a racist with insults ('call out your racist friend... bitch') also belongs here. A news headline with an anti-immigrant hashtag added ('Spanish town's mayor pleads for help after surge in migration #SendThemBack') counts as news. A bare news headline about one crime by an illegal immigrant, with only hashtags added ('#BuildThatWall #StandWithICE Police: Illegal Immigrant Arrested In Shooting Of Upper Darby Store Owner'), counts as news.",
+        "other": "Something else not hateful toward women or immigrants, such as hashtag spam with a stray insult ('Stupid cunts. #nuclearban #solarban')."
+      },
+      "map": {
+        "immigrants_dehumanised_or_criminalised": "hate",
+        "immigrants_expulsion_call": "hate",
+        "women_slur_attack": "hate",
+        "women_contempt_or_sexual_violence": "hate",
+        "immigration_policy_talk": "not_hate",
+        "casual_slur_use": "not_hate",
+        "woman_criticised_non_gendered": "not_hate",
+        "counter_speech_or_news": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "v8c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "role": "You are applying a hate speech annotation policy to tweets. The policy covers only two targets: women, and immigrants/refugees/migrants.",
+        "rule": "A tweet is hateful if it attacks, demeans, dehumanises, threatens or calls for the exclusion of women or immigrants - as a group, or an individual targeted as a woman or as an immigrant. Profanity, insults at men, and immigration politics that does not attack immigrants themselves are not hateful.",
+        "question": "Which category describes this tweet?"
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrants_dehumanised_or_criminalised": {
+          "definition": "Demeans immigrants/refugees/migrants as people.",
+          "includes": [
+            "dehumanising names: invaders, animals, rapefugees, scum, bottom feeders",
+            "portraying them as criminals, rapists, murderers, gang members, drug smugglers (fentanyl), diseased, or thieves robbing Americans of money and benefits",
+            "citing a crime by an illegal alien or DACA recipient to argue against immigration",
+            "insulting people who defend them while painting border crossers as drug bringers",
+            "branding them as people who lie to get in and crash the borders",
+            "describing them as a flood or horde ('Sure you want #illegals to flood our state')"
+          ]
+        },
+        "immigrants_expulsion_call": {
+          "definition": "Calls for immigrants as a group to be removed or rejected.",
+          "includes": [
+            "'deport every illegal alien!', 'send them all back', 'take our nation back'",
+            "a short tweet that is essentially an exclusion slogan: 'StopImmigration', #DeportThemAll, #SendThemBack",
+            "a tweet made up mostly of rejection hashtags: #NoRefugees #NoMigrants #NoImmigrants",
+            "fear-mongering rejection of immigrants of a whole religion or nationality as an unwanted threat ('we do not want this in US. #MuslimBan ... really scary imagine #ShariaLaw #EndDiversity')",
+            "dismissively telling migrants to go home, waving away concern for them ('No we do not... Go home... we can't afford them')",
+            "demanding a particular person be thrown out of the country ('#BuildThatWall and get this @user out of this country')"
+          ]
+        },
+        "women_slur_attack": {
+          "definition": "Hostile use of gendered slurs (bitch, hoe, whore, slut, cunt) against a woman or a person not identified as male.",
+          "includes": [
+            "insults, put-downs, threats",
+            "mocking a woman as a 'basic bitch hoein'",
+            "hostile 'fuck you hoe' at a woman even if a laughing reply follows ('So now you friends with JAVEN bitch fuck you hoe ! ...')"
+          ]
+        },
+        "women_contempt_or_sexual_violence": {
+          "definition": "Contempt for women, sexual degradation, or rape/violence against women.",
+          "includes": [
+            "generalisations that women are whores/hoes",
+            "sexual objectification and degradation",
+            "joking about, endorsing or trivialising rape",
+            "quoting lyrics or words that degrade, threaten or rape women ('killing you hoes', 'I catch ya bitch and I rape her') unless clearly condemned",
+            "sweeping remarks like 'that's what the hoes do', even within an insult at a man",
+            "treating a woman as a disposable sex object ('Soon I'm done fucking, bitch put your shoes on')"
+          ]
+        },
+        "immigration_policy_talk": {
+          "definition": "Immigration politics that does not attack immigrants themselves.",
+          "includes": [
+            "wall support, rallies, DACA, enforcing the law, 'apply legally'",
+            "limiting immigration as policy",
+            "using or insisting on the term 'illegal aliens'",
+            "partisan claims about what a party's policies bring",
+            "anti-immigration hashtags tacked onto a body about Democrats, Congress, Twitter or anything else",
+            "a vague body with one hashtag like #stoptheinvasion",
+            "a jab at liberals or Democrats followed by #SendThemBack #BuildTheWall ('A little louder for the liberals in the back')",
+            "arguing to stop immigration from certain countries on policy grounds (different values, economics, votes)",
+            "'let them go home and apply for a visa like all the legal immigrants have' (fairness to legal immigrants)",
+            "'#Immigration will decide the fate of our nation. #StopTheInvasion' (general statement plus one hashtag)",
+            "enforcement proposals ('ICE should get temporary officers... and start deportation. DACA has to end.')",
+            "a short reply followed by a long mixed list of political hashtags that happens to include #BuildTheWall #SendThemBack",
+            "a political jab (e.g. at Democrats) followed by many hashtags incl. #DeportThemAll #StopTheInvasion",
+            "claims that Democrats bring illegals to vote ('Lesson in Libtardology: bring ILLEGALS w/u to vote ... #DeportThemAll')",
+            "complaints that migrants get hotels or benefits while homeless people or veterans don't, even ending in #sendthemhome",
+            "complaining that a politician broke their word, with #DeportThemAll tacked on ('Why have you forsaken us... Keep your word for a change #BTW #DeportThemAll #MAGA')",
+            "urging a politician to prioritise the wall ('immigration/The Wall is way more important than tax 2.0! ... #BuildThatWall #DeportThemAll')",
+            "insulting a Democrat or pundit followed by a hashtag salad ('Bob is a lying Socialist liberal Democrat ... #NoDACA #DeportAllOfThem')",
+            "thanking the President for putting America first, with wall hashtags",
+            "taunting a Democrat about 'HUMAN TRAFFICKERS' at the border, with #DemocratsAreSociopaths #DeportThemAll tacked on"
+          ]
+        },
+        "casual_slur_use": {
+          "definition": "Slurs used without hostility toward a woman.",
+          "includes": [
+            "exclamations ('BITCH HOLD UP', 'bitch I ain't got that kinda money')",
+            "about oneself, friendly banter, playful trash talk with a friend",
+            "offhand comments about a character or celebrity ('that bitch fell in love w a whole animal')",
+            "lyrics where the slur isn't aimed at women ('Life's a slut, a dirty hoe')",
+            "insults aimed at men ('Trump's a bitch')",
+            "playful consensual bedroom talk ('if I call you a bitch or whore during sex...')",
+            "affectionate or laughing address to a friend ('happy birthday bitch! ... you hoe', 'Hahahaha bitch, I watched that video')",
+            "harsh insults clearly aimed at a man ('This dude over here harassing my life... Shut the hell up little Bitch')",
+            "bragging or joking with 'bitch'/'hoes' as an exclamation or playful taunt, no woman targeted ('Bitch I like to smoke I'm living the life hoes', 'Lil' bitch! You can't fuck with me... Walmart shoes 😂')",
+            "slurs thrown at a male politician ('Senatorial WHORE. Throw money at this bitch & he'll forget...')",
+            "'@user bitch do it look like WE play ?!'",
+            "laughing reactions and quoted banter ('😂😂 ... BITCH YOU HAVE OTHER JOBS 2 DO!!', 'lol \"You from Baltimore bitch\"')",
+            "friendly requests or mentions of the word itself ('turn your snapchat map on bitch i just wanna talk', 'the whole bitch thing you did to my bio')",
+            "crude insults at a named man ('fuck marty that cunt ass pussy bitch')",
+            "laughing jabs at whoever has an old video ('youza creep ass bitch😂')",
+            "calling out double standards about guys ('he fuckin a new bitch the next day then yall saying he a hoe??? Smfh')",
+            "self-mocking jokes ('still can't hit depth. lol. You bitch')",
+            "playful warnings to an unknown caller ('whoever called my phone private bitch don't do it, you don't want it😉')",
+            "offhand commands ('@user Smoke weed bitch')"
+          ]
+        },
+        "woman_criticised_non_gendered": {
+          "definition": "Criticises a specific woman (e.g. a politician) for conduct, character or policy without gendered slurs."
+        },
+        "counter_speech_or_news": {
+          "definition": "Condemns racism, sexism or rape culture (including sarcastically, e.g. 'we find rape culture very humorous... smh'), or neutrally reports news about immigrants, refugees or women. Includes bare factual recaps about specific people ('Flashback: Seven 9/11 terrorists overstayed their visas') with no generalising attack on immigrants. Also earnest statements taking rape seriously ('rape could happen to anyone bitch'), slang notwithstanding. Also hitting back at someone over racism ('Instead of calling me a nigger, call out your racist friend... bitch'). A news headline with an anti-immigrant hashtag added ('Spanish town's mayor pleads for help after surge in migration #SendThemBack') counts as news. A bare news headline about one crime by an illegal immigrant, with only hashtags added ('#BuildThatWall #StandWithICE Police: Illegal Immigrant Arrested In Shooting Of Upper Darby Store Owner'), counts as news."
+        },
+        "other": {
+          "definition": "Anything else that is not hateful toward women or immigrants. Includes hashtag spam with a stray insult not aimed at women ('STAY THE HELL OUT OF THE WATER... Stupid cunts. #nuclearban ...')."
+        }
+      },
+      "map": {
+        "immigrants_dehumanised_or_criminalised": "hate",
+        "immigrants_expulsion_call": "hate",
+        "women_slur_attack": "hate",
+        "women_contempt_or_sexual_violence": "hate",
+        "immigration_policy_talk": "not_hate",
+        "casual_slur_use": "not_hate",
+        "woman_criticised_non_gendered": "not_hate",
+        "counter_speech_or_news": "not_hate",
+        "other": "not_hate"
+      }
+    }
+  ]
+}

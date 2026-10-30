@@ -1,0 +1,79 @@
+{
+  "run_id": "b50-hatets-rules-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 50,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:36:57",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1025,
+    "num_turns": 31,
+    "total_cost_usd": 1.4742652000000003
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.62,
+      "note": "v1 draft from description: 6 options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7622,
+          "macro_f1": 0.7621,
+          "est_cost_usd": 0.051387,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 22,
+      "estimate": 0.7,
+      "note": "v4: narrowed H1-H3 (immigrant bad-behaviour vs policy; slurs at men/casual vs put-downs; glorifying rape quotes); 11/11 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7854,
+          "macro_f1": 0.7853,
+          "est_cost_usd": 0.073565,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 46,
+      "estimate": 0.72,
+      "note": "ens2: 3 wording variants of v8-style 10-option classifier + H4/H5 narrowed, hashtag-block headline rule; 23/23 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7639,
+          "macro_f1": 0.7639,
+          "est_cost_usd": 0.284037,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 50,
+      "estimate": 0.72,
+      "note": "ens3 (final): ens2 + migrant news-headline example and boasting example; 25/25 labels; budget spent",
+      "test": {
+        "jev": {
+          "accuracy": 0.7695,
+          "macro_f1": 0.7695,
+          "est_cost_usd": 0.301542,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

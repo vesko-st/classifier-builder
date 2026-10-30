@@ -1,0 +1,124 @@
+{
+  "run_id": "b200-intents-labelsfirst-r2",
+  "task": "banking77_intents",
+  "budget": 200,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T16:02:39",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1277,
+    "num_turns": 60,
+    "total_cost_usd": 2.3814675999999997
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 31,
+      "estimate": 0.78,
+      "note": "v1 draft: flat 77-option choice with policy-informed descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.8455,
+          "macro_f1": 0.8406,
+          "est_cost_usd": 0.33204,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 55,
+      "estimate": 0.82,
+      "note": "v3: refund vs cancel; payment/purchase wording -> card_payment_not_recognised; £1 -> extra_charge",
+      "test": {
+        "jev": {
+          "accuracy": 0.8542,
+          "macro_f1": 0.85,
+          "est_cost_usd": 0.346636,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 83,
+      "estimate": 0.84,
+      "note": "v5: PIN vs order physical card, transfer_timing for how-much-longer, country_support for cards abroad, source of funds; 23/26 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8588,
+          "macro_f1": 0.8547,
+          "est_cost_usd": 0.362806,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 111,
+      "estimate": 0.86,
+      "note": "e7: 3-member wording ensemble of v7 options (deposit vs transfer, PIN for new card, delivery, cash not recognised, payment-wrong); 36/40 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8607,
+          "macro_f1": 0.8556,
+          "est_cost_usd": 1.125181,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 151,
+      "estimate": 0.87,
+      "note": "e8: vague can't-transfer -> beneficiary_not_allowed, rate complaints -> card_payment_wrong_exchange_rate, cash not recognised over compromised, PIN set-up -> change_pin; 55/60 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8682,
+          "macro_f1": 0.8656,
+          "est_cost_usd": 1.1791,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 183,
+      "estimate": 0.87,
+      "note": "e9: SWIFT -> top_up_by_bank_transfer_charge, not approved -> failed_transfer, put-into-account -> deposit, abroad fee -> transfer_fee; 68/76 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8737,
+          "macro_f1": 0.8727,
+          "est_cost_usd": 1.211694,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 199,
+      "estimate": 0.9,
+      "note": "final: e9 unchanged; random check 18/18, all bought labels 76/84",
+      "test": {
+        "jev": {
+          "accuracy": 0.8737,
+          "macro_f1": 0.8727,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

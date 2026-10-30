@@ -1,0 +1,109 @@
+{
+  "run_id": "vs-hatets-sonnet-rules-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:09:01",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 712,
+    "num_turns": 33,
+    "total_cost_usd": 0.730877
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "draft v1 from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.7508,
+          "macro_f1": 0.7358,
+          "est_cost_usd": 0.055467,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 28,
+      "estimate": 0.72,
+      "note": "v3: narrowed slur/immigrant rules after 14 uncertainty labels; fits 13/14 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7911,
+          "macro_f1": 0.79,
+          "est_cost_usd": 0.064145,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 50,
+      "estimate": 0.75,
+      "note": "v4: deport-as-group calls are hate (policy answer + 4 labels)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7809,
+          "macro_f1": 0.7807,
+          "est_cost_usd": 0.071043,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 74,
+      "estimate": 0.75,
+      "note": "v7: v4 + idiom/possessive/alarmism clauses; 28/32 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7871,
+          "macro_f1": 0.787,
+          "est_cost_usd": 0.077273,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 88,
+      "estimate": 0.77,
+      "note": "v8: interjection/male-target/crime-news/country clauses; 35/39 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8012,
+          "macro_f1": 0.8006,
+          "est_cost_usd": 0.086693,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.78,
+      "note": "v9 final: v8 + threats/sexual violence against women stay hate; 40/45 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8012,
+          "macro_f1": 0.8005,
+          "est_cost_usd": 0.092256,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

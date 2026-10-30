@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-deal-rules-r2",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:42:23",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 3109,
+    "num_turns": 59,
+    "total_cost_usd": 2.882669600000001
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.85,
+      "note": "v1 draft: agreed/rejected/unfinished map",
+      "test": {
+        "jev": {
+          "accuracy": 0.8866,
+          "macro_f1": 0.8614,
+          "est_cost_usd": 0.015826,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 25,
+      "estimate": 0.78,
+      "note": "v5: 6 ending-type options; deal by default once prices traded; no_deal for no price talk, refusal, unanswered opening offer",
+      "test": {
+        "jev": {
+          "accuracy": 0.8814,
+          "macro_f1": 0.8184,
+          "est_cost_usd": 0.021008,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 47,
+      "estimate": 0.78,
+      "note": "v7: + firm_price_stand (real gap), buyer_commits, only_first_offer; 19/21 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9158,
+          "macro_f1": 0.8803,
+          "est_cost_usd": 0.02641,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 47,
+      "estimate": 0.79,
+      "note": "v8: 3-variant wording ensemble of v7; 19/21 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9175,
+          "macro_f1": 0.8837,
+          "est_cost_usd": 0.080893,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 71,
+      "estimate": 0.8,
+      "note": "v15: ensemble; firm stand incl. last-message floor with 20%+ gap, but not live counteroffers; 31/33 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9055,
+          "macro_f1": 0.8627,
+          "est_cost_usd": 0.097466,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.82,
+      "note": "v23 final: 9-member wording ensemble (v19+v20+v21 variants); 43/47 bought labels (uncertainty-biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9072,
+          "macro_f1": 0.8648,
+          "est_cost_usd": 0.310462,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

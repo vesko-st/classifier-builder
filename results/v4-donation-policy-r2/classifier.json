@@ -1,0 +1,153 @@
+{
+  "version": 1,
+  "name": "donation_v4",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "A_opt",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a chat in which a persuader asks the persuadee to donate part of their task payment (usually $0-$2) to Save the Children. Read the whole chat, focusing on what the PERSUADEE says about donating, especially their final position. Ignore what the persuader claims (e.g. 'thanks for your donation' from the persuader is not evidence). Which option best describes how the persuadee ended the chat?",
+      "state_template": "Charity chat:\n{{input}}",
+      "criteria": {
+        "full_payment": "The persuadee commits to donating ALL of their task payment (the full amount), and does not retract it.",
+        "free_amount": "The persuadee freely and willingly names a specific positive amount within the task payment (e.g. $0.10, 50 cents, $1, half), offered cheerfully or readily, and does not retract it.",
+        "pressured_amount": "The persuadee names only a small or token amount grudgingly, after being pushed, or the persuader haggles the amount up and the persuadee gives in reluctantly.",
+        "large_amount": "The persuadee names an amount larger than the task could pay (e.g. $5, $20, $50, $100 when the task pays about $2).",
+        "warm_vague": "The persuadee is positive or agrees in principle ('I'll donate', 'count me in', 'yes let's donate', 'I can agree with that') but never names an amount; or the chat drifts into friendly small talk with a warm persuadee.",
+        "later_elsewhere": "The persuadee says they will donate later or elsewhere instead of from this task payment (on the website, when their paycheck comes, by phone).",
+        "off_topic": "The chat is mostly off-topic and the persuadee never takes any position on donating.",
+        "skeptical_undecided": "The persuadee stays skeptical or undecided: wants to research more, look into it, think about it, or is 'not ready to decide', without committing.",
+        "unanswered_ask": "The chat stops right after the persuader asks how much they will donate, before the persuadee answers with an amount.",
+        "refused": "The persuadee declines, says they will donate $0 or nothing, says they cannot afford it, or agrees and then retracts.",
+        "garbled": "The chat is spammy, nonsense, all caps, broken English throughout, or template-like with no real conversation from the persuadee."
+      },
+      "map": {
+        "full_payment": "donated",
+        "free_amount": "donated",
+        "pressured_amount": "donated",
+        "large_amount": "donated",
+        "warm_vague": "donated",
+        "later_elsewhere": "donated",
+        "off_topic": "donated",
+        "skeptical_undecided": "not_donated",
+        "unanswered_ask": "not_donated",
+        "refused": "not_donated",
+        "garbled": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "A_pess",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a chat in which a persuader asks the persuadee to donate part of their task payment (usually $0-$2) to Save the Children. Read the whole chat, focusing on what the PERSUADEE says about donating, especially their final position. Ignore what the persuader claims (e.g. 'thanks for your donation' from the persuader is not evidence). Which option best describes how the persuadee ended the chat?",
+      "state_template": "Charity chat:\n{{input}}",
+      "criteria": {
+        "full_payment": "The persuadee commits to donating ALL of their task payment (the full amount), and does not retract it.",
+        "free_amount": "The persuadee freely and willingly names a specific positive amount within the task payment (e.g. $0.10, 50 cents, $1, half), offered cheerfully or readily, and does not retract it.",
+        "pressured_amount": "The persuadee names only a small or token amount grudgingly, after being pushed, or the persuader haggles the amount up and the persuadee gives in reluctantly.",
+        "large_amount": "The persuadee names an amount larger than the task could pay (e.g. $5, $20, $50, $100 when the task pays about $2).",
+        "warm_vague": "The persuadee is positive or agrees in principle ('I'll donate', 'count me in', 'yes let's donate', 'I can agree with that') but never names an amount; or the chat drifts into friendly small talk with a warm persuadee.",
+        "later_elsewhere": "The persuadee says they will donate later or elsewhere instead of from this task payment (on the website, when their paycheck comes, by phone).",
+        "off_topic": "The chat is mostly off-topic and the persuadee never takes any position on donating.",
+        "skeptical_undecided": "The persuadee stays skeptical or undecided: wants to research more, look into it, think about it, or is 'not ready to decide', without committing.",
+        "unanswered_ask": "The chat stops right after the persuader asks how much they will donate, before the persuadee answers with an amount.",
+        "refused": "The persuadee declines, says they will donate $0 or nothing, says they cannot afford it, or agrees and then retracts.",
+        "garbled": "The chat is spammy, nonsense, all caps, broken English throughout, or template-like with no real conversation from the persuadee."
+      },
+      "map": {
+        "full_payment": "donated",
+        "free_amount": "donated",
+        "pressured_amount": "not_donated",
+        "large_amount": "not_donated",
+        "warm_vague": "donated",
+        "later_elsewhere": "not_donated",
+        "off_topic": "not_donated",
+        "skeptical_undecided": "not_donated",
+        "unanswered_ask": "not_donated",
+        "refused": "not_donated",
+        "garbled": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "B_opt",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a conversation where one worker (the persuader) tries to convince another worker (the persuadee) to give some of the money they earn for this task to the charity Save the Children. Decide which description fits the persuadee's final stance on giving. Only the persuadee's own words count; the persuader thanking them or assuming a donation proves nothing.",
+      "state_template": "Charity chat:\n{{input}}",
+      "criteria": {
+        "full_payment": "Persuadee agrees to give their entire task earnings (all of it), and sticks with that.",
+        "free_amount": "Persuadee readily volunteers a concrete amount up to the task pay (a few cents, a dollar, half, etc.) in a willing, upbeat way, without being talked into it, and keeps it.",
+        "pressured_amount": "Persuadee ends up with a small amount only reluctantly: after saying they can't, after being pushed or guilted, or after the persuader bargains the figure up and they give in.",
+        "large_amount": "Persuadee names a sum bigger than this task could pay (such as $5, $10, $20, $50 or more, versus about $2 of pay).",
+        "warm_vague": "Persuadee is supportive or says yes to donating in general but never gives a figure, or the chat turns into friendly chit-chat with a well-disposed persuadee.",
+        "later_elsewhere": "Persuadee plans to give at some other time or by another route (the charity website, phone, a future paycheck) rather than from this task's pay.",
+        "off_topic": "Conversation is mostly unrelated and the persuadee never expresses any stance on giving.",
+        "skeptical_undecided": "Persuadee remains doubtful or noncommittal: wants to research, think it over, check the charity, or is not ready to decide.",
+        "unanswered_ask": "The conversation ends just after the persuader asks for an amount, with no figure from the persuadee.",
+        "refused": "Persuadee says no, chooses $0, says they can't afford it, or backs out of an earlier pledge.",
+        "garbled": "Conversation is spam, gibberish, all capitals, or scripted filler with no genuine engagement from the persuadee."
+      },
+      "map": {
+        "full_payment": "donated",
+        "free_amount": "donated",
+        "pressured_amount": "donated",
+        "large_amount": "donated",
+        "warm_vague": "donated",
+        "later_elsewhere": "donated",
+        "off_topic": "donated",
+        "skeptical_undecided": "not_donated",
+        "unanswered_ask": "not_donated",
+        "refused": "not_donated",
+        "garbled": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "B_pess",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a conversation where one worker (the persuader) tries to convince another worker (the persuadee) to give some of the money they earn for this task to the charity Save the Children. Decide which description fits the persuadee's final stance on giving. Only the persuadee's own words count; the persuader thanking them or assuming a donation proves nothing.",
+      "state_template": "Charity chat:\n{{input}}",
+      "criteria": {
+        "full_payment": "Persuadee agrees to give their entire task earnings (all of it), and sticks with that.",
+        "free_amount": "Persuadee readily volunteers a concrete amount up to the task pay (a few cents, a dollar, half, etc.) in a willing, upbeat way, without being talked into it, and keeps it.",
+        "pressured_amount": "Persuadee ends up with a small amount only reluctantly: after saying they can't, after being pushed or guilted, or after the persuader bargains the figure up and they give in.",
+        "large_amount": "Persuadee names a sum bigger than this task could pay (such as $5, $10, $20, $50 or more, versus about $2 of pay).",
+        "warm_vague": "Persuadee is supportive or says yes to donating in general but never gives a figure, or the chat turns into friendly chit-chat with a well-disposed persuadee.",
+        "later_elsewhere": "Persuadee plans to give at some other time or by another route (the charity website, phone, a future paycheck) rather than from this task's pay.",
+        "off_topic": "Conversation is mostly unrelated and the persuadee never expresses any stance on giving.",
+        "skeptical_undecided": "Persuadee remains doubtful or noncommittal: wants to research, think it over, check the charity, or is not ready to decide.",
+        "unanswered_ask": "The conversation ends just after the persuader asks for an amount, with no figure from the persuadee.",
+        "refused": "Persuadee says no, chooses $0, says they can't afford it, or backs out of an earlier pledge.",
+        "garbled": "Conversation is spam, gibberish, all capitals, or scripted filler with no genuine engagement from the persuadee."
+      },
+      "map": {
+        "full_payment": "donated",
+        "free_amount": "donated",
+        "pressured_amount": "not_donated",
+        "large_amount": "not_donated",
+        "warm_vague": "donated",
+        "later_elsewhere": "not_donated",
+        "off_topic": "not_donated",
+        "skeptical_undecided": "not_donated",
+        "unanswered_ask": "not_donated",
+        "refused": "not_donated",
+        "garbled": "not_donated"
+      }
+    }
+  ],
+  "weights": [
+    1,
+    1,
+    1,
+    1
+  ],
+  "decision": {
+    "class": "donated",
+    "threshold": 0.75
+  }
+}

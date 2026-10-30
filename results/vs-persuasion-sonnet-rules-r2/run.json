@@ -1,0 +1,79 @@
+{
+  "run_id": "vs-persuasion-sonnet-rules-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T17:07:35",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 939,
+    "num_turns": 41,
+    "total_cost_usd": 0.9294545
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.5,
+      "note": "first draft from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.5247,
+          "macro_f1": 0.5286,
+          "est_cost_usd": 0.082817,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 42,
+      "estimate": 0.5,
+      "note": "v3: rules H2 H3 H5 and praise/ack/thank by context",
+      "test": {
+        "jev": {
+          "accuracy": 0.5465,
+          "macro_f1": 0.5478,
+          "est_cost_usd": 0.093878,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 80,
+      "estimate": 0.5,
+      "note": "v6 ensemble of 3 phrasings with rules H2,H5-H11; labelled acc fitted 0.87",
+      "test": {
+        "jev": {
+          "accuracy": 0.5972,
+          "macro_f1": 0.584,
+          "est_cost_usd": 0.289852,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.55,
+      "note": "v8 final ensemble: + other-charity/side remarks -> other, convenience -> donation-information, praise for commitment reactions; labelled 35/41 (fitted, uncertainty-biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6005,
+          "macro_f1": 0.5885,
+          "est_cost_usd": 0.313872,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "version": 1,
+  "name": "deal_ens2",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v3b",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Craigslist listing and negotiation chat between a buyer and a seller:\n{{input}}",
+      "questions": {
+        "no_price": {
+          "instructions": "Read the whole chat. Is it true that NO price was ever proposed or discussed by either side (the chat is only greetings, questions about the item, off-topic talk, confusion about the item or technical problems with the site)? Answer yes only if no specific price offer or counteroffer was made at all. The listing price shown in the ad does not count, and the seller merely restating the asking price does not count as a negotiation. If either side says they accept an offer, answer no.",
+          "criteria": {
+            "true": "no price offers or counteroffers were made in the chat",
+            "false": "at least one side proposed a specific price"
+          }
+        },
+        "refusal": {
+          "instructions": "Does the chat END with an explicit refusal or walk-away, with no agreement after it? Examples: one side says no / no thanks, they will pass, they are too far apart, they will look elsewhere, or says goodbye without agreeing on a price. A side naming its lowest or final price, saying an offer is too low while still negotiating, or making a counteroffer is NOT a refusal. If the parties agree on a price after a refusal, answer no. A buyer ending with 'I can't go higher than my offer, sorry' after the seller's last counteroffer counts as walking away; a seller who already offered a discount and declines a further cut while restating their terms is not walking away.",
+          "criteria": {
+            "true": "the negotiation ends with an explicit rejection or walk-away",
+            "false": "no explicit rejection or walk-away at the end (agreement, open counteroffer, or still talking)"
+          }
+        },
+        "opening_unanswered": {
+          "instructions": "Look only at the END of the chat. Is the very last message the buyer's first and only price offer, with the seller having said nothing at all after it? Answer no if the seller ever proposed or restated a price that the buyer then responded to, if anyone accepted a price, if the buyer's last message is accepting or agreeing to a price, or if there were several rounds of offers.",
+          "criteria": {
+            "true": "the chat stops on the buyer's opening offer, which the seller never answered",
+            "false": "anything else: an acceptance, an agreement, a seller reply after the buyer's offer, a counteroffer after earlier offers, or no buyer offer"
+          }
+        },
+        "no_concession": {
+          "instructions": "Did the seller refuse to come down at all? Answer yes only if ALL of these hold: (1) the buyer proposed a specific price below the listing price; (2) the seller never named any price below the listing price: every buyer offer was rejected, ignored, or answered only with the asking price; and (3) the chat does not end in agreement. Answer no if the seller named any discounted price or counteroffer below the listing, if the seller said yes / ok / that works / can you pick it up in response to a buyer's price, if the buyer's last message accepts or says it sounds good / will come pick it up / will send the offer, or if no price was discussed.",
+          "criteria": {
+            "true": "the seller held firm at the listing price against every buyer offer and nothing was agreed",
+            "false": "the seller came down, or accepted or entertained the buyer's price, or the chat ends with agreement, or no price was discussed"
+          }
+        }
+      },
+      "rule": [
+        [
+          "no_price"
+        ],
+        [
+          "refusal"
+        ],
+        [
+          "opening_unanswered"
+        ],
+        [
+          "no_concession"
+        ]
+      ],
+      "positive": "no_deal",
+      "negative": "deal"
+    },
+    {
+      "version": 1,
+      "name": "deal_v3c",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Below is a Craigslist ad followed by the chat in which a buyer and the seller haggle over the price.\n{{input}}",
+      "questions": {
+        "no_price": {
+          "instructions": "Did the two sides never get as far as talking numbers? Answer yes if nobody made any price offer or counteroffer in the chat: it was only hellos, questions and answers about the item, off-topic chatter, mix-ups about what is being sold, or complaints about the website. The seller just repeating the advertised price is not an offer. Answer no as soon as either side suggested a specific price to pay. If either side says they accept an offer, answer no.",
+          "criteria": {
+            "true": "no offers or counteroffers in the chat",
+            "false": "someone put a specific price on the table"
+          }
+        },
+        "refusal": {
+          "instructions": "Does the conversation finish with somebody turning the other down or walking away, and no agreement afterwards? For example: 'no thanks', 'I'll pass', 'we're too far apart', 'I'll look elsewhere', or leaving without settling on a price. Stating a bottom-line price, calling an offer too low while still haggling, or countering is not walking away. If they later settle on a price, answer no. A buyer ending with 'I can't go higher than my offer, sorry' after the seller's last counteroffer counts as walking away; a seller who already offered a discount and declines a further cut while restating their terms is not walking away.",
+          "criteria": {
+            "true": "the chat ends with a rejection or walk-away",
+            "false": "it ends in agreement, an open offer, or ongoing talk"
+          }
+        },
+        "opening_unanswered": {
+          "instructions": "Is the final message of the chat the buyer's very first price offer, with no word from the seller after it? Answer no if the seller had named a price the buyer was responding to, if any price was accepted, if the buyer's last message agrees to a price, or if there were several rounds of offers.",
+          "criteria": {
+            "true": "the chat stops on the buyer's first offer, never answered",
+            "false": "any other ending"
+          }
+        },
+        "no_concession": {
+          "instructions": "Did the seller stay put at the advertised price? Answer yes only when: the buyer put forward a specific price lower than the listing; the seller never mentioned any figure lower than the listing (each buyer offer was turned down, ignored, or met with the asking price again); and the chat does not finish with an agreement. Answer no if the seller offered any reduction or counter below the listing, if the seller responded to the buyer's number with yes / ok / that works / can you pick it up, if the buyer ends by accepting, saying it sounds good, arranging pickup, or sending the offer, or if no price came up.",
+          "criteria": {
+            "true": "the seller held at the listing price against the buyer's offers and nothing was agreed",
+            "false": "the seller moved, entertained the offer, they agreed, or no price came up"
+          }
+        }
+      },
+      "rule": [
+        [
+          "no_price"
+        ],
+        [
+          "refusal"
+        ],
+        [
+          "opening_unanswered"
+        ],
+        [
+          "no_concession"
+        ]
+      ],
+      "positive": "no_deal",
+      "negative": "deal"
+    }
+  ]
+}

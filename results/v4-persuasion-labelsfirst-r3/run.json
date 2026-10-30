@@ -1,0 +1,94 @@
+{
+  "run_id": "v4-persuasion-labelsfirst-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:29:41",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 757,
+    "num_turns": 32,
+    "total_cost_usd": 1.3371952000000005
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 45,
+      "estimate": 0.5,
+      "note": "v1 draft: 23-option choice mapped to 18 classes, from policy answers Q1-Q3",
+      "test": {
+        "jev": {
+          "accuracy": 0.646,
+          "macro_f1": 0.6026,
+          "est_cost_usd": 0.121059,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 65,
+      "estimate": 0.55,
+      "note": "v2: narrowed proposition (self only), praise-user (explicit compliments), personal-story (sad anecdotes->emotion); check 10/10 (fitted)",
+      "test": {
+        "jev": {
+          "accuracy": 0.648,
+          "macro_f1": 0.5905,
+          "est_cost_usd": 0.127822,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 71,
+      "estimate": 0.6,
+      "note": "v3: praise-user = praise of person or their generosity; bare exclamations -> acknowledgement. 11/13 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6533,
+          "macro_f1": 0.6055,
+          "est_cost_usd": 0.129782,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 83,
+      "estimate": 0.6,
+      "note": "v4e: 3-wording ensemble of v4 (donor benefit/matching->logical, allowed amounts->donation-info, Bruce story->emotion). 15/19 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6454,
+          "macro_f1": 0.5957,
+          "est_cost_usd": 0.408498,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.62,
+      "note": "v5e: v4e + cost-arguments->logical, own-child imagining->emotion, persuader role->other, offer-to-answer->task-inquiry. 23/27 labels, check 9/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.6486,
+          "macro_f1": 0.5996,
+          "est_cost_usd": 0.429167,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

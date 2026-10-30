@@ -1,0 +1,64 @@
+{
+  "run_id": "vs-hatets-haiku-rules-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:26:40",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 862,
+    "num_turns": 68,
+    "total_cost_usd": 0.5295489
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.6,
+      "note": "Initial draft from task description",
+      "test": {
+        "jev": {
+          "accuracy": 0.7356,
+          "macro_f1": 0.7164,
+          "est_cost_usd": 0.034328,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 76,
+      "estimate": 0.76,
+      "note": "Round 2: refined with examples from user clarifications",
+      "test": {
+        "jev": {
+          "accuracy": 0.7735,
+          "macro_f1": 0.7706,
+          "est_cost_usd": 0.049311,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 90,
+      "estimate": 0.78,
+      "note": "Final: explicit guidance on reporting/exclamations/affectionate slurs. 81.5% on 27 labeled records",
+      "test": {
+        "jev": {
+          "accuracy": 0.7724,
+          "macro_f1": 0.7693,
+          "est_cost_usd": 0.054948,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

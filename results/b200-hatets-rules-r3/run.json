@@ -1,0 +1,154 @@
+{
+  "run_id": "b200-hatets-rules-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:38:59",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 2709,
+    "num_turns": 71,
+    "total_cost_usd": 2.895416
+  },
+  "final_version": 9,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.62,
+      "note": "v1 draft: 5-option choice mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7837,
+          "macro_f1": 0.7836,
+          "est_cost_usd": 0.047901,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 47,
+      "estimate": 0.66,
+      "note": "v4: 8 fine options from policy answer (removal demands, crime framing, hostile slurs at women/unclear target vs male target/casual)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7712,
+          "macro_f1": 0.7702,
+          "est_cost_usd": 0.066444,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 67,
+      "estimate": 0.7,
+      "note": "v6: 3-member wording ensemble with H3/H4/H5 narrowed rules; 21/21 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.786,
+          "macro_f1": 0.7859,
+          "est_cost_usd": 0.207195,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 85,
+      "estimate": 0.72,
+      "note": "v7: ensemble + H7/H8 (bare headlines, off-topic deport hashtags not hate), 0926 example; 29/30 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7911,
+          "macro_f1": 0.7909,
+          "est_cost_usd": 0.217431,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 117,
+      "estimate": 0.76,
+      "note": "v8: H9 (politician complaint + trailing deport hashtags not hate), H10 idioms; 46/46 labels; random check 13/15 before fix",
+      "test": {
+        "jev": {
+          "accuracy": 0.8007,
+          "macro_f1": 0.8003,
+          "est_cost_usd": 0.225516,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 133,
+      "estimate": 0.77,
+      "note": "v9: H9 broadened, H11 legal-term, H12 drugs, H13 quoting/criticising misogyny, threshold 0.55; 53/54 (0566 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8065,
+          "macro_f1": 0.8058,
+          "est_cost_usd": 0.245879,
+          "total": 1766,
+          "answered": 1762
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 149,
+      "estimate": 0.77,
+      "note": "v11: H11b (rule-of-law + #SendThemBack not hate), stacked-slur example; weights 3,2,1 (member A best on labels), thr 0.5; 60/62",
+      "test": {
+        "jev": {
+          "accuracy": 0.8028,
+          "macro_f1": 0.8024,
+          "est_cost_usd": 0.251633,
+          "total": 1766,
+          "answered": 1765
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 163,
+      "estimate": 0.78,
+      "note": "v14b: 5-member ensemble (A, A reversed options, A alt instruction, B, B reversed), C dropped; 0356 example; 65/69",
+      "test": {
+        "jev": {
+          "accuracy": 0.8052,
+          "macro_f1": 0.8046,
+          "est_cost_usd": 0.441032,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 199,
+      "estimate": 0.82,
+      "note": "v15 final: v14b with hate threshold 0.52; 82/87 bought labels (misses are suspected noise/coin-flip), 28/30 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.8086,
+          "macro_f1": 0.8079,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

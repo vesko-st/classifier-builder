@@ -1,0 +1,79 @@
+{
+  "run_id": "v4-donation-policy-r2",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:47:50",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 405,
+    "num_turns": 40,
+    "total_cost_usd": 1.5686724000000003
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 30,
+      "estimate": 0.6,
+      "note": "v1 draft: 11 ending categories; full_payment/free_amount -> donated (2-member map ensemble, threshold 0.55)",
+      "test": {
+        "jev": {
+          "accuracy": 0.717,
+          "macro_f1": 0.7145,
+          "est_cost_usd": 0.049322,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 66,
+      "estimate": 0.62,
+      "note": "v2: threshold 0.75 so pressured/mixed pledges -> not_donated (labels: pressured 4/5 not)",
+      "test": {
+        "jev": {
+          "accuracy": 0.693,
+          "macro_f1": 0.693,
+          "est_cost_usd": 0.0,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 66,
+      "estimate": 0.62,
+      "note": "v3: 2-wording ensemble (A/B), each optimistic+pessimistic map, threshold 0.75",
+      "test": {
+        "jev": {
+          "accuracy": 0.6978,
+          "macro_f1": 0.6978,
+          "est_cost_usd": 0.096928,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.62,
+      "note": "v4: warm_vague moved to donated (labels 6/7 donated); large_amount kept mid (5/8, owner says 50/50)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7146,
+          "macro_f1": 0.712,
+          "est_cost_usd": 0.0,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

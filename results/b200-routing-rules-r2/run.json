@@ -1,0 +1,184 @@
+{
+  "run_id": "b200-routing-rules-r2",
+  "task": "banking77_routing",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:44:27",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 3407,
+    "num_turns": 73,
+    "total_cost_usd": 2.9451810000000007
+  },
+  "final_version": 11,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: 77 fine-grained intent options mapped to 6 teams by guess",
+      "test": {
+        "jev": {
+          "accuracy": 0.8101,
+          "macro_f1": 0.7997,
+          "est_cost_usd": 0.259105,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.78,
+      "note": "v3: round 1 rules H1(narrowed) H2-H6",
+      "test": {
+        "jev": {
+          "accuracy": 0.8312,
+          "macro_f1": 0.8258,
+          "est_cost_usd": 0.275658,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 44,
+      "estimate": 0.82,
+      "note": "v7: 3-member wording ensemble; rules H1-H10",
+      "test": {
+        "jev": {
+          "accuracy": 0.8464,
+          "macro_f1": 0.8436,
+          "est_cost_usd": 0.855312,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 70,
+      "estimate": 0.84,
+      "note": "v9: pending/declined card & ATM -> cards; fee vs extra charge split; Amex/credit card -> pricing",
+      "test": {
+        "jev": {
+          "accuracy": 0.8825,
+          "macro_f1": 0.8662,
+          "est_cost_usd": 0.88064,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 84,
+      "estimate": 0.85,
+      "note": "v10: payment shown cancelled/missing -> disputes",
+      "test": {
+        "jev": {
+          "accuracy": 0.8834,
+          "macro_f1": 0.8671,
+          "est_cost_usd": 0.883642,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 108,
+      "estimate": 0.87,
+      "note": "v12: source-of-funds (where money came from) -> account; receipt option",
+      "test": {
+        "jev": {
+          "accuracy": 0.8838,
+          "macro_f1": 0.8671,
+          "est_cost_usd": 0.903822,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 122,
+      "estimate": 0.87,
+      "note": "v13: phone left behind->fraud, DD refund->fraud, who gives me money->account, missing money->payments",
+      "test": {
+        "jev": {
+          "accuracy": 0.8834,
+          "macro_f1": 0.8666,
+          "est_cost_usd": 0.921077,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 146,
+      "estimate": 0.89,
+      "note": "v14: wrong exchange rate complaints -> disputes; verify top-up -> account (from mapping audit)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9153,
+          "macro_f1": 0.9102,
+          "est_cost_usd": 0.931764,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 162,
+      "estimate": 0.9,
+      "note": "v15: ATM swallowed card -> fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.9278,
+          "macro_f1": 0.9234,
+          "est_cost_usd": 0.931586,
+          "total": 3080,
+          "answered": 3074
+        }
+      }
+    },
+    {
+      "version": 10,
+      "points_spent": 184,
+      "estimate": 0.9,
+      "note": "v21: round 6 rules (unreceived ATM cash split, SEPA full amount->pricing, eligibility abroad->account, rate doubt->disputes)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9334,
+          "macro_f1": 0.9292,
+          "est_cost_usd": 0.978793,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 11,
+      "points_spent": 200,
+      "estimate": 0.9,
+      "note": "v24 final: daily card limit->payments, choose card->cards, unexpected rate->disputes, fees for receiving money->pricing",
+      "test": {
+        "jev": {
+          "accuracy": 0.9354,
+          "macro_f1": 0.9314,
+          "est_cost_usd": 1.004723,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

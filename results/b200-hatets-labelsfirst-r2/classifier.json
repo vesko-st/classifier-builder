@@ -1,0 +1,191 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v9",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v6",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "women_hostile": {
+          "instructions": {
+            "question": "Does this tweet put down, degrade, sexually demean or threaten a woman or women using gendered slurs (bitch, hoe, whore, slut, cunt) or sexual degradation, in a genuinely hostile way?",
+            "counts": [
+              "slur-laden insults aimed at one specific woman, including in a personal fight or woman-on-woman trash talk",
+              "sweeping statements about women as 'hoes' or 'bitches' ('these hoes ain't loyal', 'bitches think...', 'u always a hoe to...'), even in a casual, rap-like or laughing tone",
+              "threats or sexual degradation of a woman",
+              "joking about, boasting of, endorsing or threatening rape or sexual violence against a woman ('u scared to rape a bitch?')"
+            ],
+            "does_not_count": [
+              "the word used casually, as an exclamation, about oneself, or affectionately between friends ('bitch I'm on my way', 'I'm a whole new bitch')",
+              "idioms like 'karma's a bitch', 'life's a bitch', 'son of a bitch'",
+              "reporting or condemning misogyny ('he called me a whore')",
+              "insults aimed at a man",
+              "political criticism of a female politician (e.g. Hillary Clinton) without gendered slurs or sexual degradation",
+              "friendly teasing or banter where the tone is clearly joking (laughing emojis, 'sis', playful exaggeration) rather than an attack",
+              "the speaker calling herself a bitch or hoe, bragging, or sexual talk that is not an attack",
+              "a single 'bitch' used as a rude form of address or exclamation toward someone ('Are those not grapes bitch?', 'bitch do it look like we play'), with no other slur, degradation or threat"
+            ]
+          }
+        },
+        "immigrant_hostile": {
+          "instructions": {
+            "question": "Does this tweet express hostility toward immigrants, refugees or 'illegal aliens' themselves?",
+            "counts": [
+              "dehumanising or demeaning them (rapefugees, invaders, bottom feeders, animals)",
+              "portraying them as typically criminals, rapists, killers or disease carriers, including crime reports framed as typical ('another illegal alien...') with deportation hashtags",
+              "calling for them to be deported, expelled or kept out, including short approving tweets that are mostly deportation hashtags ('Well stated! #DeportThemAll')"
+            ],
+            "does_not_count": [
+              "arguing immigration policy or supporting the wall, ICE or Trump without hostile content about immigrants",
+              "attacking Democrats, Congress or politicians, even with #DeportThemAll or #SendThemBack hashtags attached",
+              "hashtag spam or off-topic use of immigration hashtags",
+              "criticising anti-immigrant racism",
+              "tweets whose main target is politicians, elites, parties or governments, where immigrants are only mentioned in passing, even with a slur such as 'rapefugee'"
+            ]
+          }
+        }
+      },
+      "rule": [
+        [
+          "women_hostile"
+        ],
+        [
+          "immigrant_hostile"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "v6_reworded_b",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": {
+        "tweet": "{{input}}"
+      },
+      "questions": {
+        "women_hostile": {
+          "instructions": {
+            "task": "Is `tweet` hostile abuse of a woman or of women, using a gendered slur (bitch, hoe, whore, slut, cunt), sexual degradation or a threat?",
+            "yes_when": [
+              "a particular woman is being insulted with slurs, also in personal fights or trash talk between women",
+              "women in general are described as 'hoes' or 'bitches' ('these hoes ain't loyal', 'bitches think...', 'u always a hoe to...'), even jokingly or in a rap-like way",
+              "a woman is threatened or sexually degraded",
+              "it jokes about, boasts of, endorses or threatens rape or sexual violence against a woman ('u scared to rape a bitch?')"
+            ],
+            "no_when": [
+              "the slur is filler, an exclamation, self-description or an affectionate greeting ('bitch I'm on my way', 'I'm a whole new bitch')",
+              "it is an idiom: karma's a bitch, life's a bitch, son of a bitch",
+              "the author reports or condemns misogyny ('he called me a whore')",
+              "the person insulted is a man",
+              "a female politician is criticised without gendered slurs or sexual degradation",
+              "it is plainly joking banter between friends (laughing emojis, 'sis', playful exaggeration)",
+              "the author calls herself a bitch or hoe, brags, or talks about sex without attacking anyone",
+              "it has just one 'bitch' used as a rude form of address or exclamation toward someone ('Are those not grapes bitch?', 'bitch do it look like we play'), with no other slur, degradation or threat"
+            ]
+          }
+        },
+        "immigrant_hostile": {
+          "instructions": {
+            "task": "Is `tweet` hostile toward immigrants, refugees or illegal aliens as people?",
+            "yes_when": [
+              "it dehumanises or demeans them (rapefugees, invaders, bottom feeders, animals)",
+              "it presents them as typically criminals, rapists, killers or disease carriers, including crime reports framed as typical ('another illegal alien...') with deportation hashtags",
+              "it calls for deporting, expelling or keeping them out, including short approving tweets made mostly of deportation hashtags ('Well stated! #DeportThemAll')"
+            ],
+            "no_when": [
+              "it argues immigration policy or backs the wall, ICE or Trump with nothing hostile about immigrants",
+              "its target is Democrats, Congress, politicians, elites, parties or governments, even with #DeportThemAll/#SendThemBack attached or 'rapefugee' in passing",
+              "immigration hashtags are spam or off-topic",
+              "it criticises racism against immigrants"
+            ]
+          }
+        }
+      },
+      "rule": [
+        [
+          "women_hostile"
+        ],
+        [
+          "immigrant_hostile"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "v6_reworded_c",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Here is a tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "women_hostile": {
+          "instructions": {
+            "question": "Is the author attacking a woman, or women as a group, with gendered slurs, sexual degradation or threats?",
+            "counts": [
+              "slur-laden insults aimed at one specific woman, including in a personal fight or woman-on-woman trash talk",
+              "sweeping statements about women as 'hoes' or 'bitches' ('these hoes ain't loyal', 'bitches think...', 'u always a hoe to...'), even in a casual, rap-like or laughing tone",
+              "threats or sexual degradation of a woman",
+              "joking about, boasting of, endorsing or threatening rape or sexual violence against a woman ('u scared to rape a bitch?')"
+            ],
+            "does_not_count": [
+              "the word used casually, as an exclamation, about oneself, or affectionately between friends ('bitch I'm on my way', 'I'm a whole new bitch')",
+              "idioms like 'karma's a bitch', 'life's a bitch', 'son of a bitch'",
+              "reporting or condemning misogyny ('he called me a whore')",
+              "insults aimed at a man",
+              "political criticism of a female politician (e.g. Hillary Clinton) without gendered slurs or sexual degradation",
+              "friendly teasing or banter where the tone is clearly joking (laughing emojis, 'sis', playful exaggeration) rather than an attack",
+              "the speaker calling herself a bitch or hoe, bragging, or sexual talk that is not an attack",
+              "a single 'bitch' used as a rude form of address or exclamation toward someone ('Are those not grapes bitch?', 'bitch do it look like we play'), with no other slur, degradation or threat"
+            ]
+          },
+          "criteria": {
+            "true": "yes: a hostile attack on a woman or women",
+            "false": "no: casual, self-referential, idiomatic, joking, aimed at a man, or no slur"
+          }
+        },
+        "immigrant_hostile": {
+          "instructions": {
+            "question": "Is the author attacking immigrants or refugees themselves: demeaning them, painting them as criminals, or demanding they be removed?",
+            "counts": [
+              "dehumanising or demeaning them (rapefugees, invaders, bottom feeders, animals)",
+              "portraying them as typically criminals, rapists, killers or disease carriers, including crime reports framed as typical ('another illegal alien...') with deportation hashtags",
+              "calling for them to be deported, expelled or kept out, including short approving tweets that are mostly deportation hashtags ('Well stated! #DeportThemAll')"
+            ],
+            "does_not_count": [
+              "arguing immigration policy or supporting the wall, ICE or Trump without hostile content about immigrants",
+              "attacking Democrats, Congress or politicians, even with #DeportThemAll or #SendThemBack hashtags attached",
+              "hashtag spam or off-topic use of immigration hashtags",
+              "criticising anti-immigrant racism",
+              "tweets whose main target is politicians, elites, parties or governments, where immigrants are only mentioned in passing, even with a slur such as 'rapefugee'"
+            ]
+          },
+          "criteria": {
+            "true": "yes: hostile to immigrants themselves",
+            "false": "no: policy, politics, attacks on politicians, spam, or counter-speech"
+          }
+        }
+      },
+      "rule": [
+        [
+          "women_hostile"
+        ],
+        [
+          "immigrant_hostile"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.7
+  }
+}

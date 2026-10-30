@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "persuasion_strategy",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Classify this persuader message in a charity-donation chat by the persuasion strategy or dialogue act it uses.",
+  "state_template": "Charity-donation dialogue:\n{{input}}",
+  "criteria": {
+    "greeting": "Opening salutation, welcoming, or asking how the other person is doing",
+    "acknowledgement": "Confirming, agreeing, or responding affirmatively to what was said",
+    "thank": "Expressing gratitude or appreciation",
+    "praise-user": "Complimenting, praising, or affirming the other person",
+    "personal-related-inquiry": "Asking about the other person's personal life, experiences, feelings, or situation",
+    "source-related-inquiry": "Asking about Save the Children, the charity, or the organization itself",
+    "task-related-inquiry": "Asking about the task, survey, chat structure, or payment details",
+    "donation-information": "Explaining HOW TO DONATE in this task: payment methods, amount range ($0-$2), task payment deduction, donation box",
+    "ask-donation-amount": "Directly asking 'how much do you want to donate?' as an open question",
+    "proposition-of-donation": "Suggesting or stating a specific donation amount or option",
+    "credibility-appeal": "Facts about Save the Children: what they do, their mission, fund allocation, matching programs, legitimacy",
+    "logical-appeal": "Arguments that persuade to donate: 'your donation will have impact', moral reasoning, facts used to argue for donating",
+    "emotion-appeal": "Appealing to emotions, suffering, or human interest (e.g., stories of hardship)",
+    "personal-story": "Telling a detailed story about an individual person or their circumstances",
+    "self-modeling": "Modeling the desired behavior by describing own donations, values, or actions",
+    "foot-in-the-door": "Framing a donation as small or non-committal to ease agreement",
+    "off-task": "Off-topic content, irrelevant to the task or charity",
+    "other": "Conversational housekeeping: closings, confirming amounts agreed, asking for more money, answering persuadee's personal questions"
+  }
+}

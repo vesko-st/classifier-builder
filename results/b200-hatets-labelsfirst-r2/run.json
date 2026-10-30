@@ -1,0 +1,109 @@
+{
+  "run_id": "b200-hatets-labelsfirst-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 200,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:29:41",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1088,
+    "num_turns": 57,
+    "total_cost_usd": 2.2787174000000006
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 35,
+      "estimate": 0.65,
+      "note": "v1 draft criteria: women_hostile OR immigrant_hostile, from owner policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.7758,
+          "macro_f1": 0.7757,
+          "est_cost_usd": 0.054132,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 55,
+      "estimate": 0.72,
+      "note": "v2: exclude political criticism of women w/o slurs, joking banter, immigrant tweets mainly attacking politicians; check 9/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.8029,
+          "macro_f1": 0.8028,
+          "est_cost_usd": 0.061846,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 111,
+      "estimate": 0.78,
+      "note": "v4: v2 + decision threshold hate>=0.63; check 19/20, all 38 labels 33/38",
+      "test": {
+        "jev": {
+          "accuracy": 0.8194,
+          "macro_f1": 0.8179,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 117,
+      "estimate": 0.8,
+      "note": "v7: 3-member wording-variant ensemble of v6 rules, threshold 0.67; labels 37/41, check 19/20",
+      "test": {
+        "jev": {
+          "accuracy": 0.8273,
+          "macro_f1": 0.8253,
+          "est_cost_usd": 0.200594,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 141,
+      "estimate": 0.8,
+      "note": "v8: v7 + rape/sexual-violence rule (tested 2/2), threshold 0.70; labels 43/53 (biased to hard), check 19/20",
+      "test": {
+        "jev": {
+          "accuracy": 0.825,
+          "macro_f1": 0.8221,
+          "est_cost_usd": 0.207492,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 199,
+      "estimate": 0.85,
+      "note": "FINAL v9: 3-member wording ensemble (criteria women_hostile OR immigrant_hostile) + rape rule + single-'bitch'-address exclusion, threshold 0.70; random check 36/39 (macro-F1 0.923), all 82 labels 0.817 acc / 0.812 macro-F1",
+      "test": {
+        "jev": {
+          "accuracy": 0.8341,
+          "macro_f1": 0.8307,
+          "est_cost_usd": 0.218321,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

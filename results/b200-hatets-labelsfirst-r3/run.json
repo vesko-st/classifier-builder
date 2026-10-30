@@ -1,0 +1,94 @@
+{
+  "run_id": "b200-hatets-labelsfirst-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 200,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:29:41",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 766,
+    "num_turns": 41,
+    "total_cost_usd": 1.6050648
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 25,
+      "estimate": 0.65,
+      "note": "v1 draft criteria: immigrant_hate OR misogyny, from two policy answers; no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.7633,
+          "macro_f1": 0.763,
+          "est_cost_usd": 0.061252,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 69,
+      "estimate": 0.72,
+      "note": "v3: misogyny rule requires hostility toward women (casual/friendly/self/at-men excluded); hashtag-dump fix; fixes 8 of 10 uncertain-label errors",
+      "test": {
+        "jev": {
+          "accuracy": 0.8029,
+          "macro_f1": 0.8029,
+          "est_cost_usd": 0.067705,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 127,
+      "estimate": 0.8,
+      "note": "v4: 3-variant wording ensemble of criteria (immigrant_hate OR misogyny); rules from 26 uncertain + 25 random labels; check 0.88 (n=25, partly tuned)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8154,
+          "macro_f1": 0.8153,
+          "est_cost_usd": 0.237383,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 175,
+      "estimate": 0.8,
+      "note": "v5: ensemble + political/economic-effects exclusion for immigrant rule, decision threshold 0.55; check 0.88 (n=25)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8284,
+          "macro_f1": 0.8277,
+          "est_cost_usd": 0.247396,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 199,
+      "estimate": 0.8,
+      "note": "v6 final: v5 ensemble with decision threshold 0.60; all 87 labels acc 0.91 F1 0.87; check n=25 acc 0.88 F1 0.877",
+      "test": {
+        "jev": {
+          "accuracy": 0.8369,
+          "macro_f1": 0.8355,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

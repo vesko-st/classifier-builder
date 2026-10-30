@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v5",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Is this tweet hate speech? Only hostility toward women or immigrants counts.\n\n**WOMEN HATE SIGNALS**: Slurs (bitch, hoe, whore) used in hostile accusations/attacks. Threats. Sexual degradation/coercion. Generalizing about women ('these hoes', 'You a bitch You a hoe That's my philosophy'). Stacked multiple slurs.\n\n**WOMEN NOT HATE**: Reporting someone else's slur use ('You called your mom a hoe AND a bitch'). Using slur as interjection/exclamation ('Bitch this is RAPE', 'Bitch HOLD UP', 'Bitch I'll eat pizza tomorrow'). Affectionate slur use between friends ('I got my bitch's back'). Idioms ('karma's a bitch'). Self-reference.\n\n**IMMIGRANTS HATE**: Crime narratives about illegal immigrants. Depicting immigrants as welfare/job burden. Demeaning comparisons ('3rd world'). Othering ('there goes the neighborhood', 'refugees don't belong'). Violence advocacy ('shoot on sight'). Investment framing ('importing the poor').\n\n**IMMIGRANTS NOT HATE**: Policy positions only (wall, border, deportation, 'illegal aliens' term). Slogans alone (#BuildTheWall, #SendThemBack). Pure facts without demeaning intent.\n\n**OTHER GROUPS**: Hostility toward other groups doesn't count as hate.",
+  "state_template": "{{input}}",
+  "criteria": {
+    "hate": "Hostile slurs at women (threats, sexual content, accusations, generalizations, stacking). OR: Immigrants with demeaning framing (crime, burden, othering, violence, dehumanizing comparisons).",
+    "not_hate": "Reporting/condemning slurs, exclamatory slurs, affectionate slurs. OR: Immigration policy without demeaning content. OR: Hostility toward other groups."
+  },
+  "map": {
+    "hate": "hate",
+    "not_hate": "not_hate"
+  }
+}

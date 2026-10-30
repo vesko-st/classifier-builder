@@ -1,0 +1,79 @@
+{
+  "run_id": "b50-hatets-rules-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 50,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:36:47",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1146,
+    "num_turns": 39,
+    "total_cost_usd": 1.8144614000000003
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description: 6 options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7865,
+          "macro_f1": 0.7862,
+          "est_cost_usd": 0.060881,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 22,
+      "estimate": 0.7,
+      "note": "v6: H1 slurs at men not hate (confirmed), H2 narrowed (address/interjection not hate, hostile insults at women hate), H3 burden resentment hate, deport-them-all calls hate (H4 rejected); 11/11 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7945,
+          "macro_f1": 0.7941,
+          "est_cost_usd": 0.083949,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 44,
+      "estimate": 0.72,
+      "note": "ens2: 3 wording variants; adds H5/H6 narrowed (anonymous 'whoever' bitch not hate; politicians-open-borders not hate; illegal-alien crime news hate), H7 hashtags alone not hate (confirmed 0138, 0711); 22/22 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8063,
+          "macro_f1": 0.8058,
+          "est_cost_usd": 0.315709,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 50,
+      "estimate": 0.72,
+      "note": "ens3 final: + H8 reporting/quoting misogyny not hate (0921), DACA economic-policy example (0749); 25/25 labels (0887 suspected noise, predicted hate anyway)",
+      "test": {
+        "jev": {
+          "accuracy": 0.812,
+          "macro_f1": 0.8114,
+          "est_cost_usd": 0.340482,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

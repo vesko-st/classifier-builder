@@ -1,0 +1,49 @@
+{
+  "run_id": "v4-deal-free-r2",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T11:44:54",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 226,
+    "num_turns": 24,
+    "total_cost_usd": 0.7252143999999999
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "draft from description: 5 ending-type options mapped to deal/no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9021,
+          "macro_f1": 0.8779,
+          "est_cost_usd": 0.017073,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 99,
+      "estimate": 0.84,
+      "note": "ensemble of 2 wording variants of the 6-option ending classifier; late unanswered counteroffer->deal, lone opening offer/rejection/no price->no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9003,
+          "macro_f1": 0.8531,
+          "est_cost_usd": 0.038203,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

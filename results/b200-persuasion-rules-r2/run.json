@@ -1,0 +1,184 @@
+{
+  "run_id": "b200-persuasion-rules-r2",
+  "task": "persuasion_strategy",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:36:21",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 3893,
+    "num_turns": 94,
+    "total_cost_usd": 3.910084
+  },
+  "final_version": 11,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.5,
+      "note": "v1 draft from description alone, 19 options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.5966,
+          "macro_f1": 0.5761,
+          "est_cost_usd": 0.092867,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 25,
+      "estimate": 0.52,
+      "note": "v3: ack/other boundary from owner policy, praise for reacting to commitment, me-too self-modeling, vouching=credibility",
+      "test": {
+        "jev": {
+          "accuracy": 0.5966,
+          "macro_f1": 0.5727,
+          "est_cost_usd": 0.105446,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 52,
+      "estimate": 0.55,
+      "note": "e6: 3-variant ensemble; FITD/logical/ask-amount per owner policy, amount answers=donation-information, thank on behalf of children",
+      "test": {
+        "jev": {
+          "accuracy": 0.592,
+          "macro_f1": 0.5584,
+          "est_cost_usd": 0.376703,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 66,
+      "estimate": 0.57,
+      "note": "e7: range=donation-information, preference questions=task-inquiry, restating stance=other, answers with org facts=credibility",
+      "test": {
+        "jev": {
+          "accuracy": 0.5992,
+          "macro_f1": 0.5686,
+          "est_cost_usd": 0.399648,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 84,
+      "estimate": 0.58,
+      "note": "e8: gladness about giving=thank, enthusiastic reaction to donation plan/choice=praise-user, naming the org=credibility",
+      "test": {
+        "jev": {
+          "accuracy": 0.5985,
+          "macro_f1": 0.5633,
+          "est_cost_usd": 0.422404,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 98,
+      "estimate": 0.58,
+      "note": "e9: task-framing=donation-information, okay-great=ack, unclear fragments=other",
+      "test": {
+        "jev": {
+          "accuracy": 0.6045,
+          "macro_f1": 0.569,
+          "est_cost_usd": 0.436626,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 122,
+      "estimate": 0.52,
+      "note": "e10: how-are-you replies=greeting, your-donation-impact=logical vs org spending=credibility, leave-amount-to-you=ask-amount",
+      "test": {
+        "jev": {
+          "accuracy": 0.6078,
+          "macro_f1": 0.5695,
+          "est_cost_usd": 0.47038,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 140,
+      "estimate": 0.53,
+      "note": "e11: confirming chosen amount=other, offering info=task-inquiry, did-you-know-that=task-inquiry, own donating history=personal-story",
+      "test": {
+        "jev": {
+          "accuracy": 0.617,
+          "macro_f1": 0.5825,
+          "est_cost_usd": 0.492377,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 160,
+      "estimate": 0.54,
+      "note": "e12: child stories (Bruce)=emotion, personal-story only persuader's own experience, opinion of STC=credibility but own involvement=other",
+      "test": {
+        "jev": {
+          "accuracy": 0.617,
+          "macro_f1": 0.5833,
+          "est_cost_usd": 0.52551,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 10,
+      "points_spent": 176,
+      "estimate": 0.54,
+      "note": "e13: answers about donating/limits/other ways to help=donation-information, org achievements=credibility",
+      "test": {
+        "jev": {
+          "accuracy": 0.619,
+          "macro_f1": 0.5848,
+          "est_cost_usd": 0.544525,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 11,
+      "points_spent": 200,
+      "estimate": 0.52,
+      "note": "e15 final: one-word exclamation after agreeing to donate=thank, return how-are-you=greeting, volunteering questions=personal-related-inquiry; 93/95 labels fit excl. suspected noise",
+      "test": {
+        "jev": {
+          "accuracy": 0.6223,
+          "macro_f1": 0.5853,
+          "est_cost_usd": 0.571643,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "run_id": "b50-intents-labelsfirst-r2",
+  "task": "banking77_intents",
+  "budget": 50,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:43:53",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 808,
+    "num_turns": 32,
+    "total_cost_usd": 1.39318
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "draft: flat 77-option choice, descriptions from task + class names",
+      "test": {
+        "jev": {
+          "accuracy": 0.8416,
+          "macro_f1": 0.8375,
+          "est_cost_usd": 0.323352,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 24,
+      "estimate": 0.82,
+      "note": "policy answers Q1-Q4 folded into option descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.8565,
+          "macro_f1": 0.8552,
+          "est_cost_usd": 0.357503,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 44,
+      "estimate": 0.83,
+      "note": "UK-account transfer wording -> balance_not_updated_after_bank_transfer (fixes check error)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8562,
+          "macro_f1": 0.855,
+          "est_cost_usd": 0.360607,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 44,
+      "estimate": 0.83,
+      "note": "3 wording-variant ensemble of v03 (same options), damps near-tie jitter",
+      "test": {
+        "jev": {
+          "accuracy": 0.8584,
+          "macro_f1": 0.8571,
+          "est_cost_usd": 1.081471,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 50,
+      "estimate": 0.86,
+      "note": "label-driven: 'suddenly told transfer not possible' -> beneficiary_not_allowed; 'payment I don't recognise' -> card_payment_not_recognised, vague 'charge' -> direct_debit",
+      "test": {
+        "jev": {
+          "accuracy": 0.8603,
+          "macro_f1": 0.8597,
+          "est_cost_usd": 1.094661,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    }
+  ]
+}

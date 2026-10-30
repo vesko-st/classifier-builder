@@ -1,0 +1,94 @@
+{
+  "run_id": "b50-persuasion-labelsfirst-r1",
+  "task": "persuasion_strategy",
+  "budget": 50,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:55:44",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 435,
+    "num_turns": 23,
+    "total_cost_usd": 0.9315813999999999
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description and known P4G scheme, no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.5834,
+          "macro_f1": 0.5633,
+          "est_cost_usd": 0.095143,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 30,
+      "estimate": 0.5,
+      "note": "v2: descriptions revised with owner answers on short replies and emotion/logical boundary",
+      "test": {
+        "jev": {
+          "accuracy": 0.6295,
+          "macro_f1": 0.5966,
+          "est_cost_usd": 0.116318,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 50,
+      "estimate": 0.55,
+      "note": "v3: fragment-continuation rule, FITD vs donation-info (answering how/how much), off-task narrowed; check 9/10 (tuned on these)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6203,
+          "macro_f1": 0.5915,
+          "est_cost_usd": 0.126937,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 50,
+      "estimate": 0.56,
+      "note": "v4: volunteering etc -> personal-related-inquiry; check 10/10 (tuned)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6196,
+          "macro_f1": 0.5904,
+          "est_cost_usd": 0.128012,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 50,
+      "estimate": 0.57,
+      "note": "final: 3 wording variants of v4 ensembled to damp jitter; check 10/10 (tuned, biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6269,
+          "macro_f1": 0.5995,
+          "est_cost_usd": 0.409888,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

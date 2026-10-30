@@ -1,0 +1,304 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens7",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "variant_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Our annotation policy covers hate speech, mainly against women and immigrants (including refugees, migrants, asylum seekers, Muslims coming in, 'illegal aliens'), and also against other groups by race or religion. A tweet is hateful when it expresses hatred, contempt, dehumanisation, threats, or blanket exclusion against such a group or against an individual woman, either as a group or as an individual targeted as a member of the group. Which description fits this tweet best?",
+        "notes": [
+          "The word bitch or hoe alone does not make a tweet hateful. Addressing a friend as 'bitch' in an exclamation, joke, question or banter is not hateful.",
+          "Using bitch/hoe/whore/cunt hostilely to insult or attack a specific woman, or generalising about women as hoes/bitches, is hateful.",
+          "Insulting a man (e.g. calling a male pundit a 'Trump bitch', or calling a guy who keeps switching girls a 'burnt out hoe') is not hate against women.",
+          "Demanding that immigrants/refugees be kept out or go home (e.g. #NoImmigrants #NoRefugees, 'deport every illegal alien', 'go home', banning people from whole countries), calling them invaders, portraying them as criminals or a burden, or as bringing lawlessness and third-world decay, is hateful.",
+          "Merely sharing slogans or hashtags (#BuildTheWall, #SendThemBack, #StopTheInvasion) with no statement about immigrants, arguing about terminology ('illegal alien is the correct term'), or making a political/legal argument about immigration and elections, is not hateful.",
+          "Racist generalisations about black people or other races or religions are hateful.",
+          "Opposing DACA or amnesty in a way that wants Dreamers or illegal immigrants deported or removed (#NoDACA #NoAmnesty with deportation, #gohome #sendthemback endorsing removal) is hateful.",
+          "Reposting a crime news headline about an immigrant with a wall hashtag, without further comment about immigrants, is not hateful; nor is #SendThemBack used about non-immigration topics.",
+          "Supportive or affectionate tweets to a friend that use 'bitch' (e.g. 'Bitch stfu, whoever says that can kick rocks') are not hateful; putting down other women as hoes or bitches is.",
+          "Attacking a politician or public figure (e.g. calling her a traitor) while adding immigration hashtags is not hate unless it demeans immigrants or women as such."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "hate_women": {
+          "description": "Degrades women: insults, curses at or threatens a woman with gendered slurs (bitch/hoe/whore/cunt/slut used hostilely), strings of abusive slurs, generalising about women as hoes/bitches, sexually objectifying them, or saying women are inferior.",
+          "examples": [
+            "u always a hoe to a nigga that can't have you & ugly to a bitch that can't stand you",
+            "@user @user not the bitch that slagged my dog",
+            "Nigga they don't like yo hoe ass no more so they unfollowed you. Ain't no glitch bitch",
+            "MOTHERFUCKING BITCH DICK CUNTBAG LARD EATING ASS SU...",
+            "Bitches hollering it's tooo hot!! Well bitch go back to winter you can have that shit hoe",
+            "bitch, i will dog walk you like the rest of these hoes..",
+            "you can never take a L off a real bitch im hotter than them hoes that you chill w",
+            "don't say it in a curious cat bitch whoever tf you are",
+            "Dirty ass feet go take a bath bitch",
+            "I don't just follow hoes on twitter/Instagram who just cute....bitch you have to have at least some type of style"
+          ]
+        },
+        "hate_immigrants": {
+          "description": "Attacks or rejects immigrants/refugees as people: dehumanising names (invaders, scum, rapefugees, animals, parasites), portraying them as criminals/rapists/diseased/lazy as a group, or demanding that all of them be kept out, banned or deported.",
+          "examples": [
+            "USA NEEDS TO WAKE UP!#NoRefugees#NoMigrants #NoChainMigration#NoDACA#NoImmigrants",
+            "We must build the #Wall! We must deport every illegal alien!",
+            "#MuslimBan no people from these countries should be allowed",
+            "This FOOL is promoting lawlessness from illegals and wants to turn ATL into a 3rd world city",
+            "Go home and make your country better or enter ours legally #NoDACA we can't afford them",
+            "...to Hide the fact that over 32,000 Criminal Aliens have been incarcerated",
+            "There will be a Cronulla Roits 2 in Melbourne. #wearesickofit #sendthemhome",
+            "#NoDACA, #NoAmnesty. Dreamers could be allowed to apply for legal migration once deported",
+            "Hes the best man for the job.#gohome #strongborders #sendthemback",
+            "Aren't u one of the low life scum who defends people bringing fentanyl into this country from Mexico?"
+          ]
+        },
+        "immigration_politics": {
+          "description": "Immigration, borders, the wall, DACA or ICE as a political or legal topic: slogans, rally news, voting, law-and-order arguments, without demeaning immigrants or calling for all of them to be expelled.",
+          "examples": [
+            "A little louder @user for the liberals in the back. #SendThemBack #BuildTheWall",
+            "Because it's against the law and undermines the honest efforts of LEGAL immigrants. #SendThemBack",
+            "#IllegalAliens are literally determining the balance of power in our nation.",
+            "ILLEGAL ALIEN is the correct term. There are no Illegal Immigrants. There are only Legal Immigrants.",
+            "@user #Immigration will decide the fate of our nation. #StopTheInvasion",
+            "@user #SendThemBack I will contribute to the plane fare. No joke.",
+            "#BuildThatWall#StandWithICE#AmericaFirstPolice: Illegal Immigrant Arrested In Shooting Of Upper Darby Store Owner",
+            "Africans having their say about Blacks in Europe, and Europeans in Africa, at the #LandExpropriationHearings #SendThemBack",
+            "so is working #IllegalAliens for pennies on the dollar, knowing they can't come forward about it because they are here illegally... unfair to illegals, unfair to #Citizens",
+            "Is she admitting to a crime here? traitor who should be in prison for life @user #BuildTheWall #EndDACA #BoycottNFL"
+          ]
+        },
+        "casual_slang": {
+          "description": "Uses bitch/hoe as casual slang: an exclamation, addressing a friend, self-description, joking banter, a question, complaints, song lyrics, or insults aimed at men or things; not demeaning women.",
+          "examples": [
+            "@user bitch you guessed it!",
+            "@user Bitch I ain't got that kinda money",
+            "@user Sell me your makeup then hoe! I'm extra bitch lmao",
+            "@user Tucker an arrogant ahole! A Trump bitch!",
+            "@user She agay bitch?",
+            "y'all be moving on soooo quick. out here talking to a new bitch the next day. you are a straight burnt out hoe LMAAAO.",
+            "@user Bitch stfu. Whoever is telling you that or making you feel that way can kick rocks.",
+            "bitch whole pussy out wit some pro-keds on.",
+            "Delete his number and put a face mask on bitch it's recovery szn",
+            "I hate when people line their shoes up around the room. Bitch you not USED to shit."
+          ]
+        },
+        "hate_other_group": {
+          "description": "Hatred, contempt or demeaning generalisations about a race, ethnicity or religion (e.g. black people, Jews, Muslims) other than as immigrants.",
+          "examples": [
+            "It is the very reason of terrorism by blacks that all men should be armed worldwide."
+          ]
+        },
+        "other": "Anything else that does not express hatred toward women or immigrants."
+      },
+      "map": {
+        "hate_women": "hate",
+        "hate_immigrants": "hate",
+        "immigration_politics": "not_hate",
+        "casual_slang": "not_hate",
+        "hate_other_group": "hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "variant_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "You are applying a hate-speech annotation policy to tweets. The protected targets are chiefly women and immigrants (refugees, migrants, asylum seekers, Muslim newcomers, people called 'illegal aliens'), plus racial or religious groups. Mark a tweet as hateful if it shows hatred or contempt for, dehumanises, threatens, or calls for the wholesale exclusion of one of these groups, or attacks an individual woman. Pick the option that best describes the tweet.",
+        "notes": [
+          "Slang use of bitch/hoe is not hate by itself: exclamations, jokes, questions, banter or calling a friend 'bitch' are fine.",
+          "It is hate when bitch/hoe/whore/cunt is used aggressively to insult, curse at or threaten a particular woman, or when women in general are called hoes/bitches.",
+          "Abuse directed at a man (a male pundit called a 'Trump bitch', a guy called a 'burnt out hoe' for switching girls) is not hate against women.",
+          "It is hate to demand immigrants/refugees go home, be kept out or all be deported (#NoImmigrants #NoRefugees, 'go home', bans on whole countries), to call them invaders, or to paint them as criminals, a burden, or bringers of lawlessness and third-world decay.",
+          "It is not hate to only post slogans/hashtags (#BuildTheWall, #SendThemBack, #StopTheInvasion) without a statement about immigrants, to argue over terminology ('illegal alien is the correct term'), or to make a legal or electoral argument about immigration.",
+          "Racist generalisations about black people or other races or religions are hate.",
+          "Opposing DACA or amnesty in a way that wants Dreamers or illegal immigrants deported or removed (#NoDACA #NoAmnesty with deportation, #gohome #sendthemback endorsing removal) is hateful.",
+          "Reposting a crime news headline about an immigrant with a wall hashtag, without further comment about immigrants, is not hateful; nor is #SendThemBack used about non-immigration topics.",
+          "Supportive or affectionate tweets to a friend that use 'bitch' (e.g. 'Bitch stfu, whoever says that can kick rocks') are not hateful; putting down other women as hoes or bitches is.",
+          "Attacking a politician or public figure (e.g. calling her a traitor) while adding immigration hashtags is not hate unless it demeans immigrants or women as such."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "hate_women": {
+          "description": "Misogynistic abuse: a woman is cursed at, insulted or threatened with gendered slurs used hostilely, a stream of abusive slurs, women generalised as hoes/bitches, sexual objectification, or claims women are inferior.",
+          "examples": [
+            "u always a hoe to a nigga that can't have you & ugly to a bitch that can't stand you",
+            "@user @user not the bitch that slagged my dog",
+            "Nigga they don't like yo hoe ass no more so they unfollowed you. Ain't no glitch bitch",
+            "MOTHERFUCKING BITCH DICK CUNTBAG LARD EATING ASS SU...",
+            "Bitches hollering it's tooo hot!! Well bitch go back to winter you can have that shit hoe",
+            "bitch, i will dog walk you like the rest of these hoes..",
+            "you can never take a L off a real bitch im hotter than them hoes that you chill w",
+            "don't say it in a curious cat bitch whoever tf you are",
+            "Dirty ass feet go take a bath bitch",
+            "I don't just follow hoes on twitter/Instagram who just cute....bitch you have to have at least some type of style"
+          ]
+        },
+        "hate_immigrants": {
+          "description": "Hostility to immigrants or refugees as people: calling them invaders, scum, rapefugees, animals or parasites; painting them as criminals, rapists, diseased, lazy or a burden; or demanding they all go home, be banned or deported.",
+          "examples": [
+            "USA NEEDS TO WAKE UP!#NoRefugees#NoMigrants #NoChainMigration#NoDACA#NoImmigrants",
+            "We must build the #Wall! We must deport every illegal alien!",
+            "#MuslimBan no people from these countries should be allowed",
+            "This FOOL is promoting lawlessness from illegals and wants to turn ATL into a 3rd world city",
+            "Go home and make your country better or enter ours legally #NoDACA we can't afford them",
+            "...to Hide the fact that over 32,000 Criminal Aliens have been incarcerated",
+            "There will be a Cronulla Roits 2 in Melbourne. #wearesickofit #sendthemhome",
+            "#NoDACA, #NoAmnesty. Dreamers could be allowed to apply for legal migration once deported",
+            "Hes the best man for the job.#gohome #strongborders #sendthemback",
+            "Aren't u one of the low life scum who defends people bringing fentanyl into this country from Mexico?"
+          ]
+        },
+        "immigration_politics": {
+          "description": "Immigration, the border, the wall, DACA or ICE discussed as politics or law: slogans and hashtags, rally news, elections, terminology or law-and-order arguments, with no demeaning of immigrants and no call to expel them all.",
+          "examples": [
+            "A little louder @user for the liberals in the back. #SendThemBack #BuildTheWall",
+            "Because it's against the law and undermines the honest efforts of LEGAL immigrants. #SendThemBack",
+            "#IllegalAliens are literally determining the balance of power in our nation.",
+            "ILLEGAL ALIEN is the correct term. There are no Illegal Immigrants. There are only Legal Immigrants.",
+            "@user #Immigration will decide the fate of our nation. #StopTheInvasion",
+            "@user #SendThemBack I will contribute to the plane fare. No joke.",
+            "#BuildThatWall#StandWithICE#AmericaFirstPolice: Illegal Immigrant Arrested In Shooting Of Upper Darby Store Owner",
+            "Africans having their say about Blacks in Europe, and Europeans in Africa, at the #LandExpropriationHearings #SendThemBack",
+            "so is working #IllegalAliens for pennies on the dollar, knowing they can't come forward about it because they are here illegally... unfair to illegals, unfair to #Citizens",
+            "Is she admitting to a crime here? traitor who should be in prison for life @user #BuildTheWall #EndDACA #BoycottNFL"
+          ]
+        },
+        "casual_slang": {
+          "description": "bitch/hoe as everyday slang: exclamations, talking to a friend, describing oneself, joking, asking a question, complaining, lyrics, or insults at men or objects; women are not being demeaned.",
+          "examples": [
+            "@user bitch you guessed it!",
+            "@user Bitch I ain't got that kinda money",
+            "@user Sell me your makeup then hoe! I'm extra bitch lmao",
+            "@user Tucker an arrogant ahole! A Trump bitch!",
+            "@user She agay bitch?",
+            "y'all be moving on soooo quick. out here talking to a new bitch the next day. you are a straight burnt out hoe LMAAAO.",
+            "@user Bitch stfu. Whoever is telling you that or making you feel that way can kick rocks.",
+            "bitch whole pussy out wit some pro-keds on.",
+            "Delete his number and put a face mask on bitch it's recovery szn",
+            "I hate when people line their shoes up around the room. Bitch you not USED to shit."
+          ]
+        },
+        "hate_other_group": {
+          "description": "Contempt or demeaning generalisations about a race, ethnicity or religion (black people, Jews, Muslims, etc.) not framed as immigration.",
+          "examples": [
+            "It is the very reason of terrorism by blacks that all men should be armed worldwide."
+          ]
+        },
+        "other": "Something else with no hatred toward women, immigrants or another group."
+      },
+      "map": {
+        "hate_women": "hate",
+        "hate_immigrants": "hate",
+        "immigration_politics": "not_hate",
+        "casual_slang": "not_hate",
+        "hate_other_group": "hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "variant_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Decide whether this tweet is hate speech under our policy. The policy protects women and immigrants above all (migrants, refugees, asylum seekers, incoming Muslims, 'illegal aliens'), and also races and religions. Hate speech degrades, dehumanises, threatens or seeks to exclude such a group as a whole, or abuses a particular woman. Which of the following categories is the best fit?",
+        "notes": [
+          "Do not treat 'bitch' or 'hoe' as hate automatically. Friendly, joking, exclamatory or questioning uses, including calling a friend 'bitch', are not hate.",
+          "Hostile use of bitch/hoe/whore/cunt to insult, abuse or threaten a specific woman, or calling women generally hoes or bitches, is hate.",
+          "When the insulted person is a man (e.g. 'Trump bitch' for a male host, 'burnt out hoe' for a guy who moves on fast), it is not hate against women.",
+          "Calls for immigrants/refugees to go home, stay out or all be deported (#NoImmigrants, #NoRefugees, 'deport every illegal alien', country bans), labelling them invaders, or depicting them as criminals, burdens or carriers of lawlessness and third-world decline, are hate.",
+          "Hashtag-only or slogan-only posts (#BuildTheWall, #SendThemBack, #StopTheInvasion) that make no statement about immigrants, debates over the term 'illegal alien', and legal or electoral arguments about immigration are not hate.",
+          "Racist generalisations about black people or any race or religion are hate.",
+          "Opposing DACA or amnesty in a way that wants Dreamers or illegal immigrants deported or removed (#NoDACA #NoAmnesty with deportation, #gohome #sendthemback endorsing removal) is hateful.",
+          "Reposting a crime news headline about an immigrant with a wall hashtag, without further comment about immigrants, is not hateful; nor is #SendThemBack used about non-immigration topics.",
+          "Supportive or affectionate tweets to a friend that use 'bitch' (e.g. 'Bitch stfu, whoever says that can kick rocks') are not hateful; putting down other women as hoes or bitches is.",
+          "Attacking a politician or public figure (e.g. calling her a traitor) while adding immigration hashtags is not hate unless it demeans immigrants or women as such."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "hate_women": {
+          "description": "Hate toward women: gendered slurs (bitch, hoe, whore, cunt, slut) hurled hostilely at a woman, threats, slur-filled abuse, sweeping claims that women are hoes/bitches, sexual objectification, or claims of female inferiority.",
+          "examples": [
+            "u always a hoe to a nigga that can't have you & ugly to a bitch that can't stand you",
+            "@user @user not the bitch that slagged my dog",
+            "Nigga they don't like yo hoe ass no more so they unfollowed you. Ain't no glitch bitch",
+            "MOTHERFUCKING BITCH DICK CUNTBAG LARD EATING ASS SU...",
+            "Bitches hollering it's tooo hot!! Well bitch go back to winter you can have that shit hoe",
+            "bitch, i will dog walk you like the rest of these hoes..",
+            "you can never take a L off a real bitch im hotter than them hoes that you chill w",
+            "don't say it in a curious cat bitch whoever tf you are",
+            "Dirty ass feet go take a bath bitch",
+            "I don't just follow hoes on twitter/Instagram who just cute....bitch you have to have at least some type of style"
+          ]
+        },
+        "hate_immigrants": {
+          "description": "Hate toward immigrants/refugees: dehumanising labels (invaders, scum, rapefugees, animals, parasites), casting them as criminals, rapists, disease carriers, lazy or a drain, or insisting they all be expelled, banned or sent home.",
+          "examples": [
+            "USA NEEDS TO WAKE UP!#NoRefugees#NoMigrants #NoChainMigration#NoDACA#NoImmigrants",
+            "We must build the #Wall! We must deport every illegal alien!",
+            "#MuslimBan no people from these countries should be allowed",
+            "This FOOL is promoting lawlessness from illegals and wants to turn ATL into a 3rd world city",
+            "Go home and make your country better or enter ours legally #NoDACA we can't afford them",
+            "...to Hide the fact that over 32,000 Criminal Aliens have been incarcerated",
+            "There will be a Cronulla Roits 2 in Melbourne. #wearesickofit #sendthemhome",
+            "#NoDACA, #NoAmnesty. Dreamers could be allowed to apply for legal migration once deported",
+            "Hes the best man for the job.#gohome #strongborders #sendthemback",
+            "Aren't u one of the low life scum who defends people bringing fentanyl into this country from Mexico?"
+          ]
+        },
+        "immigration_politics": {
+          "description": "Political or legal talk about immigration, borders, the wall, DACA or ICE: slogans, hashtags, rallies, voting, terminology, rule of law, without degrading immigrants or demanding they all be removed.",
+          "examples": [
+            "A little louder @user for the liberals in the back. #SendThemBack #BuildTheWall",
+            "Because it's against the law and undermines the honest efforts of LEGAL immigrants. #SendThemBack",
+            "#IllegalAliens are literally determining the balance of power in our nation.",
+            "ILLEGAL ALIEN is the correct term. There are no Illegal Immigrants. There are only Legal Immigrants.",
+            "@user #Immigration will decide the fate of our nation. #StopTheInvasion",
+            "@user #SendThemBack I will contribute to the plane fare. No joke.",
+            "#BuildThatWall#StandWithICE#AmericaFirstPolice: Illegal Immigrant Arrested In Shooting Of Upper Darby Store Owner",
+            "Africans having their say about Blacks in Europe, and Europeans in Africa, at the #LandExpropriationHearings #SendThemBack",
+            "so is working #IllegalAliens for pennies on the dollar, knowing they can't come forward about it because they are here illegally... unfair to illegals, unfair to #Citizens",
+            "Is she admitting to a crime here? traitor who should be in prison for life @user #BuildTheWall #EndDACA #BoycottNFL"
+          ]
+        },
+        "casual_slang": {
+          "description": "Casual slang with bitch/hoe: exclamation, addressing a friend, self-reference, teasing, questions, complaints, lyrics, or insults directed at men or things, with no degradation of women.",
+          "examples": [
+            "@user bitch you guessed it!",
+            "@user Bitch I ain't got that kinda money",
+            "@user Sell me your makeup then hoe! I'm extra bitch lmao",
+            "@user Tucker an arrogant ahole! A Trump bitch!",
+            "@user She agay bitch?",
+            "y'all be moving on soooo quick. out here talking to a new bitch the next day. you are a straight burnt out hoe LMAAAO.",
+            "@user Bitch stfu. Whoever is telling you that or making you feel that way can kick rocks.",
+            "bitch whole pussy out wit some pro-keds on.",
+            "Delete his number and put a face mask on bitch it's recovery szn",
+            "I hate when people line their shoes up around the room. Bitch you not USED to shit."
+          ]
+        },
+        "hate_other_group": {
+          "description": "Demeaning or hateful generalisations about a race, ethnicity or religion (e.g. black people, Jews, Muslims) outside the immigration framing.",
+          "examples": [
+            "It is the very reason of terrorism by blacks that all men should be armed worldwide."
+          ]
+        },
+        "other": "Anything else that shows no hatred toward women, immigrants, or another group."
+      },
+      "map": {
+        "hate_women": "hate",
+        "hate_immigrants": "hate",
+        "immigration_politics": "not_hate",
+        "casual_slang": "not_hate",
+        "hate_other_group": "hate",
+        "other": "not_hate"
+      }
+    }
+  ]
+}

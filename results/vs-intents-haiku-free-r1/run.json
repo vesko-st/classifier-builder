@@ -1,0 +1,49 @@
+{
+  "run_id": "vs-intents-haiku-free-r1",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:52:57",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 259,
+    "num_turns": 33,
+    "total_cost_usd": 0.22561555000000005
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.2,
+      "note": "Initial classifier: simple choice with 77 intent options. All records classified.",
+      "test": {
+        "jev": {
+          "accuracy": 0.8023,
+          "macro_f1": 0.7942,
+          "est_cost_usd": 0.228272,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 99,
+      "estimate": 0.76,
+      "note": "Final classifier v2: refined instructions with key distinctions between similar intents. Achieved 80% on initial 30 sampled records (24/30), 76.2% on all 42 labeled records (32/42). Budget fully spent on 42 labels + 1 clarification question.",
+      "test": {
+        "jev": {
+          "accuracy": 0.7945,
+          "macro_f1": 0.7871,
+          "est_cost_usd": 0.254838,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

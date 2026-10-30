@@ -1,0 +1,158 @@
+{
+  "version": 1,
+  "name": "v15",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "A",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Classify this tweet under a hate-speech annotation policy that covers hate against immigrants and against women. Pick the option that best describes the tweet's main content.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrants_insulted": "Insults or dehumanises immigrants/refugees/illegal aliens themselves (scum, dummies, invaders, rapefugees, animals, parasites, lazy scroungers), says they bring disease or drugs or are out to harm us, or insults people for defending those who smuggle fentanyl in, or that importing them ruins a country.",
+        "immigrants_removal": "Demands or endorses removing, expelling or excluding immigrants as people, in the text or in its hashtags when they are the point of the tweet: 'get them out of here', 'send them all back', 'go home', 'deport him / deport them all', 'every illegal deported is a win', 'we can't import the poor', 'we shouldn't pay for illegal children or their parents', 'you're not welcome', or says they flood/overrun us. Not when the text just complains to, pleads with or advises a politician (e.g. 'the wall is more important than tax cuts!') and #DeportThemAll/#BuildThatWall only appear as trailing hashtags.",
+        "immigrant_crime_framing": "The tweet's own words take a crime by an illegal immigrant/refugee and frame it as typical of immigrants or as proof they are dangerous (often with deport / wall / no-amnesty hashtags).",
+        "immigration_policy": "Policy-style immigration opinion or news that neither attacks immigrants nor calls for removing them: building or funding the wall, border security, ending DACA, opposing amnesty, 'apply legally', voting/demographics, defending the term 'illegal aliens' or saying illegal aliens shouldn't break the law and should follow the legal process (that it's unfair to legal immigrants), even with #SendThemBack attached, attacking politicians/media, a vague slogan (e.g. 'Immigration will decide the fate of our nation #StopTheInvasion'), a bare news headline about an arrest or crime with only slogan hashtags, or deport/send-them-back hashtags tacked onto a tweet about something unrelated.",
+        "women_hostile_slur": "Hostile insult with a gendered slur (bitch, hoe, whore, cunt, slut) aimed at a woman or at someone whose gender is unclear ('whoever unfollowed me you a bitch', 'shut up you dumb hoe', 'so now you friends with him bitch fuck you hoe', 'shoot dis bitch', 'don't call me a bitch you whore'); generalisations demeaning women ('these hoes...', 'bitches always...'); sexual threats or harassment, including quoting a violent misogynistic line such as 'rape a pregnant bitch' even while commenting on it; demeaning women as a gender.",
+        "insult_at_man": "Gendered slur used to insult a clearly male target (a named man, 'this dude', 'so called men', a male politician or celebrity).",
+        "casual_slang": "Friendly, affectionate, self-referential, boastful or exclamatory use of bitch/hoe/cunt ('bitch please', 'bitch why am I...', 'karma is a bitch', 'life's a bitch', 'I'm a bad bitch', 'I need a bad bitch', 'I came to slay, bitch', a drunk cunt tweeting her thoughts, 'happy birthday bitch', song lyrics), talking about the words themselves (hearing a guy call a girl a bitch), describing or criticising someone else's misogyny ('harasses women and calls them bitch, then plays the victim'), or the author complaining that someone called them a name without slurring back.",
+        "other": "Anything else: insults not about gender or immigration (e.g. 'stupid cunts' about polluters), other topics, neutral content."
+      },
+      "map": {
+        "immigrants_insulted": "hate",
+        "immigrants_removal": "hate",
+        "immigrant_crime_framing": "hate",
+        "immigration_policy": "not_hate",
+        "women_hostile_slur": "hate",
+        "insult_at_man": "not_hate",
+        "casual_slang": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "A_rev",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Classify this tweet under a hate-speech annotation policy that covers hate against immigrants and against women. Pick the option that best describes the tweet's main content.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "other": "Anything else: insults not about gender or immigration (e.g. 'stupid cunts' about polluters), other topics, neutral content.",
+        "casual_slang": "Friendly, affectionate, self-referential, boastful or exclamatory use of bitch/hoe/cunt ('bitch please', 'bitch why am I...', 'karma is a bitch', 'life's a bitch', 'I'm a bad bitch', 'I need a bad bitch', 'I came to slay, bitch', a drunk cunt tweeting her thoughts, 'happy birthday bitch', song lyrics), talking about the words themselves (hearing a guy call a girl a bitch), describing or criticising someone else's misogyny ('harasses women and calls them bitch, then plays the victim'), or the author complaining that someone called them a name without slurring back.",
+        "insult_at_man": "Gendered slur used to insult a clearly male target (a named man, 'this dude', 'so called men', a male politician or celebrity).",
+        "women_hostile_slur": "Hostile insult with a gendered slur (bitch, hoe, whore, cunt, slut) aimed at a woman or at someone whose gender is unclear ('whoever unfollowed me you a bitch', 'shut up you dumb hoe', 'so now you friends with him bitch fuck you hoe', 'shoot dis bitch', 'don't call me a bitch you whore'); generalisations demeaning women ('these hoes...', 'bitches always...'); sexual threats or harassment, including quoting a violent misogynistic line such as 'rape a pregnant bitch' even while commenting on it; demeaning women as a gender.",
+        "immigration_policy": "Policy-style immigration opinion or news that neither attacks immigrants nor calls for removing them: building or funding the wall, border security, ending DACA, opposing amnesty, 'apply legally', voting/demographics, defending the term 'illegal aliens' or saying illegal aliens shouldn't break the law and should follow the legal process (that it's unfair to legal immigrants), even with #SendThemBack attached, attacking politicians/media, a vague slogan (e.g. 'Immigration will decide the fate of our nation #StopTheInvasion'), a bare news headline about an arrest or crime with only slogan hashtags, or deport/send-them-back hashtags tacked onto a tweet about something unrelated.",
+        "immigrant_crime_framing": "The tweet's own words take a crime by an illegal immigrant/refugee and frame it as typical of immigrants or as proof they are dangerous (often with deport / wall / no-amnesty hashtags).",
+        "immigrants_removal": "Demands or endorses removing, expelling or excluding immigrants as people, in the text or in its hashtags when they are the point of the tweet: 'get them out of here', 'send them all back', 'go home', 'deport him / deport them all', 'every illegal deported is a win', 'we can't import the poor', 'we shouldn't pay for illegal children or their parents', 'you're not welcome', or says they flood/overrun us. Not when the text just complains to, pleads with or advises a politician (e.g. 'the wall is more important than tax cuts!') and #DeportThemAll/#BuildThatWall only appear as trailing hashtags.",
+        "immigrants_insulted": "Insults or dehumanises immigrants/refugees/illegal aliens themselves (scum, dummies, invaders, rapefugees, animals, parasites, lazy scroungers), says they bring disease or drugs or are out to harm us, or insults people for defending those who smuggle fentanyl in, or that importing them ruins a country."
+      },
+      "map": {
+        "other": "not_hate",
+        "casual_slang": "not_hate",
+        "insult_at_man": "not_hate",
+        "women_hostile_slur": "hate",
+        "immigration_policy": "not_hate",
+        "immigrant_crime_framing": "hate",
+        "immigrants_removal": "hate",
+        "immigrants_insulted": "hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "A_alt",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "You are applying a hate-speech labelling policy whose targets are immigrants and women. Read the tweet and choose the description that fits its main message best; hashtags matter only when they carry the message.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrants_insulted": "Insults or dehumanises immigrants/refugees/illegal aliens themselves (scum, dummies, invaders, rapefugees, animals, parasites, lazy scroungers), says they bring disease or drugs or are out to harm us, or insults people for defending those who smuggle fentanyl in, or that importing them ruins a country.",
+        "immigrants_removal": "Demands or endorses removing, expelling or excluding immigrants as people, in the text or in its hashtags when they are the point of the tweet: 'get them out of here', 'send them all back', 'go home', 'deport him / deport them all', 'every illegal deported is a win', 'we can't import the poor', 'we shouldn't pay for illegal children or their parents', 'you're not welcome', or says they flood/overrun us. Not when the text just complains to, pleads with or advises a politician (e.g. 'the wall is more important than tax cuts!') and #DeportThemAll/#BuildThatWall only appear as trailing hashtags.",
+        "immigrant_crime_framing": "The tweet's own words take a crime by an illegal immigrant/refugee and frame it as typical of immigrants or as proof they are dangerous (often with deport / wall / no-amnesty hashtags).",
+        "immigration_policy": "Policy-style immigration opinion or news that neither attacks immigrants nor calls for removing them: building or funding the wall, border security, ending DACA, opposing amnesty, 'apply legally', voting/demographics, defending the term 'illegal aliens' or saying illegal aliens shouldn't break the law and should follow the legal process (that it's unfair to legal immigrants), even with #SendThemBack attached, attacking politicians/media, a vague slogan (e.g. 'Immigration will decide the fate of our nation #StopTheInvasion'), a bare news headline about an arrest or crime with only slogan hashtags, or deport/send-them-back hashtags tacked onto a tweet about something unrelated.",
+        "women_hostile_slur": "Hostile insult with a gendered slur (bitch, hoe, whore, cunt, slut) aimed at a woman or at someone whose gender is unclear ('whoever unfollowed me you a bitch', 'shut up you dumb hoe', 'so now you friends with him bitch fuck you hoe', 'shoot dis bitch', 'don't call me a bitch you whore'); generalisations demeaning women ('these hoes...', 'bitches always...'); sexual threats or harassment, including quoting a violent misogynistic line such as 'rape a pregnant bitch' even while commenting on it; demeaning women as a gender.",
+        "insult_at_man": "Gendered slur used to insult a clearly male target (a named man, 'this dude', 'so called men', a male politician or celebrity).",
+        "casual_slang": "Friendly, affectionate, self-referential, boastful or exclamatory use of bitch/hoe/cunt ('bitch please', 'bitch why am I...', 'karma is a bitch', 'life's a bitch', 'I'm a bad bitch', 'I need a bad bitch', 'I came to slay, bitch', a drunk cunt tweeting her thoughts, 'happy birthday bitch', song lyrics), talking about the words themselves (hearing a guy call a girl a bitch), describing or criticising someone else's misogyny ('harasses women and calls them bitch, then plays the victim'), or the author complaining that someone called them a name without slurring back.",
+        "other": "Anything else: insults not about gender or immigration (e.g. 'stupid cunts' about polluters), other topics, neutral content."
+      },
+      "map": {
+        "immigrants_insulted": "hate",
+        "immigrants_removal": "hate",
+        "immigrant_crime_framing": "hate",
+        "immigration_policy": "not_hate",
+        "women_hostile_slur": "hate",
+        "insult_at_man": "not_hate",
+        "casual_slang": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "B",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "An annotation team labels tweets as hate speech when they target immigrants or women. Which description fits this tweet best?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrants_insulted": "Degrades immigrants, refugees or 'illegals' as people: name-calling (scum, dummies, invaders, animals, rapefugees, parasites, lazy scroungers), claims they carry disease or drugs or mean us harm (incl. calling defenders of fentanyl-smuggling migrants scum), or that bringing them in turns a country into a dump.",
+        "immigrants_removal": "Wants immigrants gone or kept out as people — stated in words or by hashtags that carry the message: 'send them back', 'get them out', 'go home', 'deport him', '#DeportThemAll' as the tweet's point, 'every deportation is a raise for citizens', 'we can't take in the poor', 'we won't have to pay for these illegal children or their parents', 'not welcome here', 'they are flooding our state'. Not when the words only scold, urge or advise a politician (e.g. 'don't listen to him, the wall matters more than tax 2.0') and the deport/wall hashtags are just tacked on at the end.",
+        "immigrant_crime_framing": "In its own words (not just a headline), uses a crime committed by an illegal immigrant or refugee as evidence that immigrants are dangerous or criminal, usually with wall / deport / no-amnesty hashtags.",
+        "immigration_policy": "Discusses immigration as policy or politics without degrading immigrants or calling for their removal: wall funding, border security, DACA, amnesty, legal routes, elections and demographics, the phrase 'illegal aliens' being accurate or that they should follow the legal protocol instead of breaking the law and undermining legal immigrants (even if #SendThemBack is attached), criticism of politicians or media, a generic rallying slogan like '#Immigration will decide the fate of our nation #StopTheInvasion', a plain news headline about an arrest or gang bust with only slogan hashtags, or '#sendthemback' added to a tweet about an unrelated topic.",
+        "women_hostile_slur": "Attacks a woman, women in general, or a person of unstated gender with a gendered slur used hostilely ('you a bitch' to whoever unfollowed, 'dumb hoe', 'bitch fuck you hoe', 'shoot dis bitch', firing back 'you whore'); sweeping put-downs of women ('these hoes', 'bitches be...'); sexual threats, harassment (also when repeating a violent misogynistic lyric like 'rape a pregnant bitch' to comment on it) or degrading women as a sex.",
+        "insult_at_man": "Uses bitch/cunt/hoe to insult someone clearly male: a named man, 'this dude', 'so called men', a male public figure.",
+        "casual_slang": "Bitch/hoe/cunt used without hostility toward a woman: banter between friends, affection, exclamations and sayings ('bitch please', 'karma is a bitch', 'life's a bitch because a slut would be too easy'), bragging or desires ('I came to slay, bitch', 'I need a bad bitch'), describing oneself, lyrics, discussing the words or criticising a man who calls women bitches, or complaining about being called a name without insulting back.",
+        "other": "Everything else: insults unrelated to gender or immigration (e.g. 'stupid cunts' for polluters), unrelated topics, neutral posts."
+      },
+      "map": {
+        "immigrants_insulted": "hate",
+        "immigrants_removal": "hate",
+        "immigrant_crime_framing": "hate",
+        "immigration_policy": "not_hate",
+        "women_hostile_slur": "hate",
+        "insult_at_man": "not_hate",
+        "casual_slang": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "B_rev",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "An annotation team labels tweets as hate speech when they target immigrants or women. Which description fits this tweet best?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "other": "Everything else: insults unrelated to gender or immigration (e.g. 'stupid cunts' for polluters), unrelated topics, neutral posts.",
+        "casual_slang": "Bitch/hoe/cunt used without hostility toward a woman: banter between friends, affection, exclamations and sayings ('bitch please', 'karma is a bitch', 'life's a bitch because a slut would be too easy'), bragging or desires ('I came to slay, bitch', 'I need a bad bitch'), describing oneself, lyrics, discussing the words or criticising a man who calls women bitches, or complaining about being called a name without insulting back.",
+        "insult_at_man": "Uses bitch/cunt/hoe to insult someone clearly male: a named man, 'this dude', 'so called men', a male public figure.",
+        "women_hostile_slur": "Attacks a woman, women in general, or a person of unstated gender with a gendered slur used hostilely ('you a bitch' to whoever unfollowed, 'dumb hoe', 'bitch fuck you hoe', 'shoot dis bitch', firing back 'you whore'); sweeping put-downs of women ('these hoes', 'bitches be...'); sexual threats, harassment (also when repeating a violent misogynistic lyric like 'rape a pregnant bitch' to comment on it) or degrading women as a sex.",
+        "immigration_policy": "Discusses immigration as policy or politics without degrading immigrants or calling for their removal: wall funding, border security, DACA, amnesty, legal routes, elections and demographics, the phrase 'illegal aliens' being accurate or that they should follow the legal protocol instead of breaking the law and undermining legal immigrants (even if #SendThemBack is attached), criticism of politicians or media, a generic rallying slogan like '#Immigration will decide the fate of our nation #StopTheInvasion', a plain news headline about an arrest or gang bust with only slogan hashtags, or '#sendthemback' added to a tweet about an unrelated topic.",
+        "immigrant_crime_framing": "In its own words (not just a headline), uses a crime committed by an illegal immigrant or refugee as evidence that immigrants are dangerous or criminal, usually with wall / deport / no-amnesty hashtags.",
+        "immigrants_removal": "Wants immigrants gone or kept out as people — stated in words or by hashtags that carry the message: 'send them back', 'get them out', 'go home', 'deport him', '#DeportThemAll' as the tweet's point, 'every deportation is a raise for citizens', 'we can't take in the poor', 'we won't have to pay for these illegal children or their parents', 'not welcome here', 'they are flooding our state'. Not when the words only scold, urge or advise a politician (e.g. 'don't listen to him, the wall matters more than tax 2.0') and the deport/wall hashtags are just tacked on at the end.",
+        "immigrants_insulted": "Degrades immigrants, refugees or 'illegals' as people: name-calling (scum, dummies, invaders, animals, rapefugees, parasites, lazy scroungers), claims they carry disease or drugs or mean us harm (incl. calling defenders of fentanyl-smuggling migrants scum), or that bringing them in turns a country into a dump."
+      },
+      "map": {
+        "other": "not_hate",
+        "casual_slang": "not_hate",
+        "insult_at_man": "not_hate",
+        "women_hostile_slur": "hate",
+        "immigration_policy": "not_hate",
+        "immigrant_crime_framing": "hate",
+        "immigrants_removal": "hate",
+        "immigrants_insulted": "hate"
+      }
+    }
+  ],
+  "weights": [
+    1,
+    1,
+    1,
+    1,
+    1
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.52
+  }
+}

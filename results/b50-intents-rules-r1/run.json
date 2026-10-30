@@ -1,0 +1,79 @@
+{
+  "run_id": "b50-intents-rules-r1",
+  "task": "banking77_intents",
+  "budget": 50,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:40:29",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1963,
+    "num_turns": 49,
+    "total_cost_usd": 2.149531
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 flat 77-option choice, descriptions from prior knowledge of intent names; no labels yet",
+      "test": {
+        "jev": {
+          "accuracy": 0.8558,
+          "macro_f1": 0.8521,
+          "est_cost_usd": 0.392949,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 26,
+      "estimate": 0.82,
+      "note": "3-variant ensemble; rules H1-H4,H7,H8 (top-up fee default card, deposit->cheque/cash, physical card wanted->order, transfer direction rules); 13/13 bought labels (biased, uncertainty-picked)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8657,
+          "macro_f1": 0.8608,
+          "est_cost_usd": 1.508732,
+          "total": 3080,
+          "answered": 3076
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 42,
+      "estimate": 0.83,
+      "note": "e11 ensemble: + H9 (made transfer not here yet -> recipient), H10 (fees for banking abroad -> transfer_fee_charged, paraphrase-confirmed), H11 (ATM exchange rate questions -> wrong_exchange_rate_for_cash_withdrawal), near-tie pins; 21/21 labels (biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.864,
+          "macro_f1": 0.8593,
+          "est_cost_usd": 1.599926,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 50,
+      "estimate": 0.83,
+      "note": "final: e12 ensemble + H12 (incoming transfer from named place, how much longer -> transfer_timing), H13 (replacement shipped abroad -> card_about_to_expire); 24/25 labels, only miss 0437 = suspected noise",
+      "test": {
+        "jev": {
+          "accuracy": 0.8643,
+          "macro_f1": 0.8596,
+          "est_cost_usd": 1.621908,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "run_id": "b200-routing-rules-r3",
+  "task": "banking77_routing",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:41:19",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 3517,
+    "num_turns": 75,
+    "total_cost_usd": 3.7849348000000016
+  },
+  "final_version": 13,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: 65 intent options mapped to 6 teams, mapping guessed from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.7919,
+          "macro_f1": 0.7677,
+          "est_cost_usd": 0.241984,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 18,
+      "estimate": 0.8,
+      "note": "v2: extra charge on statement -> disputes (tested), card choice -> cards, general security -> account, declined 'transfers' -> payments",
+      "test": {
+        "jev": {
+          "accuracy": 0.8026,
+          "macro_f1": 0.785,
+          "est_cost_usd": 0.254532,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 44,
+      "estimate": 0.83,
+      "note": "v3: lost/stolen report->fraud, found card->cards, pending card payment & cash withdrawal->cards, cancelled payments->disputes, fee on known txn->pricing",
+      "test": {
+        "jev": {
+          "accuracy": 0.8412,
+          "macro_f1": 0.8205,
+          "est_cost_usd": 0.267252,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 58,
+      "estimate": 0.85,
+      "note": "v5: 3-member wording ensemble; + cancel order->disputes, can't-find payment->disputes, daily card limit->payments, compromised PIN->fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.8468,
+          "macro_f1": 0.8257,
+          "est_cost_usd": 0.826853,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.86,
+      "note": "v6: split top-up options; Apple/Google Pay->cards, card-brand/currency support->pricing, salary in other currency->payments, US signup->account, PIN->cards",
+      "test": {
+        "jev": {
+          "accuracy": 0.8646,
+          "macro_f1": 0.8399,
+          "est_cost_usd": 0.911713,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 96,
+      "estimate": 0.87,
+      "note": "v7: unknown money->fraud, terminated payment->disputes, credit card supported for top-up->pricing, visa/mc->cards",
+      "test": {
+        "jev": {
+          "accuracy": 0.8656,
+          "macro_f1": 0.8404,
+          "est_cost_usd": 0.938879,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 112,
+      "estimate": 0.88,
+      "note": "v8: prior tests: verify top-up->account, passcode->fraud, PIN blocked->fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.9003,
+          "macro_f1": 0.8845,
+          "est_cost_usd": 0.942454,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 130,
+      "estimate": 0.89,
+      "note": "v8b: + ATM swallowed card -> fraud (prior test)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9133,
+          "macro_f1": 0.8981,
+          "est_cost_usd": 0.0,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 148,
+      "estimate": 0.9,
+      "note": "v9: wrong exchange rate complaints -> disputes (prior test + 2 tests)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9331,
+          "macro_f1": 0.9287,
+          "est_cost_usd": 0.959395,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 10,
+      "points_spent": 164,
+      "estimate": 0.9,
+      "note": "v10: unreceived cash in app->fraud, who is giving me money->account, PIN rejected->fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.936,
+          "macro_f1": 0.9324,
+          "est_cost_usd": 0.986095,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 11,
+      "points_spent": 178,
+      "estimate": 0.9,
+      "note": "v11: no cash received->disputes, SEPA full amount->pricing, crypto purchase->account",
+      "test": {
+        "jev": {
+          "accuracy": 0.9377,
+          "macro_f1": 0.9345,
+          "est_cost_usd": 1.025218,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 12,
+      "points_spent": 192,
+      "estimate": 0.9,
+      "note": "v12: receiving-money fee->pricing, phone left behind->fraud, slow payment->cards, direct debit refund->fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.9405,
+          "macro_f1": 0.9367,
+          "est_cost_usd": 1.046745,
+          "total": 3080,
+          "answered": 3076
+        }
+      }
+    },
+    {
+      "version": 13,
+      "points_spent": 200,
+      "estimate": 0.9,
+      "note": "final: v12 unchanged; last 4 prior tests (exchange cost, transfer not received, duplicate charge, exchange in app) all agree",
+      "test": {
+        "jev": {
+          "accuracy": 0.9403,
+          "macro_f1": 0.9363,
+          "est_cost_usd": 0.001362,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

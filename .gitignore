@@ -25,3 +25,4 @@ paper/acl/*.fls
 paper/acl/*.log
 paper/acl/*.out
 paper/acl/*.pdf
+!paper/acl/paper.pdf

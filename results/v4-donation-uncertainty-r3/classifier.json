@@ -1,0 +1,95 @@
+{
+  "version": 1,
+  "name": "donation_e4",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v7a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "This chat comes from a study: one participant was asked to persuade the other to donate part of their task payment (up to $2) to Save the Children; after the chat the potential donor could donate any amount, even a few cents, from that payment. Decide whether the potential donor ended up donating from their task payment.",
+        "who_is_the_donor": "The speaker tags are sometimes swapped or the participants misunderstood their roles. The potential donor is whichever participant is being asked about donating and responds with their own willingness or amounts (e.g. 'I would donate 4 dollars', 'I will definitely donate'), whichever tag they carry. If both talk about donating, focus on the one who states their own intention to give.",
+        "rules": [
+          "Any expressed willingness to give from the task payment counts as donating, even a few cents or vague 'I will donate'.",
+          "Saying they will give elsewhere instead (through the charity's website, later, next month only, to another charity, by volunteering) is not a donation from the task payment.",
+          "If the persuader drops the pitch, sympathises that the person cannot afford it, or the donor focuses on their own hardship, that leans to not donating.",
+          "Engaged, positive, curious donors who accept the arguments without objecting often donate even if no amount is named.",
+          "Not donated: plans to donate on the charity's website or a large amount that cannot come from the $2 task payment ('I would like to make a 50 dollar donation... is there a website?', 'I'll do $20 and go through the site', 'I'll definitely go and make a donation today' after asking about credit cards), unless they also agree to give from this payment.",
+          "Not donated: only offers to match if the other gives ('if you give 1 dollar I will also give 1 dollar') and never confirms.",
+          "Not donated: only sympathy or praise for the charity ('I hope lots of people donate to you') without saying they will give.",
+          "Not donated: the chat drifts to other charities the donor already supports (St Jude, a ministry, Make a Wish) instead of agreeing to give to Save the Children.",
+          "The donor's last statement about giving decides: 'Yes I can' followed later by 'haven't decided yet, I may or maybe not' is not donated.",
+          "Not donated: an early 'yes' to donating that is never followed up because the chat drifts to unrelated topics (politics, small talk) and the charity is never really discussed.",
+          "Not donated: a recurring pledge ('$5 a month', '$36 a month for six months') or mailing a check, rather than giving from this task payment."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "commits_in_task": "The donor agrees to give from their task payment: names an amount, says yes, or says they will donate",
+        "positive_engaged": "No explicit commitment, but the donor is warm, accepts the arguments, and raises no objection to giving",
+        "elsewhere_or_later": "The donor prefers to give later, via the website, to another cause, or in another way, not from this payment",
+        "hardship_or_dropped": "The donor says they cannot afford it, or the persuader backs off / sympathises",
+        "undecided_off_topic": "The chat never gets to the donor's decision; off-topic or unclear",
+        "refuses": "The donor clearly refuses to donate"
+      },
+      "map": {
+        "commits_in_task": "donated",
+        "positive_engaged": "donated",
+        "elsewhere_or_later": "not_donated",
+        "hardship_or_dropped": "not_donated",
+        "undecided_off_topic": "not_donated",
+        "refuses": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v7b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "This chat comes from a study: one participant (the Persuader) was asked to persuade the other (the Persuadee) to donate part of their task payment (up to $2) to Save the Children; after the chat the Persuadee could donate any amount, even a few cents, from that payment. Decide whether the donor ended up donating from their task payment.",
+        "who_is_the_donor": [
+          "Usually the Persuadee is the donor.",
+          "The tags are sometimes swapped: if the tagged 'Persuadee' is the one asking the other whether or how much they would donate, and the tagged 'Persuader' answers with their own willingness or amounts ('I would donate 4 dollars', 'Yes, I was interested in donating', 'I will definitely donate'), then the tagged Persuader is the donor.",
+          "But a Persuader who is pitching the charity and adds 'I will donate $2 too' is using a persuasion tactic; that says nothing about the donor."
+        ],
+        "rules": [
+          "Donated: the donor expresses willingness to give: names an amount (even a few cents, or a pledge with conditions), says yes / 'I will donate' / 'I'd be happy to', or accepts a proposed amount.",
+          "Not donated: only curiosity or interest with no stated willingness ('I might be interested', 'I will look into it', 'I'll check the website').",
+          "Not donated: the donor will give somewhere else instead: through the charity's website ('I'll go donate on the site today'), to another charity they already support, by volunteering, or only at a later time.",
+          "Not donated: skepticism that is never resolved, wanting more information, hardship, or the persuader backing off.",
+          "Not donated: plans to donate on the charity's website or a large amount that cannot come from the $2 task payment ('I would like to make a 50 dollar donation... is there a website?', 'I'll do $20 and go through the site', 'I'll definitely go and make a donation today' after asking about credit cards), unless they also agree to give from this payment.",
+          "Not donated: only offers to match if the other gives ('if you give 1 dollar I will also give 1 dollar') and never confirms.",
+          "Not donated: only sympathy or praise for the charity ('I hope lots of people donate to you') without saying they will give.",
+          "Not donated: the chat drifts to other charities the donor already supports (St Jude, a ministry, Make a Wish) instead of agreeing to give to Save the Children.",
+          "The donor's last statement about giving decides: 'Yes I can' followed later by 'haven't decided yet, I may or maybe not' is not donated.",
+          "Not donated: an early 'yes' to donating that is never followed up because the chat drifts to unrelated topics (politics, small talk) and the charity is never really discussed.",
+          "Not donated: a recurring pledge ('$5 a month', '$36 a month for six months') or mailing a check, rather than giving from this task payment."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "willing_to_give": "The donor states they will give, names or accepts an amount, or pledges to give",
+        "interested_only": "The donor is curious or positive but never says they will give",
+        "elsewhere_or_later": "The donor will give via the website, to another charity, by volunteering, or only later",
+        "skeptical_or_hardship": "The donor stays skeptical, wants more information, cannot afford it, or the persuader backs off",
+        "off_topic": "The chat never gets to giving at all",
+        "refuses": "The donor clearly refuses to donate"
+      },
+      "map": {
+        "willing_to_give": "donated",
+        "interested_only": "not_donated",
+        "elsewhere_or_later": "not_donated",
+        "skeptical_or_hardship": "not_donated",
+        "off_topic": "not_donated",
+        "refuses": "not_donated"
+      }
+    }
+  ],
+  "decision": {
+    "class": "donated",
+    "threshold": 0.5
+  }
+}

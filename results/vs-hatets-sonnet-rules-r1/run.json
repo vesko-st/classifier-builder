@@ -1,0 +1,94 @@
+{
+  "run_id": "vs-hatets-sonnet-rules-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:59:42",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 630,
+    "num_turns": 32,
+    "total_cost_usd": 0.8301303999999998
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description, no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8001,
+          "macro_f1": 0.7995,
+          "est_cost_usd": 0.053168,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 26,
+      "estimate": 0.7,
+      "note": "v2: H1 H2 H3 applied (casual slang / non-target / stop-immigration slogan options)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8028,
+          "macro_f1": 0.8016,
+          "est_cost_usd": 0.062405,
+          "total": 1766,
+          "answered": 1765
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 50,
+      "estimate": 0.68,
+      "note": "v4: narrowed slang, riot/exclusion immigrant rules, non-target attacks",
+      "test": {
+        "jev": {
+          "accuracy": 0.6999,
+          "macro_f1": 0.6794,
+          "est_cost_usd": 0.074084,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 66,
+      "estimate": 0.68,
+      "note": "v5: burden-framing, sexual-degradation generalisations, DeportThemAll slogan",
+      "test": {
+        "jev": {
+          "accuracy": 0.6948,
+          "macro_f1": 0.6737,
+          "est_cost_usd": 0.07846,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 100,
+      "estimate": 0.72,
+      "note": "ensemble of v6 + v7 wordings; 40/45 bought labels (fitted), est discounted for fitting and noisy slang labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7626,
+          "macro_f1": 0.7567,
+          "est_cost_usd": 0.172399,
+          "total": 1766,
+          "answered": 1765
+        }
+      }
+    }
+  ]
+}

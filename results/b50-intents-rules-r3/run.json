@@ -1,0 +1,94 @@
+{
+  "run_id": "b50-intents-rules-r3",
+  "task": "banking77_intents",
+  "budget": 50,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:43:05",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1963,
+    "num_turns": 40,
+    "total_cost_usd": 1.8726672
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft: flat 77-way choice with hand-written descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.8383,
+          "macro_f1": 0.8303,
+          "est_cost_usd": 0.367344,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.82,
+      "note": "e1: 3-member wording ensemble (flat, structured, two-level) + rules H1n,H2,H3,H4n",
+      "test": {
+        "jev": {
+          "accuracy": 0.8379,
+          "macro_f1": 0.8315,
+          "est_cost_usd": 1.386531,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 24,
+      "estimate": 0.83,
+      "note": "e2: ensemble + H1-H7; agrees with all 12 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8403,
+          "macro_f1": 0.8338,
+          "est_cost_usd": 1.40561,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 44,
+      "estimate": 0.84,
+      "note": "e4: ensemble + H1-H11, noise examples, router cues; agrees with all 22 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8442,
+          "macro_f1": 0.8398,
+          "est_cost_usd": 1.46089,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 50,
+      "estimate": 0.85,
+      "note": "e5 final: ensemble + H1-H14; agrees with all 25 labels; H12-H14 untested (budget spent)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8574,
+          "macro_f1": 0.8549,
+          "est_cost_usd": 1.477183,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    }
+  ]
+}

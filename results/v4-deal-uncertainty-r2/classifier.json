@@ -1,0 +1,89 @@
+{
+  "version": 1,
+  "name": "deal_ens_v8_t55",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v5b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A buyer and a seller negotiated the price of a Craigslist item over chat. Did the negotiation close with a deal? Look at the last two or three messages. It is a deal when one side accepted a price (including the listing price), even casually ('okay', 'today will work', agreeing to pick up or pay cash), or when the chat ends on a concession or a firm final offer that the other side is likely to take, because the formal offer is submitted right after the chat. Ignore small loose ends (delivery, repairs, trade-in, paperwork, phone numbers) once a price is accepted. It is no deal only when the chat stops before price talk, someone refuses, or the last message leaves the two sides in clear disagreement. Which describes how the chat ends?",
+      "state_template": "Craigslist listing and negotiation chat:\n{{input}}",
+      "criteria": {
+        "accepted_offer": "After a real exchange between buyer and seller, the last messages accept a price: one side names a price (or the listing price) and the other says yes ('deal', 'sure deal', 'sounds perfect', 'I can do that', 'I'll take it', 'let me at it', 'ok', 'you've got a deal', 'yeah I'll do that, put in your offer'), or accepts implicitly by arranging pickup, payment or a meeting ('Today will work, thanks!', 'Yes I can, and pay in cash', 'okay'), possibly followed by thanks, pickup plans or goodbyes. Examples: Seller: 'I'd go as low as $55.' Buyer: 'Sounds delightful, let me at it.' / Buyer: 'That would be great. I will take it.' / Seller: '$80 is the lowest I can go.' Buyer: 'okay' / Buyer: 'That doesn't sound like a bad deal. I think we will submit an offer for it.' Seller: 'We'll submit the papers to you promptly.' / Buyer: 'I can do $1500.' Seller: '2200 and we cannot lower the price any further.' Buyer: 'ok' (giving in to the other side's price is still accepting it) / Seller: 'For that price I can't throw in the carfax.' Buyer: 'Ok, that sounds fair.' Seller: 'When do you want to come check it out?' Buyer: 'I will have cash in hand.'",
+        "accepted_with_conditions": "A price was accepted together with extra terms (pickup today, delivery, a repair, cash, lease, trade-in), even if a detail is still to be confirmed or the seller asks for the final offer to be submitted. Examples: Seller: 'You've got a deal. 28500 and your car for trade-in.' / Seller: 'Ok submit your final offer... I will fix the ring and deliver.'",
+        "closing_concession": "The last message grants the other side's request or offers a price a small step from their last offer, or states a firm final offer with an incentive, as a close, with no refusal after it. Examples: Buyer: 'I'll pick it up at $6500.' Seller: 'Make that $6,600 and you have a deal.' / Buyer: 'How about 2900?' Seller: 'If you can go 2950 it would save me the open house.' / Buyer: 'Could you do 1600?' Seller: 'If you sign today I will allow the reduction.' / Buyer: 'I can definitely do $1500 if that works for you.' / Seller: 'No sorry, my final offer is $920 if you pick it up this week, that's a steal!'",
+        "still_apart": "The chat ends with the sides in clear disagreement: the last message rejects or ignores the other side's offer and holds a position the other side has already turned down, or restates asking terms without conceding anything, or the offers are far apart. Examples: Buyer: 'Would you take $100 less a month?' Seller: 'It's a real nice apartment, 12 month lease, 2200 a month with 2200 deposit.' / Buyer: 'I'd trade my dirt bike and $1700 cash.' Seller: 'I need to get at least 2800.' / Seller: 'I'll sell it for $70 without the rims and pegs.' Buyer: 'The rims cost $60 each! Let's meet in the middle, $60.' / Seller: 'I would be willing to accept $350.' Buyer: 'There is no way I can do that much... if you could do it for 250...' / Buyer: 'Would you do $7500?' Seller: 'I will go to $8600.' / Buyer: 'I was thinking more like 100.' Seller: 'Give me $135 for them.' (a counteroffer still far from the other side's number, never answered)",
+        "refused": "One side refuses the last offer or walks away: prices too far apart, not interested, or the negotiation broke down.",
+        "no_negotiation": "The chat stops before the buyer and seller ever discuss a price back and forth: only greetings and questions about the item, or one or two opening messages with no reply to them, even if the seller states a price (e.g. the whole chat is 'Seller: Agree', or 'Buyer: Hi' / 'Seller: Are you interested in the Samsung? I will let it go for $260').",
+        "nonsense": "The conversation is off-topic or confused, or the two sides talk about different items."
+      },
+      "map": {
+        "accepted_offer": "deal",
+        "accepted_with_conditions": "deal",
+        "closing_concession": "deal",
+        "still_apart": "no_deal",
+        "refused": "no_deal",
+        "no_negotiation": "no_deal",
+        "nonsense": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v5_varB",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Here is a Craigslist item listing followed by a price-negotiation chat between a buyer and a seller. The formal offer is entered just after the chat ends, so judge from the final few messages whether the two of them reached a deal. Treat it as a deal if a price was accepted, whether outright or casually (an 'okay', arranging when to pick up or pay), or if the chat closes on a concession or firm last offer the other person would very likely accept. Leftover details such as delivery, repairs, trade-ins, paperwork or exchanging numbers do not matter once a price is accepted. Treat it as no deal only if the chat ends before any price exchange, someone says no, or the final message leaves them clearly disagreeing. Which ending fits?",
+      "state_template": "Item listing and buyer-seller chat:\n{{input}}",
+      "criteria": {
+        "accepted_offer": "Buyer and seller went back and forth, and then one accepted the other's price, or the listing price, by saying yes in some form ('deal', 'sure deal', 'sounds perfect', 'I can do that', 'I'll take it', 'let me at it', 'ok', 'okay', 'you've got a deal', 'yeah I'll do that, put in your offer') or by moving straight to pickup, payment or meeting plans ('Today will work, thanks!', 'Yes I can, and pay in cash'). Thanks or goodbyes may follow. Examples: 'I'd go as low as $55.' -> 'Sounds delightful, let me at it.' / 'That would be great. I will take it.' / '$80 is the lowest I can go.' -> 'okay' / Buyer: 'That doesn't sound like a bad deal. I think we will submit an offer for it.' Seller: 'We'll submit the papers to you promptly.' / Buyer: 'I can do $1500.' Seller: '2200 and we cannot lower the price any further.' Buyer: 'ok' (giving in to the other side's price is still accepting it) / Seller: 'For that price I can't throw in the carfax.' Buyer: 'Ok, that sounds fair.' Seller: 'When do you want to come check it out?' Buyer: 'I will have cash in hand.'",
+        "accepted_with_conditions": "A price was agreed along with added terms such as picking up today, delivery, a repair, paying cash, a lease, or a trade-in, even if some detail remains open or the seller asks for the final offer to be entered. Examples: 'You've got a deal. 28500 and your car for trade-in.' / 'Ok submit your final offer... I will fix the ring and deliver.'",
+        "closing_concession": "The final message gives the other person what they asked for, offers a price just a small step from their last number, or sets a firm last price with a sweetener, as a way of closing, and nobody refuses afterwards. Examples: 'I'll pick it up at $6500.' -> 'Make that $6,600 and you have a deal.' / 'How about 2900?' -> 'If you can go 2950 it would save me the open house.' / 'Could you do 1600?' -> 'If you sign today I will allow the reduction.' / 'I can definitely do $1500 if that works for you.' / 'My final offer is $920 if you pick it up this week, that's a steal!'",
+        "still_apart": "The chat finishes with the two clearly disagreeing: the last message turns down or ignores the other's offer and sticks to a position already rejected, or repeats the asking terms with no concession, or the numbers are far apart. Examples: 'Would you take $100 less a month?' -> 'It's a real nice apartment, 12 month lease, 2200 a month with 2200 deposit.' / 'I'd trade my dirt bike and $1700 cash.' -> 'I need to get at least 2800.' / 'I'll sell it for $70 without the rims and pegs.' -> 'The rims cost $60 each! Let's meet in the middle, $60.' / Seller: 'I would be willing to accept $350.' Buyer: 'There is no way I can do that much... if you could do it for 250...' / Buyer: 'Would you do $7500?' Seller: 'I will go to $8600.' / Buyer: 'I was thinking more like 100.' Seller: 'Give me $135 for them.' (a counteroffer still far from the other side's number, never answered)",
+        "refused": "Someone turns down the last offer or leaves: too far apart, no longer interested, or the talks fell apart.",
+        "no_negotiation": "There is never a back-and-forth about price: just greetings and item questions, or one or two opening lines that nobody answers, even when the seller quotes a price (e.g. the entire chat is 'Seller: Agree', or 'Buyer: Hi' then 'Seller: Are you interested in the Samsung? I will let it go for $260').",
+        "nonsense": "The chat is off-topic or muddled, or the two people are discussing different items."
+      },
+      "map": {
+        "accepted_offer": "deal",
+        "accepted_with_conditions": "deal",
+        "closing_concession": "deal",
+        "still_apart": "no_deal",
+        "refused": "no_deal",
+        "no_negotiation": "no_deal",
+        "nonsense": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v5_varC",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Did this Craigslist buyer and seller close a deal? The chat below is all you see; any formal offer is submitted right after it, so a chat that ends with a price accepted, casually accepted (e.g. 'okay', 'today works', pickup or cash arranged), or settled by a concession or firm final offer the other side would take counts as a deal, and small open details (delivery, fixes, trade-in, papers, phone numbers) do not change that. It is not a deal when there was no price exchange at all, when someone declined, or when the last message shows the sides clearly at odds. Pick the option that best describes the end of the chat.",
+      "state_template": "Listing, then the negotiation chat:\n{{input}}",
+      "criteria": {
+        "accepted_offer": "Buyer and seller went back and forth, and then one accepted the other's price, or the listing price, by saying yes in some form ('deal', 'sure deal', 'sounds perfect', 'I can do that', 'I'll take it', 'let me at it', 'ok', 'okay', 'you've got a deal', 'yeah I'll do that, put in your offer') or by moving straight to pickup, payment or meeting plans ('Today will work, thanks!', 'Yes I can, and pay in cash'). Thanks or goodbyes may follow. Examples: 'I'd go as low as $55.' -> 'Sounds delightful, let me at it.' / 'That would be great. I will take it.' / '$80 is the lowest I can go.' -> 'okay' / Buyer: 'That doesn't sound like a bad deal. I think we will submit an offer for it.' Seller: 'We'll submit the papers to you promptly.' / Buyer: 'I can do $1500.' Seller: '2200 and we cannot lower the price any further.' Buyer: 'ok' (giving in to the other side's price is still accepting it) / Seller: 'For that price I can't throw in the carfax.' Buyer: 'Ok, that sounds fair.' Seller: 'When do you want to come check it out?' Buyer: 'I will have cash in hand.'",
+        "accepted_with_conditions": "A price was agreed along with added terms such as picking up today, delivery, a repair, paying cash, a lease, or a trade-in, even if some detail remains open or the seller asks for the final offer to be entered. Examples: 'You've got a deal. 28500 and your car for trade-in.' / 'Ok submit your final offer... I will fix the ring and deliver.'",
+        "closing_concession": "The final message gives the other person what they asked for, offers a price just a small step from their last number, or sets a firm last price with a sweetener, as a way of closing, and nobody refuses afterwards. Examples: 'I'll pick it up at $6500.' -> 'Make that $6,600 and you have a deal.' / 'How about 2900?' -> 'If you can go 2950 it would save me the open house.' / 'Could you do 1600?' -> 'If you sign today I will allow the reduction.' / 'I can definitely do $1500 if that works for you.' / 'My final offer is $920 if you pick it up this week, that's a steal!'",
+        "still_apart": "The chat finishes with the two clearly disagreeing: the last message turns down or ignores the other's offer and sticks to a position already rejected, or repeats the asking terms with no concession, or the numbers are far apart. Examples: 'Would you take $100 less a month?' -> 'It's a real nice apartment, 12 month lease, 2200 a month with 2200 deposit.' / 'I'd trade my dirt bike and $1700 cash.' -> 'I need to get at least 2800.' / 'I'll sell it for $70 without the rims and pegs.' -> 'The rims cost $60 each! Let's meet in the middle, $60.' / Seller: 'I would be willing to accept $350.' Buyer: 'There is no way I can do that much... if you could do it for 250...' / Buyer: 'Would you do $7500?' Seller: 'I will go to $8600.' / Buyer: 'I was thinking more like 100.' Seller: 'Give me $135 for them.' (a counteroffer still far from the other side's number, never answered)",
+        "refused": "Someone turns down the last offer or leaves: too far apart, no longer interested, or the talks fell apart.",
+        "no_negotiation": "There is never a back-and-forth about price: just greetings and item questions, or one or two opening lines that nobody answers, even when the seller quotes a price (e.g. the entire chat is 'Seller: Agree', or 'Buyer: Hi' then 'Seller: Are you interested in the Samsung? I will let it go for $260').",
+        "nonsense": "The chat is off-topic or muddled, or the two people are discussing different items."
+      },
+      "map": {
+        "accepted_offer": "deal",
+        "accepted_with_conditions": "deal",
+        "closing_concession": "deal",
+        "still_apart": "no_deal",
+        "refused": "no_deal",
+        "no_negotiation": "no_deal",
+        "nonsense": "no_deal"
+      }
+    }
+  ],
+  "decision": {
+    "class": "deal",
+    "threshold": 0.55
+  }
+}

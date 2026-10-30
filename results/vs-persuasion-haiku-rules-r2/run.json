@@ -1,0 +1,64 @@
+{
+  "run_id": "vs-persuasion-haiku-rules-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T17:25:24",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 430,
+    "num_turns": 63,
+    "total_cost_usd": 0.47370490000000004
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.42,
+      "note": "Initial draft from task description; 18 classes, concrete option descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.4311,
+          "macro_f1": 0.4338,
+          "est_cost_usd": 0.062716,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 89,
+      "estimate": 0.5,
+      "note": "Refined definitions: donation-information is task-specific, credibility-appeal vs logical-appeal clarified",
+      "test": {
+        "jev": {
+          "accuracy": 0.5511,
+          "macro_f1": 0.5315,
+          "est_cost_usd": 0.064865,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 89,
+      "estimate": 0.5,
+      "note": "Final: credibility-appeal vs logical-appeal distinction, donation-information task-specific, other is housekeeping",
+      "test": {
+        "jev": {
+          "accuracy": 0.5537,
+          "macro_f1": 0.5319,
+          "est_cost_usd": 0.06575,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

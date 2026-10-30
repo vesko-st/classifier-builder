@@ -1,0 +1,94 @@
+{
+  "run_id": "v4-intents-policy-r2",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "policy_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:45:11",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 596,
+    "num_turns": 33,
+    "total_cost_usd": 1.7639266000000002
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1: flat 77-option choice from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.8383,
+          "macro_f1": 0.8321,
+          "est_cost_usd": 0.344955,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 51,
+      "estimate": 0.8,
+      "note": "v4: policy answers + minimal pairs in option descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.8523,
+          "macro_f1": 0.8476,
+          "est_cost_usd": 0.410928,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 71,
+      "estimate": 0.82,
+      "note": "v5: pending_card_payment fix after random check (10/10 on check set)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8555,
+          "macro_f1": 0.851,
+          "est_cost_usd": 0.414033,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 87,
+      "estimate": 0.84,
+      "note": "e7: 3-member wording-variant ensemble of v7 (label-driven fixes: ATM not working->declined_cash_withdrawal, domestic sent transfer->recipient, ruble exchange->card rate)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8578,
+          "macro_f1": 0.8525,
+          "est_cost_usd": 1.274051,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 99,
+      "estimate": 0.85,
+      "note": "e8: ensemble + rules from final 6 labels (UK-account cue, unspecified 'transferred, not here' -> recipient, any cash mention -> cash rate, non-card top-up money gone -> reverted); 24/24 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8571,
+          "macro_f1": 0.8519,
+          "est_cost_usd": 1.297724,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

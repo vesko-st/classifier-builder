@@ -1,0 +1,64 @@
+{
+  "run_id": "vs-intents-sonnet-free-r3",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:44:26",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 287,
+    "num_turns": 18,
+    "total_cost_usd": 0.4192637
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v1 flat 77-option choice from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.8269,
+          "macro_f1": 0.8217,
+          "est_cost_usd": 0.362289,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 80,
+      "estimate": 0.85,
+      "note": "v3 descriptions refined from owner policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.8328,
+          "macro_f1": 0.8275,
+          "est_cost_usd": 0.404459,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 100,
+      "estimate": 0.88,
+      "note": "v6 ensemble of 3 wording variants (v3,v4,paraphrase); 90% on 40 labels (30 random, tuned on)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8328,
+          "macro_f1": 0.8274,
+          "est_cost_usd": 1.220754,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

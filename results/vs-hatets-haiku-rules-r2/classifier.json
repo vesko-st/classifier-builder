@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v4",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Tweet:\n{{input}}",
+  "questions": {
+    "explicit_removal_call": {
+      "instructions": "Does the tweet explicitly call for a group to be deported, removed, sent away, or expelled (e.g., 'send them home', 'deport them')?"
+    },
+    "explicit_violence_threat": {
+      "instructions": "Does the tweet include explicit threats of violence, references to riots/violence being necessary, or dehumanizing language that frames a group as animals or invaders that must be removed?"
+    },
+    "hostile_slur_at_individual": {
+      "instructions": "Does the tweet use slurs (bitch, cunt, etc.) directed in a clearly hostile way at an identifiable individual (not self-reference or generic insult)?"
+    },
+    "is_self_or_idiom": {
+      "instructions": "Is this self-reference ('I'm that bitch'), idiom ('karma's a bitch'), generic insult not targeting a group, or political criticism without group hostility?"
+    }
+  },
+  "rule": [
+    [
+      "explicit_removal_call",
+      "!is_self_or_idiom"
+    ],
+    [
+      "explicit_violence_threat"
+    ],
+    [
+      "hostile_slur_at_individual",
+      "!is_self_or_idiom"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate"
+}

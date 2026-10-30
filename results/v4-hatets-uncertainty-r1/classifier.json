@@ -1,0 +1,122 @@
+{
+  "version": 1,
+  "name": "tweet_hate_ens3",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v7",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a strict hate-speech annotation policy. The policy targets hate speech against immigrants/refugees and against women: the author themselves directly expresses hatred, contempt or hostility toward immigrants or toward a woman. Many tweets are edgy, profane or right-wing without meeting this bar. Pick the option that best describes the tweet.",
+        "notes": [
+          "Hashtags such as #BuildThatWall, #MAGA, #NoDACA, #NoAmnesty, #StopTheInvasion on their own are not hate. Cheering Trump or the wall, attacking Democrats or Obama-era policy, reposting a news headline about crimes by immigrants or gangs, or debating immigration and 'white genocide' is not hate unless the author's own words attack immigrants as people.",
+          "The author's own hostility toward immigrants as people is hate: refusing them (#refugeesNOTwelcome, #SendThemBack, no amnesty for anyone who's an illegal, deport them all), resenting paying for 'these illegal children or their parents', telling their own story of 'them' stealing and costing taxpayers, or blaming 'illegals' for ruining a city.",
+          "For women, hate means the author degrades or threatens women or a particular woman: wishing or joking about rape or violence against her ('this bitch boutta get raped and murdered'), contemptuously calling a named or identified woman a dumb bitch/cunt/whore/hoe ('that dumb Bitch Lena Dunham. Her cunt ass...'), strings of sexist slurs ('Bitch whore son of bitch...'), or a hostile quarrel built on such insults ('Bitch stop it, bum ass hoe you lame', 'basic bitch hoein', 'You called me bitch first', 'I'm \"a crazy bitch\" & \"a hoe\" but you were crying for me'), or contemptuous generalisations about women as bitches/hoes ('Hoes be like happy birthday son... You had him in high school', 'Bitches hollering it's tooo hot!! Well bitch go back to winter', 'You be chasing them hoes fuck what a bitch think', 'you bitch ass plugs acting like hoes'), or directly calling someone a bitch as the point of the message ('@user why r u such a bitch').",
+          "Not hate: bitch as exclamation, address or a generic tag at the end of a sentence aimed at anyone ('Ya ain't cute bitch', 'I hope #karma gets you, bitch' to a thief, 'Britney, bitch', 'thoe bitch', 'BITCH HOLD UP'), sayings ('Life's a bitch'), offhand third-person mentions ('that bitch fell in love w a whole animal'), porn-style titles, self-description, joking about the word, or a general reflection on sexist insults, playful banter between friends with laughing emoji ('Hoe you down bad & you crazyyyyyy!!!! 😂😂😂'), a news headline with #DeportThemAll, or #sendthemback tagged on unrelated content ('Finally watching black lightening... #sendthemback')."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_attack": "The author attacks immigrants/refugees/illegal aliens as people: demeans them, paints them as criminals in their own words, says they are not welcome, resents them or demands no amnesty / deportation for them, e.g. 'But no amnesty for anyone who's an illegal', 'we wont have to pay for this illegal children or their parents', 'On the way home from stealing at walmart they wreck the car... MY car insurance goes up #SendThemBack', '#refugeesNOTwelcome'",
+        "woman_attack": "The author degrades or threatens women or a particular woman: rape/violence wished on her, contemptuously calling an identified woman a dumb bitch/cunt/whore/hoe, strings of sexist slurs, or a hostile quarrel built on such insults, e.g. 'this bitch boutta get raped and murdered', 'that dumb Bitch Lena Dunham. Her cunt ass looks like she would join a cult', 'Bitch stop it, bum ass hoe you lame as hell', 'You called me bitch first', 'Hoes be like... You had him in high school', 'why r u such a bitch'",
+        "other_group_hate": "Hateful slurs or contempt toward another group (e.g. Jews, Muslims, Black people)",
+        "political_cheering": "Pro-Trump / pro-wall / anti-Democrat political cheering or argument with immigration hashtags, e.g. 'TRUMP=HERO #BUILDTHATWALL', 'Ive dreamed of this day ever since the budget was approved. #BuildThatWall Mr President'",
+        "immigration_news_debate": "News, crime reports, legal or policy discussion or debate about immigration, DACA, borders, MS-13, 'white genocide' or the term 'illegal alien', e.g. 'MS-13 Gang Members Charged With Murder Are Obamas Unaccompanied Minors #NoAmnesty', comparing a refugee's rape case with Brock Turner's, 'If #IllegalAliens don't like being called illegal, they shouldn't break the law. They can follow the established protocols', 'Senate Leader: Half Of My Family Eligible For Deportation... #DeportThemAll'",
+        "casual_profanity": "Bitch/hoe used as an exclamation, address, generic tag at the end of a sentence, saying, offhand third-person mention, self-description, lyrics, fan talk or a joke about the word, e.g. 'Ya ain't cute bitch', 'I hope #karma gets you, bitch', 'Britney, bitch', 'Life's a bitch because a slut would be too easy', 'that bitch fell in love w a whole animal', 'Peppa did not come to play with you hoes, she came to slay bitch', 'Hoe you down bad & you crazyyyyyy!!!! 😂😂😂' (friends joking)",
+        "complaint_or_counter_speech": "A general reflection on or pushback against racist or sexist insults, not a fight with a particular person, e.g. 'Instead of calling me a nigger, call out your racist friend', 'It's funny when people say ... while calling me a bitch or a cunt, referencing my gender'",
+        "insult_non_sexist": "Insults or anger without sexist slurs and not aimed at immigrants",
+        "neutral_other": "Anything else: neutral, positive, unrelated content"
+      },
+      "map": {
+        "immigrant_attack": "hate",
+        "woman_attack": "hate",
+        "other_group_hate": "hate",
+        "political_cheering": "not_hate",
+        "immigration_news_debate": "not_hate",
+        "casual_profanity": "not_hate",
+        "complaint_or_counter_speech": "not_hate",
+        "insult_non_sexist": "not_hate",
+        "neutral_other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v7b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Under our annotation policy, which description fits this tweet best?",
+        "policy": "A tweet is hateful only when its author personally shows contempt, hostility or a wish for harm toward immigrants/refugees as people, or toward women or a specific woman. The bar is high: profanity, right-wing slogans and crude slang are common and usually not hateful.",
+        "counts_as_hate": [
+          "Rejecting immigrants as people: #refugeesNOTwelcome, #SendThemBack, deport them all, no amnesty for any illegal, resenting paying for 'illegal children or their parents', blaming 'illegals' for lawlessness and for turning a city into a 3rd world city, or the author's own account of 'them' committing crimes and costing citizens money.",
+          "Rape or violence wished on or joked about for a woman ('this bitch boutta get raped and murdered').",
+          "Contemptuously calling a named or identifiable woman a dumb bitch, cunt, whore or hoe ('that dumb Bitch Lena Dunham'), or a pile of insults mixing sexist slurs ('Bitch whore son of bitch shit pig...').",
+          "A heated quarrel in which people are called bitch/hoe: 'Bitch stop it, bum ass hoe you lame', 'basic bitch hoein', 'You called me bitch first', 'I'm \"a crazy bitch\" & \"a hoe\" but you were crying for me'.",
+          "Sneering generalisations about women as bitches/hoes and direct 'you are a bitch' insults: contemptuous generalisations about women as bitches/hoes ('Hoes be like happy birthday son... You had him in high school', 'Bitches hollering it's tooo hot!! Well bitch go back to winter', 'You be chasing them hoes fuck what a bitch think', 'you bitch ass plugs acting like hoes'), or directly calling someone a bitch as the point of the message ('@user why r u such a bitch')"
+        ],
+        "does_not_count": [
+          "Immigration hashtags alone (#BuildThatWall, #MAGA, #NoDACA, #StopTheInvasion), pro-Trump or anti-Democrat cheering, immigration news headlines (e.g. MS-13 arrests), policy or legal debate, white-genocide debate, arguing that 'illegal alien' is the right term.",
+          "bitch used as an exclamation, a form of address or a tag at the end of a sentence ('BITCH HOLD UP', 'Ya ain't cute bitch', 'karma gets you, bitch', 'Britney, bitch').",
+          "Sayings ('Life's a bitch'), casual third-person mentions ('that bitch fell in love w a whole animal'), self-description, lyrics, fan talk, porn titles, jokes about the word.",
+          "Reflecting on or pushing back against racist or sexist insults the author received.",
+          "Also not hate: playful banter between friends with laughing emoji ('Hoe you down bad & you crazyyyyyy!!!! 😂😂😂'), a news headline with #DeportThemAll, or #sendthemback tagged on unrelated content ('Finally watching black lightening... #sendthemback')."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "rejects_immigrants": "Author shows hostility toward immigrants/refugees/illegals as people: wants them out, refuses them amnesty or welcome, resents them, blames 'illegals' for lawlessness or ruining a city, or describes them as criminals in their own words",
+        "degrades_woman": "Author degrades or threatens women or a particular woman (rape/violence, contemptuous slurs at an identifiable woman, strings of sexist slurs, sneering generalisations like 'hoes be like...'), calls someone a bitch as a direct insult, or trades bitch/hoe insults in a heated quarrel",
+        "hates_other_group": "Slurs or contempt for another group such as Jews, Muslims or Black people",
+        "maga_cheering": "Pro-wall, pro-Trump or anti-Democrat political cheering or argument, with no hostility toward immigrants as people",
+        "immigration_news_or_debate": "Immigration news, crime headlines, policy, legal or 'white genocide' debate, or arguing about the term 'illegal alien'",
+        "slang_bitch_or_hoe": "bitch/hoe as exclamation, address, sentence tag, saying, casual mention, self-description, lyrics, fan talk or a joke, with no real contempt for a woman",
+        "reflects_on_insults": "Author reflects on or pushes back against racist or sexist insults they received",
+        "non_sexist_insult": "Anger or insults that are neither sexist nor about immigrants",
+        "other": "Anything else"
+      },
+      "map": {
+        "rejects_immigrants": "hate",
+        "degrades_woman": "hate",
+        "hates_other_group": "hate",
+        "maga_cheering": "not_hate",
+        "immigration_news_or_debate": "not_hate",
+        "slang_bitch_or_hoe": "not_hate",
+        "reflects_on_insults": "not_hate",
+        "non_sexist_insult": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v7c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "You are applying a strict hate-speech annotation guideline to a tweet. Only two kinds of hate are in scope: hate against immigrants/refugees and hate against women. Label it hate only when the writer's own words attack immigrants as people (wanting them gone, denying them amnesty, resenting them, telling a story of 'them' as criminals, #SendThemBack, #refugeesNOTwelcome) or degrade/threaten women or a specific woman (rape or violence, calling an identifiable woman a dumb bitch/cunt/whore, a barrage of sexist slurs, or a nasty back-and-forth fight using bitch/hoe such as 'You called me bitch first' or 'I'm a crazy bitch & a hoe but you were crying for me'). Sneering generalisations about women ('Hoes be like...', 'Bitches hollering...', 'chasing them hoes fuck what a bitch think') and direct put-downs like 'why r u such a bitch' are also hate. Plain immigration hashtags, MAGA cheering, news headlines, policy talk and slangy uses of bitch (exclamations, addressing someone, a 'bitch' tagged on the end of a sentence, sayings, casual mentions, lyrics, fan talk, friends joking with laughing emoji, jokes) and news headlines carrying #DeportThemAll are not hate. Choose the closest description.",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "anti_immigrant_hostility": "The writer is hostile to immigrants/refugees/illegal aliens themselves, e.g. 'no amnesty for anyone who's an illegal', 'we wont have to pay for this illegal children or their parents', 'stealing at walmart... MY car insurance goes up #SendThemBack', 'This FOOL is promoting lawlessness from illegals and wants to turn ATL into a 3rd world city'",
+        "misogynist_degradation": "The writer degrades or threatens women or a particular woman, or fights someone with bitch/hoe insults, e.g. 'this bitch boutta get raped and murdered', 'that dumb Bitch Lena Dunham. Her cunt ass...', 'Bitch stop it, bum ass hoe you lame as hell', 'basic bitch hoein', 'Bitch whore son of bitch shit pig dinosaur...', 'Hoes be like happy birthday son... You had him in high school', 'Bitches hollering it's tooo hot!! Well bitch go back to winter', '@user why r u such a bitch'",
+        "other_hate": "Hateful contempt for another group (Jews, Muslims, Black people...)",
+        "pro_wall_politics": "Political cheering or argument for Trump, the wall or against Democrats, e.g. 'TRUMP=HERO #BUILDTHATWALL', 'Ive dreamed of this day... #BuildThatWall Mr President'",
+        "immigration_reporting": "News, crime headlines, policy or legal debate about immigration, DACA, borders or white genocide, e.g. 'MS-13 Gang Members Charged With Murder Are Obamas Unaccompanied Minors', 'If #IllegalAliens don't like being called illegal, they shouldn't break the law', 'Senate Leader: Half Of My Family Eligible For Deportation... #DeportThemAll'",
+        "slang_profanity": "Slangy bitch/hoe with no real contempt for a woman, e.g. 'BITCH HOLD UP', 'Ya ain't cute bitch', 'I hope #karma gets you, bitch', 'Life's a bitch', 'that bitch fell in love w a whole animal', 'Peppa... came to slay bitch', 'Hoe you down bad & you crazyyyyyy!!!! 😂😂😂'",
+        "pushback_on_insults": "The writer reflects on or pushes back against slurs aimed at them, e.g. 'Instead of calling me a nigger, call out your racist friend'",
+        "plain_insult": "Rudeness or insults with no sexist or anti-immigrant content",
+        "unrelated": "Anything else"
+      },
+      "map": {
+        "anti_immigrant_hostility": "hate",
+        "misogynist_degradation": "hate",
+        "other_hate": "hate",
+        "pro_wall_politics": "not_hate",
+        "immigration_reporting": "not_hate",
+        "slang_profanity": "not_hate",
+        "pushback_on_insults": "not_hate",
+        "plain_insult": "not_hate",
+        "unrelated": "not_hate"
+      }
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "run_id": "v4-donation-labelsfirst-r2",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:29:41",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 803,
+    "num_turns": 47,
+    "total_cost_usd": 1.9474198
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 20,
+      "estimate": 0.62,
+      "note": "v1 criteria draft: pledge & !garbled",
+      "test": {
+        "jev": {
+          "accuracy": 0.7218,
+          "macro_f1": 0.7145,
+          "est_cost_usd": 0.018619,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 46,
+      "estimate": 0.66,
+      "note": "v3 ensemble: criteria (strict garbled) + fine-grained choice with unrealistic/no-amount/hedged -> not_donated",
+      "test": {
+        "jev": {
+          "accuracy": 0.7242,
+          "macro_f1": 0.7205,
+          "est_cost_usd": 0.043052,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 68,
+      "estimate": 0.67,
+      "note": "v4: pledge question requires a specific amount within the task payment; unrealistic sums / no amount -> not_donated",
+      "test": {
+        "jev": {
+          "accuracy": 0.7266,
+          "macro_f1": 0.7242,
+          "est_cost_usd": 0.044243,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 82,
+      "estimate": 0.68,
+      "note": "v5: hedged 'maybe/probably' amounts never firmly confirmed -> not_donated",
+      "test": {
+        "jev": {
+          "accuracy": 0.7074,
+          "macro_f1": 0.706,
+          "est_cost_usd": 0.045679,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 96,
+      "estimate": 0.68,
+      "note": "v8: firm (unhedged) agreement to a persuader-proposed in-range amount counts as a pledge",
+      "test": {
+        "jev": {
+          "accuracy": 0.705,
+          "macro_f1": 0.7037,
+          "est_cost_usd": 0.046537,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

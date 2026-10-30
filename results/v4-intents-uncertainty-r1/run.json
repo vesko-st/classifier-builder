@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-intents-uncertainty-r1",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T11:48:46",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 403,
+    "num_turns": 31,
+    "total_cost_usd": 1.2096676000000004
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.78,
+      "note": "v1 flat 77-option choice from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.8503,
+          "macro_f1": 0.8466,
+          "est_cost_usd": 0.370956,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.79,
+      "note": "v2: revised 9 descriptions + batch-1 examples; 10/10 on labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8568,
+          "macro_f1": 0.8527,
+          "est_cost_usd": 0.42477,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.8,
+      "note": "v3: batch-2 revisions, all labels as examples; 20/20 on labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8614,
+          "macro_f1": 0.8571,
+          "est_cost_usd": 0.480265,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.8,
+      "note": "v4: batch-3 revisions; 30/30 on labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8672,
+          "macro_f1": 0.8638,
+          "est_cost_usd": 0.524248,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.81,
+      "note": "v5b: batch-4 revisions; 40/40 on labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8701,
+          "macro_f1": 0.8665,
+          "est_cost_usd": 0.56629,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.81,
+      "note": "v6b final: batch-5 revisions + collateral fixes; 50/50 on (in-sample) labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.875,
+          "macro_f1": 0.8713,
+          "est_cost_usd": 0.610591,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

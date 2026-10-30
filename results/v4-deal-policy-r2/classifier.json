@@ -1,0 +1,147 @@
+{
+  "version": 1,
+  "name": "deal_ens6",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v6a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Read the Craigslist item listing and the buyer-seller negotiation chat. Focus on how the chat ENDS. Which description best fits the ending?",
+      "state_template": "{{input}}",
+      "criteria": {
+        "verbal_agreement": "Both sides agreed on a price: one side named a price and the other accepted it. Acceptance can be explicit ('deal', 'I accept', 'I'll take it', 'that works', 'sounds good') or implicit: the reply to a price is a plain 'ok'/'okay'/'thank you!', or the other side moves straight on to arranging pickup, delivery, a pickup time, payment or a phone number without objecting to the price. Agreement may be followed by thank-you or logistics messages. Also counts: one side accepts the other's price with a condition (e.g. 'I could accept $210 if you pick it up', '10000 and you come get it yourself') even if there is no further reply, or says 'you've got a deal'.",
+        "submit_offer": "Someone says they will send, submit, enter or make the (formal) offer, have already submitted it, or tells the other to see or accept the final offer, usually after settling on a price.",
+        "pending_buyer_counter": "Real back-and-forth haggling happened (the seller already lowered the price or countered at least once), and the chat ends with the buyer's next counter-offer that the seller has not answered. (If the seller replies accepting it or moving to logistics, that is verbal_agreement.)",
+        "pending_seller_price": "There was back-and-forth on price, and the chat ends with the seller's counter-offer or 'lowest'/'final' price that the buyer has not answered at all. (If the buyer replies 'ok' or moves to logistics, that is verbal_agreement; if the buyer says they can't go that high, that is refusal.)",
+        "buyer_opening_offer": "The chat ends right after the buyer's FIRST price offer, with no reply. The seller may have stated the asking price before, but the seller has not yet lowered the price or countered, so there was no back-and-forth haggling.",
+        "trailing_off": "Prices were discussed but the gap was never resolved; the chat drifts into item questions, answers or small talk with no agreement and no clear refusal. Not this if the last messages accept a price or arrange pickup or delivery at a proposed price.",
+        "refusal": "One side explicitly refuses the last offer or walks away ('No.', 'I'll pass', 'no thank you', 'can't go beyond that, sorry', 'have a good one', 'we're too far apart').",
+        "no_negotiation": "No real negotiation: no price is ever discussed, only greetings or item questions, a very short chat, people confused about which item is for sale or who is selling, or complaints that the task or site is broken."
+      },
+      "map": {
+        "verbal_agreement": "deal",
+        "submit_offer": "deal",
+        "pending_buyer_counter": "deal",
+        "pending_seller_price": "no_deal",
+        "buyer_opening_offer": "no_deal",
+        "trailing_off": "no_deal",
+        "refusal": "no_deal",
+        "no_negotiation": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v6b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a Craigslist listing followed by a chat between a buyer and a seller haggling over price. Look at the last few messages. Which of these describes where the negotiation stood when the chat stopped?",
+      "state_template": "{{input}}",
+      "criteria": {
+        "verbal_agreement": "They settled on a price. Someone proposed a number and the other side said yes to it, outright ('deal', 'I'll take it', 'that works', 'I accept', 'sounds fair') or tacitly: answering the price with a simple 'ok'/'okay'/'thanks!' or going straight to pickup, delivery, timing, payment or contact details with no pushback on the price. Thank-yous or logistics may follow. It also counts when one side agrees to the other's number but attaches a condition ('I could accept $210 if you come pick it up', '10000 and you collect it yourself'), even with no reply after, or says 'you've got a deal'.",
+        "submit_offer": "Someone mentions sending, submitting, entering or making the formal offer, says it has been submitted, or points the other to the final offer ('see final offer'), usually once a price is settled.",
+        "pending_buyer_counter": "The two had already haggled (the seller has come down or countered at least once), and the last message is a new buyer counter-offer the seller never answered. (A seller reply that accepts or arranges pickup is verbal_agreement.)",
+        "pending_seller_price": "The two had haggled, and the last message is the seller's counter-offer or stated lowest/final price, with no buyer reply at all. (A buyer 'ok' or logistics reply is verbal_agreement; a buyer 'can't go that high' is refusal.)",
+        "buyer_opening_offer": "The chat stops right after the buyer names a price for the first time, unanswered. The seller may have quoted the asking price, but had not yet come down or countered.",
+        "trailing_off": "Prices came up but the difference was never settled; the chat wanders into questions about the item, answers or small talk, with no agreement and no clear no. Not this if the final messages accept a price or arrange pickup at a proposed price.",
+        "refusal": "One side clearly turns down the last offer or walks away ('No.', 'I'll pass', 'no thanks', 'can't go beyond that, sorry', 'have a good one', 'we're too far apart').",
+        "no_negotiation": "There was no real negotiation: price never discussed, only hellos or item questions, a very short exchange, confusion about which item is for sale or who is selling, or complaints that the task or website is broken."
+      },
+      "map": {
+        "verbal_agreement": "deal",
+        "submit_offer": "deal",
+        "pending_buyer_counter": "deal",
+        "pending_seller_price": "no_deal",
+        "buyer_opening_offer": "no_deal",
+        "trailing_off": "no_deal",
+        "refusal": "no_deal",
+        "no_negotiation": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v6c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify how a Craigslist price negotiation ended.",
+        "input": "The item listing, then the buyer/seller chat.",
+        "focus": "Base your answer on the final messages of the chat and whether a price was accepted."
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "verbal_agreement": {
+          "definition": "A price was offered and accepted by the other party.",
+          "includes": [
+            "explicit yes: 'deal', 'I accept', 'that works', 'I'll take it', 'sounds good'",
+            "tacit yes: a bare 'ok'/'okay'/'thank you!' in reply to a price",
+            "moving on to pickup, delivery, pickup time, payment or phone number without objecting to the price",
+            "one side accepts the other's price with a condition, e.g. 'I could accept $210 if you pick it up' or '10000 and you come get it yourself', even with no further reply",
+            "'you've got a deal'"
+          ],
+          "note": "thank-you or logistics messages may follow"
+        },
+        "submit_offer": {
+          "definition": "Someone says they will send/submit/enter/make the formal offer, have already submitted it, or tells the other to see or accept the final offer.",
+          "note": "usually after settling on a price"
+        },
+        "pending_buyer_counter": {
+          "definition": "Last message is a buyer counter-offer, unanswered.",
+          "requires": "the seller had already lowered or countered at least once",
+          "excludes": "seller replies that accept or arrange pickup (verbal_agreement)"
+        },
+        "pending_seller_price": {
+          "definition": "Last message is the seller's counter-offer or lowest/final price, with no buyer reply.",
+          "requires": "some haggling happened",
+          "excludes": [
+            "buyer replies 'ok' or arranges pickup (verbal_agreement)",
+            "buyer says they can't go that high (refusal)"
+          ]
+        },
+        "buyer_opening_offer": {
+          "definition": "Chat ends on the buyer's first price offer with no reply.",
+          "note": "the seller may have quoted the asking price, but had not come down or countered"
+        },
+        "trailing_off": {
+          "definition": "Price was discussed but the gap stayed open; the chat drifts to item Q&A or small talk.",
+          "excludes": [
+            "final messages that accept a price or arrange pickup at a proposed price",
+            "clear refusals"
+          ]
+        },
+        "refusal": {
+          "definition": "A side explicitly rejects the last offer or walks away.",
+          "examples": [
+            "No.",
+            "I'll pass",
+            "no thank you",
+            "can't go beyond that, sorry",
+            "have a good one",
+            "we're too far apart"
+          ]
+        },
+        "no_negotiation": {
+          "definition": "No real negotiation took place.",
+          "includes": [
+            "price never discussed",
+            "only greetings or item questions",
+            "very short chat",
+            "confusion about the item or who is selling",
+            "complaints that the task or site is broken"
+          ]
+        }
+      },
+      "map": {
+        "verbal_agreement": "deal",
+        "submit_offer": "deal",
+        "pending_buyer_counter": "deal",
+        "pending_seller_price": "no_deal",
+        "buyer_opening_offer": "no_deal",
+        "trailing_off": "no_deal",
+        "refusal": "no_deal",
+        "no_negotiation": "no_deal"
+      }
+    }
+  ]
+}

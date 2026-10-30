@@ -1,0 +1,229 @@
+{
+  "run_id": "b200-intents-rules-r2",
+  "task": "banking77_intents",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T16:07:52",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 6611,
+    "num_turns": 102,
+    "total_cost_usd": 4.477686799999999
+  },
+  "final_version": 14,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1: flat 77-way choice with descriptions from description alone",
+      "test": {
+        "jev": {
+          "accuracy": 0.8494,
+          "macro_f1": 0.8445,
+          "est_cost_usd": 0.365782,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 16,
+      "estimate": 0.82,
+      "note": "v5: 3-member wording ensemble; H1 reverted, H2 failed_transfer, H3 narrowed compromised vs not-recognised",
+      "test": {
+        "jev": {
+          "accuracy": 0.8578,
+          "macro_f1": 0.8523,
+          "est_cost_usd": 1.374764,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.83,
+      "note": "v10: round 2 rules (salary, delayed transfers narrowed, exchange rate complaints, delivery, spare cards, $1 pending)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8597,
+          "macro_f1": 0.8541,
+          "est_cost_usd": 1.511066,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 58,
+      "estimate": 0.84,
+      "note": "v12: round 3 rules (order_physical_card, verify_top_up, fiat vs exchange_via_app, top-up failed/charges, country/visa exclusions)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8672,
+          "macro_f1": 0.8627,
+          "est_cost_usd": 1.586329,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 72,
+      "estimate": 0.85,
+      "note": "v16: round 4 rules (apple/google pay, rate complaints, unexplained cash, salary, retrieve card, refunds)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8705,
+          "macro_f1": 0.8657,
+          "est_cost_usd": 1.679982,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 86,
+      "estimate": 0.86,
+      "note": "v19: round 5 rules (pending transfer vs card payment, beneficiary trouble, take back transaction, UK-transfer group)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8698,
+          "macro_f1": 0.866,
+          "est_cost_usd": 1.719437,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 100,
+      "estimate": 0.86,
+      "note": "v20: auto top-up limits -> automatic_top_up",
+      "test": {
+        "jev": {
+          "accuracy": 0.8731,
+          "macro_f1": 0.8692,
+          "est_cost_usd": 1.725646,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 114,
+      "estimate": 0.86,
+      "note": "v22: round 7 rules (SWIFT top-up, card_not_working, top_up_reverted)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8711,
+          "macro_f1": 0.8685,
+          "est_cost_usd": 1.7532,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 136,
+      "estimate": 0.86,
+      "note": "v26: round 8 (SWIFT, unknown vs small extra charge, top-up trouble split, unable to transfer -> beneficiary)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8747,
+          "macro_f1": 0.873,
+          "est_cost_usd": 1.824219,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 10,
+      "points_spent": 150,
+      "estimate": 0.86,
+      "note": "v32: round 9 (top up by others, virtual card usage, SEPA/SWIFT fees); 5-member ensemble; agrees with all non-noise labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8792,
+          "macro_f1": 0.878,
+          "est_cost_usd": 3.026653,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 11,
+      "points_spent": 166,
+      "estimate": 0.86,
+      "note": "v34: round 10 (transfer not allowed -> beneficiary, SWIFT rule, why verify, pending top-up)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8828,
+          "macro_f1": 0.882,
+          "est_cost_usd": 3.093532,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 12,
+      "points_spent": 180,
+      "estimate": 0.86,
+      "note": "v37: round 11 (cannot transfer -> beneficiary, source of funds, payment did not work -> reverted)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8799,
+          "macro_f1": 0.8794,
+          "est_cost_usd": 3.130399,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 13,
+      "points_spent": 196,
+      "estimate": 0.86,
+      "note": "v41: round 12 (shop failures -> declined, abroad fees -> transfer_fee_charged); agrees with all non-noise labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8857,
+          "macro_f1": 0.8853,
+          "est_cost_usd": 3.175675,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 14,
+      "points_spent": 200,
+      "estimate": 0.87,
+      "note": "v42 final: Amex funds -> supported_cards, freeze card -> lost_or_stolen; agrees with 96/100 labels (4 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8851,
+          "macro_f1": 0.8848,
+          "est_cost_usd": 3.192492,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

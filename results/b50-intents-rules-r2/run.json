@@ -1,0 +1,79 @@
+{
+  "run_id": "b50-intents-rules-r2",
+  "task": "banking77_intents",
+  "budget": 50,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:42:00",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1513,
+    "num_turns": 38,
+    "total_cost_usd": 1.5955086
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.78,
+      "note": "v1 draft: flat 77-option choice with descriptions from task knowledge, no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.839,
+          "macro_f1": 0.8321,
+          "est_cost_usd": 0.347283,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 22,
+      "estimate": 0.8,
+      "note": "round 1: H1 PIN->get_physical_card, H2 pending_top_up, H3 visa, H4 narrowed transfer/payment pending vs timing vs balance_not_updated; 11/11 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.85,
+          "macro_f1": 0.8451,
+          "est_cost_usd": 0.39851,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.81,
+      "note": "round 2: H5 deposit, H6 narrowed (shop refusal->declined; card faulty everywhere->card_not_working), H7 receiving_money, H8 flat payment->failed_transfer, 0069 noise example; 3-variant wording ensemble; 20/20 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8526,
+          "macro_f1": 0.8473,
+          "est_cost_usd": 1.335581,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 50,
+      "estimate": 0.82,
+      "note": "final: round 3 H9 narrowed (specific extra amount->extra_charge_on_statement; charged extra for using card->card_payment_fee_charged), pending payment vs pending transaction split; 3-variant ensemble; 25/25 labels; budget spent",
+      "test": {
+        "jev": {
+          "accuracy": 0.8551,
+          "macro_f1": 0.8506,
+          "est_cost_usd": 1.372766,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    }
+  ]
+}

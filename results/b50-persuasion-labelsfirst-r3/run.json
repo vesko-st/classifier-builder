@@ -1,0 +1,64 @@
+{
+  "run_id": "b50-persuasion-labelsfirst-r3",
+  "task": "persuasion_strategy",
+  "budget": 50,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T16:00:47",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 480,
+    "num_turns": 22,
+    "total_cost_usd": 0.9207066000000003
+  },
+  "final_version": 3,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 20,
+      "estimate": 0.45,
+      "note": "v1 draft: choice with 23 options mapped to 18 classes, from policy Q1-Q2",
+      "test": {
+        "jev": {
+          "accuracy": 0.6383,
+          "macro_f1": 0.5916,
+          "est_cost_usd": 0.108717,
+          "total": 1517,
+          "answered": 1515
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 40,
+      "estimate": 0.5,
+      "note": "v2: ask-donation-amount narrowed to questions; suggested amounts -> proposition, amount info -> donation-information; 'children are our future' pleas -> emotion (label 0162). check 8/10 (biased: fitted)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6407,
+          "macro_f1": 0.6009,
+          "est_cost_usd": 0.117526,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 50,
+      "estimate": 0.55,
+      "note": "v4: 2-member wording ensemble; how-are-you replies -> greeting, vivid child suffering -> emotion, quiz-like 'have you seen X?' -> task-inquiry. 13/15 on all labels (fitted); check 8/10",
+      "test": {
+        "jev": {
+          "accuracy": 0.6473,
+          "macro_f1": 0.5988,
+          "est_cost_usd": 0.244709,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

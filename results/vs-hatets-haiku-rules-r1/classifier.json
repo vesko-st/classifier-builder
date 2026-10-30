@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v5",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Is this tweet hateful? Hateful content attacks, demeans, or dehumanizes a person or group based on protected characteristics.\n\nAlways hateful:\n- Uses gendered slurs (bitch, hoe, whore, cunt, slut) against women in any context EXCEPT clear self-defense or defending someone else\n- Uses racial slurs to demean anyone\n- Threatens violence based on protected status\n- Uses crime victims to argue for dehumanizing policies toward their killer's group\n- Makes demeaning generalizations about a group\n\nNot hateful:\n- Immigration policy debate, demographic arguments\n- Personal insults without slurs, or responding to racism with insults\n- Individual self-defense responses with harsh language\n- Defending someone else from disrespect\n- Casual vulgar language between peers (without slurs targeting groups)\n\nKey: The question is whether it attacks a group or category, not just whether it's harsh or uses bad language.",
+  "state_template": "Tweet:\n{{input}}",
+  "description": "Classify tweets as hateful - gendered slur aware",
+  "criteria": {
+    "hate": "Hateful under the policy",
+    "not_hate": "Not hateful under the policy"
+  }
+}

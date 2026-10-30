@@ -1,0 +1,127 @@
+{
+  "version": 1,
+  "name": "donation_v9n",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v9n_A",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "This is a chat in which a persuader tries to get the persuadee to donate part of their task payment (paid at the end of the task) to Save the Children. Judge how the persuadee left the question of donating at the end of the chat, and how genuine their willingness was.",
+        "notes": [
+          "Only the persuadee's donation matters, not the persuader's.",
+          "Use the persuadee's last stated position; people sometimes change their minds during the chat.",
+          "Visiting the website after already agreeing to give an amount does not undo the agreement.",
+          "Some chats are garbled or the speaker labels are mixed up, with the 'Persuadee' asking the questions. Then judge whichever participant is being asked to donate."
+        ]
+      },
+      "state_template": "Charity-donation chat:\n{{input}}",
+      "criteria": {
+        "share_of_payment": "The persuadee settled on a deliberate share of their task payment, stated as a percentage or fraction (10%, 30%, half, all of it), even if small, skeptical, or after haggling.",
+        "eager_small": "The persuadee readily and cheerfully offered or agreed to give a small amount from the task payment (a few cents up to a dollar or two), without needing to be pushed, or asked approvingly whether a small amount like 10 cents would be enough.",
+        "hesitant_small": "The persuadee was hesitant, skeptical about the charity (questioning its legitimacy or where the money goes), worried about money, or pressured, and in the end offered only a small cash sum ('how about .25?', 'about 25 cents', 'it is all I can afford').",
+        "prefers_other_way": "The persuadee said they would rather keep this task's payment and help some other way (give outside the task, volunteer, donate goods), even if they then offered part of it.",
+        "real_world_sum": "The persuadee said they will donate a real-world sum larger than the task payment ($5, $20, $100...), possibly later, tomorrow or next month.",
+        "vague_yes": "The persuadee said yes, they will or do donate, but never named or accepted an amount.",
+        "garbled_yes": "The chat is garbled, off-topic or role-confused, and the participant being asked says yes, they donate, or names an amount.",
+        "considering": "The persuadee's last word makes any donation depend on first thinking about it, researching the charity, or looking at its website ('I'll look into the website and likely donate $5', 'I'll take a look and send in my donation'), even if they mention an amount.",
+        "refused": "The persuadee declined to donate or kept their payment.",
+        "never_decided": "Donating was barely discussed and the persuadee never said whether they would donate."
+      },
+      "map": {
+        "share_of_payment": "donated",
+        "eager_small": "donated",
+        "hesitant_small": "not_donated",
+        "prefers_other_way": "not_donated",
+        "real_world_sum": "donated",
+        "vague_yes": "donated",
+        "garbled_yes": "donated",
+        "considering": "not_donated",
+        "refused": "not_donated",
+        "never_decided": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v9n_B",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Read this conversation. One person (the persuader) asks the other (the persuadee) to give some of the money they earn for this task to the charity Save the Children. Which description best fits where the persuadee ended up on giving, and how willingly?",
+        "notes": [
+          "We care about the persuadee giving, not the persuader.",
+          "Go by the persuadee's final position, since some change their minds.",
+          "If they already agreed on an amount, saying they will look at the website afterwards does not cancel it.",
+          "In some confused chats the names are swapped and the 'Persuadee' is the one pitching the charity; then judge the person who is being asked to give."
+        ]
+      },
+      "state_template": "Charity-donation chat:\n{{input}}",
+      "criteria": {
+        "share_of_payment": "Chose a definite portion of their task earnings, given as a percent or fraction (10%, 30%, half, the whole payment), even if the portion is small, they had doubts, or it was negotiated.",
+        "eager_small": "Happily and willingly offered or accepted a small gift from the task earnings (cents up to a dollar or two) with little persuasion, or asked in a positive way whether something like 10 cents is enough.",
+        "hesitant_small": "Was reluctant, doubtful about the charity (is it legit, does the money reach children), short of money, or pushed into it, and finally offered just a small cash amount ('maybe .25', 'about 25 cents', 'that's all I can afford').",
+        "prefers_other_way": "Said they'd prefer to keep the task earnings and help some other way (giving elsewhere, volunteering, donating goods), even if they then offered some of it.",
+        "real_world_sum": "Promised a sum bigger than the task earnings ($5, $20, $100 and so on), maybe to be given later, tomorrow or next month.",
+        "vague_yes": "Said yes, they'll give or they do give, without ever stating or accepting an amount.",
+        "garbled_yes": "Confused, off-topic or role-swapped chat in which the person being asked says yes, says they donate, or names an amount.",
+        "considering": "Ended by saying they will first think it over, research the charity or look at its website before maybe donating ('I'll look at the site and probably give $5', 'I'll check it out and send a donation'), even if they named an amount.",
+        "refused": "Said no to donating, or kept their earnings.",
+        "never_decided": "Giving hardly came up and the persuadee never said whether they would give."
+      },
+      "map": {
+        "share_of_payment": "donated",
+        "eager_small": "donated",
+        "hesitant_small": "not_donated",
+        "prefers_other_way": "not_donated",
+        "real_world_sum": "donated",
+        "vague_yes": "donated",
+        "garbled_yes": "donated",
+        "considering": "not_donated",
+        "refused": "not_donated",
+        "never_decided": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v9n_C",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Charity persuasion chat: the persuader asks the persuadee to donate part of their task payment to Save the Children. Classify the persuadee's final stance on donating and the tone in which they took it.",
+        "notes": [
+          "Only the persuadee's stance counts.",
+          "A stance stated later in the chat overrides an earlier one.",
+          "An agreed amount stays agreed even if the persuadee then says they will visit the website.",
+          "When speaker labels look reversed (the 'Persuadee' promotes the charity), classify the speaker who is being asked to donate."
+        ]
+      },
+      "state_template": "Charity-donation chat:\n{{input}}",
+      "criteria": {
+        "share_of_payment": "Persuadee commits to a specific proportion of the task payment expressed as a percentage or fraction (10%, 30%, half, all), regardless of doubts, size or haggling.",
+        "eager_small": "Persuadee volunteers or gladly accepts a small donation from the task payment (cents to a dollar or two) without resistance, or positively asks if a small amount like 10 cents would do.",
+        "hesitant_small": "Persuadee is reluctant, distrustful of the charity, money-worried or pressured, and finally names only a small cash amount ('how about .25?', 'about 25 cents', 'all I can afford').",
+        "prefers_other_way": "Persuadee prefers keeping the task payment and helping another way (donating outside the task, volunteering, giving goods), even if they then offer part of it.",
+        "real_world_sum": "Persuadee commits to a sum larger than the task payment ($5, $20, $100...), possibly for later, tomorrow or next month.",
+        "vague_yes": "Persuadee says yes to donating, or that they donate, without any amount.",
+        "garbled_yes": "Garbled, off-topic or role-confused chat where the person asked says yes, says they donate, or gives an amount.",
+        "considering": "Persuadee closes by deferring to thinking, researching or visiting the website first, with at most a likely or possible donation afterwards ('I'll look into the website and likely donate $5'), even naming an amount.",
+        "refused": "Persuadee declines to donate or keeps the payment.",
+        "never_decided": "Donation barely discussed; persuadee never says whether they will donate."
+      },
+      "map": {
+        "share_of_payment": "donated",
+        "eager_small": "donated",
+        "hesitant_small": "not_donated",
+        "prefers_other_way": "not_donated",
+        "real_world_sum": "donated",
+        "vague_yes": "donated",
+        "garbled_yes": "donated",
+        "considering": "not_donated",
+        "refused": "not_donated",
+        "never_decided": "not_donated"
+      }
+    }
+  ]
+}

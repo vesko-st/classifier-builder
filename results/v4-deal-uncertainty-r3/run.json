@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-deal-uncertainty-r3",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:09:25",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 561,
+    "num_turns": 33,
+    "total_cost_usd": 1.2893558000000003
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft from description: 6 fine options mapped to deal/no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9107,
+          "macro_f1": 0.8871,
+          "est_cost_usd": 0.018637,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.85,
+      "note": "v2: guidance on closing offers/conditional acceptance, 8 options; 9/10 on hard labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9158,
+          "macro_f1": 0.8828,
+          "est_cost_usd": 0.025946,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.85,
+      "note": "v7: 3-variant ensemble; unanswered counteroffers -> no_deal; no-price chats -> no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9124,
+          "macro_f1": 0.8886,
+          "est_cost_usd": 0.080697,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.86,
+      "note": "v8 ensemble: generous acceptance (grudging, typos, make the offer)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9107,
+          "macro_f1": 0.8862,
+          "est_cost_usd": 0.091624,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.86,
+      "note": "v9 ensemble: same-price logistics dispute=deal; offer-mismatch complaint=no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9107,
+          "macro_f1": 0.8862,
+          "est_cost_usd": 0.10079,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.86,
+      "note": "v11 final: v9 + formal-offer submission/finalize meeting at uncontested price = deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.9124,
+          "macro_f1": 0.8881,
+          "est_cost_usd": 0.106975,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

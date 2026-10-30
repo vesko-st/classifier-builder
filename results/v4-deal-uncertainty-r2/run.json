@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-deal-uncertainty-r2",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:08:00",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 561,
+    "num_turns": 37,
+    "total_cost_usd": 1.3183208
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft from description: 6 outcome options mapped to deal/no_deal; offer_pending->no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.8935,
+          "macro_f1": 0.8684,
+          "est_cost_usd": 0.018148,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.85,
+      "note": "v3b: last-exchange options with bought examples; 10/10 on batch1 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9055,
+          "macro_f1": 0.8803,
+          "est_cost_usd": 0.024552,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.85,
+      "note": "v4b: generous deal definition (closing concessions count), single-message chats no_deal; 19/20 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9141,
+          "macro_f1": 0.8841,
+          "est_cost_usd": 0.030443,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.85,
+      "note": "ens6: 3 wording variants of v5b (implicit acceptance, firm final offers = deal); 28/30 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9261,
+          "macro_f1": 0.8991,
+          "est_cost_usd": 0.107317,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.83,
+      "note": "ens7: +examples (giving in with 'ok' = deal; big-gap counter = no_deal); 34/40 labels (boundary-biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.9227,
+          "macro_f1": 0.895,
+          "est_cost_usd": 0.11377,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.84,
+      "note": "final: ens8 (3 wording variants, +batch5 examples) with deal threshold 0.55; 42/50 on boundary-biased labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.921,
+          "macro_f1": 0.8934,
+          "est_cost_usd": 0.122423,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

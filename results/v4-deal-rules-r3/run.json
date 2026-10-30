@@ -1,0 +1,124 @@
+{
+  "run_id": "v4-deal-rules-r3",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:42:23",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 2814,
+    "num_turns": 65,
+    "total_cost_usd": 2.921648800000001
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft from description: fine options mapped to deal/no_deal",
+      "test": {
+        "jev": {
+          "accuracy": 0.8832,
+          "macro_f1": 0.8572,
+          "est_cost_usd": 0.019248,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.82,
+      "note": "v5: H1 narrow (final acceptance/meeting stated price = deal; open gap = no_deal), H3 no price named = no_deal; 10/10 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9089,
+          "macro_f1": 0.8842,
+          "est_cost_usd": 0.025041,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 34,
+      "estimate": 0.84,
+      "note": "ens8: 3 wording variants, rules H1,H3,H4,H5,H6n,H7,H8; 17/17 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9055,
+          "macro_f1": 0.8808,
+          "est_cost_usd": 0.08236,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 54,
+      "estimate": 0.86,
+      "note": "ens11: + H9 logistics=acceptance, H4n small-gap closing counter=deal, H10 open question, H11 offer rejected, cash-gap; 27/27 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9158,
+          "macro_f1": 0.8921,
+          "est_cost_usd": 0.103797,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 76,
+      "estimate": 0.88,
+      "note": "ens14: restructured deal-by-default (cut-off chats), no-deal only for no buyer number / open question / refusal / gap>=~15% / conditional mismatch / unanswered opener; 38/38 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.921,
+          "macro_f1": 0.8891,
+          "est_cost_usd": 0.10431,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 90,
+      "estimate": 0.88,
+      "note": "ens17: + unanswered first price = no_deal, explicit 'you've got a deal', conditional reduction, best-offer unobjected, deposit≠rent; 45/45 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9192,
+          "macro_f1": 0.8858,
+          "est_cost_usd": 0.126408,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 100,
+      "estimate": 0.87,
+      "note": "FINAL ens18: 3-wording deal-by-default ensemble; 49/50 labels (miss 0744 = suspected noise); budget spent",
+      "test": {
+        "jev": {
+          "accuracy": 0.9191,
+          "macro_f1": 0.8857,
+          "est_cost_usd": 0.132276,
+          "total": 582,
+          "answered": 581
+        }
+      }
+    }
+  ]
+}

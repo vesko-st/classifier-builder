@@ -1,0 +1,199 @@
+{
+  "run_id": "b200-intents-rules-r3",
+  "task": "banking77_intents",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T16:10:15",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 4640,
+    "num_turns": 97,
+    "total_cost_usd": 4.426386600000001
+  },
+  "final_version": 12,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.85,
+      "note": "v1 draft: flat 77-option choice with descriptions from task knowledge",
+      "test": {
+        "jev": {
+          "accuracy": 0.8347,
+          "macro_f1": 0.8305,
+          "est_cost_usd": 0.342774,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 22,
+      "estimate": 0.87,
+      "note": "v3: H1 narrowed (physical card->order; delivery->card_delivery_estimate), H2 payment=card payment, H3 why_verify, H4 specific unrecognised txn beats compromised, H5 beneficiary, H6 spare card count",
+      "test": {
+        "jev": {
+          "accuracy": 0.8419,
+          "macro_f1": 0.8391,
+          "est_cost_usd": 0.370568,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 54,
+      "estimate": 0.87,
+      "note": "v7: round 2 rules H7-H13 (abroad fees->transfer_fee, disposable counts, reverted vs declined, currencies, transfer cluster: pending/timing/balance/not_received)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8529,
+          "macro_f1": 0.8499,
+          "est_cost_usd": 0.404329,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 74,
+      "estimate": 0.87,
+      "note": "v10: round 3 rules H14-H19 (slow transaction->not_received, Visa request, unexplained cash->cash_withdrawal_not_recognised, virtual card not received->getting_virtual_card, deposit->cheque_or_cash, top-up not-yet->pending), H4 narrowed",
+      "test": {
+        "jev": {
+          "accuracy": 0.8562,
+          "macro_f1": 0.8534,
+          "est_cost_usd": 0.423347,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 92,
+      "estimate": 0.87,
+      "note": "e14: 3-member wording-variant ensemble of v12 rules + H19/H20 (top-up not completed -> pending, extra charge on payments -> card fee), 0013 ATM wording; 0340/0546 suspected noise",
+      "test": {
+        "jev": {
+          "accuracy": 0.8607,
+          "macro_f1": 0.857,
+          "est_cost_usd": 1.545707,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 122,
+      "estimate": 0.88,
+      "note": "e19: round 5 rules H23-H27 (exchange discounts->exchange_charge, generic top-up fee->card charge, £1/$1 charges->extra_charge, bare unknown 'charge'->direct_debit, bare 'why charged'->transfer_fee), H4c compromised boundary",
+      "test": {
+        "jev": {
+          "accuracy": 0.8656,
+          "macro_f1": 0.862,
+          "est_cost_usd": 1.668187,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 136,
+      "estimate": 0.88,
+      "note": "e22: round 6 rules H28-H31 (Apple/Google Pay named wins, rate-too-high-for-cash -> cash withdrawal rate, wrong payment -> not_recognised, unable to transfer -> beneficiary_not_allowed) + examples for jittery records",
+      "test": {
+        "jev": {
+          "accuracy": 0.8695,
+          "macro_f1": 0.8661,
+          "est_cost_usd": 1.723664,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 150,
+      "estimate": 0.88,
+      "note": "e25: round 7 examples (receive a transfer -> receiving_money, 'thought transfers were free' -> transfer_fee, 'charged extra' -> extra_charge, transfer to my account not showing -> balance); 0454 suspected noise",
+      "test": {
+        "jev": {
+          "accuracy": 0.8695,
+          "macro_f1": 0.8661,
+          "est_cost_usd": 1.748493,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 164,
+      "estimate": 0.88,
+      "note": "e27: round 8 rules (freeze card -> lost_or_stolen, didn't work vs didn't complete top-up, fee complaints -> card_payment_fee, money not reached account -> balance) + examples for jittery near-ties",
+      "test": {
+        "jev": {
+          "accuracy": 0.8714,
+          "macro_f1": 0.8678,
+          "est_cost_usd": 1.818527,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 10,
+      "points_spent": 180,
+      "estimate": 0.86,
+      "note": "e28: random-check fixes H36 (flat/mortgage payment error -> failed_transfer), H37 (top-up not working + money missing -> top_up_reverted)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8714,
+          "macro_f1": 0.8678,
+          "est_cost_usd": 1.840827,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 11,
+      "points_spent": 194,
+      "estimate": 0.86,
+      "note": "e30: H31 confirmed (can't transfer / told not possible -> beneficiary_not_allowed; 0209 exact phrasing kept as failed_transfer example), H32b (complaints about bad rate -> card_payment_wrong_exchange_rate)",
+      "test": {
+        "jev": {
+          "accuracy": 0.874,
+          "macro_f1": 0.8712,
+          "est_cost_usd": 1.871863,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 12,
+      "points_spent": 200,
+      "estimate": 0.86,
+      "note": "e31 FINAL: H39 (customer's 'transfers declined' framing -> declined_transfer), H19d (something wrong with top-up -> top_up_failed); 97/100 bought labels right, misses are 3 suspected-noise labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8731,
+          "macro_f1": 0.8702,
+          "est_cost_usd": 1.892424,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

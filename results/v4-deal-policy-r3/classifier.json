@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "name": "deal_v6",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "A buyer and a seller negotiated over chat about a Craigslist item. Read the whole chat and pick the option that best describes how the negotiation ended. Focus on the last few turns: did both sides end up agreeing on a price, or not?",
+  "state_template": "{{input}}",
+  "criteria": {
+    "agreed": "By the end, a specific price (an offer, a counter-offer, or the asking price) was on the table and one side accepted it, explicitly ('deal', 'ok I can do that', 'sounds good', 'that works', 'I will take it at that', 'it's yours') or by saying they will submit/make the offer, or by clearly going along with that price and arranging pickup, payment or a time ('Ok, that sounds fair ... I will have cash in hand', 'Today will work, thanks!'). Small add-on conditions (pickup, delivery, extras) and a missing reply afterwards don't matter. A bare 'yes, I'd like to buy it' at the start of a near-empty chat is NOT an agreement.",
+    "counter_unanswered": "Both sides have made real offers (stating the listing/asking price does not count as an offer), and the chat ends with a new offer or counter-offer that moves toward the other side (e.g. 'Make it $6,600 and you have a deal', 'How about 45?') that the other side never answers.",
+    "final_price_unanswered": "After haggling, the seller's last message concedes a new lowest or final price toward the buyer ('the lowest I can go is X', 'I can do X but no lower'), without refusing the buyer outright, and the buyer neither accepts nor refuses.",
+    "first_offer_unanswered": "The buyer has proposed a price (possibly after the seller only stated the asking price), and the seller neither countered with a new price nor accepted it: the seller only argues, asks questions, or the chat stops. If the seller goes along with the offer (arranging pickup, delivery, payment, or thanking them for the purchase), choose 'agreed' instead.",
+    "rejected": "One side explicitly refuses the other's price or walks away ('I'll pass', 'too far apart', 'no thanks', 'I wouldn't go near that low', 'X or nothing', 'if that's your limit I don't think we can make a deal'), and no agreement follows, even if the refusing side restates their own price.",
+    "no_price": "No price was negotiated or agreed: nobody proposed a price other than stating the listing/asking price, and nobody accepted a price. The chat is only greetings, a bare statement of interest ('I'd like to buy your car', 'yes'), the asking price, questions about the item, small talk, or it stops early.",
+    "confused_or_broken": "The chat is derailed: wrong item or role confusion that is never resolved, complaints that the site or offer button is broken, or off-topic messages, with no price agreement."
+  },
+  "map": {
+    "agreed": "deal",
+    "counter_unanswered": "deal",
+    "final_price_unanswered": "deal",
+    "first_offer_unanswered": "no_deal",
+    "rejected": "no_deal",
+    "no_price": "no_deal",
+    "confused_or_broken": "no_deal"
+  }
+}

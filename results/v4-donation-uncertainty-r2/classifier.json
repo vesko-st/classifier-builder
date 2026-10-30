@@ -1,0 +1,115 @@
+{
+  "version": 1,
+  "name": "donation_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "variant_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "This is a chat in which a persuader tries to get the persuadee to donate part of their task payment to Save the Children. Did the persuadee end up donating? Pick the option that best describes the persuadee's final position by the end of the chat.",
+        "notes": [
+          "Many chats are messy or drift off topic. Judge the persuadee's overall willingness to give by the end.",
+          "If the persuadee says 'I will donate $X' or 'I can donate $X' at any point, even matching the persuader's amount or while discussing children's charities in general, treat it as a commitment.",
+          "A persuadee who sounds sympathetic and inclined to give usually did donate even without naming an amount.",
+          "Signs they did not donate: they postpone ('I'll take a look at the website and send in my donation', 'likely donate later'), their doubts about legitimacy were left unresolved, or their only offer depended on the persuader giving and was never followed up.",
+          "The persuadee's last word on donating outweighs earlier statements: an early 'yes I can' followed by 'haven't decided yet' or 'maybe not' means undecided."
+        ]
+      },
+      "state_template": "Charity chat:\n{{input}}",
+      "criteria": {
+        "committed_amount": "The persuadee said they will or can donate a specific amount (even a few cents), or accepted an amount.",
+        "agreed_no_amount": "The persuadee said they will donate or agreed to give something, without settling on an amount.",
+        "willing_vague": "No explicit commitment, but the persuadee sounds sympathetic and inclined to give, or says they donate on HITs or plan to donate.",
+        "conditional_unmet": "The persuadee's only offer was conditional on the persuader giving ('if you give $1, I'll give $1'), and the persuader never answered with a commitment.",
+        "other_charity_only": "The persuadee only talked about their own giving to other charities (e.g. children's hospitals, St Jude) and never said they would give anything in this task.",
+        "skeptical_unresolved": "The persuadee raised doubts (is it legitimate, where does the money go) that were still unresolved when the chat ended.",
+        "undecided_or_later": "The persuadee stayed undecided, said they would think about it or look at the website first, or would donate later, elsewhere or through the website rather than from this task's payment (e.g. 'I'll do $20 and go through the site'). Not this option if they already agreed to donate in the chat and only want the website to give again later.",
+        "declined": "The persuadee refused or said they cannot or will not donate.",
+        "dodged_amount": "The persuadee said they would donate, but when asked how much they dodged it (still debating, would rather not say, can't do the suggested amount) and never named an amount they would give."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "willing_vague": "donated",
+        "conditional_unmet": "not_donated",
+        "other_charity_only": "not_donated",
+        "skeptical_unresolved": "not_donated",
+        "undecided_or_later": "not_donated",
+        "declined": "not_donated",
+        "dodged_amount": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "variant_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "In this Save the Children persuasion chat, where did the persuadee (the person being asked to give part of their task earnings) end up on donating?",
+        "guidance": [
+          "The chats are often rambling or off topic; go by how willing the persuadee is to give by the end.",
+          "Any 'I'll donate $X' / 'I can give $X' from the persuadee counts as committing, even if it matches the persuader's amount or comes up while talking about children's charities in general.",
+          "A warm, sympathetic persuadee who leans toward giving usually did give, even with no amount named.",
+          "They usually did not give if they put it off (look at the website first, likely donate later), still doubted the charity at the end, or only offered to give if the persuader gave and that was never followed up.",
+          "What the persuadee says last about donating outweighs what they said earlier: an early yes followed by 'not decided' or 'maybe not' is undecided."
+        ]
+      },
+      "state_template": "Persuasion chat:\n{{input}}",
+      "criteria": {
+        "committed_amount": "Persuadee stated an amount they will or can give (any amount, even cents), or accepted a suggested amount.",
+        "agreed_no_amount": "Persuadee agreed to give something but no amount was settled.",
+        "willing_vague": "Persuadee made no explicit promise but is sympathetic, leaning toward giving, or mentions donating on HITs or planning to give.",
+        "conditional_unmet": "Persuadee only offered to give if the persuader gave too, and the persuader never confirmed.",
+        "other_charity_only": "Persuadee only discussed their own donations to other charities and never offered to give in this task.",
+        "skeptical_unresolved": "Persuadee doubted the charity's legitimacy or use of money and was still unconvinced at the end.",
+        "undecided_or_later": "Persuadee was still deciding, wanted to check the website first, or would give later, elsewhere or via the website instead of from this task's payment. Not this option if they already agreed to give in this chat and just want the site to give more later.",
+        "declined": "Persuadee said no, or said they cannot afford to or will not give.",
+        "dodged_amount": "Persuadee agreed in principle but, when asked for an amount, evaded (still deciding, won't say, can't manage the suggested sum) and never named one."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "willing_vague": "donated",
+        "conditional_unmet": "not_donated",
+        "other_charity_only": "not_donated",
+        "skeptical_unresolved": "not_donated",
+        "undecided_or_later": "not_donated",
+        "declined": "not_donated",
+        "dodged_amount": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "variant_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A persuader asked the persuadee to give part of their task payment to the charity Save the Children. Based on the whole chat, and above all on the persuadee's final stance, which describes the outcome? Notes: chats are often messy; stating any amount ('I will donate 25', 'I can do 5 if you do 5') is a commitment; a sympathetic persuadee leaning toward giving usually gave; postponing, unresolved doubts, an unanswered conditional offer, or ending on 'haven't decided' means they did not.",
+      "state_template": "Chat transcript:\n{{input}}",
+      "criteria": {
+        "committed_amount": "Committed to a specific amount, however small.",
+        "agreed_no_amount": "Agreed to donate, amount not settled.",
+        "willing_vague": "No promise, but clearly sympathetic and inclined to give.",
+        "conditional_unmet": "Offered only on condition the persuader gives, never confirmed.",
+        "other_charity_only": "Only talked about giving to other charities, never offered to give here.",
+        "skeptical_unresolved": "Still doubted the charity when the chat ended.",
+        "undecided_or_later": "Still undecided, or would check the website / give later, elsewhere or via the website instead of from the task payment. (Not if they already agreed to give here and just want to give again later.)",
+        "declined": "Refused or said they can't afford it.",
+        "dodged_amount": "Agreed in principle but dodged naming any amount when asked."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "willing_vague": "donated",
+        "conditional_unmet": "not_donated",
+        "other_charity_only": "not_donated",
+        "skeptical_unresolved": "not_donated",
+        "undecided_or_later": "not_donated",
+        "declined": "not_donated",
+        "dodged_amount": "not_donated"
+      }
+    }
+  ]
+}

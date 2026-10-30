@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-hatets-uncertainty-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T11:52:23",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 461,
+    "num_turns": 33,
+    "total_cost_usd": 1.1211757999999998
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description: 5 options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7707,
+          "macro_f1": 0.7706,
+          "est_cost_usd": 0.051387,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.7,
+      "note": "v2b after batch 1: male targets, slang, policy talk not hate; addressed slur = hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7888,
+          "macro_f1": 0.7869,
+          "est_cost_usd": 0.074307,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.72,
+      "note": "v3b after batch 2: interjections/reported slurs not hate; immigrant stereotypes + send back = hate; news w/ hashtags not hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7995,
+          "macro_f1": 0.7965,
+          "est_cost_usd": 0.090847,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.72,
+      "note": "v4 after batch 3: dismissive 'them hoes' and slur-cursing at addressee = hate; anti-immigrant stance (#RefugeesNotWelcome, criminal framing) = hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8097,
+          "macro_f1": 0.8084,
+          "est_cost_usd": 0.103308,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.73,
+      "note": "v5 after batch 4: idioms/quotes/sexual self-reference/politician insults/crime-case discussion not hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8109,
+          "macro_f1": 0.8091,
+          "est_cost_usd": 0.120145,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.74,
+      "note": "v7 final: 3-member wording-variant ensemble of v6 + batch-5 examples; 48/50 on bought labels (2 wrong are self-contradictory labels)",
+      "test": {
+        "jev": {
+          "accuracy": 0.808,
+          "macro_f1": 0.807,
+          "est_cost_usd": 0.352201,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

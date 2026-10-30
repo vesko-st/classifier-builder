@@ -1,0 +1,79 @@
+{
+  "run_id": "v4-deal-labelsfirst-r2",
+  "task": "craigslist_deal",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:29:41",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 716,
+    "num_turns": 34,
+    "total_cost_usd": 1.4725673999999997
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 30,
+      "estimate": 0.78,
+      "note": "v1 criteria draft from policy: no_deal iff no price / refusal / opening offer unanswered",
+      "test": {
+        "jev": {
+          "accuracy": 0.8797,
+          "macro_f1": 0.8185,
+          "est_cost_usd": 0.020275,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 74,
+      "estimate": 0.82,
+      "note": "v3b: + no_concession (seller never came below listing) rule; opening_unanswered/refusal tightened; 20/22 bought labels, 10/10 check",
+      "test": {
+        "jev": {
+          "accuracy": 0.8883,
+          "macro_f1": 0.833,
+          "est_cost_usd": 0.027168,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 86,
+      "estimate": 0.82,
+      "note": "ensemble of v3b + paraphrased v3c (same 4 criteria); 23/28 bought labels, 10/10 check",
+      "test": {
+        "jev": {
+          "accuracy": 0.8918,
+          "macro_f1": 0.8381,
+          "est_cost_usd": 0.051989,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.83,
+      "note": "final: ensemble v3b+v3c with no_price/refusal clarifications; 30/35 bought labels, 10/10 check; budget spent",
+      "test": {
+        "jev": {
+          "accuracy": 0.8952,
+          "macro_f1": 0.8414,
+          "est_cost_usd": 0.055118,
+          "total": 582,
+          "answered": 582
+        }
+      }
+    }
+  ]
+}

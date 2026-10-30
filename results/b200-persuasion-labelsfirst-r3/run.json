@@ -1,0 +1,109 @@
+{
+  "run_id": "b200-persuasion-labelsfirst-r3",
+  "task": "persuasion_strategy",
+  "budget": 200,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:53:12",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 6402,
+    "num_turns": 54,
+    "total_cost_usd": 2.7480252000000003
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 25,
+      "estimate": 0.5,
+      "note": "v1 draft: 23-option choice mapped to 18 classes, from task + Q1/Q2 policy",
+      "test": {
+        "jev": {
+          "accuracy": 0.6282,
+          "macro_f1": 0.6192,
+          "est_cost_usd": 0.116571,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 51,
+      "estimate": 0.55,
+      "note": "v2: fixes from check labels (flat agreement->other, would-you->proposition, gratitude for children->thank, inquiry split past=personal/current habits=task)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6262,
+          "macro_f1": 0.6089,
+          "est_cost_usd": 0.122133,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 75,
+      "estimate": 0.55,
+      "note": "v3e: 3-member wording ensemble (flat choice, reordered/rephrased choice, two_level) of v3 rules; matching->self-modeling, other charities->other",
+      "test": {
+        "jev": {
+          "accuracy": 0.621,
+          "macro_f1": 0.6076,
+          "est_cost_usd": 0.393074,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 119,
+      "estimate": 0.6,
+      "note": "v4e: ensemble; greeting covers how-are-you answers, off-task narrowed (mechanics/small talk->other), personal-story vs credibility anecdote",
+      "test": {
+        "jev": {
+          "accuracy": 0.6401,
+          "macro_f1": 0.5977,
+          "est_cost_usd": 0.418485,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 143,
+      "estimate": 0.62,
+      "note": "v5e: 3 flat-choice wording variants (dropped two_level); answer-to-question narrowed, donation-info any-amount, credibility tax-deductible",
+      "test": {
+        "jev": {
+          "accuracy": 0.6533,
+          "macro_f1": 0.6094,
+          "est_cost_usd": 0.416525,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 199,
+      "estimate": 0.6,
+      "note": "v7e final: v5e + narrowed personal-story, giving-habit small talk->other, 'donated to them (STC)'->task, fortunate-upbringing contrast->emotion; fixes 9/breaks 3 on 87 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6513,
+          "macro_f1": 0.5976,
+          "est_cost_usd": 0.43473,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

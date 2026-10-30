@@ -1,0 +1,124 @@
+{
+  "run_id": "b200-persuasion-labelsfirst-r1",
+  "task": "persuasion_strategy",
+  "budget": 200,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:53:12",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 6717,
+    "num_turns": 62,
+    "total_cost_usd": 2.8790812
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 39,
+      "estimate": 0.5,
+      "note": "v1 draft from policy answers: 21-option choice mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.6374,
+          "macro_f1": 0.5923,
+          "est_cost_usd": 0.106141,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 71,
+      "estimate": 0.58,
+      "note": "v4: praise-user narrowed to explicit praise of the person; donation-habit and suffering-fact questions -> task-related-inquiry",
+      "test": {
+        "jev": {
+          "accuracy": 0.6276,
+          "macro_f1": 0.5695,
+          "est_cost_usd": 0.111956,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 95,
+      "estimate": 0.6,
+      "note": "ens1: 3 wording variants of v6 (persuader-comment->other narrowed, org fundraising->credibility)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6302,
+          "macro_f1": 0.5742,
+          "est_cost_usd": 0.380622,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 123,
+      "estimate": 0.62,
+      "note": "ens2: round-2 rules (org impact->credibility, rhetorical->emotion, etc.); 38/42 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6236,
+          "macro_f1": 0.5676,
+          "est_cost_usd": 0.425122,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 137,
+      "estimate": 0.63,
+      "note": "ens3: personal-story = first-hand experience; praise incl. admiration; off-task tangents; 45/49",
+      "test": {
+        "jev": {
+          "accuracy": 0.6276,
+          "macro_f1": 0.5827,
+          "est_cost_usd": 0.457135,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 165,
+      "estimate": 0.64,
+      "note": "ens4: how-are-you replies->greeting, join/volunteer->personal inquiry, thanks-for-generosity->praise, etc.; 58/63",
+      "test": {
+        "jev": {
+          "accuracy": 0.6262,
+          "macro_f1": 0.5815,
+          "est_cost_usd": 0.493578,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 199,
+      "estimate": 0.62,
+      "note": "ens8 FINAL: ens6 (donation-to-STC->credibility, Whatever-comfortable->donation-info, intro-STC->source inquiry) + 'your help will...'->logical; 72/80 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6229,
+          "macro_f1": 0.5792,
+          "est_cost_usd": 0.541491,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

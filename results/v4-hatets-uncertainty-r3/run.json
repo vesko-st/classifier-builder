@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-hatets-uncertainty-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T11:54:09",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 623,
+    "num_turns": 29,
+    "total_cost_usd": 1.0028522
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description: 5 options mapped to hate/not_hate (women/immigrant targets)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7973,
+          "macro_f1": 0.7965,
+          "est_cost_usd": 0.049533,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.68,
+      "note": "v2: notes + examples from batch 1; 10/10 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8154,
+          "macro_f1": 0.8111,
+          "est_cost_usd": 0.08165,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.7,
+      "note": "v3b: broadened to race/religion, hostile-vs-banter bitch rule, man-target exclusion; 20/20 on bought (hard) labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8256,
+          "macro_f1": 0.8203,
+          "est_cost_usd": 0.104198,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.72,
+      "note": "ens5b: 3 wording variants of v4b (batch-3 rules: go-home/criminal framing = hate, hashtag-only/terminology = not); 29/30 on bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8347,
+          "macro_f1": 0.831,
+          "est_cost_usd": 0.369261,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.72,
+      "note": "ens6b: batch-4 rules (DACA deportation, go-home = hate; headline-only, friendly bitch = not) in all 3 members; 39/40 bought",
+      "test": {
+        "jev": {
+          "accuracy": 0.829,
+          "macro_f1": 0.8262,
+          "est_cost_usd": 0.458045,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.72,
+      "note": "FINAL ens7: batch-5 examples in all 3 members; 48/50 on bought (uncertainty-picked, fitted) labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8296,
+          "macro_f1": 0.8267,
+          "est_cost_usd": 0.498988,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

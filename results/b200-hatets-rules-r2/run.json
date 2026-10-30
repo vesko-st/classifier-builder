@@ -1,0 +1,199 @@
+{
+  "run_id": "b200-hatets-rules-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:42:13",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 2653,
+    "num_turns": 77,
+    "total_cost_usd": 4.1359122
+  },
+  "final_version": 12,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.62,
+      "note": "v1 draft from description: 5 options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8058,
+          "macro_f1": 0.8047,
+          "est_cost_usd": 0.05606,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 38,
+      "estimate": 0.68,
+      "note": "v5: 8 graded options (imm slogan/framing/insult; slur friendly/mild/hostile; misogyny); 16/19 on hard labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7644,
+          "macro_f1": 0.7623,
+          "est_cost_usd": 0.072081,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 58,
+      "estimate": 0.7,
+      "note": "ens1: 3 wording variants of v7 (H1c/H2c/H3/H4b rules); 24/29 on hard labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7367,
+          "macro_f1": 0.7337,
+          "est_cost_usd": 0.227444,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 76,
+      "estimate": 0.72,
+      "note": "ens3: 3 variants, structured member C, H5 narrowed, H7, subtweets; 34/38 on (hard, biased) labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7452,
+          "macro_f1": 0.7421,
+          "est_cost_usd": 0.272021,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 90,
+      "estimate": 0.73,
+      "note": "ens5: ens4 rules (H8 immigration-harm claims, H9 hatred/threats to women) + decision threshold hate>=0.6; 43/45 on labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7535,
+          "macro_f1": 0.7487,
+          "est_cost_usd": 0.304189,
+          "total": 1766,
+          "answered": 1765
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 104,
+      "estimate": 0.74,
+      "note": "ens6: + H10 generic contempt for women as bitches/hoes = hate; threshold 0.55; 48/52 on labels (2 misses suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7673,
+          "macro_f1": 0.764,
+          "est_cost_usd": 0.324535,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 110,
+      "estimate": 0.75,
+      "note": "ens7: + H11 rape jokes = hate, trailing-bitch advice friendly; threshold back to 0.5; 52/55 on labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7667,
+          "macro_f1": 0.7644,
+          "est_cost_usd": 0.344339,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 124,
+      "estimate": 0.76,
+      "note": "ens10: 4 members (ens8 A + consolidated ens9 A/B/C incl. H12 men/son of a bitch), threshold 0.6; 60/62 on labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7973,
+          "macro_f1": 0.7932,
+          "est_cost_usd": 0.419536,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 140,
+      "estimate": 0.77,
+      "note": "ens12: 4 members, + swamped/can't-take-all framing, whoever-jab, approving sayings (H13), POS deportee; threshold 0.55; 66/70 on labels (3 misses suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.799,
+          "macro_f1": 0.7955,
+          "est_cost_usd": 0.472495,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 10,
+      "points_spent": 160,
+      "estimate": 0.77,
+      "note": "ens14: + H7 contrast (crime+punitive=hate), H14 legal/procedural & quoted politicians = not, sarcasm, quoted rape lyrics; threshold 0.55; 73/80 on labels (4 misses suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7984,
+          "macro_f1": 0.7949,
+          "est_cost_usd": 0.524712,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 11,
+      "points_spent": 174,
+      "estimate": 0.77,
+      "note": "ens16: + H12b (slurs need female/unclear target), H10b (sexual conquest), hashtag-only news = not; threshold 0.5; 81/87 on labels (3 misses suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8024,
+          "macro_f1": 0.7993,
+          "est_cost_usd": 0.591689,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 12,
+      "points_spent": 200,
+      "estimate": 0.76,
+      "note": "FINAL ens17: 4-member wording ensemble, 8 options mapped to hate/not_hate, threshold 0.5; 92/100 on bought (uncertainty-selected, biased) labels; 3 misses suspected noise",
+      "test": {
+        "jev": {
+          "accuracy": 0.799,
+          "macro_f1": 0.7961,
+          "est_cost_usd": 0.641087,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

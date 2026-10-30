@@ -1,0 +1,79 @@
+{
+  "run_id": "vs-hatets-sonnet-rules-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:12:15",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 705,
+    "num_turns": 28,
+    "total_cost_usd": 0.6651612000000001
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "draft from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.8029,
+          "macro_f1": 0.8006,
+          "est_cost_usd": 0.056876,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 26,
+      "estimate": 0.7,
+      "note": "v4: tuned on 13 uncertainty labels; fits 12/13",
+      "test": {
+        "jev": {
+          "accuracy": 0.8301,
+          "macro_f1": 0.8269,
+          "est_cost_usd": 0.068373,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 92,
+      "estimate": 0.74,
+      "note": "v8: policy answers applied; fits 24/26 labels (0162, 0266 unexplained)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8318,
+          "macro_f1": 0.8277,
+          "est_cost_usd": 0.07935,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.72,
+      "note": "final: v8 re-snapshotted; 24/30 bought labels, biased hard sample",
+      "test": {
+        "jev": {
+          "accuracy": 0.8318,
+          "macro_f1": 0.8277,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

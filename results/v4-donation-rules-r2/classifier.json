@@ -1,0 +1,156 @@
+{
+  "version": 1,
+  "name": "donation_ens_v12bt",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v6b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "This is a chat in which a persuader asks the persuadee to donate part of their task payment to Save the Children. Judge whether the persuadee ended up donating, based on the persuadee's final position and attitude by the end of the chat.",
+        "notes": [
+          "Focus on the persuadee's final position, not on earlier statements they later changed.",
+          "Any amount above zero, even a few cents, counts as donating.",
+          "Sympathy for the cause is not enough. If the persuadee ends hesitant, deferring, or preferring other charities or other ways to help, they did not donate. If no explicit decision is reached, go by the persuadee's own stated stance: they donated only if they say they are interested in or willing to donate to this charity.",
+          "A polite 'yes' or 'I agree' before the chat drifts to unrelated topics is not agreement to donate. But a donation amount the persuadee committed to still stands if the chat later drifts to small talk.",
+          "Giving through the charity's website, by card, or 'on my own time' is not donating from the task payment: classify it as only_other_channel."
+        ]
+      },
+      "state_template": "Charity chat:\n{{input}}",
+      "criteria": {
+        "committed_amount": "The persuadee states they will donate (or have donated, or plan to donate soon, or will match the other person's donation) a specific amount greater than zero.",
+        "agreed_no_amount": "The persuadee agrees to donate something without naming an amount, and does not later balk or back off when an amount comes up.",
+        "leaning_yes_after_ask": "After being asked to donate, the persuadee's last word leans toward giving without fixing an amount (e.g. 'okay, I might donate', 'I'd give around $X if ...'), and they do not take it back. Asking whether a small amount (e.g. '$.10 good enough?') would do also counts.",
+        "roles_reversed": "The roles are reversed about Save the Children: the persuadee is the one who opens the topic of donating to it, says they are interested in donating to it, asks the other person whether or how much they would donate to it, or promotes it, rather than being persuaded. (Promoting or giving to a different charity does not count.)",
+        "supportive_never_asked": "No explicit decision is reached and the persuadee is never really asked, but the persuadee personally and clearly says they want to donate to this charity now or will match a donation. General approval of the charity, or hoping other people donate, does not count; nor does saying they will look into it later. Saying 'I am interested in donating' counts.",
+        "hesitant_after_ask": "After being asked, the persuadee stays hesitant or deflects: not sure, wants more information before deciding, prefers to volunteer, to give to local or other charities, or to help another way, says 'not yet', or jokes the request off. They never say they are interested in donating or agree to an amount, however warmly they talk about the cause.",
+        "balks_at_amount": "The persuadee says they are willing to donate, but when an amount comes up they evade, keep debating, push back (e.g. 'I don't think I can do $5'), or refuse to say how much (e.g. keep it private), and never name an amount of their own.",
+        "not_a_giver": "No explicit decision; the persuadee says they don't usually give to charities or don't support many, and never says they want to donate here.",
+        "prefers_other_charity": "The persuadee steers toward a different charity they support instead of Save the Children, and never agrees to give to Save the Children or to match an amount.",
+        "praise_only": "The persuadee only praises the charity, agrees it's a good cause, or hopes other people donate, but never says anything about giving themselves (and is not acting as the one promoting donations).",
+        "wants_to_but_cannot": "The persuadee says they would like to help but cannot afford it, are poor, or need the money, and never agrees to give a specific amount.",
+        "only_other_channel": "The persuadee chooses to give through the charity's website or some other channel instead of from this task's payment, e.g. says they will look at the website and send in a donation there, or donate through the site. Merely wanting to read more about the charity on its website does not count. This applies even when they name an amount or say they will 'definitely' donate, as long as the donation is to be made on the website or by their own payment (e.g. 'I'll look into the website and likely donate $5', asking about credit cards then 'I'll go and make a donation today'). Once the persuadee says they will go to the website to donate, an amount they mention afterwards (e.g. 'I'll head over there right now ... I can donate a dollar') still refers to that website donation. Exception: if the persuadee had already agreed to help and only the persuader tells them to donate on the web, a bare 'Ok, I will' is agreed_no_amount, not this.",
+        "undecided": "The persuadee stays undecided or says they will think about it, with no sign of support for giving.",
+        "refused": "The persuadee declines to donate or says they will give nothing now.",
+        "off_topic_no_interest": "The conversation drifts to unrelated topics (politics, small talk, etc.) and the persuadee never names an amount or seriously engages with donating to Save the Children; a polite passing 'yes' or 'I agree' early on does not count as agreeing to donate."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "leaning_yes_after_ask": "donated",
+        "roles_reversed": "donated",
+        "supportive_never_asked": "donated",
+        "hesitant_after_ask": "not_donated",
+        "balks_at_amount": "not_donated",
+        "not_a_giver": "not_donated",
+        "prefers_other_charity": "not_donated",
+        "praise_only": "not_donated",
+        "wants_to_but_cannot": "not_donated",
+        "only_other_channel": "not_donated",
+        "undecided": "not_donated",
+        "refused": "not_donated",
+        "off_topic_no_interest": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_varB",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Did the persuadee (the person being asked) end up giving part of their task payment to Save the Children?",
+        "how_to_judge": [
+          "Use where the persuadee stands at the end of the chat; later statements override earlier ones.",
+          "Even a few cents counts as giving.",
+          "Warm feelings about children or the charity are not enough: a persuadee who, once asked, stays unsure, wants to research first, or would rather help another way or give elsewhere did not give.",
+          "When no decision is ever made, go by what the persuadee says about their own willingness to give to this charity.",
+          "A polite early 'yes' followed by unrelated chatter is not a commitment, but an amount committed before the chat drifts still stands.",
+          "A gift planned via the website, by card, or on their own time is not a donation from this task: use only_other_channel."
+        ]
+      },
+      "state_template": "Charity chat:\n{{input}}",
+      "criteria": {
+        "committed_amount": "Persuadee names a positive amount they are giving, will give soon, or will match.",
+        "agreed_no_amount": "Persuadee says yes to giving without naming an amount, and doesn't back off later when an amount is discussed.",
+        "leaning_yes_after_ask": "Asked to give, the persuadee ends leaning yes without settling an amount ('okay, I might donate', 'I'd give about $X if ...'). Asking whether a small amount would be enough counts too.",
+        "roles_reversed": "The persuadee acts like the persuader for Save the Children: opens the topic of donating to it, says they want to donate to it, asks the other person how much they'd give, or promotes it. Championing some other charity doesn't count.",
+        "supportive_never_asked": "Never really asked and no decision made, but the persuadee clearly says they themselves will or want to donate to this charity now, or offers to match; praising the charity, hoping others give, or 'I'll look into it later' don't count. 'I'm interested in donating' counts.",
+        "wants_to_but_cannot": "Persuadee says they'd like to help but can't afford it or need the money, and never names an amount.",
+        "only_other_channel": "Persuadee plans to give via the website or another route rather than from this task's payment (e.g. 'I'll take a look and send in my donation', 'I'll go through the site'). Just wanting to read up on the website doesn't count. Still applies when they name an amount or say 'definitely', if the gift is to be made on the website or with their own card (e.g. 'I'll look into the website and likely donate $5'). If they've said they'll go to the website to give, an amount named afterwards still means a website gift. Exception: if the persuadee already said yes to helping and the persuader alone tells them to use the web, a bare 'Ok, I will' is agreed_no_amount.",
+        "undecided": "Persuadee remains undecided, saying they'll think about it, with no sign of support for giving.",
+        "refused": "Persuadee says no or that they'll give nothing now.",
+        "off_topic_no_interest": "Talk drifts to unrelated subjects and the persuadee never names an amount or seriously engages with giving; at most a polite passing 'yes'.",
+        "hesitant_after_ask": "After the ask, the persuadee hedges or deflects (not sure, wants more information, would rather volunteer, give locally or to another charity, 'not yet', jokes it off) and never agrees or says they're interested in donating.",
+        "balks_at_amount": "Persuadee is willing in principle but, once an amount comes up, dodges, keeps debating, pushes back, or won't say how much, and never names their own amount.",
+        "not_a_giver": "No decision; persuadee says they rarely or don't give to charities, and never says they want to donate here.",
+        "prefers_other_charity": "Persuadee pushes a different charity they back instead of Save the Children and never agrees to give to it or match an amount.",
+        "praise_only": "Persuadee just praises the charity or hopes others give, never saying anything about giving themselves (and isn't the one promoting donations)."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "leaning_yes_after_ask": "donated",
+        "roles_reversed": "donated",
+        "supportive_never_asked": "donated",
+        "wants_to_but_cannot": "not_donated",
+        "only_other_channel": "not_donated",
+        "undecided": "not_donated",
+        "refused": "not_donated",
+        "off_topic_no_interest": "not_donated",
+        "hesitant_after_ask": "not_donated",
+        "balks_at_amount": "not_donated",
+        "not_a_giver": "not_donated",
+        "prefers_other_charity": "not_donated",
+        "praise_only": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_varC",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Read this chat, in which one participant (the persuader) tries to get the other (the persuadee) to donate some of their task earnings to Save the Children. Which description best fits how the persuadee's decision about donating turned out? Weigh the persuadee's final stance over earlier remarks; any positive amount counts as donating. Being sympathetic toward children is not the same as agreeing to donate: if, after being asked, the persuadee stays unsure, wants to look into it first, or prefers some other way of helping, that is not donating. If no decision ever comes up, judge by whether the persuadee says they personally want to give to this charity. Planning to give via the website, by card, or on one's own time is not donating from the task payment; that is only_other_channel.",
+      "state_template": "Conversation:\n{{input}}",
+      "criteria": {
+        "committed_amount": "The persuadee commits to a specific positive amount (now, soon, or by matching the other person).",
+        "agreed_no_amount": "The persuadee agrees to donate but names no amount, and never retreats once amounts are mentioned.",
+        "leaning_yes_after_ask": "Once asked, the persuadee's last word tilts toward giving without a settled amount, e.g. 'I might donate' or a conditional offer. Wondering aloud whether a small sum would suffice also counts.",
+        "roles_reversed": "The persuadee behaves like the one doing the persuading on behalf of Save the Children: they raise the subject of donating to it, say they're keen to donate to it, question the other about their donation, or champion it. Pushing a different charity is not this.",
+        "supportive_never_asked": "No real ask or decision happens, yet the persuadee plainly says that they personally want to donate to this charity now or will match a gift; admiring the charity, wishing it lots of donors, or promising to look into it later is not enough. Stating 'I am interested in donating' qualifies.",
+        "wants_to_but_cannot": "The persuadee wishes they could help but says they can't afford it or need the money, never naming an amount.",
+        "only_other_channel": "The persuadee opts to donate through the website or some other channel rather than from the task payment, for instance promising to check the site and send a donation there. Simply planning to read about the charity online is not this. This holds even with a named amount or a firm 'I'll definitely donate', so long as the gift is to be made on the website or with their own payment method. After the persuadee says they'll head to the website to donate, any amount they then mention still belongs to that website gift. Exception: when the persuadee has already agreed to help and it is only the persuader who points them to the web, a simple 'Ok, I will' counts as agreed_no_amount.",
+        "undecided": "The persuadee stays on the fence ('I'll think about it') without showing support for giving.",
+        "refused": "The persuadee turns down donating or says they will give nothing now.",
+        "off_topic_no_interest": "The conversation wanders off to unrelated matters and the persuadee never names an amount or engages seriously with donating beyond a polite 'yes'.",
+        "hesitant_after_ask": "After being asked, the persuadee hedges or sidesteps (unsure, wants details first, would rather volunteer or support a local or different charity, 'not yet', laughs it off) and never agrees or expresses interest in donating.",
+        "balks_at_amount": "The persuadee professes willingness, but when an amount is raised they sidestep, keep deliberating, resist, or decline to reveal a figure, never offering an amount of their own.",
+        "not_a_giver": "With no decision made, the persuadee says they seldom or never give to charities, and never expresses a wish to donate here.",
+        "prefers_other_charity": "The persuadee redirects to some other charity they favour rather than Save the Children, never agreeing to donate to it or to match a sum.",
+        "praise_only": "The persuadee merely compliments the charity or wishes it many donors, saying nothing about giving themselves (and is not the one championing donations)."
+      },
+      "map": {
+        "committed_amount": "donated",
+        "agreed_no_amount": "donated",
+        "leaning_yes_after_ask": "donated",
+        "roles_reversed": "donated",
+        "supportive_never_asked": "donated",
+        "wants_to_but_cannot": "not_donated",
+        "only_other_channel": "not_donated",
+        "undecided": "not_donated",
+        "refused": "not_donated",
+        "off_topic_no_interest": "not_donated",
+        "hesitant_after_ask": "not_donated",
+        "balks_at_amount": "not_donated",
+        "not_a_giver": "not_donated",
+        "prefers_other_charity": "not_donated",
+        "praise_only": "not_donated"
+      }
+    }
+  ],
+  "decision": {
+    "class": "donated",
+    "threshold": 0.36
+  }
+}

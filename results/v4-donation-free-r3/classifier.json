@@ -1,0 +1,28 @@
+{
+  "version": 1,
+  "name": "donation_v3",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "In this chat a persuader tries to get the persuadee to donate part of their task payment (a bonus of up to $2) to the charity Save the Children. Afterwards the persuadee privately chose whether to actually donate. Which description best fits how the persuadee behaved in the chat?",
+  "state_template": "{{input}}",
+  "criteria": {
+    "full_amount": "The persuadee pledges their whole task payment or bonus (all of it, $2, 100%).",
+    "willing_pledge": "The persuadee willingly and sincerely pledges a specific amount that fits within the task payment (for example a few cents up to $2), without needing to be pushed.",
+    "grudging_token": "The persuadee only agrees to a small token amount after reluctance, pressure or haggling, e.g. 'okay, maybe I can do 10 cents'.",
+    "out_of_range_or_later": "The persuadee pledges a real-world sum larger than the task payment (such as $5, $10, $20, $50), or promises to donate later, on the charity's website, or some other way rather than from this payment.",
+    "warm_vague": "The persuadee is warm and positive and says they will or probably will donate, but never names an amount.",
+    "skeptic_research": "The persuadee stays skeptical or noncommittal, e.g. ends by saying they need to research the charity first or will think about it.",
+    "refused": "The persuadee firmly declines to donate, says they can't afford it, or wants to keep their earnings.",
+    "low_effort": "The persuadee's messages are nonsense, template-like, all caps, or barely engage with the conversation."
+  },
+  "map": {
+    "full_amount": "donated",
+    "willing_pledge": "donated",
+    "grudging_token": "donated",
+    "out_of_range_or_later": "not_donated",
+    "warm_vague": "donated",
+    "skeptic_research": "not_donated",
+    "refused": "not_donated",
+    "low_effort": "not_donated"
+  }
+}

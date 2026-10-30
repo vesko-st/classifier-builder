@@ -1,0 +1,73 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v3_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v2a",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "women": {
+          "instructions": "Does this tweet attack women: does it use a gendered slur (bitch, hoe, whore, slut, cunt, etc.) or degrading sexual language to insult, demean, threaten or objectify a woman or women?",
+          "criteria": {
+            "true": "Hostile or degrading use aimed at a specific woman or at women in general: insults in a personal fight (also when women insult other women), threats, sexual degradation, generalisations like 'these hoes', lyrics or jokes calling women hoes/bitches, playful lines piling up 'bitch' and 'hoe' at someone.",
+            "false": "No woman is targeted: self-referential use ('I'm a bad bitch'), purely affectionate use between friends (birthday wishes, 'love you hoe'), idioms ('life's a bitch', 'karma's a bitch'), an exclamation with no target ('bitch please'), the slur aimed at a man, or a tweet that reports or condemns misogyny. Also false when the insult is clearly aimed at a man or boy (e.g. addressed as nigga, bro, he/him, a male athlete or rapper), even if the words 'bitch' or 'hoe' appear."
+          }
+        },
+        "immigrants": {
+          "instructions": "Does this tweet attack immigrants, migrants or refugees themselves (not just a policy or politicians)?",
+          "criteria": {
+            "true": "It demeans or dehumanises them (invaders, vermin, 'rapefugees', bottom feeders, ironic jabs), portrays them as a group as criminals, rapists, disease carriers or welfare parasites (including crime stories framed as typical of immigrants), calls for violence against them, or approvingly calls to deport them all, send them back or get rid of them, even in a short tweet or mostly hashtags plus a word of approval.",
+            "false": "It only discusses or supports a policy (building the wall, funding ICE, ending DACA, voting), shares neutral news, attacks Democrats, Congress or other politicians with deportation hashtags tacked on, says they should come or apply legally, or defends immigrants."
+          }
+        }
+      },
+      "rule": [
+        [
+          "women"
+        ],
+        [
+          "immigrants"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v2a_para",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet (user mentions anonymised as @user):\n{{input}}",
+      "questions": {
+        "women": {
+          "instructions": "Is this tweet misogynistic abuse, i.e. does it direct a gendered slur (bitch, hoe, whore, slut, cunt and similar) or degrading sexual talk at a woman or at women to insult, belittle, threaten or objectify them?",
+          "criteria": {
+            "true": "Yes: a woman or women are the target of hostile or degrading language. This includes slur-filled insults in personal arguments (including between women), threats, sexual degradation, sweeping statements about women such as 'these hoes', jokes or rap lines calling women hoes or bitches, and teasing that stacks 'bitch' and 'hoe' on a person.",
+            "false": "No: the slur targets nobody or targets a man or boy (addressed as nigga, bro, dude, he/him, or a male public figure), it is self-description ('I'm that bitch'), loving banter between friends (birthday messages, 'love you hoe'), an idiom ('life's a bitch'), an interjection ('bitch please', 'bitch I'm hungry'), or the tweet reports or criticises misogyny."
+          }
+        },
+        "immigrants": {
+          "instructions": "Is this tweet hostile to immigrants, migrants or refugees as people, rather than only arguing about immigration policy or politicians?",
+          "criteria": {
+            "true": "Yes: it calls them invaders, vermin, 'rapefugees', bottom feeders or similar, mocks them, presents them as a group as criminals, rapists, disease carriers or freeloaders (crime reports framed as typical of them count), urges violence against them, or approvingly demands they all be deported, sent back or removed, even briefly or mostly through hashtags with a word of approval.",
+            "false": "No: it argues for a policy (the wall, ICE, ending DACA, voting), reports news neutrally, attacks Democrats, Congress or other politicians while deportation hashtags are merely appended, says they should come or apply legally, or supports immigrants."
+          }
+        }
+      },
+      "rule": [
+        [
+          "women"
+        ],
+        [
+          "immigrants"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ]
+}

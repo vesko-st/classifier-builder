@@ -1,0 +1,125 @@
+{
+  "version": 1,
+  "name": "deal_ens11",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v11a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Below is a Craigslist item listing followed by a buyer-seller price negotiation chat. Decide how the negotiation ended: did they close a deal on a price for the item, or not? Pick the option that best describes the end of the chat.",
+        "guidance": [
+          "A deal needs a specific price that one side offered and the other side accepted.",
+          "Short replies like 'ok', 'sure', 'yes', 'great', 'that works' after a price offer count as acceptance.",
+          "Acceptance with a simple condition (e.g. 'I could accept $210 if you pick it up') counts as a deal.",
+          "If the last message accepts the other side's price ('ok', 'sure', 'deal', 'you've got a deal', 'X will do'), it IS a deal, even if it adds small conditions, extra terms or asks for a phone number.",
+          "If the last message proposes a DIFFERENT price from the other side's latest offer (a new counteroffer) and nobody has accepted it, it is NOT a deal.",
+          "Agreeing on pickup or delivery without settling the price is NOT a deal.",
+          "If no price is ever discussed in the chat (e.g. the whole chat is one or two short messages like 'Agree' or 'Hi'), it is NOT a deal.",
+          "Read acceptances generously: grudging agreement ('ok I guess', 'FINE, make the offer'), typo'd replies ('okayc'), 'I'll take it' at the listed price, and a seller telling the buyer to submit or make the offer all count as accepting.",
+          "Prices with an obvious typo (e.g. '$200' or '1300' when the offers were $2000 or $13000, or '0 will do' after a $40 offer) mean the same price: treat them as accepting that price, not as a new counteroffer.",
+          "If both sides have named the SAME price and the only open point is pickup vs delivery or timing (e.g. buyer: '$10000 and you bring it'; seller: '10000 and you come get it'), the price is agreed: it IS a deal.",
+          "If the chat ends with a complaint that the submitted offer shows a different price than what was agreed (e.g. 'The offer says 2695 but I can only afford 2200'), or with an offer that one side says they will accept or reject, it is NOT a deal.",
+          "Saying 'yes' to 'are you interested?' is not agreeing to a price.",
+          "If the chat ends with one side submitting, or saying they will submit, the formal offer ('See final offer directly', 'I'll submit my offer', 'here goes with $65') at a price the other side named or did not object to, or with both arranging to meet and finalize after the seller's last price, it IS a deal. It is not a deal only when the other side clearly disputed that price."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "Both sides clearly agree on a final price (e.g. 'deal', 'sounds good', 'ok', 'yes', 'I accept'), possibly followed by pickup or payment arrangements.",
+        "offer_accepted_last": "The final messages accept the other side's latest price, even briefly ('ok', 'sure', 'you've got a deal', 'X will do') or with a small condition or extra term such as pickup, delivery, paying cash or a trade-in (e.g. 'I could accept $210 if you pick it up'). Includes grudging or typo'd acceptance, 'I'll take it' at the asking price, and 'make the offer'.",
+        "agreement_pending_formal_offer": "They appear to agree in chat and say they will submit or send the offer, with no sign of refusal.",
+        "counteroffer_unanswered": "The final message is a new counteroffer: it names a different price from the other side's latest offer (e.g. buyer offered $2232, seller says $2300; buyer then offers $2250) and the chat ends without the other side accepting it.",
+        "still_far_apart": "The chat ends mid-haggling with the two sides' prices still apart, or with only questions about the item.",
+        "price_never_settled": "They talk about logistics (pickup, delivery, condition) but never settle on a specific price.",
+        "rejected_or_walked_away": "One side refuses the final price, says they are too far apart, or leaves without agreeing.",
+        "off_topic_or_broken": "The chat is very short (one or two messages, e.g. just 'Agree' or 'Hi'), never discusses a price, is nonsensical, about the wrong item, mentions a broken offer system, or never reaches a real price negotiation."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "offer_accepted_last": "deal",
+        "agreement_pending_formal_offer": "deal",
+        "counteroffer_unanswered": "no_deal",
+        "still_far_apart": "no_deal",
+        "price_never_settled": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "off_topic_or_broken": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v11b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "You will read a Craigslist listing and the chat in which a buyer and a seller haggle over its price. Classify how the chat finishes: was a sale price agreed by both people, or not?",
+        "rules": [
+          "Count it as a deal only when a concrete price put forward by one person was agreed to by the other.",
+          "Brief agreement such as 'yes', 'okay', 'sure', 'sounds good' or 'that works' in response to a price is agreement.",
+          "Agreeing to a price on a simple condition (for example 'I can do $210 if you come get it') is still a deal.",
+          "When the closing message agrees to the other person's price ('deal', 'you've got a deal', 'okay, X it is', 'X will do'), it is a deal, even if it adds a minor extra term or asks for contact details.",
+          "When the closing message instead puts forward a new, different price than the other person's last offer, and no one agrees to it, it is not a deal.",
+          "Settling only on pickup, delivery or timing, with no agreed price, is not a deal.",
+          "A chat in which no price is ever talked about (for example just 'Hi' or 'Agree') is not a deal.",
+          "Interpret agreement charitably: reluctant agreement ('ok I guess', 'FINE, make the offer'), misspelled replies ('okayc'), 'I'll take it' at the asking price, and the seller telling the buyer to go ahead and submit the offer are all agreement.",
+          "A price with an evident typo ('$200' or '1300' where $2000 or $13000 was on the table, '0 will do' after a $40 offer) refers to that same price, so it is agreement, not a fresh counteroffer.",
+          "When both people have stated the same price and only pickup, delivery or timing is still open (e.g. '$10000 and you bring it' / '10000 and you come get it'), the price has been agreed, so it is a deal.",
+          "When the chat finishes with someone complaining the submitted offer has the wrong price ('The offer says 2695 but I can only afford 2200'), or with an offer left to be accepted or rejected, it is not a deal.",
+          "Answering 'yes' to whether one is interested does not agree to any price.",
+          "When the chat closes with someone submitting or about to submit the formal offer ('See final offer directly', 'I'll submit my offer', 'here goes with $65') at a price the other person named or did not object to, or with both setting a meeting to finalize after the seller's last price, it is a deal; it is not a deal only if the other person plainly disputed that price."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "The two people plainly settle on a final price ('deal', 'sounds good', 'okay', 'I accept'), possibly then arranging payment or pickup.",
+        "offer_accepted_last": "At the end, one person agrees to the other's most recent price, briefly or with a minor condition or extra term (pickup, delivery, cash, trade-in), e.g. 'I could accept $210 if you pick it up'. Covers reluctant or misspelled agreement, 'I'll take it' at the listed price, and 'go ahead and submit the offer'.",
+        "agreement_pending_formal_offer": "They seem to have agreed in the chat and mention that the offer will be submitted or sent, with no refusal.",
+        "counteroffer_unanswered": "The chat closes on a fresh counteroffer at a price different from the other person's latest offer (e.g. seller asks $2300 after buyer's $2232, then buyer offers $2250), with no acceptance after it.",
+        "still_far_apart": "The chat stops in the middle of haggling with prices still not matching, or with only questions about the item.",
+        "price_never_settled": "They discuss pickup, delivery or condition but never agree on a specific price.",
+        "rejected_or_walked_away": "Someone turns down the final price, says the gap is too big, or leaves without agreeing.",
+        "off_topic_or_broken": "The chat is tiny (one or two messages like 'Agree' or 'Hi'), never mentions a price, makes no sense, is about a different item, mentions the offer system not working, or never gets to real haggling."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "offer_accepted_last": "deal",
+        "agreement_pending_formal_offer": "deal",
+        "counteroffer_unanswered": "no_deal",
+        "still_far_apart": "no_deal",
+        "price_never_settled": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "off_topic_or_broken": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v11c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Read the Craigslist listing and the negotiation chat between buyer and seller. Question: by the end of the chat, had buyer and seller closed a deal at an agreed price? Deal = a specific price offered by one party and accepted by the other, including short acceptances ('ok', 'sure', 'yes', 'deal', 'you've got a deal', 'X will do') and acceptances with a small condition or extra term (pickup, delivery, cash, trade-in, phone number). Not a deal = the chat ends on an unanswered new counteroffer at a different price, prices still apart, a refusal, only logistics agreed with no price, or a chat with no price discussion at all (e.g. just 'Agree' or 'Hi'). Choose the option that best describes how the chat ends. Read acceptance generously: reluctant or grudging agreement, misspelled replies like 'okayc', 'I'll take it' at the asking price, and 'go ahead and make the offer' count. A price with an obvious typo ('$200' for $2000, '1300' for 13000, '0 will do' for $40) means the price on the table, so it is acceptance, not a counteroffer. If both parties named the same price and only pickup, delivery or timing remains open, the price is agreed: deal. If the chat ends with a complaint that the submitted offer shows a different price ('the offer says 2695 but I can only afford 2200'), or with an offer left to accept or reject, it is not a deal. Saying 'yes' to being interested is not agreeing to a price. If the chat ends with someone submitting or about to submit the formal offer ('See final offer directly', 'I'll submit my offer', 'here goes with $65') at a price the other party named or did not object to, or with them arranging to meet and finalize after the seller's last price, it is a deal, unless the other party clearly disputed that price.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "explicit_agreement": "Clear mutual agreement on a final price, possibly followed by arrangements for payment or pickup.",
+        "offer_accepted_last": "The last messages accept the other party's latest price, even with a one-word reply or a small condition (e.g. 'I could accept $210 if you pick it up'). Includes grudging or misspelled acceptance, 'I'll take it', and 'make the offer'.",
+        "agreement_pending_formal_offer": "Agreement in chat, with a note that the offer will be submitted or sent, and no refusal.",
+        "counteroffer_unanswered": "The last message offers a new price that differs from the other party's latest offer, and nothing accepts it before the chat ends.",
+        "still_far_apart": "Ends mid-haggle with prices still apart, or with only questions about the item.",
+        "price_never_settled": "Logistics such as pickup, delivery or condition are discussed but no specific price is agreed.",
+        "rejected_or_walked_away": "A party refuses the final price, calls the gap too large, or leaves without agreement.",
+        "off_topic_or_broken": "Very short (one or two messages such as 'Agree' or 'Hi'), no price ever discussed, nonsensical, wrong item, broken offer system, or no real negotiation."
+      },
+      "map": {
+        "explicit_agreement": "deal",
+        "offer_accepted_last": "deal",
+        "agreement_pending_formal_offer": "deal",
+        "counteroffer_unanswered": "no_deal",
+        "still_far_apart": "no_deal",
+        "price_never_settled": "no_deal",
+        "rejected_or_walked_away": "no_deal",
+        "off_topic_or_broken": "no_deal"
+      }
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "name": "deal_v3_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v2",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A buyer and a seller negotiate the price of a Craigslist item over chat. Afterwards the buyer submitted a final offer that the seller accepted (deal) or not (no deal); that step is not shown. Judge from the chat how it most likely ended. Pick the option that best describes the end of the chat.",
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed_explicit": "One side proposes a price and the other explicitly accepts it ('deal', 'sounds good', 'ok', 'I'll take it', 'that works').",
+        "agreed_implied": "They clearly settle on a price without saying 'deal', e.g. arranging pickup, delivery or payment at that price.",
+        "late_counter_unanswered": "After a real back-and-forth with several prices exchanged, the chat ends with a counteroffer (often a compromise) that the other side has not answered yet; the two are close to agreeing.",
+        "opening_offer_unanswered": "The chat ends with the first price offer of the conversation (or the only one) and no reply to it; there was no real back-and-forth on price.",
+        "rejected": "One side refuses the last offer, says they are too far apart, walks away, or says the price does not work, with no later agreement.",
+        "no_price": "The chat ends before any price is discussed: only greetings, item questions, or off-topic messages."
+      },
+      "map": {
+        "agreed_explicit": "deal",
+        "agreed_implied": "deal",
+        "late_counter_unanswered": "deal",
+        "opening_offer_unanswered": "no_deal",
+        "rejected": "no_deal",
+        "no_price": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v2b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a Craigslist price negotiation between a buyer and a seller. After the chat, the buyer formally submitted an offer and the seller either accepted it or not; that step is hidden. Based on how the chat ends, which situation is this?",
+      "state_template": "{{input}}",
+      "criteria": {
+        "agreed_explicit": "A price was proposed and the other party clearly said yes to it (e.g. 'deal', 'ok', 'works for me', 'I accept').",
+        "agreed_implied": "No explicit 'yes', but the two plainly settled on a price, for example by arranging when to pick up, deliver or pay.",
+        "late_counter_unanswered": "Both sides had already traded several prices, and the chat stops on a counteroffer or 'final price' that has not been answered; they are close to a deal.",
+        "opening_offer_unanswered": "The only price offer in the chat (often the buyer's first offer) is left unanswered; price was never really negotiated back and forth.",
+        "rejected": "The last offer was turned down or someone walked away (too far apart, can't go that low/high, no thanks), and nothing was agreed afterwards.",
+        "no_price": "No price was ever discussed: the chat has only greetings, questions about the item, or unrelated talk."
+      },
+      "map": {
+        "agreed_explicit": "deal",
+        "agreed_implied": "deal",
+        "late_counter_unanswered": "deal",
+        "opening_offer_unanswered": "no_deal",
+        "rejected": "no_deal",
+        "no_price": "no_deal"
+      }
+    }
+  ]
+}

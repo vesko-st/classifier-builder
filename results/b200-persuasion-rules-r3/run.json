@@ -1,0 +1,199 @@
+{
+  "run_id": "b200-persuasion-rules-r3",
+  "task": "persuasion_strategy",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:39:55",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 3813,
+    "num_turns": 97,
+    "total_cost_usd": 4.493611399999999
+  },
+  "final_version": 12,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.5,
+      "note": "v1 draft: 18-option choice from P4G scheme descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.6137,
+          "macro_f1": 0.597,
+          "est_cost_usd": 0.089833,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 24,
+      "estimate": 0.52,
+      "note": "round1 rules: task-inquiry rhetorical questions, emotion for own sadness, logical for easy-donation/general reasoning, narrowed ack/personal-story",
+      "test": {
+        "jev": {
+          "accuracy": 0.617,
+          "macro_f1": 0.5972,
+          "est_cost_usd": 0.111324,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 48,
+      "estimate": 0.55,
+      "note": "round2 rules: info-need/agreement questions task-inquiry, interest-in-donating proposition, suffering beneficiaries emotion, self-answers other, naming charity credibility",
+      "test": {
+        "jev": {
+          "accuracy": 0.6309,
+          "macro_f1": 0.6063,
+          "est_cost_usd": 0.124093,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 74,
+      "estimate": 0.57,
+      "note": "round3 rules: hypothetical willingness questions proposition, yes/no answers & meta-talk other, thanks+goodbye thank, first-person raising of charity source-inquiry",
+      "test": {
+        "jev": {
+          "accuracy": 0.6355,
+          "macro_f1": 0.6015,
+          "est_cost_usd": 0.139642,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 102,
+      "estimate": 0.58,
+      "note": "round4 rules: gladness at donation = thank, consistency/charity-choice reasons logical, amount suggestions proposition vs plans donation-info",
+      "test": {
+        "jev": {
+          "accuracy": 0.6394,
+          "macro_f1": 0.6006,
+          "est_cost_usd": 0.159048,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 102,
+      "estimate": 0.59,
+      "note": "3-variant wording ensemble of v8 rules (orig, reversed order+new instructions, class-name keys); source rule requires naming the charity",
+      "test": {
+        "jev": {
+          "accuracy": 0.6414,
+          "macro_f1": 0.6021,
+          "est_cost_usd": 0.481505,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 122,
+      "estimate": 0.6,
+      "note": "round5 rules: org achievements credibility (anecdotes emotion), challenging/what-would-convince questions other, offers to answer questions task-inquiry",
+      "test": {
+        "jev": {
+          "accuracy": 0.6418,
+          "macro_f1": 0.6053,
+          "est_cost_usd": 0.53387,
+          "total": 1517,
+          "answered": 1516
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 140,
+      "estimate": 0.6,
+      "note": "round6: encouraging affirmations praise-user, own other charity activity other, volunteering questions personal-inquiry, sign-up links donation-info",
+      "test": {
+        "jev": {
+          "accuracy": 0.6322,
+          "macro_f1": 0.5991,
+          "est_cost_usd": 0.566459,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 154,
+      "estimate": 0.6,
+      "note": "round7: comments on persuadee's experience other, tax-deductible credibility, do-you-have-a-moment task-inquiry, habit answers other",
+      "test": {
+        "jev": {
+          "accuracy": 0.6421,
+          "macro_f1": 0.6066,
+          "est_cost_usd": 0.587319,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 10,
+      "points_spent": 174,
+      "estimate": 0.61,
+      "note": "round8: children-will-appreciate after commitment = thank, 'children need your help' proposition, amount-is-your-choice donation-info, enthusiastic reactions praise-user",
+      "test": {
+        "jev": {
+          "accuracy": 0.6454,
+          "macro_f1": 0.6094,
+          "est_cost_usd": 0.608178,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 11,
+      "points_spent": 190,
+      "estimate": 0.6,
+      "note": "round9: skip-a-snack argument logical (small-donations-help stays foot-in-door), join-charity questions personal-inquiry, honesty vouching credibility",
+      "test": {
+        "jev": {
+          "accuracy": 0.6427,
+          "macro_f1": 0.6124,
+          "est_cost_usd": 0.625624,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 12,
+      "points_spent": 200,
+      "estimate": 0.6,
+      "note": "final: round9-10 examples (greeting 'Not bad', amount clarification other, org-member statements credibility, amount answers donation-info); 94/100 labels, 6 misses suspected noise",
+      "test": {
+        "jev": {
+          "accuracy": 0.6506,
+          "macro_f1": 0.6188,
+          "est_cost_usd": 0.647811,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

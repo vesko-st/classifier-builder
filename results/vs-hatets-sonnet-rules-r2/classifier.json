@@ -1,0 +1,26 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v9",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Annotation policy for hate speech. A tweet is hateful only if the author directs hostility, contempt, abuse, blame, dehumanisation or threats at women (as women) or at immigrants/refugees/migrants (including 'illegal aliens') as a group, or at another group because of ethnicity or religion. Calling for immigrants as a group to be deported, sent home, expelled or kept out counts as hate, even without insults, as does blaming illegal immigrants for crime or costs. Abusive gendered/sexual slurs (bitch, whore, hoe, slut) count only when used to attack another person; a fixed idiom or exclamation ('son of a bitch', 'he a whole bitch') is not an attack on women. Possessive or degrading sexual talk about women ('I'll make that hoe my bitch') is hate. Vague alarmism about 'white genocide' that does not blame immigrants is not hate. The word needs insulting content: 'bitch' (or hoe, whore) used only as an interjection or form of address ('Bitch this is rape', 'Bitch, I'm at the airport'), or aimed at a man ('bitch boy'), is not hate. Threats of violence or sexual violence against women, or talk of 'raping a bitch' or ordering women around ('send me those hoes'), are hate even if the slur also serves as an address. Merely using the word casually, about oneself, reporting that someone else used it, or in an idiom is not hateful; nor is neutral news, a label or border-wall hashtag alone, a political or statistical point about immigration, or a tweet criticising someone else's hate. Which kind of tweet is this?",
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "hate_women": "Author attacks a woman or women: calls a target a bitch/whore/hoe/slut/cunt as an insult, sexually degrades or threatens her, misogyny. The slur is aimed at someone, meant to demean. Includes threats, sexual violence ('scared to rape a bitch?'), or demands for women ('bitch ass is gonna get slapped, send me those hoes').",
+    "hate_immigrants": "Author blames, vilifies or demeans immigrants, refugees or illegal aliens as people, or calls for them as a group to be deported, sent home, removed or kept out ('deport every illegal alien', '#DeportThemAll', '#SendThemBack', 'no refugees, no migrants'): attributes crime, rape, disease or costs to them, calls them scum, invaders, vermin. Also dismissing immigrants as a burden unable to support themselves.",
+    "hate_other_group": "Author attacks a group because of ethnicity, race, religion (racist or antisemitic slurs used to demean, anti-Muslim hate). Not when the author criticises or quotes someone else's racism.",
+    "personal_insult": "Insults or threatens an individual in a personal quarrel using general profanity, with no gendered or sexual slur at a woman and no attack on a group.",
+    "casual_slang": "Not an attack: friendly or joking use of bitch/hoe/slut, an interjection or form of address with no insult ('Bitch this is RAPE', 'Bitch I'm sitting on the floor'), about oneself, denying or reporting being called it, idioms ('karma's a bitch', 'bitch watch it', 'son of a bitch', 'he a whole bitch'), 'bitch boy' at a man, lyrics, sex banter.",
+    "immigration_politics": "Neutral, factual or political talk about immigration, news, statistics, political arguments (about Democrats, Congress, policy), border-wall hashtags alone (#BuildThatWall), the label 'illegal alien' alone, hashtag spam, with no call to expel immigrants and no blame or demeaning of immigrants as people. Includes plain crime news with wall hashtags, and insults aimed at a country ('Brazil is a sh*thole').",
+    "other": "Anything else: unrelated, neutral, praise; or a tweet that criticises or reports someone else's hate."
+  },
+  "map": {
+    "hate_women": "hate",
+    "hate_immigrants": "hate",
+    "hate_other_group": "hate",
+    "personal_insult": "not_hate",
+    "casual_slang": "not_hate",
+    "immigration_politics": "not_hate",
+    "other": "not_hate"
+  }
+}

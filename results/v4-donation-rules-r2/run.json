@@ -1,0 +1,124 @@
+{
+  "run_id": "v4-donation-rules-r2",
+  "task": "persuasion_donation",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:31:45",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 904,
+    "num_turns": 69,
+    "total_cost_usd": 2.960788200000001
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.65,
+      "note": "v1 draft from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.7482,
+          "macro_f1": 0.7279,
+          "est_cost_usd": 0.018514,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.65,
+      "note": "v3c: round 1 rules H1 (narrowed), H2, H3 (narrowed); 10/10 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.717,
+          "macro_f1": 0.6781,
+          "est_cost_usd": 0.023926,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 38,
+      "estimate": 0.68,
+      "note": "v4b: + H4 hesitation after ask -> not_donated; 19/19 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.7338,
+          "macro_f1": 0.7052,
+          "est_cost_usd": 0.027463,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 52,
+      "estimate": 0.7,
+      "note": "v7t: 3-variant ensemble, rules H1-H7, donated threshold 0.36; 26/26 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.729,
+          "macro_f1": 0.6988,
+          "est_cost_usd": 0.084982,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 66,
+      "estimate": 0.7,
+      "note": "v8t: ensemble, H5 sharpened, H6 broadened, threshold 0.34; 32/33 labels (0143 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.729,
+          "macro_f1": 0.6998,
+          "est_cost_usd": 0.086611,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 80,
+      "estimate": 0.7,
+      "note": "v10t: split other-charity option, H7 narrowed, H3 sharpened, threshold 0.38; 39/40 labels (0480 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7338,
+          "macro_f1": 0.7061,
+          "est_cost_usd": 0.093879,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 100,
+      "estimate": 0.72,
+      "note": "v12bt final: ensemble, H3 website rule broadened+narrowed, threshold 0.36; 48/50 labels (misses are suspected noise 0480, 0478)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7362,
+          "macro_f1": 0.7111,
+          "est_cost_usd": 0.101918,
+          "total": 417,
+          "answered": 417
+        }
+      }
+    }
+  ]
+}

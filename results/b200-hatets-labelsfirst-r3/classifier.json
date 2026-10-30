@@ -1,0 +1,110 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v6_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "tweet_hate_v5a",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet:\n{{input}}",
+      "questions": {
+        "immigrant_hate": {
+          "instructions": "Judge the body of the tweet (not just its hashtags). Does the tweet attack immigrants, migrants, refugees, 'illegals', or Muslims and other foreigners as unwanted outsiders?",
+          "criteria": {
+            "true": "Yes: it demeans or dehumanises them (e.g. 'rapefugees', 'invaders', 'bottom feeders', 'savages'), portrays them as criminals, rapists, disease carriers, welfare leeches or a threat/invasion, calls them scum or vermin, attacks people who defend them as defenders of criminals, mocks them ironically ('another wonderful dreamer'), or demands they be deported, sent back or kept out ('send them home', 'get them out', 'GO HOME', 'FUCK MUSLIM STUDENTS #SendThemBack'). A very short approving tweet about immigration consisting mostly of deportation hashtags (#DeportThemAll, #SendThemBack) also counts.",
+            "false": "No: it discusses immigration policy, law or the term 'illegal aliens' neutrally or definitionally, supports Trump or the wall without attacking immigrants, attacks Democrats/Congress/politicians/the media rather than immigrants (even with #DeportThemAll attached), uses wall hashtags on an unrelated topic, defends immigrants, or criticises racism. Also no if the tweet is not about immigrants at all. Also no when a deportation hashtag appears in a list of unrelated hashtags about a personal photo, family, food, sport or a place, with nothing about immigrants. Also no for a bare news link or headline whose only hostility is in hashtags like #stoptheinvasion or #WhiteGenocide, and for explaining what the term 'illegal alien' means. Also no when the complaint is about the political or economic effects of illegal immigration (votes, congressional seats, balance of power, census, employers exploiting cheap illegal labour, Democrats wanting open borders) without degrading the immigrants themselves."
+          }
+        },
+        "misogyny": {
+          "instructions": "Is the author being hostile toward a woman, a girl or women in general, insulting or degrading them with gendered slurs (bitch, hoe, whore, slut, cunt) or with sexual violence?",
+          "criteria": {
+            "true": "Yes: the author attacks or puts down a woman or women: calls a particular woman a bitch/whore/hoe/cunt in anger or contempt (including ordinary personal fights and trash talk between women), generalises contemptuously about women ('these hoes', 'bitches ain't shit', 'dese bitches will whore around'), or threatens or jokes about raping or hurting women. Stacked slurs aimed at a woman are a strong signal.",
+            "false": "No: there is no hostility toward a woman. The slur is used casually, as filler or an exclamation ('bitch we are getting this', 'BITCH HOLD UP'), affectionately between friends ('look at this bitch, love you, you crazy hoe'), about oneself ('I'm a whole new bitch', 'im a cyber slut'), as an idiom or figure of speech ('life's a bitch', 'let's romeo and juliet this bitch'), aimed at a man or at an unknown person or thief ('bitch ass nigga', 'Trump's a bitch', 'whoever stole my purse, bitch'), aimed at the reader in a rant or fandom argument ('unfollow me bitch', 'ur just a bitter bitch'), a friend teased on their birthday, or the tweet reports or condemns misogyny. Also no if the tweet insults a woman without any gendered slur or sexual degradation (e.g. calling her a traitor)."
+          }
+        }
+      },
+      "rule": [
+        [
+          "immigrant_hate"
+        ],
+        [
+          "misogyny"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v5b",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Here is a tweet (user mentions are anonymised as @user):\n{{input}}",
+      "questions": {
+        "immigrant_hate": {
+          "instructions": "Setting the hashtags aside and reading what the author actually writes: is this tweet hostile to immigrants, refugees, migrants or other foreigners (e.g. Muslims) as a group or as people — degrading them, painting them as criminals or a menace, or demanding they be removed?",
+          "criteria": {
+            "true": "Yes: it demeans or dehumanises them (e.g. 'rapefugees', 'invaders', 'bottom feeders', 'savages'), portrays them as criminals, rapists, disease carriers, welfare leeches or a threat/invasion, calls them scum or vermin, attacks people who defend them as defenders of criminals, mocks them ironically ('another wonderful dreamer'), or demands they be deported, sent back or kept out ('send them home', 'get them out', 'GO HOME', 'FUCK MUSLIM STUDENTS #SendThemBack'). A very short approving tweet about immigration consisting mostly of deportation hashtags (#DeportThemAll, #SendThemBack) also counts.",
+            "false": "No: it discusses immigration policy, law or the term 'illegal aliens' neutrally or definitionally, supports Trump or the wall without attacking immigrants, attacks Democrats/Congress/politicians/the media rather than immigrants (even with #DeportThemAll attached), uses wall hashtags on an unrelated topic, defends immigrants, or criticises racism. Also no if the tweet is not about immigrants at all. Also no when a deportation hashtag appears in a list of unrelated hashtags about a personal photo, family, food, sport or a place, with nothing about immigrants. Also no for a bare news link or headline whose only hostility is in hashtags like #stoptheinvasion or #WhiteGenocide, and for explaining what the term 'illegal alien' means. Also no when the complaint is about the political or economic effects of illegal immigration (votes, congressional seats, balance of power, census, employers exploiting cheap illegal labour, Democrats wanting open borders) without degrading the immigrants themselves."
+          }
+        },
+        "misogyny": {
+          "instructions": "Does the author insult, degrade or threaten women — a particular woman or girl, or women in general — using gendered slurs (bitch, hoe, whore, slut, cunt) or sexual violence, with real hostility rather than casual or friendly use of the word?",
+          "criteria": {
+            "true": "Yes: the author attacks or puts down a woman or women: calls a particular woman a bitch/whore/hoe/cunt in anger or contempt (including ordinary personal fights and trash talk between women), generalises contemptuously about women ('these hoes', 'bitches ain't shit', 'dese bitches will whore around'), or threatens or jokes about raping or hurting women. Stacked slurs aimed at a woman are a strong signal.",
+            "false": "No: there is no hostility toward a woman. The slur is used casually, as filler or an exclamation ('bitch we are getting this', 'BITCH HOLD UP'), affectionately between friends ('look at this bitch, love you, you crazy hoe'), about oneself ('I'm a whole new bitch', 'im a cyber slut'), as an idiom or figure of speech ('life's a bitch', 'let's romeo and juliet this bitch'), aimed at a man or at an unknown person or thief ('bitch ass nigga', 'Trump's a bitch', 'whoever stole my purse, bitch'), aimed at the reader in a rant or fandom argument ('unfollow me bitch', 'ur just a bitter bitch'), a friend teased on their birthday, or the tweet reports or condemns misogyny. Also no if the tweet insults a woman without any gendered slur or sexual degradation (e.g. calling her a traitor)."
+          }
+        }
+      },
+      "rule": [
+        [
+          "immigrant_hate"
+        ],
+        [
+          "misogyny"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    },
+    {
+      "version": 1,
+      "name": "tweet_hate_v5c",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Tweet to review:\n{{input}}",
+      "questions": {
+        "misogyny": {
+          "instructions": "Is this tweet misogynistic abuse: the writer is angry at or contemptuous of a woman, girl or women generally and expresses it with slurs like bitch, hoe, whore, slut or cunt, or with rape or violence?",
+          "criteria": {
+            "true": "Yes: the author attacks or puts down a woman or women: calls a particular woman a bitch/whore/hoe/cunt in anger or contempt (including ordinary personal fights and trash talk between women), generalises contemptuously about women ('these hoes', 'bitches ain't shit', 'dese bitches will whore around'), or threatens or jokes about raping or hurting women. Stacked slurs aimed at a woman are a strong signal.",
+            "false": "No: there is no hostility toward a woman. The slur is used casually, as filler or an exclamation ('bitch we are getting this', 'BITCH HOLD UP'), affectionately between friends ('look at this bitch, love you, you crazy hoe'), about oneself ('I'm a whole new bitch', 'im a cyber slut'), as an idiom or figure of speech ('life's a bitch', 'let's romeo and juliet this bitch'), aimed at a man or at an unknown person or thief ('bitch ass nigga', 'Trump's a bitch', 'whoever stole my purse, bitch'), aimed at the reader in a rant or fandom argument ('unfollow me bitch', 'ur just a bitter bitch'), a friend teased on their birthday, or the tweet reports or condemns misogyny. Also no if the tweet insults a woman without any gendered slur or sexual degradation (e.g. calling her a traitor)."
+          }
+        },
+        "immigrant_hate": {
+          "instructions": "Is this tweet xenophobic hate: in its own words (not only hashtags) it degrades immigrants, refugees, illegal aliens or other foreigners, treats them as criminals, disease, invaders or parasites, or calls for them to be deported or kept out?",
+          "criteria": {
+            "true": "Yes: it demeans or dehumanises them (e.g. 'rapefugees', 'invaders', 'bottom feeders', 'savages'), portrays them as criminals, rapists, disease carriers, welfare leeches or a threat/invasion, calls them scum or vermin, attacks people who defend them as defenders of criminals, mocks them ironically ('another wonderful dreamer'), or demands they be deported, sent back or kept out ('send them home', 'get them out', 'GO HOME', 'FUCK MUSLIM STUDENTS #SendThemBack'). A very short approving tweet about immigration consisting mostly of deportation hashtags (#DeportThemAll, #SendThemBack) also counts.",
+            "false": "No: it discusses immigration policy, law or the term 'illegal aliens' neutrally or definitionally, supports Trump or the wall without attacking immigrants, attacks Democrats/Congress/politicians/the media rather than immigrants (even with #DeportThemAll attached), uses wall hashtags on an unrelated topic, defends immigrants, or criticises racism. Also no if the tweet is not about immigrants at all. Also no when a deportation hashtag appears in a list of unrelated hashtags about a personal photo, family, food, sport or a place, with nothing about immigrants. Also no for a bare news link or headline whose only hostility is in hashtags like #stoptheinvasion or #WhiteGenocide, and for explaining what the term 'illegal alien' means. Also no when the complaint is about the political or economic effects of illegal immigration (votes, congressional seats, balance of power, census, employers exploiting cheap illegal labour, Democrats wanting open borders) without degrading the immigrants themselves."
+          }
+        }
+      },
+      "rule": [
+        [
+          "immigrant_hate"
+        ],
+        [
+          "misogyny"
+        ]
+      ],
+      "positive": "hate",
+      "negative": "not_hate"
+    }
+  ],
+  "decision": {
+    "class": "hate",
+    "threshold": 0.6
+  }
+}

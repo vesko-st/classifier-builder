@@ -1,0 +1,70 @@
+{
+  "version": 1,
+  "name": "donation_v8_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v8a_criteria",
+      "model": "jev-latest",
+      "type": "criteria",
+      "state_template": "Chat between a persuader (asking for a donation to Save the Children from the persuadee's task payment, $0 up to the full payment) and a persuadee:\n{{input}}",
+      "questions": {
+        "pledge": {
+          "instructions": "By the end of the chat, has the persuadee committed to donate a specific non-zero amount from this task's payment: naming an amount no larger than the payment (usually $2 or less, e.g. $0.05, 50 cents, $1, half, all of it), or agreeing without hedging ('yes', 'sounds great', 'yes of course'; not 'maybe I can do that') to such an amount the persuader proposed? Answer no if they only agree in general without any amount, name an amount larger than the task payment (e.g. $5, $10, $20, $100), only say 'maybe', or hedge the amount itself ('maybe 25 cents', 'I may could do .25', 'probably about $0.50', 'I guess I could') without later firmly confirming it, end on a refusal or $0, only promise a future or outside donation (later, when paid, on the website, monthly, to another charity), need time to decide or research, or never settle on a donation.",
+          "criteria": {
+            "true": "persuadee firmly commits to a specific amount within the task payment (or all of it)",
+            "false": "no amount, an amount above the payment, only a hedged 'maybe/probably' amount, refusal/$0, deferred/outside giving, undecided"
+          }
+        },
+        "garbled": {
+          "instructions": "Is the persuadee's writing clearly garbled: mostly ALL-CAPS, broken non-native template English (e.g. 'i am donate that charity', 'I like to donate $25'), word-salad, or replies that do not fit the conversation? Ordinary typos, casual lowercase or short replies do not count.",
+          "criteria": {
+            "true": "persuadee writes garbled, all-caps, broken or nonsensical messages",
+            "false": "persuadee writes normal, coherent messages"
+          }
+        }
+      },
+      "rule": [
+        [
+          "pledge",
+          "!garbled"
+        ]
+      ],
+      "positive": "donated",
+      "negative": "not_donated"
+    },
+    {
+      "version": 1,
+      "name": "donation_v8b_choice",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "In this chat a persuader asks the persuadee to donate part of their task payment (from $0 up to the full payment, usually $2 or less) to Save the Children. Judge the persuadee's FINAL position at the end of the chat and pick the option that best describes it. Check the 'garbled' option first: it applies whenever the persuadee writes in clearly broken, template-like or repetitive all-caps English, whatever they say about donating.",
+      "state_template": "Charity chat:\n{{input}}",
+      "criteria": {
+        "garbled": "The persuadee's messages are clearly garbled: mostly ALL-CAPS, broken non-native template English ('i am donate that charity', 'I like to donate $25'), word-salad, or replies that do not fit the conversation. Ordinary typos or casual lowercase do not count.",
+        "gives_all": "Persuadee commits to donating their whole task payment, all of it, or the maximum ($2 when the payment is $2).",
+        "pledge_amount": "Persuadee firmly commits to a specific non-zero amount within the task payment (e.g. 'I will donate $0.50', 'I'll do $1'), or agrees without hedging ('yes', 'sounds great', 'yes of course'; not 'maybe I can do that') to an in-range amount the persuader proposed.",
+        "pledge_unrealistic": "Persuadee names an amount larger than the task payment (e.g. $5, $20, $50, $100) as their donation.",
+        "agrees_no_amount": "Persuadee clearly agrees to donate now from the payment but never names an amount, or the persuader thanks them for donating and they accept.",
+        "hedged_or_grudging": "Persuadee's amount is only hedged and never firmly confirmed ('maybe 25 cents', 'I may could do .25', 'probably about $0.50', 'I guess I could do a dollar or two'), or they offer a tiny amount reluctantly after pressure or haggling.",
+        "later_or_website": "Persuadee says they will donate later, when they get paid, or on the charity's website instead of from this payment.",
+        "undecided_or_other": "Persuadee needs time to decide, wants to research first, or prefers giving to another charity; no donation agreed.",
+        "refuses": "Persuadee's final position is a refusal or $0 / nothing.",
+        "never_discussed": "The donation is never settled: small talk only, or the persuadee never responds to the request either way."
+      },
+      "map": {
+        "garbled": "not_donated",
+        "gives_all": "donated",
+        "pledge_amount": "donated",
+        "pledge_unrealistic": "not_donated",
+        "agrees_no_amount": "not_donated",
+        "hedged_or_grudging": "not_donated",
+        "later_or_website": "not_donated",
+        "undecided_or_other": "not_donated",
+        "refuses": "not_donated",
+        "never_discussed": "not_donated"
+      }
+    }
+  ]
+}

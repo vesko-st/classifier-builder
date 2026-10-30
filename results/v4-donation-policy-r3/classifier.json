@@ -1,0 +1,40 @@
+{
+  "version": 1,
+  "name": "donation_v2",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": {
+    "task": "This is a chat from a study: a persuader asks the persuadee to donate part of their task payment (usually up to $2) to Save the Children. After the chat the persuadee privately chose how much to actually donate. Judge how the PERSUADEE's side of the chat ended up regarding a donation from this task's payment, and pick the option that best describes it.",
+    "guidance": [
+      "Focus on the persuadee's own final stance; the persuader's thanks or claims do not show the persuadee agreed.",
+      "If the persuadee changes their mind, use their last stated position.",
+      "A pledge counts only if it is a positive amount (or a share like 'half', 'all') to come out of this task's payment or bonus.",
+      "All-caps, broken, nonsensical or copy-pasted template-like persuadee messages count as low_quality_chat even if they mention an amount."
+    ]
+  },
+  "state_template": "Chat:\n{{input}}",
+  "criteria": {
+    "full_amount_pledge": "The persuadee commits to donating all of their task payment (e.g. the full $2, 'all of it', 'the whole amount').",
+    "willing_pledge": "The persuadee willingly and readily commits to a specific positive amount or share from this task's payment (e.g. 'I'll donate $0.50', 'half'), or readily confirms an amount the persuader names, without much resistance.",
+    "reluctant_pledge": "The persuadee commits to a positive amount only grudgingly: after resisting, repeated pressure or haggling, with stated reluctance, or a token amount given to end the pressure.",
+    "warm_agreement_no_amount": "The persuadee is warm and agrees in general to donate or help ('yes I'll donate', 'count me in') but never states an amount.",
+    "big_sum_pledge": "The persuadee says they will donate now (or have just donated) a specific sum larger than the task payment, such as $20, $25, $50 or $100, without deferring it to a later time or another channel.",
+    "later_or_elsewhere": "The persuadee defers: they say they will donate later, on the website, when they get paid, or to another charity, rather than giving from this task's payment now.",
+    "undecided_or_research": "The persuadee stays noncommittal, wants to think about it or research the charity first, or is skeptical, and never commits.",
+    "refusal": "The persuadee declines, says $0, says they cannot afford it or want to keep their payment, or only want to give directly to the charity.",
+    "off_topic_no_decision": "The chat drifts to other topics or the roles are confused, and the donation is never really discussed or settled.",
+    "low_quality_chat": "The persuadee's messages are all-caps, spammy, nonsensical, broken, or scripted/template-like, so the chat is not a genuine conversation."
+  },
+  "map": {
+    "full_amount_pledge": "donated",
+    "willing_pledge": "donated",
+    "reluctant_pledge": "not_donated",
+    "warm_agreement_no_amount": "donated",
+    "big_sum_pledge": "donated",
+    "later_or_elsewhere": "not_donated",
+    "undecided_or_research": "not_donated",
+    "refusal": "not_donated",
+    "off_topic_no_decision": "not_donated",
+    "low_quality_chat": "not_donated"
+  }
+}

@@ -1,0 +1,79 @@
+{
+  "run_id": "vs-hatets-haiku-rules-r2",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:26:05",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 554,
+    "num_turns": 60,
+    "total_cost_usd": 0.4983455000000001
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.5,
+      "note": "Initial classifier from task description",
+      "test": {
+        "jev": {
+          "accuracy": 0.7496,
+          "macro_f1": 0.7481,
+          "est_cost_usd": 0.035716,
+          "total": 1766,
+          "answered": 1765
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 28,
+      "estimate": 0.68,
+      "note": "Criteria classifier: targeted + hostile + not contextual_exception",
+      "test": {
+        "jev": {
+          "accuracy": 0.7871,
+          "macro_f1": 0.7843,
+          "est_cost_usd": 0.030916,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 68,
+      "estimate": 0.68,
+      "note": "Criteria: removal calls, violence threats, or hostile slurs at individuals",
+      "test": {
+        "jev": {
+          "accuracy": 0.6999,
+          "macro_f1": 0.6768,
+          "est_cost_usd": 0.03455,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.78,
+      "note": "Final classifier: 38 labels (22 uncertain + 16 random), macro F1 0.774",
+      "test": {
+        "jev": {
+          "accuracy": 0.6999,
+          "macro_f1": 0.6768,
+          "est_cost_usd": 0.0,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

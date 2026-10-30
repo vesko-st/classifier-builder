@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "name": "tweet_hate_v7C",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": {
+    "tweet": "{{input}}",
+    "note": "user mentions are anonymised as @user"
+  },
+  "questions": {
+    "immigrant_hate": {
+      "instructions": {
+        "task": "Decide whether this tweet targets immigrants/refugees/migrants with hate (as opposed to merely discussing or supporting immigration policy).",
+        "counts_as_hate": [
+          "dehumanising or contemptuous names for them (rapefugees, invaders, bottom feeders, criminals, parasites)",
+          "portrays them generally as criminals, rapists, killers, disease carriers, welfare leeches or a threat",
+          "reports a crime by an illegal alien/migrant framed as typical ('another', 'yet another victim') together with calls to deport them",
+          "a short approving tweet consisting mostly of hashtags like #DeportThemAll, #SendThemBack, #SendThemHome",
+          "short emphatic demands to get rid of or deport them ('Get rid of #IllegalAliens', 'They just keep on coming. Deport!')",
+          "says they should be sent back, kept out or removed because of who they are, with contempt",
+          "sarcasm mocking immigrants or dreamers, e.g. 'another wonderful dreamer', 'another fine example of a refugee' with anti-immigration hashtags",
+          "violence or harm wished on them"
+        ],
+        "does_not_count": [
+          "merely uses the term 'illegal aliens' or an immigration hashtag without saying anything hostile about the people",
+          "plain support for a border wall, enforcement, ICE, or ending DACA/amnesty without demeaning immigrants",
+          "the target is Democrats, Congress, liberals, politicians or the media, with immigration hashtags tacked on",
+          "news headline or link with only a wall hashtag and no hostile framing",
+          "the author criticises, reports or mocks anti-immigrant hate",
+          "hostility to Muslims or other groups with no immigrant or refugee angle",
+          "the tweet is unrelated to immigration",
+          "criticism of Islam or Muslims (sharia, taqiyya) that does not mention immigrants or refugees",
+          "arguments that illegal immigration is unfair to legal immigrants or breaks the law, without demeaning the people"
+        ]
+      },
+      "criteria": {
+        "true": "hateful toward immigrants or refugees",
+        "false": "not hateful toward immigrants or refugees"
+      }
+    },
+    "woman_hate": {
+      "instructions": {
+        "task": "Decide whether this tweet targets a woman, girl or women with abuse.",
+        "counts_as_abuse": [
+          "calls a specific woman or girl (clearly female: she/her, girl, sis, wife, named woman) a bitch, hoe, whore, slut, cunt or similar in anger, contempt or mockery, including personal fights and trash talk between women",
+          "stacks several such slurs at someone in a hostile way",
+          "an angry, hostile string of gendered slurs aimed at 'you' or someone (e.g. 'u fucking bitch whore', 'cunt ... bitch') even if the target's gender is not stated",
+          "degrading generalisations about women or 'these hoes/bitches' that express contempt for them",
+          "sexual degradation, rape or violence aimed at women"
+        ],
+        "does_not_count": [
+          "the person insulted is a man or boy (addressed as boy, dude, bro, man, nigga, he/him) or the tweet is about men ('you dudes', 'he a hoe'), or a male politician",
+          "the author uses 'bitch' or 'hoe' about herself or as an exclamation ('bitch I'm on my way')",
+          "friendly or celebratory messages to a friend, even with 'bitch' and 'hoe' (happy birthday bitch, love you hoe, my bff bitch)",
+          "a single 'bitch' aimed at 'you' or 'whoever' with no sign the target is a woman and no other slur",
+          "sayings, jokes or wordplay using the words without attacking anyone ('life's a bitch', 'you can rent a hoe')",
+          "the author criticises or reports sexism or slurs",
+          "no woman or women are targeted"
+        ]
+      },
+      "criteria": {
+        "true": "abusive toward a woman or women",
+        "false": "not abusive toward a woman or women"
+      }
+    }
+  },
+  "rule": [
+    [
+      "immigrant_hate"
+    ],
+    [
+      "woman_hate"
+    ]
+  ],
+  "positive": "hate",
+  "negative": "not_hate"
+}

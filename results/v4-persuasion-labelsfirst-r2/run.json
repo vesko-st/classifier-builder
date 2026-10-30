@@ -1,0 +1,79 @@
+{
+  "run_id": "v4-persuasion-labelsfirst-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T13:00:41",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 6105,
+    "num_turns": 35,
+    "total_cost_usd": 1.4188115999999997
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 30,
+      "estimate": 0.55,
+      "note": "v1 draft: 20-option choice mapped to 18 classes, from policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.6203,
+          "macro_f1": 0.5633,
+          "est_cost_usd": 0.096533,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 68,
+      "estimate": 0.55,
+      "note": "v2: concession-then-argument -> logical, suffering in impact -> emotion, volunteering -> personal inquiry, Great! after commit -> praise, 'donate a little bit' -> FITD",
+      "test": {
+        "jev": {
+          "accuracy": 0.6216,
+          "macro_f1": 0.5658,
+          "est_cost_usd": 0.104245,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 84,
+      "estimate": 0.58,
+      "note": "v3: suggested specific amounts -> donation-information; persuader's non-appeal remarks about self -> other",
+      "test": {
+        "jev": {
+          "accuracy": 0.6289,
+          "macro_f1": 0.571,
+          "est_cost_usd": 0.109175,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.58,
+      "note": "final: 3-member wording-variant ensemble of v6 (v5 rules + restored FITD example); 26/35 bought labels, 8/10 check",
+      "test": {
+        "jev": {
+          "accuracy": 0.6374,
+          "macro_f1": 0.5795,
+          "est_cost_usd": 0.356855,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

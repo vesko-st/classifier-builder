@@ -1,0 +1,124 @@
+{
+  "run_id": "v4-hatets-uncertainty-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T11:51:03",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 521,
+    "num_turns": 32,
+    "total_cost_usd": 1.2786441999999998
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "v1 draft from description: 7 fine options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7854,
+          "macro_f1": 0.7844,
+          "est_cost_usd": 0.06281,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.72,
+      "note": "v2: hostile bitch/hoe put-downs = hate, exclamations not; refugees-not-welcome/blaming illegals = hate; legal-term arguments not",
+      "test": {
+        "jev": {
+          "accuracy": 0.6665,
+          "macro_f1": 0.6588,
+          "est_cost_usd": 0.074232,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.74,
+      "note": "v3: plain pro-wall/pro-Trump cheering and DACA policy talk = not_hate; quarrels with bitch/hoe (incl. recounting being called one) = hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7378,
+          "macro_f1": 0.7372,
+          "est_cost_usd": 0.087583,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.76,
+      "note": "v5: strict bar - author's own hostility; immigrant crime news/debate not hate; quarrels with bitch/hoe hate, sayings/offhand mentions/general complaints not",
+      "test": {
+        "jev": {
+          "accuracy": 0.7984,
+          "macro_f1": 0.7955,
+          "est_cost_usd": 0.101899,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.77,
+      "note": "v6: women hate = degrading/threatening a woman or quarrel built on slurs; trailing generic 'bitch' not; immigrant crime story + #SendThemBack hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8154,
+          "macro_f1": 0.8081,
+          "est_cost_usd": 0.115472,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 80,
+      "estimate": 0.78,
+      "note": "ens2: 3 wording variants of v6 averaged, steadier near ties; 38/40 on labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8143,
+          "macro_f1": 0.8093,
+          "est_cost_usd": 0.284557,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 100,
+      "estimate": 0.75,
+      "note": "ens3 final: 3-variant ensemble; adds sneering generalisations about women (hoes be like...) and direct 'you're a bitch' insults as hate; banter, #DeportThemAll headlines, stray #sendthemback not. 47/50 on (biased, tuned-on) labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8165,
+          "macro_f1": 0.8129,
+          "est_cost_usd": 0.327057,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

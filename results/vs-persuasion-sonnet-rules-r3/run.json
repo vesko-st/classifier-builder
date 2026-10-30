@@ -1,0 +1,109 @@
+{
+  "run_id": "vs-persuasion-sonnet-rules-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T17:07:35",
+  "builder": {
+    "model": "claude-sonnet-5-5",
+    "effort": "high",
+    "wall_seconds": 1109,
+    "num_turns": 41,
+    "total_cost_usd": 1.0575292
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.5,
+      "note": "first draft from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.5346,
+          "macro_f1": 0.5531,
+          "est_cost_usd": 0.076369,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 14,
+      "estimate": 0.55,
+      "note": "v3b: fits 7 uncertainty labels; ack/logical/self-model/task-inquiry/other rules",
+      "test": {
+        "jev": {
+          "accuracy": 0.5557,
+          "macro_f1": 0.579,
+          "est_cost_usd": 0.085851,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 60,
+      "estimate": 0.6,
+      "note": "v6 single classifier, fits 18/25 uncertain labels (uncertain-selected, biased low)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5814,
+          "macro_f1": 0.593,
+          "est_cost_usd": 0.099125,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 74,
+      "estimate": 0.6,
+      "note": "ens2: 3-variant ensemble, 'other' fragments rule; 21/32 bought labels (uncertain-biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5689,
+          "macro_f1": 0.5816,
+          "est_cost_usd": 0.301736,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 94,
+      "estimate": 0.62,
+      "note": "ens4: stats/credibility vs emotion split; 28/42 labels right (66.7%, uncertain-biased); 6/7 random",
+      "test": {
+        "jev": {
+          "accuracy": 0.5768,
+          "macro_f1": 0.5876,
+          "est_cost_usd": 0.316527,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.6,
+      "note": "ens5: final; donation-information terms rule; 32/45 bought labels (uncertain-biased), 6/7 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.5755,
+          "macro_f1": 0.5849,
+          "est_cost_usd": 0.324491,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

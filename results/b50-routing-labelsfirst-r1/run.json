@@ -1,0 +1,49 @@
+{
+  "run_id": "b50-routing-labelsfirst-r1",
+  "task": "banking77_routing",
+  "budget": 50,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:12:00",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 339,
+    "num_turns": 25,
+    "total_cost_usd": 0.8862344000000001
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 20,
+      "estimate": 0.8,
+      "note": "v1: 75 Banking77-style intent options mapped to teams per owner's 3 policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.9193,
+          "macro_f1": 0.9155,
+          "est_cost_usd": 0.293318,
+          "total": 3080,
+          "answered": 3074
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 50,
+      "estimate": 0.88,
+      "note": "v2: transfers not allowed/not possible -> account; small unexplained statement charge vs fees on purchases abroad -> pricing. 15/15 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.9253,
+          "macro_f1": 0.9229,
+          "est_cost_usd": 0.298935,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

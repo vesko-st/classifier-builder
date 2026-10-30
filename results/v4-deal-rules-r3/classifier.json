@@ -1,0 +1,178 @@
+{
+  "version": 1,
+  "name": "ens18",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal2_A",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Read the Craigslist listing and the buyer-seller price negotiation. Did it close with a deal? These chats are cut off right before the final offer is formally submitted, so most negotiations that reached a price, or got close to one, did close. Treat it as a deal unless one of the no-deal situations below applies.",
+        "deal_situations": [
+          "One side accepted the other's price, however briefly, reluctantly or clumsily ('ok', 'that works', 'I guess we can settle', 'since you have 9200', '1300 will work'), even if it is the last message or is followed by small talk ('sorry for being rude') or a joking remark.",
+          "The chat ends with an offer or counteroffer that is within reach of the other side's last number, even if nobody answered it: e.g. seller firm at 8500, buyer 'let's split the difference at $8,300' -> deal; seller 1900, buyer 'the highest I could afford is $1850' -> deal; buyer 3700, seller '4000 and I'll waive the fees' -> deal; buyer 22, seller '25 and you got yourself a deal' -> deal.",
+          "Someone says they will make/submit/send the offer, or tells the other to submit it, after the item was discussed (even with no number restated).",
+          "A price was put forward and the other side, instead of objecting, moved on to pickup, payment, delivery or thanks ('can you pick it up tonight?' 'yes').",
+          "Both sides state the same price but differ on a side term: buyer '$10000 and you bring it to me', seller '10000 and you will come get it yourself' -> deal (the price is agreed).",
+          "An explicit 'you've got a deal' / 'deal' from one side is a deal even if trade-in details are muddled (seller: 'you've got a deal. 28500 and your car for trade in').",
+          "After a counter close to their own number, the other side says it is a good deal, even while joking (seller: 'How about 3000?' after buyer's 2700; buyer: 'That's a pretty good deal I must say. But I was hoping it came with handcuffs') -> deal.",
+          "A conditional yes to the other side's requested price counts even without restating the number (buyer: 'could you reduce the rent to 1600?', seller: 'If you can come today and sign your lease I will allow you the reduction' -> deal).",
+          "A seller's 'best offer' price met with no objection counts: seller: 'I'll give you $900, but that's my best offer', buyer: 'It is a great bike', seller: 'I think it's worth it' -> deal.",
+          "Buyer: 'My best I can do is $1200. Take it or leave it' on a $1395 listing, after the seller made their pitch -> deal (close)."
+        ],
+        "no_deal_situations": [
+          "The buyer never named or agreed to any price: only greetings, questions, general interest ('yes I want to buy it'), or a request for a discount that the seller answered with a number the buyer never responded to (buyer: 'can you knock off some money?' seller: 'give me $3350 and it's yours' -> no deal).",
+          "The chat ends on an unanswered question or concern about the item, with no price agreed.",
+          "The final word on price is a refusal, or someone says the submitted offer is wrong and they will reject it (buyer: 'the offer says 1100? I can only reject it', seller: 'I'm not offended if you reject!' -> no deal), or someone walks away.",
+          "The two sides are still far apart at the end: the last offer is a large distance (roughly 15% or more) from the other side's stated minimum or maximum, e.g. $1000 offered against a $1450 floor, $200 against $375, $1700 cash plus a trade against 'I need at least 2800'. Also $1300 against 'I can give it to you for $1600' -> no deal. Smaller gaps are close: $80 against 'lowest I will go is 90' -> deal; '$1400 final price' against a $1500 floor -> deal.",
+          "A price was offered only under a condition (e.g. '$70 if I pick it up') and the other side answered with different terms (e.g. 'we'll deliver') without confirming the price.",
+          "The chat barely started: an opening offer or message that the other side never answered, with no back-and-forth on price (e.g. a single 'I'd like to purchase this for $19, will that be acceptable?') -> no deal.",
+          "The chat ends on the first price anyone proposed, and it was never answered: there was no back-and-forth on price yet (buyer after item questions: 'My budget is lower, I could afford $2000 a month' -> no deal; buyer: 'would you go down to $20K if I picked it up?' as the first offer -> no deal). This differs from a counteroffer at the end of a real exchange of numbers, which is a deal when close.",
+          "Agreeing to the number for something else is not agreeing to the price: buyer offers $1600 a month, seller says '$1600 is fine for a deposit' and offers a tour, buyer 'I can come in later today' -> no deal (rent never agreed).",
+          "A chat made of a single message from either side (e.g. the seller alone saying 'I will take 70') is not a deal. Buyer 'around $200' vs seller 'meant $300' is far apart -> no deal."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "price_accepted": "One party accepted the other's price, in any wording, including as the last message.",
+        "closing_counter": "The chat ends with an offer or counteroffer close to the other side's number (a small remaining gap), unanswered or not.",
+        "offer_submitted": "A party says they will make/submit/send the offer, or tells the other to do so.",
+        "settled_logistics": "A price was on the table and the chat moved on to pickup, payment, delivery or thanks without objection.",
+        "no_buyer_commitment": "The buyer never named or agreed to any price (only interest, questions, or asking for a discount).",
+        "ended_on_questions": "The chat ends with an unanswered question or concern and no agreed price.",
+        "refused_or_rejected": "The last word is a refusal, a rejection of the offer, or walking away.",
+        "far_apart": "The parties' last numbers are still far apart (a large gap of roughly 15% or more).",
+        "conditional_mismatch": "A conditional price was answered with different terms and never confirmed."
+      },
+      "map": {
+        "price_accepted": "deal",
+        "closing_counter": "deal",
+        "offer_submitted": "deal",
+        "settled_logistics": "deal",
+        "no_buyer_commitment": "no_deal",
+        "ended_on_questions": "no_deal",
+        "refused_or_rejected": "no_deal",
+        "far_apart": "no_deal",
+        "conditional_mismatch": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal2_B",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "This Craigslist buyer-seller chat stops just before the formal offer is entered. Did the negotiation end in a sale?",
+        "default": "Most chats that reach a price, or come close to one, end in a sale. Answer sale unless a clear no-sale reason applies.",
+        "sale_reasons": [
+          "an acceptance of the other's price in any form, even grudging or garbled ('I guess we can settle', '1300 will work'), even as the last message or followed by chit-chat;",
+          "a final offer or counter that is near the other's last number, answered or not ('split the difference at $8,300' vs firm 8500; 'highest I could afford is $1850' vs 1900; '4000 and I'll waive the fees' vs 3700; '25 and you got yourself a deal' vs 22);",
+          "a party says the offer will be made/submitted/sent, or asks the other to submit it;",
+          "the price was not objected to and they moved on to pickup, payment or thanks.",
+          "both sides name the same price even if they differ on pickup or delivery ('$10000 and you bring it' / '10000 and you come get it').",
+          "an explicit 'you've got a deal' even with muddled trade-in details;",
+          "a close counter answered with 'that's a pretty good deal', even with jokes after it.",
+          "a conditional yes to the requested price without repeating the number ('If you come today and sign the lease I will allow you the reduction');",
+          "a seller's stated best offer that the buyer does not object to ('$900, that's my best offer' / 'It is a great bike' / 'I think it's worth it');",
+          "'My best I can do is $1200. Take it or leave it' on a $1395 listing (close);"
+        ],
+        "no_sale_reasons": [
+          "the buyer never put forward or agreed to a number (e.g. buyer only asked for 'some money off' and the seller's '$3350 and it's yours' got no reply);",
+          "it ends on an open question or concern with no price agreed;",
+          "the last word on price is a refusal, a rejection of the submitted offer ('the offer says 1100? I can only reject it' / 'not offended if you reject'), or walking away;",
+          "the numbers are still far apart, about 15% or more ($1000 vs a $1450 floor; $200 vs $375; $1700 cash plus a bike vs 'at least 2800'); Also $1300 vs '$1600 with a 12 month lease' is far apart; but $80 vs 'lowest 90', or '$1400 final' vs a $1500 floor, are close enough (sale).",
+          "a conditional price ('$70 if I pick it up') was answered with other terms ('we'll deliver') and never confirmed.",
+          "the chat is only an opening offer or message with no reply and no back-and-forth on price;",
+          "the chat ends on the very first price proposed, with no reply and no earlier exchange of numbers ('I could afford $2000 a month' after only item questions; 'would you go down to $20K?' as the first offer);",
+          "the number was accepted for something other than the price (buyer offers $1600/month, seller: '$1600 is fine for a deposit' plus a tour) -> the price itself was never agreed;",
+          "a single-message chat from either side ('I will take 70' with no reply); buyer around $200 vs seller $300 (far apart);"
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "price_accepted": "Sale: the other side's price was accepted, in any wording.",
+        "closing_counter": "Sale: the last offer or counter is close to the other side's number.",
+        "offer_submitted": "Sale: someone says to make or submit the offer.",
+        "settled_logistics": "Sale: no objection to the price; they moved on to pickup or payment.",
+        "no_buyer_commitment": "No sale: the buyer never named or agreed to a number.",
+        "ended_on_questions": "No sale: ends on an open question, no price agreed.",
+        "refused_or_rejected": "No sale: refusal, rejection or walk-away at the end.",
+        "far_apart": "No sale: numbers still far apart (gap of about 15% or more).",
+        "conditional_mismatch": "No sale: conditional price met with different terms."
+      },
+      "map": {
+        "price_accepted": "deal",
+        "closing_counter": "deal",
+        "offer_submitted": "deal",
+        "settled_logistics": "deal",
+        "no_buyer_commitment": "no_deal",
+        "ended_on_questions": "no_deal",
+        "refused_or_rejected": "no_deal",
+        "far_apart": "no_deal",
+        "conditional_mismatch": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal2_C",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Decide whether this Craigslist negotiation (listing + chat) closed with a deal. The formal offer step happens after the chat and is not shown.",
+        "rule": "Call it a deal whenever the parties reached a price or ended within a small step of each other; call it no deal only for the specific failure cases.",
+        "deal_examples": [
+          "Seller: 'I think 1300 will work since I need to get it sold' / Buyer: 'Oh, sorry for being rude' -> deal (accepted).",
+          "Seller firm at 8500 / Buyer: 'let's split the difference at $8,300' (last message) -> deal (close).",
+          "Seller: 1900 / Buyer: 'The highest I could afford would be $1850' (last message) -> deal (close).",
+          "Buyer: 'If you can agree to 3700 we'd have a deal' / Seller: '4000 and I'll waive all of the fees' -> deal (close).",
+          "Buyer: 'I am going to submit my offer directly' / Seller: 'Okay that's good' -> deal (offer submitted).",
+          "Buyer offers 112 / Seller: 'Can you pick it up tonight?' / Buyer: 'Yes' -> deal (logistics, no objection).",
+          "Buyer: '$10000 and you bring it to me' / Seller: '10000 and you will come get it yourself' -> deal (same price; only pickup differs).",
+          "Buyer: 'How about $80?' / Seller: '90 is the lowest I will go' -> deal (close).",
+          "Seller: 'lowest I could go is $1500' / Buyer: 'What about $1400 final price for me' -> deal (close).",
+          "Seller: 'you've got a deal. 28500 and your car for trade in.' -> deal.",
+          "Buyer 2700 / Seller: 'How about 3000?' / Buyer: 'That's a pretty good deal I must say. But I was hoping it came with handcuffs' -> deal.",
+          "Buyer: 'is there any way you could reduce the rent to 1600?' / Seller: 'If you can come today and sign your lease with me I will allow you the reduction' -> deal.",
+          "Seller: 'I'll give you 900$ for guts, but that's my best offer' / Buyer: 'It is a great bike.' / Seller: 'I think it's worth it.' -> deal.",
+          "Listing $1395; Buyer: 'My best i can do is $1200. Take it or leave it' -> deal (close)."
+        ],
+        "no_deal_cases": [
+          "Buyer never named or agreed to a number: e.g. buyer asks for 'some money off', seller says 'give me $3350 and it's yours', chat ends.",
+          "Only greetings, questions or interest; or it ends on an unanswered question about the item.",
+          "Refusal, walking away, or a stated rejection of the submitted offer (buyer: 'the offer says 1100? I can only reject it' / seller: 'I'm not offended if you reject!').",
+          "Still far apart (about 15% or more): $1000 vs a $1450 floor; $200 vs 'lowest $375'; $1700 cash plus a bike vs 'at least 2800'. Also $1300 vs 'I can give it to you for $1600'.",
+          "Conditional price ('$70 if I pick it up') answered with different terms ('we'll deliver'), never confirmed.",
+          "Only an opening offer that was never answered (one-sided chat, no negotiation).",
+          "It ends on the first price offer of the chat, unanswered, with no prior exchange of numbers (e.g. 'I could afford $2000 a month' after only questions).",
+          "The number was accepted for a different thing: buyer '$1600 a month?', seller '$1600 is fine for a deposit, happy to give you a tour', buyer 'I can come in later today' -> no deal.",
+          "A single message from either side with no reply (seller: 'I will take 70'); buyer ~$200 vs seller $300 (far apart)."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "price_accepted": "Deal: price accepted in any form.",
+        "closing_counter": "Deal: ended within a small step of each other.",
+        "offer_submitted": "Deal: someone will make/submit the offer.",
+        "settled_logistics": "Deal: moved on to pickup/payment without objecting.",
+        "no_buyer_commitment": "No deal: buyer never put forward or agreed to a number.",
+        "ended_on_questions": "No deal: only questions/interest, or ends on an open question.",
+        "refused_or_rejected": "No deal: refusal, rejection or walk-away.",
+        "far_apart": "No deal: still far apart.",
+        "conditional_mismatch": "No deal: conditional price met with other terms."
+      },
+      "map": {
+        "price_accepted": "deal",
+        "closing_counter": "deal",
+        "offer_submitted": "deal",
+        "settled_logistics": "deal",
+        "no_buyer_commitment": "no_deal",
+        "ended_on_questions": "no_deal",
+        "refused_or_rejected": "no_deal",
+        "far_apart": "no_deal",
+        "conditional_mismatch": "no_deal"
+      }
+    }
+  ]
+}

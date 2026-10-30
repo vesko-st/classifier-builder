@@ -1,0 +1,646 @@
+{
+  "version": 1,
+  "name": "banking77_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "A",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Which one intent best describes what this customer of a digital bank (app-based account with physical, virtual and disposable cards, top-ups, transfers and currency exchange) is asking about?",
+      "state_template": "Customer message to a digital bank's support chat:\n{{input}}",
+      "criteria": {
+        "activate_my_card": "Activating a card: how to activate a new card, or activation is not working.",
+        "age_limit": "Age requirements: minimum age to open/use an account, whether children or teenagers can have an account.",
+        "apple_pay_or_google_pay": "Using Apple Pay, Google Pay or Android Pay with the card or for top-ups, including when it isn't working.",
+        "atm_support": "Which ATMs or cash machines the card can be used at, finding an ATM, whether ATMs abroad accept the card.",
+        "automatic_top_up": "Auto top-up feature: how it works, setting it up, turning it off, why it triggered.",
+        "balance_not_updated_after_bank_transfer": "A bank transfer into the customer's own account (e.g. from their UK account or another bank) was already made but the money is not showing in the balance yet, even if they also ask how long it normally takes; asking to check a transfer into their account went through.",
+        "balance_not_updated_after_cheque_or_cash_deposit": "Deposited money (cash, a cheque, or a deposit with no method stated) but the balance has not updated or funds are not showing; cheque slow to clear.",
+        "beneficiary_not_allowed": "Cannot add a beneficiary/payee, the transfer was refused because the beneficiary is not allowed, or having trouble sending money to a beneficiary.",
+        "cancel_transfer": "Wants to cancel, stop or reverse a transfer they made (often by mistake / wrong recipient).",
+        "card_about_to_expire": "Card is expiring or has expired; getting a replacement for an expiring/expired card.",
+        "card_acceptance": "Where the card is accepted: whether shops/merchants/online stores accept it, a merchant not accepting the card.",
+        "card_arrival": "An already-ordered card has not arrived yet; tracking a card in the mail; card delivery is late.",
+        "card_delivery_estimate": "How long card delivery takes, when it will arrive, express/expedited delivery, getting it by a certain date (general estimate, not a late card).",
+        "card_linking": "Linking a card to the app or account: adding/showing a card (new or found) in the app, linking an existing card.",
+        "card_not_working": "The card is not working in general: it failed repeatedly in several different places, does not work at all, or seems broken/damaged.",
+        "card_payment_fee_charged": "Charged a fee for a card payment / purchase; extra fee for using the card for a payment.",
+        "card_payment_not_recognised": "A charge, payment or purchase on the account that they do not recognise, cannot explain, or did not make (except a small extra charge such as £1 / $1 / €1, which is extra_charge_on_statement).",
+        "card_payment_wrong_exchange_rate": "Wrong or bad exchange rate applied to a card payment / purchase in a foreign currency.",
+        "card_swallowed": "ATM kept, ate, retained or swallowed the card.",
+        "cash_withdrawal_charge": "Charged a fee for an ATM/cash withdrawal; how much cash withdrawals cost. Example: 'Why did I get charged a fee, I thought it was free?'",
+        "cash_withdrawal_not_recognised": "A cash withdrawal or cash transaction showing in the app or on the account that they did not make or do not recognise.",
+        "change_pin": "Changing or resetting the card PIN; where in the app to change the PIN.",
+        "compromised_card": "Card details may be compromised or used by someone else (fraud, skimming, someone got the card details) without the card being lost.",
+        "contactless_not_working": "Contactless / tap payment not working.",
+        "country_support": "Which countries the service or account is available in / supports; using the account while living in or moving to another country.",
+        "declined_card_payment": "A payment with the card was declined or rejected, or the card did not work when paying at a particular shop, restaurant or online merchant.",
+        "declined_cash_withdrawal": "ATM cash withdrawal was declined or the ATM would not give money.",
+        "declined_transfer": "A transfer was declined/rejected or they are told they cannot make a transfer.",
+        "direct_debit_payment_not_recognised": "A direct debit on the account they do not recognise or did not set up.",
+        "disposable_card_limits": "Limits of disposable virtual cards: how many times / how much they can be used, restrictions.",
+        "edit_personal_details": "Changing personal details: name, address, phone, email or other account information.",
+        "exchange_charge": "Fees or charges for exchanging currency; extra costs when exchanging money.",
+        "exchange_rate": "What exchange rate is used, where to find rates, how rates are set (not complaining about a specific wrong rate).",
+        "exchange_via_app": "How to exchange / convert currency in the app; which currencies can be exchanged.",
+        "extra_charge_on_statement": "An extra fee or small additional charge on the statement, such as an unexpected or unrecognised £1 / $1 / €1 charge (even if pending), not clearly tied to a specific transfer, top-up, ATM or exchange.",
+        "failed_transfer": "A transfer failed or didn't go through, money returned after a failed transfer.",
+        "fiat_currency_support": "Which fiat currencies the account can hold, receive or pay in; whether a specific currency is supported.",
+        "get_disposable_virtual_card": "How to get or create a disposable (single-use) virtual card; who can get one.",
+        "get_physical_card": "Getting a physical card (e.g. having only a virtual card); where the PIN for their card is or not having received their PIN yet.",
+        "getting_spare_card": "Getting an extra, additional or second card, e.g. for a family member.",
+        "getting_virtual_card": "How to get or order a (non-disposable) virtual card, its cost.",
+        "lost_or_stolen_card": "Card lost or stolen; reporting a lost/stolen card; wanting help to retrieve or get back their card; card found after being lost.",
+        "lost_or_stolen_phone": "Phone lost, stolen or left behind; accessing the account without the phone.",
+        "order_physical_card": "Ordering a physical card: how to order, delivery options/countries, cost of ordering a card.",
+        "passcode_forgotten": "Forgot or needs to reset the app passcode / password / login code.",
+        "pending_card_payment": "A card payment, purchase or 'payment' is still pending or has not gone through yet; asking when a payment will go through or why it is pending.",
+        "pending_cash_withdrawal": "A cash withdrawal is still pending.",
+        "pending_top_up": "A top-up is explicitly described as still pending, processing, or taking long to appear.",
+        "pending_transfer": "A transfer or an unspecified 'transaction' is still pending / in progress; asking when it will go through or post to the account, or how long it stays pending. (A pending 'payment' or purchase is pending_card_payment.)",
+        "pin_blocked": "PIN blocked after too many wrong attempts; card/account blocked due to PIN, unblocking the PIN.",
+        "receiving_money": "How to receive money or get paid into the account (salary, payments from others).",
+        "Refund_not_showing_up": "An expected refund from a merchant hasn't appeared yet / is not showing.",
+        "request_refund": "Wants to request or get a refund for a purchase; how to get a refund.",
+        "reverted_card_payment?": "A card payment was reverted, reversed or returned to the account; money came back after a card payment.",
+        "supported_cards_and_currencies": "Which cards (Visa, Mastercard, Amex, credit cards) and currencies can be used to top up or are supported.",
+        "terminate_account": "Close, delete or terminate the account.",
+        "top_up_by_bank_transfer_charge": "Fees for topping up by bank transfer; questions about SWIFT transfers (using, receiving or paying for a SWIFT transfer).",
+        "top_up_by_card_charge": "Fee for topping up with a card (debit/credit card top-up charge).",
+        "top_up_by_cash_or_cheque": "Topping up with cash or a cheque; how to deposit cash or cheques.",
+        "top_up_failed": "A top-up attempt was declined, rejected, gave an error, did not go through, or something seems to have gone wrong with a top-up (e.g. can't access the money because of a top-up problem).",
+        "top_up_limits": "Maximum or minimum top-up amount; top-up limits.",
+        "top_up_reverted": "A top-up was made and seemed to go through, but the account was not credited, or the top-up was reversed/cancelled afterwards (not a card top-up where money left the card; see topping_up_by_card).",
+        "topping_up_by_card": "Topping up using a card: how to do it, or money taken from / gone from the card used for the top-up but not added to the account.",
+        "transaction_charged_twice": "A payment/transaction was charged twice; duplicate charge.",
+        "transfer_fee_charged": "Charged a fee for a transfer; why a transfer had a fee. Example: 'why was i chargged'.",
+        "transfer_into_account": "How to transfer money into their own account / whether they can top up by (non-SWIFT) bank transfer.",
+        "transfer_not_received_by_recipient": "The customer sent or transferred money and it has not arrived / is not there yet, or the recipient has not received it (when they do not say the transfer was into their own account).",
+        "transfer_timing": "How long transfers take to arrive or how much longer to wait for a transfer (e.g. from the US or Europe), when not about a completed transfer into their own account that is missing from the balance.",
+        "unable_to_verify_identity": "Cannot complete identity verification; verification failing or not working.",
+        "verify_my_identity": "How to verify identity, what documents are needed, how long verification takes.",
+        "verify_source_of_funds": "Verifying or showing the source of funds / where their money comes from.",
+        "verify_top_up": "Verification of a card top-up: verification code for the top-up card, how top-ups are verified.",
+        "virtual_card_not_working": "Virtual card not working or declined.",
+        "visa_or_mastercard": "Whether the card is Visa or Mastercard.",
+        "why_verify_identity": "Why identity verification or personal information is needed; whether verification is really necessary or the account can be used without verifying.",
+        "wrong_amount_of_cash_received": "ATM gave the wrong amount of cash / less cash than requested or recorded.",
+        "wrong_exchange_rate_for_cash_withdrawal": "Wrong exchange rate applied to a cash withdrawal abroad."
+      }
+    },
+    {
+      "version": 1,
+      "name": "B",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "A customer wrote to the support chat of an app-only bank. Pick the single support topic their message belongs to. Each topic has a name and a definition; follow the definition.",
+      "state_template": {
+        "support_chat_message": "{{input}}"
+      },
+      "criteria": {
+        "activate_my_card": {
+          "topic": "Activate my card",
+          "definition": "Activating a card: how to activate a new card, or activation is not working."
+        },
+        "age_limit": {
+          "topic": "Age limit",
+          "definition": "Age requirements: minimum age to open/use an account, whether children or teenagers can have an account."
+        },
+        "apple_pay_or_google_pay": {
+          "topic": "Apple pay or google pay",
+          "definition": "Using Apple Pay, Google Pay or Android Pay with the card or for top-ups, including when it isn't working."
+        },
+        "atm_support": {
+          "topic": "Atm support",
+          "definition": "Which ATMs or cash machines the card can be used at, finding an ATM, whether ATMs abroad accept the card."
+        },
+        "automatic_top_up": {
+          "topic": "Automatic top up",
+          "definition": "Auto top-up feature: how it works, setting it up, turning it off, why it triggered."
+        },
+        "balance_not_updated_after_bank_transfer": {
+          "topic": "Balance not updated after bank transfer",
+          "definition": "A bank transfer into the customer's own account (e.g. from their UK account or another bank) was already made but the money is not showing in the balance yet, even if they also ask how long it normally takes; asking to check a transfer into their account went through."
+        },
+        "balance_not_updated_after_cheque_or_cash_deposit": {
+          "topic": "Balance not updated after cheque or cash deposit",
+          "definition": "Deposited money (cash, a cheque, or a deposit with no method stated) but the balance has not updated or funds are not showing; cheque slow to clear."
+        },
+        "beneficiary_not_allowed": {
+          "topic": "Beneficiary not allowed",
+          "definition": "Cannot add a beneficiary/payee, the transfer was refused because the beneficiary is not allowed, or having trouble sending money to a beneficiary."
+        },
+        "cancel_transfer": {
+          "topic": "Cancel transfer",
+          "definition": "Wants to cancel, stop or reverse a transfer they made (often by mistake / wrong recipient)."
+        },
+        "card_about_to_expire": {
+          "topic": "Card about to expire",
+          "definition": "Card is expiring or has expired; getting a replacement for an expiring/expired card."
+        },
+        "card_acceptance": {
+          "topic": "Card acceptance",
+          "definition": "Where the card is accepted: whether shops/merchants/online stores accept it, a merchant not accepting the card."
+        },
+        "card_arrival": {
+          "topic": "Card arrival",
+          "definition": "An already-ordered card has not arrived yet; tracking a card in the mail; card delivery is late."
+        },
+        "card_delivery_estimate": {
+          "topic": "Card delivery estimate",
+          "definition": "How long card delivery takes, when it will arrive, express/expedited delivery, getting it by a certain date (general estimate, not a late card)."
+        },
+        "card_linking": {
+          "topic": "Card linking",
+          "definition": "Linking a card to the app or account: adding/showing a card (new or found) in the app, linking an existing card."
+        },
+        "card_not_working": {
+          "topic": "Card not working",
+          "definition": "The card is not working in general: it failed repeatedly in several different places, does not work at all, or seems broken/damaged."
+        },
+        "card_payment_fee_charged": {
+          "topic": "Card payment fee charged",
+          "definition": "Charged a fee for a card payment / purchase; extra fee for using the card for a payment."
+        },
+        "card_payment_not_recognised": {
+          "topic": "Card payment not recognised",
+          "definition": "A charge, payment or purchase on the account that they do not recognise, cannot explain, or did not make (except a small extra charge such as £1 / $1 / €1, which is extra_charge_on_statement)."
+        },
+        "card_payment_wrong_exchange_rate": {
+          "topic": "Card payment wrong exchange rate",
+          "definition": "Wrong or bad exchange rate applied to a card payment / purchase in a foreign currency."
+        },
+        "card_swallowed": {
+          "topic": "Card swallowed",
+          "definition": "ATM kept, ate, retained or swallowed the card."
+        },
+        "cash_withdrawal_charge": {
+          "topic": "Cash withdrawal charge",
+          "definition": "Charged a fee for an ATM/cash withdrawal; how much cash withdrawals cost. Example: 'Why did I get charged a fee, I thought it was free?'"
+        },
+        "cash_withdrawal_not_recognised": {
+          "topic": "Cash withdrawal not recognised",
+          "definition": "A cash withdrawal or cash transaction showing in the app or on the account that they did not make or do not recognise."
+        },
+        "change_pin": {
+          "topic": "Change pin",
+          "definition": "Changing or resetting the card PIN; where in the app to change the PIN."
+        },
+        "compromised_card": {
+          "topic": "Compromised card",
+          "definition": "Card details may be compromised or used by someone else (fraud, skimming, someone got the card details) without the card being lost."
+        },
+        "contactless_not_working": {
+          "topic": "Contactless not working",
+          "definition": "Contactless / tap payment not working."
+        },
+        "country_support": {
+          "topic": "Country support",
+          "definition": "Which countries the service or account is available in / supports; using the account while living in or moving to another country."
+        },
+        "declined_card_payment": {
+          "topic": "Declined card payment",
+          "definition": "A payment with the card was declined or rejected, or the card did not work when paying at a particular shop, restaurant or online merchant."
+        },
+        "declined_cash_withdrawal": {
+          "topic": "Declined cash withdrawal",
+          "definition": "ATM cash withdrawal was declined or the ATM would not give money."
+        },
+        "declined_transfer": {
+          "topic": "Declined transfer",
+          "definition": "A transfer was declined/rejected or they are told they cannot make a transfer."
+        },
+        "direct_debit_payment_not_recognised": {
+          "topic": "Direct debit payment not recognised",
+          "definition": "A direct debit on the account they do not recognise or did not set up."
+        },
+        "disposable_card_limits": {
+          "topic": "Disposable card limits",
+          "definition": "Limits of disposable virtual cards: how many times / how much they can be used, restrictions."
+        },
+        "edit_personal_details": {
+          "topic": "Edit personal details",
+          "definition": "Changing personal details: name, address, phone, email or other account information."
+        },
+        "exchange_charge": {
+          "topic": "Exchange charge",
+          "definition": "Fees or charges for exchanging currency; extra costs when exchanging money."
+        },
+        "exchange_rate": {
+          "topic": "Exchange rate",
+          "definition": "What exchange rate is used, where to find rates, how rates are set (not complaining about a specific wrong rate)."
+        },
+        "exchange_via_app": {
+          "topic": "Exchange via app",
+          "definition": "How to exchange / convert currency in the app; which currencies can be exchanged."
+        },
+        "extra_charge_on_statement": {
+          "topic": "Extra charge on statement",
+          "definition": "An extra fee or small additional charge on the statement, such as an unexpected or unrecognised £1 / $1 / €1 charge (even if pending), not clearly tied to a specific transfer, top-up, ATM or exchange."
+        },
+        "failed_transfer": {
+          "topic": "Failed transfer",
+          "definition": "A transfer failed or didn't go through, money returned after a failed transfer."
+        },
+        "fiat_currency_support": {
+          "topic": "Fiat currency support",
+          "definition": "Which fiat currencies the account can hold, receive or pay in; whether a specific currency is supported."
+        },
+        "get_disposable_virtual_card": {
+          "topic": "Get disposable virtual card",
+          "definition": "How to get or create a disposable (single-use) virtual card; who can get one."
+        },
+        "get_physical_card": {
+          "topic": "Get physical card",
+          "definition": "Getting a physical card (e.g. having only a virtual card); where the PIN for their card is or not having received their PIN yet."
+        },
+        "getting_spare_card": {
+          "topic": "Getting spare card",
+          "definition": "Getting an extra, additional or second card, e.g. for a family member."
+        },
+        "getting_virtual_card": {
+          "topic": "Getting virtual card",
+          "definition": "How to get or order a (non-disposable) virtual card, its cost."
+        },
+        "lost_or_stolen_card": {
+          "topic": "Lost or stolen card",
+          "definition": "Card lost or stolen; reporting a lost/stolen card; wanting help to retrieve or get back their card; card found after being lost."
+        },
+        "lost_or_stolen_phone": {
+          "topic": "Lost or stolen phone",
+          "definition": "Phone lost, stolen or left behind; accessing the account without the phone."
+        },
+        "order_physical_card": {
+          "topic": "Order physical card",
+          "definition": "Ordering a physical card: how to order, delivery options/countries, cost of ordering a card."
+        },
+        "passcode_forgotten": {
+          "topic": "Passcode forgotten",
+          "definition": "Forgot or needs to reset the app passcode / password / login code."
+        },
+        "pending_card_payment": {
+          "topic": "Pending card payment",
+          "definition": "A card payment, purchase or 'payment' is still pending or has not gone through yet; asking when a payment will go through or why it is pending."
+        },
+        "pending_cash_withdrawal": {
+          "topic": "Pending cash withdrawal",
+          "definition": "A cash withdrawal is still pending."
+        },
+        "pending_top_up": {
+          "topic": "Pending top up",
+          "definition": "A top-up is explicitly described as still pending, processing, or taking long to appear."
+        },
+        "pending_transfer": {
+          "topic": "Pending transfer",
+          "definition": "A transfer or an unspecified 'transaction' is still pending / in progress; asking when it will go through or post to the account, or how long it stays pending. (A pending 'payment' or purchase is pending_card_payment.)"
+        },
+        "pin_blocked": {
+          "topic": "Pin blocked",
+          "definition": "PIN blocked after too many wrong attempts; card/account blocked due to PIN, unblocking the PIN."
+        },
+        "receiving_money": {
+          "topic": "Receiving money",
+          "definition": "How to receive money or get paid into the account (salary, payments from others)."
+        },
+        "Refund_not_showing_up": {
+          "topic": "Refund not showing up",
+          "definition": "An expected refund from a merchant hasn't appeared yet / is not showing."
+        },
+        "request_refund": {
+          "topic": "Request refund",
+          "definition": "Wants to request or get a refund for a purchase; how to get a refund."
+        },
+        "reverted_card_payment?": {
+          "topic": "Reverted card payment",
+          "definition": "A card payment was reverted, reversed or returned to the account; money came back after a card payment."
+        },
+        "supported_cards_and_currencies": {
+          "topic": "Supported cards and currencies",
+          "definition": "Which cards (Visa, Mastercard, Amex, credit cards) and currencies can be used to top up or are supported."
+        },
+        "terminate_account": {
+          "topic": "Terminate account",
+          "definition": "Close, delete or terminate the account."
+        },
+        "top_up_by_bank_transfer_charge": {
+          "topic": "Top up by bank transfer charge",
+          "definition": "Fees for topping up by bank transfer; questions about SWIFT transfers (using, receiving or paying for a SWIFT transfer)."
+        },
+        "top_up_by_card_charge": {
+          "topic": "Top up by card charge",
+          "definition": "Fee for topping up with a card (debit/credit card top-up charge)."
+        },
+        "top_up_by_cash_or_cheque": {
+          "topic": "Top up by cash or cheque",
+          "definition": "Topping up with cash or a cheque; how to deposit cash or cheques."
+        },
+        "top_up_failed": {
+          "topic": "Top up failed",
+          "definition": "A top-up attempt was declined, rejected, gave an error, did not go through, or something seems to have gone wrong with a top-up (e.g. can't access the money because of a top-up problem)."
+        },
+        "top_up_limits": {
+          "topic": "Top up limits",
+          "definition": "Maximum or minimum top-up amount; top-up limits."
+        },
+        "top_up_reverted": {
+          "topic": "Top up reverted",
+          "definition": "A top-up was made and seemed to go through, but the account was not credited, or the top-up was reversed/cancelled afterwards (not a card top-up where money left the card; see topping_up_by_card)."
+        },
+        "topping_up_by_card": {
+          "topic": "Topping up by card",
+          "definition": "Topping up using a card: how to do it, or money taken from / gone from the card used for the top-up but not added to the account."
+        },
+        "transaction_charged_twice": {
+          "topic": "Transaction charged twice",
+          "definition": "A payment/transaction was charged twice; duplicate charge."
+        },
+        "transfer_fee_charged": {
+          "topic": "Transfer fee charged",
+          "definition": "Charged a fee for a transfer; why a transfer had a fee. Example: 'why was i chargged'."
+        },
+        "transfer_into_account": {
+          "topic": "Transfer into account",
+          "definition": "How to transfer money into their own account / whether they can top up by (non-SWIFT) bank transfer."
+        },
+        "transfer_not_received_by_recipient": {
+          "topic": "Transfer not received by recipient",
+          "definition": "The customer sent or transferred money and it has not arrived / is not there yet, or the recipient has not received it (when they do not say the transfer was into their own account)."
+        },
+        "transfer_timing": {
+          "topic": "Transfer timing",
+          "definition": "How long transfers take to arrive or how much longer to wait for a transfer (e.g. from the US or Europe), when not about a completed transfer into their own account that is missing from the balance."
+        },
+        "unable_to_verify_identity": {
+          "topic": "Unable to verify identity",
+          "definition": "Cannot complete identity verification; verification failing or not working."
+        },
+        "verify_my_identity": {
+          "topic": "Verify my identity",
+          "definition": "How to verify identity, what documents are needed, how long verification takes."
+        },
+        "verify_source_of_funds": {
+          "topic": "Verify source of funds",
+          "definition": "Verifying or showing the source of funds / where their money comes from."
+        },
+        "verify_top_up": {
+          "topic": "Verify top up",
+          "definition": "Verification of a card top-up: verification code for the top-up card, how top-ups are verified."
+        },
+        "virtual_card_not_working": {
+          "topic": "Virtual card not working",
+          "definition": "Virtual card not working or declined."
+        },
+        "visa_or_mastercard": {
+          "topic": "Visa or mastercard",
+          "definition": "Whether the card is Visa or Mastercard."
+        },
+        "why_verify_identity": {
+          "topic": "Why verify identity",
+          "definition": "Why identity verification or personal information is needed; whether verification is really necessary or the account can be used without verifying."
+        },
+        "wrong_amount_of_cash_received": {
+          "topic": "Wrong amount of cash received",
+          "definition": "ATM gave the wrong amount of cash / less cash than requested or recorded."
+        },
+        "wrong_exchange_rate_for_cash_withdrawal": {
+          "topic": "Wrong exchange rate for cash withdrawal",
+          "definition": "Wrong exchange rate applied to a cash withdrawal abroad."
+        }
+      }
+    },
+    {
+      "version": 1,
+      "name": "C",
+      "model": "jev-latest",
+      "type": "two_level",
+      "state_template": "Message from a bank customer:\n{{input}}",
+      "router": {
+        "instructions": "Which area of the bank's service is the customer's message about?",
+        "criteria": {
+          "card_get": "Getting, ordering, receiving, activating or linking a new card (physical, virtual, disposable, spare), card delivery, expiry, PIN, Visa/Mastercard",
+          "card_problem": "Card not working, declined, lost, stolen, retrieving a lost card, compromised, swallowed, or where it is accepted; Apple/Google Pay; lost phone",
+          "card_payment": "Card payments/purchases and any 'payment': a payment pending or not gone through yet, reverted, unrecognised, charged twice, card fees, refunds, wrong rate charged on a purchase, unexplained or extra charges on the statement, direct debits",
+          "cash": "ATM cash withdrawals: fees (including a fee they thought was free), declined, pending, wrong amount, unrecognised cash showing in the app, exchange rate; cash or cheque deposits not showing",
+          "transfer": "Bank transfers in or out (not SWIFT questions): timing, a transfer or transaction pending or not posted, failed, declined, cancelled, transfer fees, not received, beneficiaries, receiving money, moving money into own account",
+          "top_up": "Topping up the account: how, limits, fees (incl. bank transfer top-up fees), SWIFT transfers, auto top-up, pending, failed, reverted, verification, supported cards",
+          "fx": "Currency exchange and currencies: rates, exchange fees, exchanging in the app, which currencies are supported",
+          "account": "Account and identity: verification, source of funds, personal details, passcode, closing the account, age, countries"
+        }
+      },
+      "groups": {
+        "card_get": {
+          "instructions": "Which specific intent does the customer's message express?",
+          "criteria": {
+            "activate_my_card": "Activating a card: how to activate a new card, or activation is not working.",
+            "card_about_to_expire": "Card is expiring or has expired; getting a replacement for an expiring/expired card.",
+            "card_arrival": "An already-ordered card has not arrived yet; tracking a card in the mail; card delivery is late.",
+            "card_delivery_estimate": "How long card delivery takes, when it will arrive, express/expedited delivery, getting it by a certain date (general estimate, not a late card).",
+            "card_linking": "Linking a card to the app or account: adding/showing a card (new or found) in the app, linking an existing card.",
+            "change_pin": "Changing or resetting the card PIN; where in the app to change the PIN.",
+            "get_disposable_virtual_card": "How to get or create a disposable (single-use) virtual card; who can get one.",
+            "get_physical_card": "Getting a physical card (e.g. having only a virtual card); where the PIN for their card is or not having received their PIN yet.",
+            "getting_spare_card": "Getting an extra, additional or second card, e.g. for a family member.",
+            "getting_virtual_card": "How to get or order a (non-disposable) virtual card, its cost.",
+            "order_physical_card": "Ordering a physical card: how to order, delivery options/countries, cost of ordering a card.",
+            "visa_or_mastercard": "Whether the card is Visa or Mastercard.",
+            "disposable_card_limits": "Limits of disposable virtual cards: how many times / how much they can be used, restrictions.",
+            "pin_blocked": "PIN blocked after too many wrong attempts; card/account blocked due to PIN, unblocking the PIN."
+          },
+          "map": {
+            "activate_my_card": "activate_my_card",
+            "card_about_to_expire": "card_about_to_expire",
+            "card_arrival": "card_arrival",
+            "card_delivery_estimate": "card_delivery_estimate",
+            "card_linking": "card_linking",
+            "change_pin": "change_pin",
+            "get_disposable_virtual_card": "get_disposable_virtual_card",
+            "get_physical_card": "get_physical_card",
+            "getting_spare_card": "getting_spare_card",
+            "getting_virtual_card": "getting_virtual_card",
+            "order_physical_card": "order_physical_card",
+            "visa_or_mastercard": "visa_or_mastercard",
+            "disposable_card_limits": "disposable_card_limits",
+            "pin_blocked": "pin_blocked"
+          }
+        },
+        "card_problem": {
+          "instructions": "Which specific intent does the customer's message express?",
+          "criteria": {
+            "card_not_working": "The card is not working in general: it failed repeatedly in several different places, does not work at all, or seems broken/damaged.",
+            "contactless_not_working": "Contactless / tap payment not working.",
+            "virtual_card_not_working": "Virtual card not working or declined.",
+            "declined_card_payment": "A payment with the card was declined or rejected, or the card did not work when paying at a particular shop, restaurant or online merchant.",
+            "card_acceptance": "Where the card is accepted: whether shops/merchants/online stores accept it, a merchant not accepting the card.",
+            "lost_or_stolen_card": "Card lost or stolen; reporting a lost/stolen card; wanting help to retrieve or get back their card; card found after being lost.",
+            "compromised_card": "Card details may be compromised or used by someone else (fraud, skimming, someone got the card details) without the card being lost.",
+            "card_swallowed": "ATM kept, ate, retained or swallowed the card.",
+            "apple_pay_or_google_pay": "Using Apple Pay, Google Pay or Android Pay with the card or for top-ups, including when it isn't working.",
+            "lost_or_stolen_phone": "Phone lost, stolen or left behind; accessing the account without the phone.",
+            "atm_support": "Which ATMs or cash machines the card can be used at, finding an ATM, whether ATMs abroad accept the card."
+          },
+          "map": {
+            "card_not_working": "card_not_working",
+            "contactless_not_working": "contactless_not_working",
+            "virtual_card_not_working": "virtual_card_not_working",
+            "declined_card_payment": "declined_card_payment",
+            "card_acceptance": "card_acceptance",
+            "lost_or_stolen_card": "lost_or_stolen_card",
+            "compromised_card": "compromised_card",
+            "card_swallowed": "card_swallowed",
+            "apple_pay_or_google_pay": "apple_pay_or_google_pay",
+            "lost_or_stolen_phone": "lost_or_stolen_phone",
+            "atm_support": "atm_support"
+          }
+        },
+        "card_payment": {
+          "instructions": "Which specific intent does the customer's message express?",
+          "criteria": {
+            "pending_card_payment": "A card payment, purchase or 'payment' is still pending or has not gone through yet; asking when a payment will go through or why it is pending.",
+            "reverted_card_payment?": "A card payment was reverted, reversed or returned to the account; money came back after a card payment.",
+            "card_payment_not_recognised": "A charge, payment or purchase on the account that they do not recognise, cannot explain, or did not make (except a small extra charge such as £1 / $1 / €1, which is extra_charge_on_statement).",
+            "transaction_charged_twice": "A payment/transaction was charged twice; duplicate charge.",
+            "card_payment_fee_charged": "Charged a fee for a card payment / purchase; extra fee for using the card for a payment.",
+            "card_payment_wrong_exchange_rate": "Wrong or bad exchange rate applied to a card payment / purchase in a foreign currency.",
+            "request_refund": "Wants to request or get a refund for a purchase; how to get a refund.",
+            "Refund_not_showing_up": "An expected refund from a merchant hasn't appeared yet / is not showing.",
+            "extra_charge_on_statement": "An extra fee or small additional charge on the statement, such as an unexpected or unrecognised £1 / $1 / €1 charge (even if pending), not clearly tied to a specific transfer, top-up, ATM or exchange.",
+            "direct_debit_payment_not_recognised": "A direct debit on the account they do not recognise or did not set up."
+          },
+          "map": {
+            "pending_card_payment": "pending_card_payment",
+            "reverted_card_payment?": "reverted_card_payment?",
+            "card_payment_not_recognised": "card_payment_not_recognised",
+            "transaction_charged_twice": "transaction_charged_twice",
+            "card_payment_fee_charged": "card_payment_fee_charged",
+            "card_payment_wrong_exchange_rate": "card_payment_wrong_exchange_rate",
+            "request_refund": "request_refund",
+            "Refund_not_showing_up": "Refund_not_showing_up",
+            "extra_charge_on_statement": "extra_charge_on_statement",
+            "direct_debit_payment_not_recognised": "direct_debit_payment_not_recognised"
+          }
+        },
+        "cash": {
+          "instructions": "Which specific intent does the customer's message express?",
+          "criteria": {
+            "cash_withdrawal_charge": "Charged a fee for an ATM/cash withdrawal; how much cash withdrawals cost. Example: 'Why did I get charged a fee, I thought it was free?'",
+            "cash_withdrawal_not_recognised": "A cash withdrawal or cash transaction showing in the app or on the account that they did not make or do not recognise.",
+            "declined_cash_withdrawal": "ATM cash withdrawal was declined or the ATM would not give money.",
+            "pending_cash_withdrawal": "A cash withdrawal is still pending.",
+            "wrong_amount_of_cash_received": "ATM gave the wrong amount of cash / less cash than requested or recorded.",
+            "wrong_exchange_rate_for_cash_withdrawal": "Wrong exchange rate applied to a cash withdrawal abroad.",
+            "balance_not_updated_after_cheque_or_cash_deposit": "Deposited money (cash, a cheque, or a deposit with no method stated) but the balance has not updated or funds are not showing; cheque slow to clear."
+          },
+          "map": {
+            "cash_withdrawal_charge": "cash_withdrawal_charge",
+            "cash_withdrawal_not_recognised": "cash_withdrawal_not_recognised",
+            "declined_cash_withdrawal": "declined_cash_withdrawal",
+            "pending_cash_withdrawal": "pending_cash_withdrawal",
+            "wrong_amount_of_cash_received": "wrong_amount_of_cash_received",
+            "wrong_exchange_rate_for_cash_withdrawal": "wrong_exchange_rate_for_cash_withdrawal",
+            "balance_not_updated_after_cheque_or_cash_deposit": "balance_not_updated_after_cheque_or_cash_deposit"
+          }
+        },
+        "transfer": {
+          "instructions": "Which specific intent does the customer's message express?",
+          "criteria": {
+            "balance_not_updated_after_bank_transfer": "A bank transfer into the customer's own account (e.g. from their UK account or another bank) was already made but the money is not showing in the balance yet, even if they also ask how long it normally takes; asking to check a transfer into their account went through.",
+            "beneficiary_not_allowed": "Cannot add a beneficiary/payee, the transfer was refused because the beneficiary is not allowed, or having trouble sending money to a beneficiary.",
+            "cancel_transfer": "Wants to cancel, stop or reverse a transfer they made (often by mistake / wrong recipient).",
+            "declined_transfer": "A transfer was declined/rejected or they are told they cannot make a transfer.",
+            "failed_transfer": "A transfer failed or didn't go through, money returned after a failed transfer.",
+            "pending_transfer": "A transfer or an unspecified 'transaction' is still pending / in progress; asking when it will go through or post to the account, or how long it stays pending. (A pending 'payment' or purchase is pending_card_payment.)",
+            "transfer_fee_charged": "Charged a fee for a transfer; why a transfer had a fee. Example: 'why was i chargged'.",
+            "transfer_into_account": "How to transfer money into their own account / whether they can top up by (non-SWIFT) bank transfer.",
+            "transfer_not_received_by_recipient": "The customer sent or transferred money and it has not arrived / is not there yet, or the recipient has not received it (when they do not say the transfer was into their own account).",
+            "transfer_timing": "How long transfers take to arrive or how much longer to wait for a transfer (e.g. from the US or Europe), when not about a completed transfer into their own account that is missing from the balance.",
+            "receiving_money": "How to receive money or get paid into the account (salary, payments from others)."
+          },
+          "map": {
+            "balance_not_updated_after_bank_transfer": "balance_not_updated_after_bank_transfer",
+            "beneficiary_not_allowed": "beneficiary_not_allowed",
+            "cancel_transfer": "cancel_transfer",
+            "declined_transfer": "declined_transfer",
+            "failed_transfer": "failed_transfer",
+            "pending_transfer": "pending_transfer",
+            "transfer_fee_charged": "transfer_fee_charged",
+            "transfer_into_account": "transfer_into_account",
+            "transfer_not_received_by_recipient": "transfer_not_received_by_recipient",
+            "transfer_timing": "transfer_timing",
+            "receiving_money": "receiving_money"
+          }
+        },
+        "top_up": {
+          "instructions": "Which specific intent does the customer's message express?",
+          "criteria": {
+            "automatic_top_up": "Auto top-up feature: how it works, setting it up, turning it off, why it triggered.",
+            "pending_top_up": "A top-up is explicitly described as still pending, processing, or taking long to appear.",
+            "top_up_by_bank_transfer_charge": "Fees for topping up by bank transfer; questions about SWIFT transfers (using, receiving or paying for a SWIFT transfer).",
+            "top_up_by_card_charge": "Fee for topping up with a card (debit/credit card top-up charge).",
+            "top_up_by_cash_or_cheque": "Topping up with cash or a cheque; how to deposit cash or cheques.",
+            "top_up_failed": "A top-up attempt was declined, rejected, gave an error, did not go through, or something seems to have gone wrong with a top-up (e.g. can't access the money because of a top-up problem).",
+            "top_up_limits": "Maximum or minimum top-up amount; top-up limits.",
+            "top_up_reverted": "A top-up was made and seemed to go through, but the account was not credited, or the top-up was reversed/cancelled afterwards (not a card top-up where money left the card; see topping_up_by_card).",
+            "topping_up_by_card": "Topping up using a card: how to do it, or money taken from / gone from the card used for the top-up but not added to the account.",
+            "verify_top_up": "Verification of a card top-up: verification code for the top-up card, how top-ups are verified.",
+            "supported_cards_and_currencies": "Which cards (Visa, Mastercard, Amex, credit cards) and currencies can be used to top up or are supported."
+          },
+          "map": {
+            "automatic_top_up": "automatic_top_up",
+            "pending_top_up": "pending_top_up",
+            "top_up_by_bank_transfer_charge": "top_up_by_bank_transfer_charge",
+            "top_up_by_card_charge": "top_up_by_card_charge",
+            "top_up_by_cash_or_cheque": "top_up_by_cash_or_cheque",
+            "top_up_failed": "top_up_failed",
+            "top_up_limits": "top_up_limits",
+            "top_up_reverted": "top_up_reverted",
+            "topping_up_by_card": "topping_up_by_card",
+            "verify_top_up": "verify_top_up",
+            "supported_cards_and_currencies": "supported_cards_and_currencies"
+          }
+        },
+        "fx": {
+          "instructions": "Which specific intent does the customer's message express?",
+          "criteria": {
+            "exchange_charge": "Fees or charges for exchanging currency; extra costs when exchanging money.",
+            "exchange_rate": "What exchange rate is used, where to find rates, how rates are set (not complaining about a specific wrong rate).",
+            "exchange_via_app": "How to exchange / convert currency in the app; which currencies can be exchanged.",
+            "fiat_currency_support": "Which fiat currencies the account can hold, receive or pay in; whether a specific currency is supported."
+          },
+          "map": {
+            "exchange_charge": "exchange_charge",
+            "exchange_rate": "exchange_rate",
+            "exchange_via_app": "exchange_via_app",
+            "fiat_currency_support": "fiat_currency_support"
+          }
+        },
+        "account": {
+          "instructions": "Which specific intent does the customer's message express?",
+          "criteria": {
+            "age_limit": "Age requirements: minimum age to open/use an account, whether children or teenagers can have an account.",
+            "country_support": "Which countries the service or account is available in / supports; using the account while living in or moving to another country.",
+            "edit_personal_details": "Changing personal details: name, address, phone, email or other account information.",
+            "passcode_forgotten": "Forgot or needs to reset the app passcode / password / login code.",
+            "terminate_account": "Close, delete or terminate the account.",
+            "unable_to_verify_identity": "Cannot complete identity verification; verification failing or not working.",
+            "verify_my_identity": "How to verify identity, what documents are needed, how long verification takes.",
+            "verify_source_of_funds": "Verifying or showing the source of funds / where their money comes from.",
+            "why_verify_identity": "Why identity verification or personal information is needed; whether verification is really necessary or the account can be used without verifying."
+          },
+          "map": {
+            "age_limit": "age_limit",
+            "country_support": "country_support",
+            "edit_personal_details": "edit_personal_details",
+            "passcode_forgotten": "passcode_forgotten",
+            "terminate_account": "terminate_account",
+            "unable_to_verify_identity": "unable_to_verify_identity",
+            "verify_my_identity": "verify_my_identity",
+            "verify_source_of_funds": "verify_source_of_funds",
+            "why_verify_identity": "why_verify_identity"
+          }
+        }
+      }
+    }
+  ]
+}

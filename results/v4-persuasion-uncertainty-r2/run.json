@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-persuasion-uncertainty-r2",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T11:59:28",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 480,
+    "num_turns": 34,
+    "total_cost_usd": 1.2545278
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description + P4G scheme, 20 options mapped to 18 classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.6302,
+          "macro_f1": 0.6266,
+          "est_cost_usd": 0.113473,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.5,
+      "note": "v2: batch1 labels as examples; praise/credibility/task-inquiry/off-task tweaks",
+      "test": {
+        "jev": {
+          "accuracy": 0.6513,
+          "macro_f1": 0.6341,
+          "est_cost_usd": 0.141602,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.5,
+      "note": "v3: batch2 labels; comment_partner option, greeting replies, emotion/donation-info tweaks",
+      "test": {
+        "jev": {
+          "accuracy": 0.6473,
+          "macro_f1": 0.6218,
+          "est_cost_usd": 0.165811,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.5,
+      "note": "v4: batch3 labels; greeting replies anywhere (context unordered), praise/emotion/task-inquiry examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.6486,
+          "macro_f1": 0.624,
+          "est_cost_usd": 0.184711,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.55,
+      "note": "v5: batch4 labels; credibility covers charity impact claims; 3-member wording-variant ensemble",
+      "test": {
+        "jev": {
+          "accuracy": 0.6579,
+          "macro_f1": 0.6269,
+          "est_cost_usd": 0.585675,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.55,
+      "note": "v6 final: batch5 labels; foot-in-the-door covers small-donation-goes-far, off-task tangents, non-English=other; 3-member ensemble",
+      "test": {
+        "jev": {
+          "accuracy": 0.6486,
+          "macro_f1": 0.6169,
+          "est_cost_usd": 0.637002,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

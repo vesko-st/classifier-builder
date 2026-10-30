@@ -1,0 +1,79 @@
+{
+  "run_id": "vs-persuasion-haiku-rules-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T17:29:05",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 585,
+    "num_turns": 67,
+    "total_cost_usd": 0.6203939499999997
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "Initial draft: basic 18-class choice classifier",
+      "test": {
+        "jev": {
+          "accuracy": 0.474,
+          "macro_f1": 0.4722,
+          "est_cost_usd": 0.059366,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 28,
+      "estimate": 0.72,
+      "note": "Improved with better category descriptions and examples, 85.7% accuracy on 14 labeled examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.5452,
+          "macro_f1": 0.5049,
+          "est_cost_usd": 0.092551,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 70,
+      "estimate": 0.6,
+      "note": "Best single classifier: 60% accuracy on 35 labeled examples, macro-F1 0.60",
+      "test": {
+        "jev": {
+          "accuracy": 0.5643,
+          "macro_f1": 0.5242,
+          "est_cost_usd": 0.094384,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 100,
+      "estimate": 0.55,
+      "note": "Final classifier: v4 with refined category descriptions. 44% accuracy on 50 labeled examples (macro-F1 0.501)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5643,
+          "macro_f1": 0.5242,
+          "est_cost_usd": 0.0,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

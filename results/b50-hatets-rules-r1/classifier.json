@@ -1,0 +1,155 @@
+{
+  "version": 1,
+  "name": "v10",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "v6_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify this tweet under a hate-speech annotation policy. The policy covers hate speech against two target groups: immigrants/refugees/migrants and women. A tweet is hateful when it spreads, incites, promotes or justifies hatred or violence toward the target group or a member of it, or aims to dehumanise, degrade, hurt or intimidate them. Pick the option that best describes the tweet.",
+        "notes": [
+          "Offensive or vulgar language alone is not hate; what matters is whether a woman/women or immigrants are being degraded or attacked.",
+          "Political support for border policy without demeaning immigrants is not hate."
+        ]
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_hate": "Hostile to immigrants, refugees, migrants or 'illegals' themselves: dehumanising labels (scum, invaders, animals, rapefugees), portraying them as criminals, rapists, disease, a flood or a threat, or demanding they be deported, sent back, kept out or got rid of (e.g. 'they keep coming, build the wall and deport', #DeportThemAll, #SendThemBack aimed at them); also hashtags that reject the people themselves, such as StopImmigration, #NoIllegals, #NoChainMigration, #DeportThemAll, #SendThemBack, or mocking immigrant women and children",
+        "immigration_politics": "About immigration politics without hostility to immigrants themselves: policy debate, partisan rants about Democrats/DACA/amnesty, news, arguing over the term 'illegal alien' or insisting that they follow legal procedures, or pro-Trump/MAGA posts that merely include general hashtags like #BuildThatWall, #MAGA or #NoDACA without saying anything hostile about immigrants",
+        "misogynistic_attack": "Degrades a woman or women: a gendered slur (bitch, hoe, whore, slut, cunt) hurled at someone the author says they are mad at, can't stand or is scolding (e.g. 'I can't stand you hoe 😭', 'I'm so mad... you're a bitch', 'bitch thats my cousin hoe cool your beans!'), sexual objectification, threats, repeating a violent misogynistic phrase (even to mock whoever said it), or demeaning women in general; addressing someone as both bitch and hoe while telling them off counts here (e.g. 'Bitch stop it, bum ass hoe you lame as hell Rudy')",
+        "criticism_of_a_woman": "Criticises or insults a specific woman (e.g. a politician or public figure) for her politics, conduct or character, without gendered slurs and without degrading her as a woman",
+        "casual_slur": "Uses words like bitch or hoe as filler, an exclamation or a form of address with no real hostility (e.g. 'drink some water bitch'), in playful, nostalgic or teasing banter with no stated anger (e.g. 'youza creep ass bitch😂', 'sell me your makeup then hoe! lmao'), affectionately or flirtatiously ('you just my bitch ;)'), about oneself, as a compliment or in sexual desire ('bad bitch'), or in song lyrics",
+        "slur_at_man": "Uses bitch, hoe, cunt etc. about someone the tweet explicitly marks as male with words like he/him/his, dude, bro, boy, man (e.g. 'he is a bitch', 'bitch boy', 'son of a bitch', 'this dude... shut up little bitch'), even when the author is angry with him, or as praise ('he is that bitch'). A first name alone does not show the target is male",
+        "other": "Anything else: unrelated topics, insults not aimed at women or immigrants, or condemning someone else's sexism without repeating violent content"
+      },
+      "map": {
+        "immigrant_hate": "hate",
+        "immigration_politics": "not_hate",
+        "misogynistic_attack": "hate",
+        "criticism_of_a_woman": "not_hate",
+        "casual_slur": "not_hate",
+        "slur_at_man": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "v6_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "An annotation policy defines hate speech as content directed at immigrants (including refugees and migrants) or at women that promotes hatred, hostility or violence against them, or that degrades, dehumanises or intimidates them. Ordinary vulgarity is not enough. Which description fits this tweet best?",
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_hate": "Expresses hostility toward immigrants/refugees/migrants as people: calls them vermin, invaders, criminals, rapists, a disease or a danger; wants them deported, sent home, kept out or removed ('they keep coming, deport them'); uses hashtags aimed at the people such as StopImmigration, #NoIllegals, #DeportThemAll, #SendThemBack; or mocks migrant women and children",
+        "immigration_politics": "Discusses immigration as a political issue without hostility to the immigrants: policy views, attacks on Democrats or DACA, news reports, debating the label 'illegal alien' or saying people should follow legal channels, or MAGA/pro-Trump posts that just tack on general tags like #BuildThatWall, #MAGA, #NoDACA",
+        "misogynistic_attack": "Demeans a woman or women: throws a gendered slur (bitch, hoe, whore, slut, cunt) at a person the author openly says annoys them, they dislike or they are scolding (even with emoji, e.g. 'I can't stand you hoe 😭', 'so mad... you're a bitch', 'bitch thats my cousin hoe cool your beans!'), objectifies women sexually, threatens them, repeats a violent phrase about women even while mocking its author, or belittles women generally; addressing someone as both bitch and hoe while telling them off counts here (e.g. 'Bitch stop it, bum ass hoe you lame as hell Rudy')",
+        "criticism_of_a_woman": "Attacks a particular woman, such as a politician or celebrity, over her views, actions or character, using no gendered slurs and not belittling her for being a woman",
+        "casual_slur": "Bitch/hoe used without real hostility: as filler or an exclamation, as a way of addressing someone ('drink some water bitch'), in playful or nostalgic teasing where no anger is stated ('youza creep ass bitch😂', 'sell me your makeup then hoe lmao'), between friends or partners ('you just my bitch ;)'), about oneself, as praise or desire ('bad bitch'), or quoting lyrics",
+        "slur_at_man": "The slur (bitch, hoe, cunt, son of a bitch, bitch boy) is aimed at someone the text clearly identifies as a man or boy (he, him, dude, bro, boy), even in an angry insult, or praises someone ('he is that bitch'). A name alone is not enough to treat the target as male",
+        "other": "Something else: unrelated topics, insults that don't target women or immigrants, or a tweet condemning someone else's sexism without repeating violent content"
+      },
+      "map": {
+        "immigrant_hate": "hate",
+        "immigration_politics": "not_hate",
+        "misogynistic_attack": "hate",
+        "criticism_of_a_woman": "not_hate",
+        "casual_slur": "not_hate",
+        "slur_at_man": "not_hate",
+        "other": "not_hate"
+      }
+    },
+    {
+      "version": 1,
+      "name": "v6_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Decide which category this tweet belongs to under a hate-speech policy.",
+        "policy": "Hate speech targets immigrants or women. It is hateful if it incites or justifies hatred or violence against them, or tries to dehumanise, humiliate or intimidate them.",
+        "not_enough": "Swearing, crude language and political opinions do not make a tweet hateful by themselves."
+      },
+      "state_template": "Tweet:\n{{input}}",
+      "criteria": {
+        "immigrant_hate": {
+          "definition": "Hostile to immigrants, refugees or migrants themselves",
+          "includes": [
+            "dehumanising names (scum, invaders, rapefugees)",
+            "depicting them as criminals, a threat or a flood",
+            "demands to deport them, send them back or keep them out",
+            "calls or hashtags rejecting the people: StopImmigration, #NoIllegals, #DeportThemAll, #SendThemBack",
+            "mocking migrant women and children"
+          ]
+        },
+        "immigration_politics": {
+          "definition": "Immigration as a political topic, no hostility to immigrants",
+          "includes": [
+            "policy debate, news",
+            "partisan attacks on Democrats, DACA, amnesty",
+            "arguing the term 'illegal alien' is correct, or that people should follow legal procedure",
+            "pro-Trump/MAGA posts with only general tags like #BuildThatWall, #MAGA, #NoDACA"
+          ]
+        },
+        "misogynistic_attack": {
+          "definition": "Degrades a woman or women",
+          "includes": [
+            "a gendered slur (bitch, hoe, whore, slut, cunt) used as an insult toward someone the author states they are mad at, can't stand or is telling off, even with emoji ('I can't stand you hoe 😭', 'bitch thats my cousin hoe cool your beans!')",
+            "sexual objectification or threats",
+            "repeating a violent misogynistic phrase, even to mock whoever said it",
+            "contempt for women in general",
+            "calling someone both bitch and hoe while telling them off ('Bitch stop it, bum ass hoe you lame as hell Rudy')"
+          ]
+        },
+        "criticism_of_a_woman": {
+          "definition": "Criticises a specific woman (politician, public figure) for her politics, conduct or character",
+          "excludes": [
+            "gendered slurs",
+            "degrading her as a woman"
+          ]
+        },
+        "casual_slur": {
+          "definition": "bitch/hoe without real hostility",
+          "includes": [
+            "filler, exclamation, form of address ('drink some water bitch')",
+            "playful or nostalgic teasing with no stated anger ('youza creep ass bitch😂', 'sell me your makeup then hoe lmao')",
+            "affection between friends or partners ('you just my bitch ;)')",
+            "about oneself",
+            "compliment or desire ('bad bitch')",
+            "song lyrics"
+          ]
+        },
+        "slur_at_man": {
+          "definition": "Slur aimed at someone the tweet explicitly identifies as male (he/him/his, dude, bro, boy, man), even an angry insult, or used as praise ('he is that bitch')",
+          "examples": [
+            "bitch boy",
+            "son of a bitch",
+            "he's a bitch",
+            "this dude harassing me, shut up little bitch"
+          ],
+          "excludes": [
+            "targets identified only by a first name"
+          ]
+        },
+        "other": {
+          "definition": "Anything else",
+          "includes": [
+            "unrelated topics",
+            "insults not aimed at women or immigrants",
+            "condemning someone else's sexism without repeating violent content"
+          ]
+        }
+      },
+      "map": {
+        "immigrant_hate": "hate",
+        "immigration_politics": "not_hate",
+        "misogynistic_attack": "hate",
+        "criticism_of_a_woman": "not_hate",
+        "casual_slur": "not_hate",
+        "slur_at_man": "not_hate",
+        "other": "not_hate"
+      }
+    }
+  ]
+}

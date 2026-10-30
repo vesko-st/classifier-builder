@@ -1,0 +1,424 @@
+{
+  "version": 1,
+  "name": "deal_ens_v23",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "deal_v19a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a Craigslist listing followed by a buyer-seller chat. The chat log usually stops before the parties formally submit and accept the final offer. Focus on the last few messages: which description fits how the chat ends?",
+      "state_template": "Listing and chat:\n{{input}}",
+      "criteria": {
+        "price_accepted": "One side agreed to a price the other side proposed or insisted on, explicitly or implicitly: 'deal', 'ok', 'sounds good', 'fair enough', 'I can do 1750', 'Yes! I'll pick it up tonight', 'what's your phone number?', 'that's reasonable, come check it out'. Also when a side accepts the price but adjusts extras ('Alright, but for that price no free carfax' → 'Ok, sounds fair, I'll have cash in hand').",
+        "buyer_commits": "After asking about the item, the buyer commits without contesting the price: 'I will take it', says they will submit an offer, or arranges a day or place to pick it up or move in (e.g. 'Today will work, thanks!'). Only a bare 'yes' in a chat of two or three lines with no discussion does not count.",
+        "converging_final_offer": "Both sides have already named prices, and the chat ends on a new price that moves toward the other side, even when framed as final or the lowest ('90 is the lowest I will go' after asking 100, against a buyer's 80; 'my final offer is $920' after hinting ~935, against 775; '25 and you got yourself a deal' against 22), or the two last prices are within a few percent ('14900 is my final offer' against 14800).",
+        "firm_price_stand": "The chat ends with one side refusing to move WITHOUT making any new concession (repeating a price they already gave, or just 'I'm firm, sorry', 'can't go beyond that, sorry') while the other side's offer is still more than a few percent away: 'I really can't go any lower than $350' (already said 350) to a $300 offer; 'I'm pretty firm on the price, sorry'; 'can't go beyond $240, sorry' to $260. Also when the very last message of the chat is one side's floor or ceiling that still leaves a big gap (20% or more) to the other side's offer, e.g. buyer offered 200 and the chat ends with the seller saying 375 is their minimum. If the other side replies with any agreement after it, this option does not apply. A last message that is a fresh counteroffer the speaker is proposing (e.g. seller asked 190, buyer ends with 'I will pick them up for 151.50') is not a floor or ceiling: that is converging_final_offer, even if the gap is big.",
+        "refused_or_walked_away": "One side says they will pass, look elsewhere, that it won't work, or ends the negotiation.",
+        "only_first_offer": "Only one side has named a price: the seller's asking price, or the buyer's first offer (e.g. 'would you consider $60 cash?', 'how about half the asking price?', 'I'll buy it for 110'), and the chat ends with no counteroffer to it (no reply, or only an objection that it is too low). Also when the seller states the price and the buyer only says it looks great and asks another question, without committing.",
+        "no_price_talk": "No price negotiation happens: only greetings, questions about the item, or a bare 'yes I want it'; or the chat is off-topic, confused or nonsensical."
+      },
+      "map": {
+        "price_accepted": "deal",
+        "buyer_commits": "deal",
+        "converging_final_offer": "deal",
+        "firm_price_stand": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "only_first_offer": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v19b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a Craigslist ad and the chat between a would-be buyer and the seller. The transcript normally cuts off just before the formal offer is submitted and accepted, so decide from the closing messages how the negotiation stood. Pick the option that best describes the ending.",
+      "state_template": "Craigslist ad and chat:\n{{input}}",
+      "criteria": {
+        "price_accepted": "A price put forward or held to by one party was agreed to by the other, in so many words or by clear implication: 'you've got a deal', 'okay', 'works for me', 'fair enough', 'I can do that', 'I'll come get it tonight', 'send me your number', 'that's a fair offer, come take a look'. Includes accepting the number while changing an extra ('Alright, but at that price you get your own carfax' → 'Ok, that's fair, I'll bring cash').",
+        "buyer_commits": "Having asked about the item, the buyer goes ahead without disputing the price: 'I'll take it', they'll put in an offer, or they set a time and place to collect it or move in ('Today works, thanks!'). Just a 'yes' in a two- or three-line chat with no discussion is not enough.",
+        "converging_final_offer": "Each side has already put a number forward, and the transcript ends on a fresh number that comes toward the other party, even if called final or the lowest ('90 is as low as I go' after first asking 100, buyer at 80; 'final offer $920' against 775 after hinting ~935; '25 and it's a deal' against 22), or with the two latest numbers only a few percent apart ('14900 is my last offer' against 14800).",
+        "firm_price_stand": "At the end one party won't budge and gives no new concession at all (restates a number they already gave, or just says 'firm, sorry' / 'that's my max, sorry'), while the other party's number is still more than a few percent away: 'can't do less than $350' (already said) after a $300 offer, 'the price is firm, sorry', 'sorry, $240 is my max' against $260. Also when the transcript's very last line is a party's floor or ceiling still far (20%+) from the other party's number, e.g. buyer at 9200 and the chat stops on the seller naming 11500 as their minimum. Any later agreement from the other party rules this option out. A closing line that puts a new counteroffer on the table (seller wanted 190, buyer closes with 'I'll pick them up for 151.50') is not a floor or ceiling; that counts as converging_final_offer even when far apart.",
+        "refused_or_walked_away": "A party declines, says they'll pass or shop elsewhere, says it isn't going to work, or ends the talks.",
+        "only_first_offer": "Just one party has put a number forward, either the seller's asking price or the buyer's opening bid ('would you take $60 cash?', 'what about half the asking price?', 'I'll give you 110 for it'), and the transcript ends with no counter to it: no answer, or only a complaint that it is too low. Also when the seller names the price and the buyer just says it looks nice and asks something else, without committing.",
+        "no_price_talk": "There's no price negotiation: just hellos, questions about the item, or a bare 'yes I'll buy it'; or the chat is unrelated, muddled or makes no sense."
+      },
+      "map": {
+        "price_accepted": "deal",
+        "buyer_commits": "deal",
+        "converging_final_offer": "deal",
+        "firm_price_stand": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "only_first_offer": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v19c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "You will see a for-sale listing and a negotiation chat. The parties finish the deal through a formal offer step that is not shown, so classify the state of the negotiation at the point where the chat stops. Which option fits the final messages?",
+      "state_template": "Listing and chat:\n{{input}}",
+      "criteria": {
+        "price_accepted": {
+          "definition": "The other side accepted a price that one side offered or insisted on.",
+          "examples": [
+            "deal",
+            "ok",
+            "sounds good",
+            "fair enough",
+            "I can do 1750",
+            "Yes! I'll pick it up tonight",
+            "what's your phone number?",
+            "that's reasonable, come check it out",
+            "'Alright, but for that price no carfax' then 'Ok, sounds fair, cash in hand'"
+          ],
+          "note": "Acceptance may be implicit, and may come with changed extras."
+        },
+        "buyer_commits": {
+          "definition": "The buyer, after learning about the item, proceeds without arguing about the price.",
+          "includes": [
+            "'I will take it'",
+            "says they will submit an offer",
+            "arranges a pickup or move-in day"
+          ],
+          "excludes": [
+            "a bare 'yes' in a two- or three-line chat with no discussion"
+          ]
+        },
+        "converging_final_offer": {
+          "definition": "Both sides have named prices and the chat ends on a new price that moves toward the other side (even if called final or the lowest), or with the last two prices within a few percent.",
+          "examples": [
+            "seller asked 100, buyer 80, seller: '90 is the lowest I will go'",
+            "buyer 775, seller: 'my final offer is 920' after hinting ~935",
+            "buyer 22, seller: '25 and you got yourself a deal'",
+            "buyer 14800, seller: '14900 is my final offer'"
+          ]
+        },
+        "firm_price_stand": {
+          "definition": "The chat ends with one side refusing to move and making no new concession (repeats a price already given, or names none) while the other's offer is still more than a few percent away.",
+          "examples": [
+            "'I really can't go any lower than $350' (already offered 350) to a $300 offer",
+            "'I'm pretty firm on the price, sorry'",
+            "'can't go beyond $240, sorry' to a $260 ask"
+          ],
+          "also": "The very last message is one side's floor or ceiling that still leaves a gap of 20% or more to the other side's offer (buyer 200, chat ends on seller's minimum of 375). Not if the other side agrees afterwards.",
+          "excludes": [
+            "the last message is a new counteroffer the speaker proposes (seller asked 190, buyer ends: 'I will pick them up for 151.50'); that is converging_final_offer even if the gap is big"
+          ]
+        },
+        "refused_or_walked_away": {
+          "definition": "One side declines, will pass, will look elsewhere, says it won't work, or ends the negotiation."
+        },
+        "only_first_offer": {
+          "definition": "Only one side has named a price (the seller's asking price or the buyer's opening offer) and nobody counters it before the chat ends.",
+          "examples": [
+            "'would you consider $60 cash?' with no reply",
+            "'I'll buy it for 110' answered only with 'that's too low'",
+            "seller: 'I am selling it for $75, are you interested?' buyer: 'Yes, it looks great. Did you alter the device?' (no commitment)"
+          ]
+        },
+        "no_price_talk": {
+          "definition": "No price negotiation took place.",
+          "includes": [
+            "only greetings or item questions",
+            "a bare 'yes I want it'",
+            "off-topic, confused or nonsensical chats"
+          ]
+        }
+      },
+      "map": {
+        "price_accepted": "deal",
+        "buyer_commits": "deal",
+        "converging_final_offer": "deal",
+        "firm_price_stand": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "only_first_offer": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v20a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a Craigslist listing followed by a buyer-seller chat. The chat log usually stops before the parties formally submit and accept the final offer. Focus on the last few messages: which description fits how the chat ends?",
+      "state_template": "Listing and chat:\n{{input}}",
+      "criteria": {
+        "price_accepted": "One side agreed to a price the other side proposed or insisted on, explicitly or implicitly: 'deal', 'ok', 'sounds good', 'fair enough', 'I can do 1750', 'Yes! I'll pick it up tonight', 'what's your phone number?', 'that's reasonable, come check it out'. Also when a side accepts the price but adjusts extras ('Alright, but for that price no free carfax' → 'Ok, sounds fair, I'll have cash in hand').",
+        "buyer_commits": "After asking about the item, the buyer commits without contesting the price: 'I will take it', says they will submit an offer, or arranges a day or place to pick it up or move in (e.g. 'Today will work, thanks!'). Only a bare 'yes' in a chat of two or three lines with no discussion does not count.",
+        "converging_final_offer": "Both sides have already named prices, and the chat ends on a new price that moves toward the other side, even when framed as final or the lowest ('90 is the lowest I will go' after asking 100, against a buyer's 80; 'my final offer is $920' after hinting ~935, against 775; '25 and you got yourself a deal' against 22), or the two last prices are within a few percent ('14900 is my final offer' against 14800).",
+        "firm_price_stand": "The chat ends with one side refusing to move WITHOUT making any new concession (repeating a price they already gave, or just 'I'm firm, sorry', 'can't go beyond that, sorry') while the other side's offer is still more than a few percent away: 'I really can't go any lower than $350' (already said 350) to a $300 offer; 'I'm pretty firm on the price, sorry'; 'can't go beyond $240, sorry' to $260. Also when the very last message of the chat is one side's floor or ceiling that still leaves a big gap (20% or more) to the other side's offer, e.g. buyer offered 200 and the chat ends with the seller saying 375 is their minimum. If the other side replies with any agreement after it, this option does not apply. A last message that is a fresh counteroffer the speaker is proposing (e.g. seller asked 190, buyer ends with 'I will pick them up for 151.50') is not a floor or ceiling: that is converging_final_offer, even if the gap is big.",
+        "refused_or_walked_away": "One side says they will pass, look elsewhere, that it won't work, or ends the negotiation. Includes a conditional refusal at the end: 'I can do $9800, but if $9000 is your low, then I don't think we can make a deal.'",
+        "only_first_offer": "Only one side has named a price: the seller's asking price, or the buyer's first offer (e.g. 'would you consider $60 cash?', 'how about half the asking price?', 'I'll buy it for 110'), and the chat ends with no counteroffer to it (no reply, or only an objection that it is too low). Also when the seller states the price and the buyer only says it looks great and asks another question, without committing.",
+        "no_price_talk": "No price negotiation happens: only greetings, questions about the item, or a bare 'yes I want it'; or the chat is off-topic, confused or nonsensical."
+      },
+      "map": {
+        "price_accepted": "deal",
+        "buyer_commits": "deal",
+        "converging_final_offer": "deal",
+        "firm_price_stand": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "only_first_offer": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v20b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a Craigslist ad and the chat between a would-be buyer and the seller. The transcript normally cuts off just before the formal offer is submitted and accepted, so decide from the closing messages how the negotiation stood. Pick the option that best describes the ending.",
+      "state_template": "Craigslist ad and chat:\n{{input}}",
+      "criteria": {
+        "price_accepted": "A price put forward or held to by one party was agreed to by the other, in so many words or by clear implication: 'you've got a deal', 'okay', 'works for me', 'fair enough', 'I can do that', 'I'll come get it tonight', 'send me your number', 'that's a fair offer, come take a look'. Includes accepting the number while changing an extra ('Alright, but at that price you get your own carfax' → 'Ok, that's fair, I'll bring cash').",
+        "buyer_commits": "Having asked about the item, the buyer goes ahead without disputing the price: 'I'll take it', they'll put in an offer, or they set a time and place to collect it or move in ('Today works, thanks!'). Just a 'yes' in a two- or three-line chat with no discussion is not enough.",
+        "converging_final_offer": "Each side has already put a number forward, and the transcript ends on a fresh number that comes toward the other party, even if called final or the lowest ('90 is as low as I go' after first asking 100, buyer at 80; 'final offer $920' against 775 after hinting ~935; '25 and it's a deal' against 22), or with the two latest numbers only a few percent apart ('14900 is my last offer' against 14800).",
+        "firm_price_stand": "At the end one party won't budge and gives no new concession at all (restates a number they already gave, or just says 'firm, sorry' / 'that's my max, sorry'), while the other party's number is still more than a few percent away: 'can't do less than $350' (already said) after a $300 offer, 'the price is firm, sorry', 'sorry, $240 is my max' against $260. Also when the transcript's very last line is a party's floor or ceiling still far (20%+) from the other party's number, e.g. buyer at 9200 and the chat stops on the seller naming 11500 as their minimum. Any later agreement from the other party rules this option out. A closing line that puts a new counteroffer on the table (seller wanted 190, buyer closes with 'I'll pick them up for 151.50') is not a floor or ceiling; that counts as converging_final_offer even when far apart.",
+        "refused_or_walked_away": "A party declines, says they'll pass or shop elsewhere, says it isn't going to work, or ends the talks. Covers a closing conditional no: 'I can do $9800, but if $9000 is your limit, I don't think we can make a deal.'",
+        "only_first_offer": "Just one party has put a number forward, either the seller's asking price or the buyer's opening bid ('would you take $60 cash?', 'what about half the asking price?', 'I'll give you 110 for it'), and the transcript ends with no counter to it: no answer, or only a complaint that it is too low. Also when the seller names the price and the buyer just says it looks nice and asks something else, without committing.",
+        "no_price_talk": "There's no price negotiation: just hellos, questions about the item, or a bare 'yes I'll buy it'; or the chat is unrelated, muddled or makes no sense."
+      },
+      "map": {
+        "price_accepted": "deal",
+        "buyer_commits": "deal",
+        "converging_final_offer": "deal",
+        "firm_price_stand": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "only_first_offer": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v20c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "You will see a for-sale listing and a negotiation chat. The parties finish the deal through a formal offer step that is not shown, so classify the state of the negotiation at the point where the chat stops. Which option fits the final messages?",
+      "state_template": "Listing and chat:\n{{input}}",
+      "criteria": {
+        "price_accepted": {
+          "definition": "The other side accepted a price that one side offered or insisted on.",
+          "examples": [
+            "deal",
+            "ok",
+            "sounds good",
+            "fair enough",
+            "I can do 1750",
+            "Yes! I'll pick it up tonight",
+            "what's your phone number?",
+            "that's reasonable, come check it out",
+            "'Alright, but for that price no carfax' then 'Ok, sounds fair, cash in hand'"
+          ],
+          "note": "Acceptance may be implicit, and may come with changed extras."
+        },
+        "buyer_commits": {
+          "definition": "The buyer, after learning about the item, proceeds without arguing about the price.",
+          "includes": [
+            "'I will take it'",
+            "says they will submit an offer",
+            "arranges a pickup or move-in day"
+          ],
+          "excludes": [
+            "a bare 'yes' in a two- or three-line chat with no discussion"
+          ]
+        },
+        "converging_final_offer": {
+          "definition": "Both sides have named prices and the chat ends on a new price that moves toward the other side (even if called final or the lowest), or with the last two prices within a few percent.",
+          "examples": [
+            "seller asked 100, buyer 80, seller: '90 is the lowest I will go'",
+            "buyer 775, seller: 'my final offer is 920' after hinting ~935",
+            "buyer 22, seller: '25 and you got yourself a deal'",
+            "buyer 14800, seller: '14900 is my final offer'"
+          ]
+        },
+        "firm_price_stand": {
+          "definition": "The chat ends with one side refusing to move and making no new concession (repeats a price already given, or names none) while the other's offer is still more than a few percent away.",
+          "examples": [
+            "'I really can't go any lower than $350' (already offered 350) to a $300 offer",
+            "'I'm pretty firm on the price, sorry'",
+            "'can't go beyond $240, sorry' to a $260 ask"
+          ],
+          "also": "The very last message is one side's floor or ceiling that still leaves a gap of 20% or more to the other side's offer (buyer 200, chat ends on seller's minimum of 375). Not if the other side agrees afterwards.",
+          "excludes": [
+            "the last message is a new counteroffer the speaker proposes (seller asked 190, buyer ends: 'I will pick them up for 151.50'); that is converging_final_offer even if the gap is big"
+          ]
+        },
+        "refused_or_walked_away": {
+          "definition": "One side declines, will pass, will look elsewhere, says it won't work, or ends the negotiation.",
+          "examples": [
+            "'I can do $9800, but if $9000 is your low, then I don't think we can make a deal.' (last message)"
+          ]
+        },
+        "only_first_offer": {
+          "definition": "Only one side has named a price (the seller's asking price or the buyer's opening offer) and nobody counters it before the chat ends.",
+          "examples": [
+            "'would you consider $60 cash?' with no reply",
+            "'I'll buy it for 110' answered only with 'that's too low'",
+            "seller: 'I am selling it for $75, are you interested?' buyer: 'Yes, it looks great. Did you alter the device?' (no commitment)"
+          ]
+        },
+        "no_price_talk": {
+          "definition": "No price negotiation took place.",
+          "includes": [
+            "only greetings or item questions",
+            "a bare 'yes I want it'",
+            "off-topic, confused or nonsensical chats"
+          ]
+        }
+      },
+      "map": {
+        "price_accepted": "deal",
+        "buyer_commits": "deal",
+        "converging_final_offer": "deal",
+        "firm_price_stand": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "only_first_offer": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v21a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "This is a Craigslist listing followed by a buyer-seller chat. The chat log usually stops before the parties formally submit and accept the final offer. Focus on the last few messages: which description fits how the chat ends?",
+      "state_template": "Listing and chat:\n{{input}}",
+      "criteria": {
+        "price_accepted": "One side agreed to a price the other side proposed or insisted on, explicitly or implicitly: 'deal', 'ok', 'sounds good', 'fair enough', 'I can do 1750', 'Yes! I'll pick it up tonight', 'what's your phone number?', 'that's reasonable, come check it out'. Also when a side accepts the price but adjusts extras ('Alright, but for that price no free carfax' → 'Ok, sounds fair, I'll have cash in hand').",
+        "buyer_commits": "After asking about the item, the buyer commits without contesting the price: 'I will take it', says they will submit an offer, or arranges a day or place to pick it up or move in (e.g. 'Today will work, thanks!'). Only a bare 'yes' in a chat of two or three lines with no discussion does not count.",
+        "converging_final_offer": "Both sides have already named prices, and the chat ends on a new price that moves toward the other side, even when framed as final or the lowest ('90 is the lowest I will go' after asking 100, against a buyer's 80; 'my final offer is $920' after hinting ~935, against 775; '25 and you got yourself a deal' against 22), or the two last prices are within a few percent ('14900 is my final offer' against 14800). A 'best offer' or 'lowest' price within about 20% of the other side's offer still counts here even if small talk or item questions follow it (seller 'I'll give you 900, that's my best offer' against 750, then chit-chat; seller 'lowest is $850' against 700, then a question about condition).",
+        "firm_price_stand": "The chat ends with one side refusing to move WITHOUT making any new concession (repeating a price they already gave, or just 'I'm firm, sorry', 'can't go beyond that, sorry') while the other side's offer is still more than a few percent away: 'I really can't go any lower than $350' (already said 350) to a $300 offer; 'I'm pretty firm on the price, sorry'; 'can't go beyond $240, sorry' to $260. Also when the very last message of the chat is one side's floor or ceiling that still leaves a big gap (20% or more) to the other side's offer, e.g. buyer offered 200 and the chat ends with the seller saying 375 is their minimum. If the other side replies with any agreement after it, this option does not apply. The same holds when the chat ends on a further counteroffer that still leaves the two prices 20% or more apart with nobody accepting (seller's lowest is 6000, buyer ends with 'I can go $3750'; seller 4500, buyer ends 'what if I could stretch to $3000').",
+        "refused_or_walked_away": "One side says they will pass, look elsewhere, that it won't work, or ends the negotiation. Includes a conditional refusal at the end: 'I can do $9800, but if $9000 is your low, then I don't think we can make a deal.'",
+        "only_first_offer": "Only one side has named a price: the seller's asking price, or the buyer's first offer (e.g. 'would you consider $60 cash?', 'how about half the asking price?', 'I'll buy it for 110'), and the chat ends with no counteroffer to it (no reply, or only an objection that it is too low). Also when the seller states the price and the buyer only says it looks great and asks another question, without committing.",
+        "no_price_talk": "No price negotiation happens: only greetings, questions about the item, or a bare 'yes I want it'; or the chat is off-topic, confused or nonsensical."
+      },
+      "map": {
+        "price_accepted": "deal",
+        "buyer_commits": "deal",
+        "converging_final_offer": "deal",
+        "firm_price_stand": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "only_first_offer": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v21b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "Below is a Craigslist ad and the chat between a would-be buyer and the seller. The transcript normally cuts off just before the formal offer is submitted and accepted, so decide from the closing messages how the negotiation stood. Pick the option that best describes the ending.",
+      "state_template": "Craigslist ad and chat:\n{{input}}",
+      "criteria": {
+        "price_accepted": "A price put forward or held to by one party was agreed to by the other, in so many words or by clear implication: 'you've got a deal', 'okay', 'works for me', 'fair enough', 'I can do that', 'I'll come get it tonight', 'send me your number', 'that's a fair offer, come take a look'. Includes accepting the number while changing an extra ('Alright, but at that price you get your own carfax' → 'Ok, that's fair, I'll bring cash').",
+        "buyer_commits": "Having asked about the item, the buyer goes ahead without disputing the price: 'I'll take it', they'll put in an offer, or they set a time and place to collect it or move in ('Today works, thanks!'). Just a 'yes' in a two- or three-line chat with no discussion is not enough.",
+        "converging_final_offer": "Each side has already put a number forward, and the transcript ends on a fresh number that comes toward the other party, even if called final or the lowest ('90 is as low as I go' after first asking 100, buyer at 80; 'final offer $920' against 775 after hinting ~935; '25 and it's a deal' against 22), or with the two latest numbers only a few percent apart ('14900 is my last offer' against 14800). A party's 'best' or 'lowest' number within about 20% of the other's still belongs here even if chit-chat or item questions follow ('900 is my best offer' against 750, then small talk; 'lowest would be $850' against 700, then a condition question).",
+        "firm_price_stand": "At the end one party won't budge and gives no new concession at all (restates a number they already gave, or just says 'firm, sorry' / 'that's my max, sorry'), while the other party's number is still more than a few percent away: 'can't do less than $350' (already said) after a $300 offer, 'the price is firm, sorry', 'sorry, $240 is my max' against $260. Also when the transcript's very last line is a party's floor or ceiling still far (20%+) from the other party's number, e.g. buyer at 9200 and the chat stops on the seller naming 11500 as their minimum. Any later agreement from the other party rules this option out. Likewise when the chat closes on yet another counteroffer that leaves the numbers 20% or more apart and nobody agrees (seller's floor 6000, buyer closes 'I can go $3750'; seller 4500, buyer closes 'what if I stretch to $3000').",
+        "refused_or_walked_away": "A party declines, says they'll pass or shop elsewhere, says it isn't going to work, or ends the talks. Covers a closing conditional no: 'I can do $9800, but if $9000 is your limit, I don't think we can make a deal.'",
+        "only_first_offer": "Just one party has put a number forward, either the seller's asking price or the buyer's opening bid ('would you take $60 cash?', 'what about half the asking price?', 'I'll give you 110 for it'), and the transcript ends with no counter to it: no answer, or only a complaint that it is too low. Also when the seller names the price and the buyer just says it looks nice and asks something else, without committing.",
+        "no_price_talk": "There's no price negotiation: just hellos, questions about the item, or a bare 'yes I'll buy it'; or the chat is unrelated, muddled or makes no sense."
+      },
+      "map": {
+        "price_accepted": "deal",
+        "buyer_commits": "deal",
+        "converging_final_offer": "deal",
+        "firm_price_stand": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "only_first_offer": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    },
+    {
+      "version": 1,
+      "name": "deal_v21c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": "You will see a for-sale listing and a negotiation chat. The parties finish the deal through a formal offer step that is not shown, so classify the state of the negotiation at the point where the chat stops. Which option fits the final messages?",
+      "state_template": "Listing and chat:\n{{input}}",
+      "criteria": {
+        "price_accepted": {
+          "definition": "The other side accepted a price that one side offered or insisted on.",
+          "examples": [
+            "deal",
+            "ok",
+            "sounds good",
+            "fair enough",
+            "I can do 1750",
+            "Yes! I'll pick it up tonight",
+            "what's your phone number?",
+            "that's reasonable, come check it out",
+            "'Alright, but for that price no carfax' then 'Ok, sounds fair, cash in hand'"
+          ],
+          "note": "Acceptance may be implicit, and may come with changed extras."
+        },
+        "buyer_commits": {
+          "definition": "The buyer, after learning about the item, proceeds without arguing about the price.",
+          "includes": [
+            "'I will take it'",
+            "says they will submit an offer",
+            "arranges a pickup or move-in day"
+          ],
+          "excludes": [
+            "a bare 'yes' in a two- or three-line chat with no discussion"
+          ]
+        },
+        "converging_final_offer": {
+          "definition": "Both sides have named prices and the chat ends on a new price that moves toward the other side (even if called final or the lowest), or with the last two prices within a few percent.",
+          "examples": [
+            "seller asked 100, buyer 80, seller: '90 is the lowest I will go'",
+            "buyer 775, seller: 'my final offer is 920' after hinting ~935",
+            "buyer 22, seller: '25 and you got yourself a deal'",
+            "buyer 14800, seller: '14900 is my final offer'",
+            "buyer 750, seller: 'I'll give you 900, that's my best offer', then small talk",
+            "buyer 700, seller: 'lowest I could go would be $850', then questions about condition"
+          ]
+        },
+        "firm_price_stand": {
+          "definition": "The chat ends with one side refusing to move and making no new concession (repeats a price already given, or names none) while the other's offer is still more than a few percent away.",
+          "examples": [
+            "'I really can't go any lower than $350' (already offered 350) to a $300 offer",
+            "'I'm pretty firm on the price, sorry'",
+            "'can't go beyond $240, sorry' to a $260 ask"
+          ],
+          "also": "The very last message is one side's floor or ceiling that still leaves a gap of 20% or more to the other side's offer (buyer 200, chat ends on seller's minimum of 375). Not if the other side agrees afterwards.",
+          "also2": "The chat ends on a further counteroffer that still leaves the prices 20% or more apart, and nobody accepts (seller's lowest 6000, buyer ends 'I can go $3750'; seller 4500, buyer ends 'what if I could stretch to $3000')."
+        },
+        "refused_or_walked_away": {
+          "definition": "One side declines, will pass, will look elsewhere, says it won't work, or ends the negotiation.",
+          "examples": [
+            "'I can do $9800, but if $9000 is your low, then I don't think we can make a deal.' (last message)"
+          ]
+        },
+        "only_first_offer": {
+          "definition": "Only one side has named a price (the seller's asking price or the buyer's opening offer) and nobody counters it before the chat ends.",
+          "examples": [
+            "'would you consider $60 cash?' with no reply",
+            "'I'll buy it for 110' answered only with 'that's too low'",
+            "seller: 'I am selling it for $75, are you interested?' buyer: 'Yes, it looks great. Did you alter the device?' (no commitment)"
+          ]
+        },
+        "no_price_talk": {
+          "definition": "No price negotiation took place.",
+          "includes": [
+            "only greetings or item questions",
+            "a bare 'yes I want it'",
+            "off-topic, confused or nonsensical chats"
+          ]
+        }
+      },
+      "map": {
+        "price_accepted": "deal",
+        "buyer_commits": "deal",
+        "converging_final_offer": "deal",
+        "firm_price_stand": "no_deal",
+        "refused_or_walked_away": "no_deal",
+        "only_first_offer": "no_deal",
+        "no_price_talk": "no_deal"
+      }
+    }
+  ]
+}

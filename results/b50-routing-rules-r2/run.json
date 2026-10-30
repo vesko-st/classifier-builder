@@ -1,0 +1,79 @@
+{
+  "run_id": "b50-routing-rules-r2",
+  "task": "banking77_routing",
+  "budget": 50,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:09:00",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1409,
+    "num_turns": 35,
+    "total_cost_usd": 1.470548
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "draft: 63 intent options mapped to 6 teams, mapping guessed from description",
+      "test": {
+        "jev": {
+          "accuracy": 0.8256,
+          "macro_f1": 0.8168,
+          "est_cost_usd": 0.241855,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 22,
+      "estimate": 0.8,
+      "note": "round1: H1n,H2,H3n,H4,H5,H6 applied; agrees with 11/11 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8379,
+          "macro_f1": 0.8338,
+          "est_cost_usd": 0.260617,
+          "total": 3080,
+          "answered": 3078
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 42,
+      "estimate": 0.83,
+      "note": "round2: +H7 applepay->cards, H8 pending cash wd->cards, H9 unreceived cash->fraud, H10n declined specific payment->payments; 21/21 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8487,
+          "macro_f1": 0.8397,
+          "est_cost_usd": 0.269926,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 50,
+      "estimate": 0.84,
+      "note": "final: 3-member wording ensemble; round3 rules H11f card-vs-transaction focus, H12 source of funds, H13 supported cards; 25/25 labels (hard-picked, biased)",
+      "test": {
+        "jev": {
+          "accuracy": 0.851,
+          "macro_f1": 0.8426,
+          "est_cost_usd": 0.839919,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

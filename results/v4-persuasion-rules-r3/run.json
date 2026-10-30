@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-persuasion-rules-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:20:38",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1149,
+    "num_turns": 51,
+    "total_cost_usd": 2.2887157999999994
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.5,
+      "note": "v1 draft from scheme definitions, no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.5992,
+          "macro_f1": 0.6105,
+          "est_cost_usd": 0.104118,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 24,
+      "estimate": 0.52,
+      "note": "v3: round-1 rules (proposition vs inquiries, thank+farewell, opinions->other, moral->emotion, praise reactions)",
+      "test": {
+        "jev": {
+          "accuracy": 0.5985,
+          "macro_f1": 0.6085,
+          "est_cost_usd": 0.120553,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 52,
+      "estimate": 0.55,
+      "note": "v5: structured defs, 3-wording ensemble; FITD/logical/donation-info/source rules from round 2",
+      "test": {
+        "jev": {
+          "accuracy": 0.615,
+          "macro_f1": 0.615,
+          "est_cost_usd": 0.429736,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 72,
+      "estimate": 0.57,
+      "note": "v7: round-3 rules (answers about self->other, org facts->cred, emotion narrowed, guilt-trip insult->other)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6117,
+          "macro_f1": 0.6131,
+          "est_cost_usd": 0.470064,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 88,
+      "estimate": 0.57,
+      "note": "v8: self-modeling narrowed to own giving to STC, personal facts->other, noise examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.6137,
+          "macro_f1": 0.6074,
+          "est_cost_usd": 0.509254,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.58,
+      "note": "v9 final: amount suggestions (stated->proposition, question->ask-amount), 50/50 labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6163,
+          "macro_f1": 0.6088,
+          "est_cost_usd": 0.535423,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

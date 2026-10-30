@@ -1,0 +1,79 @@
+{
+  "run_id": "b50-persuasion-rules-r3",
+  "task": "persuasion_strategy",
+  "budget": 50,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:52:43",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 745,
+    "num_turns": 38,
+    "total_cost_usd": 1.4774278
+  },
+  "final_version": 4,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft from description and scheme knowledge, no labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.5966,
+          "macro_f1": 0.6059,
+          "est_cost_usd": 0.094194,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.5,
+      "note": "v3: H1 narrowed (org descriptions stay credibility), H2 narrowed, H3 broadened, task-related-inquiry covers 'what questions do you have'; 10/10 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6088,
+          "macro_f1": 0.6073,
+          "est_cost_usd": 0.108217,
+          "total": 1517,
+          "answered": 1516
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 44,
+      "estimate": 0.55,
+      "note": "v7: H5/H6 confirmed, H7 rejected then narrowed (small-amount = foot-in-the-door, aggregation = logical); 22/22 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6018,
+          "macro_f1": 0.5994,
+          "est_cost_usd": 0.130856,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 50,
+      "estimate": 0.55,
+      "note": "v10: 3-wording ensemble of v9 (final-round rules: agreement+content -> content; bare 'I have' replies -> other; 'donate a little bit' request -> proposition); 25/25 labels, each member 25/25",
+      "test": {
+        "jev": {
+          "accuracy": 0.6174,
+          "macro_f1": 0.6088,
+          "est_cost_usd": 0.424903,
+          "total": 1517,
+          "answered": 1516
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "name": "hate_v8",
+  "model": "jev-latest",
+  "type": "choice",
+  "instructions": "Classify this tweet under an annotation policy for hate speech. Hate speech here means a message that expresses hatred, contempt, dehumanisation or threats against a protected group (immigrants/refugees/foreigners, or women), or against an individual because they belong to that group. The body of the tweet decides, not the hashtags. Hateful toward immigrants: hostility to them as people (invaders, criminals, parasites, job or welfare thieves, scum), crime stories framed as typical of immigrants, or calls to remove them. Not hateful: slogan or hashtag-only tweets, plain support for a wall, using 'illegal' or 'alien' descriptively, and criticism of politicians, Democrats or the left about immigration. Hateful toward women: slur insults aimed at a woman, stacked slurs, generalisations about women as 'hoes' or 'bitches', and threats. Not hateful: friendly or playful banter and hype where friends call each other bitch/hoe, fan or celebrity hype (\"she came to slay, bitch\"), self-reference, exclamations, idioms like 'karma's a bitch', and insults aimed at men. Pick the single best option.",
+  "state_template": "Tweet:\n{{input}}",
+  "criteria": {
+    "hate_immigrants": "Hostility toward immigrants/refugees/illegal aliens/an ethnic, national or religious group as people: calling them invaders, criminals, parasites, scum, rapists, job or welfare thieves; a crime story framed as typical of immigrants with deport/ban hashtags; rejecting them (#RefugeesNotWelcome, #NoImmigrants); calls for violence against them or for deporting/removing them ('get them out of here', '#sendthemhome', 'deport them all'; a short approving tweet built on #DeportThemAll counts).",
+    "hate_women": "Misogynistic: a slur insult aimed at a woman ('you fugly looking bitch', 'bitch ass hoe fuck u'), stacked slurs (bitch, cunt, whore, slut together), generalisations that women are hoes/bitches/sluts ('these hoes be...'), objectifying or demeaning women, or threats of violence or rape against women.",
+    "political_immigration": "Hashtag-only or slogan tweets (#IllegalAliens, #BuildThatWall, #StopTheInvasion), plain support for a wall or border security, neutral news or statistics, calling people 'illegal' or 'aliens' descriptively, 'apply legally', and attacks on politicians, Democrats, the left or the media over immigration (even with deport hashtags) - with no hostility toward the immigrants as people.",
+    "casual_slang": "Friendly or playful banter between friends using bitch/hoe (\"bitch you should know, hoe, we been friends since 7th grade\"), hype and fan talk (\"Peppa came to slay bitch\"), self-referential use ('bad bitch'), exclamations, idioms ('karma's a bitch', 'life's a bitch'), song lyrics, and gendered insults aimed at a man - no real hostility toward a woman or women.",
+    "other_insult": "A general insult or profanity at a person (including a man) or thing that is not about gender or origin.",
+    "neutral": "Neutral, unrelated, or just news, hashtags, ads or opinion with no hostility towards a group."
+  },
+  "map": {
+    "hate_immigrants": "hate",
+    "hate_women": "hate",
+    "political_immigration": "not_hate",
+    "casual_slang": "not_hate",
+    "other_insult": "not_hate",
+    "neutral": "not_hate"
+  }
+}

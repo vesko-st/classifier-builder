@@ -1,0 +1,124 @@
+{
+  "run_id": "v4-persuasion-uncertainty-r3",
+  "task": "persuasion_strategy",
+  "budget": 100,
+  "strategy": "uncertainty",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:00:50",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 378,
+    "num_turns": 35,
+    "total_cost_usd": 1.2088922000000002
+  },
+  "final_version": 7,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.45,
+      "note": "v1 draft: 22 fine options mapped to 18 classes, from scheme knowledge only",
+      "test": {
+        "jev": {
+          "accuracy": 0.6341,
+          "macro_f1": 0.6215,
+          "est_cost_usd": 0.110945,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.5,
+      "note": "v2: batch-1 labelled examples added to option descriptions; 9/10 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6381,
+          "macro_f1": 0.6181,
+          "est_cost_usd": 0.125104,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 40,
+      "estimate": 0.52,
+      "note": "v3: batch-2 examples; 'did you know/what if I told you' questions -> task-related-inquiry; bare Yes agreeing -> acknowledgement",
+      "test": {
+        "jev": {
+          "accuracy": 0.6361,
+          "macro_f1": 0.6261,
+          "est_cost_usd": 0.143056,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 60,
+      "estimate": 0.53,
+      "note": "v4: batch-3 examples added; 29/30 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6394,
+          "macro_f1": 0.6279,
+          "est_cost_usd": 0.158037,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.55,
+      "note": "v5: batch-4 examples; thank beats closing; 39/40 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6374,
+          "macro_f1": 0.6276,
+          "est_cost_usd": 0.172385,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.55,
+      "note": "v6: batch-5 examples; 49/50 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6427,
+          "macro_f1": 0.6333,
+          "est_cost_usd": 0.189199,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 100,
+      "estimate": 0.55,
+      "note": "v7 final: ensemble of v6 + reworded variant (same options/examples) to damp near-tie jitter; both members 49/50 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.6467,
+          "macro_f1": 0.6378,
+          "est_cost_usd": 0.389017,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

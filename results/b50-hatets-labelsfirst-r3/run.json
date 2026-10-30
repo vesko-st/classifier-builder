@@ -1,0 +1,49 @@
+{
+  "run_id": "b50-hatets-labelsfirst-r3",
+  "task": "tweet_hate_testsplit",
+  "budget": 50,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:41:15",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 300,
+    "num_turns": 21,
+    "total_cost_usd": 0.6998094
+  },
+  "final_version": 2,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 25,
+      "estimate": 0.65,
+      "note": "v1 draft criteria (women OR immigrants) from owner policy answers; 616/1000 predicted hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7661,
+          "macro_f1": 0.766,
+          "est_cost_usd": 0.053093,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 49,
+      "estimate": 0.72,
+      "note": "v3 ensemble of v2a (slur aimed at a man -> not hate) + paraphrase; 10/12 bought labels, 8/10 random check; 609/1000 hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7684,
+          "macro_f1": 0.7684,
+          "est_cost_usd": 0.111972,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

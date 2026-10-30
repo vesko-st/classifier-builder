@@ -1,0 +1,199 @@
+{
+  "run_id": "b200-routing-rules-r1",
+  "task": "banking77_routing",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:47:10",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 3582,
+    "num_turns": 89,
+    "total_cost_usd": 3.7546654000000004
+  },
+  "final_version": 12,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "draft: 77 fine-grained banking intents mapped to 6 teams by guess",
+      "test": {
+        "jev": {
+          "accuracy": 0.8179,
+          "macro_f1": 0.8076,
+          "est_cost_usd": 0.276563,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 32,
+      "estimate": 0.8,
+      "note": "round1: card_swallowed->fraud, declined_cash_withdrawal->cards, stolen-card fee->fraud, card brand vs top-up card descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.8464,
+          "macro_f1": 0.8333,
+          "est_cost_usd": 0.291952,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 58,
+      "estimate": 0.83,
+      "note": "round2: pending card payments/withdrawals->cards, found card->cards, phone left->fraud, fee-should-not-apply->pricing",
+      "test": {
+        "jev": {
+          "accuracy": 0.8701,
+          "macro_f1": 0.8474,
+          "est_cost_usd": 0.301619,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 78,
+      "estimate": 0.85,
+      "note": "round3: crypto->account, Visa/Mastercard & Apple/Google Pay->cards, cash not received at ATM->disputes, non-received cash in app->fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.8756,
+          "macro_f1": 0.8538,
+          "est_cost_usd": 0.309798,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 92,
+      "estimate": 0.85,
+      "note": "round4: unrecognised incoming money->fraud, bank security info->account, SEPA full amount->pricing, choose card type->cards, vague money disappeared->payments",
+      "test": {
+        "jev": {
+          "accuracy": 0.8737,
+          "macro_f1": 0.8511,
+          "est_cost_usd": 0.329325,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 106,
+      "estimate": 0.86,
+      "note": "round5: payment cancelled by app / can't find my payment -> disputes (reverted_card_payment)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8744,
+          "macro_f1": 0.8519,
+          "est_cost_usd": 0.33176,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 120,
+      "estimate": 0.87,
+      "note": "round6: cancel_transfer limited to bank transfers (cancelled card payments->disputes); switched to 3-variant wording ensemble to damp near-tie jitter",
+      "test": {
+        "jev": {
+          "accuracy": 0.875,
+          "macro_f1": 0.8525,
+          "est_cost_usd": 1.078976,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 138,
+      "estimate": 0.87,
+      "note": "round7: country availability->account, who sent my money->account, cancel order->disputes, card fees->cards, unwarranted fee->pricing",
+      "test": {
+        "jev": {
+          "accuracy": 0.8801,
+          "macro_f1": 0.8583,
+          "est_cost_usd": 1.131538,
+          "total": 3080,
+          "answered": 3078
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 152,
+      "estimate": 0.88,
+      "note": "round8: foreign card top-up options->pricing, didn't get cash amount wanted->disputes, cash missing per app->fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.8811,
+          "macro_f1": 0.8596,
+          "est_cost_usd": 1.153113,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 10,
+      "points_spent": 166,
+      "estimate": 0.88,
+      "note": "round9: whether a kind of external card (Amex/other) can top up->pricing, unknown charge->fraud, PIN compromised->fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.8808,
+          "macro_f1": 0.8594,
+          "est_cost_usd": 1.163577,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 11,
+      "points_spent": 180,
+      "estimate": 0.88,
+      "note": "round10: daily/spending limits->payments, fee for receiving money->pricing",
+      "test": {
+        "jev": {
+          "accuracy": 0.8828,
+          "macro_f1": 0.8613,
+          "est_cost_usd": 1.199135,
+          "total": 3080,
+          "answered": 3072
+        }
+      }
+    },
+    {
+      "version": 12,
+      "points_spent": 194,
+      "estimate": 0.88,
+      "note": "round11: crypto top-up problems->payments (crypto purchase/exchange stays account), direct debit refund->fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.8838,
+          "macro_f1": 0.863,
+          "est_cost_usd": 1.218038,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

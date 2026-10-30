@@ -1,0 +1,1195 @@
+{
+  "version": 1,
+  "name": "intents_ens4",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "flat_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Which one intent does this customer message express? Pick the single best-matching intent from the bank's fixed intent list.",
+        "rules": [
+          "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+          "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+          "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+          "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+          "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+          "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+          "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+          "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+          "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+          "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+          "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+          "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+          "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+          "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+          "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+          "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+          "Whether the customer can get a card or use the service given where they live is country_support.",
+          "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+          "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+          "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+          "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+          "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+          "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+          "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+          "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+          "Finding a card that was lost and asking whether it can still be used is card_linking.",
+          "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+          "Any question about auto top-up, including its limits, is automatic_top_up.",
+          "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+          "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+          "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+          "Reactivating a card is card_linking."
+        ]
+      },
+      "state_template": "Customer message to a digital bank's support chat:\n{{input}}",
+      "criteria": {
+        "activate_my_card": "How to activate a card the customer has received; help activating it.",
+        "age_limit": "Minimum age to open an account or use the service; accounts for children/teenagers.",
+        "apple_pay_or_google_pay": "Using Apple Pay, Google Pay or Android Pay with the card; adding the card to a phone wallet; top up via Apple/Google Pay.",
+        "atm_support": "Which ATMs or cash machines accept the card, where to find an ATM, using the card at ATMs in general. Not for a failed withdrawal attempt.",
+        "automatic_top_up": "Auto top-up: setting it up, how it works, turning it off, adding money automatically when balance is low. Includes limits or amounts for auto top-up.",
+        "balance_not_updated_after_bank_transfer": "Money transferred into the customer's account by bank transfer has not appeared in the balance yet. A transfer from the customer's UK account or other bank that is not showing up yet, even if they ask how long it takes. Any complaint that the balance has not been updated or is taking long to update, when no cheque or cash deposit is mentioned. E.g. 'What's the time frame for a UK account transfer? I just made one and it's not showing up anywhere.'",
+        "balance_not_updated_after_cheque_or_cash_deposit": "A cheque or cash the customer deposited has not shown up in the balance. Any money the customer deposited that isn't showing up yet.",
+        "beneficiary_not_allowed": "Cannot add a beneficiary/payee/recipient, or the beneficiary is not allowed or rejected. Includes trying to transfer money and being unable to: it won't go through after several attempts, or they cannot send to a particular account.",
+        "cancel_transfer": "Wants to cancel, stop or reverse a transfer they made (e.g. sent to the wrong account by mistake).",
+        "card_about_to_expire": "Card is expiring or expired; getting a replacement before expiry; expiry date questions.",
+        "card_acceptance": "Where the card is accepted: which shops, merchants or places take the card; card not accepted by a merchant.",
+        "card_arrival": "A card that was ordered has not arrived yet; tracking a card in the mail; card still not delivered. Reporting that an ordered card has not arrived, without asking when to expect it.",
+        "card_delivery_estimate": "How long card delivery takes, when it will arrive, express or fast-tracked delivery options. How or when the card will reach them, e.g. 'How will I get my card?', 'Can I have it by a certain date?', or 'I ordered it weeks ago, when can I expect it?'.",
+        "card_linking": "Linking a card to the account or app; re-linking or reactivating a card that was found after being lost. Includes finding a lost card and asking whether it can still be used. Includes 'Can I reactivate a card?'.",
+        "card_not_working": "The physical card is not working or keeps failing, without a specific declined payment, ATM, contactless or virtual-card issue. The customer asks what is wrong with their card because it keeps failing or never goes through, without saying it was declined (an explicitly declined card is declined_card_payment).",
+        "card_payment_fee_charged": "Was charged an extra fee for a card payment/purchase. Includes being charged a hidden or unexplained fee.",
+        "card_payment_not_recognised": "A card payment the customer does not recognise or didn't make on their statement. Includes an unknown charge on the account the customer can't identify.",
+        "card_payment_wrong_exchange_rate": "A card payment in a foreign currency was charged at a wrong or bad exchange rate. Any complaint that the rate charged or applied was wrong, bad, or gave them less than expected, including for currency exchanged in the app. Includes believing the charges for a currency exchange they made are not right.",
+        "card_swallowed": "An ATM kept, ate or swallowed the card.",
+        "cash_withdrawal_charge": "Was charged a fee for withdrawing cash from an ATM; ATM withdrawal fees.",
+        "cash_withdrawal_not_recognised": "A cash/ATM withdrawal on the account that the customer did not make or doesn't recognise. Unexpected or unexplained cash transactions or a cash balance appearing in the app that the customer did not expect or receive. Includes a withdrawal they didn't make even if they think their card was copied or compromised.",
+        "change_pin": "How to change or reset the card PIN, where it can be changed.",
+        "compromised_card": "Card details may have been stolen, copied or hacked while the customer still has the card; fraud on the card; someone else using the card details.",
+        "contactless_not_working": "Contactless payments (tap to pay) are not working.",
+        "country_support": "Which countries the service or card is available or can be used in; using the account when living in or moving to another country. Includes whether someone living in a given country or region can get a card or account, and whether a card can be mailed or shipped to a country.",
+        "declined_card_payment": "A card payment or purchase was declined or rejected. Includes a card that was repeatedly declined when paying, even a new card.",
+        "declined_cash_withdrawal": "An ATM cash withdrawal was declined or refused. Includes being unable to get the ATM to work or to give cash.",
+        "declined_transfer": "A transfer the customer tried to make was declined or rejected.",
+        "direct_debit_payment_not_recognised": "A direct debit payment the customer does not recognise.",
+        "disposable_card_limits": "Limits on disposable virtual cards: how many times or how much they can be used.",
+        "edit_personal_details": "Changing personal details such as name, address, phone number or email.",
+        "exchange_charge": "Fees charged for currency exchange; how much exchanging money costs. Includes asking for discounted rates or lower costs when exchanging frequently.",
+        "exchange_rate": "What exchange rate is used or applied, where rates come from, current rates. Neutral informational questions only, not complaints about a rate they got.",
+        "exchange_via_app": "How to exchange or convert currencies in the app; which currencies can be exchanged.",
+        "extra_charge_on_statement": "An unexplained extra charge or small fee on the statement (e.g. an extra pound) that the customer wants explained. A small unknown charge such as 1 pound/dollar, even if pending or described as a purchase the customer doesn't remember; or an extra fee showing on the statement.",
+        "failed_transfer": "A transfer the customer made failed or didn't go through. A transfer reported as failed, or an error message appearing when trying to make a transfer or a large payment (e.g. for a flat or mortgage).",
+        "fiat_currency_support": "Which fiat currencies the account supports, can hold or can be used in; whether a specific currency is supported.",
+        "get_disposable_virtual_card": "How to get or create a disposable (single-use) virtual card.",
+        "get_physical_card": "Getting the physical card; where to find the PIN for a new card. Mainly: finding the PIN for a newly received card; not general requests for a physical card (those are order_physical_card).",
+        "getting_spare_card": "Getting an additional or spare card, e.g. for a family member, on the same account. Includes asking about the fees for getting another card, e.g. 'If I get another card, what kind of fees am I looking at?'.",
+        "getting_virtual_card": "How to get or order a virtual card; virtual card availability and cost. Includes a virtual card that was ordered but hasn't come through or been received yet.",
+        "lost_or_stolen_card": "The customer's card was lost or stolen; what to do, blocking it. Includes asking for help to retrieve their card.",
+        "lost_or_stolen_phone": "The customer's phone was lost or stolen; securing the app/account.",
+        "order_physical_card": "Ordering a new physical card: how to order, cost, where it can be delivered. Wanting or asking how to get a physical/plastic card they can hold (not how an already-ordered card will be delivered).",
+        "passcode_forgotten": "Forgot the app passcode or password; resetting the passcode.",
+        "pending_card_payment": "A card payment is still showing as pending. An unspecified 'payment' that has not gone through yet.",
+        "pending_cash_withdrawal": "A cash withdrawal is still pending or hasn't been processed.",
+        "pending_top_up": "A top-up is still pending or taking a long time to arrive. Includes not being sure a top-up has gone through yet.",
+        "pending_transfer": "A transfer the customer sent is still pending. A transfer or transaction the customer made that has not completed, posted or shown up on their dashboard yet. Includes a pending transaction taking long to post or clear. Includes complaining that a specific transfer (e.g. an international one) is taking forever. Includes asking how long their transfer will stay pending. Includes an urgent transfer that finally worked out (was submitted) but that they have been waiting on for a long time, asking how long to expect to wait.",
+        "pin_blocked": "The PIN is blocked or locked after too many wrong attempts; unblocking it.",
+        "receiving_money": "How to receive money from others, get paid, or receive a salary into the account. Includes how other people can send, transfer or top up money to the customer.",
+        "Refund_not_showing_up": "A refund from a merchant has not appeared on the account.",
+        "request_refund": "How to request or get a refund for a purchase; return policy.",
+        "reverted_card_payment?": "A card payment was reverted, reversed or returned to the account unexpectedly. A card payment that was cancelled, or that a merchant refused or returned. Includes a purchase they already paid for that they no longer see in the account.",
+        "supported_cards_and_currencies": "Which cards (Visa, Mastercard, etc.) can be used to top up, and which currencies are supported for cards/top-up. Includes which payment methods, cards or currencies are accepted for adding money to the account. Includes how to add money from a specific card brand such as American Express.",
+        "terminate_account": "Closing or deleting the account.",
+        "top_up_by_bank_transfer_charge": "Fees for topping up via bank transfer. Includes any question about SWIFT transfers.",
+        "top_up_by_card_charge": "Fees for topping up with a card; charged for a card top-up. Includes fees for adding money when no method is stated (e.g. 'Do you charge a fee for adding money in USD?').",
+        "top_up_by_cash_or_cheque": "How to top up with cash or a cheque.",
+        "top_up_failed": "A top-up failed, was declined or did not work. Includes doubting whether a top-up worked at all.",
+        "top_up_limits": "Limits on top-ups: maximum amount, how often, how much can be topped up.",
+        "top_up_reverted": "A top-up was reverted, cancelled or the money went back/disappeared after topping up.",
+        "topping_up_by_card": "How to top up the account using a card. Includes: 'I used my card to top up but the money is gone'.",
+        "transaction_charged_twice": "The same transaction/payment was charged twice (duplicate charge).",
+        "transfer_fee_charged": "Was charged a fee for making a transfer. Includes being charged a higher fee for banking abroad, and asking whether they will get extra charges.",
+        "transfer_into_account": "How to transfer money into the account (add money by bank transfer); account details for incoming transfers. Includes the customer asking in general which ways or methods they can use to add money to their own account.",
+        "transfer_not_received_by_recipient": "The customer sent money but the recipient has not received it. Includes money sent to a friend or retailer that hasn't arrived or gone through yet, even if they ask how long it takes.",
+        "transfer_timing": "How long transfers take to arrive; transfer processing times. General questions about transfer durations; also 'when can I expect my transfer to reach my account?' or 'it's been a couple days, how much longer do I have to wait for my transfer?'.",
+        "unable_to_verify_identity": "Problems completing identity verification; verification failing or not working.",
+        "verify_my_identity": "How to verify identity; what documents are needed for verification.",
+        "verify_source_of_funds": "Verifying the source of funds or where money came from.",
+        "verify_top_up": "Top-up verification: verification code for a card top-up, verifying a top-up. Includes not seeing or not finding the verification code for a card top-up or card transfer.",
+        "virtual_card_not_working": "The virtual card is not working or being declined.",
+        "visa_or_mastercard": "Whether the card is Visa or Mastercard; choosing between them. Wanting a card of a specific brand, e.g. 'I want to get a Visa card'.",
+        "why_verify_identity": "Why identity verification is needed. Whether verification is required, or whether they can use the account without verifying.",
+        "wrong_amount_of_cash_received": "ATM gave less or the wrong amount of cash than requested.",
+        "wrong_exchange_rate_for_cash_withdrawal": "A cash withdrawal abroad was charged at a wrong exchange rate. Complaints that the rate was too high because they should have received more cash. Includes questions about the rates applied when getting cash, e.g. weekend rates for cash. Includes asking whether they can withdraw cash at an ATM while outside the country without extra fees."
+      }
+    },
+    {
+      "version": 1,
+      "name": "flat_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "A support agent at a mobile-only bank must file this chat message under exactly one intent label. Which label describes what the customer wants or is reporting?",
+        "rules": [
+          "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+          "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+          "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+          "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+          "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+          "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+          "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+          "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+          "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+          "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+          "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+          "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+          "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+          "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+          "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+          "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+          "Whether the customer can get a card or use the service given where they live is country_support.",
+          "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+          "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+          "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+          "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+          "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+          "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+          "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+          "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+          "Finding a card that was lost and asking whether it can still be used is card_linking.",
+          "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+          "Any question about auto top-up, including its limits, is automatic_top_up.",
+          "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+          "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+          "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+          "Reactivating a card is card_linking."
+        ]
+      },
+      "state_template": {
+        "channel": "in-app support chat of a digital bank",
+        "customer_message": "{{input}}"
+      },
+      "criteria": {
+        "activate_my_card": {
+          "meaning": "How to activate a card the customer has received; help activating it."
+        },
+        "age_limit": {
+          "meaning": "Minimum age to open an account or use the service; accounts for children/teenagers."
+        },
+        "apple_pay_or_google_pay": {
+          "meaning": "Using Apple Pay, Google Pay or Android Pay with the card; adding the card to a phone wallet; top up via Apple/Google Pay."
+        },
+        "atm_support": {
+          "meaning": "Which ATMs or cash machines accept the card, where to find an ATM, using the card at ATMs in general.",
+          "also_includes": [
+            "Not for a failed withdrawal attempt."
+          ]
+        },
+        "automatic_top_up": {
+          "meaning": "Auto top-up: setting it up, how it works, turning it off, adding money automatically when balance is low.",
+          "also_includes": [
+            "Includes limits or amounts for auto top-up."
+          ]
+        },
+        "balance_not_updated_after_bank_transfer": {
+          "meaning": "Money transferred into the customer's account by bank transfer has not appeared in the balance yet.",
+          "also_includes": [
+            "A transfer from the customer's UK account or other bank that is not showing up yet, even if they ask how long it takes.",
+            "Any complaint that the balance has not been updated or is taking long to update, when no cheque or cash deposit is mentioned.",
+            "E.g. 'What's the time frame for a UK account transfer? I just made one and it's not showing up anywhere.'"
+          ]
+        },
+        "balance_not_updated_after_cheque_or_cash_deposit": {
+          "meaning": "A cheque or cash the customer deposited has not shown up in the balance.",
+          "also_includes": [
+            "Any money the customer deposited that isn't showing up yet."
+          ]
+        },
+        "beneficiary_not_allowed": {
+          "meaning": "Cannot add a beneficiary/payee/recipient, or the beneficiary is not allowed or rejected.",
+          "also_includes": [
+            "Includes trying to transfer money and being unable to: it won't go through after several attempts, or they cannot send to a particular account."
+          ]
+        },
+        "cancel_transfer": {
+          "meaning": "Wants to cancel, stop or reverse a transfer they made (e.g. sent to the wrong account by mistake)."
+        },
+        "card_about_to_expire": {
+          "meaning": "Card is expiring or expired; getting a replacement before expiry; expiry date questions."
+        },
+        "card_acceptance": {
+          "meaning": "Where the card is accepted: which shops, merchants or places take the card; card not accepted by a merchant."
+        },
+        "card_arrival": {
+          "meaning": "A card that was ordered has not arrived yet; tracking a card in the mail; card still not delivered.",
+          "also_includes": [
+            "Reporting that an ordered card has not arrived, without asking when to expect it."
+          ]
+        },
+        "card_delivery_estimate": {
+          "meaning": "How long card delivery takes, when it will arrive, express or fast-tracked delivery options.",
+          "also_includes": [
+            "How or when the card will reach them, e.g. 'How will I get my card?', 'Can I have it by a certain date?', or 'I ordered it weeks ago, when can I expect it?'."
+          ]
+        },
+        "card_linking": {
+          "meaning": "Linking a card to the account or app; re-linking or reactivating a card that was found after being lost.",
+          "also_includes": [
+            "Includes finding a lost card and asking whether it can still be used.",
+            "Includes 'Can I reactivate a card?'."
+          ]
+        },
+        "card_not_working": {
+          "meaning": "The physical card is not working or keeps failing, without a specific declined payment, ATM, contactless or virtual-card issue.",
+          "also_includes": [
+            "The customer asks what is wrong with their card because it keeps failing or never goes through, without saying it was declined (an explicitly declined card is declined_card_payment)."
+          ]
+        },
+        "card_payment_fee_charged": {
+          "meaning": "Was charged an extra fee for a card payment/purchase.",
+          "also_includes": [
+            "Includes being charged a hidden or unexplained fee."
+          ]
+        },
+        "card_payment_not_recognised": {
+          "meaning": "A card payment the customer does not recognise or didn't make on their statement.",
+          "also_includes": [
+            "Includes an unknown charge on the account the customer can't identify."
+          ]
+        },
+        "card_payment_wrong_exchange_rate": {
+          "meaning": "A card payment in a foreign currency was charged at a wrong or bad exchange rate.",
+          "also_includes": [
+            "Any complaint that the rate charged or applied was wrong, bad, or gave them less than expected, including for currency exchanged in the app.",
+            "Includes believing the charges for a currency exchange they made are not right."
+          ]
+        },
+        "card_swallowed": {
+          "meaning": "An ATM kept, ate or swallowed the card."
+        },
+        "cash_withdrawal_charge": {
+          "meaning": "Was charged a fee for withdrawing cash from an ATM; ATM withdrawal fees."
+        },
+        "cash_withdrawal_not_recognised": {
+          "meaning": "A cash/ATM withdrawal on the account that the customer did not make or doesn't recognise.",
+          "also_includes": [
+            "Unexpected or unexplained cash transactions or a cash balance appearing in the app that the customer did not expect or receive.",
+            "Includes a withdrawal they didn't make even if they think their card was copied or compromised."
+          ]
+        },
+        "change_pin": {
+          "meaning": "How to change or reset the card PIN, where it can be changed."
+        },
+        "compromised_card": {
+          "meaning": "Card details may have been stolen, copied or hacked while the customer still has the card; fraud on the card; someone else using the card details."
+        },
+        "contactless_not_working": {
+          "meaning": "Contactless payments (tap to pay) are not working."
+        },
+        "country_support": {
+          "meaning": "Which countries the service or card is available or can be used in; using the account when living in or moving to another country.",
+          "also_includes": [
+            "Includes whether someone living in a given country or region can get a card or account, and whether a card can be mailed or shipped to a country."
+          ]
+        },
+        "declined_card_payment": {
+          "meaning": "A card payment or purchase was declined or rejected.",
+          "also_includes": [
+            "Includes a card that was repeatedly declined when paying, even a new card."
+          ]
+        },
+        "declined_cash_withdrawal": {
+          "meaning": "An ATM cash withdrawal was declined or refused.",
+          "also_includes": [
+            "Includes being unable to get the ATM to work or to give cash."
+          ]
+        },
+        "declined_transfer": {
+          "meaning": "A transfer the customer tried to make was declined or rejected."
+        },
+        "direct_debit_payment_not_recognised": {
+          "meaning": "A direct debit payment the customer does not recognise."
+        },
+        "disposable_card_limits": {
+          "meaning": "Limits on disposable virtual cards: how many times or how much they can be used."
+        },
+        "edit_personal_details": {
+          "meaning": "Changing personal details such as name, address, phone number or email."
+        },
+        "exchange_charge": {
+          "meaning": "Fees charged for currency exchange; how much exchanging money costs.",
+          "also_includes": [
+            "Includes asking for discounted rates or lower costs when exchanging frequently."
+          ]
+        },
+        "exchange_rate": {
+          "meaning": "What exchange rate is used or applied, where rates come from, current rates.",
+          "also_includes": [
+            "Neutral informational questions only, not complaints about a rate they got."
+          ]
+        },
+        "exchange_via_app": {
+          "meaning": "How to exchange or convert currencies in the app; which currencies can be exchanged."
+        },
+        "extra_charge_on_statement": {
+          "meaning": "An unexplained extra charge or small fee on the statement (e.g. an extra pound) that the customer wants explained.",
+          "also_includes": [
+            "A small unknown charge such as 1 pound/dollar, even if pending or described as a purchase the customer doesn't remember; or an extra fee showing on the statement."
+          ]
+        },
+        "failed_transfer": {
+          "meaning": "A transfer the customer made failed or didn't go through.",
+          "also_includes": [
+            "A transfer reported as failed, or an error message appearing when trying to make a transfer or a large payment (e.g. for a flat or mortgage)."
+          ]
+        },
+        "fiat_currency_support": {
+          "meaning": "Which fiat currencies the account supports, can hold or can be used in; whether a specific currency is supported."
+        },
+        "get_disposable_virtual_card": {
+          "meaning": "How to get or create a disposable (single-use) virtual card."
+        },
+        "get_physical_card": {
+          "meaning": "Getting the physical card; where to find the PIN for a new card.",
+          "also_includes": [
+            "Mainly: finding the PIN for a newly received card; not general requests for a physical card (those are order_physical_card)."
+          ]
+        },
+        "getting_spare_card": {
+          "meaning": "Getting an additional or spare card, e.g. for a family member, on the same account.",
+          "also_includes": [
+            "Includes asking about the fees for getting another card, e.g. 'If I get another card, what kind of fees am I looking at?'."
+          ]
+        },
+        "getting_virtual_card": {
+          "meaning": "How to get or order a virtual card; virtual card availability and cost.",
+          "also_includes": [
+            "Includes a virtual card that was ordered but hasn't come through or been received yet."
+          ]
+        },
+        "lost_or_stolen_card": {
+          "meaning": "The customer's card was lost or stolen; what to do, blocking it.",
+          "also_includes": [
+            "Includes asking for help to retrieve their card."
+          ]
+        },
+        "lost_or_stolen_phone": {
+          "meaning": "The customer's phone was lost or stolen; securing the app/account."
+        },
+        "order_physical_card": {
+          "meaning": "Ordering a new physical card: how to order, cost, where it can be delivered.",
+          "also_includes": [
+            "Wanting or asking how to get a physical/plastic card they can hold (not how an already-ordered card will be delivered)."
+          ]
+        },
+        "passcode_forgotten": {
+          "meaning": "Forgot the app passcode or password; resetting the passcode."
+        },
+        "pending_card_payment": {
+          "meaning": "A card payment is still showing as pending.",
+          "also_includes": [
+            "An unspecified 'payment' that has not gone through yet."
+          ]
+        },
+        "pending_cash_withdrawal": {
+          "meaning": "A cash withdrawal is still pending or hasn't been processed."
+        },
+        "pending_top_up": {
+          "meaning": "A top-up is still pending or taking a long time to arrive.",
+          "also_includes": [
+            "Includes not being sure a top-up has gone through yet."
+          ]
+        },
+        "pending_transfer": {
+          "meaning": "A transfer the customer sent is still pending.",
+          "also_includes": [
+            "A transfer or transaction the customer made that has not completed, posted or shown up on their dashboard yet.",
+            "Includes a pending transaction taking long to post or clear.",
+            "Includes complaining that a specific transfer (e.g. an international one) is taking forever.",
+            "Includes asking how long their transfer will stay pending.",
+            "Includes an urgent transfer that finally worked out (was submitted) but that they have been waiting on for a long time, asking how long to expect to wait."
+          ]
+        },
+        "pin_blocked": {
+          "meaning": "The PIN is blocked or locked after too many wrong attempts; unblocking it."
+        },
+        "receiving_money": {
+          "meaning": "How to receive money from others, get paid, or receive a salary into the account.",
+          "also_includes": [
+            "Includes how other people can send, transfer or top up money to the customer."
+          ]
+        },
+        "Refund_not_showing_up": {
+          "meaning": "A refund from a merchant has not appeared on the account."
+        },
+        "request_refund": {
+          "meaning": "How to request or get a refund for a purchase; return policy."
+        },
+        "reverted_card_payment?": {
+          "meaning": "A card payment was reverted, reversed or returned to the account unexpectedly.",
+          "also_includes": [
+            "A card payment that was cancelled, or that a merchant refused or returned.",
+            "Includes a purchase they already paid for that they no longer see in the account."
+          ]
+        },
+        "supported_cards_and_currencies": {
+          "meaning": "Which cards (Visa, Mastercard, etc.) can be used to top up, and which currencies are supported for cards/top-up.",
+          "also_includes": [
+            "Includes which payment methods, cards or currencies are accepted for adding money to the account.",
+            "Includes how to add money from a specific card brand such as American Express."
+          ]
+        },
+        "terminate_account": {
+          "meaning": "Closing or deleting the account."
+        },
+        "top_up_by_bank_transfer_charge": {
+          "meaning": "Fees for topping up via bank transfer.",
+          "also_includes": [
+            "Includes any question about SWIFT transfers."
+          ]
+        },
+        "top_up_by_card_charge": {
+          "meaning": "Fees for topping up with a card; charged for a card top-up.",
+          "also_includes": [
+            "Includes fees for adding money when no method is stated (e.g. 'Do you charge a fee for adding money in USD?')."
+          ]
+        },
+        "top_up_by_cash_or_cheque": {
+          "meaning": "How to top up with cash or a cheque."
+        },
+        "top_up_failed": {
+          "meaning": "A top-up failed, was declined or did not work.",
+          "also_includes": [
+            "Includes doubting whether a top-up worked at all."
+          ]
+        },
+        "top_up_limits": {
+          "meaning": "Limits on top-ups: maximum amount, how often, how much can be topped up."
+        },
+        "top_up_reverted": {
+          "meaning": "A top-up was reverted, cancelled or the money went back/disappeared after topping up."
+        },
+        "topping_up_by_card": {
+          "meaning": "How to top up the account using a card.",
+          "also_includes": [
+            "Includes: 'I used my card to top up but the money is gone'."
+          ]
+        },
+        "transaction_charged_twice": {
+          "meaning": "The same transaction/payment was charged twice (duplicate charge)."
+        },
+        "transfer_fee_charged": {
+          "meaning": "Was charged a fee for making a transfer.",
+          "also_includes": [
+            "Includes being charged a higher fee for banking abroad, and asking whether they will get extra charges."
+          ]
+        },
+        "transfer_into_account": {
+          "meaning": "How to transfer money into the account (add money by bank transfer); account details for incoming transfers.",
+          "also_includes": [
+            "Includes the customer asking in general which ways or methods they can use to add money to their own account."
+          ]
+        },
+        "transfer_not_received_by_recipient": {
+          "meaning": "The customer sent money but the recipient has not received it.",
+          "also_includes": [
+            "Includes money sent to a friend or retailer that hasn't arrived or gone through yet, even if they ask how long it takes."
+          ]
+        },
+        "transfer_timing": {
+          "meaning": "How long transfers take to arrive; transfer processing times.",
+          "also_includes": [
+            "General questions about transfer durations; also 'when can I expect my transfer to reach my account?' or 'it's been a couple days, how much longer do I have to wait for my transfer?'."
+          ]
+        },
+        "unable_to_verify_identity": {
+          "meaning": "Problems completing identity verification; verification failing or not working."
+        },
+        "verify_my_identity": {
+          "meaning": "How to verify identity; what documents are needed for verification."
+        },
+        "verify_source_of_funds": {
+          "meaning": "Verifying the source of funds or where money came from."
+        },
+        "verify_top_up": {
+          "meaning": "Top-up verification: verification code for a card top-up, verifying a top-up.",
+          "also_includes": [
+            "Includes not seeing or not finding the verification code for a card top-up or card transfer."
+          ]
+        },
+        "virtual_card_not_working": {
+          "meaning": "The virtual card is not working or being declined."
+        },
+        "visa_or_mastercard": {
+          "meaning": "Whether the card is Visa or Mastercard; choosing between them.",
+          "also_includes": [
+            "Wanting a card of a specific brand, e.g. 'I want to get a Visa card'."
+          ]
+        },
+        "why_verify_identity": {
+          "meaning": "Why identity verification is needed.",
+          "also_includes": [
+            "Whether verification is required, or whether they can use the account without verifying."
+          ]
+        },
+        "wrong_amount_of_cash_received": {
+          "meaning": "ATM gave less or the wrong amount of cash than requested."
+        },
+        "wrong_exchange_rate_for_cash_withdrawal": {
+          "meaning": "A cash withdrawal abroad was charged at a wrong exchange rate.",
+          "also_includes": [
+            "Complaints that the rate was too high because they should have received more cash.",
+            "Includes questions about the rates applied when getting cash, e.g. weekend rates for cash.",
+            "Includes asking whether they can withdraw cash at an ATM while outside the country without extra fees."
+          ]
+        }
+      }
+    },
+    {
+      "version": 1,
+      "name": "flat_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Classify the customer's support message into the one intent it belongs to. Consider what the customer actually needs help with.",
+        "rules": [
+          "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+          "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+          "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+          "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+          "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+          "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+          "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+          "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+          "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+          "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+          "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+          "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+          "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+          "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+          "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+          "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+          "Whether the customer can get a card or use the service given where they live is country_support.",
+          "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+          "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+          "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+          "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+          "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+          "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+          "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+          "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+          "Finding a card that was lost and asking whether it can still be used is card_linking.",
+          "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+          "Any question about auto top-up, including its limits, is automatic_top_up.",
+          "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+          "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+          "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+          "Reactivating a card is card_linking."
+        ]
+      },
+      "state_template": "Message:\n{{input}}",
+      "criteria": {
+        "activate_my_card": "The customer's message is about: how to activate a card the customer has received; help activating it.",
+        "age_limit": "The customer's message is about: minimum age to open an account or use the service; accounts for children/teenagers.",
+        "apple_pay_or_google_pay": "The customer's message is about: using Apple Pay, Google Pay or Android Pay with the card; adding the card to a phone wallet; top up via Apple/Google Pay.",
+        "atm_support": "The customer's message is about: which ATMs or cash machines accept the card, where to find an ATM, using the card at ATMs in general. Not for a failed withdrawal attempt.",
+        "automatic_top_up": "The customer's message is about: auto top-up: setting it up, how it works, turning it off, adding money automatically when balance is low. Includes limits or amounts for auto top-up.",
+        "balance_not_updated_after_bank_transfer": "The customer's message is about: money transferred into the customer's account by bank transfer has not appeared in the balance yet. A transfer from the customer's UK account or other bank that is not showing up yet, even if they ask how long it takes. Any complaint that the balance has not been updated or is taking long to update, when no cheque or cash deposit is mentioned. E.g. 'What's the time frame for a UK account transfer? I just made one and it's not showing up anywhere.'",
+        "balance_not_updated_after_cheque_or_cash_deposit": "The customer's message is about: a cheque or cash the customer deposited has not shown up in the balance. Any money the customer deposited that isn't showing up yet.",
+        "beneficiary_not_allowed": "The customer's message is about: cannot add a beneficiary/payee/recipient, or the beneficiary is not allowed or rejected. Includes trying to transfer money and being unable to: it won't go through after several attempts, or they cannot send to a particular account.",
+        "cancel_transfer": "The customer's message is about: wants to cancel, stop or reverse a transfer they made (e.g. sent to the wrong account by mistake).",
+        "card_about_to_expire": "The customer's message is about: card is expiring or expired; getting a replacement before expiry; expiry date questions.",
+        "card_acceptance": "The customer's message is about: where the card is accepted: which shops, merchants or places take the card; card not accepted by a merchant.",
+        "card_arrival": "The customer's message is about: a card that was ordered has not arrived yet; tracking a card in the mail; card still not delivered. Reporting that an ordered card has not arrived, without asking when to expect it.",
+        "card_delivery_estimate": "The customer's message is about: how long card delivery takes, when it will arrive, express or fast-tracked delivery options. How or when the card will reach them, e.g. 'How will I get my card?', 'Can I have it by a certain date?', or 'I ordered it weeks ago, when can I expect it?'.",
+        "card_linking": "The customer's message is about: linking a card to the account or app; re-linking or reactivating a card that was found after being lost. Includes finding a lost card and asking whether it can still be used. Includes 'Can I reactivate a card?'.",
+        "card_not_working": "The customer's message is about: the physical card is not working or keeps failing, without a specific declined payment, ATM, contactless or virtual-card issue. The customer asks what is wrong with their card because it keeps failing or never goes through, without saying it was declined (an explicitly declined card is declined_card_payment).",
+        "card_payment_fee_charged": "The customer's message is about: was charged an extra fee for a card payment/purchase. Includes being charged a hidden or unexplained fee.",
+        "card_payment_not_recognised": "The customer's message is about: a card payment the customer does not recognise or didn't make on their statement. Includes an unknown charge on the account the customer can't identify.",
+        "card_payment_wrong_exchange_rate": "The customer's message is about: a card payment in a foreign currency was charged at a wrong or bad exchange rate. Any complaint that the rate charged or applied was wrong, bad, or gave them less than expected, including for currency exchanged in the app. Includes believing the charges for a currency exchange they made are not right.",
+        "card_swallowed": "The customer's message is about: an ATM kept, ate or swallowed the card.",
+        "cash_withdrawal_charge": "The customer's message is about: was charged a fee for withdrawing cash from an ATM; ATM withdrawal fees.",
+        "cash_withdrawal_not_recognised": "The customer's message is about: a cash/ATM withdrawal on the account that the customer did not make or doesn't recognise. Unexpected or unexplained cash transactions or a cash balance appearing in the app that the customer did not expect or receive. Includes a withdrawal they didn't make even if they think their card was copied or compromised.",
+        "change_pin": "The customer's message is about: how to change or reset the card PIN, where it can be changed.",
+        "compromised_card": "The customer's message is about: card details may have been stolen, copied or hacked while the customer still has the card; fraud on the card; someone else using the card details.",
+        "contactless_not_working": "The customer's message is about: contactless payments (tap to pay) are not working.",
+        "country_support": "The customer's message is about: which countries the service or card is available or can be used in; using the account when living in or moving to another country. Includes whether someone living in a given country or region can get a card or account, and whether a card can be mailed or shipped to a country.",
+        "declined_card_payment": "The customer's message is about: a card payment or purchase was declined or rejected. Includes a card that was repeatedly declined when paying, even a new card.",
+        "declined_cash_withdrawal": "The customer's message is about: an ATM cash withdrawal was declined or refused. Includes being unable to get the ATM to work or to give cash.",
+        "declined_transfer": "The customer's message is about: a transfer the customer tried to make was declined or rejected.",
+        "direct_debit_payment_not_recognised": "The customer's message is about: a direct debit payment the customer does not recognise.",
+        "disposable_card_limits": "The customer's message is about: limits on disposable virtual cards: how many times or how much they can be used.",
+        "edit_personal_details": "The customer's message is about: changing personal details such as name, address, phone number or email.",
+        "exchange_charge": "The customer's message is about: fees charged for currency exchange; how much exchanging money costs. Includes asking for discounted rates or lower costs when exchanging frequently.",
+        "exchange_rate": "The customer's message is about: what exchange rate is used or applied, where rates come from, current rates. Neutral informational questions only, not complaints about a rate they got.",
+        "exchange_via_app": "The customer's message is about: how to exchange or convert currencies in the app; which currencies can be exchanged.",
+        "extra_charge_on_statement": "The customer's message is about: an unexplained extra charge or small fee on the statement (e.g. an extra pound) that the customer wants explained. A small unknown charge such as 1 pound/dollar, even if pending or described as a purchase the customer doesn't remember; or an extra fee showing on the statement.",
+        "failed_transfer": "The customer's message is about: a transfer the customer made failed or didn't go through. A transfer reported as failed, or an error message appearing when trying to make a transfer or a large payment (e.g. for a flat or mortgage).",
+        "fiat_currency_support": "The customer's message is about: which fiat currencies the account supports, can hold or can be used in; whether a specific currency is supported.",
+        "get_disposable_virtual_card": "The customer's message is about: how to get or create a disposable (single-use) virtual card.",
+        "get_physical_card": "The customer's message is about: getting the physical card; where to find the PIN for a new card. Mainly: finding the PIN for a newly received card; not general requests for a physical card (those are order_physical_card).",
+        "getting_spare_card": "The customer's message is about: getting an additional or spare card, e.g. for a family member, on the same account. Includes asking about the fees for getting another card, e.g. 'If I get another card, what kind of fees am I looking at?'.",
+        "getting_virtual_card": "The customer's message is about: how to get or order a virtual card; virtual card availability and cost. Includes a virtual card that was ordered but hasn't come through or been received yet.",
+        "lost_or_stolen_card": "The customer's message is about: the customer's card was lost or stolen; what to do, blocking it. Includes asking for help to retrieve their card.",
+        "lost_or_stolen_phone": "The customer's message is about: the customer's phone was lost or stolen; securing the app/account.",
+        "order_physical_card": "The customer's message is about: ordering a new physical card: how to order, cost, where it can be delivered. Wanting or asking how to get a physical/plastic card they can hold (not how an already-ordered card will be delivered).",
+        "passcode_forgotten": "The customer's message is about: forgot the app passcode or password; resetting the passcode.",
+        "pending_card_payment": "The customer's message is about: a card payment is still showing as pending. An unspecified 'payment' that has not gone through yet.",
+        "pending_cash_withdrawal": "The customer's message is about: a cash withdrawal is still pending or hasn't been processed.",
+        "pending_top_up": "The customer's message is about: a top-up is still pending or taking a long time to arrive. Includes not being sure a top-up has gone through yet.",
+        "pending_transfer": "The customer's message is about: a transfer the customer sent is still pending. A transfer or transaction the customer made that has not completed, posted or shown up on their dashboard yet. Includes a pending transaction taking long to post or clear. Includes complaining that a specific transfer (e.g. an international one) is taking forever. Includes asking how long their transfer will stay pending. Includes an urgent transfer that finally worked out (was submitted) but that they have been waiting on for a long time, asking how long to expect to wait.",
+        "pin_blocked": "The customer's message is about: the PIN is blocked or locked after too many wrong attempts; unblocking it.",
+        "receiving_money": "The customer's message is about: how to receive money from others, get paid, or receive a salary into the account. Includes how other people can send, transfer or top up money to the customer.",
+        "Refund_not_showing_up": "The customer's message is about: a refund from a merchant has not appeared on the account.",
+        "request_refund": "The customer's message is about: how to request or get a refund for a purchase; return policy.",
+        "reverted_card_payment?": "The customer's message is about: a card payment was reverted, reversed or returned to the account unexpectedly. A card payment that was cancelled, or that a merchant refused or returned. Includes a purchase they already paid for that they no longer see in the account.",
+        "supported_cards_and_currencies": "The customer's message is about: which cards (Visa, Mastercard, etc.) can be used to top up, and which currencies are supported for cards/top-up. Includes which payment methods, cards or currencies are accepted for adding money to the account. Includes how to add money from a specific card brand such as American Express.",
+        "terminate_account": "The customer's message is about: closing or deleting the account.",
+        "top_up_by_bank_transfer_charge": "The customer's message is about: fees for topping up via bank transfer. Includes any question about SWIFT transfers.",
+        "top_up_by_card_charge": "The customer's message is about: fees for topping up with a card; charged for a card top-up. Includes fees for adding money when no method is stated (e.g. 'Do you charge a fee for adding money in USD?').",
+        "top_up_by_cash_or_cheque": "The customer's message is about: how to top up with cash or a cheque.",
+        "top_up_failed": "The customer's message is about: a top-up failed, was declined or did not work. Includes doubting whether a top-up worked at all.",
+        "top_up_limits": "The customer's message is about: limits on top-ups: maximum amount, how often, how much can be topped up.",
+        "top_up_reverted": "The customer's message is about: a top-up was reverted, cancelled or the money went back/disappeared after topping up.",
+        "topping_up_by_card": "The customer's message is about: how to top up the account using a card. Includes: 'I used my card to top up but the money is gone'.",
+        "transaction_charged_twice": "The customer's message is about: the same transaction/payment was charged twice (duplicate charge).",
+        "transfer_fee_charged": "The customer's message is about: was charged a fee for making a transfer. Includes being charged a higher fee for banking abroad, and asking whether they will get extra charges.",
+        "transfer_into_account": "The customer's message is about: how to transfer money into the account (add money by bank transfer); account details for incoming transfers. Includes the customer asking in general which ways or methods they can use to add money to their own account.",
+        "transfer_not_received_by_recipient": "The customer's message is about: the customer sent money but the recipient has not received it. Includes money sent to a friend or retailer that hasn't arrived or gone through yet, even if they ask how long it takes.",
+        "transfer_timing": "The customer's message is about: how long transfers take to arrive; transfer processing times. General questions about transfer durations; also 'when can I expect my transfer to reach my account?' or 'it's been a couple days, how much longer do I have to wait for my transfer?'.",
+        "unable_to_verify_identity": "The customer's message is about: problems completing identity verification; verification failing or not working.",
+        "verify_my_identity": "The customer's message is about: how to verify identity; what documents are needed for verification.",
+        "verify_source_of_funds": "The customer's message is about: verifying the source of funds or where money came from.",
+        "verify_top_up": "The customer's message is about: top-up verification: verification code for a card top-up, verifying a top-up. Includes not seeing or not finding the verification code for a card top-up or card transfer.",
+        "virtual_card_not_working": "The customer's message is about: the virtual card is not working or being declined.",
+        "visa_or_mastercard": "The customer's message is about: whether the card is Visa or Mastercard; choosing between them. Wanting a card of a specific brand, e.g. 'I want to get a Visa card'.",
+        "why_verify_identity": "The customer's message is about: why identity verification is needed. Whether verification is required, or whether they can use the account without verifying.",
+        "wrong_amount_of_cash_received": "The customer's message is about: aTM gave less or the wrong amount of cash than requested.",
+        "wrong_exchange_rate_for_cash_withdrawal": "The customer's message is about: a cash withdrawal abroad was charged at a wrong exchange rate. Complaints that the rate was too high because they should have received more cash. Includes questions about the rates applied when getting cash, e.g. weekend rates for cash. Includes asking whether they can withdraw cash at an ATM while outside the country without extra fees."
+      }
+    },
+    {
+      "version": 1,
+      "name": "two_level",
+      "model": "jev-latest",
+      "type": "two_level",
+      "state_template": "Customer message to a digital bank's support chat:\n{{input}}",
+      "router": {
+        "instructions": "Which area of banking is this customer message about?",
+        "criteria": {
+          "getting or managing a card": "Getting, ordering, receiving, activating or linking a card; virtual, disposable or spare cards; PIN; expiry; Visa/Mastercard; Apple/Google Pay.",
+          "card problems or security": "Card not working, contactless or virtual card failing, ATM swallowed card, lost/stolen card or phone, compromised card, where the card is accepted, ATM availability.",
+          "card payments and statement charges": "Card purchases declined, pending, reverted, unrecognised, charged twice, charged a fee or wrong rate; unexplained statement charges; direct debits; refunds.",
+          "cash withdrawals": "ATM cash withdrawals: fees, declined, pending, unrecognised, wrong amount, wrong exchange rate.",
+          "top-ups": "Adding money to the account by card, cash, cheque or auto top-up: how, fees, limits, failed, pending, reverted, verification; deposits not showing; which cards can top up.",
+          "transfers": "Bank transfers sent or received: timing, pending, failed, declined, cancelled, fees, beneficiaries, not received by recipient, money coming in.",
+          "currency exchange": "Exchanging currencies: rates, exchange fees, doing it in the app, which currencies are supported.",
+          "account and identity": "Age limit, country support, personal details, passcode, closing the account, identity and source-of-funds verification."
+        }
+      },
+      "groups": {
+        "getting or managing a card": {
+          "instructions": {
+            "question": "This message is about getting or managing a card. Which specific intent does the customer have?",
+            "rules": [
+              "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+              "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+              "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+              "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+              "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+              "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+              "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+              "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+              "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+              "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+              "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+              "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+              "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+              "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+              "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+              "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+              "Whether the customer can get a card or use the service given where they live is country_support.",
+              "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+              "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+              "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+              "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+              "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+              "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+              "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+              "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+              "Finding a card that was lost and asking whether it can still be used is card_linking.",
+              "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+              "Any question about auto top-up, including its limits, is automatic_top_up.",
+              "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+              "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+              "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+              "Reactivating a card is card_linking."
+            ]
+          },
+          "criteria": {
+            "activate_my_card": "How to activate a card the customer has received; help activating it.",
+            "card_arrival": "A card that was ordered has not arrived yet; tracking a card in the mail; card still not delivered. Reporting that an ordered card has not arrived, without asking when to expect it.",
+            "card_delivery_estimate": "How long card delivery takes, when it will arrive, express or fast-tracked delivery options. How or when the card will reach them, e.g. 'How will I get my card?', 'Can I have it by a certain date?', or 'I ordered it weeks ago, when can I expect it?'.",
+            "card_linking": "Linking a card to the account or app; re-linking or reactivating a card that was found after being lost. Includes finding a lost card and asking whether it can still be used. Includes 'Can I reactivate a card?'.",
+            "get_physical_card": "Getting the physical card; where to find the PIN for a new card. Mainly: finding the PIN for a newly received card; not general requests for a physical card (those are order_physical_card).",
+            "order_physical_card": "Ordering a new physical card: how to order, cost, where it can be delivered. Wanting or asking how to get a physical/plastic card they can hold (not how an already-ordered card will be delivered).",
+            "getting_spare_card": "Getting an additional or spare card, e.g. for a family member, on the same account. Includes asking about the fees for getting another card, e.g. 'If I get another card, what kind of fees am I looking at?'.",
+            "getting_virtual_card": "How to get or order a virtual card; virtual card availability and cost. Includes a virtual card that was ordered but hasn't come through or been received yet.",
+            "get_disposable_virtual_card": "How to get or create a disposable (single-use) virtual card.",
+            "disposable_card_limits": "Limits on disposable virtual cards: how many times or how much they can be used.",
+            "card_about_to_expire": "Card is expiring or expired; getting a replacement before expiry; expiry date questions.",
+            "visa_or_mastercard": "Whether the card is Visa or Mastercard; choosing between them. Wanting a card of a specific brand, e.g. 'I want to get a Visa card'.",
+            "apple_pay_or_google_pay": "Using Apple Pay, Google Pay or Android Pay with the card; adding the card to a phone wallet; top up via Apple/Google Pay.",
+            "change_pin": "How to change or reset the card PIN, where it can be changed.",
+            "pin_blocked": "The PIN is blocked or locked after too many wrong attempts; unblocking it."
+          },
+          "map": {
+            "activate_my_card": "activate_my_card",
+            "card_arrival": "card_arrival",
+            "card_delivery_estimate": "card_delivery_estimate",
+            "card_linking": "card_linking",
+            "get_physical_card": "get_physical_card",
+            "order_physical_card": "order_physical_card",
+            "getting_spare_card": "getting_spare_card",
+            "getting_virtual_card": "getting_virtual_card",
+            "get_disposable_virtual_card": "get_disposable_virtual_card",
+            "disposable_card_limits": "disposable_card_limits",
+            "card_about_to_expire": "card_about_to_expire",
+            "visa_or_mastercard": "visa_or_mastercard",
+            "apple_pay_or_google_pay": "apple_pay_or_google_pay",
+            "change_pin": "change_pin",
+            "pin_blocked": "pin_blocked"
+          }
+        },
+        "card problems or security": {
+          "instructions": {
+            "question": "This message is about card problems or security. Which specific intent does the customer have?",
+            "rules": [
+              "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+              "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+              "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+              "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+              "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+              "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+              "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+              "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+              "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+              "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+              "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+              "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+              "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+              "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+              "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+              "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+              "Whether the customer can get a card or use the service given where they live is country_support.",
+              "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+              "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+              "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+              "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+              "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+              "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+              "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+              "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+              "Finding a card that was lost and asking whether it can still be used is card_linking.",
+              "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+              "Any question about auto top-up, including its limits, is automatic_top_up.",
+              "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+              "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+              "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+              "Reactivating a card is card_linking."
+            ]
+          },
+          "criteria": {
+            "card_not_working": "The physical card is not working or keeps failing, without a specific declined payment, ATM, contactless or virtual-card issue. The customer asks what is wrong with their card because it keeps failing or never goes through, without saying it was declined (an explicitly declined card is declined_card_payment).",
+            "contactless_not_working": "Contactless payments (tap to pay) are not working.",
+            "virtual_card_not_working": "The virtual card is not working or being declined.",
+            "card_swallowed": "An ATM kept, ate or swallowed the card.",
+            "lost_or_stolen_card": "The customer's card was lost or stolen; what to do, blocking it. Includes asking for help to retrieve their card.",
+            "compromised_card": "Card details may have been stolen, copied or hacked while the customer still has the card; fraud on the card; someone else using the card details.",
+            "card_acceptance": "Where the card is accepted: which shops, merchants or places take the card; card not accepted by a merchant.",
+            "atm_support": "Which ATMs or cash machines accept the card, where to find an ATM, using the card at ATMs in general. Not for a failed withdrawal attempt.",
+            "lost_or_stolen_phone": "The customer's phone was lost or stolen; securing the app/account."
+          },
+          "map": {
+            "card_not_working": "card_not_working",
+            "contactless_not_working": "contactless_not_working",
+            "virtual_card_not_working": "virtual_card_not_working",
+            "card_swallowed": "card_swallowed",
+            "lost_or_stolen_card": "lost_or_stolen_card",
+            "compromised_card": "compromised_card",
+            "card_acceptance": "card_acceptance",
+            "atm_support": "atm_support",
+            "lost_or_stolen_phone": "lost_or_stolen_phone"
+          }
+        },
+        "card payments and statement charges": {
+          "instructions": {
+            "question": "This message is about card payments and statement charges. Which specific intent does the customer have?",
+            "rules": [
+              "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+              "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+              "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+              "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+              "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+              "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+              "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+              "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+              "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+              "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+              "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+              "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+              "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+              "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+              "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+              "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+              "Whether the customer can get a card or use the service given where they live is country_support.",
+              "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+              "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+              "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+              "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+              "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+              "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+              "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+              "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+              "Finding a card that was lost and asking whether it can still be used is card_linking.",
+              "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+              "Any question about auto top-up, including its limits, is automatic_top_up.",
+              "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+              "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+              "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+              "Reactivating a card is card_linking."
+            ]
+          },
+          "criteria": {
+            "declined_card_payment": "A card payment or purchase was declined or rejected. Includes a card that was repeatedly declined when paying, even a new card.",
+            "pending_card_payment": "A card payment is still showing as pending. An unspecified 'payment' that has not gone through yet.",
+            "reverted_card_payment?": "A card payment was reverted, reversed or returned to the account unexpectedly. A card payment that was cancelled, or that a merchant refused or returned. Includes a purchase they already paid for that they no longer see in the account.",
+            "card_payment_not_recognised": "A card payment the customer does not recognise or didn't make on their statement. Includes an unknown charge on the account the customer can't identify.",
+            "card_payment_fee_charged": "Was charged an extra fee for a card payment/purchase. Includes being charged a hidden or unexplained fee.",
+            "card_payment_wrong_exchange_rate": "A card payment in a foreign currency was charged at a wrong or bad exchange rate. Any complaint that the rate charged or applied was wrong, bad, or gave them less than expected, including for currency exchanged in the app. Includes believing the charges for a currency exchange they made are not right.",
+            "transaction_charged_twice": "The same transaction/payment was charged twice (duplicate charge).",
+            "extra_charge_on_statement": "An unexplained extra charge or small fee on the statement (e.g. an extra pound) that the customer wants explained. A small unknown charge such as 1 pound/dollar, even if pending or described as a purchase the customer doesn't remember; or an extra fee showing on the statement.",
+            "direct_debit_payment_not_recognised": "A direct debit payment the customer does not recognise.",
+            "request_refund": "How to request or get a refund for a purchase; return policy.",
+            "Refund_not_showing_up": "A refund from a merchant has not appeared on the account."
+          },
+          "map": {
+            "declined_card_payment": "declined_card_payment",
+            "pending_card_payment": "pending_card_payment",
+            "reverted_card_payment?": "reverted_card_payment?",
+            "card_payment_not_recognised": "card_payment_not_recognised",
+            "card_payment_fee_charged": "card_payment_fee_charged",
+            "card_payment_wrong_exchange_rate": "card_payment_wrong_exchange_rate",
+            "transaction_charged_twice": "transaction_charged_twice",
+            "extra_charge_on_statement": "extra_charge_on_statement",
+            "direct_debit_payment_not_recognised": "direct_debit_payment_not_recognised",
+            "request_refund": "request_refund",
+            "Refund_not_showing_up": "Refund_not_showing_up"
+          }
+        },
+        "cash withdrawals": {
+          "instructions": {
+            "question": "This message is about cash withdrawals. Which specific intent does the customer have?",
+            "rules": [
+              "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+              "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+              "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+              "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+              "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+              "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+              "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+              "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+              "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+              "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+              "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+              "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+              "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+              "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+              "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+              "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+              "Whether the customer can get a card or use the service given where they live is country_support.",
+              "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+              "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+              "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+              "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+              "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+              "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+              "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+              "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+              "Finding a card that was lost and asking whether it can still be used is card_linking.",
+              "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+              "Any question about auto top-up, including its limits, is automatic_top_up.",
+              "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+              "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+              "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+              "Reactivating a card is card_linking."
+            ]
+          },
+          "criteria": {
+            "cash_withdrawal_charge": "Was charged a fee for withdrawing cash from an ATM; ATM withdrawal fees.",
+            "cash_withdrawal_not_recognised": "A cash/ATM withdrawal on the account that the customer did not make or doesn't recognise. Unexpected or unexplained cash transactions or a cash balance appearing in the app that the customer did not expect or receive. Includes a withdrawal they didn't make even if they think their card was copied or compromised.",
+            "declined_cash_withdrawal": "An ATM cash withdrawal was declined or refused. Includes being unable to get the ATM to work or to give cash.",
+            "pending_cash_withdrawal": "A cash withdrawal is still pending or hasn't been processed.",
+            "wrong_amount_of_cash_received": "ATM gave less or the wrong amount of cash than requested.",
+            "wrong_exchange_rate_for_cash_withdrawal": "A cash withdrawal abroad was charged at a wrong exchange rate. Complaints that the rate was too high because they should have received more cash. Includes questions about the rates applied when getting cash, e.g. weekend rates for cash. Includes asking whether they can withdraw cash at an ATM while outside the country without extra fees."
+          },
+          "map": {
+            "cash_withdrawal_charge": "cash_withdrawal_charge",
+            "cash_withdrawal_not_recognised": "cash_withdrawal_not_recognised",
+            "declined_cash_withdrawal": "declined_cash_withdrawal",
+            "pending_cash_withdrawal": "pending_cash_withdrawal",
+            "wrong_amount_of_cash_received": "wrong_amount_of_cash_received",
+            "wrong_exchange_rate_for_cash_withdrawal": "wrong_exchange_rate_for_cash_withdrawal"
+          }
+        },
+        "top-ups": {
+          "instructions": {
+            "question": "This message is about top-ups. Which specific intent does the customer have?",
+            "rules": [
+              "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+              "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+              "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+              "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+              "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+              "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+              "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+              "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+              "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+              "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+              "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+              "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+              "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+              "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+              "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+              "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+              "Whether the customer can get a card or use the service given where they live is country_support.",
+              "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+              "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+              "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+              "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+              "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+              "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+              "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+              "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+              "Finding a card that was lost and asking whether it can still be used is card_linking.",
+              "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+              "Any question about auto top-up, including its limits, is automatic_top_up.",
+              "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+              "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+              "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+              "Reactivating a card is card_linking."
+            ]
+          },
+          "criteria": {
+            "automatic_top_up": "Auto top-up: setting it up, how it works, turning it off, adding money automatically when balance is low. Includes limits or amounts for auto top-up.",
+            "pending_top_up": "A top-up is still pending or taking a long time to arrive. Includes not being sure a top-up has gone through yet.",
+            "top_up_failed": "A top-up failed, was declined or did not work. Includes doubting whether a top-up worked at all.",
+            "top_up_reverted": "A top-up was reverted, cancelled or the money went back/disappeared after topping up.",
+            "top_up_limits": "Limits on top-ups: maximum amount, how often, how much can be topped up.",
+            "top_up_by_card_charge": "Fees for topping up with a card; charged for a card top-up. Includes fees for adding money when no method is stated (e.g. 'Do you charge a fee for adding money in USD?').",
+            "top_up_by_bank_transfer_charge": "Fees for topping up via bank transfer. Includes any question about SWIFT transfers.",
+            "top_up_by_cash_or_cheque": "How to top up with cash or a cheque.",
+            "topping_up_by_card": "How to top up the account using a card. Includes: 'I used my card to top up but the money is gone'.",
+            "verify_top_up": "Top-up verification: verification code for a card top-up, verifying a top-up. Includes not seeing or not finding the verification code for a card top-up or card transfer.",
+            "supported_cards_and_currencies": "Which cards (Visa, Mastercard, etc.) can be used to top up, and which currencies are supported for cards/top-up. Includes which payment methods, cards or currencies are accepted for adding money to the account. Includes how to add money from a specific card brand such as American Express.",
+            "balance_not_updated_after_cheque_or_cash_deposit": "A cheque or cash the customer deposited has not shown up in the balance. Any money the customer deposited that isn't showing up yet."
+          },
+          "map": {
+            "automatic_top_up": "automatic_top_up",
+            "pending_top_up": "pending_top_up",
+            "top_up_failed": "top_up_failed",
+            "top_up_reverted": "top_up_reverted",
+            "top_up_limits": "top_up_limits",
+            "top_up_by_card_charge": "top_up_by_card_charge",
+            "top_up_by_bank_transfer_charge": "top_up_by_bank_transfer_charge",
+            "top_up_by_cash_or_cheque": "top_up_by_cash_or_cheque",
+            "topping_up_by_card": "topping_up_by_card",
+            "verify_top_up": "verify_top_up",
+            "supported_cards_and_currencies": "supported_cards_and_currencies",
+            "balance_not_updated_after_cheque_or_cash_deposit": "balance_not_updated_after_cheque_or_cash_deposit"
+          }
+        },
+        "transfers": {
+          "instructions": {
+            "question": "This message is about transfers. Which specific intent does the customer have?",
+            "rules": [
+              "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+              "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+              "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+              "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+              "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+              "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+              "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+              "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+              "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+              "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+              "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+              "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+              "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+              "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+              "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+              "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+              "Whether the customer can get a card or use the service given where they live is country_support.",
+              "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+              "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+              "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+              "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+              "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+              "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+              "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+              "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+              "Finding a card that was lost and asking whether it can still be used is card_linking.",
+              "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+              "Any question about auto top-up, including its limits, is automatic_top_up.",
+              "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+              "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+              "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+              "Reactivating a card is card_linking."
+            ]
+          },
+          "criteria": {
+            "balance_not_updated_after_bank_transfer": "Money transferred into the customer's account by bank transfer has not appeared in the balance yet. A transfer from the customer's UK account or other bank that is not showing up yet, even if they ask how long it takes. Any complaint that the balance has not been updated or is taking long to update, when no cheque or cash deposit is mentioned. E.g. 'What's the time frame for a UK account transfer? I just made one and it's not showing up anywhere.'",
+            "beneficiary_not_allowed": "Cannot add a beneficiary/payee/recipient, or the beneficiary is not allowed or rejected. Includes trying to transfer money and being unable to: it won't go through after several attempts, or they cannot send to a particular account.",
+            "cancel_transfer": "Wants to cancel, stop or reverse a transfer they made (e.g. sent to the wrong account by mistake).",
+            "declined_transfer": "A transfer the customer tried to make was declined or rejected.",
+            "failed_transfer": "A transfer the customer made failed or didn't go through. A transfer reported as failed, or an error message appearing when trying to make a transfer or a large payment (e.g. for a flat or mortgage).",
+            "pending_transfer": "A transfer the customer sent is still pending. A transfer or transaction the customer made that has not completed, posted or shown up on their dashboard yet. Includes a pending transaction taking long to post or clear. Includes complaining that a specific transfer (e.g. an international one) is taking forever. Includes asking how long their transfer will stay pending. Includes an urgent transfer that finally worked out (was submitted) but that they have been waiting on for a long time, asking how long to expect to wait.",
+            "transfer_fee_charged": "Was charged a fee for making a transfer. Includes being charged a higher fee for banking abroad, and asking whether they will get extra charges.",
+            "transfer_into_account": "How to transfer money into the account (add money by bank transfer); account details for incoming transfers. Includes the customer asking in general which ways or methods they can use to add money to their own account.",
+            "transfer_not_received_by_recipient": "The customer sent money but the recipient has not received it. Includes money sent to a friend or retailer that hasn't arrived or gone through yet, even if they ask how long it takes.",
+            "transfer_timing": "How long transfers take to arrive; transfer processing times. General questions about transfer durations; also 'when can I expect my transfer to reach my account?' or 'it's been a couple days, how much longer do I have to wait for my transfer?'.",
+            "receiving_money": "How to receive money from others, get paid, or receive a salary into the account. Includes how other people can send, transfer or top up money to the customer."
+          },
+          "map": {
+            "balance_not_updated_after_bank_transfer": "balance_not_updated_after_bank_transfer",
+            "beneficiary_not_allowed": "beneficiary_not_allowed",
+            "cancel_transfer": "cancel_transfer",
+            "declined_transfer": "declined_transfer",
+            "failed_transfer": "failed_transfer",
+            "pending_transfer": "pending_transfer",
+            "transfer_fee_charged": "transfer_fee_charged",
+            "transfer_into_account": "transfer_into_account",
+            "transfer_not_received_by_recipient": "transfer_not_received_by_recipient",
+            "transfer_timing": "transfer_timing",
+            "receiving_money": "receiving_money"
+          }
+        },
+        "currency exchange": {
+          "instructions": {
+            "question": "This message is about currency exchange. Which specific intent does the customer have?",
+            "rules": [
+              "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+              "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+              "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+              "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+              "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+              "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+              "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+              "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+              "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+              "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+              "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+              "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+              "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+              "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+              "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+              "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+              "Whether the customer can get a card or use the service given where they live is country_support.",
+              "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+              "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+              "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+              "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+              "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+              "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+              "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+              "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+              "Finding a card that was lost and asking whether it can still be used is card_linking.",
+              "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+              "Any question about auto top-up, including its limits, is automatic_top_up.",
+              "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+              "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+              "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+              "Reactivating a card is card_linking."
+            ]
+          },
+          "criteria": {
+            "exchange_charge": "Fees charged for currency exchange; how much exchanging money costs. Includes asking for discounted rates or lower costs when exchanging frequently.",
+            "exchange_rate": "What exchange rate is used or applied, where rates come from, current rates. Neutral informational questions only, not complaints about a rate they got.",
+            "exchange_via_app": "How to exchange or convert currencies in the app; which currencies can be exchanged.",
+            "fiat_currency_support": "Which fiat currencies the account supports, can hold or can be used in; whether a specific currency is supported."
+          },
+          "map": {
+            "exchange_charge": "exchange_charge",
+            "exchange_rate": "exchange_rate",
+            "exchange_via_app": "exchange_via_app",
+            "fiat_currency_support": "fiat_currency_support"
+          }
+        },
+        "account and identity": {
+          "instructions": {
+            "question": "This message is about account and identity. Which specific intent does the customer have?",
+            "rules": [
+              "A 'payment' whose type is not stated is a card payment (not a transfer). An unqualified 'transaction' or 'transfer' still in progress or not yet posted is a pending transfer.",
+              "A transfer 'from my UK account' or from another bank account is money coming into this account.",
+              "A complaint that the exchange rate the customer got was wrong, bad, or worse than expected (they got less than expected), including for an exchange in the app, is card_payment_wrong_exchange_rate, or wrong_exchange_rate_for_cash_withdrawal when it concerns cash received; This includes thinking the charges for a currency exchange they made are not right. exchange_charge is for asking how much exchanging costs; exchange_rate is only for neutral questions about what the rates are or where they come from.",
+              "When the customer's complaint is that their balance has not updated (and no cheque or cash deposit is mentioned), it is balance_not_updated_after_bank_transfer; when it is about the transfer itself not having completed, it is pending_transfer.",
+              "A card payment that was cancelled, refused by the merchant, or reversed after it was made is reverted_card_payment?; declined_card_payment is when the card is declined at the moment of paying.",
+              "Read obvious typos by meaning (e.g. 'pop-up' or 'top-pu' means top-up).",
+              "A small unexplained charge on the statement, such as a 1 pound/dollar/euro charge, is extra_charge_on_statement, even when it shows as pending or is called a purchase.",
+              "Money the customer 'deposited' is a cheque or cash deposit, not a top-up or transfer.",
+              "When the customer is trying to make a transfer and is told it is not possible or not allowed, cannot do it, or attempts keep being unsuccessful, it is beneficiary_not_allowed. When they report getting an error message while making a transfer or payment (e.g. a large payment such as for a flat or mortgage), or that the transfer failed, it is failed_transfer. declined_transfer is a transfer reported as declined.",
+              "Doubting whether a top-up worked at all is top_up_failed; waiting for a top-up to arrive ('yet', 'taking long', 'still pending') is pending_top_up.",
+              "Using a card to top up and then finding the money is gone is topping_up_by_card.",
+              "Questions about SWIFT transfers (whether they can be used, received or cost anything) are top_up_by_bank_transfer_charge.",
+              "A virtual card that was ordered but hasn't appeared yet is getting_virtual_card (card_arrival is for physical cards in the post).",
+              "When the customer asks in general what ways they can add money to their own account, it is transfer_into_account. Asking which payment methods, card types or currencies are accepted for adding money is supported_cards_and_currencies. Other people sending money to the customer is receiving_money.",
+              "A specific cash withdrawal the customer didn't make is cash_withdrawal_not_recognised, even when they suspect their card was copied.",
+              "An unknown or unrecognised charge, without mention of a small fixed amount like 1 pound/dollar, is card_payment_not_recognised; extra_charge_on_statement is for small extra charges or fees on the statement.",
+              "Whether the customer can get a card or use the service given where they live is country_support.",
+              "Being unable to get cash out of an ATM (the ATM wouldn't work for them, card won't work at the ATM) is declined_cash_withdrawal; atm_support is about which or where ATMs can be used.",
+              "When the customer says money they sent to a friend, person or business hasn't arrived or gone through yet, it is transfer_not_received_by_recipient, even if they also ask how long transfers take.",
+              "Complaints that a specific transfer or transaction is still pending, not yet posted, or taking forever (including 'how long will my transfer stay pending?' and 'when will the transaction post?') are pending_transfer. Asking how much longer they have to wait for a transfer, or when it will reach their account, is transfer_timing, even if it has been a couple of days.",
+              "Questions about how much exchanging currency costs, including discounts or better rates for frequent exchanges, are exchange_charge.",
+              "Asking whether or how a specific card brand (e.g. American Express) can be used to add money is supported_cards_and_currencies.",
+              "A question about fees for adding money to the account, when the method is not stated, is top_up_by_card_charge.",
+              "Being charged a (higher) fee for doing banking or using the account abroad is transfer_fee_charged.",
+              "Any question about exchange rates for getting or withdrawing cash, or about withdrawing cash from an ATM while in another country without extra cost, is wrong_exchange_rate_for_cash_withdrawal.",
+              "Finding a card that was lost and asking whether it can still be used is card_linking.",
+              "Being charged a hidden or unexplained fee is card_payment_fee_charged; asking whether they will get extra charges is transfer_fee_charged.",
+              "Any question about auto top-up, including its limits, is automatic_top_up.",
+              "Asking whether a card can be mailed, shipped or delivered to a particular country or region is country_support.",
+              "A purchase the customer paid for that has now disappeared from the account, or that the seller says didn't go through after paying, is reverted_card_payment?.",
+              "When the customer asks when they can expect a card they ordered, even if it is late, it is card_delivery_estimate; card_arrival is reporting that the card hasn't arrived or asking to track it, without asking for an expected date.",
+              "Reactivating a card is card_linking."
+            ]
+          },
+          "criteria": {
+            "age_limit": "Minimum age to open an account or use the service; accounts for children/teenagers.",
+            "country_support": "Which countries the service or card is available or can be used in; using the account when living in or moving to another country. Includes whether someone living in a given country or region can get a card or account, and whether a card can be mailed or shipped to a country.",
+            "edit_personal_details": "Changing personal details such as name, address, phone number or email.",
+            "passcode_forgotten": "Forgot the app passcode or password; resetting the passcode.",
+            "terminate_account": "Closing or deleting the account.",
+            "unable_to_verify_identity": "Problems completing identity verification; verification failing or not working.",
+            "verify_my_identity": "How to verify identity; what documents are needed for verification.",
+            "verify_source_of_funds": "Verifying the source of funds or where money came from.",
+            "why_verify_identity": "Why identity verification is needed. Whether verification is required, or whether they can use the account without verifying."
+          },
+          "map": {
+            "age_limit": "age_limit",
+            "country_support": "country_support",
+            "edit_personal_details": "edit_personal_details",
+            "passcode_forgotten": "passcode_forgotten",
+            "terminate_account": "terminate_account",
+            "unable_to_verify_identity": "unable_to_verify_identity",
+            "verify_my_identity": "verify_my_identity",
+            "verify_source_of_funds": "verify_source_of_funds",
+            "why_verify_identity": "why_verify_identity"
+          }
+        }
+      }
+    }
+  ]
+}

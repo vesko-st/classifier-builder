@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "name": "persuasion_ens1",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "persuasion_v4",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "In a chat where a persuader tries to get the persuadee to donate part of their task payment to the charity Save the Children, tag the persuader message labelled 'Persuader message to tag' with the persuasion strategy or dialogue act it uses.",
+        "notes": [
+          "Judge only the message to tag; use the earlier chat only as context to understand it (earlier lines may be incomplete).",
+          "Pick the single option that best describes the main function of the message.",
+          "If the message to tag is a short fragment that completes or continues the persuader's own previous line (e.g. 'At all!' right after '$2 you won't miss.'), tag it with the strategy of the combined sentence."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "greeting": "Greets or opens the chat, or replies to a 'how are you' exchange: 'Hi', 'Hello there', 'How are you today?', 'I am doing well, thank you', 'Doing alright..', 'Glad you are doing well also'",
+        "thank": "Thanks the persuadee: 'Thank you', 'Thanks so much for your donation'",
+        "praise-user": "Praises or compliments the persuadee, including a positive reaction right after they agree to donate: 'That's very generous of you', 'You are a kind person', 'People like you make the world better', 'Great!/Awesome!' right after the persuadee commits to a donation",
+        "acknowledgement": "Substantive agreement with or reaction to what the persuadee said, without a persuasion strategy: 'I agree', 'Absolutely.', 'Yes, they are.', 'Me too', 'ok, I understand that', 'That's great to hear', or 'Great!' when it is not reacting to the persuadee agreeing to donate. Flat fillers like 'Ok...', 'Fine...', 'Yeah.' are not acknowledgement (they are other)",
+        "source-related-inquiry": "Asks whether the persuadee knows about the charity or organization: 'Have you heard of Save the Children?', 'Are you familiar with the organization?'",
+        "task-related-inquiry": "Asks the persuadee's opinion or experience about donating money or charities, or their thoughts on the cause: 'Do you donate to charities?', 'Have you ever donated before?', 'Is this something you care about?', 'What do you think about it?'",
+        "personal-related-inquiry": "Asks about the persuadee's personal life, background, habits or activities other than donating money: 'Do you have children?', 'Where are you from?', 'What do you do for work?', 'Do you ever volunteer?'",
+        "proposition-of-donation": "Asks or proposes that the persuadee donate: 'Would you be willing to donate some of your payment?', 'Would you like to donate to Save the Children?', 'We should donate to them!'",
+        "ask-donation-amount": "Asks how much the persuadee will donate: 'How much would you like to donate?', 'What amount would you feel comfortable donating?'",
+        "donation-information": "Gives factual information about the donation itself or answers the persuadee's question about how or how much to donate: the donation comes out of the task payment, any amount from $0 to the full payment, the research team will collect and send it, how to pay, a suggested or typical amount given when the persuadee asks ('I would suggest $20 a month, or whatever you can spare')",
+        "foot-in-the-door": "The persuader proactively encourages a small donation to make giving easier: 'Even a small amount helps', 'Every little bit helps', 'Even 50 cents would help', 'Just a dollar?', 'May I suggest $.50 or even $1?'. Not when the persuader is answering the persuadee's own question about how or how much to donate (that is donation-information)",
+        "self-modeling": "The persuader says they themselves donate or will donate, setting an example: 'I will donate the same amount', 'I usually donate to this cause', 'I gave my payment too'",
+        "personal-story": "Tells a story or anecdote about the persuader's own or someone else's experience related to children, charity or need: 'I worked in Africa and saw the difference a few dollars make', 'The founder heard about Bruce's family and helped them'",
+        "credibility-appeal": "Establishes the charity's credibility: describes the organization, what it does, its programs, history, reach, ratings or track record, including the charity acting on children's suffering, or points to its website: 'Save the Children is an international NGO that promotes children's rights', 'It is one of the top rated charities', 'They have a presence on every continent', 'They provide food and shelter to children in Syria', 'More information is on their website: URL'",
+        "emotion-appeal": "Evokes emotions such as sadness, guilt, sympathy or hope. Includes stating facts or statistics about children's suffering or need (deaths, war, hunger, 'they have nothing'): '1000 children have been killed in Syria', 'Did you know 16,000 children under 5 die each day?', 'It breaks my heart that children lack clean water', 'Imagine how happy the children will be'",
+        "logical-appeal": "Reasoning that donating has an effect, or moral or general reasoning and cost comparisons: 'Your donation will make a huge impact', 'You can protect those children if you donate', 'They can only help when people donate', 'Children are the future', 'If you have enough, give to others', 'It is less than a cup of coffee'",
+        "off-task": "Discussion of a topic unrelated to the charity, the donation or the task, such as history, politics, the news, places, hobbies ('the true Americans are the Native Indians'). Brief facts the persuader states about themselves ('I live in Florida') are other, not off-task",
+        "other": "None of the above. Mostly: flat fillers ('Ok...', 'Fine...', 'Yeah.', 'yes, indeed.'); closings ('Have a great night!', 'I hope you enjoy the rest of your day'); confirming the amount ('Just to be sure, you want to donate 1 dollar?'); asking for more; short answers to the persuadee's questions ('I have', 'No, I don't donate'); talk about other charities; brief facts about the persuader's own life ('I live in Florida', 'I have a fridge full of food'); arguing with the persuadee; remarks about the task or HIT itself ('we need 10 chats to complete this hit'); typo fixes ('sorry, I meant URL')"
+      }
+    },
+    {
+      "version": 1,
+      "name": "persuasion_v4b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Which persuasion strategy or dialogue act does the persuader's final message (the one marked 'Persuader message to tag') use?",
+        "setting": "Chats in which a persuader tries to convince the persuadee to give part of their task payment to Save the Children.",
+        "how to decide": [
+          "Look at what the tagged message itself does; read the earlier lines only for context, they may be partial.",
+          "If the tagged message is a short piece that continues the persuader's own previous line, tag the strategy of the whole combined sentence.",
+          "Choose the one option that fits the message's main purpose."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "greeting": {
+          "meaning": "Greets or opens the chat, or replies to a 'how are you' exchange",
+          "for example": "'Hi', 'Hello there', 'How are you today?', 'I am doing well, thank you', 'Doing alright..', 'Glad you are doing well also'"
+        },
+        "thank": {
+          "meaning": "Thanks the persuadee",
+          "for example": "'Thank you', 'Thanks so much for your donation'"
+        },
+        "praise-user": {
+          "meaning": "Praises or compliments the persuadee, including a positive reaction right after they agree to donate",
+          "for example": "'That's very generous of you', 'You are a kind person', 'People like you make the world better', 'Great!/Awesome!' right after the persuadee commits to a donation"
+        },
+        "acknowledgement": {
+          "meaning": "Substantive agreement with or reaction to what the persuadee said, without a persuasion strategy",
+          "for example": "'I agree', 'Absolutely.', 'Yes, they are.', 'Me too', 'ok, I understand that', 'That's great to hear', or 'Great!' when it is not reacting to the persuadee agreeing to donate. Flat fillers like 'Ok...', 'Fine...', 'Yeah.' are not acknowledgement (they are other)"
+        },
+        "source-related-inquiry": {
+          "meaning": "Asks whether the persuadee knows about the charity or organization",
+          "for example": "'Have you heard of Save the Children?', 'Are you familiar with the organization?'"
+        },
+        "task-related-inquiry": {
+          "meaning": "Asks the persuadee's opinion or experience about donating money or charities, or their thoughts on the cause",
+          "for example": "'Do you donate to charities?', 'Have you ever donated before?', 'Is this something you care about?', 'What do you think about it?'"
+        },
+        "personal-related-inquiry": {
+          "meaning": "Asks about the persuadee's personal life, background, habits or activities other than donating money",
+          "for example": "'Do you have children?', 'Where are you from?', 'What do you do for work?', 'Do you ever volunteer?'"
+        },
+        "proposition-of-donation": {
+          "meaning": "Asks or proposes that the persuadee donate",
+          "for example": "'Would you be willing to donate some of your payment?', 'Would you like to donate to Save the Children?', 'We should donate to them!'"
+        },
+        "ask-donation-amount": {
+          "meaning": "Asks how much the persuadee will donate",
+          "for example": "'How much would you like to donate?', 'What amount would you feel comfortable donating?'"
+        },
+        "donation-information": {
+          "meaning": "Gives factual information about the donation itself or answers the persuadee's question about how or how much to donate: the donation comes out of the task payment, any amount from $0 to the full payment, the research team will collect and send it, how to pay, a suggested or typical amount given when the persuadee asks ('I would suggest $20 a month, or whatever you can spare')"
+        },
+        "foot-in-the-door": {
+          "meaning": "The persuader proactively encourages a small donation to make giving easier",
+          "for example": "'Even a small amount helps', 'Every little bit helps', 'Even 50 cents would help', 'Just a dollar?', 'May I suggest $.50 or even $1?'. Not when the persuader is answering the persuadee's own question about how or how much to donate (that is donation-information)"
+        },
+        "self-modeling": {
+          "meaning": "The persuader says they themselves donate or will donate, setting an example",
+          "for example": "'I will donate the same amount', 'I usually donate to this cause', 'I gave my payment too'"
+        },
+        "personal-story": {
+          "meaning": "Tells a story or anecdote about the persuader's own or someone else's experience related to children, charity or need",
+          "for example": "'I worked in Africa and saw the difference a few dollars make', 'The founder heard about Bruce's family and helped them'"
+        },
+        "credibility-appeal": {
+          "meaning": "Establishes the charity's credibility: describes the organization, what it does, its programs, history, reach, ratings or track record, including the charity acting on children's suffering, or points to its website",
+          "for example": "'Save the Children is an international NGO that promotes children's rights', 'It is one of the top rated charities', 'They have a presence on every continent', 'They provide food and shelter to children in Syria', 'More information is on their website: URL'"
+        },
+        "emotion-appeal": {
+          "meaning": "Evokes emotions such as sadness, guilt, sympathy or hope. Includes stating facts or statistics about children's suffering or need (deaths, war, hunger, 'they have nothing')",
+          "for example": "'1000 children have been killed in Syria', 'Did you know 16,000 children under 5 die each day?', 'It breaks my heart that children lack clean water', 'Imagine how happy the children will be'"
+        },
+        "logical-appeal": {
+          "meaning": "Reasoning that donating has an effect, or moral or general reasoning and cost comparisons",
+          "for example": "'Your donation will make a huge impact', 'You can protect those children if you donate', 'They can only help when people donate', 'Children are the future', 'If you have enough, give to others', 'It is less than a cup of coffee'"
+        },
+        "off-task": {
+          "meaning": "Discussion of a topic unrelated to the charity, the donation or the task, such as history, politics, the news, places, hobbies ('the true Americans are the Native Indians'). Brief facts the persuader states about themselves ('I live in Florida') are other, not off-task"
+        },
+        "other": {
+          "meaning": "None of the above. Mostly: flat fillers ('Ok..",
+          "for example": "', 'Fine...', 'Yeah.', 'yes, indeed.'); closings ('Have a great night!', 'I hope you enjoy the rest of your day'); confirming the amount ('Just to be sure, you want to donate 1 dollar?'); asking for more; short answers to the persuadee's questions ('I have', 'No, I don't donate'); talk about other charities; brief facts about the persuader's own life ('I live in Florida', 'I have a fridge full of food'); arguing with the persuadee; remarks about the task or HIT itself ('we need 10 chats to complete this hit'); typo fixes ('sorry, I meant URL')"
+        }
+      }
+    },
+    {
+      "version": 1,
+      "name": "persuasion_v4c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "question": "Tag the persuader's message to tag with the annotation-scheme category that best describes the persuasion strategy or dialogue act it performs.",
+        "setting": "Chats in which a persuader tries to convince the persuadee to give part of their task payment to Save the Children.",
+        "how to decide": [
+          "Look at what the tagged message itself does; read the earlier lines only for context, they may be partial.",
+          "If the tagged message is a short piece that continues the persuader's own previous line, tag the strategy of the whole combined sentence.",
+          "Choose the one option that fits the message's main purpose."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "other": {
+          "meaning": "None of the above. Mostly: flat fillers ('Ok..",
+          "for example": "', 'Fine...', 'Yeah.', 'yes, indeed.'); closings ('Have a great night!', 'I hope you enjoy the rest of your day'); confirming the amount ('Just to be sure, you want to donate 1 dollar?'); asking for more; short answers to the persuadee's questions ('I have', 'No, I don't donate'); talk about other charities; brief facts about the persuader's own life ('I live in Florida', 'I have a fridge full of food'); arguing with the persuadee; remarks about the task or HIT itself ('we need 10 chats to complete this hit'); typo fixes ('sorry, I meant URL')"
+        },
+        "off-task": {
+          "meaning": "Discussion of a topic unrelated to the charity, the donation or the task, such as history, politics, the news, places, hobbies ('the true Americans are the Native Indians'). Brief facts the persuader states about themselves ('I live in Florida') are other, not off-task"
+        },
+        "logical-appeal": {
+          "meaning": "Reasoning that donating has an effect, or moral or general reasoning and cost comparisons",
+          "for example": "'Your donation will make a huge impact', 'You can protect those children if you donate', 'They can only help when people donate', 'Children are the future', 'If you have enough, give to others', 'It is less than a cup of coffee'"
+        },
+        "emotion-appeal": {
+          "meaning": "Evokes emotions such as sadness, guilt, sympathy or hope. Includes stating facts or statistics about children's suffering or need (deaths, war, hunger, 'they have nothing')",
+          "for example": "'1000 children have been killed in Syria', 'Did you know 16,000 children under 5 die each day?', 'It breaks my heart that children lack clean water', 'Imagine how happy the children will be'"
+        },
+        "credibility-appeal": {
+          "meaning": "Establishes the charity's credibility: describes the organization, what it does, its programs, history, reach, ratings or track record, including the charity acting on children's suffering, or points to its website",
+          "for example": "'Save the Children is an international NGO that promotes children's rights', 'It is one of the top rated charities', 'They have a presence on every continent', 'They provide food and shelter to children in Syria', 'More information is on their website: URL'"
+        },
+        "personal-story": {
+          "meaning": "Tells a story or anecdote about the persuader's own or someone else's experience related to children, charity or need",
+          "for example": "'I worked in Africa and saw the difference a few dollars make', 'The founder heard about Bruce's family and helped them'"
+        },
+        "self-modeling": {
+          "meaning": "The persuader says they themselves donate or will donate, setting an example",
+          "for example": "'I will donate the same amount', 'I usually donate to this cause', 'I gave my payment too'"
+        },
+        "foot-in-the-door": {
+          "meaning": "The persuader proactively encourages a small donation to make giving easier",
+          "for example": "'Even a small amount helps', 'Every little bit helps', 'Even 50 cents would help', 'Just a dollar?', 'May I suggest $.50 or even $1?'. Not when the persuader is answering the persuadee's own question about how or how much to donate (that is donation-information)"
+        },
+        "donation-information": {
+          "meaning": "Gives factual information about the donation itself or answers the persuadee's question about how or how much to donate: the donation comes out of the task payment, any amount from $0 to the full payment, the research team will collect and send it, how to pay, a suggested or typical amount given when the persuadee asks ('I would suggest $20 a month, or whatever you can spare')"
+        },
+        "ask-donation-amount": {
+          "meaning": "Asks how much the persuadee will donate",
+          "for example": "'How much would you like to donate?', 'What amount would you feel comfortable donating?'"
+        },
+        "proposition-of-donation": {
+          "meaning": "Asks or proposes that the persuadee donate",
+          "for example": "'Would you be willing to donate some of your payment?', 'Would you like to donate to Save the Children?', 'We should donate to them!'"
+        },
+        "personal-related-inquiry": {
+          "meaning": "Asks about the persuadee's personal life, background, habits or activities other than donating money",
+          "for example": "'Do you have children?', 'Where are you from?', 'What do you do for work?', 'Do you ever volunteer?'"
+        },
+        "task-related-inquiry": {
+          "meaning": "Asks the persuadee's opinion or experience about donating money or charities, or their thoughts on the cause",
+          "for example": "'Do you donate to charities?', 'Have you ever donated before?', 'Is this something you care about?', 'What do you think about it?'"
+        },
+        "source-related-inquiry": {
+          "meaning": "Asks whether the persuadee knows about the charity or organization",
+          "for example": "'Have you heard of Save the Children?', 'Are you familiar with the organization?'"
+        },
+        "acknowledgement": {
+          "meaning": "Substantive agreement with or reaction to what the persuadee said, without a persuasion strategy",
+          "for example": "'I agree', 'Absolutely.', 'Yes, they are.', 'Me too', 'ok, I understand that', 'That's great to hear', or 'Great!' when it is not reacting to the persuadee agreeing to donate. Flat fillers like 'Ok...', 'Fine...', 'Yeah.' are not acknowledgement (they are other)"
+        },
+        "praise-user": {
+          "meaning": "Praises or compliments the persuadee, including a positive reaction right after they agree to donate",
+          "for example": "'That's very generous of you', 'You are a kind person', 'People like you make the world better', 'Great!/Awesome!' right after the persuadee commits to a donation"
+        },
+        "thank": {
+          "meaning": "Thanks the persuadee",
+          "for example": "'Thank you', 'Thanks so much for your donation'"
+        },
+        "greeting": {
+          "meaning": "Greets or opens the chat, or replies to a 'how are you' exchange",
+          "for example": "'Hi', 'Hello there', 'How are you today?', 'I am doing well, thank you', 'Doing alright..', 'Glad you are doing well also'"
+        }
+      }
+    }
+  ]
+}

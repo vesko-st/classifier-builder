@@ -1,0 +1,109 @@
+{
+  "run_id": "b200-intents-labelsfirst-r1",
+  "task": "banking77_intents",
+  "budget": 200,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T16:11:15",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 2679,
+    "num_turns": 53,
+    "total_cost_usd": 2.2821618000000004
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 49,
+      "estimate": 0.72,
+      "note": "v1 draft: flat 77-option choice with descriptions from owner policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.8526,
+          "macro_f1": 0.8496,
+          "est_cost_usd": 0.34379,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 89,
+      "estimate": 0.82,
+      "note": "v4: descriptions revised from 10 uncertainty labels; 20/20 bought labels, 10/10 check",
+      "test": {
+        "jev": {
+          "accuracy": 0.8532,
+          "macro_f1": 0.8507,
+          "est_cost_usd": 0.369662,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 111,
+      "estimate": 0.83,
+      "note": "v9: 3-member flat wording-variant ensemble + round-2 rules; 30/31 bought labels, 10/10 check",
+      "test": {
+        "jev": {
+          "accuracy": 0.8613,
+          "macro_f1": 0.8598,
+          "est_cost_usd": 1.444079,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 133,
+      "estimate": 0.84,
+      "note": "v11: round-3 rules (transfer waiting vs not arrived, beneficiary, rate complaints); 41/42 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8652,
+          "macro_f1": 0.8641,
+          "est_cost_usd": 1.499556,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 155,
+      "estimate": 0.84,
+      "note": "v13: label-derived rules in structured instructions for all 3 members; 52/53 bought labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8666,
+          "macro_f1": 0.8674,
+          "est_cost_usd": 1.642856,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 199,
+      "estimate": 0.85,
+      "note": "v16 final: 3-member ensemble with label-derived rules; 70/75 bought labels (4 suspected noise), 18/20 random check",
+      "test": {
+        "jev": {
+          "accuracy": 0.8681,
+          "macro_f1": 0.8688,
+          "est_cost_usd": 1.691106,
+          "total": 3080,
+          "answered": 3077
+        }
+      }
+    }
+  ]
+}

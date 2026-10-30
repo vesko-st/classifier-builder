@@ -1,0 +1,81 @@
+{
+  "version": 1,
+  "name": "donation_v4_ens",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "donation_v3",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "This is a chat in which a persuader asks the persuadee to donate part of their task payment (usually $0-$2) to Save the Children. Which description best fits how the PERSUADEE's decision comes across in the chat? We use it to predict whether the persuadee actually donated after the chat.",
+        "rules": [
+          "Judge the persuadee's own words, not the persuader's claims. A persuader saying 'thanks for your donation' is not a commitment unless the persuadee agreed.",
+          "If the writing in the chat (either side) is garbled, all-caps, robotic, template-like or trolling, choose garbled_or_trolling whatever was pledged.",
+          "Use the persuadee's final position if it changed during the chat."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "full_amount": "The persuadee commits to donating all (or nearly all) of their task payment, e.g. 'I'll donate the full $2', 'all of my payment'.",
+        "pledge_willing": "The persuadee freely and willingly commits to a specific positive amount within the task payment range ($0.01-$2), e.g. 'I'll donate $0.50', 'half, so $1'.",
+        "pledge_reluctant": "The persuadee commits to a small or token amount only reluctantly after pressure, or caves when the persuader haggles the amount up.",
+        "pledge_out_of_range": "The persuadee names an amount larger than the task payment (e.g. $5, $20, $50, $100), which cannot come from the task payment.",
+        "deferred": "The persuadee says they will give later, elsewhere (the website, when paid) or after researching, and gives nothing now or nothing definite.",
+        "agrees_no_amount": "The persuadee warmly agrees to donate or seems to have agreed, but no specific amount is ever named by them.",
+        "no_decision": "No donation decision is reached or discussed; the chat is mostly small talk or unclear.",
+        "refusal": "The persuadee declines, says $0, or says they cannot afford to give anything now.",
+        "garbled_or_trolling": "The chat has garbled, all-caps, robotic or template-like writing on either side, or the persuadee is trolling or rushing through."
+      },
+      "map": {
+        "full_amount": "donated",
+        "pledge_willing": "donated",
+        "pledge_reluctant": "donated",
+        "pledge_out_of_range": "not_donated",
+        "deferred": "not_donated",
+        "agrees_no_amount": "donated",
+        "no_decision": "not_donated",
+        "refusal": "not_donated",
+        "garbled_or_trolling": "not_donated"
+      }
+    },
+    {
+      "version": 1,
+      "name": "donation_v3b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Read this chat. A persuader is asking the persuadee to give some of their task earnings (normally between $0 and $2) to the charity Save the Children. Pick the option that best describes where the persuadee ends up on donating. This is used to predict whether they really donated once the chat ended.",
+        "rules": [
+          "Go by what the persuadee says, not by what the persuader asserts; a persuader thanking them for a donation they never agreed to does not count.",
+          "When the conversation on either side is garbled, in all caps, robotic, template-like, or trolling, pick garbled_or_trolling regardless of any pledge.",
+          "If the persuadee changes their mind, use their last position."
+        ]
+      },
+      "state_template": "{{input}}",
+      "criteria": {
+        "full_amount": "Persuadee says they will give their entire task payment or almost all of it ('all $2', 'the full amount').",
+        "pledge_willing": "Persuadee readily offers a concrete positive amount that fits within the task payment ($0.01 to $2), such as '50 cents' or 'I'll do $1'.",
+        "pledge_reluctant": "Persuadee ends up agreeing to a small or token amount only after resisting or being pushed, or gives in when the persuader bargains the amount upward.",
+        "pledge_out_of_range": "Persuadee names a figure bigger than the task payment could cover, like $5, $20, $50 or $100.",
+        "deferred": "Persuadee intends to give at some later point or some other way (on the website, after payday, after looking into it) instead of now.",
+        "agrees_no_amount": "Persuadee happily goes along with donating, or appears to, yet never states an amount of their own.",
+        "no_decision": "Donating never really gets settled or discussed; mostly chit-chat or unclear.",
+        "refusal": "Persuadee turns it down, picks $0, or says they can't spare anything right now.",
+        "garbled_or_trolling": "Text on either side is garbled, ALL CAPS, robotic or template-like, or the persuadee is trolling or hurrying through."
+      },
+      "map": {
+        "full_amount": "donated",
+        "pledge_willing": "donated",
+        "pledge_reluctant": "donated",
+        "pledge_out_of_range": "not_donated",
+        "deferred": "not_donated",
+        "agrees_no_amount": "donated",
+        "no_decision": "not_donated",
+        "refusal": "not_donated",
+        "garbled_or_trolling": "not_donated"
+      }
+    }
+  ]
+}

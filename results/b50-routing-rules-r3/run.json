@@ -1,0 +1,94 @@
+{
+  "run_id": "b50-routing-rules-r3",
+  "task": "banking77_routing",
+  "budget": 50,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T15:11:21",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1126,
+    "num_turns": 37,
+    "total_cost_usd": 1.5115876000000001
+  },
+  "final_version": 5,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.7,
+      "note": "draft: 77 banking intents mapped to 6 teams by guess",
+      "test": {
+        "jev": {
+          "accuracy": 0.8071,
+          "macro_f1": 0.7737,
+          "est_cost_usd": 0.262467,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 26,
+      "estimate": 0.8,
+      "note": "round1 rules: pending ATM withdrawals->cards, stolen card->fraud, cancel purchase->disputes, DD refund->fraud, unknown incoming money->fraud",
+      "test": {
+        "jev": {
+          "accuracy": 0.8321,
+          "macro_f1": 0.7994,
+          "est_cost_usd": 0.278632,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 42,
+      "estimate": 0.82,
+      "note": "round2 rules: reverted/cancelled card payment->disputes, ATM swallowed card->fraud, unreceived cash withdrawal->fraud, vague missing money->payments",
+      "test": {
+        "jev": {
+          "accuracy": 0.8558,
+          "macro_f1": 0.8321,
+          "est_cost_usd": 0.288036,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 48,
+      "estimate": 0.83,
+      "note": "round3: no-cash-dispensed->disputes (H8 narrowed), country availability incl cards->account (H11), duplicate-charge wording",
+      "test": {
+        "jev": {
+          "accuracy": 0.8558,
+          "macro_f1": 0.8324,
+          "est_cost_usd": 0.294184,
+          "total": 3080,
+          "answered": 3079
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 50,
+      "estimate": 0.82,
+      "note": "final: H11 narrowed (card delivery to a country->cards; country eligibility->account); agrees with 24/25 labels (0843 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8575,
+          "macro_f1": 0.8338,
+          "est_cost_usd": 0.2979,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

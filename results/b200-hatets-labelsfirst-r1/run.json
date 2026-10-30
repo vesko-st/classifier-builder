@@ -1,0 +1,109 @@
+{
+  "run_id": "b200-hatets-labelsfirst-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 200,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:29:41",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 869,
+    "num_turns": 44,
+    "total_cost_usd": 1.7673707999999995
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 30,
+      "estimate": 0.65,
+      "note": "v1 criteria draft from policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.7718,
+          "macro_f1": 0.7718,
+          "est_cost_usd": 0.063997,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 50,
+      "estimate": 0.68,
+      "note": "v2 tightened woman_hate (clear female target, no sayings/lone bitch) and immigrant term-only",
+      "test": {
+        "jev": {
+          "accuracy": 0.8171,
+          "macro_f1": 0.8159,
+          "est_cost_usd": 0.069485,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 74,
+      "estimate": 0.69,
+      "note": "v4: v2 + hostile slur strings in woman_hate + immigrant sarcasm examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.8109,
+          "macro_f1": 0.8102,
+          "est_cost_usd": 0.0749,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 134,
+      "estimate": 0.78,
+      "note": "v6: v4 + friendly/celebratory slur use excluded; check(26) macro-F1 0.880",
+      "test": {
+        "jev": {
+          "accuracy": 0.8143,
+          "macro_f1": 0.8134,
+          "est_cost_usd": 0.077051,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 158,
+      "estimate": 0.79,
+      "note": "v7: male-target and Islam-only exclusions, short deport demands = hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8177,
+          "macro_f1": 0.8168,
+          "est_cost_usd": 0.085877,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 200,
+      "estimate": 0.8,
+      "note": "FINAL v7C: v7 rules in JSON counts_as_hate/does_not_count phrasing; check(31) 0.870, all-bought(85) best",
+      "test": {
+        "jev": {
+          "accuracy": 0.812,
+          "macro_f1": 0.8114,
+          "est_cost_usd": 0.09144,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

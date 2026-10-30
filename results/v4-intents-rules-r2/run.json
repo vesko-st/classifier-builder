@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-intents-rules-r2",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:10:56",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 1084,
+    "num_turns": 54,
+    "total_cost_usd": 2.145367
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "draft: flat 77-option choice from descriptions",
+      "test": {
+        "jev": {
+          "accuracy": 0.85,
+          "macro_f1": 0.8442,
+          "est_cost_usd": 0.331652,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 24,
+      "estimate": 0.8,
+      "note": "round1 rules H1-H5 (narrowed after tests): transfer/payment timing cluster",
+      "test": {
+        "jev": {
+          "accuracy": 0.8549,
+          "macro_f1": 0.8495,
+          "est_cost_usd": 0.373155,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 38,
+      "estimate": 0.8,
+      "note": "round2 rules H7-H9 + 3-member wording ensemble",
+      "test": {
+        "jev": {
+          "accuracy": 0.8581,
+          "macro_f1": 0.8538,
+          "est_cost_usd": 1.214804,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 56,
+      "estimate": 0.8,
+      "note": "round3 rules H10-H11 (top-up failed/reverted/apple pay, declined vs not working)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8558,
+          "macro_f1": 0.8517,
+          "est_cost_usd": 1.252818,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.81,
+      "note": "round4 rules H12-H15 (unknown charge=direct debit, pending transfer, spare card, visa/mc)",
+      "test": {
+        "jev": {
+          "accuracy": 0.861,
+          "macro_f1": 0.8572,
+          "est_cost_usd": 1.333556,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.82,
+      "note": "final: round5 rules (cost of physical card=order, unknown charge split card vs direct debit), wording pins; agrees with all labels except suspected-noise 0454",
+      "test": {
+        "jev": {
+          "accuracy": 0.8643,
+          "macro_f1": 0.8606,
+          "est_cost_usd": 1.397201,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

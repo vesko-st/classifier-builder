@@ -1,0 +1,184 @@
+{
+  "run_id": "b200-intents-rules-r1",
+  "task": "banking77_intents",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T16:06:27",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 5370,
+    "num_turns": 83,
+    "total_cost_usd": 3.959920800000002
+  },
+  "final_version": 11,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.8,
+      "note": "v1 draft: flat 77-option choice with descriptions from intent names",
+      "test": {
+        "jev": {
+          "accuracy": 0.8516,
+          "macro_f1": 0.8453,
+          "est_cost_usd": 0.343532,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 42,
+      "estimate": 0.85,
+      "note": "v5: 3-member wording ensemble (2 flat + two_level) with rules H1',H3'',H4,H5,H6,H2',H7,H8,H9,H10'",
+      "test": {
+        "jev": {
+          "accuracy": 0.8526,
+          "macro_f1": 0.8477,
+          "est_cost_usd": 1.603916,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 68,
+      "estimate": 0.86,
+      "note": "v9: round 3 rules (typo, small unexplained charge, deposits, transfer-not-possible=beneficiary_not_allowed, error msg=failed_transfer, card top-up money gone, spare card fees)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8604,
+          "macro_f1": 0.8585,
+          "est_cost_usd": 2.007647,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 90,
+      "estimate": 0.87,
+      "note": "v14 ens4: 4-member ensemble (3 flat phrasings + two_level); round 4 rules: SWIFT=top_up_by_bank_transfer_charge, virtual card not arrived=getting_virtual_card, ways to add money, unrecognised cash withdrawal",
+      "test": {
+        "jev": {
+          "accuracy": 0.8659,
+          "macro_f1": 0.8651,
+          "est_cost_usd": 2.831755,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 104,
+      "estimate": 0.87,
+      "note": "v16 ens4: round 5 rules (unknown charge=card_payment_not_recognised, country eligibility, ATM failure=declined_cash_withdrawal, recipient not received, specific delayed transfer=pending_transfer)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8675,
+          "macro_f1": 0.8668,
+          "est_cost_usd": 3.187237,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 120,
+      "estimate": 0.87,
+      "note": "v17 ens4: round 6 rules (exchange discounts=exchange_charge, Amex top-up=supported_cards, add-money fee=top_up_by_card_charge, banking-abroad fee=transfer_fee_charged, pending transfer)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8672,
+          "macro_f1": 0.8664,
+          "est_cost_usd": 3.408442,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 136,
+      "estimate": 0.87,
+      "note": "v20 ens4: round 7 (transfer_timing vs pending boundary, cash rates, found card=card_linking, hidden fee=card_payment_fee_charged)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8685,
+          "macro_f1": 0.8678,
+          "est_cost_usd": 3.603776,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 150,
+      "estimate": 0.87,
+      "note": "v22 ens4: round 8 anchors (transfer_timing 'how much longer', card by a date, auto top-up limits, urgent pending transfer)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8698,
+          "macro_f1": 0.8692,
+          "est_cost_usd": 3.669723,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 170,
+      "estimate": 0.83,
+      "note": "v23 ens4: random-check fixes (card shipped to country=country_support, paid purchase disappeared=reverted, when to expect ordered card=card_delivery_estimate). Random check 7/10 before fixes.",
+      "test": {
+        "jev": {
+          "accuracy": 0.8682,
+          "macro_f1": 0.8671,
+          "est_cost_usd": 3.858615,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 10,
+      "points_spent": 184,
+      "estimate": 0.84,
+      "note": "v24 ens4: round 9 (bad/worse rate complaints=card_payment_wrong_exchange_rate, sent to friend not arrived=transfer_not_received_by_recipient, UK transfer anchor)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8711,
+          "macro_f1": 0.8704,
+          "est_cost_usd": 3.917603,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 11,
+      "points_spent": 200,
+      "estimate": 0.84,
+      "note": "v26 final ens4: + reactivate=card_linking, wrong exchange charges=card_payment_wrong_exchange_rate, ATM abroad without fees=wrong_exchange_rate_for_cash_withdrawal. Agrees with all 96 non-noise labels.",
+      "test": {
+        "jev": {
+          "accuracy": 0.8724,
+          "macro_f1": 0.8716,
+          "est_cost_usd": 4.01928,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

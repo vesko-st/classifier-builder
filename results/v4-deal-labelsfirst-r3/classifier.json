@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "name": "deal_v4",
+  "model": "jev-latest",
+  "type": "criteria",
+  "state_template": "Craigslist negotiation (listing, then chat between buyer and seller):\n{{input}}",
+  "questions": {
+    "agreed": {
+      "instructions": "Does the chat show that the two sides reached agreement on the sale? Count any acceptance of the other side's price or terms, even informal or implied: 'deal', 'I'll take it', 'ok', 'fair enough', 'sounds good', 'that works', 'put in your offer', 'I'll send the offer', 'great doing business with you', arranging pickup at the agreed price.",
+      "criteria": {
+        "true": "One side accepted the other's price or terms (explicitly or clearly implied)",
+        "false": "No acceptance of any price; the last offer is still open, or it was refused"
+      }
+    },
+    "haggled": {
+      "instructions": "Did the two sides actually negotiate the price: at least one concrete price offer was made AND the other side responded with a counter-offer or a stated lowest price (more than just a single opening offer)?",
+      "criteria": {
+        "true": "There was real back-and-forth about specific prices",
+        "false": "No prices, or only one side's single opening offer with no price response"
+      }
+    },
+    "walked_away": {
+      "instructions": "Does the negotiation end without a deal on the table? Yes if, in the final messages, someone explicitly ends or rejects the negotiation (no thanks, will pass, not interested, too far apart, 'I don't think we can make a deal', 'that's my last offer or I walk' answered by a refusal, goodbye without a deal, breaks off rudely), OR the buyer's last price offer is flatly rejected ('too low', 'too little', 'I'm firm', 'no', or just repeating the seller's earlier price) and nobody proposes a new price afterwards. No if the chat ends in agreement, or with a new price offer, counter-offer or newly stated lowest price still open for the other side to take.",
+      "criteria": {
+        "true": "Ends in refusal or walk-away, with no price left on the table",
+        "false": "Ends in agreement, or with a concrete price still on the table"
+      }
+    },
+    "broken": {
+      "instructions": "Is this not a real negotiation about the listed item? Yes only if the participants are confused about who is selling or which item is for sale and never sort it out, the messages are nonsense or off-topic throughout, or they complain the website or offer button does not work. Jokes, banter, rudeness or odd remarks inside an otherwise real price negotiation do NOT make it broken.",
+      "criteria": {
+        "true": "Broken, confused or off-topic chat",
+        "false": "A real negotiation about the listed item, even if jokey or rude"
+      }
+    }
+  },
+  "rule": [
+    [
+      "agreed"
+    ],
+    [
+      "haggled",
+      "!walked_away",
+      "!broken"
+    ]
+  ],
+  "positive": "deal",
+  "negative": "no_deal"
+}

@@ -1,0 +1,109 @@
+{
+  "run_id": "v4-intents-rules-r1",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:10:03",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 828,
+    "num_turns": 48,
+    "total_cost_usd": 1.8823172000000001
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.75,
+      "note": "v1 draft: flat 77-option choice from description + domain knowledge",
+      "test": {
+        "jev": {
+          "accuracy": 0.8519,
+          "macro_f1": 0.8472,
+          "est_cost_usd": 0.325421,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 22,
+      "estimate": 0.78,
+      "note": "v2: H1-H5 (cash deposit delay, pending payment, small unexplained charge, physical card order, declined at a place)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8601,
+          "macro_f1": 0.8546,
+          "est_cost_usd": 0.344825,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 48,
+      "estimate": 0.8,
+      "note": "v3: H6-H12; agrees with all labels except suspected-noise 0023",
+      "test": {
+        "jev": {
+          "accuracy": 0.8643,
+          "macro_f1": 0.8596,
+          "est_cost_usd": 0.380399,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 64,
+      "estimate": 0.82,
+      "note": "v4e: 3-variant ensemble with H1-H13; agrees with all non-noise labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8653,
+          "macro_f1": 0.8614,
+          "est_cost_usd": 1.491634,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 80,
+      "estimate": 0.83,
+      "note": "v5e: ensemble + H14-H17; agrees with all non-noise labels",
+      "test": {
+        "jev": {
+          "accuracy": 0.8682,
+          "macro_f1": 0.8643,
+          "est_cost_usd": 1.577788,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 100,
+      "estimate": 0.84,
+      "note": "v6e final: ensemble + H18-H20; agrees with all non-noise labels (4 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8646,
+          "macro_f1": 0.8613,
+          "est_cost_usd": 1.620477,
+          "total": 3080,
+          "answered": 3080
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,214 @@
+{
+  "run_id": "b200-hatets-rules-r1",
+  "task": "tweet_hate_testsplit",
+  "budget": 200,
+  "strategy": "uncertainty_rules",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:45:25",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 5152,
+    "num_turns": 83,
+    "total_cost_usd": 4.715595999999999
+  },
+  "final_version": 13,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 0,
+      "estimate": 0.62,
+      "note": "v1 draft from description: 5 options mapped to hate/not_hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.7826,
+          "macro_f1": 0.7825,
+          "est_cost_usd": 0.053019,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 20,
+      "estimate": 0.68,
+      "note": "v3: narrowed H1 (immigrants as criminals = hate) and H2 (hostile slurs at non-male = hate; exclamation/men = not)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8029,
+          "macro_f1": 0.8026,
+          "est_cost_usd": 0.058656,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 47,
+      "estimate": 0.7,
+      "note": "v5: 9 fine options mapped, 2-member wording ensemble; rules H1-H8 (expulsion calls, non-gendered criticism of women, sarcastic counter-speech)",
+      "test": {
+        "jev": {
+          "accuracy": 0.7882,
+          "macro_f1": 0.7875,
+          "est_cost_usd": 0.154176,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 65,
+      "estimate": 0.72,
+      "note": "v9: 3-member wording ensemble; added lyrics-degrading-women, hashtag-string exclusion, robbing-Americans framing, casual examples",
+      "test": {
+        "jev": {
+          "accuracy": 0.7916,
+          "macro_f1": 0.7913,
+          "est_cost_usd": 0.286337,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 83,
+      "estimate": 0.72,
+      "note": "v11: + serious rape statements / sex-play / tacked-on hashtags not hate; religion/nationality exclusion hate; 0887/0490 shoe-group treated as noise",
+      "test": {
+        "jev": {
+          "accuracy": 0.7995,
+          "macro_f1": 0.799,
+          "est_cost_usd": 0.310146,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 99,
+      "estimate": 0.72,
+      "note": "v14: H16 narrowed to fear-mongering; friendly banter casual; liars/border-crashers criminalising; contemptuous go-home = expulsion",
+      "test": {
+        "jev": {
+          "accuracy": 0.8035,
+          "macro_f1": 0.8031,
+          "est_cost_usd": 0.339592,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 7,
+      "points_spent": 113,
+      "estimate": 0.72,
+      "note": "v18: insults at men casual; single-hashtag & enforcement policy not hate; 'hoes' generalisations, disposable-sex-object, flood metaphor hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8029,
+          "macro_f1": 0.8023,
+          "est_cost_usd": 0.381796,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 8,
+      "points_spent": 131,
+      "estimate": 0.73,
+      "note": "v20: bragging/joking slur exclamations casual (H19), political jab + hashtag salad not hate (H20), slurs at male politicians casual",
+      "test": {
+        "jev": {
+          "accuracy": 0.8052,
+          "macro_f1": 0.8044,
+          "est_cost_usd": 0.413616,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 9,
+      "points_spent": 145,
+      "estimate": 0.73,
+      "note": "v21: H21 individual expulsion demand = hate; examples for counter-speech vs racist, hashtag spam, voting-fraud jab, exclamation",
+      "test": {
+        "jev": {
+          "accuracy": 0.8075,
+          "macro_f1": 0.8066,
+          "est_cost_usd": 0.442172,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 10,
+      "points_spent": 159,
+      "estimate": 0.73,
+      "note": "v23: resource-competition complaints + tacked #sendthemhome/#DeportThemAll = policy; laughing/quoted banter casual; hostile 'fuck you hoe' = hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8075,
+          "macro_f1": 0.8066,
+          "est_cost_usd": 0.476217,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 11,
+      "points_spent": 173,
+      "estimate": 0.73,
+      "note": "v25: more casual examples (word mentions, friendly vocatives, insults at named men, double-standard callouts); wall-priority plea and news+hashtag not hate",
+      "test": {
+        "jev": {
+          "accuracy": 0.8069,
+          "macro_f1": 0.8059,
+          "est_cost_usd": 0.51449,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 12,
+      "points_spent": 187,
+      "estimate": 0.73,
+      "note": "v26b: bare news headline of a single immigrant crime + hashtags = news (not hate)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8041,
+          "macro_f1": 0.8032,
+          "est_cost_usd": 0.525616,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    },
+    {
+      "version": 13,
+      "points_spent": 199,
+      "estimate": 0.72,
+      "note": "v29 FINAL: casual examples (self-mocking, playful warnings, offhand commands), tacked-on hashtag examples (thanks to President, Democrat taunts); fits 96/97 bought labels (0490 suspected noise)",
+      "test": {
+        "jev": {
+          "accuracy": 0.8063,
+          "macro_f1": 0.8054,
+          "est_cost_usd": 0.561886,
+          "total": 1766,
+          "answered": 1766
+        }
+      }
+    }
+  ]
+}

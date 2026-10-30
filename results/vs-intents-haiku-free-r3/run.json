@@ -1,0 +1,34 @@
+{
+  "run_id": "vs-intents-haiku-free-r3",
+  "task": "banking77_intents",
+  "budget": 100,
+  "strategy": "free",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T14:57:36",
+  "builder": {
+    "model": "claude-haiku-4-5-20251001",
+    "effort": "high",
+    "wall_seconds": 489,
+    "num_turns": 39,
+    "total_cost_usd": 0.30723980000000006
+  },
+  "final_version": 1,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 100,
+      "estimate": 0.814,
+      "note": "2-member ensemble with different wording variants. Improves robustness on edge cases. 81.4% accuracy on 43-label validation set, macro-F1 0.755",
+      "test": {
+        "jev": {
+          "accuracy": 0.7927,
+          "macro_f1": 0.7849,
+          "est_cost_usd": 0.479517,
+          "total": 3080,
+          "answered": 3078
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,109 @@
+{
+  "run_id": "b200-persuasion-labelsfirst-r2",
+  "task": "persuasion_strategy",
+  "budget": 200,
+  "strategy": "policy_labels_first",
+  "constraints": [],
+  "mode": "budget",
+  "created": "2026-10-30T12:53:12",
+  "builder": {
+    "model": "claude-opus-5-5",
+    "effort": "high",
+    "wall_seconds": 6287,
+    "num_turns": 43,
+    "total_cost_usd": 2.2690192
+  },
+  "final_version": 6,
+  "snapshots": [
+    {
+      "version": 1,
+      "points_spent": 22,
+      "estimate": 0.5,
+      "note": "v1 draft: 19-option choice with map, from policy answers",
+      "test": {
+        "jev": {
+          "accuracy": 0.6098,
+          "macro_f1": 0.576,
+          "est_cost_usd": 0.117329,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 2,
+      "points_spent": 55,
+      "estimate": 0.55,
+      "note": "v2: donation/volunteering-history questions default to personal-related-inquiry (owner: 60/40 split)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6282,
+          "macro_f1": 0.6078,
+          "est_cost_usd": 0.121438,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 3,
+      "points_spent": 105,
+      "estimate": 0.6,
+      "note": "v4: plain answers about the persuader -> other; donating answers stay self-modeling",
+      "test": {
+        "jev": {
+          "accuracy": 0.6322,
+          "macro_f1": 0.6102,
+          "est_cost_usd": 0.132436,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 4,
+      "points_spent": 135,
+      "estimate": 0.62,
+      "note": "ens1: 3 wording variants of v5 (fixes 3 more bought labels than v4)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6322,
+          "macro_f1": 0.6047,
+          "est_cost_usd": 0.400849,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 5,
+      "points_spent": 175,
+      "estimate": 0.62,
+      "note": "ens3: ens1 with off-task option mapped to other (labels 0/4 off-task)",
+      "test": {
+        "jev": {
+          "accuracy": 0.6454,
+          "macro_f1": 0.5958,
+          "est_cost_usd": 0.0,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    },
+    {
+      "version": 6,
+      "points_spent": 199,
+      "estimate": 0.7,
+      "note": "final: ens3 re-snapshotted with estimate from 16 random check labels (15/16 acc); macro-F1 lower due to noisy small classes",
+      "test": {
+        "jev": {
+          "accuracy": 0.6454,
+          "macro_f1": 0.5958,
+          "est_cost_usd": 0.0,
+          "total": 1517,
+          "answered": 1517
+        }
+      }
+    }
+  ]
+}

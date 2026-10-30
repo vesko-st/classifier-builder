@@ -1,0 +1,710 @@
+{
+  "version": 1,
+  "name": "v16",
+  "type": "ensemble",
+  "members": [
+    {
+      "version": 1,
+      "name": "flat_a",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "A customer of a digital bank sent this message to the support chat. Which intent does the message express? Choose exactly one intent.",
+        "labelling rules (follow these)": [
+          "If the customer calls the transaction a transfer ('denying my transfers', 'I thought transfers were free'), choose the matching transfer intent even if they were buying something.",
+          "An error when making a large payment such as for a flat or mortgage is failed_transfer.",
+          "Waiting for a transfer to reach a recipient or retailer's account is transfer_not_received_by_recipient; waiting a long time for a transfer with no recipient mentioned, or 'when will the transaction post to my account', is pending_transfer.",
+          "Asking to check that a UK transfer made a few hours ago went through is balance_not_updated_after_bank_transfer.",
+          "The card was tried several times or in several places and never goes through, without the word declined: card_not_working.",
+          "Topping up explicitly with a card and the money is gone: topping_up_by_card.",
+          "Finding, receiving, or setting the PIN of the physical card (the customer mentions the physical card or a PIN that never arrived): get_physical_card. 'Help me set up a new PIN' or changing a PIN: change_pin.",
+          "Reactivating or re-adding a card the customer thought was lost: card_linking.",
+          "A beneficiary that can't receive the customer's transfer: beneficiary_not_allowed.",
+          "Hidden fees or being charged too many fees: card_payment_fee_charged.",
+          "Wanting to cancel a purchase of an item: request_refund. Wanting to take back, revert or cancel a transaction or transfer they made: cancel_transfer.",
+          "Being unable to transfer to an account ('I need to transfer to my account and can't', 'transfer not possible / not allowed'): beneficiary_not_allowed.",
+          "How disposable virtual cards work or making disposable cards: get_disposable_virtual_card.",
+          "Cash or a cash balance showing up in the app that the customer doesn't recognise: cash_withdrawal_not_recognised.",
+          "Whether a currency (e.g. EUR) is allowed or supported for exchange: fiat_currency_support."
+        ]
+      },
+      "state_template": "Customer message:\n{{input}}",
+      "criteria": {
+        "activate_my_card": "Activating a new card, or the customer cannot activate their card.",
+        "age_limit": "Minimum age to open/use an account; opening an account for children or teens.",
+        "apple_pay_or_google_pay": "Using Apple Pay, Google Pay or Apple Watch, including topping up through them.",
+        "atm_support": "Finding ATMs or which ATMs accept the card (e.g. nearest Mastercard ATM).",
+        "automatic_top_up": "The auto top-up feature: whether it exists, how to set it up, its limits.",
+        "balance_not_updated_after_bank_transfer": "A bank transfer was made or received (money sent into the account) but the balance hasn't updated / the incoming transfer isn't showing yet; also 'how long does a UK transfer take, it isn't showing'.",
+        "balance_not_updated_after_cheque_or_cash_deposit": "Money the customer deposited or put into their account (cash, cheque) isn't showing in the balance yet (e.g. 'still awaiting the money I put into my account'), or a cheque is slow to clear.",
+        "beneficiary_not_allowed": "Cannot add a beneficiary, or a transfer to an account is not allowed / 'not possible' / the customer can't transfer to that account (even if it worked before).",
+        "cancel_transfer": "Cancelling, reversing or reverting a transfer or payment the customer made (including a payment sent by mistake).",
+        "card_about_to_expire": "Card is expiring or expired: getting a replacement, including its cost and delivery time.",
+        "card_acceptance": "Where the card can be used / whether shops or places accept it.",
+        "card_arrival": "The customer's new card has not arrived yet, or they want to track a card that was sent.",
+        "card_delivery_estimate": "How long card delivery takes, how the card will be delivered, getting it by a certain date or fast-tracked.",
+        "card_linking": "Linking a card to the app/account, adding a card in the app, or re-linking a card the customer found after losing it.",
+        "card_not_working": "The card does not work or stopped working, e.g. it did not work in several shops or the customer cannot use it, without saying a payment was declined (not at an ATM).",
+        "card_payment_fee_charged": "A fee or extra amount charged for paying/purchasing with the card (the customer mentions the card, a purchase or payments having fees); complaints about hidden fees or being charged too many fees.",
+        "card_payment_not_recognised": "A card payment or charge on the statement the customer does not recognise, did not make, or says is wrong.",
+        "card_payment_wrong_exchange_rate": "An exchange rate the customer got was wrong, incorrect or bad, on a card purchase/payment or unspecified (e.g. 'the rate I got is incorrect', 'the rate in your app is really bad', 'you are ripping people off with the rate'). If the rate complaint is about getting cash / an ATM withdrawal, use wrong_exchange_rate_for_cash_withdrawal.",
+        "card_swallowed": "An ATM kept, ate or swallowed the card.",
+        "cash_withdrawal_charge": "A fee charged for withdrawing cash at an ATM (domestic; not cash abroad/foreign currency).",
+        "cash_withdrawal_not_recognised": "A cash withdrawal on the account that the customer didn't make or authorise (even if they suspect their card was copied); cash shown in the app that the customer did not take or receive.",
+        "change_pin": "Changing an existing PIN or setting up a new PIN (e.g. where/how to change my PIN, help me set up a new PIN).",
+        "compromised_card": "The customer believes someone else has their card details or is using their card (fraud, cloned card), wants it frozen. If they name a specific card payment or cash withdrawal they didn't make, use the matching not_recognised intent instead.",
+        "contactless_not_working": "Contactless payment not working.",
+        "country_support": "Which countries are supported; using the service or having the card sent to a particular country.",
+        "declined_card_payment": "A card payment was declined or rejected (the customer says declined/rejected, or asks why a payment was declined).",
+        "declined_cash_withdrawal": "An ATM cash withdrawal was declined or not authorised, or the card won't work at an ATM.",
+        "declined_transfer": "A transfer was declined or rejected: the customer uses the word declined/rejected about their transfer(s).",
+        "direct_debit_payment_not_recognised": "A direct debit the customer does not recognise or did not set up.",
+        "disposable_card_limits": "Limits/restrictions on disposable virtual cards (how many uses, what they can do).",
+        "edit_personal_details": "Changing personal details or account information (name, address, etc.).",
+        "exchange_charge": "Fees, charges or costs for exchanging currency, including whether frequent exchangers get a better/discounted rate.",
+        "exchange_rate": "Neutral information requests about what the exchange rates are or how they are set; not complaints that a rate was wrong or bad.",
+        "exchange_via_app": "How to exchange currencies in the app; what currencies can be exchanged to.",
+        "extra_charge_on_statement": "The customer was charged an extra amount on top ('why was I charged extra?'), typically a small £1/$1/€1 amount or an extra pound paid over the price. Not a payment that is wrong or unknown, and not an extra fee for paying with the card (that is card_payment_fee_charged).",
+        "failed_transfer": "A bank transfer failed or keeps failing; the customer can't make a transfer go through (not top-ups).",
+        "fiat_currency_support": "Which fiat currencies are supported for holding and exchanging.",
+        "get_disposable_virtual_card": "Getting/ordering a disposable virtual card; who can get one.",
+        "get_physical_card": "PIN questions for a physical card: PIN not received, can't find the PIN, where the PIN is, how to set the physical card's PIN.",
+        "getting_spare_card": "Getting an additional/second/spare card, including fees and how many cards one can have.",
+        "getting_virtual_card": "Getting a virtual card, where to find it, or a virtual card that hasn't been received.",
+        "lost_or_stolen_card": "The card was lost or stolen.",
+        "lost_or_stolen_phone": "The customer's phone was lost, stolen or left behind and they need to use/secure the account.",
+        "order_physical_card": "Ordering a physical/plastic card; fees for a physical card; where cards can be delivered.",
+        "passcode_forgotten": "Forgot the app passcode or login code; resetting it.",
+        "pending_card_payment": "A card payment/purchase is still pending.",
+        "pending_cash_withdrawal": "A cash withdrawal is pending or shows as in progress (e.g. ATM failed but transaction in progress).",
+        "pending_top_up": "A top-up is pending or taking a long time to complete.",
+        "pending_transfer": "A specific transfer is pending, or the customer has been waiting a long time / forever for a transfer ('why is my transfer taking so long', 'how much longer').",
+        "pin_blocked": "PIN blocked or account/card blocked after entering the wrong PIN too many times.",
+        "receiving_money": "Whether/how other people can send money to the customer, including in other currencies.",
+        "Refund_not_showing_up": "A refund the customer is expecting has not appeared in their account yet.",
+        "request_refund": "The customer wants to request/get a refund for something they bought.",
+        "reverted_card_payment?": "A card payment was returned/reverted back to the account, e.g. money was deducted and then came back, or the seller says the payment didn't go through.",
+        "supported_cards_and_currencies": "Which cards (card brands such as American Express, credit cards) and currencies are supported, e.g. for adding money; why a particular card brand doesn't work for top-up.",
+        "terminate_account": "Closing, deleting or terminating the account; no longer wanting to be a customer.",
+        "top_up_by_bank_transfer_charge": "Fees for topping up by bank transfer; any SWIFT or SEPA question.",
+        "top_up_by_card_charge": "Fees for topping up with a card.",
+        "top_up_by_cash_or_cheque": "Topping up with cash or a cheque, depositing cash/cheques.",
+        "top_up_failed": "A top-up failed, was declined, gave an error, or the customer is unsure it went through ('pop-up' or 'top off' are misspellings of top-up).",
+        "top_up_limits": "Limits on top-up amounts or number of top-ups.",
+        "top_up_reverted": "A top-up went through and then was reverted / the money disappeared again.",
+        "topping_up_by_card": "How to top up with a card; problems topping up with a card.",
+        "transaction_charged_twice": "The same payment was charged twice (double charge).",
+        "transfer_fee_charged": "A fee charged on a transfer (including when the customer says they thought transfers were free); also bare questions about charges with no transaction named ('why was I charged?', 'will I get extra charges?') and fees for using the account abroad.",
+        "transfer_into_account": "How to add money to the account by transferring from another account; general questions about what ways or methods there are to add money to the account (when the customer does not say 'top up').",
+        "transfer_not_received_by_recipient": "An outgoing transfer the customer sent has not arrived: the recipient hasn't got it, or the money is 'not there / not here yet' / 'not showing up'; also vague complaints that a 'transaction' is taking too long to complete.",
+        "transfer_timing": "General questions about how long transfers take (e.g. from the US or Europe), not about a specific transfer the customer just made that isn't showing.",
+        "unable_to_verify_identity": "The customer tried to verify their identity but it failed or they can't complete it.",
+        "verify_my_identity": "How to verify identity, what documents are needed, how long verification takes.",
+        "verify_source_of_funds": "Seeing or verifying the source of funds / where money came from; seeing one's available money.",
+        "verify_top_up": "Verifying a top-up or top-up card; finding the top-up verification code.",
+        "virtual_card_not_working": "A virtual card does not work.",
+        "visa_or_mastercard": "Visa vs Mastercard: which brand the card is, or choosing one.",
+        "why_verify_identity": "Why identity verification or personal information is required.",
+        "wrong_amount_of_cash_received": "The ATM gave the wrong amount of cash.",
+        "wrong_exchange_rate_for_cash_withdrawal": "Wrong, too high or bad exchange rate on a cash withdrawal or when getting cash (e.g. 'this should have been a much higher amount of cash', 'what are weekend rates for getting cash'); any question about fees, costs or rates for withdrawing cash abroad, on holiday or in a foreign/home currency."
+      }
+    },
+    {
+      "version": 1,
+      "name": "flat_b",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "You are routing chats for a mobile-only bank's customer support. Read the customer's message and pick the single support topic it belongs to, following each topic's 'use when' definition.",
+        "labelling rules (follow these)": [
+          "If the customer calls the transaction a transfer ('denying my transfers', 'I thought transfers were free'), choose the matching transfer intent even if they were buying something.",
+          "An error when making a large payment such as for a flat or mortgage is failed_transfer.",
+          "Waiting for a transfer to reach a recipient or retailer's account is transfer_not_received_by_recipient; waiting a long time for a transfer with no recipient mentioned, or 'when will the transaction post to my account', is pending_transfer.",
+          "Asking to check that a UK transfer made a few hours ago went through is balance_not_updated_after_bank_transfer.",
+          "The card was tried several times or in several places and never goes through, without the word declined: card_not_working.",
+          "Topping up explicitly with a card and the money is gone: topping_up_by_card.",
+          "Finding, receiving, or setting the PIN of the physical card (the customer mentions the physical card or a PIN that never arrived): get_physical_card. 'Help me set up a new PIN' or changing a PIN: change_pin.",
+          "Reactivating or re-adding a card the customer thought was lost: card_linking.",
+          "A beneficiary that can't receive the customer's transfer: beneficiary_not_allowed.",
+          "Hidden fees or being charged too many fees: card_payment_fee_charged.",
+          "Wanting to cancel a purchase of an item: request_refund. Wanting to take back, revert or cancel a transaction or transfer they made: cancel_transfer.",
+          "Being unable to transfer to an account ('I need to transfer to my account and can't', 'transfer not possible / not allowed'): beneficiary_not_allowed.",
+          "How disposable virtual cards work or making disposable cards: get_disposable_virtual_card.",
+          "Cash or a cash balance showing up in the app that the customer doesn't recognise: cash_withdrawal_not_recognised.",
+          "Whether a currency (e.g. EUR) is allowed or supported for exchange: fiat_currency_support."
+        ]
+      },
+      "state_template": "Customer message:\n{{input}}",
+      "criteria": {
+        "wrong_exchange_rate_for_cash_withdrawal": {
+          "use when": "Wrong, too high or bad exchange rate on a cash withdrawal or when getting cash (e.g. 'this should have been a much higher amount of cash', 'what are weekend rates for getting cash'); any question about fees, costs or rates for withdrawing cash abroad, on holiday or in a foreign/home currency."
+        },
+        "wrong_amount_of_cash_received": {
+          "use when": "The ATM gave the wrong amount of cash."
+        },
+        "why_verify_identity": {
+          "use when": "Why identity verification or personal information is required."
+        },
+        "visa_or_mastercard": {
+          "use when": "Visa vs Mastercard: which brand the card is, or choosing one."
+        },
+        "virtual_card_not_working": {
+          "use when": "A virtual card does not work."
+        },
+        "verify_top_up": {
+          "use when": "Verifying a top-up or top-up card; finding the top-up verification code."
+        },
+        "verify_source_of_funds": {
+          "use when": "Seeing or verifying the source of funds / where money came from; seeing one's available money."
+        },
+        "verify_my_identity": {
+          "use when": "How to verify identity, what documents are needed, how long verification takes."
+        },
+        "unable_to_verify_identity": {
+          "use when": "The customer tried to verify their identity but it failed or they can't complete it."
+        },
+        "transfer_timing": {
+          "use when": "General questions about how long transfers take (e.g. from the US or Europe), not about a specific transfer the customer just made that isn't showing."
+        },
+        "transfer_not_received_by_recipient": {
+          "use when": "An outgoing transfer the customer sent has not arrived: the recipient hasn't got it, or the money is 'not there / not here yet' / 'not showing up'; also vague complaints that a 'transaction' is taking too long to complete."
+        },
+        "transfer_into_account": {
+          "use when": "How to add money to the account by transferring from another account; general questions about what ways or methods there are to add money to the account (when the customer does not say 'top up')."
+        },
+        "transfer_fee_charged": {
+          "use when": "A fee charged on a transfer (including when the customer says they thought transfers were free); also bare questions about charges with no transaction named ('why was I charged?', 'will I get extra charges?') and fees for using the account abroad."
+        },
+        "transaction_charged_twice": {
+          "use when": "The same payment was charged twice (double charge)."
+        },
+        "topping_up_by_card": {
+          "use when": "How to top up with a card; problems topping up with a card."
+        },
+        "top_up_reverted": {
+          "use when": "A top-up went through and then was reverted / the money disappeared again."
+        },
+        "top_up_limits": {
+          "use when": "Limits on top-up amounts or number of top-ups."
+        },
+        "top_up_failed": {
+          "use when": "A top-up failed, was declined, gave an error, or the customer is unsure it went through ('pop-up' or 'top off' are misspellings of top-up)."
+        },
+        "top_up_by_cash_or_cheque": {
+          "use when": "Topping up with cash or a cheque, depositing cash/cheques."
+        },
+        "top_up_by_card_charge": {
+          "use when": "Fees for topping up with a card."
+        },
+        "top_up_by_bank_transfer_charge": {
+          "use when": "Fees for topping up by bank transfer; any SWIFT or SEPA question."
+        },
+        "terminate_account": {
+          "use when": "Closing, deleting or terminating the account; no longer wanting to be a customer."
+        },
+        "supported_cards_and_currencies": {
+          "use when": "Which cards (card brands such as American Express, credit cards) and currencies are supported, e.g. for adding money; why a particular card brand doesn't work for top-up."
+        },
+        "reverted_card_payment?": {
+          "use when": "A card payment was returned/reverted back to the account, e.g. money was deducted and then came back, or the seller says the payment didn't go through."
+        },
+        "request_refund": {
+          "use when": "The customer wants to request/get a refund for something they bought."
+        },
+        "Refund_not_showing_up": {
+          "use when": "A refund the customer is expecting has not appeared in their account yet."
+        },
+        "receiving_money": {
+          "use when": "Whether/how other people can send money to the customer, including in other currencies."
+        },
+        "pin_blocked": {
+          "use when": "PIN blocked or account/card blocked after entering the wrong PIN too many times."
+        },
+        "pending_transfer": {
+          "use when": "A specific transfer is pending, or the customer has been waiting a long time / forever for a transfer ('why is my transfer taking so long', 'how much longer')."
+        },
+        "pending_top_up": {
+          "use when": "A top-up is pending or taking a long time to complete."
+        },
+        "pending_cash_withdrawal": {
+          "use when": "A cash withdrawal is pending or shows as in progress (e.g. ATM failed but transaction in progress)."
+        },
+        "pending_card_payment": {
+          "use when": "A card payment/purchase is still pending."
+        },
+        "passcode_forgotten": {
+          "use when": "Forgot the app passcode or login code; resetting it."
+        },
+        "order_physical_card": {
+          "use when": "Ordering a physical/plastic card; fees for a physical card; where cards can be delivered."
+        },
+        "lost_or_stolen_phone": {
+          "use when": "The customer's phone was lost, stolen or left behind and they need to use/secure the account."
+        },
+        "lost_or_stolen_card": {
+          "use when": "The card was lost or stolen."
+        },
+        "getting_virtual_card": {
+          "use when": "Getting a virtual card, where to find it, or a virtual card that hasn't been received."
+        },
+        "getting_spare_card": {
+          "use when": "Getting an additional/second/spare card, including fees and how many cards one can have."
+        },
+        "get_physical_card": {
+          "use when": "PIN questions for a physical card: PIN not received, can't find the PIN, where the PIN is, how to set the physical card's PIN."
+        },
+        "get_disposable_virtual_card": {
+          "use when": "Getting/ordering a disposable virtual card; who can get one."
+        },
+        "fiat_currency_support": {
+          "use when": "Which fiat currencies are supported for holding and exchanging."
+        },
+        "failed_transfer": {
+          "use when": "A bank transfer failed or keeps failing; the customer can't make a transfer go through (not top-ups)."
+        },
+        "extra_charge_on_statement": {
+          "use when": "The customer was charged an extra amount on top ('why was I charged extra?'), typically a small £1/$1/€1 amount or an extra pound paid over the price. Not a payment that is wrong or unknown, and not an extra fee for paying with the card (that is card_payment_fee_charged)."
+        },
+        "exchange_via_app": {
+          "use when": "How to exchange currencies in the app; what currencies can be exchanged to."
+        },
+        "exchange_rate": {
+          "use when": "Neutral information requests about what the exchange rates are or how they are set; not complaints that a rate was wrong or bad."
+        },
+        "exchange_charge": {
+          "use when": "Fees, charges or costs for exchanging currency, including whether frequent exchangers get a better/discounted rate."
+        },
+        "edit_personal_details": {
+          "use when": "Changing personal details or account information (name, address, etc.)."
+        },
+        "disposable_card_limits": {
+          "use when": "Limits/restrictions on disposable virtual cards (how many uses, what they can do)."
+        },
+        "direct_debit_payment_not_recognised": {
+          "use when": "A direct debit the customer does not recognise or did not set up."
+        },
+        "declined_transfer": {
+          "use when": "A transfer was declined or rejected: the customer uses the word declined/rejected about their transfer(s)."
+        },
+        "declined_cash_withdrawal": {
+          "use when": "An ATM cash withdrawal was declined or not authorised, or the card won't work at an ATM."
+        },
+        "declined_card_payment": {
+          "use when": "A card payment was declined or rejected (the customer says declined/rejected, or asks why a payment was declined)."
+        },
+        "country_support": {
+          "use when": "Which countries are supported; using the service or having the card sent to a particular country."
+        },
+        "contactless_not_working": {
+          "use when": "Contactless payment not working."
+        },
+        "compromised_card": {
+          "use when": "The customer believes someone else has their card details or is using their card (fraud, cloned card), wants it frozen. If they name a specific card payment or cash withdrawal they didn't make, use the matching not_recognised intent instead."
+        },
+        "change_pin": {
+          "use when": "Changing an existing PIN or setting up a new PIN (e.g. where/how to change my PIN, help me set up a new PIN)."
+        },
+        "cash_withdrawal_not_recognised": {
+          "use when": "A cash withdrawal on the account that the customer didn't make or authorise (even if they suspect their card was copied); cash shown in the app that the customer did not take or receive."
+        },
+        "cash_withdrawal_charge": {
+          "use when": "A fee charged for withdrawing cash at an ATM (domestic; not cash abroad/foreign currency)."
+        },
+        "card_swallowed": {
+          "use when": "An ATM kept, ate or swallowed the card."
+        },
+        "card_payment_wrong_exchange_rate": {
+          "use when": "An exchange rate the customer got was wrong, incorrect or bad, on a card purchase/payment or unspecified (e.g. 'the rate I got is incorrect', 'the rate in your app is really bad', 'you are ripping people off with the rate'). If the rate complaint is about getting cash / an ATM withdrawal, use wrong_exchange_rate_for_cash_withdrawal."
+        },
+        "card_payment_not_recognised": {
+          "use when": "A card payment or charge on the statement the customer does not recognise, did not make, or says is wrong."
+        },
+        "card_payment_fee_charged": {
+          "use when": "A fee or extra amount charged for paying/purchasing with the card (the customer mentions the card, a purchase or payments having fees); complaints about hidden fees or being charged too many fees."
+        },
+        "card_not_working": {
+          "use when": "The card does not work or stopped working, e.g. it did not work in several shops or the customer cannot use it, without saying a payment was declined (not at an ATM)."
+        },
+        "card_linking": {
+          "use when": "Linking a card to the app/account, adding a card in the app, or re-linking a card the customer found after losing it."
+        },
+        "card_delivery_estimate": {
+          "use when": "How long card delivery takes, how the card will be delivered, getting it by a certain date or fast-tracked."
+        },
+        "card_arrival": {
+          "use when": "The customer's new card has not arrived yet, or they want to track a card that was sent."
+        },
+        "card_acceptance": {
+          "use when": "Where the card can be used / whether shops or places accept it."
+        },
+        "card_about_to_expire": {
+          "use when": "Card is expiring or expired: getting a replacement, including its cost and delivery time."
+        },
+        "cancel_transfer": {
+          "use when": "Cancelling, reversing or reverting a transfer or payment the customer made (including a payment sent by mistake)."
+        },
+        "beneficiary_not_allowed": {
+          "use when": "Cannot add a beneficiary, or a transfer to an account is not allowed / 'not possible' / the customer can't transfer to that account (even if it worked before)."
+        },
+        "balance_not_updated_after_cheque_or_cash_deposit": {
+          "use when": "Money the customer deposited or put into their account (cash, cheque) isn't showing in the balance yet (e.g. 'still awaiting the money I put into my account'), or a cheque is slow to clear."
+        },
+        "balance_not_updated_after_bank_transfer": {
+          "use when": "A bank transfer was made or received (money sent into the account) but the balance hasn't updated / the incoming transfer isn't showing yet; also 'how long does a UK transfer take, it isn't showing'."
+        },
+        "automatic_top_up": {
+          "use when": "The auto top-up feature: whether it exists, how to set it up, its limits."
+        },
+        "atm_support": {
+          "use when": "Finding ATMs or which ATMs accept the card (e.g. nearest Mastercard ATM)."
+        },
+        "apple_pay_or_google_pay": {
+          "use when": "Using Apple Pay, Google Pay or Apple Watch, including topping up through them."
+        },
+        "age_limit": {
+          "use when": "Minimum age to open/use an account; opening an account for children or teens."
+        },
+        "activate_my_card": {
+          "use when": "Activating a new card, or the customer cannot activate their card."
+        }
+      }
+    },
+    {
+      "version": 1,
+      "name": "flat_c",
+      "model": "jev-latest",
+      "type": "choice",
+      "instructions": {
+        "task": "Classify the intent of this message from a customer to their digital bank's support chat. Each option gives its support area and what the customer is asking about; pick the one option that best matches what the customer wants.",
+        "labelling rules (follow these)": [
+          "If the customer calls the transaction a transfer ('denying my transfers', 'I thought transfers were free'), choose the matching transfer intent even if they were buying something.",
+          "An error when making a large payment such as for a flat or mortgage is failed_transfer.",
+          "Waiting for a transfer to reach a recipient or retailer's account is transfer_not_received_by_recipient; waiting a long time for a transfer with no recipient mentioned, or 'when will the transaction post to my account', is pending_transfer.",
+          "Asking to check that a UK transfer made a few hours ago went through is balance_not_updated_after_bank_transfer.",
+          "The card was tried several times or in several places and never goes through, without the word declined: card_not_working.",
+          "Topping up explicitly with a card and the money is gone: topping_up_by_card.",
+          "Finding, receiving, or setting the PIN of the physical card (the customer mentions the physical card or a PIN that never arrived): get_physical_card. 'Help me set up a new PIN' or changing a PIN: change_pin.",
+          "Reactivating or re-adding a card the customer thought was lost: card_linking.",
+          "A beneficiary that can't receive the customer's transfer: beneficiary_not_allowed.",
+          "Hidden fees or being charged too many fees: card_payment_fee_charged.",
+          "Wanting to cancel a purchase of an item: request_refund. Wanting to take back, revert or cancel a transaction or transfer they made: cancel_transfer.",
+          "Being unable to transfer to an account ('I need to transfer to my account and can't', 'transfer not possible / not allowed'): beneficiary_not_allowed.",
+          "How disposable virtual cards work or making disposable cards: get_disposable_virtual_card.",
+          "Cash or a cash balance showing up in the app that the customer doesn't recognise: cash_withdrawal_not_recognised.",
+          "Whether a currency (e.g. EUR) is allowed or supported for exchange: fiat_currency_support."
+        ]
+      },
+      "state_template": "Message to support:\n{{input}}",
+      "criteria": {
+        "activate_my_card": {
+          "area": "cards",
+          "customer is asking about": "Activating a new card, or the customer cannot activate their card."
+        },
+        "card_about_to_expire": {
+          "area": "cards",
+          "customer is asking about": "Card is expiring or expired: getting a replacement, including its cost and delivery time."
+        },
+        "card_acceptance": {
+          "area": "cards",
+          "customer is asking about": "Where the card can be used / whether shops or places accept it."
+        },
+        "card_arrival": {
+          "area": "cards",
+          "customer is asking about": "The customer's new card has not arrived yet, or they want to track a card that was sent."
+        },
+        "card_delivery_estimate": {
+          "area": "cards",
+          "customer is asking about": "How long card delivery takes, how the card will be delivered, getting it by a certain date or fast-tracked."
+        },
+        "card_linking": {
+          "area": "cards",
+          "customer is asking about": "Linking a card to the app/account, adding a card in the app, or re-linking a card the customer found after losing it."
+        },
+        "card_not_working": {
+          "area": "cards",
+          "customer is asking about": "The card does not work or stopped working, e.g. it did not work in several shops or the customer cannot use it, without saying a payment was declined (not at an ATM)."
+        },
+        "card_swallowed": {
+          "area": "cards",
+          "customer is asking about": "An ATM kept, ate or swallowed the card."
+        },
+        "change_pin": {
+          "area": "cards",
+          "customer is asking about": "Changing an existing PIN or setting up a new PIN (e.g. where/how to change my PIN, help me set up a new PIN)."
+        },
+        "compromised_card": {
+          "area": "cards",
+          "customer is asking about": "The customer believes someone else has their card details or is using their card (fraud, cloned card), wants it frozen. If they name a specific card payment or cash withdrawal they didn't make, use the matching not_recognised intent instead."
+        },
+        "contactless_not_working": {
+          "area": "cards",
+          "customer is asking about": "Contactless payment not working."
+        },
+        "get_physical_card": {
+          "area": "cards",
+          "customer is asking about": "PIN questions for a physical card: PIN not received, can't find the PIN, where the PIN is, how to set the physical card's PIN."
+        },
+        "getting_spare_card": {
+          "area": "cards",
+          "customer is asking about": "Getting an additional/second/spare card, including fees and how many cards one can have."
+        },
+        "lost_or_stolen_card": {
+          "area": "cards",
+          "customer is asking about": "The card was lost or stolen."
+        },
+        "order_physical_card": {
+          "area": "cards",
+          "customer is asking about": "Ordering a physical/plastic card; fees for a physical card; where cards can be delivered."
+        },
+        "pin_blocked": {
+          "area": "cards",
+          "customer is asking about": "PIN blocked or account/card blocked after entering the wrong PIN too many times."
+        },
+        "visa_or_mastercard": {
+          "area": "cards",
+          "customer is asking about": "Visa vs Mastercard: which brand the card is, or choosing one."
+        },
+        "get_disposable_virtual_card": {
+          "area": "cards",
+          "customer is asking about": "Getting/ordering a disposable virtual card; who can get one."
+        },
+        "getting_virtual_card": {
+          "area": "cards",
+          "customer is asking about": "Getting a virtual card, where to find it, or a virtual card that hasn't been received."
+        },
+        "virtual_card_not_working": {
+          "area": "cards",
+          "customer is asking about": "A virtual card does not work."
+        },
+        "disposable_card_limits": {
+          "area": "cards",
+          "customer is asking about": "Limits/restrictions on disposable virtual cards (how many uses, what they can do)."
+        },
+        "apple_pay_or_google_pay": {
+          "area": "cards",
+          "customer is asking about": "Using Apple Pay, Google Pay or Apple Watch, including topping up through them."
+        },
+        "country_support": {
+          "area": "cards",
+          "customer is asking about": "Which countries are supported; using the service or having the card sent to a particular country."
+        },
+        "card_payment_fee_charged": {
+          "area": "card payments and cash",
+          "customer is asking about": "A fee or extra amount charged for paying/purchasing with the card (the customer mentions the card, a purchase or payments having fees); complaints about hidden fees or being charged too many fees."
+        },
+        "card_payment_not_recognised": {
+          "area": "card payments and cash",
+          "customer is asking about": "A card payment or charge on the statement the customer does not recognise, did not make, or says is wrong."
+        },
+        "card_payment_wrong_exchange_rate": {
+          "area": "card payments and cash",
+          "customer is asking about": "An exchange rate the customer got was wrong, incorrect or bad, on a card purchase/payment or unspecified (e.g. 'the rate I got is incorrect', 'the rate in your app is really bad', 'you are ripping people off with the rate'). If the rate complaint is about getting cash / an ATM withdrawal, use wrong_exchange_rate_for_cash_withdrawal."
+        },
+        "declined_card_payment": {
+          "area": "card payments and cash",
+          "customer is asking about": "A card payment was declined or rejected (the customer says declined/rejected, or asks why a payment was declined)."
+        },
+        "pending_card_payment": {
+          "area": "card payments and cash",
+          "customer is asking about": "A card payment/purchase is still pending."
+        },
+        "reverted_card_payment?": {
+          "area": "card payments and cash",
+          "customer is asking about": "A card payment was returned/reverted back to the account, e.g. money was deducted and then came back, or the seller says the payment didn't go through."
+        },
+        "transaction_charged_twice": {
+          "area": "card payments and cash",
+          "customer is asking about": "The same payment was charged twice (double charge)."
+        },
+        "extra_charge_on_statement": {
+          "area": "card payments and cash",
+          "customer is asking about": "The customer was charged an extra amount on top ('why was I charged extra?'), typically a small £1/$1/€1 amount or an extra pound paid over the price. Not a payment that is wrong or unknown, and not an extra fee for paying with the card (that is card_payment_fee_charged)."
+        },
+        "direct_debit_payment_not_recognised": {
+          "area": "card payments and cash",
+          "customer is asking about": "A direct debit the customer does not recognise or did not set up."
+        },
+        "atm_support": {
+          "area": "card payments and cash",
+          "customer is asking about": "Finding ATMs or which ATMs accept the card (e.g. nearest Mastercard ATM)."
+        },
+        "cash_withdrawal_charge": {
+          "area": "card payments and cash",
+          "customer is asking about": "A fee charged for withdrawing cash at an ATM (domestic; not cash abroad/foreign currency)."
+        },
+        "cash_withdrawal_not_recognised": {
+          "area": "card payments and cash",
+          "customer is asking about": "A cash withdrawal on the account that the customer didn't make or authorise (even if they suspect their card was copied); cash shown in the app that the customer did not take or receive."
+        },
+        "declined_cash_withdrawal": {
+          "area": "card payments and cash",
+          "customer is asking about": "An ATM cash withdrawal was declined or not authorised, or the card won't work at an ATM."
+        },
+        "pending_cash_withdrawal": {
+          "area": "card payments and cash",
+          "customer is asking about": "A cash withdrawal is pending or shows as in progress (e.g. ATM failed but transaction in progress)."
+        },
+        "wrong_amount_of_cash_received": {
+          "area": "card payments and cash",
+          "customer is asking about": "The ATM gave the wrong amount of cash."
+        },
+        "wrong_exchange_rate_for_cash_withdrawal": {
+          "area": "card payments and cash",
+          "customer is asking about": "Wrong, too high or bad exchange rate on a cash withdrawal or when getting cash (e.g. 'this should have been a much higher amount of cash', 'what are weekend rates for getting cash'); any question about fees, costs or rates for withdrawing cash abroad, on holiday or in a foreign/home currency."
+        },
+        "Refund_not_showing_up": {
+          "area": "card payments and cash",
+          "customer is asking about": "A refund the customer is expecting has not appeared in their account yet."
+        },
+        "request_refund": {
+          "area": "card payments and cash",
+          "customer is asking about": "The customer wants to request/get a refund for something they bought."
+        },
+        "balance_not_updated_after_bank_transfer": {
+          "area": "transfers",
+          "customer is asking about": "A bank transfer was made or received (money sent into the account) but the balance hasn't updated / the incoming transfer isn't showing yet; also 'how long does a UK transfer take, it isn't showing'."
+        },
+        "beneficiary_not_allowed": {
+          "area": "transfers",
+          "customer is asking about": "Cannot add a beneficiary, or a transfer to an account is not allowed / 'not possible' / the customer can't transfer to that account (even if it worked before)."
+        },
+        "cancel_transfer": {
+          "area": "transfers",
+          "customer is asking about": "Cancelling, reversing or reverting a transfer or payment the customer made (including a payment sent by mistake)."
+        },
+        "declined_transfer": {
+          "area": "transfers",
+          "customer is asking about": "A transfer was declined or rejected: the customer uses the word declined/rejected about their transfer(s)."
+        },
+        "failed_transfer": {
+          "area": "transfers",
+          "customer is asking about": "A bank transfer failed or keeps failing; the customer can't make a transfer go through (not top-ups)."
+        },
+        "pending_transfer": {
+          "area": "transfers",
+          "customer is asking about": "A specific transfer is pending, or the customer has been waiting a long time / forever for a transfer ('why is my transfer taking so long', 'how much longer')."
+        },
+        "receiving_money": {
+          "area": "transfers",
+          "customer is asking about": "Whether/how other people can send money to the customer, including in other currencies."
+        },
+        "transfer_fee_charged": {
+          "area": "transfers",
+          "customer is asking about": "A fee charged on a transfer (including when the customer says they thought transfers were free); also bare questions about charges with no transaction named ('why was I charged?', 'will I get extra charges?') and fees for using the account abroad."
+        },
+        "transfer_into_account": {
+          "area": "transfers",
+          "customer is asking about": "How to add money to the account by transferring from another account; general questions about what ways or methods there are to add money to the account (when the customer does not say 'top up')."
+        },
+        "transfer_not_received_by_recipient": {
+          "area": "transfers",
+          "customer is asking about": "An outgoing transfer the customer sent has not arrived: the recipient hasn't got it, or the money is 'not there / not here yet' / 'not showing up'; also vague complaints that a 'transaction' is taking too long to complete."
+        },
+        "transfer_timing": {
+          "area": "transfers",
+          "customer is asking about": "General questions about how long transfers take (e.g. from the US or Europe), not about a specific transfer the customer just made that isn't showing."
+        },
+        "automatic_top_up": {
+          "area": "top ups and deposits",
+          "customer is asking about": "The auto top-up feature: whether it exists, how to set it up, its limits."
+        },
+        "balance_not_updated_after_cheque_or_cash_deposit": {
+          "area": "top ups and deposits",
+          "customer is asking about": "Money the customer deposited or put into their account (cash, cheque) isn't showing in the balance yet (e.g. 'still awaiting the money I put into my account'), or a cheque is slow to clear."
+        },
+        "pending_top_up": {
+          "area": "top ups and deposits",
+          "customer is asking about": "A top-up is pending or taking a long time to complete."
+        },
+        "supported_cards_and_currencies": {
+          "area": "top ups and deposits",
+          "customer is asking about": "Which cards (card brands such as American Express, credit cards) and currencies are supported, e.g. for adding money; why a particular card brand doesn't work for top-up."
+        },
+        "top_up_by_bank_transfer_charge": {
+          "area": "top ups and deposits",
+          "customer is asking about": "Fees for topping up by bank transfer; any SWIFT or SEPA question."
+        },
+        "top_up_by_card_charge": {
+          "area": "top ups and deposits",
+          "customer is asking about": "Fees for topping up with a card."
+        },
+        "top_up_by_cash_or_cheque": {
+          "area": "top ups and deposits",
+          "customer is asking about": "Topping up with cash or a cheque, depositing cash/cheques."
+        },
+        "top_up_failed": {
+          "area": "top ups and deposits",
+          "customer is asking about": "A top-up failed, was declined, gave an error, or the customer is unsure it went through ('pop-up' or 'top off' are misspellings of top-up)."
+        },
+        "top_up_limits": {
+          "area": "top ups and deposits",
+          "customer is asking about": "Limits on top-up amounts or number of top-ups."
+        },
+        "top_up_reverted": {
+          "area": "top ups and deposits",
+          "customer is asking about": "A top-up went through and then was reverted / the money disappeared again."
+        },
+        "topping_up_by_card": {
+          "area": "top ups and deposits",
+          "customer is asking about": "How to top up with a card; problems topping up with a card."
+        },
+        "verify_top_up": {
+          "area": "top ups and deposits",
+          "customer is asking about": "Verifying a top-up or top-up card; finding the top-up verification code."
+        },
+        "exchange_charge": {
+          "area": "exchange currency",
+          "customer is asking about": "Fees, charges or costs for exchanging currency, including whether frequent exchangers get a better/discounted rate."
+        },
+        "exchange_rate": {
+          "area": "exchange currency",
+          "customer is asking about": "Neutral information requests about what the exchange rates are or how they are set; not complaints that a rate was wrong or bad."
+        },
+        "exchange_via_app": {
+          "area": "exchange currency",
+          "customer is asking about": "How to exchange currencies in the app; what currencies can be exchanged to."
+        },
+        "fiat_currency_support": {
+          "area": "exchange currency",
+          "customer is asking about": "Which fiat currencies are supported for holding and exchanging."
+        },
+        "age_limit": {
+          "area": "account identity security",
+          "customer is asking about": "Minimum age to open/use an account; opening an account for children or teens."
+        },
+        "edit_personal_details": {
+          "area": "account identity security",
+          "customer is asking about": "Changing personal details or account information (name, address, etc.)."
+        },
+        "lost_or_stolen_phone": {
+          "area": "account identity security",
+          "customer is asking about": "The customer's phone was lost, stolen or left behind and they need to use/secure the account."
+        },
+        "passcode_forgotten": {
+          "area": "account identity security",
+          "customer is asking about": "Forgot the app passcode or login code; resetting it."
+        },
+        "terminate_account": {
+          "area": "account identity security",
+          "customer is asking about": "Closing, deleting or terminating the account; no longer wanting to be a customer."
+        },
+        "unable_to_verify_identity": {
+          "area": "account identity security",
+          "customer is asking about": "The customer tried to verify their identity but it failed or they can't complete it."
+        },
+        "verify_my_identity": {
+          "area": "account identity security",
+          "customer is asking about": "How to verify identity, what documents are needed, how long verification takes."
+        },
+        "verify_source_of_funds": {
+          "area": "account identity security",
+          "customer is asking about": "Seeing or verifying the source of funds / where money came from; seeing one's available money."
+        },
+        "why_verify_identity": {
+          "area": "account identity security",
+          "customer is asking about": "Why identity verification or personal information is required."
+        }
+      }
+    }
+  ]
+}
