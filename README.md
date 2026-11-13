@@ -33,7 +33,7 @@ The skill's files: [`SKILL.md`](skills/jev-classifier-builder/SKILL.md) (the wor
 
 ## The paper
 
-The skill comes from *Building System 1: How Language Agents Construct and Use Classifiers Under an Information Budget* ([PDF](paper/acl/paper.pdf)). In the paper, a coding agent (System 2) builds natural-language classifiers that Jev runs (System 1). Given every training label, an Opus builder matches or beats RoBERTa fine-tuned on them on six tasks. Without labels, spending a budget of a simulated user's time on labels and questions, it beats zero-shot wherever the user has something to teach, and the best strategy depends on where the missing knowledge lies. The skill's strategies are the ones that worked, rewritten for a real user in place of the simulated one and its point budget.
+The skill comes from *Agents as System 2: Building System 1 Primitives for Agentic Systems* ([PDF](paper/acl/paper.pdf)). In the paper, a coding agent (System 2) builds natural-language classifiers that Jev runs (System 1). Given every training label, an Opus builder matches or beats RoBERTa fine-tuned on them on six tasks. Without labels, spending a budget of a simulated user's time on labels and questions, it beats zero-shot wherever the user has something to teach, and the best strategy depends on where the missing knowledge lies. The skill's strategies are the ones that worked, rewritten for a real user in place of the simulated one and its point budget.
 
 ### Layout
 
